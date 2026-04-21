@@ -154,7 +154,7 @@
     "body": "Hi Joe,\n\nRunning US DC ops, every renewal that lands on your desk ties up budget for gear that is running fine. Rackspace engineering hiring is at a 12 month high so the OEM renewal line item is probably moving the wrong direction each quarter.\n\nOSI does third party maintenance on Cisco, Dell, HP, and NetApp at 40 to 60% below OEM. Gartner recognized and privately owned.\n\nWorth a short call on what is coming off support in the next two quarters?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-17"
   },
   {
@@ -1112,7 +1112,7 @@
     "body": "Hi Jeff,\n\nCongrats on the VP Network Services role. We supply SmartOptics DWDM gear and certified compatible optics to rural telcos at 30 to 50% below OEM. Most of our carrier teams use us as a secondary source when Cisco or Lumentum timelines slip.\n\nWorth a quick call to see if it fits anything on the 2026 roadmap?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-17"
   },
   {
@@ -1184,7 +1184,7 @@
     "body": "Hi Eric,\n\nYour work on Data and AI enterprise architecture at Bell is the environment where memory and compute sourcing starts to matter. We supply Samsung and Hynix DDR4 and DDR5 direct to Dell and HP shops, below OEM pricing with manufacturer warranty. Side note, OSI is already on your approved vendor list at Bell, so standing up a PO is painless if it comes to that.\n\nWould a quick intro call make sense on the compute side?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-17"
   },
   {
@@ -1763,7 +1763,7 @@
     "body": "Hi Vito,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-18"
   },
   {
@@ -1908,7 +1908,7 @@
     "body": "Hi Juan,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-18"
   },
   {
@@ -2196,7 +2196,7 @@
     "body": "Hi Pete,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-18"
   },
   {
@@ -2773,7 +2773,7 @@
     "body": "Hi Michael,\n\nFigured you'd be worth a note. Taking 20 years at Comcast and now running the LFT Fiber buildout in rural Acadiana is an interesting pivot, and I'd bet supply chain on optics and transport gear is top of mind.\n\nWe run SmartOptics DWDM and transceivers at 30 to 50% under Ciena and Nokia, and they ship in weeks.\n\nWorth a quick call on what the LFT Fiber build looks like?\n",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-18"
   },
   {
@@ -3146,7 +3146,7 @@
     "body": "Hi Lawrence,\n\nWatching what is happening at Nitel post Comcast. Curious how your team is handling optics and DWDM sourcing with the integration work on the table.\n\nWe supply SmartOptics transceivers and open line DWDM as a secondary source for fiber carriers. 30 to 50 percent below Ciena and Nokia, ships in weeks. Worth a short call to compare notes?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-18"
   },
   {
@@ -3218,8 +3218,10 @@
     "body": "Hi Mark,\n\nQuick question. How is your team handling maintenance costs on aging Cisco and Dell infrastructure? A lot of tech ops leaders at nonprofits are squeezing OEM renewals right now.\n\nWe do third party maintenance at 40 to 60 percent below OEM. Gartner recognized and privately owned. No PE backing. Worth a short look?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "cancelled",
+    "addedDate": "2026-04-18",
+    "cancelledAt": "2026-04-21T15:29:22.113791",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "mark-depollo-ithaka-2",
@@ -3230,8 +3232,10 @@
     "body": "Any thoughts?\n\nOn Mon, Apr 20, 2026 at 4:00 PM, Andy McLean <andy@osiglobal.com> wrote:\n> Hi Mark,\n>\n> Quick question. How is your team handling maintenance costs on aging Cisco and Dell infrastructure? A lot of tech ops leaders at nonprofits are squeezing OEM renewals right now.\n>\n> We do third party maintenance at 40 to 60 percent below OEM. Gartner recognized and privately owned. No PE backing. Worth a short look?",
     "sendDate": "2026-04-23",
     "sendTime": "11am",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "cancelled",
+    "addedDate": "2026-04-18",
+    "cancelledAt": "2026-04-21T15:29:22.113791",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "mark-depollo-ithaka-3",
@@ -3242,8 +3246,10 @@
     "body": "Hi Mark,\n\nDifferent angle. ITHAKA's engineering hiring suggests some platform growth ahead. We source DDR4 and DDR5 DIMMs direct from Samsung and Hynix. Manufacturer warranty at below OEM pricing.\n\nWorth a sample of what you run?\n\nOn Wed, Apr 22, 2026 at 10:00 AM, Andy McLean <andy@osiglobal.com> wrote:\n> Any thoughts?\n>\n> On Mon, Apr 20, 2026 at 4:00 PM, Andy McLean <andy@osiglobal.com> wrote:\n> > Hi Mark,\n> >\n> > Quick question. How is your team handling maintenance costs on aging Cisco and Dell infrastructure? A lot of tech ops leaders at nonprofits are squeezing OEM renewals right now.\n> >\n> > We do third party maintenance at 40 to 60 percent below OEM. Gartner recognized and privately owned. No PE backing. Worth a short look?",
     "sendDate": "2026-04-29",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "cancelled",
+    "addedDate": "2026-04-18",
+    "cancelledAt": "2026-04-21T15:29:22.113791",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "mark-depollo-ithaka-4",
@@ -3254,8 +3260,10 @@
     "body": "Hi Mark,\n\nAnother angle. We send complimentary sample SFPs to tech ops teams as break glass insurance. Certified compatible and SmartOptics pedigree, so it works out of the box.\n\nWould a pair be useful on the shelf for your DC or MDF?\n\nOn Tue, Apr 28, 2026 at 10:00 AM, Andy McLean <andy@osiglobal.com> wrote:\n> Hi Mark,\n>\n> Different angle. ITHAKA's engineering hiring suggests some platform growth ahead. We source DDR4 and DDR5 DIMMs direct from Samsung and Hynix. Manufacturer warranty at below OEM pricing.\n>\n> Worth a sample of what you run?",
     "sendDate": "2026-05-07",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "cancelled",
+    "addedDate": "2026-04-18",
+    "cancelledAt": "2026-04-21T15:29:22.113791",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "mark-depollo-ithaka-5",
@@ -3266,8 +3274,10 @@
     "body": "Hi Mark,\n\nOne more. We do TPM on NetApp and stock pre owned storage gear for teams running past OEM warranty. Useful for extending life on capital you already sunk.\n\nAnything in that shape at ITHAKA?\n\nOn Fri, May 8, 2026 at 10:00 AM, Andy McLean <andy@osiglobal.com> wrote:\n> Hi Mark,\n>\n> Another angle. We send complimentary sample SFPs to tech ops teams as break glass insurance. Certified compatible and SmartOptics pedigree, so it works out of the box.\n>\n> Would a pair be useful on the shelf for your DC or MDF?",
     "sendDate": "2026-05-14",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "cancelled",
+    "addedDate": "2026-04-18",
+    "cancelledAt": "2026-04-21T15:29:22.113791",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "mark-depollo-ithaka-6",
@@ -3278,80 +3288,100 @@
     "body": "Should I close the file on this one, or is the timing just off?\n\nOn Mon, May 18, 2026 at 10:00 AM, Andy McLean <andy@osiglobal.com> wrote:\n> Hi Mark,\n>\n> One more. We do TPM on NetApp and stock pre owned storage gear for teams running past OEM warranty. Useful for extending life on capital you already sunk.\n>\n> Anything in that shape at ITHAKA?",
     "sendDate": "2026-05-22",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "cancelled",
+    "addedDate": "2026-04-18",
+    "cancelledAt": "2026-04-21T15:29:22.113791",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "luann-argenta-bausch-1",
     "prospectName": "LuAnn Argenta",
     "company": "Bausch Health",
-    "to": "luann.argenta@valeant.com",
+    "to": "luann.argenta@bausch.com",
     "subject": "Bausch IT -- quick question",
     "body": "Hi LuAnn,\n\nSaw you are running IT at Bausch. Quick thought.\n\nWe work with IT leaders in pharma on third party maintenance for Cisco, Dell, HP, and NetApp gear running fine but coming off OEM support. Savings run 40 to 60 percent.\n\nWorth a 15 minute call next week to see if it fits?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "sent",
+    "addedDate": "2026-04-19",
+    "notes": [],
+    "emailCorrectedAt": "2026-04-21T15:55:42.177541",
+    "originalEmail": "luann.argenta@valeant.com"
   },
   {
     "id": "luann-argenta-bausch-2",
     "prospectName": "LuAnn Argenta",
     "company": "Bausch Health",
-    "to": "luann.argenta@valeant.com",
+    "to": "luann.argenta@bausch.com",
     "subject": "RE: Bausch IT -- quick question",
     "body": "Any thoughts?\n\n---------- On April 20, Andy McLean wrote ----------\nHi LuAnn,\n\nSaw you are running IT at Bausch. Quick thought.\n\nWe work with IT leaders in pharma on third party maintenance for Cisco, Dell, HP, and NetApp gear running fine but coming off OEM support. Savings run 40 to 60 percent.\n\nWorth a 15 minute call next week to see if it fits?",
     "sendDate": "2026-04-23",
     "sendTime": "11am",
     "status": "pending",
-    "addedDate": "2026-04-19"
+    "addedDate": "2026-04-19",
+    "notes": [],
+    "emailCorrectedAt": "2026-04-21T15:55:42.177541",
+    "originalEmail": "luann.argenta@valeant.com"
   },
   {
     "id": "luann-argenta-bausch-3",
     "prospectName": "LuAnn Argenta",
     "company": "Bausch Health",
-    "to": "luann.argenta@valeant.com",
+    "to": "luann.argenta@bausch.com",
     "subject": "DIMMs for the ERP stack",
     "body": "Hi LuAnn,\n\nFollowing up with a different angle. We source server memory direct from Samsung, Hynix, and Micron. DDR4 pricing has been hit hard by AI demand, but we carry inventory at below OEM rates.\n\nIf Bausch is carrying any ERP or database server refresh work, memory is usually the easiest place to cut cost.\n\nWorth a look?\n\n---------- On April 22, Andy McLean wrote ----------\n[earlier thread]",
     "sendDate": "2026-04-29",
     "sendTime": "12pm",
     "status": "pending",
-    "addedDate": "2026-04-19"
+    "addedDate": "2026-04-19",
+    "notes": [],
+    "emailCorrectedAt": "2026-04-21T15:55:42.177541",
+    "originalEmail": "luann.argenta@valeant.com"
   },
   {
     "id": "luann-argenta-bausch-4",
     "prospectName": "LuAnn Argenta",
     "company": "Bausch Health",
-    "to": "luann.argenta@valeant.com",
+    "to": "luann.argenta@bausch.com",
     "subject": "NetApp support cycle",
     "body": "Hi LuAnn,\n\nOne more angle. If Bausch has any NetApp storage heading off warranty, we do third party support on it. Same SLAs, about half the OEM cost.\n\nA lot of pharma teams use us as the benchmark bid so they can push back on NetApp's renewal quote.\n\nWorth comparing your next renewal?\n\n---------- On April 28, Andy McLean wrote ----------\n[earlier thread]",
     "sendDate": "2026-05-07",
     "sendTime": "1pm",
     "status": "pending",
-    "addedDate": "2026-04-19"
+    "addedDate": "2026-04-19",
+    "notes": [],
+    "emailCorrectedAt": "2026-04-21T15:55:42.177541",
+    "originalEmail": "luann.argenta@valeant.com"
   },
   {
     "id": "luann-argenta-bausch-5",
     "prospectName": "LuAnn Argenta",
     "company": "Bausch Health",
-    "to": "luann.argenta@valeant.com",
+    "to": "luann.argenta@bausch.com",
     "subject": "Spare gear on the shelf",
     "body": "Hi LuAnn,\n\nWe also supply tested pre-owned Cisco, Juniper, and Arista gear. A lot of IT teams use us for break glass spares or lab buildout without burning new gear budget.\n\nIf Bausch is sitting on any aging switches where a spare would help, worth a conversation.\n\n---------- On May 8, Andy McLean wrote ----------\n[earlier thread]",
     "sendDate": "2026-05-14",
     "sendTime": "2pm",
     "status": "pending",
-    "addedDate": "2026-04-19"
+    "addedDate": "2026-04-19",
+    "notes": [],
+    "emailCorrectedAt": "2026-04-21T15:55:42.177541",
+    "originalEmail": "luann.argenta@valeant.com"
   },
   {
     "id": "luann-argenta-bausch-6",
     "prospectName": "LuAnn Argenta",
     "company": "Bausch Health",
-    "to": "luann.argenta@valeant.com",
+    "to": "luann.argenta@bausch.com",
     "subject": "Close the file?",
     "body": "Hi LuAnn,\n\nShould I close the file on this one, or is the timing just off?\n\n---------- On May 18, Andy McLean wrote ----------\n[earlier thread]",
     "sendDate": "2026-05-22",
     "sendTime": "3pm",
     "status": "pending",
-    "addedDate": "2026-04-19"
+    "addedDate": "2026-04-19",
+    "notes": [],
+    "emailCorrectedAt": "2026-04-21T15:55:42.177541",
+    "originalEmail": "luann.argenta@valeant.com"
   },
   {
     "id": "etienne-trudel-desjardins-1",
@@ -3362,7 +3392,7 @@
     "body": "Hi Etienne,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nSide note, we are already on Desjardins' approved vendor list, so no new vendor onboarding if anything ever needs to move fast.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-19"
   },
   {
@@ -3506,8 +3536,10 @@
     "body": "Hi Kyesun,\n\nTeams architecting across Cisco, Dell, HP, and NetApp at LG CNS scale usually carry OEM support bills that scale harder than the infrastructure itself. OSI Global runs third party maintenance 40 to 60 percent below OEM on that mix, same SLA, no downgrade.\n\nSide note, we're already on your approved vendor list, so no new onboarding if anything ever needs to move fast.\n\nWorth 15 minutes to trade notes?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "cancelled",
+    "addedDate": "2026-04-19",
+    "cancelledAt": "2026-04-21T15:23:46.678981",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "kyesun-lee-lgcns-2",
@@ -3518,8 +3550,10 @@
     "body": "Any thoughts?\n\nOn Mon, Apr 20, 2026, Andy McLean wrote:\n> Hi Kyesun,\n>\n> Teams architecting across Cisco, Dell, HP, and NetApp at LG CNS scale usually carry OEM support bills that scale harder than the infrastructure itself. OSI Global runs third party maintenance 40 to 60 percent below OEM on that mix, same SLA, no downgrade.\n>\n> Side note, we're already on your approved vendor list, so no new onboarding if anything ever needs to move fast.\n>\n> Worth 15 minutes to trade notes?",
     "sendDate": "2026-04-23",
     "sendTime": "11am",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "cancelled",
+    "addedDate": "2026-04-19",
+    "cancelledAt": "2026-04-21T15:23:46.678981",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "kyesun-lee-lgcns-3",
@@ -3530,8 +3564,10 @@
     "body": "Hi Kyesun,\n\nOne thing architect teams tend to find useful: we source DDR4 and DDR5 direct from Samsung and Hynix well below OEM list. Same manufacturer warranty. No impact on hardware support contracts.\n\nIf any upcoming server builds are sensitive to memory cost, easy to send a spec and see what the delta looks like.\n\nOn Wed, Apr 22, 2026, Andy McLean wrote:\n> Any thoughts?\n>\n> On Mon, Apr 20, 2026, Andy McLean wrote:\n> > Hi Kyesun,\n> >\n> > Teams architecting across Cisco, Dell, HP, and NetApp at LG CNS scale usually carry OEM support bills that scale harder than the infrastructure itself. OSI Global runs third party maintenance 40 to 60 percent below OEM on that mix, same SLA, no downgrade.\n> >\n> > Side note, we're already on your approved vendor list, so no new onboarding if anything ever needs to move fast.\n> >\n> > Worth 15 minutes to trade notes?",
     "sendDate": "2026-04-29",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "cancelled",
+    "addedDate": "2026-04-19",
+    "cancelledAt": "2026-04-21T15:23:46.678981",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "kyesun-lee-lgcns-4",
@@ -3542,8 +3578,10 @@
     "body": "Hi Kyesun,\n\nQuick reminder we're already approved at LG CNS if timing matters.\n\nIf your architecture team ever needs a sanity check on optics pricing, I'd happily send a sample SFP or two to your lab. SmartOptics built, manufacturer warranty, roughly 40 percent below OEM. No commitment, just a Plan B on the shelf.\n\nOn Tue, Apr 28, 2026, Andy McLean wrote:\n> Hi Kyesun,\n>\n> One thing architect teams tend to find useful: we source DDR4 and DDR5 direct from Samsung and Hynix well below OEM list. Same manufacturer warranty. No impact on hardware support contracts.\n>\n> If any upcoming server builds are sensitive to memory cost, easy to send a spec and see what the delta looks like.",
     "sendDate": "2026-05-07",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "cancelled",
+    "addedDate": "2026-04-19",
+    "cancelledAt": "2026-04-21T15:23:46.678981",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "kyesun-lee-lgcns-5",
@@ -3554,8 +3592,10 @@
     "body": "Hi Kyesun,\n\nOne more OSI line worth flagging: tested pre-owned Cisco, Juniper, and Arista gear with OSI TPM on top. Useful for lab rebuilds, overflow capacity, or DR sites where new list pricing is hard to justify.\n\nHappy to share a pricing snapshot if that's ever relevant to something you're scoping.\n\nOn Fri, May 8, 2026, Andy McLean wrote:\n> Hi Kyesun,\n>\n> Quick reminder we're already approved at LG CNS if timing matters.\n>\n> If your architecture team ever needs a sanity check on optics pricing, I'd happily send a sample SFP or two to your lab. SmartOptics built, manufacturer warranty, roughly 40 percent below OEM. No commitment, just a Plan B on the shelf.",
     "sendDate": "2026-05-14",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "cancelled",
+    "addedDate": "2026-04-19",
+    "cancelledAt": "2026-04-21T15:23:46.678981",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "kyesun-lee-lgcns-6",
@@ -3566,8 +3606,10 @@
     "body": "Should I close the file on this one, or is the timing just off?\n\nOn Mon, May 18, 2026, Andy McLean wrote:\n> Hi Kyesun,\n>\n> One more OSI line worth flagging: tested pre-owned Cisco, Juniper, and Arista gear with OSI TPM on top. Useful for lab rebuilds, overflow capacity, or DR sites where new list pricing is hard to justify.\n>\n> Happy to share a pricing snapshot if that's ever relevant to something you're scoping.",
     "sendDate": "2026-05-22",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "cancelled",
+    "addedDate": "2026-04-19",
+    "cancelledAt": "2026-04-21T15:23:46.678981",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "jonghwan-kim-lgcns-1",
@@ -3650,7 +3692,7 @@
     "body": "Hi Josh,\n\nSaw the Oak Hill acquisition closed at the end of last year. Network expansion usually means more optics pressure on the Ops team.\n\nI'm putting together a package for you. Box of swag and a pair of sample SFPs from the team at OSI Global. Same MSA you're running today with a manufacturer warranty.\n\nDo you come into the NOC, or is there a better address to ship it to?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-19"
   },
   {
@@ -3789,19 +3831,19 @@
     "id": "ben-wexler-keybank-1",
     "prospectName": "Ben Wexler",
     "company": "KeyBank",
-    "to": "ben.wexler@yahoo.com",
+    "to": "benjamin_wexler@keybank.com",
     "subject": "SFP samples + swag",
     "body": "Hi Ben,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-19"
   },
   {
     "id": "ben-wexler-keybank-2",
     "prospectName": "Ben Wexler",
     "company": "KeyBank",
-    "to": "ben.wexler@yahoo.com",
+    "to": "benjamin_wexler@keybank.com",
     "subject": "RE: SFP samples + swag",
     "body": "Any thoughts?\n\nOn Mon, Apr 20, 2026, Andy McLean wrote:\n> Hi Ben,\n>\n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>\n> Do you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-04-23",
@@ -3813,7 +3855,7 @@
     "id": "ben-wexler-keybank-3",
     "prospectName": "Ben Wexler",
     "company": "KeyBank",
-    "to": "ben.wexler@yahoo.com",
+    "to": "benjamin_wexler@keybank.com",
     "subject": "TPM benchmark for KeyBank",
     "body": "Hi Ben,\n\nCurious if KeyBank has looked at third party maintenance lately. Since the Park Place and Service Express merger, a lot of bank teams have renegotiated their rates or moved providers.\n\nWorth a quick benchmark against current pricing?\n\nOn Wed, Apr 22, 2026, Andy McLean wrote:\n> Any thoughts?\n>\n> On Mon, Apr 20, 2026, Andy McLean wrote:\n> > Hi Ben,\n> >\n> > I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n> >\n> > Do you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-04-29",
@@ -3825,7 +3867,7 @@
     "id": "ben-wexler-keybank-4",
     "prospectName": "Ben Wexler",
     "company": "KeyBank",
-    "to": "ben.wexler@yahoo.com",
+    "to": "benjamin_wexler@keybank.com",
     "subject": "Server memory pricing",
     "body": "Hi Ben,\n\nAny server refresh or DIMM upgrade work at KeyBank this year? We source Samsung and Hynix direct with manufacturer warranties. DDR4 prices well under OEM. DDR5 same story.\n\nWant me to pull current pricing on common SKUs?\n\nOn Tue, Apr 28, 2026, Andy McLean wrote:\n> Hi Ben,\n>\n> Curious if KeyBank has looked at third party maintenance lately. Since the Park Place and Service Express merger, a lot of bank teams have renegotiated their rates or moved providers.\n>\n> Worth a quick benchmark against current pricing?",
     "sendDate": "2026-05-07",
@@ -3837,7 +3879,7 @@
     "id": "ben-wexler-keybank-5",
     "prospectName": "Ben Wexler",
     "company": "KeyBank",
-    "to": "ben.wexler@yahoo.com",
+    "to": "benjamin_wexler@keybank.com",
     "subject": "Tested Cisco + TPM bundle",
     "body": "Hi Ben,\n\nIf KeyBank runs lab environments or carries spares, we stock tested Cisco and Juniper gear with our TPM coverage included. Usually a fraction of OEM new.\n\nAnything on the list I should quote?\n\nOn Fri, May 8, 2026, Andy McLean wrote:\n> Hi Ben,\n>\n> Any server refresh or DIMM upgrade work at KeyBank this year? We source Samsung and Hynix direct with manufacturer warranties. DDR4 prices well under OEM. DDR5 same story.\n>\n> Want me to pull current pricing on common SKUs?",
     "sendDate": "2026-05-14",
@@ -3849,7 +3891,7 @@
     "id": "ben-wexler-keybank-6",
     "prospectName": "Ben Wexler",
     "company": "KeyBank",
-    "to": "ben.wexler@yahoo.com",
+    "to": "benjamin_wexler@keybank.com",
     "subject": "Close the file?",
     "body": "No reply so I'll assume the timing is off. Should I close the file, or circle back in a quarter?\n\nOn Mon, May 18, 2026, Andy McLean wrote:\n> Hi Ben,\n>\n> If KeyBank runs lab environments or carries spares, we stock tested Cisco and Juniper gear with our TPM coverage included. Usually a fraction of OEM new.\n>\n> Anything on the list I should quote?",
     "sendDate": "2026-05-22",
@@ -3866,8 +3908,10 @@
     "body": "Hi Alex,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "cancelled",
+    "addedDate": "2026-04-19",
+    "cancelledAt": "2026-04-21T15:48:32.831566",
+    "cancelReason": "Cancelled by Andy"
   },
   {
     "id": "alex-broque-hurricane-electric-2",
@@ -3878,8 +3922,10 @@
     "body": "Any thoughts?\n\nOn Mon, Apr 20, 2026, Andy McLean wrote:\n> Hi Alex,\n>\n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>\n> Do you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-04-23",
     "sendTime": "11am",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "cancelled",
+    "addedDate": "2026-04-19",
+    "cancelledAt": "2026-04-21T15:48:32.831566",
+    "cancelReason": "Cancelled by Andy"
   },
   {
     "id": "alex-broque-hurricane-electric-3",
@@ -3890,8 +3936,10 @@
     "body": "Hi Alex,\n\nIf HE hits OEM lead time walls on 100G or 400G ZR or ZR+ for any peering or backbone expansion work, we stock both. Usually ships the same week.\n\nWant the current inventory list?\n\nOn Wed, Apr 22, 2026, Andy McLean wrote:\n> Any thoughts?\n>\n> On Mon, Apr 20, 2026, Andy McLean wrote:\n> > Hi Alex,\n> >\n> > I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n> >\n> > Do you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-04-29",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "cancelled",
+    "addedDate": "2026-04-19",
+    "cancelledAt": "2026-04-21T15:48:32.831566",
+    "cancelReason": "Cancelled by Andy"
   },
   {
     "id": "alex-broque-hurricane-electric-4",
@@ -3902,8 +3950,10 @@
     "body": "Hi Alex,\n\nWhen HE needs capacity fills that aren't worth going back to the OEM for, we run SmartOptics open line DWDM at 30 to 50 percent under Ciena and Nokia. No licensing friction.\n\nWorth a conversation on the roadmap?\n\nOn Tue, Apr 28, 2026, Andy McLean wrote:\n> Hi Alex,\n>\n> If HE hits OEM lead time walls on 100G or 400G ZR or ZR+ for any peering or backbone expansion work, we stock both. Usually ships the same week.\n>\n> Want the current inventory list?",
     "sendDate": "2026-05-07",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "cancelled",
+    "addedDate": "2026-04-19",
+    "cancelledAt": "2026-04-21T15:48:32.831566",
+    "cancelReason": "Cancelled by Andy"
   },
   {
     "id": "alex-broque-hurricane-electric-5",
@@ -3914,8 +3964,10 @@
     "body": "Hi Alex,\n\nAny Cisco or Juniper gear in the HE fleet aging out of OEM support soon? We do third party maintenance, Gartner recognized, usually 40 to 60 percent below SmartNet.\n\nWorth a quick list review?\n\nOn Fri, May 8, 2026, Andy McLean wrote:\n> Hi Alex,\n>\n> When HE needs capacity fills that aren't worth going back to the OEM for, we run SmartOptics open line DWDM at 30 to 50 percent under Ciena and Nokia. No licensing friction.\n>\n> Worth a conversation on the roadmap?",
     "sendDate": "2026-05-14",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "cancelled",
+    "addedDate": "2026-04-19",
+    "cancelledAt": "2026-04-21T15:48:32.831566",
+    "cancelReason": "Cancelled by Andy"
   },
   {
     "id": "alex-broque-hurricane-electric-6",
@@ -3926,8 +3978,10 @@
     "body": "No bite so far, which is fine. Should I close the file, or check back in a few months?\n\nOn Mon, May 18, 2026, Andy McLean wrote:\n> Hi Alex,\n>\n> Any Cisco or Juniper gear in the HE fleet aging out of OEM support soon? We do third party maintenance, Gartner recognized, usually 40 to 60 percent below SmartNet.\n>\n> Worth a quick list review?",
     "sendDate": "2026-05-22",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "cancelled",
+    "addedDate": "2026-04-19",
+    "cancelledAt": "2026-04-21T15:48:32.831566",
+    "cancelReason": "Cancelled by Andy"
   },
   {
     "id": "scott-albert-hunter-communications-1",
@@ -4443,8 +4497,10 @@
     "body": "Hi Bruce,\n\nYou run the carrier systems at BullsEye through the Lingo integration. Curious if you've compared transceiver pricing lately.\n\nOSI supplies SmartOptics gear compatible with Cisco and Juniper. We stock our own inventory, which keeps lead times short when factory supply slips.\n\nWorth 15 minutes to compare numbers?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelledAt": "2026-04-21T16:33:04.025953",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "bruce-elwert-bullseye-telecom-2",
@@ -4455,8 +4511,10 @@
     "body": "Any thoughts?\n\nOn Tue, Apr 21, 2026 at 12:00 AM, Andy McLean wrote:\n> Hi Bruce,\n> \n> You run the carrier systems at BullsEye through the Lingo integration. Curious if you've compared transceiver pricing lately.\n> \n> OSI supplies SmartOptics gear compatible with Cisco and Juniper. We stock our own inventory, which keeps lead times short when factory supply slips.\n> \n> Worth 15 minutes to compare numbers?",
     "sendDate": "2026-04-23",
     "sendTime": "11am",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelledAt": "2026-04-21T16:33:04.025953",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "bruce-elwert-bullseye-telecom-3",
@@ -4467,8 +4525,10 @@
     "body": "Hi Bruce,\n\nAnother angle. OSI runs third party maintenance on Cisco at 40 to 60 percent below OEM rates. Juniper and Arista are in scope too if you want them on one contract.\n\nFor carrier infrastructure where gear is past refresh but still doing its job, this frees up opex.\n\nWorth a quick look at what you're paying for support today?\n\nOn Thu, Apr 23, 2026 at 12:00 AM, Andy McLean wrote:\n> Any thoughts?\n> \n> On Tue, Apr 21, 2026 at 12:00 AM, Andy McLean wrote:\n> > Hi Bruce,\n> > \n> > You run the carrier systems at BullsEye through the Lingo integration. Curious if you've compared transceiver pricing lately.\n> > \n> > OSI supplies SmartOptics gear compatible with Cisco and Juniper. We stock our own inventory, which keeps lead times short when factory supply slips.\n> > \n> > Worth 15 minutes to compare numbers?",
     "sendDate": "2026-04-29",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelledAt": "2026-04-21T16:33:04.025953",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "bruce-elwert-bullseye-telecom-4",
@@ -4479,8 +4539,10 @@
     "body": "Hi Bruce,\n\nOne more OSI line. We distribute SmartOptics DCP, a DWDM open line platform that sits 30 to 50 percent below Ciena and Nokia. Smaller footprint than traditional DCP gear, and lead time is weeks not months.\n\nIf BullsEye or Lingo has any backbone transport in the refresh queue, worth running a side by side.\n\nHave 15 minutes this week?\n\nOn Wed, Apr 29, 2026 at 12:00 AM, Andy McLean wrote:\n> Hi Bruce,\n> \n> Another angle. OSI runs third party maintenance on Cisco at 40 to 60 percent below OEM rates. Juniper and Arista are in scope too if you want them on one contract.\n> \n> For carrier infrastructure where gear is past refresh but still doing its job, this frees up opex.\n> \n> Worth a quick look at what you're paying for support today?\n> \n> On Thu, Apr 23, 2026 at 12:00 AM, Andy McLean wrote:\n> > Any thoughts?\n> > \n> > On Tue, Apr 21, 2026 at 12:00 AM, Andy McLean wrote:\n> > > Hi Bruce,\n> > > \n> > > You run the carrier systems at BullsEye through the Lingo integration. Curious if you've compared transceiver pricing lately.\n> > > \n> > > OSI supplies SmartOptics gear compatible with Cisco and Juniper. We stock our own inventory, which keeps lead times short when factory supply slips.\n> > > \n> > > Worth 15 minutes to compare numbers?",
     "sendDate": "2026-05-07",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelledAt": "2026-04-21T16:33:04.025953",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "bruce-elwert-bullseye-telecom-5",
@@ -4491,8 +4553,10 @@
     "body": "Hi Bruce,\n\nOne last angle before I let this rest. OSI carries used Cisco and Juniper stock. Tested with warranty, and we can bundle it under OSI TPM so you skip the OEM renewal cycle.\n\nFor spare capacity or fast port adds, the price delta vs. new is usually 50 to 70 percent.\n\nAny of that useful at BullsEye right now?\n\nOn Thu, May 7, 2026 at 12:00 AM, Andy McLean wrote:\n> Hi Bruce,\n> \n> One more OSI line. We distribute SmartOptics DCP, a DWDM open line platform that sits 30 to 50 percent below Ciena and Nokia. Smaller footprint than traditional DCP gear, and lead time is weeks not months.\n> \n> If BullsEye or Lingo has any backbone transport in the refresh queue, worth running a side by side.\n> \n> Have 15 minutes this week?\n> \n> On Wed, Apr 29, 2026 at 12:00 AM, Andy McLean wrote:\n> > Hi Bruce,\n> > \n> > Another angle. OSI runs third party maintenance on Cisco at 40 to 60 percent below OEM rates. Juniper and Arista are in scope too if you want them on one contract.\n> > \n> > For carrier infrastructure where gear is past refresh but still doing its job, this frees up opex.\n> > \n> > Worth a quick look at what you're paying for support today?\n> > \n> > On Thu, Apr 23, 2026 at 12:00 AM, Andy McLean wrote:\n> > > Any thoughts?\n> > > \n> > > On Tue, Apr 21, 2026 at 12:00 AM, Andy McLean wrote:\n> > > > Hi Bruce,\n> > > > \n> > > > You run the carrier systems at BullsEye through the Lingo integration. Curious if you've compared transceiver pricing lately.\n> > > > \n> > > > OSI supplies SmartOptics gear compatible with Cisco and Juniper. We stock our own inventory, which keeps lead times short when factory supply slips.\n> > > > \n> > > > Worth 15 minutes to compare numbers?",
     "sendDate": "2026-05-14",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelledAt": "2026-04-21T16:33:04.025953",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "bruce-elwert-bullseye-telecom-6",
@@ -4503,8 +4567,10 @@
     "body": "Should I close the file on this one, or is the timing just off?\n\nOn Thu, May 14, 2026 at 12:00 AM, Andy McLean wrote:\n> Hi Bruce,\n> \n> One last angle before I let this rest. OSI carries used Cisco and Juniper stock. Tested with warranty, and we can bundle it under OSI TPM so you skip the OEM renewal cycle.\n> \n> For spare capacity or fast port adds, the price delta vs. new is usually 50 to 70 percent.\n> \n> Any of that useful at BullsEye right now?\n> \n> On Thu, May 7, 2026 at 12:00 AM, Andy McLean wrote:\n> > Hi Bruce,\n> > \n> > One more OSI line. We distribute SmartOptics DCP, a DWDM open line platform that sits 30 to 50 percent below Ciena and Nokia. Smaller footprint than traditional DCP gear, and lead time is weeks not months.\n> > \n> > If BullsEye or Lingo has any backbone transport in the refresh queue, worth running a side by side.\n> > \n> > Have 15 minutes this week?\n> > \n> > On Wed, Apr 29, 2026 at 12:00 AM, Andy McLean wrote:\n> > > Hi Bruce,\n> > > \n> > > Another angle. OSI runs third party maintenance on Cisco at 40 to 60 percent below OEM rates. Juniper and Arista are in scope too if you want them on one contract.\n> > > \n> > > For carrier infrastructure where gear is past refresh but still doing its job, this frees up opex.\n> > > \n> > > Worth a quick look at what you're paying for support today?\n> > > \n> > > On Thu, Apr 23, 2026 at 12:00 AM, Andy McLean wrote:\n> > > > Any thoughts?\n> > > > \n> > > > On Tue, Apr 21, 2026 at 12:00 AM, Andy McLean wrote:\n> > > > > Hi Bruce,\n> > > > > \n> > > > > You run the carrier systems at BullsEye through the Lingo integration. Curious if you've compared transceiver pricing lately.\n> > > > > \n> > > > > OSI supplies SmartOptics gear compatible with Cisco and Juniper. We stock our own inventory, which keeps lead times short when factory supply slips.\n> > > > > \n> > > > > Worth 15 minutes to compare numbers?",
     "sendDate": "2026-05-22",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelledAt": "2026-04-21T16:33:04.025953",
+    "cancelReason": "Invalid email address"
   },
   {
     "id": "joshua-young-armstrong-group-1",
@@ -4587,8 +4653,10 @@
     "body": "Hi Annette,\n\nYou run the Juniper product line at Netceed. OSI supplies used Juniper switches and routers, all tested with warranty, plus Juniper TPM at 40 to 60 percent below OEM.\n\nThat's a natural add to your existing Juniper catalog. The broadband providers you serve get a cost reduction option without breaking vendor standardization.\n\nWorth 15 minutes to walk through?",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelledAt": "2026-04-21T17:02:49.975988",
+    "cancelReason": "Cancelled by Andy"
   },
   {
     "id": "annette-bittner-netceed-us-2",
@@ -4599,8 +4667,10 @@
     "body": "Any thoughts?\n\nOn Tue, Apr 21, 2026 at 12:00 AM, Andy McLean wrote:\n> Hi Annette,\n> \n> You run the Juniper product line at Netceed. OSI supplies used Juniper switches and routers, all tested with warranty, plus Juniper TPM at 40 to 60 percent below OEM.\n> \n> That's a natural add to your existing Juniper catalog. The broadband providers you serve get a cost reduction option without breaking vendor standardization.\n> \n> Worth 15 minutes to walk through?",
     "sendDate": "2026-04-23",
     "sendTime": "11am",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelledAt": "2026-04-21T17:02:49.975988",
+    "cancelReason": "Cancelled by Andy"
   },
   {
     "id": "annette-bittner-netceed-us-3",
@@ -4611,8 +4681,10 @@
     "body": "Hi Annette,\n\nOne more angle. OSI supplies SmartOptics transceivers at 60 to 80 percent below OEM. They're compatible with what your broadband customers run on Cisco and Juniper.\n\nFor Netceed, that's another product line your catalog already has demand for. Attach rate on Juniper gear is usually decent.\n\nWorth walking through the margin model?\n\nOn Thu, Apr 23, 2026 at 12:00 AM, Andy McLean wrote:\n> Any thoughts?\n> \n> On Tue, Apr 21, 2026 at 12:00 AM, Andy McLean wrote:\n> > Hi Annette,\n> > \n> > You run the Juniper product line at Netceed. OSI supplies used Juniper switches and routers, all tested with warranty, plus Juniper TPM at 40 to 60 percent below OEM.\n> > \n> > That's a natural add to your existing Juniper catalog. The broadband providers you serve get a cost reduction option without breaking vendor standardization.\n> > \n> > Worth 15 minutes to walk through?",
     "sendDate": "2026-04-29",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelledAt": "2026-04-21T17:02:49.975988",
+    "cancelReason": "Cancelled by Andy"
   },
   {
     "id": "annette-bittner-netceed-us-4",
@@ -4623,8 +4695,10 @@
     "body": "Hi Annette,\n\nAnother product line Netceed could carry. OSI has inventory on used Cisco switches and routers, fully tested with warranty, and we back it with TPM on the same contract.\n\nFor cable and fiber operators stretching refresh cycles, this cuts cost directly. Netceed's distribution footprint would move it fast.\n\nDoes it fit your catalog strategy?\n\nOn Wed, Apr 29, 2026 at 12:00 AM, Andy McLean wrote:\n> Hi Annette,\n> \n> One more angle. OSI supplies SmartOptics transceivers at 60 to 80 percent below OEM. They're compatible with what your broadband customers run on Cisco and Juniper.\n> \n> For Netceed, that's another product line your catalog already has demand for. Attach rate on Juniper gear is usually decent.\n> \n> Worth walking through the margin model?\n> \n> On Thu, Apr 23, 2026 at 12:00 AM, Andy McLean wrote:\n> > Any thoughts?\n> > \n> > On Tue, Apr 21, 2026 at 12:00 AM, Andy McLean wrote:\n> > > Hi Annette,\n> > > \n> > > You run the Juniper product line at Netceed. OSI supplies used Juniper switches and routers, all tested with warranty, plus Juniper TPM at 40 to 60 percent below OEM.\n> > > \n> > > That's a natural add to your existing Juniper catalog. The broadband providers you serve get a cost reduction option without breaking vendor standardization.\n> > > \n> > > Worth 15 minutes to walk through?",
     "sendDate": "2026-05-07",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelledAt": "2026-04-21T17:02:49.975988",
+    "cancelReason": "Cancelled by Andy"
   },
   {
     "id": "annette-bittner-netceed-us-5",
@@ -4635,8 +4709,10 @@
     "body": "Hi Annette,\n\nLast OSI line worth mentioning. We distribute SmartOptics DCP, a DWDM platform at 30 to 50 percent below Ciena and Nokia. Compact footprint and fast lead times.\n\nBroadband providers upgrading access transport are asking their distributors about it. Worth Netceed having it on catalog.\n\nDoes that fit your product roadmap?\n\nOn Thu, May 7, 2026 at 12:00 AM, Andy McLean wrote:\n> Hi Annette,\n> \n> Another product line Netceed could carry. OSI has inventory on used Cisco switches and routers, fully tested with warranty, and we back it with TPM on the same contract.\n> \n> For cable and fiber operators stretching refresh cycles, this cuts cost directly. Netceed's distribution footprint would move it fast.\n> \n> Does it fit your catalog strategy?\n> \n> On Wed, Apr 29, 2026 at 12:00 AM, Andy McLean wrote:\n> > Hi Annette,\n> > \n> > One more angle. OSI supplies SmartOptics transceivers at 60 to 80 percent below OEM. They're compatible with what your broadband customers run on Cisco and Juniper.\n> > \n> > For Netceed, that's another product line your catalog already has demand for. Attach rate on Juniper gear is usually decent.\n> > \n> > Worth walking through the margin model?\n> > \n> > On Thu, Apr 23, 2026 at 12:00 AM, Andy McLean wrote:\n> > > Any thoughts?\n> > > \n> > > On Tue, Apr 21, 2026 at 12:00 AM, Andy McLean wrote:\n> > > > Hi Annette,\n> > > > \n> > > > You run the Juniper product line at Netceed. OSI supplies used Juniper switches and routers, all tested with warranty, plus Juniper TPM at 40 to 60 percent below OEM.\n> > > > \n> > > > That's a natural add to your existing Juniper catalog. The broadband providers you serve get a cost reduction option without breaking vendor standardization.\n> > > > \n> > > > Worth 15 minutes to walk through?",
     "sendDate": "2026-05-14",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelledAt": "2026-04-21T17:02:49.975988",
+    "cancelReason": "Cancelled by Andy"
   },
   {
     "id": "annette-bittner-netceed-us-6",
@@ -4647,8 +4723,10 @@
     "body": "Should I close the file on this one, or is the timing just off?\n\nOn Thu, May 14, 2026 at 12:00 AM, Andy McLean wrote:\n> Hi Annette,\n> \n> Last OSI line worth mentioning. We distribute SmartOptics DCP, a DWDM platform at 30 to 50 percent below Ciena and Nokia. Compact footprint and fast lead times.\n> \n> Broadband providers upgrading access transport are asking their distributors about it. Worth Netceed having it on catalog.\n> \n> Does that fit your product roadmap?\n> \n> On Thu, May 7, 2026 at 12:00 AM, Andy McLean wrote:\n> > Hi Annette,\n> > \n> > Another product line Netceed could carry. OSI has inventory on used Cisco switches and routers, fully tested with warranty, and we back it with TPM on the same contract.\n> > \n> > For cable and fiber operators stretching refresh cycles, this cuts cost directly. Netceed's distribution footprint would move it fast.\n> > \n> > Does it fit your catalog strategy?\n> > \n> > On Wed, Apr 29, 2026 at 12:00 AM, Andy McLean wrote:\n> > > Hi Annette,\n> > > \n> > > One more angle. OSI supplies SmartOptics transceivers at 60 to 80 percent below OEM. They're compatible with what your broadband customers run on Cisco and Juniper.\n> > > \n> > > For Netceed, that's another product line your catalog already has demand for. Attach rate on Juniper gear is usually decent.\n> > > \n> > > Worth walking through the margin model?\n> > > \n> > > On Thu, Apr 23, 2026 at 12:00 AM, Andy McLean wrote:\n> > > > Any thoughts?\n> > > > \n> > > > On Tue, Apr 21, 2026 at 12:00 AM, Andy McLean wrote:\n> > > > > Hi Annette,\n> > > > > \n> > > > > You run the Juniper product line at Netceed. OSI supplies used Juniper switches and routers, all tested with warranty, plus Juniper TPM at 40 to 60 percent below OEM.\n> > > > > \n> > > > > That's a natural add to your existing Juniper catalog. The broadband providers you serve get a cost reduction option without breaking vendor standardization.\n> > > > > \n> > > > > Worth 15 minutes to walk through?",
     "sendDate": "2026-05-22",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelledAt": "2026-04-21T17:02:49.975988",
+    "cancelReason": "Cancelled by Andy"
   },
   {
     "id": "david-thomas-sifi-1",
@@ -4659,7 +4737,7 @@
     "body": "Hi David,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?\n",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-20"
   },
   {
@@ -4731,7 +4809,7 @@
     "body": "Hi Ed,\n\nWith the Park Place and Service Express merger, a lot of network teams are taking a fresh look at their maintenance relationships. OSI is Gartner recognized TPM, no PE, 40 to 60% below OEM rates across Cisco, Juniper, Dell, HP, NetApp, Arista.\n\nGiven the scale you run at MetTel, worth 15 minutes to benchmark?\n",
     "sendDate": "2026-04-21",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-20"
   },
   {
@@ -4865,5 +4943,437 @@
     "sendTime": "10am",
     "status": "pending",
     "addedDate": "2026-04-20"
+  },
+  {
+    "id": "cooper-harless-hunter-communications-1",
+    "prospectName": "Cooper Harless",
+    "company": "Hunter Communications",
+    "to": "cooper@hunterfiber.com",
+    "subject": "SFP sample for Hunter",
+    "body": "Hi Cooper,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Also noticed you picked up the Junos SR-MPLS cert recently, nice one.\n\nDo you come into the office in Eugene, or is there a better address to ship it to?\n",
+    "sendDate": "2026-05-13",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "cooper-harless-hunter-communications-2",
+    "prospectName": "Cooper Harless",
+    "company": "Hunter Communications",
+    "to": "cooper@hunterfiber.com",
+    "subject": "RE: SFP sample for Hunter",
+    "body": "Any thoughts?\nOn May 13, 2026, Andy McLean wrote:\n> Hi Cooper,\n>\n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Also noticed you picked up the Junos SR-MPLS cert recently, nice one.\n>\n> Do you come into the office in Eugene, or is there a better address to ship it to?",
+    "sendDate": "2026-05-15",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "cooper-harless-hunter-communications-3",
+    "prospectName": "Cooper Harless",
+    "company": "Hunter Communications",
+    "to": "cooper@hunterfiber.com",
+    "subject": "DWDM alternative to Ciena on transport",
+    "body": "Hi Cooper,\n\nQuick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, and it ships in weeks rather than quarters. Plays well with Juniper on the transport side.\n\nIf Hunter's expanding capacity with the Oak Hill buildout, could be worth a short call.\n\nRelevant?\n\nOn May 15, 2026, Andy McLean wrote:\n> Any thoughts?\n>On May 13, 2026, Andy McLean wrote:\n>> Hi Cooper,\n>>\n>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Also noticed you picked up the Junos SR-MPLS cert recently, nice one.\n>>\n>> Do you come into the office in Eugene, or is there a better address to ship it to?",
+    "sendDate": "2026-05-21",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "cooper-harless-hunter-communications-4",
+    "prospectName": "Cooper Harless",
+    "company": "Hunter Communications",
+    "to": "cooper@hunterfiber.com",
+    "subject": "400G ZR on the Juniper side",
+    "body": "Hi Cooper,\n\nOne more. We supply ZR and ZR+ coherent optics as a secondary source when the OEM timelines slip. Carrier teams use us for site to site and metro links that don't justify a full DWDM chassis.\n\nIs 400G coherent on the roadmap anywhere at Hunter?\n\nOn May 21, 2026, Andy McLean wrote:\n>Hi Cooper,\n>\n>Quick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, and it ships in weeks rather than quarters. Plays well with Juniper on the transport side.\n>\n>If Hunter's expanding capacity with the Oak Hill buildout, could be worth a short call.\n>\n>Relevant?\n>\n>On May 15, 2026, Andy McLean wrote:\n>> Any thoughts?\n>>On May 13, 2026, Andy McLean wrote:\n>>> Hi Cooper,\n>>>\n>>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Also noticed you picked up the Junos SR-MPLS cert recently, nice one.\n>>>\n>>> Do you come into the office in Eugene, or is there a better address to ship it to?",
+    "sendDate": "2026-06-01",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "cooper-harless-hunter-communications-5",
+    "prospectName": "Cooper Harless",
+    "company": "Hunter Communications",
+    "to": "cooper@hunterfiber.com",
+    "subject": "Cost on older Juniper or Cisco gear",
+    "body": "Hi Cooper,\n\nOne more angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, typically 40 to 60% below OEM support. Recognized by Gartner and privately owned, so no PE pressure on rates.\n\nIf any kit is off warranty or coming up for renewal, we can put a competitive bid against whoever you're using.\n\nRelevant?\n\nOn June 1, 2026, Andy McLean wrote:\n>Hi Cooper,\n>\n>One more. We supply ZR and ZR+ coherent optics as a secondary source when the OEM timelines slip. Carrier teams use us for site to site and metro links that don't justify a full DWDM chassis.\n>\n>Is 400G coherent on the roadmap anywhere at Hunter?\n>\n>On May 21, 2026, Andy McLean wrote:\n>>Hi Cooper,\n>>\n>>Quick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, and it ships in weeks rather than quarters. Plays well with Juniper on the transport side.\n>>\n>>If Hunter's expanding capacity with the Oak Hill buildout, could be worth a short call.\n>>\n>>Relevant?\n>>\n>>On May 15, 2026, Andy McLean wrote:\n>>> Any thoughts?\n>>>On May 13, 2026, Andy McLean wrote:\n>>>> Hi Cooper,\n>>>>\n>>>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Also noticed you picked up the Junos SR-MPLS cert recently, nice one.\n>>>>\n>>>> Do you come into the office in Eugene, or is there a better address to ship it to?",
+    "sendDate": "2026-06-08",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "cooper-harless-hunter-communications-6",
+    "prospectName": "Cooper Harless",
+    "company": "Hunter Communications",
+    "to": "cooper@hunterfiber.com",
+    "subject": "Close the file?",
+    "body": "Hi Cooper,\n\nShould I close the file on this one, or is the timing just off?\n\nOn June 8, 2026, Andy McLean wrote:\n>Hi Cooper,\n>\n>One more angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, typically 40 to 60% below OEM support. Recognized by Gartner and privately owned, so no PE pressure on rates.\n>\n>If any kit is off warranty or coming up for renewal, we can put a competitive bid against whoever you're using.\n>\n>Relevant?\n>\n>On June 1, 2026, Andy McLean wrote:\n>>Hi Cooper,\n>>\n>>One more. We supply ZR and ZR+ coherent optics as a secondary source when the OEM timelines slip. Carrier teams use us for site to site and metro links that don't justify a full DWDM chassis.\n>>\n>>Is 400G coherent on the roadmap anywhere at Hunter?\n>>\n>>On May 21, 2026, Andy McLean wrote:\n>>>Hi Cooper,\n>>>\n>>>Quick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, and it ships in weeks rather than quarters. Plays well with Juniper on the transport side.\n>>>\n>>>If Hunter's expanding capacity with the Oak Hill buildout, could be worth a short call.\n>>>\n>>>Relevant?\n>>>\n>>>On May 15, 2026, Andy McLean wrote:\n>>>> Any thoughts?\n>>>>On May 13, 2026, Andy McLean wrote:\n>>>>> Hi Cooper,\n>>>>>\n>>>>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Also noticed you picked up the Junos SR-MPLS cert recently, nice one.\n>>>>>\n>>>>> Do you come into the office in Eugene, or is there a better address to ship it to?",
+    "sendDate": "2026-06-16",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "paul-merritt-fatbeam-1",
+    "prospectName": "Paul Merritt",
+    "company": "Fatbeam",
+    "to": "paul.merritt@fatbeam.com",
+    "subject": "A note for Fatbeam's WA expansion",
+    "body": "Hi Paul,\n\nSaw you're ramping the Enterprise team in Western WA. We supply private label DWDM and certified optics to regional carriers, typically 30 to 50% below Ciena or Nokia on the transport side. Teams use us as a secondary source when OEM lead times or pricing put a build at risk.\n\nWorth 15 minutes to compare notes?",
+    "sendDate": "2026-04-22",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "paul-merritt-fatbeam-2",
+    "prospectName": "Paul Merritt",
+    "company": "Fatbeam",
+    "to": "paul.merritt@fatbeam.com",
+    "subject": "RE: A note for Fatbeam's WA expansion",
+    "body": "Any thoughts?\n\nOn April 22, 2026, Andy McLean wrote:\n> Hi Paul,\n>\n> Saw you're ramping the Enterprise team in Western WA. We supply private label DWDM and certified optics to regional carriers, typically 30 to 50% below Ciena or Nokia on the transport side. Teams use us as a secondary source when OEM lead times or pricing put a build at risk.\n>\n> Worth 15 minutes to compare notes?",
+    "sendDate": "2026-04-24",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "paul-merritt-fatbeam-3",
+    "prospectName": "Paul Merritt",
+    "company": "Fatbeam",
+    "to": "paul.merritt@fatbeam.com",
+    "subject": "OEM support costs at Fatbeam",
+    "body": "Hi Paul,\n\nFollowing up with a different angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on rates. Multi vendor, one contract.\n\nIf OEM support renewals are on the docket this year, worth a call?\n\nOn April 24, 2026, Andy McLean wrote:\n> Any thoughts?\n>\n> On April 22, 2026, Andy McLean wrote:\n>> Hi Paul,\n>>\n>> Saw you're ramping the Enterprise team in Western WA. We supply private label DWDM and certified optics to regional carriers, typically 30 to 50% below Ciena or Nokia on the transport side. Teams use us as a secondary source when OEM lead times or pricing put a build at risk.\n>>\n>> Worth 15 minutes to compare notes?",
+    "sendDate": "2026-04-30",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "paul-merritt-fatbeam-4",
+    "prospectName": "Paul Merritt",
+    "company": "Fatbeam",
+    "to": "paul.merritt@fatbeam.com",
+    "subject": "Server DIMMs at below OEM",
+    "body": "Hi Paul,\n\nOne more thread. We also supply server DIMMs direct from Samsung and Hynix for teams dealing with DDR4 and DDR5 cost pressure. Below OEM pricing, manufacturer warranty.\n\nRelevant to any refresh or expansion on the server side?\n\nOn April 30, 2026, Andy McLean wrote:\n> Hi Paul,\n>\n> Following up with a different angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on rates. Multi vendor, one contract.\n>\n> If OEM support renewals are on the docket this year, worth a call?\n>\n> On April 24, 2026, Andy McLean wrote:\n>> Any thoughts?\n>>\n>> On April 22, 2026, Andy McLean wrote:\n>>> Hi Paul,\n>>>\n>>> Saw you're ramping the Enterprise team in Western WA. We supply private label DWDM and certified optics to regional carriers, typically 30 to 50% below Ciena or Nokia on the transport side. Teams use us as a secondary source when OEM lead times or pricing put a build at risk.\n>>>\n>>> Worth 15 minutes to compare notes?",
+    "sendDate": "2026-05-08",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "paul-merritt-fatbeam-5",
+    "prospectName": "Paul Merritt",
+    "company": "Fatbeam",
+    "to": "paul.merritt@fatbeam.com",
+    "subject": "Pre owned networking as the build expands",
+    "body": "Hi Paul,\n\nFinal angle. We move pre owned Cisco, Juniper, and Arista gear with full OSI TPM coverage, for teams extending the life of existing infrastructure instead of going back to OEM list.\n\nAny part of the Fatbeam footprint where that could help?\n\nOn May 8, 2026, Andy McLean wrote:\n> Hi Paul,\n>\n> One more thread. We also supply server DIMMs direct from Samsung and Hynix for teams dealing with DDR4 and DDR5 cost pressure. Below OEM pricing, manufacturer warranty.\n>\n> Relevant to any refresh or expansion on the server side?\n>\n> On April 30, 2026, Andy McLean wrote:\n>> Hi Paul,\n>>\n>> Following up with a different angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on rates. Multi vendor, one contract.\n>>\n>> If OEM support renewals are on the docket this year, worth a call?\n>>\n>> On April 24, 2026, Andy McLean wrote:\n>>> Any thoughts?\n>>>\n>>> On April 22, 2026, Andy McLean wrote:\n>>>> Hi Paul,\n>>>>\n>>>> Saw you're ramping the Enterprise team in Western WA. We supply private label DWDM and certified optics to regional carriers, typically 30 to 50% below Ciena or Nokia on the transport side. Teams use us as a secondary source when OEM lead times or pricing put a build at risk.\n>>>>\n>>>> Worth 15 minutes to compare notes?",
+    "sendDate": "2026-05-15",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "paul-merritt-fatbeam-6",
+    "prospectName": "Paul Merritt",
+    "company": "Fatbeam",
+    "to": "paul.merritt@fatbeam.com",
+    "subject": "Close the file?",
+    "body": "Hi Paul,\n\nShould I close the file on this one, or is the timing just off?\n\nOn May 15, 2026, Andy McLean wrote:\n> Hi Paul,\n>\n> Final angle. We move pre owned Cisco, Juniper, and Arista gear with full OSI TPM coverage, for teams extending the life of existing infrastructure instead of going back to OEM list.\n>\n> Any part of the Fatbeam footprint where that could help?\n>\n> On May 8, 2026, Andy McLean wrote:\n>> Hi Paul,\n>>\n>> One more thread. We also supply server DIMMs direct from Samsung and Hynix for teams dealing with DDR4 and DDR5 cost pressure. Below OEM pricing, manufacturer warranty.\n>>\n>> Relevant to any refresh or expansion on the server side?\n>>\n>> On April 30, 2026, Andy McLean wrote:\n>>> Hi Paul,\n>>>\n>>> Following up with a different angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on rates. Multi vendor, one contract.\n>>>\n>>> If OEM support renewals are on the docket this year, worth a call?\n>>>\n>>> On April 24, 2026, Andy McLean wrote:\n>>>> Any thoughts?\n>>>>\n>>>> On April 22, 2026, Andy McLean wrote:\n>>>>> Hi Paul,\n>>>>>\n>>>>> Saw you're ramping the Enterprise team in Western WA. We supply private label DWDM and certified optics to regional carriers, typically 30 to 50% below Ciena or Nokia on the transport side. Teams use us as a secondary source when OEM lead times or pricing put a build at risk.\n>>>>>\n>>>>> Worth 15 minutes to compare notes?",
+    "sendDate": "2026-05-26",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "gavin-budd-fatbeam-1",
+    "prospectName": "Gavin Budd",
+    "company": "Fatbeam",
+    "to": "gavin@fatbeam.com",
+    "subject": "SFP sample for Fatbeam",
+    "body": "Hi Gavin,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office in Post Falls, or is there a better address to ship it to?",
+    "sendDate": "2026-04-28",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "gavin-budd-fatbeam-2",
+    "prospectName": "Gavin Budd",
+    "company": "Fatbeam",
+    "to": "gavin@fatbeam.com",
+    "subject": "RE: SFP sample for Fatbeam",
+    "body": "Any thoughts?\n\nOn April 28, 2026, Andy McLean wrote:\n> Hi Gavin,\n>\n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>\n> Do you come into the office in Post Falls, or is there a better address to ship it to?",
+    "sendDate": "2026-04-30",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "gavin-budd-fatbeam-3",
+    "prospectName": "Gavin Budd",
+    "company": "Fatbeam",
+    "to": "gavin@fatbeam.com",
+    "subject": "DWDM alternative to Ciena on transport",
+    "body": "Hi Gavin,\n\nQuick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, and it ships in weeks rather than quarters.\n\nHandy if you're sizing wavelengths anywhere capacity is tight. Worth a short call?\n\nOn April 30, 2026, Andy McLean wrote:\n> Any thoughts?\n>\n> On April 28, 2026, Andy McLean wrote:\n>> Hi Gavin,\n>>\n>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>>\n>> Do you come into the office in Post Falls, or is there a better address to ship it to?",
+    "sendDate": "2026-05-06",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "gavin-budd-fatbeam-4",
+    "prospectName": "Gavin Budd",
+    "company": "Fatbeam",
+    "to": "gavin@fatbeam.com",
+    "subject": "OEM support costs on Fatbeam gear",
+    "body": "Hi Gavin,\n\nOne more angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, typically 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on our rates or staffing.\n\nIf any kit is off warranty or coming up for SmartNet renewal, we can put a competitive bid against whoever you're using.\n\nRelevant?\n\nOn May 6, 2026, Andy McLean wrote:\n> Hi Gavin,\n>\n> Quick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, and it ships in weeks rather than quarters.\n>\n> Handy if you're sizing wavelengths anywhere capacity is tight. Worth a short call?\n>\n> On April 30, 2026, Andy McLean wrote:\n>> Any thoughts?\n>>\n>> On April 28, 2026, Andy McLean wrote:\n>>> Hi Gavin,\n>>>\n>>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>>>\n>>> Do you come into the office in Post Falls, or is there a better address to ship it to?",
+    "sendDate": "2026-05-14",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "gavin-budd-fatbeam-5",
+    "prospectName": "Gavin Budd",
+    "company": "Fatbeam",
+    "to": "gavin@fatbeam.com",
+    "subject": "400G ZR for Fatbeam's metro links",
+    "body": "Hi Gavin,\n\nOne more. We supply ZR and ZR+ coherent optics as a secondary source when Cisco or Lumentum timelines slip. Carrier teams use us for metro and short reach links that don't justify a full DWDM chassis.\n\nIs 400G on your roadmap anywhere?\n\nOn May 14, 2026, Andy McLean wrote:\n> Hi Gavin,\n>\n> One more angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, typically 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on our rates or staffing.\n>\n> If any kit is off warranty or coming up for SmartNet renewal, we can put a competitive bid against whoever you're using.\n>\n> Relevant?\n>\n> On May 6, 2026, Andy McLean wrote:\n>> Hi Gavin,\n>>\n>> Quick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, and it ships in weeks rather than quarters.\n>>\n>> Handy if you're sizing wavelengths anywhere capacity is tight. Worth a short call?\n>>\n>> On April 30, 2026, Andy McLean wrote:\n>>> Any thoughts?\n>>>\n>>> On April 28, 2026, Andy McLean wrote:\n>>>> Hi Gavin,\n>>>>\n>>>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>>>>\n>>>> Do you come into the office in Post Falls, or is there a better address to ship it to?",
+    "sendDate": "2026-05-21",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "gavin-budd-fatbeam-6",
+    "prospectName": "Gavin Budd",
+    "company": "Fatbeam",
+    "to": "gavin@fatbeam.com",
+    "subject": "Close the file?",
+    "body": "Hi Gavin,\n\nShould I close the file on this one, or is the timing just off?\n\nOn May 21, 2026, Andy McLean wrote:\n> Hi Gavin,\n>\n> One more. We supply ZR and ZR+ coherent optics as a secondary source when Cisco or Lumentum timelines slip. Carrier teams use us for metro and short reach links that don't justify a full DWDM chassis.\n>\n> Is 400G on your roadmap anywhere?\n>\n> On May 14, 2026, Andy McLean wrote:\n>> Hi Gavin,\n>>\n>> One more angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, typically 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on our rates or staffing.\n>>\n>> If any kit is off warranty or coming up for SmartNet renewal, we can put a competitive bid against whoever you're using.\n>>\n>> Relevant?\n>>\n>> On May 6, 2026, Andy McLean wrote:\n>>> Hi Gavin,\n>>>\n>>> Quick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, and it ships in weeks rather than quarters.\n>>>\n>>> Handy if you're sizing wavelengths anywhere capacity is tight. Worth a short call?\n>>>\n>>> On April 30, 2026, Andy McLean wrote:\n>>>> Any thoughts?\n>>>>\n>>>> On April 28, 2026, Andy McLean wrote:\n>>>>> Hi Gavin,\n>>>>>\n>>>>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>>>>>\n>>>>> Do you come into the office in Post Falls, or is there a better address to ship it to?",
+    "sendDate": "2026-06-01",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "danny-pate-fatbeam-1",
+    "prospectName": "Danny Pate",
+    "company": "Fatbeam",
+    "to": "danny.pate@fatbeam.com",
+    "subject": "TPM and OEM support costs at Fatbeam",
+    "body": "Hi Danny,\n\nShort note. We do third party maintenance on Cisco, Juniper, Arista and other network gear, typically 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on rates. Multi vendor so your team doesn't have to chase four contracts.\n\nIf OEM support renewals are on the docket this year, worth a 15 minute call?",
+    "sendDate": "2026-05-04",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "danny-pate-fatbeam-2",
+    "prospectName": "Danny Pate",
+    "company": "Fatbeam",
+    "to": "danny.pate@fatbeam.com",
+    "subject": "RE: TPM and OEM support costs at Fatbeam",
+    "body": "Any thoughts?\n\nOn May 4, 2026, Andy McLean wrote:\n> Hi Danny,\n>\n> Short note. We do third party maintenance on Cisco, Juniper, Arista and other network gear, typically 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on rates. Multi vendor so your team doesn't have to chase four contracts.\n>\n> If OEM support renewals are on the docket this year, worth a 15 minute call?",
+    "sendDate": "2026-05-06",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "danny-pate-fatbeam-3",
+    "prospectName": "Danny Pate",
+    "company": "Fatbeam",
+    "to": "danny.pate@fatbeam.com",
+    "subject": "DWDM alternative to Ciena on transport",
+    "body": "Hi Danny,\n\nDifferent angle. We supply private label DWDM on the SmartOptics platform, 30 to 50% below Ciena or Nokia, shipping in weeks. Carrier teams use us to fill capacity gaps without going back to the OEM.\n\nRelevant as the Fatbeam buildout continues?\n\nOn May 6, 2026, Andy McLean wrote:\n> Any thoughts?\n>\n> On May 4, 2026, Andy McLean wrote:\n>> Hi Danny,\n>>\n>> Short note. We do third party maintenance on Cisco, Juniper, Arista and other network gear, typically 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on rates. Multi vendor so your team doesn't have to chase four contracts.\n>>\n>> If OEM support renewals are on the docket this year, worth a 15 minute call?",
+    "sendDate": "2026-05-12",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "danny-pate-fatbeam-4",
+    "prospectName": "Danny Pate",
+    "company": "Fatbeam",
+    "to": "danny.pate@fatbeam.com",
+    "subject": "Certified optics for Fatbeam spares",
+    "body": "Hi Danny,\n\nOne more thread. Certified compatible optics direct from the same engineering source as the OEM, typically 80 percent below list. Useful for spares on the shelf or routine refresh.\n\nWould a sample pair land well at your team?\n\nOn May 12, 2026, Andy McLean wrote:\n> Hi Danny,\n>\n> Different angle. We supply private label DWDM on the SmartOptics platform, 30 to 50% below Ciena or Nokia, shipping in weeks. Carrier teams use us to fill capacity gaps without going back to the OEM.\n>\n> Relevant as the Fatbeam buildout continues?\n>\n> On May 6, 2026, Andy McLean wrote:\n>> Any thoughts?\n>>\n>> On May 4, 2026, Andy McLean wrote:\n>>> Hi Danny,\n>>>\n>>> Short note. We do third party maintenance on Cisco, Juniper, Arista and other network gear, typically 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on rates. Multi vendor so your team doesn't have to chase four contracts.\n>>>\n>>> If OEM support renewals are on the docket this year, worth a 15 minute call?",
+    "sendDate": "2026-05-20",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "danny-pate-fatbeam-5",
+    "prospectName": "Danny Pate",
+    "company": "Fatbeam",
+    "to": "danny.pate@fatbeam.com",
+    "subject": "Pre owned networking for the buildout",
+    "body": "Hi Danny,\n\nFinal angle. We move pre owned Cisco, Juniper, and Arista gear with OSI TPM coverage. A lot of carrier teams are using it to extend the useful life of existing platforms instead of going to OEM list on a refresh.\n\nAnywhere that fits for you?\n\nOn May 20, 2026, Andy McLean wrote:\n> Hi Danny,\n>\n> One more thread. Certified compatible optics direct from the same engineering source as the OEM, typically 80 percent below list. Useful for spares on the shelf or routine refresh.\n>\n> Would a sample pair land well at your team?\n>\n> On May 12, 2026, Andy McLean wrote:\n>> Hi Danny,\n>>\n>> Different angle. We supply private label DWDM on the SmartOptics platform, 30 to 50% below Ciena or Nokia, shipping in weeks. Carrier teams use us to fill capacity gaps without going back to the OEM.\n>>\n>> Relevant as the Fatbeam buildout continues?\n>>\n>> On May 6, 2026, Andy McLean wrote:\n>>> Any thoughts?\n>>>\n>>> On May 4, 2026, Andy McLean wrote:\n>>>> Hi Danny,\n>>>>\n>>>> Short note. We do third party maintenance on Cisco, Juniper, Arista and other network gear, typically 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on rates. Multi vendor so your team doesn't have to chase four contracts.\n>>>>\n>>>> If OEM support renewals are on the docket this year, worth a 15 minute call?",
+    "sendDate": "2026-05-28",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "danny-pate-fatbeam-6",
+    "prospectName": "Danny Pate",
+    "company": "Fatbeam",
+    "to": "danny.pate@fatbeam.com",
+    "subject": "Close the file?",
+    "body": "Hi Danny,\n\nShould I close the file on this one, or is the timing just off?\n\nOn May 28, 2026, Andy McLean wrote:\n> Hi Danny,\n>\n> Final angle. We move pre owned Cisco, Juniper, and Arista gear with OSI TPM coverage. A lot of carrier teams are using it to extend the useful life of existing platforms instead of going to OEM list on a refresh.\n>\n> Anywhere that fits for you?\n>\n> On May 20, 2026, Andy McLean wrote:\n>> Hi Danny,\n>>\n>> One more thread. Certified compatible optics direct from the same engineering source as the OEM, typically 80 percent below list. Useful for spares on the shelf or routine refresh.\n>>\n>> Would a sample pair land well at your team?\n>>\n>> On May 12, 2026, Andy McLean wrote:\n>>> Hi Danny,\n>>>\n>>> Different angle. We supply private label DWDM on the SmartOptics platform, 30 to 50% below Ciena or Nokia, shipping in weeks. Carrier teams use us to fill capacity gaps without going back to the OEM.\n>>>\n>>> Relevant as the Fatbeam buildout continues?\n>>>\n>>> On May 6, 2026, Andy McLean wrote:\n>>>> Any thoughts?\n>>>>\n>>>> On May 4, 2026, Andy McLean wrote:\n>>>>> Hi Danny,\n>>>>>\n>>>>> Short note. We do third party maintenance on Cisco, Juniper, Arista and other network gear, typically 40 to 60% below SmartNet. Recognized by Gartner and privately owned, so no PE pressure on rates. Multi vendor so your team doesn't have to chase four contracts.\n>>>>>\n>>>>> If OEM support renewals are on the docket this year, worth a 15 minute call?",
+    "sendDate": "2026-06-05",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "adam-hill-fatbeam-1",
+    "prospectName": "Adam Hill",
+    "company": "Fatbeam",
+    "to": "adam.hill@fatbeam.com",
+    "subject": "SFP sample for Fatbeam's NOC",
+    "body": "Hi Adam,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Useful for when something fails at 2am and the OEM lead time doesn't cut it.\n\nDo you come into the office in Boise, or is there a better address to ship it to?",
+    "sendDate": "2026-05-08",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "adam-hill-fatbeam-2",
+    "prospectName": "Adam Hill",
+    "company": "Fatbeam",
+    "to": "adam.hill@fatbeam.com",
+    "subject": "RE: SFP sample for Fatbeam's NOC",
+    "body": "Any thoughts?\n\nOn May 8, 2026, Andy McLean wrote:\n> Hi Adam,\n>\n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Useful for when something fails at 2am and the OEM lead time doesn't cut it.\n>\n> Do you come into the office in Boise, or is there a better address to ship it to?",
+    "sendDate": "2026-05-12",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "adam-hill-fatbeam-3",
+    "prospectName": "Adam Hill",
+    "company": "Fatbeam",
+    "to": "adam.hill@fatbeam.com",
+    "subject": "OEM support costs on NOC gear",
+    "body": "Hi Adam,\n\nFollowing up with a different angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, 40 to 60% below SmartNet. Recognized by Gartner and privately owned, no PE pressure on rates.\n\nIf anything is off warranty in the NOC, we can put a competitive bid together.\n\nRelevant?\n\nOn May 12, 2026, Andy McLean wrote:\n> Any thoughts?\n>\n> On May 8, 2026, Andy McLean wrote:\n>> Hi Adam,\n>>\n>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Useful for when something fails at 2am and the OEM lead time doesn't cut it.\n>>\n>> Do you come into the office in Boise, or is there a better address to ship it to?",
+    "sendDate": "2026-05-18",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "adam-hill-fatbeam-4",
+    "prospectName": "Adam Hill",
+    "company": "Fatbeam",
+    "to": "adam.hill@fatbeam.com",
+    "subject": "Pre owned networking for spare chassis",
+    "body": "Hi Adam,\n\nOne more. We move pre owned Cisco, Juniper, and Arista gear for teams that want a spare chassis on the shelf without paying OEM list. Full OSI TPM coverage available.\n\nWould that fit anywhere in the Fatbeam footprint?\n\nOn May 18, 2026, Andy McLean wrote:\n> Hi Adam,\n>\n> Following up with a different angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, 40 to 60% below SmartNet. Recognized by Gartner and privately owned, no PE pressure on rates.\n>\n> If anything is off warranty in the NOC, we can put a competitive bid together.\n>\n> Relevant?\n>\n> On May 12, 2026, Andy McLean wrote:\n>> Any thoughts?\n>>\n>> On May 8, 2026, Andy McLean wrote:\n>>> Hi Adam,\n>>>\n>>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Useful for when something fails at 2am and the OEM lead time doesn't cut it.\n>>>\n>>> Do you come into the office in Boise, or is there a better address to ship it to?",
+    "sendDate": "2026-05-27",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "adam-hill-fatbeam-5",
+    "prospectName": "Adam Hill",
+    "company": "Fatbeam",
+    "to": "adam.hill@fatbeam.com",
+    "subject": "400G ZR on metro links",
+    "body": "Hi Adam,\n\nOne more angle. We supply ZR and ZR+ coherent optics as a secondary source when Cisco or Lumentum timelines slip. NOC teams keep them on the shelf for fast restoration on metro links.\n\nIs 400G on the network anywhere?\n\nOn May 27, 2026, Andy McLean wrote:\n> Hi Adam,\n>\n> One more. We move pre owned Cisco, Juniper, and Arista gear for teams that want a spare chassis on the shelf without paying OEM list. Full OSI TPM coverage available.\n>\n> Would that fit anywhere in the Fatbeam footprint?\n>\n> On May 18, 2026, Andy McLean wrote:\n>> Hi Adam,\n>>\n>> Following up with a different angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, 40 to 60% below SmartNet. Recognized by Gartner and privately owned, no PE pressure on rates.\n>>\n>> If anything is off warranty in the NOC, we can put a competitive bid together.\n>>\n>> Relevant?\n>>\n>> On May 12, 2026, Andy McLean wrote:\n>>> Any thoughts?\n>>>\n>>> On May 8, 2026, Andy McLean wrote:\n>>>> Hi Adam,\n>>>>\n>>>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Useful for when something fails at 2am and the OEM lead time doesn't cut it.\n>>>>\n>>>> Do you come into the office in Boise, or is there a better address to ship it to?",
+    "sendDate": "2026-06-03",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "adam-hill-fatbeam-6",
+    "prospectName": "Adam Hill",
+    "company": "Fatbeam",
+    "to": "adam.hill@fatbeam.com",
+    "subject": "Close the file?",
+    "body": "Hi Adam,\n\nShould I close the file on this one, or is the timing just off?\n\nOn June 3, 2026, Andy McLean wrote:\n> Hi Adam,\n>\n> One more angle. We supply ZR and ZR+ coherent optics as a secondary source when Cisco or Lumentum timelines slip. NOC teams keep them on the shelf for fast restoration on metro links.\n>\n> Is 400G on the network anywhere?\n>\n> On May 27, 2026, Andy McLean wrote:\n>> Hi Adam,\n>>\n>> One more. We move pre owned Cisco, Juniper, and Arista gear for teams that want a spare chassis on the shelf without paying OEM list. Full OSI TPM coverage available.\n>>\n>> Would that fit anywhere in the Fatbeam footprint?\n>>\n>> On May 18, 2026, Andy McLean wrote:\n>>> Hi Adam,\n>>>\n>>> Following up with a different angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, 40 to 60% below SmartNet. Recognized by Gartner and privately owned, no PE pressure on rates.\n>>>\n>>> If anything is off warranty in the NOC, we can put a competitive bid together.\n>>>\n>>> Relevant?\n>>>\n>>> On May 12, 2026, Andy McLean wrote:\n>>>> Any thoughts?\n>>>>\n>>>> On May 8, 2026, Andy McLean wrote:\n>>>>> Hi Adam,\n>>>>>\n>>>>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Useful for when something fails at 2am and the OEM lead time doesn't cut it.\n>>>>>\n>>>>> Do you come into the office in Boise, or is there a better address to ship it to?",
+    "sendDate": "2026-06-11",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "jordan-diaz-fatbeam-1",
+    "prospectName": "Jordan Diaz",
+    "company": "Fatbeam",
+    "to": "jordan.diaz@fatbeam.com",
+    "subject": "SFP sample for Fatbeam",
+    "body": "Hi Jordan,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office in Boise, or is there a better address to ship it to?",
+    "sendDate": "2026-05-14",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "jordan-diaz-fatbeam-2",
+    "prospectName": "Jordan Diaz",
+    "company": "Fatbeam",
+    "to": "jordan.diaz@fatbeam.com",
+    "subject": "RE: SFP sample for Fatbeam",
+    "body": "Any thoughts?\n\nOn May 14, 2026, Andy McLean wrote:\n> Hi Jordan,\n>\n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>\n> Do you come into the office in Boise, or is there a better address to ship it to?",
+    "sendDate": "2026-05-18",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "jordan-diaz-fatbeam-3",
+    "prospectName": "Jordan Diaz",
+    "company": "Fatbeam",
+    "to": "jordan.diaz@fatbeam.com",
+    "subject": "DWDM alternative to Ciena on transport",
+    "body": "Hi Jordan,\n\nQuick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, shipping in weeks rather than quarters. Open architecture, no licensing headaches.\n\nIf Fatbeam is lighting new builds or filling capacity anywhere, worth a short call?\n\nOn May 18, 2026, Andy McLean wrote:\n> Any thoughts?\n>\n> On May 14, 2026, Andy McLean wrote:\n>> Hi Jordan,\n>>\n>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>>\n>> Do you come into the office in Boise, or is there a better address to ship it to?",
+    "sendDate": "2026-05-22",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "jordan-diaz-fatbeam-4",
+    "prospectName": "Jordan Diaz",
+    "company": "Fatbeam",
+    "to": "jordan.diaz@fatbeam.com",
+    "subject": "OEM support costs on network gear",
+    "body": "Hi Jordan,\n\nOne more angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, 40 to 60% below SmartNet. Recognized by Gartner and privately owned, no PE pressure on rates.\n\nIf any kit is off warranty, we can put a competitive bid against whoever you're using.\n\nRelevant?\n\nOn May 22, 2026, Andy McLean wrote:\n> Hi Jordan,\n>\n> Quick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, shipping in weeks rather than quarters. Open architecture, no licensing headaches.\n>\n> If Fatbeam is lighting new builds or filling capacity anywhere, worth a short call?\n>\n> On May 18, 2026, Andy McLean wrote:\n>> Any thoughts?\n>>\n>> On May 14, 2026, Andy McLean wrote:\n>>> Hi Jordan,\n>>>\n>>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>>>\n>>> Do you come into the office in Boise, or is there a better address to ship it to?",
+    "sendDate": "2026-06-02",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "jordan-diaz-fatbeam-5",
+    "prospectName": "Jordan Diaz",
+    "company": "Fatbeam",
+    "to": "jordan.diaz@fatbeam.com",
+    "subject": "400G ZR coherent for Fatbeam builds",
+    "body": "Hi Jordan,\n\nOne more. We supply ZR and ZR+ coherent optics as a secondary source when Cisco or Lumentum timelines slip. Carrier teams use us for metro and inter site links that don't justify a full DWDM chassis.\n\nIs 400G coherent on the roadmap anywhere?\n\nOn June 2, 2026, Andy McLean wrote:\n> Hi Jordan,\n>\n> One more angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, 40 to 60% below SmartNet. Recognized by Gartner and privately owned, no PE pressure on rates.\n>\n> If any kit is off warranty, we can put a competitive bid against whoever you're using.\n>\n> Relevant?\n>\n> On May 22, 2026, Andy McLean wrote:\n>> Hi Jordan,\n>>\n>> Quick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, shipping in weeks rather than quarters. Open architecture, no licensing headaches.\n>>\n>> If Fatbeam is lighting new builds or filling capacity anywhere, worth a short call?\n>>\n>> On May 18, 2026, Andy McLean wrote:\n>>> Any thoughts?\n>>>\n>>> On May 14, 2026, Andy McLean wrote:\n>>>> Hi Jordan,\n>>>>\n>>>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>>>>\n>>>> Do you come into the office in Boise, or is there a better address to ship it to?",
+    "sendDate": "2026-06-09",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
+  },
+  {
+    "id": "jordan-diaz-fatbeam-6",
+    "prospectName": "Jordan Diaz",
+    "company": "Fatbeam",
+    "to": "jordan.diaz@fatbeam.com",
+    "subject": "Close the file?",
+    "body": "Hi Jordan,\n\nShould I close the file on this one, or is the timing just off?\n\nOn June 9, 2026, Andy McLean wrote:\n> Hi Jordan,\n>\n> One more. We supply ZR and ZR+ coherent optics as a secondary source when Cisco or Lumentum timelines slip. Carrier teams use us for metro and inter site links that don't justify a full DWDM chassis.\n>\n> Is 400G coherent on the roadmap anywhere?\n>\n> On June 2, 2026, Andy McLean wrote:\n>> Hi Jordan,\n>>\n>> One more angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, 40 to 60% below SmartNet. Recognized by Gartner and privately owned, no PE pressure on rates.\n>>\n>> If any kit is off warranty, we can put a competitive bid against whoever you're using.\n>>\n>> Relevant?\n>>\n>> On May 22, 2026, Andy McLean wrote:\n>>> Hi Jordan,\n>>>\n>>> Quick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, shipping in weeks rather than quarters. Open architecture, no licensing headaches.\n>>>\n>>> If Fatbeam is lighting new builds or filling capacity anywhere, worth a short call?\n>>>\n>>> On May 18, 2026, Andy McLean wrote:\n>>>> Any thoughts?\n>>>>\n>>>> On May 14, 2026, Andy McLean wrote:\n>>>>> Hi Jordan,\n>>>>>\n>>>>> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>>>>>\n>>>>> Do you come into the office in Boise, or is there a better address to ship it to?",
+    "sendDate": "2026-06-17",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-04-21"
   }
 ]

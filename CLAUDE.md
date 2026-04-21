@@ -150,6 +150,10 @@ If Claude is running a task that modifies files in this folder, Claude should of
 - For company-mode prospecting ("find me people at X company"): use the Company Mode workflow in `knowledge/OSI_Prospect_Qualification_Skill.md`
 
 ### Skills Folder
+
+🚨 **HARD RULE: EVERY SKILL LIVES IN `Claude-Brain/skills/`. NO EXCEPTIONS.**
+Both the source folder (`skills/[skill-name]/SKILL.md`) AND the packaged `.skill` file (`skills/[skill-name].skill`) must be inside the `skills/` directory. Never at the root of `Claude-Brain/`. Never in a sibling folder. Never scattered across multiple locations. If a Claude session creates a `.skill` file anywhere other than `Claude-Brain/skills/`, move it immediately. Runtime data files (like `reengagement-tracker.json`) belong at the root of `Claude-Brain/`, NOT in `skills/`. Skills folder is ONLY for skill sources and their packages.
+
 Reusable skills live in `Claude-Brain/skills/` (NOT `.claude/skills/` - that is read-only). Current skills:
 - `osi-outreach-7email` - Full 7-email hyper-personalized sequence. Trigger: "run the 7-email sequence for [name]"
 - `osi-3email-new` - 3-email new outreach for directors or shorter-touch targets. Trigger: "3-email sequence for [name]"
