@@ -162,11 +162,11 @@ Reusable skills live in `Claude-Brain/skills/` (NOT `.claude/skills/` - that is 
 
 **Workflow for any skill change:**
 1. Read and edit skills only in `Claude-Brain/skills/[skill-name]/SKILL.md`.
-2. Package into a `.skill` file (zip the folder) and drop it in `Claude-Brain/` root.
+2. Package into a `.skill` file (zip the folder) and save it alongside the source folder in `Claude-Brain/skills/`. Never at the root of `Claude-Brain/` (that caused duplicate-skill messes in April 2026).
 3. Andy installs it once. Done.
 
-**Morning skill sync (automated):** The `morning-skill-sync` scheduled task runs weekday mornings. It compares `.skill` files in `Claude-Brain/` against what's installed in `.claude/skills/` and surfaces:
-- `.skill` files in Claude-Brain that are not yet installed (one-click to install)
+**Morning skill sync (automated):** The `morning-skill-sync` scheduled task runs weekday mornings. It compares `.skill` files in `Claude-Brain/skills/` against what's installed in `.claude/skills/` and surfaces:
+- `.skill` files in `Claude-Brain/skills/` that are not yet installed (one-click to install)
 - Installed skills whose Claude-Brain source has drifted from the live copy (needs re-package + re-install)
 - Any gaps worth knowing about
 
