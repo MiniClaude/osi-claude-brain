@@ -56,7 +56,7 @@ Use **regular LinkedIn** (`linkedin.com/in/...`) for both search and profile rea
 
 ## Approved Vendor Rule — read list from Claude-Brain file
 
-OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/approved-vendors.json`. Read that file at sequence-build time (OneDrive-safe Python: `open(path,'r')`, fall back to SharePoint MCP on EINVAL) and check if the prospect's company matches any entry (case-insensitive substring match, e.g. "Desjardins Group" matches "Desjardins").
+OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/approved-vendors.json`. Read that file at sequence-build time (plain Python: `open(path,'r')`) and check if the prospect's company matches any entry (case-insensitive substring match, e.g. "Desjardins Group" matches "Desjardins").
 
 **If the prospect's company matches an approved-vendor entry:**
 - **Email 1:** Include ONE line acknowledging approved-vendor status. Soft, peer-to-peer phrasing. Examples:

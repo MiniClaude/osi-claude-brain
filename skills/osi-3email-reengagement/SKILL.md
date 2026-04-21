@@ -10,7 +10,7 @@ description: >
   before writing. Always run this skill before writing any re-engagement outreach.
 ---
 
-> **SYNC NOTE:** This skill exists in two locations: `Claude-Brain/skills/osi-3email-reengagement/` (OneDrive — source of truth) and local Cowork `.claude/skills/`. Any edits must be applied to both. If returning after days away, check OneDrive version first and sync local if newer.
+> **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-3email-reengagement\` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub. If returning after days away, run `git pull` first to get the latest, then check the local Cowork copy and re-install the `.skill` file if the source has drifted.
 
 # OSI Global 3-Email Re-Engagement Sequence
 
@@ -36,7 +36,7 @@ Read this entire skill before producing any output.
 
 Before any other work on this prospect, check the email queue. This prevents stacking duplicate sequences on the same person, which wrecks sender reputation and is bad form.
 
-Open `C:\Users\Andy\OneDrive - OSI Hardware\Documents\Claude\Claude-Brain\email-queue.json` using the OneDrive-safe Python read pattern (try local `open(path,'r')` first, fall back to SharePoint MCP on EINVAL). Scan every entry for a match with this prospect:
+Open `C:\Claude-Brain\email-queue.json` using the plain Python `open(path,'r')` (the file is on local disk now, not OneDrive). Scan every entry for a match with this prospect:
 
 - Match by `to` field equal to the prospect's email address (case-insensitive), OR
 - Match by `prospectName` + `company` both matching the prospect's full name and company (case-insensitive)
@@ -62,7 +62,7 @@ This check runs BEFORE HubSpot ownership check, ZoomInfo enrichment, or any rese
 
 ## Approved Vendor Rule — read list from Claude-Brain file
 
-OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/approved-vendors.json`. Read that file at sequence-build time (OneDrive-safe Python: `open(path,'r')`, fall back to SharePoint MCP on EINVAL) and check if the prospect's company matches any entry (case-insensitive substring match, e.g. "Desjardins Group" matches "Desjardins").
+OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/approved-vendors.json`. Read that file at sequence-build time (plain Python: `open(path,'r')`) and check if the prospect's company matches any entry (case-insensitive substring match, e.g. "Desjardins Group" matches "Desjardins").
 
 **If the prospect's company matches an approved-vendor entry:**
 - **Email 1:** Include ONE line acknowledging approved-vendor status. Soft, peer-to-peer phrasing. Examples:

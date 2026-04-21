@@ -3,7 +3,7 @@ name: osi-email-task-drafts
 description: Auto-draft reply emails for every HubSpot email task that is due today or overdue for Andy. For each task, identifies the associated contact, pulls the CURRENT state of the relationship from HubSpot engagements (calls, emails logged to HubSpot, and Teams/Zoom meeting notes), drafts a thread-matched reply in Andy's voice, and writes the draft into the task's notes field so Andy can review and send. Skips outreach-sequence auto-tasks (generic "Send follow-up email" with empty body) — those are handled by osi-outreach-sequence. Trigger on "run email tasks", "draft my email tasks", "write drafts for email tasks", "do my follow-ups", or when Andy asks you to go through email tasks due.
 ---
 
-> **SYNC NOTE:** This skill exists in two locations: `Claude-Brain/skills/osi-email-task-drafts/` (OneDrive — source of truth) and local Cowork `.claude/skills/`. Any edits must be applied to both.
+> **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-email-task-drafts\` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub. If returning after days away, run `git pull` first to get the latest, then check the local Cowork copy and re-install the `.skill` file if the source has drifted.
 
 # OSI Email Task Drafts
 

@@ -8,7 +8,7 @@ description: >
   says "keep going" or "find another one" during a LinkedIn prospecting session.
 ---
 
-> **SYNC NOTE:** This skill exists in two locations: `Claude-Brain/skills/osi-cold-reengagement/` (OneDrive — source of truth) and local Cowork `.claude/skills/`. Any edits must be applied to both. If returning after days away, check OneDrive version first and sync local if newer.
+> **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-cold-reengagement\` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub. If returning after days away, run `git pull` first to get the latest, then check the local Cowork copy and re-install the `.skill` file if the source has drifted.
 
 # OSI Cold LinkedIn Re-Engagement
 

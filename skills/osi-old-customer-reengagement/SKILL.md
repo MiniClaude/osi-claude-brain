@@ -11,7 +11,7 @@ description: >
   and wants outreach built. Do NOT use this for cold prospects — use osi-outreach-sequence instead.
 ---
 
-> **SYNC NOTE:** This skill exists in two locations: `Claude-Brain/skills/osi-old-customer-reengagement/` (OneDrive — source of truth) and local Cowork `.claude/skills/`. Any edits must be applied to both.
+> **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-old-customer-reengagement\` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub. If returning after days away, run `git pull` first to get the latest, then check the local Cowork copy and re-install the `.skill` file if the source has drifted.
 
 # OSI Global — Old Customer Re-Engagement Sequence
 
@@ -56,7 +56,7 @@ If Andy pastes a HubSpot record, extract fields directly. Do not press for histo
 
 Before any other work on this prospect, check the email queue. This prevents stacking duplicate sequences on the same person, which wrecks sender reputation and is bad form.
 
-Open `C:\Users\Andy\OneDrive - OSI Hardware\Documents\Claude\Claude-Brain\email-queue.json` using the OneDrive-safe Python read pattern (try local `open(path,'r')` first, fall back to SharePoint MCP on EINVAL). Scan every entry for a match with this prospect:
+Open `C:\Claude-Brain\email-queue.json` using the plain Python `open(path,'r')` (the file is on local disk now, not OneDrive). Scan every entry for a match with this prospect:
 
 - Match by `to` field equal to the prospect's email address (case-insensitive), OR
 - Match by `prospectName` + `company` both matching the prospect's full name and company (case-insensitive)
@@ -82,7 +82,7 @@ This check runs BEFORE HubSpot ownership check, ZoomInfo enrichment, or any rese
 
 ## Approved Vendor Rule — read list from Claude-Brain file
 
-OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/approved-vendors.json`. Read that file at sequence-build time (OneDrive-safe Python: `open(path,'r')`, fall back to SharePoint MCP on EINVAL) and check if the prospect's company matches any entry (case-insensitive substring match, e.g. "Desjardins Group" matches "Desjardins").
+OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/approved-vendors.json`. Read that file at sequence-build time (plain Python: `open(path,'r')`) and check if the prospect's company matches any entry (case-insensitive substring match, e.g. "Desjardins Group" matches "Desjardins").
 
 **If the prospect's company matches an approved-vendor entry:**
 - **Email 1:** Include ONE line acknowledging approved-vendor status. Soft, peer-to-peer phrasing. Examples:
@@ -446,7 +446,7 @@ When Andy says "sent":
 
 ### Schedule Emails 2-5 via email-queue.json
 
-**Queue file:** C:\Users\Andy\OneDrive - OSI Hardware\Documents\Claude\Claude-Brain\email-queue.json
+**Queue file:** C:\Claude-Brain\email-queue.json
 
 Each entry:
 
@@ -468,18 +468,15 @@ Each entry:
 **Task ID format:** `[firstname]-[lastname]-[company-slug]-oldcust-[N]`
 Example: `jane-smith-acme-oldcust-2`
 
-**Write pattern — OneDrive-safe, no permission prompts:**
+**Write pattern:**
 
 ```python
-import json, sys, os
+import json, os
 
-QUEUE = r'C:\Users\Andy\OneDrive - OSI Hardware\Documents\Claude\Claude-Brain\email-queue.json'
+QUEUE = r'C:\Claude-Brain\email-queue.json'
 
-try:
-    with open(QUEUE, 'r') as f:
-        queue = json.load(f)
-except (OSError, ValueError):
-    raise SystemExit("FALLBACK: use SharePoint MCP to fetch current queue content, then continue")
+with open(QUEUE, 'r') as f:
+    queue = json.load(f)
 
 new_entries = [ ... ]  # array of entry dicts for Emails 2-5
 

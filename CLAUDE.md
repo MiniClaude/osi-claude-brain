@@ -35,7 +35,7 @@ You are reading this file as part of session startup. Before doing anything else
 - **Company:** OSI Global  -  sells networking hardware including DWDM, 400G transceivers, and optical components
 - **CRM:** HubSpot (Owner ID: 196669355)
 - **Communication platform:** Microsoft Teams
-- **Working setup:** Two laptops, both synced via this OneDrive folder (C:\Users\drrew\OneDrive\Claude-Brain)
+- **Working setup:** Two laptops, both synced via Git and GitHub. Working copy lives at `C:\Claude-Brain\` on both machines. Remote backup at `github.com/Drrewdy/Claude-Brain` (private repo). OneDrive is no longer used for syncing; any old OneDrive copy is archive only.
 
 ---
 
@@ -122,10 +122,19 @@ When I say "process my notes" or "catch me up":
 
 ## Second Brain Structure
 
-**This OneDrive folder is the single source of truth. All projects, notes, research, and outreach live here. Always point Cowork to this folder on both laptops.**
+**This Git-versioned folder is the single source of truth. Working copy lives at `C:\Claude-Brain\` on both laptops, backed up to GitHub (`github.com/Drrewdy/Claude-Brain`). All projects, notes, research, and outreach live here. Always point Cowork to this folder on both laptops.**
+
+### Git / GitHub Workflow (READ THIS)
+The folder is a Git repo, not a synced OneDrive folder. That means syncing is manual and explicit. Three commands in Git Bash run the whole show:
+- **Start of session (pull down the latest):** `git pull`
+- **End of session (push your changes up):** `git add .` then `git commit -m "what changed"` then `git push`
+
+Rules of thumb: always `git pull` before starting work, always `git push` when finished. If Andy edits the same file on both laptops without pulling in between, Git will ask to merge. For `.xlsx` files this is painful, so for spreadsheets: pull, edit, push immediately.
+
+If Claude is running a task that modifies files in this folder, Claude should offer to commit and push at the end of the task so the other laptop can pull the change.
 
 ### Folder Layout
-- `Claude-Brain/` ← this folder (C:\Users\drrew\OneDrive\Claude-Brain)
+- `Claude-Brain/` ← this folder (`C:\Claude-Brain\`)
   - `CLAUDE.md` ← this file  -  read every session before doing anything
   - `inbox/` ← drop raw notes here for processing
   - `sessions/` ← end-of-session summaries, one file per session (session-YYYY-MM-DD.md)
@@ -163,7 +172,7 @@ Reusable skills live in `Claude-Brain/skills/` (NOT `.claude/skills/` - that is 
 
 Andy should not have to remember to install skills. If the sync flags something, act on it immediately.
 
-**Why reading Claude-Brain matters:** The `.claude/skills/` copy has been found truncated/corrupted before (185 lines vs 449 actual). Claude-Brain on OneDrive is the only reliable copy. Always edit there.
+**Why reading Claude-Brain matters:** The `.claude/skills/` copy has been found truncated/corrupted before (185 lines vs 449 actual). The Git-versioned `C:\Claude-Brain\` folder (backed up on GitHub) is the only reliable copy. Always edit there.
 
 ### Cold Re-Engagement vs. Full Sequence - Keep These Separate
 - **Cold re-engagement** = 2 InMail tasks only (no strategy doc, no email sequence). Used when working existing 1st-degree LinkedIn connections who've gone cold.
@@ -231,6 +240,7 @@ Title says "Data Center Strategy & Operations" but his entire career is program 
 ---
 
 ## Notes on Data & Privacy
-- This file lives on OneDrive (Microsoft 365 ecosystem)  -  within OSI Global's trusted infrastructure
+- This file lives in a private GitHub repo (`github.com/Drrewdy/Claude-Brain`) with the working copy at `C:\Claude-Brain\` on each laptop. The repo is private and only Andy has access.
 - Do not store specific serial numbers, unreleased pricing, or confidential customer contract details in plain text here
 - For sensitive deal specifics, reference HubSpot instead
+- The old OneDrive copy (`C:\Users\drrew\OneDrive\Claude-Brain` on personal laptop, `C:\Users\Andy\OneDrive - OSI Hardware\Documents\Claude\Claude-Brain` on work laptop) is no longer synced. Keep only as a read-only archive. Do not write to it.

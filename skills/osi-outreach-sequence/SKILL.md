@@ -12,7 +12,7 @@ description: >
   Always use this skill for new prospect outreach.
 ---
 
-> **SYNC NOTE:** This skill exists in two locations: `Claude-Brain/skills/osi-outreach-sequence/` (OneDrive — source of truth) and local Cowork `.claude/skills/`. Any edits must be applied to both. If returning after days away, check OneDrive version first and sync local if newer.
+> **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-outreach-sequence\` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub. If returning after days away, run `git pull` first to get the latest, then check the local Cowork copy and re-install the `.skill` file if the source has drifted.
 
 # OSI Global Outreach Sequence
 
@@ -230,7 +230,7 @@ Any email that fails any of the above gets rewritten before it is saved or sched
 
 ## Approved Vendor Rule — read list from Claude-Brain file
 
-OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/approved-vendors.json`. Read that file at sequence-build time (OneDrive-safe Python: `open(path,'r')`, fall back to SharePoint MCP on EINVAL) and check if the prospect's company matches any entry (case-insensitive substring match, e.g. "Desjardins Group" matches "Desjardins").
+OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/approved-vendors.json`. Read that file at sequence-build time (plain Python: `open(path,'r')`) and check if the prospect's company matches any entry (case-insensitive substring match, e.g. "Desjardins Group" matches "Desjardins").
 
 **If the prospect's company matches an approved-vendor entry:**
 - **Email 1:** Include ONE line acknowledging approved-vendor status. Soft, peer-to-peer phrasing. Examples:
@@ -254,7 +254,7 @@ To add a company to the approved-vendor list, Andy edits `Claude-Brain/approved-
 
 Before any other work on this prospect, check the email queue. This prevents stacking duplicate sequences on the same person, which wrecks sender reputation and is bad form.
 
-Open `C:\Users\Andy\OneDrive - OSI Hardware\Documents\Claude\Claude-Brain\email-queue.json` using the OneDrive-safe Python read pattern (try local `open(path,'r')` first, fall back to SharePoint MCP on EINVAL). Scan every entry for a match with this prospect:
+Open `C:\Claude-Brain\email-queue.json` using the plain Python `open(path,'r')` (the file is on local disk now, not OneDrive). Scan every entry for a match with this prospect:
 
 - Match by `to` field equal to the prospect's email address (case-insensitive), OR
 - Match by `prospectName` + `company` both matching the prospect's full name and company (case-insensitive)
@@ -519,7 +519,7 @@ When Andy says "sent":
 
 Do NOT create individual scheduled tasks for emails. Instead, append all 6 emails to the queue file.
 
-**Queue file:** C:\Users\Andy\OneDrive - OSI Hardware\Documents\Claude\Claude-Brain\email-queue.json
+**Queue file:** C:\Claude-Brain\email-queue.json
 
 Each entry:
 
@@ -540,29 +540,22 @@ Each entry:
 
 The master osi-email-sender task runs every weekday at 11 AM, 12 PM, 1 PM, 2 PM, 3 PM, and 4 PM Eastern. Each fire window processes queue entries whose `sendTime` matches that specific window. No individual scheduled tasks needed.
 
-### How to write to the queue (OneDrive-safe, no permission prompts)
+### How to write to the queue
 
-The queue file lives in OneDrive and may be dehydrated (cloud-only placeholder) between sessions. The MCP Read tool returns EINVAL on cloud-only files, and the Write tool refuses without a prior Read. Python's `open(path, 'w')` does NOT have either limitation and overwrites cloud-only placeholders cleanly. Use this pattern every time:
+The queue file lives on local disk at `C:\Claude-Brain\email-queue.json`. Use Python's `open(path, 'w')` to overwrite cleanly:
 
 ```python
-import json, sys, os
+import json, os
 
-QUEUE = r'C:\Users\Andy\OneDrive - OSI Hardware\Documents\Claude\Claude-Brain\email-queue.json'
+QUEUE = r'C:\Claude-Brain\email-queue.json'
 # Or from the sandbox mount:
 # QUEUE = '/sessions/.../mnt/Claude-Brain/email-queue.json'
 
-# Step 1: Read existing content. Try local first, fall back to SharePoint on EINVAL.
-try:
-    with open(QUEUE, 'r') as f:
-        queue = json.load(f)
-except (OSError, ValueError) as e:
-    # Local read failed — file is cloud-only. Fetch via SharePoint MCP.
-    # Use mcp__3d844455-*__sharepoint_search for query "email-queue.json",
-    # get the file URI, then mcp__3d844455-*__read_resource on it.
-    # Parse the returned JSON string into `queue`.
-    raise SystemExit("FALLBACK: use SharePoint MCP to fetch current queue content, then continue with the merge below")
+# Step 1: Read existing content (the file is on local disk, no cloud fallback needed).
+with open(QUEUE, 'r') as f:
+    queue = json.load(f)
 
-# Step 2: Build new entries (Jan, Eric, Tina, Dimitar — or whoever).
+# Step 2: Build new entries (Jan, Eric, Tina, Dimitar, or whoever).
 new_entries = [ ... ]  # array of entry dicts
 
 # Step 3: Dedupe by id so re-runs don't create duplicates.
@@ -570,8 +563,8 @@ existing_ids = {e.get("id") for e in queue}
 to_add = [e for e in new_entries if e["id"] not in existing_ids]
 queue.extend(to_add)
 
-# Step 4: Atomic write with open('w') — bypasses Write-tool's prior-Read requirement
-#         AND avoids needing cowork delete permission.
+# Step 4: Atomic write with open('w'). Bypasses the Write-tool's prior-Read requirement
+#         and avoids needing cowork delete permission.
 tmp = QUEUE + '.tmp'
 with open(tmp, 'w') as f:
     json.dump(queue, f, indent=2)

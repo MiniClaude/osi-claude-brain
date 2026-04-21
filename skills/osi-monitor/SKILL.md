@@ -10,7 +10,7 @@ description: >
   scheduled task at 11 AM weekdays.
 ---
 
-> **SYNC NOTE:** This skill exists in two locations: `Claude-Brain/skills/osi-monitor/` (OneDrive — source of truth) and local Cowork `.claude/skills/`. Any edits must be applied to both. If returning after days away, check OneDrive version first and sync local if newer.
+> **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-monitor\` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub. If returning after days away, run `git pull` first to get the latest, then check the local Cowork copy and re-install the `.skill` file if the source has drifted.
 
 # OSI Sequence Monitor
 
@@ -86,7 +86,7 @@ Keywords: "out of office", "on vacation", "away from the office", "will return",
 If the reply is not an OOO, treat it as human engagement and auto-pause the remaining queue entries for that prospect immediately. No waiting for Andy's confirmation. No lost momentum while Andy is asleep.
 
 Steps:
-1. Read `C:\Users\Andy\OneDrive - OSI Hardware\Documents\Claude\Claude-Brain\email-queue.json`.
+1. Read `C:\Claude-Brain\email-queue.json`.
 2. Find every entry where the prospectName matches AND status is `"pending"`.
 3. Change each of those entries' status from `"pending"` to `"paused-reply-[YYYY-MM-DD]"`. Write the file back.
 4. Update the HubSpot strategy note on the contact — prepend this line:
