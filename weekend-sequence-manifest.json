@@ -1,0 +1,499 @@
+{
+  "total_tasks": 112,
+  "total_batches": 38,
+  "window1_batches": 30,
+  "window2_batches": 8,
+  "sorted_by": "hs_timestamp ASC (oldest overdue first)",
+  "batches": [
+    {
+      "batch_number": 1,
+      "task_ids": [
+        "107907180967",
+        "107906261818",
+        "107894716470"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Roweenza Atangan | Bell Canada",
+        "Sales Nav -- Send connection request -- Torrey Crabtree | Big River Communications",
+        "Sales Nav -- Send connection request -- Andrew Schnese | Nsight"
+      ]
+    },
+    {
+      "batch_number": 2,
+      "task_ids": [
+        "107906268827",
+        "107910720622",
+        "107895192408"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Marcus Ramirez | GVTC Communications",
+        "Sales Nav -- Send connection request -- Ron Holt | Dark Fiber and Infrastructure",
+        "Sales Nav -- Send connection request -- Renee Carnes | altafiber"
+      ]
+    },
+    {
+      "batch_number": 3,
+      "task_ids": [
+        "107906355870",
+        "107906680138",
+        "107895331153"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Jeff Dear | GVTC Communications",
+        "Sales Nav -- Send connection request -- Eric Dessureault | Bell Canada",
+        "Sales Nav -- Send connection request -- Gregory Henry | Armstrong Group"
+      ]
+    },
+    {
+      "batch_number": 4,
+      "task_ids": [
+        "107894766700",
+        "107895311017",
+        "107894707756"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Thomas Danz | Nsight",
+        "Sales Nav -- Send connection request -- Jason McCollough | Armstrong Group",
+        "Sales Nav -- Send connection request -- Mike Wills | altafiber"
+      ]
+    },
+    {
+      "batch_number": 5,
+      "task_ids": [
+        "107912136098",
+        "107906976023",
+        "107894726286"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- John Sasser | Sabey Data Centers",
+        "Sales Nav -- Send connection request -- Amre Hamouda | Spectrotel",
+        "Sales Nav -- Send connection request -- Dan Bradford | Nsight"
+      ]
+    },
+    {
+      "batch_number": 6,
+      "task_ids": [
+        "107906399759",
+        "107907348784",
+        "107895361197"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Vito Ciminello | Astound Broadband",
+        "Sales Nav -- Send connection request -- Gary Duttenhefer | Consolidated Telcom",
+        "Sales Nav -- Send connection request -- Juan Pardo | VTX1 Companies"
+      ]
+    },
+    {
+      "batch_number": 7,
+      "task_ids": [
+        "107895357367",
+        "107906268735",
+        "107895332885"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Stephen Wonderling | Armstrong Group",
+        "Sales Nav -- Send connection request -- Henry Jacobsen | Astound Broadband",
+        "Sales Nav -- Send connection request -- Chris Clinton | VTX1 Companies"
+      ]
+    },
+    {
+      "batch_number": 8,
+      "task_ids": [
+        "107907148979",
+        "107894740235",
+        "107909970007"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Mike Fiszlewicz | altafiber",
+        "Sales Nav -- Send connection request -- Pete Johnson | Arvig Enterprises",
+        "Sales Nav -- Send connection request -- Ed Martin | Altafiber (Cincinnati Bell)"
+      ]
+    },
+    {
+      "batch_number": 9,
+      "task_ids": [
+        "107906610868",
+        "107911241308",
+        "107908523433"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Kevin Dancs | Spectrotel",
+        "Sales Nav -- Send connection request -- Brad Arthur | Altafiber (Cincinnati Bell)",
+        "Sales Nav -- Send connection request -- Valerie Kalti | Altafiber"
+      ]
+    },
+    {
+      "batch_number": 10,
+      "task_ids": [
+        "107906402684",
+        "107907078707",
+        "107894673309"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Kevin Keaveny | Big River Communications",
+        "Sales Nav -- Send connection request -- Dave Tofts | EastLink",
+        "Sales Nav -- Send connection request -- Michael Soileau | LFT Fiber"
+      ]
+    },
+    {
+      "batch_number": 11,
+      "task_ids": [
+        "107895355250",
+        "107894771744",
+        "107895326550"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Clarence Black | Plateau Telecommunications",
+        "Sales Nav -- Send connection request -- Hiroyuki Hosono | Docomo Pacific",
+        "Sales Nav -- Send connection request -- Noriel Ocampo | Docomo Pacific"
+      ]
+    },
+    {
+      "batch_number": 12,
+      "task_ids": [
+        "107894692970",
+        "107906763628",
+        "107939332226"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Thomas Prevost | Armstrong Group",
+        "Sales Nav -- Send connection request -- Lawrence Edmond | Nitel",
+        "LinkedIn Connection Request - Mark DePollo"
+      ]
+    },
+    {
+      "batch_number": 13,
+      "task_ids": [
+        "107937766940",
+        "108009770588",
+        "108014917758"
+      ],
+      "subjects": [
+        "LinkedIn Connection Request - LuAnn Argenta",
+        "Sales Nav -- Send connection request",
+        "Sales Nav -- Send connection request"
+      ]
+    },
+    {
+      "batch_number": 14,
+      "task_ids": [
+        "107939127386",
+        "107738019680",
+        "107738017640"
+      ],
+      "subjects": [
+        "LinkedIn Connection Request",
+        "7email",
+        "7email"
+      ]
+    },
+    {
+      "batch_number": 15,
+      "task_ids": [
+        "107737194571",
+        "107737063297",
+        "107749585194"
+      ],
+      "subjects": [
+        "7email",
+        "7email",
+        "7email"
+      ]
+    },
+    {
+      "batch_number": 16,
+      "task_ids": [
+        "107749619026",
+        "107569783925",
+        "107753521834"
+      ],
+      "subjects": [
+        "7email",
+        "sequence",
+        "7 email"
+      ]
+    },
+    {
+      "batch_number": 17,
+      "task_ids": [
+        "107753364130",
+        "107753268640",
+        "107756420659"
+      ],
+      "subjects": [
+        "7email",
+        "7email",
+        "7email"
+      ]
+    },
+    {
+      "batch_number": 18,
+      "task_ids": [
+        "107749599245",
+        "107753252191",
+        "107753257489"
+      ],
+      "subjects": [
+        "7email",
+        "7email",
+        "7email"
+      ]
+    },
+    {
+      "batch_number": 19,
+      "task_ids": [
+        "107749572443",
+        "107749628597",
+        "107753342834"
+      ],
+      "subjects": [
+        "7meail",
+        "7email",
+        "7email"
+      ]
+    },
+    {
+      "batch_number": 20,
+      "task_ids": [
+        "107750351447",
+        "107749596267",
+        "107753488390"
+      ],
+      "subjects": [
+        "7 email",
+        "7 email",
+        "7email"
+      ]
+    },
+    {
+      "batch_number": 21,
+      "task_ids": [
+        "107750359349",
+        "107884573217",
+        "107884188715"
+      ],
+      "subjects": [
+        "7 email",
+        "Sales Nav -- Send connection request -- Andrew Hinegardner | Consumer Cellular",
+        "Sales Nav -- Send connection request -- Patrick O'Donnell | SBA Communications"
+      ]
+    },
+    {
+      "batch_number": 22,
+      "task_ids": [
+        "107883900554",
+        "107884723251",
+        "107884635180"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Dave Fasshauer | ExteNet Systems",
+        "Sales Nav -- Send connection request -- Deonarine Rajkumar | FLAG (Global Cloud Xchange)",
+        "Sales Nav -- Send connection request -- Joe Kennedy | Transaction Network Services"
+      ]
+    },
+    {
+      "batch_number": 23,
+      "task_ids": [
+        "107846750572",
+        "107873081133",
+        "107839806834"
+      ],
+      "subjects": [
+        "LinkedIn Connection Request - Christopher Lawrence",
+        "LinkedIn Connection Request - Steve Pragaspathy",
+        "LinkedIn Connection Request - Michael Kearney"
+      ]
+    },
+    {
+      "batch_number": 24,
+      "task_ids": [
+        "107845079704",
+        "107834911318",
+        "107844633374"
+      ],
+      "subjects": [
+        "LinkedIn Connection Request - Kevin Smith",
+        "LinkedIn Connection Request - Brian Ackerman",
+        "LinkedIn Connection Request - Victor Johnson"
+      ]
+    },
+    {
+      "batch_number": 25,
+      "task_ids": [
+        "107894682028",
+        "107894649890",
+        "107895152181"
+      ],
+      "subjects": [
+        "LinkedIn Connection Request",
+        "LinkedIn Connection Request",
+        "LinkedIn Connection Request"
+      ]
+    },
+    {
+      "batch_number": 26,
+      "task_ids": [
+        "107895184762",
+        "107894528600",
+        "107883814002"
+      ],
+      "subjects": [
+        "LinkedIn Connection Request",
+        "LinkedIn Connection Request",
+        "Sales Nav -- Send connection request -- John Miller | altafiber"
+      ]
+    },
+    {
+      "batch_number": 27,
+      "task_ids": [
+        "107848632473",
+        "107882380691",
+        "107849563414"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- David Thomas | SiFi Networks",
+        "Sales Nav -- Send connection request -- Ed Fox | MetTel",
+        "Sales Nav -- Send connection request -- Joseph Vandecoevering | Hunter Communications"
+      ]
+    },
+    {
+      "batch_number": 28,
+      "task_ids": [
+        "107884634549",
+        "107839837788",
+        "107937985155"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Lamar Horton | Astound Broadband",
+        "Sales Nav -- Send connection request -- Mike Wills | altafiber",
+        "LinkedIn Connection Request - Tom Downey"
+      ]
+    },
+    {
+      "batch_number": 29,
+      "task_ids": [
+        "107939379760",
+        "107939023763",
+        "107737061906"
+      ],
+      "subjects": [
+        "LinkedIn Connection Request - Tom MacDougall",
+        "LinkedIn Connection Request",
+        "7email"
+      ]
+    },
+    {
+      "batch_number": 30,
+      "task_ids": [
+        "107939379627",
+        "107939392774",
+        "108004387001"
+      ],
+      "subjects": [
+        "LinkedIn Connection Request",
+        "LinkedIn Connection Request",
+        "Sales Nav - Send connection request - Christian Henn | Thor Industries"
+      ]
+    },
+    {
+      "batch_number": 31,
+      "task_ids": [
+        "108000229808",
+        "108008487475",
+        "108008816461"
+      ],
+      "subjects": [
+        "Sales Nav - Send connection request - Rayyan Syed | Thor Industries",
+        "Sales Nav - Send connection request - Chris Laware | Jayco",
+        "Sales Nav - Send connection request - Toby Carter | Keystone RV"
+      ]
+    },
+    {
+      "batch_number": 32,
+      "task_ids": [
+        "108008472182",
+        "108014602114",
+        "108008545588"
+      ],
+      "subjects": [
+        "Sales Nav - Send connection request - Mitchell Kelly | Airxcel",
+        "Sales Nav - Send connection request - Marguerite Farney | Thor Motor Coach",
+        "Sales Nav - Send connection request - Robert Annetta | Thor Industries"
+      ]
+    },
+    {
+      "batch_number": 33,
+      "task_ids": [
+        "108007235163",
+        "108014529035",
+        "108013819230"
+      ],
+      "subjects": [
+        "Sales Nav - Send connection request - Scott Sibert | Thor Motor Coach",
+        "Sales Nav - Send connection request - Brian Mann | Keystone RV",
+        "Sales Nav - Send connection request - Troy Pennington | Airxcel"
+      ]
+    },
+    {
+      "batch_number": 34,
+      "task_ids": [
+        "107749494166",
+        "107749483579",
+        "108014533376"
+      ],
+      "subjects": [
+        "7email",
+        "7email",
+        "Sales Nav -- Send connection request -- Ryan Bell | Winnebago Industries"
+      ]
+    },
+    {
+      "batch_number": 35,
+      "task_ids": [
+        "108062178365",
+        "108015027830",
+        "108010486845"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Steven Yurgelevic | Lippert Components",
+        "Sales Nav -- Send connection request -- Damien Carpentier | Desjardins",
+        "Sales Nav -- Send connection request -- Francis Gradel | Desjardins"
+      ]
+    },
+    {
+      "batch_number": 36,
+      "task_ids": [
+        "108010412678",
+        "108015237387",
+        "108010457462"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Alexandre Tiber | Desjardins",
+        "Sales Nav -- Send connection request -- Dominic Bachand | Desjardins",
+        "Sales Nav -- Send connection request -- Alain Maillard | Desjardins"
+      ]
+    },
+    {
+      "batch_number": 37,
+      "task_ids": [
+        "108015325469",
+        "108013842181",
+        "108010268968"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Clement Montagne | Desjardins",
+        "Sales Nav -- Send connection request -- Gabriel Avonture | Desjardins",
+        "Sales Nav -- Send connection request -- Chahine Salame | Desjardins"
+      ]
+    },
+    {
+      "batch_number": 38,
+      "task_ids": [
+        "108010379388"
+      ],
+      "subjects": [
+        "Sales Nav -- Send connection request -- Julien L'Ecuyer | Desjardins"
+      ]
+    }
+  ]
+}

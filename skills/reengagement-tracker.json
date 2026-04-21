@@ -1,0 +1,9 @@
+{
+  "last_run": null,
+  "last_search_page": 1,
+  "last_search_keywords": "network engineer infrastructure director",
+  "processed_contact_ids": [],
+  "skipped_contact_ids": [],
+  "total_tasks_created": 0,
+  "notes": "Tracks progress for osi-cold-reengagement weekend automation. Each run reads this file, processes the next batch, and updates it before exiting."
+}

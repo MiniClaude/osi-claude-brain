@@ -1,0 +1,26 @@
+===== Weekend Sequence Orchestrator Run =====
+Timestamp: 2026-04-17T21:55:43Z (Fri 5:55 PM ET)
+Run session: blissful-peaceful-ride
+Status: FAILED — unable to read batch schedule
+
+Failure detail:
+- Task prompt required reading /sessions/keen-eloquent-hawking/scheduled_batches.json
+- That path belongs to a different session and is not accessible from this session (EACCES: permission denied on statx)
+- No copy of scheduled_batches.json was found in the current session's workspace
+- weekend-sequence-manifest.json exists in Claude-Brain, but it only contains batch_number / task_ids / subjects — it does NOT contain the fire_at_iso timestamps or per-batch prompts the orchestrator needs
+
+Batches successfully scheduled this run: 0
+Batches 4–30 NOT scheduled.
+
+Pre-existing scheduled tasks (unchanged):
+- weekend-seq-batch-01  → Fri 2026-04-17 6:00 PM ET
+- weekend-seq-batch-02  → Fri 2026-04-17 8:00 PM ET
+- weekend-seq-batch-03  → Fri 2026-04-17 10:00 PM ET
+
+Recommended action for Andy:
+1. Re-run the orchestrator from the original session (keen-eloquent-hawking) so it can read scheduled_batches.json, OR
+2. Copy scheduled_batches.json into this session's workspace and re-invoke the orchestrator, OR
+3. Schedule batches 4–30 manually.
+
+Per the task instructions, no retries were attempted.
+=============================================
