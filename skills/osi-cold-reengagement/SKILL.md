@@ -137,7 +137,9 @@ Based on their profile, pick the right play. Do not limit to one if multiple app
 
 ## Step 7: Create HubSpot tasks
 
-Create 2 tasks on the prospect's contact record:
+**Duplicate-task check (MANDATORY before creating either task):** Query HubSpot for tasks associated to this contact. If the contact has ANY task where `hs_task_type` = `LINKED_IN_MESSAGE` AND `hs_task_status` is `NOT_STARTED` or `IN_PROGRESS`, skip BOTH tasks entirely. Tell Andy: "existing LinkedIn task on HubSpot. No new tasks created." and move to the next candidate. This applies regardless of the existing task's subject line. One active LinkedIn message task already queued = we do not pile on more.
+
+Create 2 tasks on the prospect's contact record (only if the duplicate check passes):
 
 **Task 1:**
 - Subject: "1st LinkedIn Message"

@@ -1,6 +1,6 @@
 ---
 name: osi-email-task-drafts
-description: Auto-draft reply emails for every HubSpot email task that is due today or overdue for Andy. For each task, identifies the associated contact, pulls the CURRENT state of the relationship from HubSpot engagements (calls, emails logged to HubSpot, and Teams/Zoom meeting notes), drafts a thread-matched reply in Andy's voice, and writes the draft into the task's notes field so Andy can review and send. Skips outreach-sequence auto-tasks (generic "Send follow-up email" with empty body) — those are handled by osi-outreach-sequence. Trigger on "run email tasks", "draft my email tasks", "write drafts for email tasks", "do my follow-ups", or when Andy asks you to go through email tasks due.
+description: Auto-draft reply emails for every HubSpot email task that is due today or overdue for Andy. For each task, identifies the associated contact, reads the FULL HubSpot engagement history (meeting notes, emails, calls), checks for a fresh external hook via one targeted web search, and drafts a thread-matched reply in Andy's voice. Drafts are written into the task's notes field so Andy can review and send. Skips outreach-sequence auto-tasks (generic "Send follow-up email" with empty body) — those are handled by osi-outreach-sequence. Trigger on "run email tasks", "draft my email tasks", "write drafts for email tasks", "do my follow-ups", or when Andy asks you to go through email tasks due.
 ---
 
 > **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-email-task-drafts\` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub. If returning after days away, run `git pull` first to get the latest, then check the local Cowork copy and re-install the `.skill` file if the source has drifted.
@@ -25,9 +25,11 @@ Pull 15 each of EMAIL / CALL / NOTE and 10 MEETING_EVENT records for the contact
 
 Every draft must reference **at least 2 specifics** (named products, standards, projects, named partner-side engineers, prior commitments) pulled directly from what you read. If you can't find 2 specifics, do NOT invent them — write the thin-context fallback.
 
-### Rule 3 — HubSpot is the only source.
+### Rule 3 — HubSpot for specifics, plus ONE fresh-hook web search per contact.
 
-If the contact has no engagement history in HubSpot, do NOT go searching externally. No Outlook search, no LinkedIn, no ZoomInfo, no web search. Write the thin-context fallback and flag for manual review.
+HubSpot engagement history is where specifics come from (products, projects, commitments, named people). In addition, run exactly ONE targeted web search per contact before drafting, to surface a fresh 30-day external hook (company news, earnings, exec change, acquisition, buildout, product launch). If the search returns something real, weave it into the opener. If it returns nothing or generic PR fluff, ignore it and proceed. Do NOT run multiple searches per contact, do NOT chase down second-order results, and do NOT use Outlook search, LinkedIn, or ZoomInfo as drafting sources. The fresh-hook search is additive to HubSpot; it does not replace the engagement history read.
+
+If the contact has no engagement history in HubSpot AND no fresh external hook surfaces, write the thin-context fallback and flag for manual review.
 
 ### Data sources (in order of usefulness for specifics)
 
@@ -120,19 +122,25 @@ Give each agent this prompt (substitute the batch's task list):
 >
 >    If the contact is associated with a company, also pull the 5 most recent engagements on the COMPANY record (via `associatedWith` with `objectType: "companies"`) — these often surface context from colleagues that's relevant to the target contact.
 >
-> 4. **Do NOT** run `outlook_email_search`, LinkedIn, web search, or ZoomInfo. HubSpot engagement history is the only source.
+> 4. **Run ONE fresh-hook web search.** Search the web (via WebSearch or workspace web_fetch) with query: `"[Company name] news [current month] [current year]"`. Score the top results:
+>    - Real news (acquisition, merger, exec hire, earnings, product launch, buildout, partnership, outage): capture the one-line summary + source URL and use it as the opener hook in the draft.
+>    - Generic PR fluff, award posts, charity drives, job listings: ignore.
+>    - Nothing recent: skip and proceed with HubSpot specifics only.
 >
-> 5. **Before drafting, extract a "specifics inventory" from what you read.** List, for yourself:
+>    ONE search per contact. Do not run a second search, do not pivot keywords, do not chase results. If the first search does not surface a usable hook, move on. Do NOT run `outlook_email_search`, LinkedIn, or ZoomInfo.
+>
+> 5. **Before drafting, extract a "specifics inventory" from HubSpot history + the fresh hook (if found).** List, for yourself:
 >    - Named products / model families (e.g., SAR-Hm/Hmc, ACX5448, Nutanix, VxRail)
 >    - Technical standards / specs (e.g., IEC 61850, 10G SR, port density requirements)
 >    - Project / initiative names (e.g., Nokia pilot, Dallas lab visit, HP/Cisco rightsizing, Thanksgiving data center build)
 >    - Named colleagues at the target or partner (e.g., "Chris at Nokia engineering", "Bashar in procurement")
 >    - Specific prior offers / commitments (e.g., "shadow-quote in 24 hours", "advance overnight replacement")
 >    - Open questions or unanswered asks from the last contact message
+>    - Fresh external hook from the 30-day news search (if one surfaced)
 >
->    If your inventory has **2+ specifics**, you can write a full substantive draft weaving them in. If it has fewer, write the shorter thin-context fallback + ⚠️ flag — do NOT invent specifics.
+>    If your inventory has **2+ specifics** (HubSpot history + fresh hook both count), you can write a full substantive draft weaving them in. If it has fewer, write the shorter thin-context fallback + ⚠️ flag — do NOT invent specifics.
 >
-> 6. **Draft a substantive 3–5 paragraph reply in Andy's voice** that hits the four-move blueprint below and weaves in **at least 2 specifics from your inventory**. Match the formality/length/tone of the most recent real reply from the contact. NEVER draft from the task title — it is stale reference only.
+> 6. **Draft a substantive 3–5 paragraph reply in Andy's voice** that weaves in **at least 2 specifics from your inventory**. Match the formality/length/tone of the most recent real reply from the contact. NEVER draft from the task title — it is stale reference only.
 >
 > 7. Write to `hs_task_body` via `manage_crm_objects` updateRequest, `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. **APPEND** after existing notes using `<hr>`. Never overwrite.
 >
@@ -187,7 +195,7 @@ If zero tasks were drafted (everything skipped or no tasks due), end with one li
 
 - Never overwrite an existing substantive draft. Append only, separated by `<hr>`.
 - Never invent specifics. If fewer than 2 are found, write thin-context fallback + flag.
-- Never use Outlook search, LinkedIn, web search, or ZoomInfo as sources. HubSpot engagements only.
+- HubSpot engagement history is the primary source for specifics. ONE targeted 30-day news web search is allowed per contact for a fresh hook. Never use Outlook search, LinkedIn, or ZoomInfo as drafting sources. Never run more than one web search per contact.
 - Never modify the task status. Andy marks tasks complete himself after sending.
 - Never use em-dashes in the draft body. Split into two sentences instead.
 - If subagent batch returns an error for a task, log it in the summary as "ERROR -- [reason]" and move on.

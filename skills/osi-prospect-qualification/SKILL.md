@@ -723,7 +723,8 @@ Do this for EVERY prospect regardless of whether they had an existing task or no
 4. If no email AND no phone — create 2 LinkedIn message tasks:
    - Task 1: Type LINKED_IN_MESSAGE, subject "1st LI — [First Last] | [Company]", due 7 days. Notes: draft 1st LI message (3 sentences max).
    - Task 2: Type LINKED_IN_MESSAGE, subject "2nd LI — [First Last] | [Company]", due 21 days. Notes: draft 2nd LI message (1-2 sentences).
-   Check for existing "1st LI" and "2nd LI" tasks first. If they exist, skip.
+
+   **Duplicate-task check (MANDATORY before creating either task):** Query HubSpot for tasks associated to this contact. If the contact has ANY task where `hs_task_type` = `LINKED_IN_MESSAGE` AND `hs_task_status` is `NOT_STARTED` or `IN_PROGRESS`, skip BOTH tasks entirely. Log the outcome in the output: "Existing LinkedIn message task(s) on HubSpot for this contact. No new tasks created." Do not create "1st LI" or "2nd LI" as duplicates. This applies regardless of the existing task's subject line (could be "1st LI", "2nd LI", "InMail", "Sales Nav message", or anything else). The rule is: one active LinkedIn message task already queued = we do not pile on more.
 
 5. If the prospect is not yet in HubSpot, create them first before saving the note and tasks.
 

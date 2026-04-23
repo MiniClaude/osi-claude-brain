@@ -211,7 +211,9 @@ For companies NOT in HubSpot: create company record (owner: 196669355).
 
 ## Step 7: Create LinkedIn InMail Tasks
 
-For each qualified target eligible for tasks:
+**Duplicate-task check (MANDATORY before creating either task):** Query HubSpot for tasks associated to this contact. If the contact has ANY task where `hs_task_type` = `LINKED_IN_MESSAGE` AND `hs_task_status` is `NOT_STARTED` or `IN_PROGRESS`, skip BOTH tasks entirely. Log in Excel and session summary: "existing LinkedIn task on HubSpot. No new tasks created." This applies regardless of the existing task's subject line. One active LinkedIn message task already queued = we do not pile on more.
+
+For each qualified target eligible for tasks (and passing the duplicate check above):
 - Task 1: "LinkedIn InMail - [Name] - [Company] (Touch 1)" — LINKED_IN_MESSAGE — due TODAY
 - Task 2: "LinkedIn InMail - [Name] - [Company] (Touch 2)" — LINKED_IN_MESSAGE — due 2 WEEKS
 - Owner: 196669355
