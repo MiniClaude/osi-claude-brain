@@ -3,13 +3,125 @@ name: osi-email-sender
 description: Send all due emails from C:\Claude-Brain\email-queue.json via Outlook. Runs 11am, 12pm, 1pm, 2pm, 3pm, 4pm ET weekdays.
 ---
 
-# 🚨 READ THIS ENTIRE FILE BEFORE SENDING ANY EMAIL 🚨
+# 🛑 ABSOLUTE FIRST ACTION: VERIFY YOU ARE READING THE LIVE SKILL 🛑
 
-This skill sends cold outreach to real, paying-potential customers. One bad format, one missed blank line, and Andy looks like a fool to a prospect he may be chasing for months. There is no "close enough." Follow every rule below exactly. If anything in this file is ambiguous, STOP and ask Andy. Do not guess.
+**Before doing anything else, run this check:**
+
+1. Use the Read tool on `C:\Claude-Brain\skills\osi-email-sender\SKILL.md`. That file is the ONLY authoritative version.
+2. If you are currently reading any other copy (e.g., a `SKILL.md` in `/mnt/uploads/`, an inlined copy pasted into a scheduled task prompt, a `.claude/skills/` runtime snapshot, or anything attached to this session that was written before today), STOP and reload from `C:\Claude-Brain\skills\osi-email-sender\SKILL.md`. Stale copies have caused real prospects to receive malformed emails. 2026-04-23: Joe Zarcone / Rackspace went out with a hand-rolled quote header and no grey divider because the runner was following a stale upload that did not contain Step 3A REPLY flow logic. This must not happen again.
+3. The live file on disk is authoritative. Any version that disagrees with the live file is wrong. If you see two copies and they differ, follow the live file and surface the drift to Andy at the end of the run.
+
+If the live file is unreachable for any reason, ABORT the run. Do not fall back to an older copy. Report the failure and let Andy decide.
 
 ---
 
-## Step 1: Load the queue
+# 🚨 READ THIS ENTIRE FILE BEFORE SENDING ANY EMAIL 🚨
+
+This skill sends cold outreach to real, paying-potential customers. One bad format, one missed blank line, one fake quote header, one send to a cancelled contact, and the user looks like a spammer to a prospect they may be chasing for months. There is no "close enough." Follow every rule exactly. If anything is ambiguous, STOP and ask the user. Do not guess.
+
+---
+
+# 🛑 MANDATORY PRE-SEND GATE 🛑
+
+**Before composing ANY email, every single one, no exceptions, you MUST run this check. If you skip it, you WILL send to a cancelled or blocked prospect and burn a real relationship. This has happened. It must not happen again.**
+
+```python
+import json
+QUEUE_PATH = 'C:/Claude-Brain/email-queue.json'
+HARD_BLOCK_PATH = 'C:/Claude-Brain/hard-block.json'
+
+with open(QUEUE_PATH) as f:
+    queue = json.load(f)
+with open(HARD_BLOCK_PATH) as f:
+    hb = json.load(f)
+
+entry = next((e for e in queue if e.get('id') == ENTRY_ID), None)
+assert entry is not None, f"Entry {ENTRY_ID} not in queue"
+assert entry['status'] == 'pending', f"SKIP: {ENTRY_ID} status is {entry['status']}, not pending"
+
+# Hard-block enforcement. Single source of truth is C:/Claude-Brain/hard-block.json.
+# Never hardcode addresses or domains anywhere else. To block a new address/domain,
+# edit hard-block.json. Do not touch this gate code.
+blocked_addrs = {a['email'].lower() for a in hb.get('addresses', [])}
+blocked_domains = {d['domain'].lower() for d in hb.get('domains', [])}
+addr = entry['to'].lower().strip()
+domain = addr.split('@')[-1] if '@' in addr else ''
+
+if addr in blocked_addrs or domain in blocked_domains:
+    # Hard-block hit. This is NOTIFICATION-WORTHY: some upstream sequence enrolled a prospect
+    # against a blocked address/domain. Andy wants to know, NOT silent skipping.
+    # Raise a distinctive AssertionError so the runner logs it loudly in Step 7.
+    reason = f"hard-blocked address {addr}" if addr in blocked_addrs else f"hard-blocked domain {domain}"
+    raise AssertionError(f"HARD_BLOCK_HIT | id={ENTRY_ID} | to={addr} | {reason} | FLAG TO ANDY IN REPORT")
+```
+
+Run this check immediately before composing each email. Not once per run. Not once per window. Once per email. The queue file's modification time can change mid-run because osi-monitor writes cancellations and pauses to it in real time. The list you pulled at the start of the window is a candidate list only. The authoritative status is whatever is on disk RIGHT NOW.
+
+If either assert fails, SKIP this entry: do not open a compose, do not draft, do not click Reply, do not click New mail. Log the skip (ID and reason) and move on to the next entry.
+
+**Every compose step in this file (Step 3A and Step 3B) begins by running this gate. If you forget, you have failed the skill.**
+
+---
+
+## TL;DR: the five rules that matter
+
+1. **Re-read the queue entry from disk right before composing each email.** Run the Pre-Send Gate above. If `status != "pending"` or `to` is hard-blocked, SKIP. No exceptions, ever.
+2. **Subject starts with `RE: ` → use Outlook's Reply button on the original sent email in Sent Items. NEVER start a New mail for a follow-up.** The queue body's fake `---------- On April 16, Andy McLean wrote ----------` separator is NOT the quote format. Outlook's native Reply gives the real grey divider and From/Sent/To/Subject header.
+3. **Subject does NOT start with `RE: ` → New mail flow.** Type the full body from the queue.
+4. **Exactly ONE blank line between the last line you typed and `Best,`.** Not zero. Not two. One. Run the bi-directional trim in Step 4 on every email, then verify visually before Send. The trim pads up if there are too few newlines and Backspaces down if there are too many. Target is always one visible blank line.
+5. **Preview before Send on every email.** Count the blank lines. Confirm the grey divider and header are present (Reply flow). Confirm no hand-rolled quote header is in the body.
+
+If any rule feels unclear, re-read the full file. Skipping these rules is how prospects get burned.
+
+---
+
+# 🚫 ABSOLUTE RULE: NO EM-DASHES IN ANY EMAIL. EVER. 🚫
+
+**An em-dash (Unicode code point U+2014) in an outbound email is an instant tell that AI wrote it.** Real prospects pattern-match on that character and write the sender off as spam or AI slop. This is non-negotiable.
+
+This rule applies to:
+- Every email body you type
+- Every follow-up reply
+- Every subject line
+- Every character that leaves this process and lands in a prospect's inbox
+
+It also applies to en-dashes (Unicode code point U+2013) for the same reason.
+
+**Before typing ANY body text, run this sanitizer:**
+
+```js
+function stripDashes(text) {
+  // Em-dash (U+2014) and en-dash (U+2013) → plain hyphen or period.
+  // Replace " U+2014 " surrounded by spaces with ". " (sentence break). Replace any bare em-dash with "-".
+  return text
+    .replace(/ \u2014 /g, '. ')
+    .replace(/\u2014 /g, '. ')
+    .replace(/ \u2014/g, '.')
+    .replace(/\u2014/g, '-')
+    .replace(/ \u2013 /g, '. ')
+    .replace(/\u2013/g, '-');
+}
+
+// Apply to every body/reply/subject string pulled from the queue before it hits Outlook.
+```
+
+**After inserting the body, run this final check:**
+
+```js
+const body = document.querySelector('[aria-label*="Message body"][contenteditable="true"]');
+const txt = body.innerText;
+if (txt.includes('\u2014') || txt.includes('\u2013')) {
+  throw new Error('EM-DASH OR EN-DASH FOUND IN BODY. ABORT. Fix the queue entry and re-run.');
+}
+```
+
+If the queue body contains an em-dash, it is a bug in whichever skill wrote the queue entry (osi-outreach-sequence, osi-3email-new, etc.). Surface it to Andy so he can fix the upstream skill. Never send an email that has an em-dash in it, even if you have to skip the entry.
+
+---
+
+## Step 1: Load the queue AND scan for hard-block enrollments
+
+### 1A. Select candidate entries
 
 Queue file: `C:\Claude-Brain\email-queue.json`
 
@@ -24,84 +136,253 @@ Skip `cancelled` and `sent` entries.
 
 If current hour is outside the six windows, do nothing and log the no-op. Do not dispatch.
 
+### 1B. Pre-flight hard-block scan (MANDATORY — Andy must always know)
+
+Before composing ANY email this window, scan the pending candidate set against `C:\Claude-Brain\hard-block.json`. For every pending entry whose `to` matches a blocked address or whose domain matches a blocked domain, collect it into a `hard_block_hits` list.
+
+Andy wants to be NOTIFIED any time an upstream sequence enrolled a prospect against a blocked address or domain. Silent skipping is not acceptable — a new sequence quietly failing to send is worse than visible failure, because Andy thinks outreach is going out when it isn't.
+
+For each `hard_block_hits` entry, you MUST:
+1. Do NOT compose or send that email.
+2. Mark the queue entry `status = "cancelled"` with `cancelReason = "hard-blocked by <address|domain>. Was enrolled by <upstream sequence>. Flagged at <time>."` so it doesn't show up on future runs.
+3. Surface the hit loudly in the Step 7 run report under a dedicated "🚨 HARD-BLOCK HITS — NEW ENROLLMENTS AGAINST BLOCKED CONTACTS" section. Include: prospect name (derive from `id`), email, which rule fired (exact address vs domain), which sequence enrolled them (infer from queue history — the first entry in the sequence will have been created by one of the outreach skills), and recommended action.
+
+If there are zero hits, say so explicitly in the report ("Hard-block scan: clean, 0 hits") so Andy has positive confirmation the scan ran.
+
+```python
+import json
+from datetime import datetime
+with open('C:/Claude-Brain/email-queue.json') as f: queue = json.load(f)
+with open('C:/Claude-Brain/hard-block.json') as f: hb = json.load(f)
+blocked_addrs = {a['email'].lower() for a in hb.get('addresses', [])}
+blocked_domains = {d['domain'].lower() for d in hb.get('domains', [])}
+
+today = datetime.now().strftime('%Y-%m-%d')
+candidates = [e for e in queue if e.get('sendDate') == today and e.get('sendTime') == CURRENT_WINDOW and e.get('status') == 'pending']
+
+hard_block_hits = []
+for e in candidates:
+    addr = (e.get('to') or '').lower().strip()
+    domain = addr.split('@')[-1] if '@' in addr else ''
+    if addr in blocked_addrs:
+        hard_block_hits.append({'entry': e, 'rule': f'address {addr}'})
+    elif domain in blocked_domains:
+        hard_block_hits.append({'entry': e, 'rule': f'domain {domain}'})
+
+# Cancel each hit in the queue so it doesn't keep firing on future runs
+# (atomic write per the Step 6 pattern)
+```
+
 ---
 
-## Step 2: Formatting rules — NON-NEGOTIABLE
+## Step 2: Re-read the entry status, then decide the flow
 
-The `body` field in the queue is plain text with `\n\n` between paragraphs. When inserting into Outlook's compose body you MUST preserve that structure as visible blank lines. This is where Claude has screwed up before. Read this section twice.
+### 2A. Re-read the entry from disk immediately before composing
 
-### Two spaces after every sentence
-- Every sentence-ending punctuation mark (`.`, `?`, `!`) must be followed by TWO spaces before the next sentence begins, not one.
-- CRITICAL GOTCHA: `document.execCommand('insertText', ...)` COLLAPSES consecutive ASCII spaces back to one when inserting into a contenteditable. Two literal spaces become one space in the rendered email. The fix: the SECOND space must be a non-breaking space (`\u00a0`), not a regular space. The browser will not collapse `\u00a0`, and most mail clients render it identically to a regular space.
-- The queue body may have either single or double spacing — the sender is responsible for normalizing to "regular space + non-breaking space". Before inserting any paragraph into the compose body, run this transform on the text:
+Do not trust the in-memory list of pending entries you built in Step 1. The queue can be updated mid-run by osi-monitor (bounces, replies) or by Andy editing it directly. Before composing each email, re-read the queue file from disk and look up this specific entry by `id`. Confirm `status == "pending"`. If it is anything else (`cancelled`, `sent`, `paused`), SKIP this entry entirely. Do not compose, do not draft, do not send. Log the skip and move on.
+
+Additionally, cross-check the recipient against the hard-block list in the user's auto-memory (`feedback_bad_emails.md`). If the `to` field matches any blocked address, SKIP and log. Do not send under any circumstance.
+
+This re-check is mandatory per-entry, even inside a single run window. On 2026-04-22 Brett Baker / Lippert had Email 2 nearly go out because the run pulled `pending` at 11:06 AM and the queue was updated to `cancelled` by osi-monitor at 11:12 AM, by which time the sender was already composing. Always re-check.
+
+### 2B. Decide the flow: Reply or New mail
+
+Look at the queue entry's `subject`. Strip any surrounding whitespace.
+
+- If it starts with `RE: ` (case-insensitive, with the space after the colon), it is a follow-up. Go to **Step 3A: REPLY flow**.
+- Otherwise it is a fresh outreach. Go to **Step 3B: NEW MAIL flow**.
+
+This decision is not a judgment call. It's a string prefix check. `RE: ` → Reply. Anything else → New mail.
+
+---
+
+## Step 3A: REPLY flow (subject starts with `RE: `)
+
+### What the final email MUST look like
+
+```
+Any thoughts?                        ← the new reply text you typed
+
+                                     ← exactly ONE blank line
+Best,
+Andy
+                                     ← signature block (auto-inserted)
+Andy McLean
+Solutions Executive
+Book a Meeting with Me
+...
+_________________________________    ← solid light grey horizontal divider
+From: Andrew McLean <andy@osiglobal.com>
+Sent: Monday, April 20, 2026 4:35 PM
+To: 'Prospect Name' <prospect@example.com>
+Subject: Original subject without RE:
+
+[original email 1 body, exactly as sent, with its own signature]
+```
+
+The grey divider + From/Sent/To/Subject header block + original body are all produced automatically by Outlook when you click Reply on the original sent email. You do NOT type any of that. You only type the short new reply text at the very top.
+
+### Procedure
+
+0. **RUN THE PRE-SEND GATE FIRST.** See the 🛑 MANDATORY PRE-SEND GATE 🛑 section at the top of this file. Re-read the queue entry from disk by `id`. Confirm `status == "pending"` and `to` is not in the hard-block list. If either fails, SKIP this entry and do not proceed to step 1. This is not optional. Brett Baker / Lippert 2026-04-22 is why.
+1. Navigate to Sent Items. URL fallback if clicking the nav item fails: `https://outlook.office.com/mail/sentitems`.
+2. Click the search bar at the top of Outlook. Type the queue subject WITHOUT the leading `RE: ` (e.g., if queue subject is `RE: Bell / servers + compute for AI workloads`, search for `Bell / servers + compute for AI workloads`). Press Enter.
+3. From the results, find the email whose To field matches the queue entry's `to` field exactly AND whose Sent date matches the prior email in this sequence (for Email 2 of a 6-email sequence this is typically 2 business days ago). Open it.
+4. If no matching sent email exists, STOP. Do not fall back to New mail. Report: `Could not find original sent thread for <id>. Not sent.` Move on.
+5. Click the `Reply` button (top right of the reading pane, or at the bottom of the email).
+6. The reply compose opens inline. VERIFY all three fields are pre-populated correctly:
+   - **To**: matches the queue `to` exactly. If not, STOP.
+   - **Subject**: matches the queue `subject` exactly (`Re: ...` vs `RE: ...` case difference is fine. Outlook's autofill is canonical). If subject is wrong, STOP.
+   - **Body**: cursor at the top, then Outlook's signature, then the grey divider and From/Sent/To/Subject header, then the original email body. If no grey divider appears, STOP. That means Reply did not attach the thread properly.
+7. Parse the queue `body` to extract ONLY the new reply text. The new text is everything BEFORE the first quote marker. Recognize any of these as quote markers:
+   - A line matching `----------\s*On .* wrote ----------`
+   - A line matching `On .*, (Andy )?McLean .*wrote:`
+   - A line starting with `> `
+   - A line starting with `From: Andrew McLean`
+   Take the text before the first marker, strip trailing whitespace. For Email 2 in the standard sequence, this is almost always just `Any thoughts?`.
+8. Click at the very top of the body (above the signature) and type the new reply text. If it has multiple paragraphs, separate them with a blank line (see Step 4 for the mechanical details).
+9. **Trim the signature's leading blank down to exactly ONE.** This is the single most common failure mode. See Step 4 for the exact code pattern. You must do this every time, even if the compose "looks fine". The second blank is invisible-looking but it is there.
+10. Run the preview check in Step 5. Do not skip it.
+11. Click `Send`.
+12. Confirm success: the compose closes and the email appears in Sent Items with the reply arrow icon next to the recipient. If a dialog appears ("Discard?", "Send without subject?", etc.), STOP and read it.
+
+---
+
+## Step 3B: NEW MAIL flow (subject does NOT start with `RE: `)
+
+0. **RUN THE PRE-SEND GATE FIRST.** See the 🛑 MANDATORY PRE-SEND GATE 🛑 section at the top of this file. Re-read the queue entry from disk by `id`. Confirm `status == "pending"` and `to` is not in the hard-block list. If either fails, SKIP this entry. This is not optional. Brett Baker / Lippert 2026-04-22 is why.
+1. Navigate to `https://outlook.office.com/mail/deeplink/compose?to=<URL-encoded to>&subject=<URL-encoded subject>`.
+2. Wait up to 6 seconds for the compose body to render (`[aria-label="Message body"][role="textbox"]` must exist).
+3. Verify the To and Subject fields are populated correctly from the URL. If either is empty or wrong, STOP.
+4. Click at position 0 of the body (top, above the signature).
+5. Insert the full queue `body`, splitting on `\n\n` for paragraph breaks. Between paragraphs insert one `insertParagraph` call followed by another `insertParagraph` call. The first ends the paragraph, the second creates the blank line between paragraphs.
+6. Do NOT add an extra `insertParagraph` after the last paragraph. The signature already has a leading gap above it.
+7. **Trim the signature's leading blank down to exactly ONE.** Same rule as Reply flow. See Step 4.
+8. Run the preview check in Step 5.
+9. Click `Send`.
+10. Confirm success: compose closes, email in Sent Items.
+
+---
+
+## Step 4: Body formatting mechanics
+
+### Signature trim: target EXACTLY ONE blank line between the last sentence and `Best,`
+
+This is the single rule that matters most. The rendered email must look like this:
+
+```
+...the last sentence of your body text.
+                                         ← exactly ONE visible blank line
+Best,
+Andy
+Andy McLean
+Solutions Executive
+...
+```
+
+Andy updated his Outlook signature on 2026-04-23 to remove one leading blank line. With the new signature, the mechanical target is **exactly 1 `\n` character in `body.innerText` immediately before `Best,`**. That single `\n` is the paragraph break between the last body sentence and the signature block. Outlook's paragraph margin between those two elements IS the one visible blank line Andy wants. Adding an extra `\n` (making it 2) creates a second visible blank line, which is what has been happening and what Andy does not want. Target 1, never 2, never 0.
+
+The trim below is bi-directional: it Backspaces if there are too many newlines AND inserts paragraph breaks if there are too few. Do not assume the starting state. Always run this.
+
+Run this after inserting the body text, before clicking Send:
 
 ```js
-// First normalize any 2+ ASCII spaces after sentence punctuation back to one, then expand to "space + nbsp" before any capital letter / digit / quote.
+const body = document.querySelector('[aria-label*="Message body"][contenteditable="true"]');
+if (!body) throw new Error('Message body not found');
+body.focus();
+
+function newlinesBeforeBest() {
+  const text = body.innerText;
+  const idx = text.indexOf('Best,');
+  if (idx < 0) return -1;
+  let n = 0;
+  for (let i = idx - 1; i >= 0 && text[i] === '\n'; i--) n++;
+  return n;
+}
+
+// Place the cursor immediately before the "B" in "Best,".
+const walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT);
+let textNode = null, offset = 0, node;
+while ((node = walker.nextNode())) {
+  const i = node.nodeValue.indexOf('Best,');
+  if (i >= 0) { textNode = node; offset = i; break; }
+}
+if (!textNode) throw new Error('"Best," not found in body text');
+const range = document.createRange();
+range.setStart(textNode, offset);
+range.collapse(true);
+const sel = window.getSelection();
+sel.removeAllRanges();
+sel.addRange(range);
+
+// TARGET STATE: exactly 1 newline immediately before "Best,".
+// That renders as exactly one visible blank line between the last body sentence and Best,
+// (Outlook's paragraph-margin CSS provides the visible gap; we do not need a second \n).
+const TARGET = 1;
+
+// Too many newlines: Backspace down to TARGET.
+let guard = 0;
+while (newlinesBeforeBest() > TARGET && guard++ < 20) {
+  document.execCommand('delete', false);
+}
+
+// Too few newlines: insert paragraph breaks up to TARGET.
+// (Cursor is still positioned immediately before "Best,". Every insertParagraph
+// adds one \n before the cursor.)
+guard = 0;
+while (newlinesBeforeBest() < TARGET && guard++ < 20) {
+  document.execCommand('insertParagraph');
+}
+
+const finalCount = newlinesBeforeBest();
+if (finalCount !== TARGET) {
+  throw new Error(`Signature trim failed: ${finalCount} newlines before "Best," (want exactly ${TARGET} = one visible blank line)`);
+}
+```
+
+After this runs, the rendered body shows exactly ONE visible blank line between the last typed line and `Best,`. Not two. Not zero. One. If the function throws, STOP and surface to Andy. Do not send a broken email.
+
+### Two spaces after every sentence
+
+Every sentence-ending punctuation mark (`.`, `?`, `!`) must be followed by TWO spaces before the next sentence. `document.execCommand('insertText', ...)` collapses consecutive ASCII spaces back to one. The fix: the second space must be a non-breaking space (`\u00a0`).
+
+Before inserting any paragraph, transform the text:
+
+```js
 text = text
   .replace(/([.?!])  +/g, '$1 ')
   .replace(/([.?!]) (?=[A-Z0-9"'`])/g, '$1 \u00a0');
 ```
 
-Apply per paragraph (after splitting on `\n\n`), so periods at the end of a paragraph aren't touched. Verify in the preview check that `body.innerText.split('Best,')[0]` does not match `/[.?!] [A-Z]/` — a hit means the second space was a regular space and got collapsed.
-
-Do not double-space after abbreviations that don't end a sentence (e.g. `Mr. Fox`, `e.g.`, `U.S.`). The capital-letter-after-space heuristic handles most cases; if the queue body contains an abbreviation followed by a capitalized proper noun mid-sentence, the writer skill should have written it without a trailing space-then-capital pattern. If it didn't, the transform will incorrectly double-space — log it and surface to Andy rather than sending.
+Apply per paragraph (after splitting on `\n\n`). Abbreviations like `Mr. Fox`, `U.S.`, `e.g.` can false-positive. If the queue body contains such a pattern and the transform would incorrectly double-space, log it and surface to the user before sending.
 
 ### Paragraph spacing
-- Every paragraph in the body is separated by a **full blank line** in the final email. Not a single line break. A blank line. If the body has four paragraphs, there are three blank lines between them in the rendered email.
-- Mechanically: between every real paragraph, call `document.execCommand('insertParagraph', false)` **twice**. One creates the paragraph break. The second creates the empty paragraph that renders as the blank line.
 
-### Signature spacing — the part that has burned us repeatedly
-- There MUST be exactly ONE blank line between the last paragraph of the body and the Outlook auto-signature block (the `Best,` / `Andy McLean` / etc. that Outlook appends).
-- The Outlook compose body's signature block ships with TWO leading whitespace-only children stacked above `Best,`. Each one renders as a blank line. So out of the box: 2 blank lines. Adding an extra `insertParagraph` after the last body paragraph: 3 blank lines. Removing both leading whitespace children: 0 blank lines. The correct state is exactly ONE leading whitespace child remaining inside the signature block.
-- After inserting the last body paragraph, do NOT call `insertParagraph` again. Then walk into the signature block and trim its leading whitespace-only children down to exactly one. Code pattern:
+Every real paragraph in the body is separated by a full blank line in the rendered email. Mechanically: between two real paragraphs, call `insertParagraph` twice. One ends the current paragraph, the second creates the empty paragraph that renders as the blank line.
 
-```js
-const kids = [...body.children];
-let sigIdx = kids.findIndex(c => (c.textContent || '').includes('Best,'));
-const sig = kids[sigIdx];
-let leading = 0;
-for (const c of sig.children) {
-  if ((c.textContent || '').replace(/\u00a0/g, '').trim()) break;
-  leading++;
-}
-while (leading > 1 && sig.firstElementChild && !(sig.firstElementChild.textContent || '').replace(/\u00a0/g, '').trim()) {
-  sig.removeChild(sig.firstElementChild);
-  leading--;
-}
-```
+Do NOT call `insertParagraph` after the last real paragraph. The signature's leading blank provides the gap.
 
-After this, the sequence is: last paragraph → ONE empty element → `Best,`. That renders as exactly one blank line above `Best,`. Verified visually on David Thomas / SiFi and Edward Fox / MetTel on 2026-04-21.
+### Never type a sign-off
 
-### Do NOT type a sign-off
-- NEVER type `Best,` or `Andy` or any name at the bottom of the body. Outlook's signature block does that automatically. Typing it creates a doubled sign-off.
-
-### Mandatory preview-before-send check
-Before clicking Send on each email, read back `body.innerText.slice(0, 800)` and verify:
-- Each paragraph from the queue body appears on its own, separated by exactly one blank line. In `innerText` that shows as `\n\n\n` between paragraphs (the middle `\n` is the blank paragraph) — that's correct.
-- The last paragraph is followed by exactly ONE blank line before `Best,`. Count it. Between `?\n` (or whatever the final paragraph ends with) and `Best,`, there should be exactly one empty line. More than one means too many blanks and you must NOT send.
-- Two spaces after every sentence-ending `.`, `?`, `!` mid-paragraph. Search the preview for `\. [A-Z]`, `\? [A-Z]`, `\! [A-Z]` — any single hit means you missed the double-space transform. Stop and fix.
-- No stray `Andy` typed manually at the end.
-
-If any of those four checks fails, DO NOT SEND. Clear the body, re-insert, and recheck. If still broken after one retry, stop and surface to Andy.
+NEVER type `Best,` or `Andy` or any name at the bottom of the body. Outlook's signature block does that automatically. Typing it produces a doubled sign-off.
 
 ---
 
-## Step 3: Compose and send (one email at a time)
+## Step 5: Preview check, mandatory before every Send
 
-For each due entry:
+Before clicking Send, run these five checks. If any fails, do not send.
 
-1. Navigate to `https://outlook.office.com/mail/deeplink/compose?to=<URL-encoded to>&subject=<URL-encoded subject>`.
-2. Wait (poll up to ~6 seconds) for the `[aria-label="Message body"][role="textbox"]` element.
-3. Verify the To field shows the recipient and the Subject field shows the subject exactly. If either is empty or wrong, stop and surface to Andy — do not fix silently.
-4. Place the cursor at position 0 of the body (see Formatting rules).
-5. Insert paragraphs following the paragraph spacing rule above. STOP after the last paragraph — do NOT add any extra `insertParagraph` at the end. The signature's own leading gap is already present.
-6. Run the preview-before-send check.
-7. Click `button[aria-label="Send"]`.
-8. Confirm success: compose collapses and a `Go to Inbox` button is the only visible button on that surface. If a dialog appears, stop and read it — do not dismiss blindly.
+1. **Take a screenshot of the compose window.** Look at it. Count the blank lines between the last line of your typed text and `Best,`. It must be exactly ONE. Two blanks means the signature trim did not run or targeted the wrong count. Zero means you over-trimmed.
+2. **Reply flow only**: confirm the grey horizontal divider is present below the signature and the `From: / Sent: / To: / Subject:` header shows real data (Andrew McLean as the From, the original recipient as the To, the original subject without `RE:`, a plausible prior date).
+3. **No fake quote header in the body.** Search the body text for `---------- On` or `On .*, Andy McLean .*wrote:` or lines starting with `> `. If any match appears in what you typed at the top, you accidentally typed the full queue body including its fake separator. STOP. Clear the body and redo.
+4. **Read `body.innerText.slice(0, 800)`.** Confirm each paragraph from the queue body appears on its own line, separated by exactly one blank line. Confirm no stray `Andy` typed manually at the end. Confirm no double-space after abbreviations that were not actual sentence endings.
+5. **EM-DASH / EN-DASH CHECK.** Run: `body.innerText.includes('\u2014') || body.innerText.includes('\u2013')`. If true, ABORT. Em-dashes and en-dashes tell prospects an AI wrote the email. That destroys the outreach. Never send a body that contains either character.
+
+If all five pass, click Send.
 
 ---
 
-## Step 4: Update the queue
+## Step 6: Update the queue
 
 After each successful send, set that entry's `status` to `sent` via a plain Python atomic write:
 
@@ -117,23 +398,41 @@ with os.fdopen(fd, 'w') as f: json.dump(q, f, indent=2)
 os.replace(tmp, path)
 ```
 
-Never delete the file first. Never use the Write tool for the queue. One atomic write per email (after send), not a single bulk write at the end — if something crashes mid-run, status must be truthful for what was actually sent.
+Never delete the file first. Never use the Write tool for the queue. One atomic write per email, not a single bulk write at the end. If something crashes mid-run, status must be truthful for what actually went out.
 
 ---
 
-## Step 5: Log the run
+## Step 7: Log the run
 
-Append a summary to `C:\Claude-Brain\sessions\session-YYYY-MM-DD.md` (today's date) under a heading for the window that just fired. Include:
-- Window (e.g., `4pm ET`)
+Append a summary to `C:\Claude-Brain\sessions\session-YYYY-MM-DD.md` under a heading for the window that just fired. Include:
+- Window (e.g., `11am ET`)
 - Count sent, count skipped, count errored
 - List of IDs sent, with any flags or anomalies
 - Next scheduled window and how many pending entries it will process
 
+### 🚨 Hard-block hits section (mandatory, even when empty)
+
+Every run report MUST include a "Hard-block scan" section. This is how Andy knows whether upstream sequences are enrolling prospects against blocked contacts.
+
+Format:
+
+```
+🚨 HARD-BLOCK SCAN
+Status: <clean | N hits>
+
+If hits:
+  - <Prospect name> (<email>) — rule: <address|domain> — enrolled by: <upstream sequence, inferred from queue history> — action: cancelled all remaining entries in that sequence
+```
+
+This is the piece Andy explicitly asked for on 2026-04-23: notify on every blocked enrollment. Never bury a hard-block hit inside aggregate counts. Always call it out by name with context so Andy can go upstream and stop the enrolling skill from doing it again.
+
 ---
 
-## Failure modes to watch for (learned the hard way)
+## Failure modes (learned the hard way, don't repeat these)
 
-- **Paragraphs mashed together.** If you inserted with a single `insertParagraph` between paragraphs, the output will show `\n` between them in innerText and render as no visible gap. This is wrong. Always two `insertParagraph` calls between paragraphs.
-- **Wrong-sized gap before signature.** Out-of-the-box Outlook signature ships with 2 leading blank-line elements above `Best,`. Adding `insertParagraph` after the last body paragraph stacks to 3. Removing both leading blanks collapses to 0. Verified 2026-04-21 on the same window: Josh Harless / Hunter went out with 3 blank lines (extra insertParagraph), Ben Wexler / KeyBank went out with 0 (over-trimmed both leading blanks), David Thomas / SiFi and Edward Fox / MetTel went out correct. Use the trim-to-one code pattern in Step 2 every time. Verify visually in the preview check before Send — count the blank lines.
-- **Sending before verifying.** Clicking Send before reading back `innerText` has burned real client outreach. Do the preview check every single time, even if the previous 9 looked fine.
-- **Signature dup.** Typing `Andy` at the bottom produces a doubled sign-off. The queue body never contains a sign-off — respect that and insert only what's there.
+- **Hand-rolled quote headers (2026-04-22).** Brett Baker / Lippert was left sitting as a draft in Sent Items, and Lance Weaver / Rackspace went out to a real prospect, both with the entire queue body typed into a New mail compose including a fake `---------- On April 16, Andy McLean wrote ----------` separator. No grey divider. No real From/Sent/To/Subject header. The original body was retyped instead of quoted natively. It looks like spam. Root cause: sender ignored Step 2 and went straight to New mail for every entry. For `RE: ` subjects the ONLY correct flow is Step 3A. New mail is for fresh subjects only.
+- **Wrong-sized gap before signature.** The target is ALWAYS exactly one visible blank line between the last typed sentence and `Best,`. Mechanically, exactly 2 newlines in `innerText` immediately before `Best,`. The Step 4 trim is bi-directional. It pads up or Backspaces down to that target regardless of what Outlook's signature block starts with. On 2026-04-23 Andy removed a leading blank from his signature, so the starting newline count is now smaller than it used to be. If you see a one-way trim that only Backspaces, it will under-trim and fail the assert. Always use the bi-directional version. Historical context: Josh Harless / Hunter went out with too many blanks, Ben Wexler / KeyBank went out with zero (over-trimmed), Noriel Ocampo / DOCOMO on 2026-04-22 shipped with four. Those were all one-way trims or skipped trims. Do not repeat them.
+- **Paragraphs mashed together.** If you insert with a single `insertParagraph` between paragraphs, `innerText` shows a single `\n` between them and the rendered email has no visible gap. Always two `insertParagraph` calls between paragraphs.
+- **Sending before verifying.** Clicking Send before running the preview check has burned real prospect outreach multiple times. Do the preview check every single email, even if the previous 9 looked fine.
+- **Signature dup.** Typing `Best,` or `Andy` at the bottom of the body produces a doubled sign-off. The queue body never contains a sign-off. Respect that and insert only what's there.
+- **Draft left in Sent Items on a failed Send.** If the Send click is intercepted by a Discard dialog, the compose closes without actually sending but leaves a `[Draft]` entry in Sent Items. After every Send, confirm the Sent Items item does NOT have the `[Draft]` prefix before marking the queue entry as `sent`.

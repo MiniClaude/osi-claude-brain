@@ -429,14 +429,43 @@ Subject line: Short, specific, not flaggable as spam. You decide based on the ta
 
 Subject: RE: [same subject as Email 1]
 
-Body:
+Email 2 content BRANCHES by Email 1 archetype. Do NOT write "Any thoughts?" for every sequence. That bump only works when Email 1 asked a one-line logistics question. For consultative pitches it lands weak and wastes the touch.
+
+**How to classify Email 1:**
+- Look at the body. If it contains any of: "sample", "swag", "Do you come into the office", "is there a better address to ship it to" → **sample-offer archetype** (Network SFP sequence, Server DIMM sequence, any Email 1 that asked for a shipping address).
+- Otherwise → **pain-led archetype** (TPM, DWDM, Storage, Pre-owned, or any consultative Email 1 that ended with "Worth X minutes?" or a similar conversation ask).
+
+**Archetype A — sample-offer Email 1:**
+
+Body is literally:
 > Any thoughts?
 
-Then quoted Email 1 in standard reply format:
+That's the whole thing. The prospect just needs to answer the shipping question. A longer Email 2 on a shipping ask looks like pressure.
+
+**Archetype B — pain-led Email 1:**
+
+Body is 2-3 sentences. Do NOT repeat Email 1's argument verbatim. Pick ONE of these moves:
+- **New data point on the same pain** — add a fresh stat, customer example, or lead-time number that sharpens Email 1's hook.
+- **Adjacent pain on a related OSI product line** — if Email 1 was DWDM, open a door on optics supply or TPM. If Email 1 was servers, open a door on DIMMs or storage.
+- **Company signal that surfaced since Email 1** — a news item, a hire, an acquisition, a build announcement that makes the pitch more relevant now than two days ago.
+
+End with ONE concrete ask. Not "any thoughts?" Ask for a specific 15 minutes, a sample of a different product, a pointer to the right person, or a direct yes/no on a narrow question.
+
+Example (Email 1 pitched DWDM): "Most carriers in active buildout see OEM transport lead times stretch past a quarter by Q3. SmartOptics usually ships in weeks and runs 30 to 50% below Ciena or Nokia. Worth 15 minutes to compare it against what you have on order?"
+
+Example (Email 1 pitched TPM): "Heard Pensando maintenance is running 40% higher on renewal this cycle. We run multi-vendor TPM on Cisco, Dell, HP, and NetApp at roughly half OEM. Worth a quick look at what's coming off contract in the next two quarters?"
+
+Example (Email 1 pitched server refresh + DIMMs): "DDR4 DIMM pricing has softened another 15% since last month while DDR5 has not moved. If any of the refresh is going to workloads that don't need DDR5, we can save real budget on that line item. Want me to price out a sample config for your next rack?"
+
+**Both archetypes:**
+
+Then quoted Email 1 below in standard reply format:
 > On [Day 1 date], Andy McLean wrote:
 > [Full Email 1 text]
 
-No greeting. No sign-off. Just "Any thoughts?" and the quote.
+No greeting. No sign-off. Outlook signature handles the sign-off. Never type "Andy" at the bottom.
+
+When writing the entry to email-queue.json, the `body` field is: [new reply text] + "\n\n" + [quote marker line] + "\n" + [Full Email 1 text]. The osi-email-sender parses out everything before the quote marker and uses native Outlook Reply, so the quote marker itself is just a parse anchor, not what actually goes in the rendered email.
 
 ---
 

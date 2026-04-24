@@ -61,7 +61,8 @@ Also after the morning monitor when Andy's ready to work through follow-ups.
 
 **Excluded:**
 - Generic `"Send follow-up email"` tasks with empty `hs_task_body` — these are from `osi-outreach-sequence` and already have pre-scheduled Outlook drafts.
-- Tasks that already have a substantive draft in `hs_task_body` (anything more than `<p></p>` or empty). Preserve existing drafts; don't overwrite.
+
+**Overwrite rule:** Tasks that already have a draft in `hs_task_body` are NOT excluded. The skill always produces a fresh draft and overwrites whatever is there. Previous drafts (auto or manual) will be replaced. Andy's expectation: the draft in the task is always the current one, built from the latest HubSpot history and today's fresh-hook search. If Andy wants to preserve a specific draft, he sends the email (or marks the task complete) before re-running the skill.
 
 ---
 
@@ -90,11 +91,10 @@ search_crm_objects(
 
 ### Step 2 — Filter to drafting queue
 
-- **Draft queue:** tasks whose subject is NOT exactly "Send follow-up email" AND whose `hs_task_body` is empty or just `<p></p>`.
-- **Skip — sequence:** subject = "Send follow-up email" AND empty body (osi-outreach-sequence tasks).
-- **Skip — preserved:** `hs_task_body` already has substantive content (a previous draft).
+- **Draft queue:** every task whose subject is NOT exactly "Send follow-up email". Body content does not matter — empty bodies get a fresh draft, and existing drafts get overwritten with a fresh draft.
+- **Skip — sequence:** subject = "Send follow-up email" AND empty body (osi-outreach-sequence tasks). These have pre-scheduled Outlook drafts already; leave them alone.
 
-Report counts in the opening message.
+Report counts in the opening message: `drafted (fresh) | drafted (overwrote previous) | skipped (sequence)`.
 
 ### Step 3 — Dispatch parallel subagents
 
@@ -142,7 +142,7 @@ Give each agent this prompt (substitute the batch's task list):
 >
 > 6. **Draft a substantive 3–5 paragraph reply in Andy's voice** that weaves in **at least 2 specifics from your inventory**. Match the formality/length/tone of the most recent real reply from the contact. NEVER draft from the task title — it is stale reference only.
 >
-> 7. Write to `hs_task_body` via `manage_crm_objects` updateRequest, `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. **APPEND** after existing notes using `<hr>`. Never overwrite.
+> 7. Write to `hs_task_body` via `manage_crm_objects` updateRequest, `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. **OVERWRITE** the body with the fresh draft. Do not append, do not preserve the prior draft. The task body after this write should contain ONLY the fresh draft — nothing else. If the task had a previous draft, note that in the output status (`drafted (overwrote previous)`) but do not keep any of the prior content.
 >
 > **Draft format:**
 > ```
@@ -152,11 +152,11 @@ Give each agent this prompt (substitute the batch's task list):
 > Including the "Last engagement" line lets Andy see at a glance what the draft is anchored on — if it's stale or wrong, he can skip.
 >
 > **Edge cases:**
-> - Existing substantive body → SKIP + log "already has draft — preserved".
-> - No contact associated → write "NO CONTACT ASSOCIATED — manual review needed." to the task body.
-> - Contact exists but zero HubSpot engagements in last 12 months → write a short "circling back / worth reconnecting?" draft AND flag "⚠️ thin context — no recent HubSpot engagement" at the top.
+> - Existing body has a previous draft → overwrite it with the fresh draft. Status = `drafted (overwrote previous)`.
+> - No contact associated → write "NO CONTACT ASSOCIATED — manual review needed." to the task body (overwriting anything else there).
+> - Contact exists but zero HubSpot engagements in last 12 months → write a short "circling back / worth reconnecting?" draft AND flag "⚠️ thin context — no recent HubSpot engagement" at the top. Overwrite any prior content.
 >
-> **Output:** Table with columns: `Task ID | Contact | Company | Status (drafted/skipped/no-contact/thin-context) | Last engagement anchor (date + 1-line)`.
+> **Output:** Table with columns: `Task ID | Contact | Company | Status (drafted-fresh / drafted-overwrote / no-contact / thin-context) | Last engagement anchor (date + 1-line)`.
 
 ### Step 5 — Consolidate and report
 
@@ -168,8 +168,9 @@ Format exactly:
 EMAIL TASK DRAFTS -- [Day, Date]
 
 TASKS REVIEWED: [N]
-DRAFTED: [N]
-SKIPPED (already had draft): [N]
+DRAFTED (fresh): [N]
+DRAFTED (overwrote previous): [N]
+SKIPPED (sequence task): [N]
 NO CONTACT ASSOCIATED: [N]
 THIN CONTEXT (flagged): [N]
 
@@ -187,13 +188,13 @@ STATUS: [ALL CLEAR / ISSUES FOUND -- see flags above]
 
 Keep the summary under 25 lines. Andy works through drafts in HubSpot directly — the summary is a dispatch list, not a report.
 
-If zero tasks were drafted (everything skipped or no tasks due), end with one line: "No drafts needed today. [N] tasks already had drafts, [N] in outreach sequences."
+If zero tasks were drafted (no tasks due), end with one line: "No drafts needed today. [N] tasks in outreach sequences."
 
 ---
 
 ## Rules
 
-- Never overwrite an existing substantive draft. Append only, separated by `<hr>`.
+- Always overwrite existing drafts with a fresh one each run. The task body is never preserved or appended to; it is replaced entirely. If Andy hand-edited a prior draft and wanted to keep it, he would have sent it already.
 - Never invent specifics. If fewer than 2 are found, write thin-context fallback + flag.
 - HubSpot engagement history is the primary source for specifics. ONE targeted 30-day news web search is allowed per contact for a fresh hook. Never use Outlook search, LinkedIn, or ZoomInfo as drafting sources. Never run more than one web search per contact.
 - Never modify the task status. Andy marks tasks complete himself after sending.

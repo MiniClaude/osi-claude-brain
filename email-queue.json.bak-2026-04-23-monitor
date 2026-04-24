@@ -310,7 +310,7 @@
     "to": "james.weinheimer@rackspace.com",
     "subject": "OEM support line across the Rackspace DCs",
     "body": "Hi Jim,\n\nAt the VP DC ops level, OEM support is one of those line items that quietly grows every quarter. Rackspace engineering hiring is at its highest in a year so more gear lands under contract each renewal cycle.\n\nOSI does third party maintenance on Cisco, Dell, HP, and NetApp at 40 to 60% below OEM. Gartner recognized and privately owned with no PE parent.\n\nWorth a short call on what is coming off support in the next two quarters?",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-04-23",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -322,7 +322,7 @@
     "to": "james.weinheimer@rackspace.com",
     "subject": "RE: OEM support line across the Rackspace DCs",
     "body": "Any thoughts?\n\n---------- On May 5, Andy McLean wrote ----------\nHi Jim,\n\nAt the VP DC ops level, OEM support is one of those line items that quietly grows every quarter. Rackspace engineering hiring is at its highest in a year so more gear lands under contract each renewal cycle.\n\nOSI does third party maintenance on Cisco, Dell, HP, and NetApp at 40 to 60% below OEM. Gartner recognized and privately owned with no PE parent.\n\nWorth a short call on what is coming off support in the next two quarters?",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-04-27",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -334,7 +334,7 @@
     "to": "james.weinheimer@rackspace.com",
     "subject": "optics and DWDM budget lines",
     "body": "Hi Jim,\n\nShifting angles. Across the Rackspace DC footprint, optics and DC interconnect gear tend to be where OEM lead times and pricing quietly slip the budget.\n\nOSI is the largest global SmartOptics partner. We do coded transceivers across 40 plus OEM platforms and open line DWDM at 30 to 50% below Ciena and Nokia.\n\nWorth a conversation on whether any of that fits the roadmap?\n\n---------- On May 7, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-19",
+    "sendDate": "2026-05-01",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -346,7 +346,7 @@
     "to": "james.weinheimer@rackspace.com",
     "subject": "DDR5 exposure across new compute",
     "body": "Hi Jim,\n\nThe hiring ramp at Rackspace likely puts new compute across the DCs this year. DDR5 pricing out of the OEMs stays elevated through the next two quarters.\n\nOSI sources DIMMs direct from Samsung and Hynix with manufacturer warranty. Ships same day from 6,000 units on the bench.\n\nIs the next refresh batch worth a quick look?\n\n---------- On May 13, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-28",
+    "sendDate": "2026-05-11",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -358,7 +358,7 @@
     "to": "james.weinheimer@rackspace.com",
     "subject": "NetApp support windows on the older shelves",
     "body": "Hi Jim,\n\nRackspace storage likely carries NetApp at various generations. OEM walks away on support windows and the team keeps paying maintenance on gear that still runs clean for years.\n\nOSI does third party maintenance on NetApp with documented SLAs. Privately held so no quarterly margin pressure from a PE parent.\n\nIs storage support on your roadmap this year?\n\n---------- On May 25, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-06-04",
+    "sendDate": "2026-05-18",
     "sendTime": "2pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -370,7 +370,7 @@
     "to": "james.weinheimer@rackspace.com",
     "subject": "closing the file on this one",
     "body": "Jim,\n\nShould I close the file on this one, or is the timing just off?\n\n---------- On June 1, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-06-12",
+    "sendDate": "2026-05-27",
     "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -382,7 +382,7 @@
     "to": "jan.brooks@rackspace.com",
     "subject": "sample SFPs for your Rackspace links",
     "body": "Hi Jan,\n\nI am prepping a package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-04-23",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -394,7 +394,7 @@
     "to": "jan.brooks@rackspace.com",
     "subject": "RE: sample SFPs for your Rackspace links",
     "body": "Any thoughts?\n\n---------- On May 11, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-07",
+    "sendDate": "2026-04-27",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -406,7 +406,7 @@
     "to": "jan.brooks@rackspace.com",
     "subject": "spares on the Cisco side at Rackspace",
     "body": "Hi Jan,\n\nDifferent angle. If the Rackspace network group carries any Cisco that is coming off Smartnet, OSI runs a spares program with chassis and line cards on the shelf. OEM TPM is available on the same gear if that fits.\n\nWorth a short conversation?\n\n---------- On May 13, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-05-01",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -418,7 +418,7 @@
     "to": "jan.brooks@rackspace.com",
     "subject": "DDR5 on the next compute refresh",
     "body": "Hi Jan,\n\nThe Rackspace engineering ramp likely puts new compute online this year. DDR5 pricing out of the OEMs stays elevated for the next two quarters.\n\nWe source DIMMs direct from Samsung and Hynix with manufacturer warranty. Ships same day from 6,000 units on the bench.\n\nIs the next refresh batch worth a quick look?\n\n---------- On May 19, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-21",
+    "sendDate": "2026-05-11",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -430,7 +430,7 @@
     "to": "jan.brooks@rackspace.com",
     "subject": "third party support on the Cisco that is out of OEM",
     "body": "Hi Jan,\n\nIf any of the Cisco at Rackspace is out of OEM support or about to be, OSI covers third party maintenance on that gear. 40 to 60% below OEM rates with the same response windows. Gartner recognized and privately owned.\n\nDoes that fit the network side of the refresh?\n\n---------- On May 29, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-29",
+    "sendDate": "2026-05-18",
     "sendTime": "2pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -442,7 +442,7 @@
     "to": "jan.brooks@rackspace.com",
     "subject": "closing the file on this one",
     "body": "Jan,\n\nShould I close the file on this one, or is the timing just off?\n\n---------- On Jun 8, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-06-08",
+    "sendDate": "2026-05-27",
     "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -454,7 +454,7 @@
     "to": "eric.aitken@rackspace.com",
     "subject": "NetApp support across your Rackspace storage",
     "body": "Hi Eric,\n\nRunning Storage & Backup at Rackspace, NetApp is almost certainly in the stack at various generations. OEM walks away on support windows and the team keeps paying maintenance on shelves that still run clean for years.\n\nOSI does third party maintenance on NetApp with documented SLAs. Gartner recognized and privately owned, no PE parent and no quarterly margin pressure.\n\nWorth a short call on what is coming off OEM support in the next two quarters?",
-    "sendDate": "2026-04-29",
+    "sendDate": "2026-04-23",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -466,7 +466,7 @@
     "to": "eric.aitken@rackspace.com",
     "subject": "RE: NetApp support across your Rackspace storage",
     "body": "Any thoughts?\n\n---------- On May 26, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-01",
+    "sendDate": "2026-04-27",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -478,7 +478,7 @@
     "to": "eric.aitken@rackspace.com",
     "subject": "DDR5 on the backup compute side",
     "body": "Hi Eric,\n\nShifting to compute. The Rackspace engineering ramp likely puts new servers online this year supporting backup and recovery workloads. DDR5 pricing from the OEMs stays elevated through the next two quarters.\n\nOSI sources DIMMs direct from Samsung and Hynix with manufacturer warranty. Ships same day from 6,000 units on the bench.\n\nIs the next refresh batch worth a look?\n\n---------- On May 28, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-07",
+    "sendDate": "2026-05-01",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -490,7 +490,7 @@
     "to": "eric.aitken@rackspace.com",
     "subject": "optics on your storage network",
     "body": "Hi Eric,\n\nOn the network side of storage, optics tend to be where lead times and sparing quietly slip budgets. OSI is the largest global SmartOptics partner. We code transceivers for 40 plus OEM platforms from 1G up to 400G. Ships in weeks not months.\n\nWould a Plan B on the shelf for critical storage links help?\n\n---------- On Jun 3, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-15",
+    "sendDate": "2026-05-11",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -502,7 +502,7 @@
     "to": "eric.aitken@rackspace.com",
     "subject": "pre-owned NetApp for capacity expansion",
     "body": "Hi Eric,\n\nIf Rackspace is looking at capacity expansion on the storage side, OSI supplies pre-owned NetApp with OSI TPM on the same gear. Often a fraction of new OEM pricing.\n\nDoes that fit anything on the roadmap?\n\n---------- On Jun 15, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-22",
+    "sendDate": "2026-05-18",
     "sendTime": "2pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -514,7 +514,7 @@
     "to": "eric.aitken@rackspace.com",
     "subject": "closing the file on this one",
     "body": "Eric,\n\nShould I close the file on this one, or is the timing just off?\n\n---------- On Jun 22, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-06-02",
+    "sendDate": "2026-05-27",
     "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -526,7 +526,7 @@
     "to": "tina.rahaim@rackspace.com",
     "subject": "OEM spend optimization across Rackspace infrastructure",
     "body": "Hi Tina,\n\nOptimization and Transformation at global scale usually puts OEM maintenance renewals in your field of view. Rackspace engineering hiring is at a 12 month high so the maintenance line item is probably moving the wrong direction each quarter.\n\nOSI does third party maintenance on Cisco, Dell, HP, and NetApp at 40 to 60% below OEM. Gartner recognized and privately owned.\n\nWorth a short call on what is coming off support in the next two quarters?",
-    "sendDate": "2026-05-15",
+    "sendDate": "2026-04-23",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -538,7 +538,7 @@
     "to": "tina.rahaim@rackspace.com",
     "subject": "RE: OEM spend optimization across Rackspace infrastructure",
     "body": "Any thoughts?\n\n---------- On May 29, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-19",
+    "sendDate": "2026-04-27",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -550,7 +550,7 @@
     "to": "tina.rahaim@rackspace.com",
     "subject": "DDR5 on the next compute refresh",
     "body": "Hi Tina,\n\nShifting to compute. With the hiring ramp at Rackspace, new server capacity is likely landing this year. DDR5 pricing out of the OEMs stays elevated for the next two quarters.\n\nOSI sources DIMMs direct from Samsung and Hynix with manufacturer warranty. Ships same day from 6,000 units on the bench.\n\nWorth a look at the numbers on the next refresh?\n\n---------- On Jun 2, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-26",
+    "sendDate": "2026-05-01",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -562,7 +562,7 @@
     "to": "tina.rahaim@rackspace.com",
     "subject": "optics and DWDM across the DC footprint",
     "body": "Hi Tina,\n\nOn the DC interconnect side, optics and DWDM lines tend to be where OEM pricing and lead times quietly drain budget. OSI is the largest global SmartOptics partner and does open line DWDM at 30 to 50% below Ciena and Nokia.\n\nDoes that fit any optimization work on your plate?\n\n---------- On Jun 8, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-06-03",
+    "sendDate": "2026-05-11",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -574,7 +574,7 @@
     "to": "tina.rahaim@rackspace.com",
     "subject": "storage maintenance line item",
     "body": "Hi Tina,\n\nRackspace storage likely carries NetApp at various generations. OEM walks away on support windows and the team keeps paying maintenance on shelves that still run clean.\n\nOSI does third party maintenance on NetApp with documented SLAs. Privately held with no PE parent.\n\nIs storage maintenance a cost line worth reviewing?\n\n---------- On Jun 16, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-06-10",
+    "sendDate": "2026-05-18",
     "sendTime": "2pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -586,7 +586,7 @@
     "to": "tina.rahaim@rackspace.com",
     "subject": "closing the file on this one",
     "body": "Tina,\n\nShould I close the file on this one, or is the timing just off?\n\n---------- On Jun 24, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-06-18",
+    "sendDate": "2026-05-27",
     "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -1901,9 +1901,8 @@
     "body": "Hi Gary,\n\nRural telco transport is a spot where we have been helping a lot of teams lately. SmartOptics open line DWDM, 30 to 50% below Ciena and Nokia, and the footprint fits smaller offices.\n\nIf capacity or vendor pricing is pushing on you at all, worth a quick call?\n\nOn Wed, Apr 22, 2026, Andy McLean wrote:\n> Any thoughts?\n> \n> On Mon, Apr 20, 2026, Andy McLean wrote:\n> > Hi Gary,\n> > \n> > I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n> > \n> > Do you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-04-28",
     "sendTime": "12pm",
-    "status": "cancelled-bounce-2026-04-23",
-    "addedDate": "2026-04-18",
-    "bounceCancelDate": "2026-04-23"
+    "status": "pending",
+    "addedDate": "2026-04-18"
   },
   {
     "id": "gary-duttenhefer-consolidated-telcom-4",
@@ -1914,9 +1913,8 @@
     "body": "Hi Gary,\n\nOne more angle. We stock tested preowned Cisco and Juniper hardware and run third party maintenance at 40 to 60% under OEM.\n\nFor rural operators dealing with older gear, it is usually the cleanest way to stretch budget. Want the rundown?\n\nOn Tue, Apr 28, 2026, Andy McLean wrote:\n> Hi Gary,\n> \n> Rural telco transport is a spot where we have been helping a lot of teams lately. SmartOptics open line DWDM, 30 to 50% below Ciena and Nokia, and the footprint fits smaller offices.\n> \n> If capacity or vendor pricing is pushing on you at all, worth a quick call?",
     "sendDate": "2026-05-06",
     "sendTime": "1pm",
-    "status": "cancelled-bounce-2026-04-23",
-    "addedDate": "2026-04-18",
-    "bounceCancelDate": "2026-04-23"
+    "status": "pending",
+    "addedDate": "2026-04-18"
   },
   {
     "id": "gary-duttenhefer-consolidated-telcom-5",
@@ -1927,9 +1925,8 @@
     "body": "Hi Gary,\n\nQuick one on servers. We source Samsung and Hynix DIMMs direct, manufacturer warranties, priced well under Dell and HP.\n\nIf anything on the compute side is due for refresh, happy to send numbers. No call required.\n\nOn Fri, May 8, 2026, Andy McLean wrote:\n> Hi Gary,\n> \n> One more angle. We stock tested preowned Cisco and Juniper hardware and run third party maintenance at 40 to 60% under OEM.\n> \n> For rural operators dealing with older gear, it is usually the cleanest way to stretch budget. Want the rundown?",
     "sendDate": "2026-05-13",
     "sendTime": "2pm",
-    "status": "cancelled-bounce-2026-04-23",
-    "addedDate": "2026-04-18",
-    "bounceCancelDate": "2026-04-23"
+    "status": "pending",
+    "addedDate": "2026-04-18"
   },
   {
     "id": "gary-duttenhefer-consolidated-telcom-6",
@@ -1940,9 +1937,8 @@
     "body": "Hi Gary,\n\nShould I close the file on this one, or is the timing just off? No worries either way.\n\nOn Mon, May 18, 2026, Andy McLean wrote:\n> Hi Gary,\n> \n> Quick one on servers. We source Samsung and Hynix DIMMs direct, manufacturer warranties, priced well under Dell and HP.\n> \n> If anything on the compute side is due for refresh, happy to send numbers. No call required.",
     "sendDate": "2026-05-21",
     "sendTime": "3pm",
-    "status": "cancelled-bounce-2026-04-23",
-    "addedDate": "2026-04-18",
-    "bounceCancelDate": "2026-04-23"
+    "status": "pending",
+    "addedDate": "2026-04-18"
   },
   {
     "id": "juan-pardo-vtx1-companies-1",
@@ -2400,7 +2396,7 @@
     "to": "ed.martin@cinbell.com",
     "subject": "TPM for altafiber's DC fleet",
     "body": "Hi Ed,\n\nQuick one. Many DC Operations teams at regional telecoms use third party maintenance to cut OEM costs on gear that runs fine but carries premium support contracts from Cisco, HPE, or NetApp.\n\nWe're Gartner recognized and price significantly below OEM. Worth a quick conversation on what's coming up for renewal?",
-    "sendDate": "2026-04-29",
+    "sendDate": "2026-04-23",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -2412,7 +2408,7 @@
     "to": "ed.martin@cinbell.com",
     "subject": "RE: TPM for altafiber's DC fleet",
     "body": "Any thoughts?\n\nOn May 6, 2026, Andy McLean wrote:\n> Hi Ed,\n>\n> Quick one. Many DC Operations teams at regional telecoms use third party maintenance to cut OEM costs on gear that runs fine but carries premium support contracts from Cisco, HPE, or NetApp.\n>\n> We're Gartner recognized and price significantly below OEM. Worth a quick conversation on what's coming up for renewal?",
-    "sendDate": "2026-05-01",
+    "sendDate": "2026-04-27",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -2424,7 +2420,7 @@
     "to": "ed.martin@cinbell.com",
     "subject": "Server memory direct from Samsung",
     "body": "Hi Ed,\n\nAnother angle. We source DIMMs direct from Samsung and Hynix for DC teams dealing with memory cost pressure on server refresh cycles. DDR4 is still significantly cheaper than DDR5 for workloads that don't need the jump.\n\nHappy to price a small sample run if there's a BOM coming through.\n\nOn May 8, 2026, Andy McLean wrote:\n> Any thoughts?\n>\n> On May 6, 2026, Andy McLean wrote:\n> > Hi Ed,\n> >\n> > Quick one. Many DC Operations teams at regional telecoms use third party maintenance to cut OEM costs on gear that runs fine but carries premium support contracts from Cisco, HPE, or NetApp.\n> >\n> > We're Gartner recognized and price significantly below OEM. Worth a quick conversation on what's coming up for renewal?",
-    "sendDate": "2026-05-07",
+    "sendDate": "2026-05-01",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -2436,7 +2432,7 @@
     "to": "ed.martin@cinbell.com",
     "subject": "Refurbished gear on the shelf",
     "body": "Hi Ed,\n\nDifferent track. A lot of DC Ops teams at regional telecoms keep tested refurbished networking spares on the shelf as a break glass layer. Cisco, Juniper, Arista, and NetApp. All tested, all with OSI TPM available.\n\nWorth a look at what altafiber is carrying out of warranty right now?\n\nOn May 14, 2026, Andy McLean wrote:\n> Hi Ed,\n>\n> Another angle. We source DIMMs direct from Samsung and Hynix for DC teams dealing with memory cost pressure on server refresh cycles. DDR4 is still significantly cheaper than DDR5 for workloads that don't need the jump.\n>\n> Happy to price a small sample run if there's a BOM coming through.",
-    "sendDate": "2026-05-15",
+    "sendDate": "2026-05-11",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -2448,7 +2444,7 @@
     "to": "ed.martin@cinbell.com",
     "subject": "Break glass SFPs",
     "body": "Hi Ed,\n\nOne more quick angle. We also supply certified compatible optics for DC teams that want a Plan B on the shelf. If something fails and you can't wait two weeks for OEM, we usually ship next day.\n\nHappy to send a few complimentary SFPs your way. Any form factors you're running low on?\n\nOn May 26, 2026, Andy McLean wrote:\n> Hi Ed,\n>\n> Different track. A lot of DC Ops teams at regional telecoms keep tested refurbished networking spares on the shelf as a break glass layer. Cisco, Juniper, Arista, and NetApp. All tested, all with OSI TPM available.\n>\n> Worth a look at what altafiber is carrying out of warranty right now?",
-    "sendDate": "2026-05-22",
+    "sendDate": "2026-05-18",
     "sendTime": "2pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -2460,7 +2456,7 @@
     "to": "ed.martin@cinbell.com",
     "subject": "Closing the loop",
     "body": "Hi Ed,\n\nShould I close the file on this one, or is the timing just off?\n\nOn June 1, 2026, Andy McLean wrote:\n> Hi Ed,\n>\n> One more quick angle. We also supply certified compatible optics for DC teams that want a Plan B on the shelf. If something fails and you can't wait two weeks for OEM, we usually ship next day.\n>\n> Happy to send a few complimentary SFPs your way. Any form factors you're running low on?",
-    "sendDate": "2026-06-02",
+    "sendDate": "2026-05-27",
     "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -2617,7 +2613,7 @@
     "to": "valerie.kalti@altafiber.com",
     "subject": "AI infra at Altafiber",
     "body": "Hi Valerie,\n\nBuilding AI and automation infrastructure at a carrier means a lot of server and memory decisions. OSI Global supplies DIMMs direct from Samsung and Hynix with manufacturer warranty, well below OEM pricing.\n\nIs that on your radar as you scale the build out?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-04-23",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -2629,7 +2625,7 @@
     "to": "valerie.kalti@altafiber.com",
     "subject": "RE: AI infra at Altafiber",
     "body": "Any thoughts?\n\nOn Wed, May 27, 2026, Andy McLean wrote:\n> Hi Valerie,\n> Building AI and automation infrastructure at a carrier means a lot of server and memory decisions. OSI Global supplies DIMMs direct from Samsung and Hynix with manufacturer warranty, well below OEM pricing.\n> Is that on your radar as you scale the build out?",
-    "sendDate": "2026-05-07",
+    "sendDate": "2026-04-27",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -2641,7 +2637,7 @@
     "to": "valerie.kalti@altafiber.com",
     "subject": "Server refresh at Altafiber",
     "body": "Valerie,\n\nAlongside memory, we also move Dell and HP compute as an authorized partner, often below channel. If any of your AI workloads are pushing a server refresh, worth a look.\n\nAre you running Dell, HP, or a mix right now?\n\nOn Fri, May 29, 2026, Andy McLean wrote:\n> Any thoughts?\n> \n> On Wed, May 27, 2026, Andy McLean wrote:\n> > Hi Valerie,\n> > Building AI and automation infrastructure at a carrier means a lot of server and memory decisions. OSI Global supplies DIMMs direct from Samsung and Hynix with manufacturer warranty, well below OEM pricing.\n> > Is that on your radar as you scale the build out?",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-05-01",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -2653,7 +2649,7 @@
     "to": "valerie.kalti@altafiber.com",
     "subject": "Multi vendor maintenance",
     "body": "Hi Valerie,\n\nDifferent angle. We do third party maintenance on multi vendor environments, 40 to 60% below OEM. With Park Place and Service Express merging, a lot of IT leaders are benchmarking rates again.\n\nWorth a competitive bid at your next renewal?\n\nOn Thu, Jun 4, 2026, Andy McLean wrote:\n> Valerie,\n> Alongside memory, we also move Dell and HP compute as an authorized partner, often below channel. If any of your AI workloads are pushing a server refresh, worth a look.\n> Are you running Dell, HP, or a mix right now?",
-    "sendDate": "2026-05-21",
+    "sendDate": "2026-05-11",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -2665,7 +2661,7 @@
     "to": "valerie.kalti@altafiber.com",
     "subject": "Storage support for AI workloads",
     "body": "Valerie,\n\nOne more. We maintain NetApp and other storage platforms for IT teams carrying OEM costs on gear that has been running fine for years. If any storage is underpinning your AI stack, it usually qualifies.\n\nWant a quick benchmark against your current support spend?\n\nOn Mon, Jun 15, 2026, Andy McLean wrote:\n> Hi Valerie,\n> Different angle. We do third party maintenance on multi vendor environments, 40 to 60% below OEM. With Park Place and Service Express merging, a lot of IT leaders are benchmarking rates again.\n> Worth a competitive bid at your next renewal?",
-    "sendDate": "2026-05-29",
+    "sendDate": "2026-05-18",
     "sendTime": "2pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -2677,7 +2673,7 @@
     "to": "valerie.kalti@altafiber.com",
     "subject": "Close the file?",
     "body": "Should I close the file on this one, or is the timing just off?\n\nOn Mon, Jun 22, 2026, Andy McLean wrote:\n> Valerie,\n> One more. We maintain NetApp and other storage platforms for IT teams carrying OEM costs on gear that has been running fine for years. If any storage is underpinning your AI stack, it usually qualifies.\n> Want a quick benchmark against your current support spend?",
-    "sendDate": "2026-06-08",
+    "sendDate": "2026-05-27",
     "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3151,7 +3147,7 @@
     "to": "tprevost@agoc.com",
     "subject": "Quick sample from OSI",
     "body": "Hi Thomas,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-04-23",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3163,7 +3159,7 @@
     "to": "tprevost@agoc.com",
     "subject": "RE: Quick sample from OSI",
     "body": "Any thoughts?\n\nOn Wed, May 6, 2026 at 4:00 PM, Andy McLean <andy@osiglobal.com> wrote:\n> Hi Thomas,\n>\n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>\n> Do you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-07",
+    "sendDate": "2026-04-27",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3175,7 +3171,7 @@
     "to": "tprevost@agoc.com",
     "subject": "DWDM pricing for Armstrong's fiber footprint",
     "body": "Hi Thomas,\n\nGiven Armstrong's fiber footprint across PA and the surrounding region, I figured DWDM might be on your radar. We run open line systems on the SmartOptics platform at 30 to 50 percent below Ciena and Nokia. Ships in weeks.\n\nWorth a short look for anything on your roadmap?\n\nOn Fri, May 8, 2026 at 10:00 AM, Andy McLean <andy@osiglobal.com> wrote:\n> Any thoughts?\n>\n> On Wed, May 6, 2026 at 4:00 PM, Andy McLean <andy@osiglobal.com> wrote:\n> > Hi Thomas,\n> >\n> > I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n> >\n> > Do you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-05-01",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3187,7 +3183,7 @@
     "to": "tprevost@agoc.com",
     "subject": "Pre owned Cisco for break glass",
     "body": "Hi Thomas,\n\nDifferent angle. Do you carry Cisco or Juniper spares on the shelf? We stock tested pre owned gear with full OSI TPM available if the original comes off OEM support.\n\nUseful as insurance, or is that already covered?\n\nOn Thu, May 14, 2026 at 10:00 AM, Andy McLean <andy@osiglobal.com> wrote:\n> Hi Thomas,\n>\n> Given Armstrong's fiber footprint across PA and the surrounding region, I figured DWDM might be on your radar. We run open line systems on the SmartOptics platform at 30 to 50 percent below Ciena and Nokia. Ships in weeks.\n>\n> Worth a short look for anything on your roadmap?",
-    "sendDate": "2026-05-21",
+    "sendDate": "2026-05-11",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3199,7 +3195,7 @@
     "to": "tprevost@agoc.com",
     "subject": "Server memory from Samsung and Hynix",
     "body": "Hi Thomas,\n\nOne more. If Armstrong runs Dell or HP on the service side, we source DDR4 and DDR5 DIMMs direct from Samsung and Hynix. Manufacturer warranty at below OEM pricing. Zero impact on your service contract.\n\nWorth a sample for your spares kit?\n\nOn Tue, May 26, 2026 at 10:00 AM, Andy McLean <andy@osiglobal.com> wrote:\n> Hi Thomas,\n>\n> Different angle. Do you carry Cisco or Juniper spares on the shelf? We stock tested pre owned gear with full OSI TPM available if the original comes off OEM support.\n>\n> Useful as insurance, or is that already covered?",
-    "sendDate": "2026-05-29",
+    "sendDate": "2026-05-18",
     "sendTime": "2pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3211,7 +3207,7 @@
     "to": "tprevost@agoc.com",
     "subject": "Close the file?",
     "body": "Should I close the file on this one, or is the timing just off?\n\nOn Mon, Jun 1, 2026 at 10:00 AM, Andy McLean <andy@osiglobal.com> wrote:\n> Hi Thomas,\n>\n> One more. If Armstrong runs Dell or HP on the service side, we source DDR4 and DDR5 DIMMs direct from Samsung and Hynix. Manufacturer warranty at below OEM pricing. Zero impact on your service contract.\n>\n> Worth a sample for your spares kit?",
-    "sendDate": "2026-06-08",
+    "sendDate": "2026-05-27",
     "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -4135,7 +4131,7 @@
     "to": "salbert@hunterfiber.com",
     "subject": "OSI intro for Hunter",
     "body": "Hi Scott,\n\nQuick intro from Andy at OSI Global. We supply certified compatible optics to regional carriers, mostly as a secondary source when OEM lead times stretch or when something has to move fast.\n\nIs supply chain on transceivers something your team is dealing with right now?",
-    "sendDate": "2026-04-29",
+    "sendDate": "2026-04-23",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-19"
@@ -4147,7 +4143,7 @@
     "to": "salbert@hunterfiber.com",
     "subject": "RE: OSI intro for Hunter",
     "body": "Any thoughts?\n\nOn Apr 30, 2026, Andy McLean wrote:\n\n> Hi Scott,\n> \n> Quick intro from Andy at OSI Global. We supply certified compatible optics to regional carriers, mostly as a secondary source when OEM lead times stretch or when something has to move fast.\n> \n> Is supply chain on transceivers something your team is dealing with right now?",
-    "sendDate": "2026-05-01",
+    "sendDate": "2026-04-27",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-19"
@@ -4159,7 +4155,7 @@
     "to": "salbert@hunterfiber.com",
     "subject": "400G and ZR+ at Hunter",
     "body": "Scott, different angle. We supply open line DWDM gear and ZR/ZR+ coherent optics at 30 to 50% below Ciena and Nokia. Ships in weeks, not quarters.\n\nWorth a conversation for any capacity or fiber route buildouts on your roadmap?\n\nOn May 4, 2026, Andy McLean wrote:\n\n> Any thoughts?\n> \n> On Apr 30, 2026, Andy McLean wrote:\n> \n> > Hi Scott,\n> > \n> > Quick intro from Andy at OSI Global. We supply certified compatible optics to regional carriers, mostly as a secondary source when OEM lead times stretch or when something has to move fast.\n> > \n> > Is supply chain on transceivers something your team is dealing with right now?",
-    "sendDate": "2026-05-07",
+    "sendDate": "2026-05-01",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-19"
@@ -4171,7 +4167,7 @@
     "to": "salbert@hunterfiber.com",
     "subject": "OEM support costs",
     "body": "Scott, one more. A lot of carrier network teams are reviewing TPM to replace OEM support on gear that is running fine but coming off warranty. We cover most vendors, Cisco and Juniper included, at 40 to 60% below OEM.\n\nIs budget pressure on support renewals on your radar?\n\nOn May 8, 2026, Andy McLean wrote:\n\n> Scott, different angle. We supply open line DWDM gear and ZR/ZR+ coherent optics at 30 to 50% below Ciena and Nokia. Ships in weeks, not quarters.\n> \n> Worth a conversation for any capacity or fiber route buildouts on your roadmap?",
-    "sendDate": "2026-05-15",
+    "sendDate": "2026-05-11",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-19"
@@ -4183,7 +4179,7 @@
     "to": "salbert@hunterfiber.com",
     "subject": "Server memory pricing",
     "body": "Scott, last angle before I wrap. We source server memory direct from Samsung and Hynix with manufacturer warranties, priced well below OEM. DDR4 especially is a big spread.\n\nAnything on the compute side worth a quick look?\n\nOn May 18, 2026, Andy McLean wrote:\n\n> Scott, one more. A lot of carrier network teams are reviewing TPM to replace OEM support on gear that is running fine but coming off warranty. We cover most vendors, Cisco and Juniper included, at 40 to 60% below OEM.\n> \n> Is budget pressure on support renewals on your radar?",
-    "sendDate": "2026-05-22",
+    "sendDate": "2026-05-18",
     "sendTime": "2pm",
     "status": "pending",
     "addedDate": "2026-04-19"
@@ -4195,7 +4191,7 @@
     "to": "salbert@hunterfiber.com",
     "subject": "Should I close the file?",
     "body": "No worries if the timing is just off. Should I close the file on this one, or is there a better moment to circle back?\n\nOn May 26, 2026, Andy McLean wrote:\n\n> Scott, last angle before I wrap. We source server memory direct from Samsung and Hynix with manufacturer warranties, priced well below OEM. DDR4 especially is a big spread.\n> \n> Anything on the compute side worth a quick look?",
-    "sendDate": "2026-06-02",
+    "sendDate": "2026-05-27",
     "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-19"
@@ -4375,7 +4371,7 @@
     "to": "rnance@hunterfiber.com",
     "subject": "Transport costs on FTTH buildouts",
     "body": "Hi Robert,\n\nRunning a fiber ISP means the FTTH rollout only pencils if the transport side behaves. We work with regional carriers on open line DWDM that sits roughly 40 percent below Ciena and Nokia, ships in weeks, and stays clear of licensing tiers.\n\nWorth a quick call to see if it fits anything on your Hunter roadmap?",
-    "sendDate": "2026-05-19",
+    "sendDate": "2026-04-23",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-19"
@@ -4387,7 +4383,7 @@
     "to": "rnance@hunterfiber.com",
     "subject": "RE: Transport costs on FTTH buildouts",
     "body": "Any thoughts?\n\nOn May 6, 2026, Andy McLean wrote:\nHi Robert,\n\nRunning a fiber ISP means the FTTH rollout only pencils if the transport side behaves. We work with regional carriers on open line DWDM that sits roughly 40 percent below Ciena and Nokia, ships in weeks, and stays clear of licensing tiers.\n\nWorth a quick call to see if it fits anything on your Hunter roadmap?",
-    "sendDate": "2026-05-21",
+    "sendDate": "2026-04-27",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-19"
@@ -4399,7 +4395,7 @@
     "to": "rnance@hunterfiber.com",
     "subject": "Sample optics for your field team",
     "body": "Robert, quick one. We ship sample SFPs and coherent pluggables free to fiber ISPs so field ops has a Plan B on the shelf when an OEM lead time slips. Works on Cisco and Juniper platforms.\n\nCan I send a pair to Hunter to kick the tires?\n\nOn May 8, 2026, Andy McLean wrote:\nAny thoughts?\n\nOn May 6, 2026, Andy McLean wrote:\nHi Robert,\n\nRunning a fiber ISP means the FTTH rollout only pencils if the transport side behaves. We work with regional carriers on open line DWDM that sits roughly 40 percent below Ciena and Nokia, ships in weeks, and stays clear of licensing tiers.\n\nWorth a quick call to see if it fits anything on your Hunter roadmap?",
-    "sendDate": "2026-05-28",
+    "sendDate": "2026-05-01",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-19"
@@ -4411,7 +4407,7 @@
     "to": "rnance@hunterfiber.com",
     "subject": "OEM support renewals at Hunter",
     "body": "Hi Robert, one more angle. We do third party maintenance on Cisco and Juniper at 40 to 60 percent below OEM. A lot of carriers use us to trim the bill on gear that is already running fine and just needs break fix.\n\nAnything coming up on renewal?\n\nOn May 14, 2026, Andy McLean wrote:\nRobert, quick one. We ship sample SFPs and coherent pluggables free to fiber ISPs so field ops has a Plan B on the shelf when an OEM lead time slips. Works on Cisco and Juniper platforms.\n\nCan I send a pair to Hunter to kick the tires?",
-    "sendDate": "2026-06-05",
+    "sendDate": "2026-05-11",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-19"
@@ -4423,7 +4419,7 @@
     "to": "rnance@hunterfiber.com",
     "subject": "Server memory for Hunter back office",
     "body": "Robert, one last one. We source DDR4 and DDR5 DIMMs direct from Samsung and Hynix with manufacturer warranties, priced well below OEM. Most of our carrier customers use it to stretch their server refresh budget.\n\nWant a quick price check against whatever Dell or HP quoted you last?\n\nOn May 26, 2026, Andy McLean wrote:\nHi Robert, one more angle. We do third party maintenance on Cisco and Juniper at 40 to 60 percent below OEM. A lot of carriers use us to trim the bill on gear that is already running fine and just needs break fix.\n\nAnything coming up on renewal?",
-    "sendDate": "2026-06-12",
+    "sendDate": "2026-05-18",
     "sendTime": "2pm",
     "status": "pending",
     "addedDate": "2026-04-19"
@@ -4435,7 +4431,7 @@
     "to": "rnance@hunterfiber.com",
     "subject": "Close the file?",
     "body": "Should I close the file on this one, or is the timing just off?\n\nOn June 1, 2026, Andy McLean wrote:\nRobert, one last one. We source DDR4 and DDR5 DIMMs direct from Samsung and Hynix with manufacturer warranties, priced well below OEM. Most of our carrier customers use it to stretch their server refresh budget.\n\nWant a quick price check against whatever Dell or HP quoted you last?",
-    "sendDate": "2026-06-23",
+    "sendDate": "2026-05-27",
     "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-19"

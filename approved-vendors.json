@@ -1,10 +1,13 @@
 {
-  "last_updated": "2026-04-18",
+  "last_updated": "2026-04-22",
   "managed_by": "Andy \u2014 edit this file to add/remove",
   "approved_vendor_companies": [
     "Bell Canada",
+    "Broad Institute",
     "Desjardins",
-    "LG CNS"
+    "Forest River",
+    "LG CNS",
+    "Rackspace"
   ],
   "how_to_match": "Case-insensitive substring match against the prospect's company name. E.g., 'Desjardins Group' matches 'Desjardins'. Normalize whitespace and punctuation before matching.",
   "usage_rule": "If the prospect's company matches any entry in approved_vendor_companies, include one approved-vendor mention in Email 1 AND one more in Email 3 or Email 4 (Claude picks whichever fits the narrative best). Do NOT mention in every email."
