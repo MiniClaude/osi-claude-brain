@@ -5,19 +5,19 @@
   "companies": [
     {
       "name": "Midcontinent Communications, Inc.",
-      "status": "discovery_pending"
+      "status": "discovery_complete"
     },
     {
       "name": "Lingo Communications",
-      "status": "discovery_pending"
+      "status": "discovery_complete"
     },
     {
       "name": "Visionary Broadband",
-      "status": "discovery_pending"
+      "status": "discovery_complete"
     },
     {
       "name": "Cincinnati Bell",
-      "status": "discovery_pending"
+      "status": "discovery_complete"
     },
     {
       "name": "Armstrong Group of Companies",
@@ -85,22 +85,446 @@
       "verdict_reason": "Director Core IP & Transport at cable MSO \u2014 DWDM fit. Already queued via direct write to email-queue.json (emails 1-6 scheduled).",
       "addedDate": "2026-04-24",
       "processedDate": "2026-04-24"
+    },
+    {
+      "id": "steven-larson-midcontinent-communicatio",
+      "firstName": "Steven",
+      "lastName": "Larson",
+      "company": "Midcontinent Communications, Inc.",
+      "linkedinUrl": "https://www.linkedin.com/in/steven-larson-49a6433b/",
+      "title": "Network Engineer III at Midco",
+      "source": "linkedin_search",
+      "hubspotContactId": 564099,
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Network Engineer III at Midco cable MSO. Cisco SP VPN + automation certs. Reposted SCI Broadband acquisition. Network sequence (free SFP wedge) with DWDM, TPM, DIMMs as follow-on angles.",
+      "processedDate": "2026-04-25"
+    },
+    {
+      "id": "jeff-shields-midcontinent-communicatio",
+      "firstName": "Jeff",
+      "lastName": "Shields",
+      "company": "Midcontinent Communications, Inc.",
+      "linkedinUrl": "https://www.linkedin.com/in/jeff-shields-b17a087a/",
+      "title": "DOCSIS Engineer at Midco",
+      "source": "linkedin_search",
+      "hubspotContactId": 217792447652,
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "DOCSIS Engineer at Midco cable MSO (ZoomInfo title, 98% accuracy). Restricted profile (3rd degree). Active SCI Broadband network expansion. Network sequence (free SFP wedge) with DWDM/CIN, TPM, DIMMs as follow-on.",
+      "processedDate": "2026-04-25"
+    },
+    {
+      "id": "daniel-n-midcontinent-communicatio",
+      "firstName": "Daniel",
+      "lastName": "N.",
+      "company": "Midcontinent Communications, Inc.",
+      "linkedinUrl": "https://www.linkedin.com/in/daniel-n-9aa721160/",
+      "title": "Network Security Engineer I at Midco",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "no",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Network Security Engineer I at Midco \u2014 junior security role (firewalls/IDS/SIEM), not network infrastructure or optics buyer. Restricted profile, skills hidden. STOP-GATE applied.",
+      "processedDate": "2026-04-25"
+    },
+    {
+      "id": "todd-kruid-midcontinent-communicatio",
+      "firstName": "Todd",
+      "lastName": "Kruid",
+      "company": "Midcontinent Communications, Inc.",
+      "linkedinUrl": "https://www.linkedin.com/in/todd-kruid-23876010/",
+      "title": "Network Voice Engineer Professional at Midco",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "conditional",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Network Voice Engineer Professional at Midco \u2014 voice/telephony engineer (SBC, SIP, CUCM territory). Adjacent to OSI but not the primary optics/DWDM/TPM buyer at cable MSO. Restricted profile. STOP-GATE applied.",
+      "processedDate": "2026-04-25"
+    },
+    {
+      "id": "eric-tijerina-midcontinent-communicatio",
+      "firstName": "Eric",
+      "lastName": "Tijerina",
+      "company": "Midcontinent Communications, Inc.",
+      "linkedinUrl": "https://www.linkedin.com/in/eric-tijerina/",
+      "title": "Sr. Director of Access Network Engineering at Midco",
+      "source": "linkedin_search",
+      "hubspotContactId": 215131323140,
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Sr. Director of Access Network Engineering at Midco. Director-level pain-led DWDM opener. Owns access plant during SCI Broadband integration. Strong fit. 3rd Yes-with-email of batch.",
+      "processedDate": "2026-04-25"
+    },
+    {
+      "id": "jesse-tucker-midcontinent-communicatio",
+      "firstName": "Jesse",
+      "lastName": "Tucker",
+      "company": "Midcontinent Communications, Inc.",
+      "linkedinUrl": "https://www.linkedin.com/in/jesse-tucker6128/",
+      "title": "Network Engineer IV (DOCSIS) at Midco",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "joey-mackey-midcontinent-communicatio",
+      "firstName": "Joey",
+      "lastName": "Mackey",
+      "company": "Midcontinent Communications, Inc.",
+      "linkedinUrl": "https://www.linkedin.com/in/joey-mackey-969a8416/",
+      "title": "Network Engineer I-WI-FI at Midco",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "tony-fisher-midcontinent-communicatio",
+      "firstName": "Tony",
+      "lastName": "Fisher",
+      "company": "Midcontinent Communications, Inc.",
+      "linkedinUrl": "https://www.linkedin.com/in/tony-fisher-a270506/",
+      "title": "System Engineer at Midco",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "brennan-wellman-midcontinent-communicatio",
+      "firstName": "Brennan",
+      "lastName": "Wellman",
+      "company": "Midcontinent Communications, Inc.",
+      "linkedinUrl": "https://www.linkedin.com/in/brennan-wellman/",
+      "title": "Automation Engineer at Midco",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "brad-janzen-midcontinent-communicatio",
+      "firstName": "Brad",
+      "lastName": "Janzen",
+      "company": "Midcontinent Communications, Inc.",
+      "linkedinUrl": "https://www.linkedin.com/in/brad-janzen-3302917/",
+      "title": "Transport Engineering Supervisor at Midco",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "vannasouk-phimmasone-lingo-communications",
+      "firstName": "Vannasouk",
+      "lastName": "Phimmasone",
+      "company": "Lingo Communications",
+      "linkedinUrl": "https://www.linkedin.com/in/vannasoukphimmasone/",
+      "title": "Network Engineering Manager @ BullsEye - Lingo",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "james-mchale-lingo-communications",
+      "firstName": "James",
+      "lastName": "McHale",
+      "company": "Lingo Communications",
+      "linkedinUrl": "https://www.linkedin.com/in/james-mchale-a1763612a/",
+      "title": "Director of Solutions Engineering @ Lingo + BullsEye",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "john-lachance-lingo-communications",
+      "firstName": "John",
+      "lastName": "Lachance",
+      "company": "Lingo Communications",
+      "linkedinUrl": "https://www.linkedin.com/in/jlachance/",
+      "title": "Sr. Solutions Engineer at Lingo Communications",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "lee-veal-lingo-communications",
+      "firstName": "Lee",
+      "lastName": "Veal",
+      "company": "Lingo Communications",
+      "linkedinUrl": "https://www.linkedin.com/in/leeveal/",
+      "title": "System Administrator at Lingo Communications",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "kimberly-rodriguez-lingo-communications",
+      "firstName": "Kimberly",
+      "lastName": "Rodriguez",
+      "company": "Lingo Communications",
+      "linkedinUrl": "https://www.linkedin.com/in/kimberly-rodriguez-78b18126/",
+      "title": "Team Lead Network Administrator @ Lingo",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "lauren-matthews-lingo-communications",
+      "firstName": "Lauren",
+      "lastName": "Matthews",
+      "company": "Lingo Communications",
+      "linkedinUrl": "https://www.linkedin.com/in/lauren-n-matthews/",
+      "title": "Activations Engineer II at Lingo + BullsEye",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "keith-jones-lingo-communications",
+      "firstName": "Keith",
+      "lastName": "Jones",
+      "company": "Lingo Communications",
+      "linkedinUrl": "https://www.linkedin.com/in/keithfjones/",
+      "title": "Activations Engineer at Lingo + Bullseye Telecom",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "brian-r-visionary-broadband",
+      "firstName": "Brian",
+      "lastName": "R.",
+      "company": "Visionary Broadband",
+      "linkedinUrl": "https://www.linkedin.com/in/brian-r-611563128/",
+      "title": "Sr. Fiber Engineer @ Visionary Broadband",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "joseph-chavez-visionary-broadband",
+      "firstName": "Joseph",
+      "lastName": "Chavez",
+      "company": "Visionary Broadband",
+      "linkedinUrl": "https://www.linkedin.com/in/joseph-chavez-101591ab/",
+      "title": "Broadband access administrator at Visionary Broadband",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "colin-vesper-visionary-broadband",
+      "firstName": "Colin",
+      "lastName": "Vesper",
+      "company": "Visionary Broadband",
+      "linkedinUrl": "https://www.linkedin.com/in/colinvesper/",
+      "title": "Lead Network Engineer at Visionary Broadband",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "sarah-smith-visionary-broadband",
+      "firstName": "Sarah",
+      "lastName": "Smith",
+      "company": "Visionary Broadband",
+      "linkedinUrl": "https://www.linkedin.com/in/sarah-smith-pmp-31a93445/",
+      "title": "VP of Enterprise Performance at Visionary Broadband",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "preston-schilling-visionary-broadband",
+      "firstName": "Preston",
+      "lastName": "Schilling",
+      "company": "Visionary Broadband",
+      "linkedinUrl": "https://www.linkedin.com/in/preston-schilling-48921626/",
+      "title": "COO at Visionary Broadband",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "marvin-wineteer-visionary-broadband",
+      "firstName": "Marvin",
+      "lastName": "Wineteer",
+      "company": "Visionary Broadband",
+      "linkedinUrl": "https://www.linkedin.com/in/marvin-wineteer-95643b4/",
+      "title": "Network Administrator at Visionary Broadband",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "brian-shepherd-visionary-broadband",
+      "firstName": "Brian",
+      "lastName": "Shepherd",
+      "company": "Visionary Broadband",
+      "linkedinUrl": "https://www.linkedin.com/in/brshepherd/",
+      "title": "VP of Network Expansion Coordination at Visionary Broadband",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "sarah-frisbie-cincinnati-bell",
+      "firstName": "Sarah",
+      "lastName": "Frisbie",
+      "company": "Cincinnati Bell",
+      "linkedinUrl": "https://www.linkedin.com/in/sarahfrisbie1/",
+      "title": "Director of Network Engineering at altafiber",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "ryan-boyd-cincinnati-bell",
+      "firstName": "Ryan",
+      "lastName": "Boyd",
+      "company": "Cincinnati Bell",
+      "linkedinUrl": "https://www.linkedin.com/in/jc6zydjz/",
+      "title": "Network Engineer I @ altafiber",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "al-witschy-cincinnati-bell",
+      "firstName": "Al",
+      "lastName": "Witschy",
+      "company": "Cincinnati Bell",
+      "linkedinUrl": "https://www.linkedin.com/in/al-witschy-71b44a39/",
+      "title": "Platform Engineer at altafiber",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "scott-pennington-cincinnati-bell",
+      "firstName": "Scott",
+      "lastName": "Pennington",
+      "company": "Cincinnati Bell",
+      "linkedinUrl": "https://www.linkedin.com/in/scott-pennington-3b0670b/",
+      "title": "Network Engineer III at Cincinnati Bell",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "michael-willis-cincinnati-bell",
+      "firstName": "Michael",
+      "lastName": "Willis",
+      "company": "Cincinnati Bell",
+      "linkedinUrl": "https://www.linkedin.com/in/mikegwillis/",
+      "title": "Sr. Linux System Engineer altafiber",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "mike-wills-cincinnati-bell",
+      "firstName": "Mike",
+      "lastName": "Wills",
+      "company": "Cincinnati Bell",
+      "linkedinUrl": "https://www.linkedin.com/in/mike-wills-8626a35/",
+      "title": "Director - Transport and Voice Operations at altafiber",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "ron-beerman-cincinnati-bell",
+      "firstName": "Ron",
+      "lastName": "Beerman",
+      "company": "Cincinnati Bell",
+      "linkedinUrl": "https://www.linkedin.com/in/ron-beerman-a4407a2/",
+      "title": "Chief Network Officer at altafiber",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "steve-linde-cincinnati-bell",
+      "firstName": "Steve",
+      "lastName": "Linde",
+      "company": "Cincinnati Bell",
+      "linkedinUrl": "https://www.linkedin.com/in/steve-linde-20403140/",
+      "title": "Director, Procurement at altafiber",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "pending",
+      "addedDate": "2026-04-25"
     }
   ],
   "stagger": {
     "Midcontinent Communications, Inc.": {
-      "last_day1": "2026-04-27",
-      "person_count": 1
+      "last_day1": "2026-05-13",
+      "person_count": 4
     }
   },
   "log": {
-    "discovery_runs": [],
+    "discovery_runs": [
+      {
+        "taskId": "discovery-a-cable-msos",
+        "fired": "2026-04-25T03:17:48.692917",
+        "companies": [
+          "Midcontinent Communications, Inc.",
+          "Lingo Communications",
+          "Cincinnati Bell",
+          "Visionary Broadband"
+        ],
+        "candidates_added": 32,
+        "per_company": {
+          "Midcontinent Communications, Inc.": 10,
+          "Lingo Communications": 7,
+          "Visionary Broadband": 7,
+          "Cincinnati Bell": 8
+        }
+      }
+    ],
     "processing_runs": [
       {
         "taskId": "manual-interactive",
         "fired": "2026-04-24T22:30:00-04:00",
         "sequences_fired": 1,
         "note": "John Lubeck queued directly, bypass of Processing batch flow"
+      },
+      {
+        "taskId": "overnight-batch-04",
+        "fired": "2026-04-25T03:30:00-04:00",
+        "sequences_fired": 3,
+        "candidates_evaluated": 5,
+        "verdicts": {
+          "yes-with-email": 3,
+          "no": 1,
+          "conditional": 1
+        },
+        "note": "Steven Larson, Jeff Shields, Eric Tijerina queued. Daniel N. (Network Security Engineer I) marked no. Todd Kruid (Voice Engineer) marked conditional."
       }
     ]
   }

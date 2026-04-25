@@ -1,6 +1,6 @@
 ---
 name: osi-email-sender
-description: Send all due emails from C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json via Outlook. Runs 11am, 12pm, 1pm, 2pm, 3pm, 4pm ET weekdays.
+description: Send all due emails from C:\Claude-Brain\email-queue.json via Outlook. Runs 11am, 12pm, 1pm, 2pm, 3pm, 4pm ET weekdays.
 ---
 
 # 🛑 ABSOLUTE FIRST ACTION: VERIFY YOU ARE READING THE LIVE SKILL 🛑
@@ -27,7 +27,7 @@ This skill sends cold outreach to real, paying-potential customers. One bad form
 
 ```python
 import json
-QUEUE_PATH = 'C:/Users/Andy/OneDrive - OSI Hardware/Claude-Brain/email-queue.json'  # Live queue on OneDrive (real-time sync across laptops). Moved from C:/Claude-Brain/ on 2026-04-24.
+QUEUE_PATH = 'C:/Claude-Brain/email-queue.json'  # Live queue on OneDrive (real-time sync across laptops). Moved from C:/Claude-Brain/ on 2026-04-24.
 HARD_BLOCK_PATH = 'C:/Claude-Brain/hard-block.json'  # Hard-block list stays in Git (manually maintained, low churn)
 
 with open(QUEUE_PATH) as f:
@@ -123,7 +123,7 @@ If the queue body contains an em-dash, it is a bug in whichever skill wrote the 
 
 ### 1A. Select candidate entries
 
-Queue file: `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json`
+Queue file: `C:\Claude-Brain\email-queue.json`
 
 Moved to OneDrive on 2026-04-24 specifically so the queue auto-syncs in real time between Andy's two laptops. OneDrive is the live sync mechanism for this ONE file. The rest of Claude-Brain still lives in Git at `C:\Claude-Brain\`. Do not read or write any `C:\Claude-Brain\email-queue.json` path. If the OneDrive path is unreachable, ABORT. Do not fall back to Git.
 
@@ -152,7 +152,7 @@ If there are zero hits, say so explicitly in the report ("Hard-block scan: clean
 ```python
 import json
 from datetime import datetime
-with open('C:/Users/Andy/OneDrive - OSI Hardware/Claude-Brain/email-queue.json') as f: queue = json.load(f)
+with open('C:/Claude-Brain/email-queue.json') as f: queue = json.load(f)
 with open('C:/Claude-Brain/hard-block.json') as f: hb = json.load(f)
 blocked_addrs = {a['email'].lower() for a in hb.get('addresses', [])}
 blocked_domains = {d['domain'].lower() for d in hb.get('domains', [])}
@@ -388,7 +388,7 @@ After each successful send, set that entry's `status` to `sent` via a plain Pyth
 
 ```python
 import json, os, tempfile
-path = 'C:/Users/Andy/OneDrive - OSI Hardware/Claude-Brain/email-queue.json'
+path = 'C:/Claude-Brain/email-queue.json'
 with open(path) as f: q = json.load(f)
 for e in q:
     if e.get('id') == '<id>':

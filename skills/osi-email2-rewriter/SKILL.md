@@ -13,7 +13,7 @@ Sample-offer Email 2s (SFP sample, DIMM sample, shipping question) stay as `Any 
 
 ## Step 1: Pull today's candidate Email 2s
 
-Read `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json`. Select entries where ALL are true:
+Read `C:\Claude-Brain\email-queue.json`. Select entries where ALL are true:
 - `status == "pending"`
 - `sendDate == today (YYYY-MM-DD, ET)`
 - `sendTime == "11am"`
@@ -111,7 +111,7 @@ Atomic write, one entry at a time:
 
 ```python
 import json, os, tempfile
-path = 'C:/Users/Andy/OneDrive - OSI Hardware/Claude-Brain/email-queue.json'
+path = 'C:/Claude-Brain/email-queue.json'
 with open(path) as f: q = json.load(f)
 for e in q:
     if e.get('id') == '<id>':

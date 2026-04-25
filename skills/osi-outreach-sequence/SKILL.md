@@ -315,7 +315,7 @@ To add a company to the approved-vendor list, Andy edits `Claude-Brain/approved-
 
 Before any other work on this prospect, check the email queue. This prevents stacking duplicate sequences on the same person, which wrecks sender reputation and is bad form.
 
-Open `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json` using plain Python `open(path,'r')`. Scan every entry for a match:
+Open `C:\Claude-Brain\email-queue.json` using plain Python `open(path,'r')`. Scan every entry for a match:
 
 - Match by `to` field equal to the prospect's email address (case-insensitive), OR
 - Match by `prospectName` + `company` both matching the prospect's full name and company (case-insensitive)
@@ -488,7 +488,7 @@ When Andy says "sent": confirm, then schedule Emails 2-6 via email-queue.json.
 
 ### email-queue.json entry format
 
-Path: `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json`
+Path: `C:\Claude-Brain\email-queue.json`
 
 ```json
 {
@@ -510,7 +510,7 @@ Path: `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json`
 ```python
 import json, os
 
-QUEUE = r'C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json'
+QUEUE = r'C:\Claude-Brain\email-queue.json'
 
 with open(QUEUE, 'r') as f:
     queue = json.load(f)
@@ -677,7 +677,7 @@ Execute:
 2. Take first pending candidate.
 3. Invoke qualification Profile Mode (accepts linkedinUrl or name+company or hubspot_contact source).
 4. Update candidate status atomically.
-5. Branch on verdict. Yes-with-email: apply same-company stagger from state metadata, update LINKED_IN_CONNECT due_date, append 6 emails to C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json, append row to Tab 1 of prospects-tracker-new.xlsx, update stagger metadata in state file.
+5. Branch on verdict. Yes-with-email: apply same-company stagger from state metadata, update LINKED_IN_CONNECT due_date, append 6 emails to C:\Claude-Brain\email-queue.json, append row to Tab 1 of prospects-tracker-new.xlsx, update stagger metadata in state file.
 6. Continue until 3 outreach sequences fire OR queue has no pending.
 7. Append status line to overnight-run-log.md.
 ```
@@ -689,7 +689,7 @@ You are running the Wrap-up task for an OSI Global overnight run.
 
 Read C:\Claude-Brain\skills\osi-outreach-sequence\SKILL.md "Wrap-up task" section first.
 
-1. Read C:\Claude-Brain\overnight-candidates.json and C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json.
+1. Read C:\Claude-Brain\overnight-candidates.json and C:\Claude-Brain\email-queue.json.
 2. Tally per-company: prospects found, verdicts, sequences fired.
 3. Update C:\Claude-Brain\prospects-tracker-new.xlsx Tab 2 (Company Status).
 4. Write session log to C:\Claude-Brain\sessions\session-YYYY-MM-DD.md.
