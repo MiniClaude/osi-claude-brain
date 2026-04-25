@@ -62,3 +62,43 @@ Andy ping at 12:05 UTC ("what is happening?") — replied with status, batch con
 - **Skipped (logged here, not appended):** Drew Facio (VP Field Services), Dennis Durden (Director OSP Construction), Tamara Rosenberg (External Affairs), Jordan Pruett (SVP Strategy/Regulatory), Misti Willock / Manuel Frias / Scott Hearon / Ashley C. (sales/BD), Rob Wyatt (PM/New Construction), Corey Odom / Billy Edwards / Jacob Salgado (field/area construction managers).
 - **Status:** Resound Networks marked discovery_complete. Ready for Processing recurring runner.
 - **GIT WARN:** unstaged changes already on branch from concurrent Processing runs (CLAUDE.md, email-queue.json, overnight-candidates.json, overnight-run-log.md, prospects-tracker, both .skill files). Wrote state + log locally per skill failure-mode. Not pushing from this session to avoid clobbering parallel work.
+
+[2026-04-25 12:32 UTC] Processing Recurring batch — 3 of 3 sequences fired (cap reached). 10 candidates evaluated.
+  - John Lachance (Sr Solutions Engineer, Lingo) | Day 1 = 2026-04-27 | Network sample-offer | NEW HubSpot 217783919683 | jlachance@impacttelecom.com (98%) + (512) 635-1720
+  - Colin Vesper (Lead Network Engineer, Visionary Broadband) | Day 1 = 2026-04-27 | Network sample-offer w/ DWDM pivot | NEW HubSpot 217774992137 | cvesper@office.vcn.com (93%) + Wyoming direct/mobile
+  - Preston Schilling (COO, Visionary Broadband) | Day 1 = 2026-05-01 | Pain-led DWDM/transport (exec) | NEW HubSpot 217794530995 | pschilling@office.vcn.com (98%) + Wyoming direct/mobile
+Yes-no-email path (HubSpot package only): Vannasouk Phimmasone, James McHale (both 1st-degree LINKED_IN_CONNECT skipped), Lee Veal, Kimberly Rodriguez, Lauren Matthews, Keith Jones — all Lingo, ZoomInfo COMPANY_ONLY_MATCH. 6 contacts created with strategy notes + LI connect + 2 LI message tasks each.
+No / STOP-GATE: Brian R. (Visionary) → resolves to Brian Worthen, now CEO at Mammoth Networks (brian.worthen@mammothnetworks.com), no longer at Visionary. Worth a fresh-target candidate at Mammoth Networks if Andy wants.
+Stagger updates: Lingo Communications {last_day1: 2026-04-27, person_count: 1}; Visionary Broadband {last_day1: 2026-05-01, person_count: 2}.
+Queue: pending was 125 → now 115 pending. 18 emails appended to email-queue.json (now 499 entries total).
+Tab 1: 3 rows appended (339 John, 340 Colin, 341 Preston).
+Lingo wrapped (all 7 candidates processed). Visionary partial (3 of 7 processed; Joseph Chavez, Sarah Smith, Marvin Wineteer, Brian Shepherd remain pending for next fire).
+[2026-04-25 12:33 UTC] GIT WARN — .git/index.lock STILL stuck since 03:56 UTC (sandbox lacks delete perms — same as 05:16, 05:32, 07:26, 08:26, 09:24, 10:24, 11:25, 12:09, 12:10 fires). State + log + queue + Excel ALL persisted to disk locally. Andy: rm C:\Claude-Brain\.git\index.lock then git add . && git commit -m "Processing batches + all earlier discovery work" && git push. Other laptop will not see ANY changes from today (16+ discoveries + 7 processing sequences + 6 yes-no-email work) until lock cleared. CRITICAL — running uncommitted for 8.5+ hours.
+
+[2026-04-25 ~12:35 UTC] Discovery Mega (one-shot oneshot fire: osi-discovery-resound-oneshot). NO-OP.
+- Resound Networks already marked discovery_complete at 2026-04-25T12:11:39 with 10 candidates pending in queue.
+- Earlier-run discovery_notes preserved verbatim. M&A hook (HTZ Communications acquisition) and HubSpot ownership (Andy 196669355, JAM-owned, 1 contact Jeff Cortez) already captured.
+- No re-discovery performed (would create duplicate candidates). State file unchanged. Exiting clean.
+- 10 Resound candidates remain pending. Processing recurring runner will pick them up on next fire.
+
+[2026-04-25 14:26 UTC] Processing Recurring batch — 3 of 3 sequences fired (cap reached). 11 candidates evaluated.
+  - Sarah Frisbie (Director, Network Engineering, altafiber) | Day 1 = 2026-05-11 | Network sample-offer | Existing HubSpot 46214249386 | sarah.frisbie@altafiber.com (99%) + mobile (513) 565-0650
+  - Scott Pennington (Network Engineer III / Principal Platform Engineer, altafiber) | Day 1 = 2026-05-15 | Network sample-offer (re-engagement) | Existing HubSpot 138771300470 | scott.pennington@altafiber.com (91%)
+  - Ron Beerman (Chief Network Officer, altafiber) | Day 1 = 2026-05-21 | Pain-led exec DWDM (Lahaina + 2027 fiber hook, SmartOptics DCP vs Ciena/Nokia) | Existing HubSpot 3732051 | ron.beerman@altafiber.com (99%) + mobile (513) 608-7400
+Yes-no-email path (HubSpot package only): Brian Shepherd (VP Network Expansion Coordination, Visionary Broadband, 1st-degree). NEW HubSpot 217748709714 with strategy note + 2 LI message tasks (May 4 + May 18). LINKED_IN_CONNECT skipped (1st-degree). ZoomInfo FULL_MATCH but no email/phone.
+No / STOP-GATE: Joseph Chavez (Visionary, Broadband access admin, restricted 3rd-degree, no skills); Sarah Smith PMP (Visionary, VP Enterprise Performance = program mgmt, restricted).
+Conditional: Marvin Wineteer (Visionary, Network Admin, 7 connections only — can't verify); Ryan Boyd (altafiber, Network Engineer I = entry level, saturated account); Al Witschy (altafiber, Platform Engineer ambiguous); Michael Willis (altafiber, Sr Linux System Engineer, saturated account).
+Skipped-active-sequence: Mike Wills (altafiber, already in queue with Email 1 sent 2026-04-22).
+Stagger updates: Cincinnati Bell {last_day1: 2026-05-21, person_count: 3}.
+Queue: pending 115 → 104 pending. 18 emails appended to email-queue.json (now 517 entries total). Excel rows 342, 343, 344 (Frisbie, Pennington, Beerman).
+Visionary wrapped (all 7 candidates processed: Vesper, Schilling sequences in flight + Chavez/Smith no + Wineteer cond + Phimmasone/McHale/Lachance yes-no-email/already done + Brian Shepherd yes-no-email this fire). Cincinnati Bell partial (3 yes-with-email + 2 cond + 1 active-skip; 2 still pending: Steve Linde, Mike Wills already handled).
+GIT WARN — sandbox lacks .git/index.lock delete perms; state, queue, log, Excel all persisted to disk locally; not pushing from this session per concurrent-run discipline.
+
+[2026-04-25 16:21 UTC] Processing Recurring batch — 3 of 3 sequences fired (cap reached). 3 candidates evaluated.
+  - Stephen Linde (Director, Procurement, altafiber) | Day 1 = 2026-05-28 | Pain-led exec procurement angle | NEW HubSpot 217802520737 | stephen.linde@altafiber.com (85%) + direct (513) 397-7305 + mobile (513) 226-0060 | 1st-degree LinkedIn so LINKED_IN_CONNECT skipped. Cincinnati Bell stagger person 4.
+  - Justin Pastore (Senior Network and Security Engineer, Armstrong Group) | Day 1 = 2026-04-27 | Network sample-offer (free SFP wedge) | EXISTING HubSpot 539547 (phones reconciled: direct 256-8072, mobile 944-3600) | jpastore@agoc.com | 3rd-degree LI. 10+ years tenure, Cisco Networking Academy. Armstrong Group stagger person 1.
+  - Shawn Hillard (Manager, Network Operations, Armstrong Group) | Day 1 = 2026-05-01 | Network sample-offer (free SFP wedge) | EXISTING HubSpot 539438 (phones reconciled: direct 214-6901, mobile 996-3582) | shillard@agoc.com | 3rd-degree LI. 20-year NOC veteran since 2006. Armstrong stagger person 2.
+Queue: pending 104 → 101 (3 evaluated, all yes-with-email). 18 emails appended (now 535 total).
+Tab 1: 3 rows appended (345 Stephen, 346 Justin, 347 Shawn).
+Cincinnati Bell wrapped (all 4 yes-with-email + 3 cond + 1 active-skip; 0 pending). Armstrong batch started (2 of 16 candidates processed). 14 Armstrong candidates remain pending for next fire.
+[2026-04-25 16:21 UTC] GIT WARN — .git/index.lock STILL stuck since 03:56 UTC (sandbox lacks delete perms — same as 05:16, 05:32, 07:26, 08:26, 09:24, 10:24, 11:25, 12:09, 12:10, 12:33, 14:26 fires). State + log + queue + Excel ALL persisted to disk locally. Andy: rm C:\Claude-Brain\.git\index.lock then git add . && git commit -m "Processing batch 16:21 UTC" && git push. 19+ sequences uncommitted across the day.

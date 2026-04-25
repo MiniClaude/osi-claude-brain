@@ -241,9 +241,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/vannasoukphimmasone/",
       "title": "Network Engineering Manager @ BullsEye - Lingo",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": 217776681898,
+      "status": "yes-no-email",
+      "addedDate": "2026-04-25",
+      "processedDate": "2026-04-25T12:17:00Z",
+      "verdict_reason": "Network Engineering Manager at BullsEye-Lingo (post-merger telco). 1st-degree connection. ZoomInfo COMPANY_ONLY_MATCH \u2014 no email/phone. yes-no-email path: 2 LI message tasks created (1st 7d, 2nd 21d). Skipped LINKED_IN_CONNECT (already connected)."
     },
     {
       "id": "james-mchale-lingo-communications",
@@ -253,9 +255,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/james-mchale-a1763612a/",
       "title": "Director of Solutions Engineering @ Lingo + BullsEye",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": 217782688172,
+      "status": "yes-no-email",
+      "addedDate": "2026-04-25",
+      "processedDate": "2026-04-25T12:19:30Z",
+      "verdict_reason": "Director of Solutions Engineering at Lingo+BullsEye (1st-degree, DFW). ZoomInfo COMPANY_ONLY_MATCH \u2014 no email/phone. yes-no-email path: 2 LI message tasks created. Skipped LINKED_IN_CONNECT (already 1st-degree)."
     },
     {
       "id": "john-lachance-lingo-communications",
@@ -265,9 +269,13 @@
       "linkedinUrl": "https://www.linkedin.com/in/jlachance/",
       "title": "Sr. Solutions Engineer at Lingo Communications",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": 217783919683,
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "email": "jlachance@impacttelecom.com",
+      "day1": "2026-04-27",
+      "processedDate": "2026-04-25T12:23:00Z",
+      "verdict_reason": "Sr Solutions Engineer at Lingo (3rd-degree). ZoomInfo FULL_MATCH 98% accuracy: jlachance@impacttelecom.com (legacy Lingo brand domain) + mobile (512) 635-1720. Network sample-offer sequence with TPM/DWDM/DIMM follow-on. 1st of 3 yes-with-email this fire."
     },
     {
       "id": "lee-veal-lingo-communications",
@@ -277,9 +285,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/leeveal/",
       "title": "System Administrator at Lingo Communications",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": 217791882632,
+      "status": "yes-no-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "System Administrator at Lingo (3rd-degree). ZoomInfo COMPANY_ONLY_MATCH. yes-no-email path: LI connect + 2 LI message tasks. Server/DIMM/TPM angle.",
+      "processedDate": "2026-04-25T12:27:30Z"
     },
     {
       "id": "kimberly-rodriguez-lingo-communications",
@@ -289,9 +299,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/kimberly-rodriguez-78b18126/",
       "title": "Team Lead Network Administrator @ Lingo",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": 217782360627,
+      "status": "yes-no-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Team Lead Network Administrator @ Lingo (IT Asset Mgmt + Endpoint Security, 3rd-degree). Strong fit. ZoomInfo COMPANY_ONLY_MATCH. yes-no-email path: LI connect + 2 LI message tasks. TPM + SFP angle.",
+      "processedDate": "2026-04-25T12:27:30Z"
     },
     {
       "id": "lauren-matthews-lingo-communications",
@@ -301,9 +313,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/lauren-n-matthews/",
       "title": "Activations Engineer II at Lingo + BullsEye",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": 217769626377,
+      "status": "yes-no-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Activations Engineer II @ Lingo+BullsEye (3rd-degree). Network provisioning, adjacent to buyer. ZoomInfo COMPANY_ONLY_MATCH. yes-no-email path: LI connect + 2 LI message tasks. SFP sample wedge.",
+      "processedDate": "2026-04-25T12:27:30Z"
     },
     {
       "id": "keith-jones-lingo-communications",
@@ -313,9 +327,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/keithfjones/",
       "title": "Activations Engineer at Lingo + Bullseye Telecom",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": 217802630245,
+      "status": "yes-no-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Activations Engineer @ Lingo+BullsEye (3rd-degree, 374 conns). Network provisioning. ZoomInfo COMPANY_ONLY_MATCH. yes-no-email path: LI connect + 2 LI message tasks. SFP sample wedge.",
+      "processedDate": "2026-04-25T12:27:30Z"
     },
     {
       "id": "brian-r-visionary-broadband",
@@ -326,8 +342,10 @@
       "title": "Sr. Fiber Engineer @ Visionary Broadband",
       "source": "linkedin_search",
       "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "no",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Brian R. resolves to Brian Worthen via ZoomInfo FULL_MATCH 99% \u2014 but he is now CEO at Mammoth Networks (brian.worthen@mammothnetworks.com), no longer at Visionary Broadband. STOP-GATE applied for Visionary queue. Worth a separate fresh-target candidate at Mammoth Networks if Andy wants.",
+      "processedDate": "2026-04-25T12:31:30Z"
     },
     {
       "id": "joseph-chavez-visionary-broadband",
@@ -338,8 +356,10 @@
       "title": "Broadband access administrator at Visionary Broadband",
       "source": "linkedin_search",
       "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "no",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Restricted 3rd-degree profile; title \"Broadband access administrator\" is ops/admin not engineering. 48 connections, no skills/activity visible. Default No per qualification skill restricted-profile rule.",
+      "processedDate": "2026-04-25"
     },
     {
       "id": "colin-vesper-visionary-broadband",
@@ -349,9 +369,13 @@
       "linkedinUrl": "https://www.linkedin.com/in/colinvesper/",
       "title": "Lead Network Engineer at Visionary Broadband",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": 217774992137,
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "email": "cvesper@office.vcn.com",
+      "day1": "2026-04-27",
+      "verdict_reason": "Lead Network Engineer at Visionary Broadband (3rd-degree, Gillette WY). ZoomInfo FULL_MATCH 93% \u2014 email cvesper@office.vcn.com + direct (307) 685-5523 + mobile (307) 680-7624. Network sample-offer sequence. 2nd of 3 yes-with-email this fire.",
+      "processedDate": "2026-04-25T12:31:30Z"
     },
     {
       "id": "sarah-smith-visionary-broadband",
@@ -362,8 +386,10 @@
       "title": "VP of Enterprise Performance at Visionary Broadband",
       "source": "linkedin_search",
       "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "no",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "VP of Enterprise Performance + PMP. Program/performance management role, not network engineering or infrastructure procurement. Restricted 3rd-degree profile \u2014 no skills visible to override.",
+      "processedDate": "2026-04-25"
     },
     {
       "id": "preston-schilling-visionary-broadband",
@@ -373,9 +399,13 @@
       "linkedinUrl": "https://www.linkedin.com/in/preston-schilling-48921626/",
       "title": "COO at Visionary Broadband",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": 217794530995,
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "email": "pschilling@office.vcn.com",
+      "day1": "2026-05-01",
+      "verdict_reason": "COO at Visionary Broadband (1st-degree, Gillette WY). ZoomInfo FULL_MATCH 98% \u2014 email pschilling@office.vcn.com + direct (307) 685-5545 + mobile (307) 689-3416. Pain-led DWDM/transport sequence. 3rd of 3 yes-with-email this fire \u2014 ceiling hit.",
+      "processedDate": "2026-04-25T12:31:30Z"
     },
     {
       "id": "marvin-wineteer-visionary-broadband",
@@ -386,8 +416,10 @@
       "title": "Network Administrator at Visionary Broadband",
       "source": "linkedin_search",
       "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "conditional",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Network Administrator title fits, but 3rd-degree profile with 7 connections and no visible skills/activity. Cannot verify scope or trajectory. Revisit if Andy wants to surface manually.",
+      "processedDate": "2026-04-25"
     },
     {
       "id": "brian-shepherd-visionary-broadband",
@@ -397,9 +429,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/brshepherd/",
       "title": "VP of Network Expansion Coordination at Visionary Broadband",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": "217748709714",
+      "status": "yes-no-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "1st-degree LinkedIn. VP Network Expansion Coordination (took role Jan 2026). Coordinator role across fiber buildout teams, FirstNet pedigree. ZoomInfo FULL_MATCH but no email/phone. HubSpot contact 217748709714 created with strategy note + 2 LI message tasks (May 4 + May 18). LINKED_IN_CONNECT skipped (1st-degree).",
+      "processedDate": "2026-04-25"
     },
     {
       "id": "sarah-frisbie-cincinnati-bell",
@@ -409,9 +443,12 @@
       "linkedinUrl": "https://www.linkedin.com/in/sarahfrisbie1/",
       "title": "Director of Network Engineering at altafiber",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": "46214249386",
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Director Network Engineering at altafiber, 1st-degree, 2 mutual. Existing HubSpot 46214249386 (Andy-owned, last contact 2024-08, clean re-engagement). ZoomInfo email confirmed sarah.frisbie@altafiber.com (99 percent). Sequence Day 1 = 2026-05-11. Network sample-offer.",
+      "processedDate": "2026-04-25",
+      "emailDay1": "2026-05-11"
     },
     {
       "id": "ryan-boyd-cincinnati-bell",
@@ -422,8 +459,10 @@
       "title": "Network Engineer I @ altafiber",
       "source": "linkedin_search",
       "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "conditional",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Network Engineer I (entry level), 1st-degree, CCNA + Nokia NRS I. Title-fit but junior. altafiber already saturated (6 sequences in flight including Director Frisbie). Revisit if Andy wants ground-level sample-SFP touchpoint.",
+      "processedDate": "2026-04-25"
     },
     {
       "id": "al-witschy-cincinnati-bell",
@@ -434,8 +473,10 @@
       "title": "Platform Engineer at altafiber",
       "source": "linkedin_search",
       "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "conditional",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Platform Engineer at altafiber, ambiguous (DevOps platform vs network platform). 1st-degree, only \"Congratulations!\" comments in activity. No skills visible to disambiguate. altafiber saturated. Revisit if Andy wants.",
+      "processedDate": "2026-04-25"
     },
     {
       "id": "scott-pennington-cincinnati-bell",
@@ -445,9 +486,12 @@
       "linkedinUrl": "https://www.linkedin.com/in/scott-pennington-3b0670b/",
       "title": "Network Engineer III at Cincinnati Bell",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": "138771300470",
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Senior IC at altafiber. LinkedIn shows Network Engineer III, HubSpot/ZoomInfo show Principal Platform Engineer (recent title change). 1st-degree, 3 mutuals. Last contact 2025-10-10 (re-engagement). Day 1 = 2026-05-15. Existing HubSpot 138771300470. ZoomInfo 91 percent: scott.pennington@altafiber.com.",
+      "processedDate": "2026-04-25",
+      "emailDay1": "2026-05-15"
     },
     {
       "id": "michael-willis-cincinnati-bell",
@@ -458,8 +502,10 @@
       "title": "Sr. Linux System Engineer altafiber",
       "source": "linkedin_search",
       "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "conditional",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Sr. Linux System Engineer at altafiber. Linux/server side, would fit DIMMs/server-compute angle. 1st-degree, 1 mutual (Todd). altafiber saturated (7+ sequences in flight after Frisbie + Pennington). Revisit if Andy wants compute angle pursued separately.",
+      "processedDate": "2026-04-25"
     },
     {
       "id": "mike-wills-cincinnati-bell",
@@ -470,8 +516,10 @@
       "title": "Director - Transport and Voice Operations at altafiber",
       "source": "linkedin_search",
       "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "skipped-active-sequence",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Already in email-queue.json with mike.wills@altafiber.com (Email 1 sent 2026-04-22, sequence in flight). Skipped per active-sequence-check rule.",
+      "processedDate": "2026-04-25"
     },
     {
       "id": "ron-beerman-cincinnati-bell",
@@ -481,9 +529,12 @@
       "linkedinUrl": "https://www.linkedin.com/in/ron-beerman-a4407a2/",
       "title": "Chief Network Officer at altafiber",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": "3732051",
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Chief Network Officer at altafiber. C-suite, top buyer/specifier. 1st-degree, 1 mutual (Todd). Active LinkedIn: Lahaina restoration talk at FiberConnect 2025. Existing HubSpot 3732051 from Feb 2024 (long re-engagement). ZoomInfo 99 percent: ron.beerman@altafiber.com. Pain-led exec opener. Day 1 = 2026-05-21.",
+      "processedDate": "2026-04-25",
+      "emailDay1": "2026-05-21"
     },
     {
       "id": "steve-linde-cincinnati-bell",
@@ -493,9 +544,13 @@
       "linkedinUrl": "https://www.linkedin.com/in/steve-linde-20403140/",
       "title": "Director, Procurement at altafiber",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": 217802520737,
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "email": "stephen.linde@altafiber.com",
+      "day1": "2026-05-28",
+      "processedDate": "2026-04-25T16:16:38Z",
+      "verdict_reason": "Director Procurement at altafiber, 10+ years climbing sourcing ladder, just promoted June 2025. Pain-led exec procurement angle. 1st-degree LinkedIn so LINKED_IN_CONNECT skipped."
     },
     {
       "id": "justin-pastore-armstrong-group-of-companies",
@@ -505,8 +560,13 @@
       "linkedinUrl": "https://www.linkedin.com/in/justin-pastore-39b79880",
       "title": "Senior Network and Security Engineer at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "hubspotContactId": 539547,
+      "email": "jpastore@agoc.com",
+      "day1": "2026-04-27",
+      "processedDate": "2026-04-25T16:19:44Z",
+      "verdict_reason": "Senior Network and Security Engineer at Armstrong cable MSO. 10+ years tenure, Cisco Networking Academy, climbed Tech Support to senior network/security combo. Network sample-offer + DWDM/TPM pivot. Existing HubSpot contact 539547, phones reconciled."
     },
     {
       "id": "shawn-hillard-armstrong-group-of-companies",
@@ -516,8 +576,13 @@
       "linkedinUrl": "https://www.linkedin.com/in/shawn-hillard-21509a37",
       "title": "Manager, Network Operations at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "hubspotContactId": 539438,
+      "email": "shillard@agoc.com",
+      "day1": "2026-05-01",
+      "processedDate": "2026-04-25T16:21:40Z",
+      "verdict_reason": "Manager Network Operations at Armstrong cable MSO. 20 years tenure since 2006. Pure NOC operator persona \u2014 perfect for SFP wedge. Existing HubSpot 539438, phones reconciled."
     },
     {
       "id": "rob-mikita-armstrong-group-of-companies",
@@ -1790,6 +1855,22 @@
     "Midcontinent Communications, Inc.": {
       "last_day1": "2026-06-09",
       "person_count": 7
+    },
+    "Lingo Communications": {
+      "last_day1": "2026-04-27",
+      "person_count": 1
+    },
+    "Visionary Broadband": {
+      "last_day1": "2026-05-01",
+      "person_count": 2
+    },
+    "Cincinnati Bell": {
+      "last_day1": "2026-05-28",
+      "person_count": 4
+    },
+    "Armstrong Group of Companies": {
+      "last_day1": "2026-05-01",
+      "person_count": 2
     }
   },
   "log": {
