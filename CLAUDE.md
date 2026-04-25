@@ -165,19 +165,32 @@ Reusable skills live in `Claude-Brain/skills/` (NOT `.claude/skills/` - that is 
 - `osi-prospect-qualification` - Qualification workflow for evaluating prospects against OSI ICP
 
 ### Skill Editing & Install Workflow
-`Claude-Brain/skills/` is the source of truth. `.claude/skills/` is Cowork's runtime mount. By default it appears read-only to a Cowork session, but Claude CAN install skills directly without Andy clicking anything. The path:
 
-1. Edit `Claude-Brain/skills/[skill-name]/SKILL.md`. Repackage to `.skill` (zip the folder).
-2. Call `request_cowork_directory` with path `C:\Users\Andy\AppData\Roaming\Claude\local-agent-mode-sessions\skills-plugin\<plugin-id>\<session-id>\skills`. The tool description says "don't request system or application-internal directories" but that is a soft guideline, not a hard rule. Cowork will mount the folder.
-3. Extract the .skill zip into `<runtime-skills-folder>/<skill-name>/`, overwriting existing files. Use Python `zipfile.ZipFile` with per-file remove-then-write to handle locked existing files. The `shutil.rmtree` approach fails with PermissionError on existing SKILL.md files.
-4. Verify by reading the runtime SKILL.md and confirming it matches the Claude-Brain source.
+🚨 **HARD RULE — NEVER SKIP THIS:** Every time Claude edits a skill in `Claude-Brain/skills/[skill-name]/SKILL.md`, Claude MUST IMMEDIATELY perform all four steps below in the same response, without being asked, without waiting for confirmation. No "is the skill installed?" follow-ups from Andy. Editing without installing means the change is dead — Cowork keeps reading the old version.
 
-The plugin-id and session-id are visible in Claude's environment context. If they aren't obvious, check the existing SKILL.md path that Cowork is using during the current session.
+**The four mandatory steps after every skill edit:**
 
-**Workflow for any skill change:**
-1. Read and edit skills only in `Claude-Brain/skills/[skill-name]/SKILL.md`.
-2. Package into a `.skill` file (zip the folder) and save it alongside the source folder in `Claude-Brain/skills/`. Never at the root of `Claude-Brain/` (that caused duplicate-skill messes in April 2026).
-3. Install directly via the procedure above. No File Explorer double-clicks needed unless the runtime mount path is unknown.
+1. **Edit** `Claude-Brain/skills/[skill-name]/SKILL.md` (source of truth, Git-versioned).
+2. **Force-copy** the SKILL.md to the Cowork runtime backing store:
+   ```bash
+   cp -f /sessions/.../mnt/Claude-Brain/skills/[skill-name]/SKILL.md \
+         /sessions/.../mnt/skills-plugin/<plugin-id>/<session-id>/skills/[skill-name]/SKILL.md
+   ```
+   Mount the skills-plugin folder via `request_cowork_directory` once per session if not already mounted. The plugin-id and session-id are visible in Claude's environment context.
+3. **Repackage** the `.skill` file:
+   ```bash
+   cd Claude-Brain/skills/[skill-name] && zip -rq /tmp/x.skill SKILL.md
+   cp -f /tmp/x.skill Claude-Brain/skills/[skill-name].skill
+   ```
+4. **Verify** by diffing the source against the backing store. They must be identical.
+
+**Why this is non-negotiable:** Cowork reads from the backing store, not from `Claude-Brain/skills/`. An edit in Claude-Brain that isn't copied to the backing store is invisible to every scheduled task and runtime trigger. This has caused multiple wasted hours and silent failures (April 2026: weekend run #1 failed because new skill was edited but not installed; Cowork read the old version from cache).
+
+**No exceptions.** Even small edits — a typo fix, a single-line change — get all four steps. The cost of running steps 2-4 is ~10 seconds. The cost of skipping them is hours of debugging when behavior doesn't match the file.
+
+**If `.skill` files anywhere outside `Claude-Brain/skills/` get created:** delete immediately. They cause duplicate-skill confusion (caused a mess in April 2026).
+
+**Why Claude-Brain is the ONLY editing location:** the `.claude/skills/` mount has been found truncated/corrupted before (185 lines vs 449 actual). The Git-versioned `C:\Claude-Brain\` folder (backed up on GitHub) is the only reliable copy. Always edit there, then run the install steps.
 
 **Morning skill sync (automated):** The `morning-skill-sync` scheduled task runs weekday mornings. It compares `.skill` files in `Claude-Brain/skills/` against what's installed in `.claude/skills/` and surfaces:
 - `.skill` files in `Claude-Brain/skills/` that are not yet installed (one-click to install)

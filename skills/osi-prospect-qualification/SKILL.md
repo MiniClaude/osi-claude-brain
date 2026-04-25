@@ -357,15 +357,23 @@ Create:
 - Notes: LinkedIn invite text (under 300 chars, references Personal Hook, no pitch, no mutual connections).
 - Owner: 196669355.
 
-### Step 4: If no email AND no phone — LinkedIn fallback tasks
+### Step 4: If NO email — LinkedIn fallback tasks (regardless of phone availability)
 
-**Duplicate-task check (MANDATORY):** query HubSpot for tasks on this contact. If any task with `hs_task_type = LINKED_IN_MESSAGE` AND `hs_task_status` `NOT_STARTED` or `IN_PROGRESS`, skip BOTH new tasks. Log: "Existing LinkedIn message task on HubSpot. No new tasks created." One active LinkedIn task = stop. Applies regardless of subject line.
+**Trigger:** ZoomInfo (or HubSpot for shallow path) did NOT return a valid business email. Phone availability is independent — if no email, create the LI tasks even if phone is available. The phone gets used in the call script (already in the strategy note).
+
+These tasks are IN ADDITION to LINKED_IN_CONNECT (which is always created for every ✅ Yes), not instead of.
+
+**Duplicate-task check (MANDATORY before either task):** query HubSpot for tasks on this contact. If any task with `hs_task_type = LINKED_IN_MESSAGE` AND `hs_task_status` `NOT_STARTED` or `IN_PROGRESS`, skip BOTH new tasks. Log: "Existing LinkedIn message task on HubSpot. No new tasks created." One active LinkedIn task = stop. Applies regardless of subject line.
 
 If duplicate check passes:
 - Task 1: `LINKED_IN_MESSAGE`, "1st LI -- [First Last] | [Company]", due 7 days. Notes: 1st LI message draft (3 sentences max).
 - Task 2: `LINKED_IN_MESSAGE`, "2nd LI -- [First Last] | [Company]", due 21 days. Notes: 2nd LI message draft (1-2 sentences).
 
-These are the COMPLETE plan for no-email prospects. Do NOT hand off to outreach.
+7 days + 21 days = the 2 InMails land 2 weeks apart.
+
+These tasks PLUS the LINKED_IN_CONNECT task PLUS the strategy note are the complete outreach plan for no-email prospects. Do NOT hand off to osi-outreach-sequence (no email = no sequence).
+
+**Yes-no-email candidate status in the queue:** mark `yes-no-email` so the Processing runner knows this candidate's outreach is complete and DOES NOT count toward the 3-yes-with-email-per-fire target. The runner continues evaluating the next pending candidate.
 
 ---
 

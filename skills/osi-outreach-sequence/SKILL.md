@@ -62,48 +62,92 @@ Auto Mode is overnight-only.
 
 ---
 
-## ARCHITECTURE — one recurring runner
+## ARCHITECTURE — two tasks, separate concerns
 
-Overnight = a single recurring task firing hourly. ONE task = ONE approval pool. Andy approves LinkedIn / HubSpot / ZoomInfo / Chrome ONCE on the first fire; all subsequent fires reuse.
+Overnight = exactly two scheduled tasks:
+
+1. **Discovery Mega** — ONE-TIME, fires once at kickoff. Hits ALL companies in a single fire. Heavy token. All candidates land in the queue. Then disables itself.
+2. **Processing Recurring** — fires every 2 hours. PURE Processing only. 3 sequences per fire. Light token, predictable. Runs until queue drains, then idles in wrap-up.
+
+Two tasks = two approval pools. Andy approves LinkedIn / HubSpot / ZoomInfo / Chrome ONCE on each task's first fire. All subsequent fires reuse.
+
+**Why split:** Discovery is bursty (one company = many candidates). Processing is steady (3 sequences/fire). Mixing them means Processing competes with Discovery for token budget and the backlog grows faster than it drains. Splitting keeps each task's load predictable.
 
 ### Kickoff (in-session, ~2 minutes)
 
 Triggered by Company or Auto Mode command. Andy at keyboard.
 
 1. Read existing `C:\Claude-Brain\overnight-candidates.json`. Preserve pending entries.
-2. Populate company list. Company Mode: Andy's named list. Auto Mode: cold-company selector output.
-3. Schedule (or update) ONE recurring task: `osi-overnight-runner-recurring`, cron `0 * * * *` (hourly).
-4. Done. Andy approves the schedule call once.
+2. Populate company list:
+   - **Company Mode:** Andy's named list, all marked `discovery_pending`.
+   - **Auto Mode:** run cold-company selector (HubSpot owned by Andy + 6+ months no activity + active-client filter + OSI fit check + queue-prevent filter), pick top **5** companies, mark `discovery_pending`.
+3. Schedule **Discovery Mega** as a one-time task firing in 2-5 minutes (or immediately via Run now).
+4. Schedule **Processing Recurring** as a recurring task, cron `0 */2 * * *` (every 2 hours, fires :00 of every other hour).
+5. Done. Andy approves both schedule calls.
 
 Kickoff does NOT do LinkedIn search, qualification, or outreach.
 
-### Recurring runner (hourly)
+### Discovery Mega — one-time, all companies in one fire
 
-Each fire opens `overnight-candidates.json` and routes:
+Prompt template:
 
-**Branch A — Discovery** (any company has status `discovery_pending`):
-- Pick FIRST one.
-- M&A check (web search for rebrand / acquisition).
-- HubSpot ownership check (JAM tree below).
-- Regular LinkedIn candidate search (NOT Sales Navigator). All keyword rounds. Paginate every page.
-- Append candidates to state file with status `pending`, source `linkedin_search`. Atomic write.
-- Update company status to `discovery_complete`.
-- Log status line. Exit.
+```
+You are running OSI Discovery Mega. Process ALL companies with status discovery_pending in C:\Claude-Brain\overnight-candidates.json.
 
-**Branch B — Processing** (no `discovery_pending`, candidates `pending`):
-- Take first pending.
-- Invoke `osi-prospect-qualification` Profile Mode (accepts linkedinUrl OR name+company OR `hubspot_contact` source).
-- Update candidate status atomically.
-- Branch by verdict:
-  - **No / Conditional:** STOP-GATE. No ZoomInfo, no HubSpot writes. Continue.
-  - **Yes-no-email:** qualification creates 2 LI fallback tasks. Doesn't count. Continue.
-  - **Yes-with-email:** qualification writes strategy note + LINKED_IN_CONNECT task. Then this skill: same-company stagger, append 6 emails to queue, append Tab 1 row, update LINKED_IN_CONNECT due_date, increment stagger metadata. **Counts as 1 of 3.**
-- Continue until 3 outreach fire OR no pending. Log status line. Exit.
+Read C:\Claude-Brain\skills\osi-outreach-sequence\SKILL.md and C:\Claude-Brain\skills\osi-prospect-qualification\SKILL.md first.
 
-**Branch C — Wrap-up** (queue fully drained):
-- Update Tab 2 of `prospects-tracker-new.xlsx`.
-- Append final status line to `overnight-run-log.md`.
-- Exit. Future fires also exit on Branch C until new work added.
+For EACH discovery_pending company in sequence:
+1. M&A check (web search for rebrand / acquisition).
+2. HubSpot ownership check (JAM tree).
+3. Regular LinkedIn candidate search (NOT Sales Nav). All keyword rounds, paginate every page. For HubSpot-rich accounts (existing customers / SQL leads with 8+ contacts), shortcut: pull strong-fit HubSpot contacts as source `hubspot_contact` instead of LinkedIn search — saves time, leverages curation.
+4. Append candidates to state file with status pending. Atomic write (.tmp + os.replace).
+5. Update company status to discovery_complete.
+6. Append status line to C:\Claude-Brain\overnight-run-log.md.
+
+When ALL companies marked discovery_complete, exit. Do NOT do Processing — that's the recurring task's job.
+
+Failure modes per skill: log to overnight-run-log.md, never silent. If a single company errors, log + skip + move on. Other companies still get done.
+```
+
+Token budget: heavy by design. Generous ceiling — Discovery Mega's whole job is one big concentrated burst.
+
+### Processing Recurring — every 2 hours, 3 sequences per fire
+
+Prompt template:
+
+```
+You are the OSI Processing Recurring runner. Fires every 2 hours. ONE TASK = ONE APPROVAL POOL.
+
+Read C:\Claude-Brain\skills\osi-outreach-sequence\SKILL.md and C:\Claude-Brain\skills\osi-prospect-qualification\SKILL.md first.
+
+Open C:\Claude-Brain\overnight-candidates.json. If missing: log alert to overnight-run-log.md, exit.
+
+PRIORITY (top to bottom):
+
+1. PROCESSING (any candidate status pending):
+   - Take first pending candidate.
+   - Invoke qualification Profile Mode (accepts linkedinUrl OR name+company OR hubspot_contact source).
+   - Update candidate status atomically: no / conditional / yes-no-email / yes-with-email.
+   - Branch:
+     - No / Conditional: STOP-GATE per qualification. Continue.
+     - Yes-no-email: qualification creates 2 LI fallback tasks. Doesn't count toward 3-slot limit. Continue.
+     - Yes-with-email: qualification writes strategy note + LINKED_IN_CONNECT task. Then this skill: same-company stagger from state metadata, append 6 emails to email-queue.json, append Tab 1 row, update LINKED_IN_CONNECT due_date, increment stagger metadata. Counts as 1 of 3.
+   - Continue until 3 outreach sequences fire OR no pending candidates remain.
+   - Log status line. Exit.
+
+2. WRAP-UP (no candidates pending — Discovery Mega has done its job and Processing has drained the queue):
+   - Update Tab 2 of prospects-tracker-new.xlsx with per-company summary.
+   - Final status line to overnight-run-log.md.
+   - Exit clean. Future fires also exit on wrap-up until new work added.
+
+Note: this runner does NOT do Discovery. If new companies are added mid-run with discovery_pending status, Andy must schedule a new Discovery Mega manually (or run Kickoff again).
+
+Token ceiling: 3 outreach sequences per fire. Hard limit. Finish current candidate cleanly and exit if approaching.
+
+Failure modes per skill: log to overnight-run-log.md, never silent. Retry once on transient failures.
+```
+
+Cron: `0 */2 * * *` — every 2 hours at :00 (Cowork adds ~9 min jitter).
 
 ### JAM ownership decision tree
 - Not in HubSpot → proceed.
@@ -182,7 +226,7 @@ Never use "vetted" / "pre-approved" / mention "procurement" in Email 1.
 
 ## Active Sequence Check — runs first
 
-Open `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json`. Match by `to` (email, case-insensitive) OR `prospectName` + `company`.
+Open `C:\Claude-Brain\email-queue.json`. Match by `to` (email, case-insensitive) OR `prospectName` + `company`.
 
 **Skip if any matched entry has:**
 - `status: "pending"`, OR
@@ -280,7 +324,7 @@ Show all 6 + call script + VM + LinkedIn invite + send schedule. End with: "Look
 
 ### email-queue.json entry
 
-Path: `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json`
+Path: `C:\Claude-Brain\email-queue.json`
 
 ```json
 {
@@ -301,7 +345,7 @@ Path: `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json`
 
 ```python
 import json, os
-QUEUE = r'C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json'
+QUEUE = r'C:\Claude-Brain\email-queue.json'
 with open(QUEUE, 'r') as f: queue = json.load(f)
 existing_ids = {e.get("id") for e in queue}
 queue.extend([e for e in new_entries if e["id"] not in existing_ids])

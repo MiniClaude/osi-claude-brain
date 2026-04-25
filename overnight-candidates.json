@@ -71,7 +71,9 @@
     },
     {
       "name": "Resound Networks",
-      "status": "discovery_pending"
+      "status": "discovery_complete",
+      "discovery_completed_at": "2026-04-25T12:11:39.192280Z",
+      "discovery_notes": "JAM-owned (Andy 196669355). 1 HubSpot contact on file (no shortcut). M&A: HTZ Communications acquisition (network planning/design boost across rural TX/AZ/CO/OK/AR/NM/KS). Founded 2015-2016, headquartered Pampa TX, 51-200 employees, fixed wireless ISP serving 500+ communities/5M+ homes across 8 states. 10 candidates added (CTO, transport director, network managers, VP wireless, VP software dev, senior + line network engineers)."
     }
   ],
   "candidates": [
@@ -166,9 +168,12 @@
       "linkedinUrl": "https://www.linkedin.com/in/jesse-tucker6128/",
       "title": "Network Engineer IV (DOCSIS) at Midco",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": "217781724059",
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "email": "jesse.tucker@midco.com",
+      "day1": "2026-05-28",
+      "processedDate": "2026-04-25T12:02:00Z"
     },
     {
       "id": "joey-mackey-midcontinent-communicatio",
@@ -179,8 +184,10 @@
       "title": "Network Engineer I-WI-FI at Midco",
       "source": "linkedin_search",
       "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "conditional",
+      "addedDate": "2026-04-25",
+      "reason": "Network Engineer I (WiFi) at Midco. Junior level + WiFi-specific niche. Not an optical/transport/server buying influence. Revisit if promoted or shifts roles.",
+      "processedDate": "2026-04-25T12:05:00Z"
     },
     {
       "id": "tony-fisher-midcontinent-communicatio",
@@ -190,9 +197,12 @@
       "linkedinUrl": "https://www.linkedin.com/in/tony-fisher-a270506/",
       "title": "System Engineer at Midco",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": "564828",
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "email": "tony.fisher@midco.com",
+      "day1": "2026-06-03",
+      "processedDate": "2026-04-25T12:08:00Z"
     },
     {
       "id": "brennan-wellman-midcontinent-communicatio",
@@ -203,8 +213,10 @@
       "title": "Automation Engineer at Midco",
       "source": "linkedin_search",
       "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "conditional",
+      "addedDate": "2026-04-25",
+      "reason": "Automation Engineer title too vague. Restricted 3rd-degree profile, no public skills, 26 LinkedIn connections (junior signal). ZoomInfo COMPANY_ONLY_MATCH (no contact record). Revisit if connection accepts and skills become readable.",
+      "processedDate": "2026-04-25T12:11:00Z"
     },
     {
       "id": "brad-janzen-midcontinent-communicatio",
@@ -214,9 +226,12 @@
       "linkedinUrl": "https://www.linkedin.com/in/brad-janzen-3302917/",
       "title": "Transport Engineering Supervisor at Midco",
       "source": "linkedin_search",
-      "hubspotContactId": null,
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "hubspotContactId": "217780773512",
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "email": "brad.janzen@midco.com",
+      "day1": "2026-06-09",
+      "processedDate": "2026-04-25T12:09:00Z"
     },
     {
       "id": "vannasouk-phimmasone-lingo-communications",
@@ -1659,12 +1674,122 @@
       "status": "pending",
       "addedDate": "2026-04-25",
       "note": "ACTIVE-SEQUENCE FILTER WARNING. Last contacted 2026-03-18 (~38 days ago, same day as Dave Jones \u2014 likely same outreach burst). Processing batch active-sequence dedup must verify before enroll. Conditional fit anyway (Product, not Network)."
+    },
+    {
+      "id": "chadd-giles-resound-networks",
+      "firstName": "Chadd",
+      "lastName": "Giles",
+      "company": "Resound Networks",
+      "linkedinUrl": "https://www.linkedin.com/in/chadd-giles-853b7536/",
+      "title": "CTO/Founder at Resound Networks",
+      "source": "linkedin_search",
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "chris-vainrib-resound-networks",
+      "firstName": "Chris",
+      "lastName": "Vainrib",
+      "company": "Resound Networks",
+      "linkedinUrl": "https://www.linkedin.com/in/chris-vainrib-b5681014/",
+      "title": "Director, RF Engineering and Transport at Resound Networks LLC",
+      "source": "linkedin_search",
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "jay-kapadia-resound-networks",
+      "firstName": "Jay",
+      "lastName": "Kapadia",
+      "company": "Resound Networks",
+      "linkedinUrl": "https://www.linkedin.com/in/kapadiajay/",
+      "title": "Manager Network Engineering at Resound Networks",
+      "source": "linkedin_search",
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "cole-giles-resound-networks",
+      "firstName": "Cole",
+      "lastName": "Giles",
+      "company": "Resound Networks",
+      "linkedinUrl": "https://www.linkedin.com/in/cole-giles-901381177/",
+      "title": "VP-Wireless Infrastructure at Resound Networks LLC",
+      "source": "linkedin_search",
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "chintan-mehta-resound-networks",
+      "firstName": "Chintan",
+      "lastName": "Mehta",
+      "company": "Resound Networks",
+      "linkedinUrl": "https://www.linkedin.com/in/chintanrashmikantmehta/",
+      "title": "Senior Network Engineer at Resound Networks",
+      "source": "linkedin_search",
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "jeff-cortez-resound-networks",
+      "firstName": "Jeff",
+      "lastName": "Cortez",
+      "company": "Resound Networks",
+      "linkedinUrl": "https://www.linkedin.com/in/jeff-cortez-a81a51131/",
+      "title": "Vice President of Software Development at Resound LLC / EP",
+      "source": "linkedin_search",
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "job-ruzvidzo-resound-networks",
+      "firstName": "Job",
+      "lastName": "Ruzvidzo",
+      "company": "Resound Networks",
+      "linkedinUrl": "https://www.linkedin.com/in/jobruzvidzo/",
+      "title": "Manager of Systems Performance Engineering at Resound Networks",
+      "source": "linkedin_search",
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "luke-hutchins-resound-networks",
+      "firstName": "Luke",
+      "lastName": "Hutchins",
+      "company": "Resound Networks",
+      "linkedinUrl": "https://www.linkedin.com/in/luke-hutchins-51724818a/",
+      "title": "Network Engineer at Resound Networks",
+      "source": "linkedin_search",
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "jorge-renteria-jr-resound-networks",
+      "firstName": "Jorge",
+      "lastName": "Renteria Jr",
+      "company": "Resound Networks",
+      "linkedinUrl": "https://www.linkedin.com/in/jorge-renteria-jr-a27848205/",
+      "title": "Network Engineer at Resound Networks",
+      "source": "linkedin_search",
+      "status": "pending",
+      "addedDate": "2026-04-25"
+    },
+    {
+      "id": "chad-staggs-resound-networks",
+      "firstName": "Chad",
+      "lastName": "Staggs",
+      "company": "Resound Networks",
+      "linkedinUrl": "https://www.linkedin.com/in/chad-staggs-831b8283/",
+      "title": "Network Engineer at Resound Networks",
+      "source": "linkedin_search",
+      "status": "pending",
+      "addedDate": "2026-04-25"
     }
   ],
   "stagger": {
     "Midcontinent Communications, Inc.": {
-      "last_day1": "2026-05-13",
-      "person_count": 4
+      "last_day1": "2026-06-09",
+      "person_count": 7
     }
   },
   "log": {
