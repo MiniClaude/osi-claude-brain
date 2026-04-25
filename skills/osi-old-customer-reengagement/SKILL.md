@@ -56,7 +56,7 @@ If Andy pastes a HubSpot record, extract fields directly. Do not press for histo
 
 Before any other work on this prospect, check the email queue. This prevents stacking duplicate sequences on the same person, which wrecks sender reputation and is bad form.
 
-Open `C:\Claude-Brain\email-queue.json` using the plain Python `open(path,'r')` (the file is on local disk now, not OneDrive). Scan every entry for a match with this prospect:
+Open `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json` using plain Python `open(path,'r')`. The queue lives on OneDrive as of 2026-04-24 so it auto-syncs between Andy's two laptops in real time. Scan every entry for a match with this prospect:
 
 - Match by `to` field equal to the prospect's email address (case-insensitive), OR
 - Match by `prospectName` + `company` both matching the prospect's full name and company (case-insensitive)
@@ -446,7 +446,7 @@ When Andy says "sent":
 
 ### Schedule Emails 2-5 via email-queue.json
 
-**Queue file:** C:\Claude-Brain\email-queue.json
+**Queue file:** C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json
 
 Each entry:
 
@@ -473,7 +473,7 @@ Example: `jane-smith-acme-oldcust-2`
 ```python
 import json, os
 
-QUEUE = r'C:\Claude-Brain\email-queue.json'
+QUEUE = r'C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json'
 
 with open(QUEUE, 'r') as f:
     queue = json.load(f)

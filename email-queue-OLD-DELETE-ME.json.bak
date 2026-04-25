@@ -1,0 +1,9 @@
+Old osi-monitor backup from 2026-04-23. Dead file.
+
+The live queue moved to C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json on 2026-04-24.
+
+Delete this file. Run in Git Bash:
+  cd /c/Claude-Brain
+  git rm email-queue-OLD-DELETE-ME.json.bak
+  git commit -m "Delete old monitor backup"
+  git push

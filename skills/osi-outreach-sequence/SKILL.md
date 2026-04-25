@@ -2,14 +2,17 @@
 name: osi-outreach-sequence
 description: >
   Fully automated outreach sequence for OSI Global prospects. Sends 6 emails via Outlook
-  (Email 1 at 4 PM ET, Email 2 at 11 AM, Email 3 at 12 PM, Email 4 at 1 PM, Email 5 at 2 PM, Email 6 at 3 PM — each email has its own dedicated window). Creates 7 call tasks in HubSpot (Days 9-31) plus LinkedIn
-  connection request task on Day 1. Runs interactively (Andy reviews before sending) or overnight
-  (fully automated). Triggers on: "run a sequence", "outreach sequence", "build a sequence for",
-  "run sequences for the following companies", pasting a LinkedIn profile, or uploading a profile
-  file. In Company Mode, finds and qualifies prospects at named companies then runs the full
-  sequence for each qualified person. In Auto Mode (no companies provided), pulls cold companies
-  from HubSpot owned by Andy with no activity in 6+ months and prospects those automatically.
-  Always use this skill for new prospect outreach.
+  (Email 1 at 4 PM ET, Email 2 at 11 AM, Email 3 at 12 PM, Email 4 at 1 PM, Email 5 at 2 PM,
+  Email 6 at 3 PM — each email has its own dedicated window). Creates LinkedIn connection
+  request task on Day 1. Runs in three modes: Interactive (Andy pastes one LinkedIn profile
+  and reviews before sending), Company (Andy names companies, run overnight), or Auto
+  (no companies named, Claude picks cold HubSpot companies owned by Andy with no activity
+  6+ months). Overnight runs use a four-task-type pipeline: Kickoff schedules the work,
+  Discovery tasks do LinkedIn candidate search per company, Processing batches qualify
+  and fire up to 3 sequences every 2 hours, Wrap-up task writes the summary. Triggers on:
+  "run a sequence", "outreach sequence", "build a sequence for", "run sequences for the
+  following companies", "run sequences tonight", pasting a LinkedIn profile, or uploading
+  a profile file. Always use this skill for new prospect outreach.
 ---
 
 > **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-outreach-sequence\` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub. If returning after days away, run `git pull` first to get the latest, then check the local Cowork copy and re-install the `.skill` file if the source has drifted.
@@ -26,177 +29,235 @@ This skill works in tandem with **osi-prospect-qualification**. The boundary bet
 |---|---|
 | Qualify (verdict Yes / No / Conditional) | osi-prospect-qualification |
 | Read the LinkedIn profile in full (About, Experience, Skills, activity / posts) | osi-prospect-qualification |
+| Resolve LinkedIn URL from name+company when URL not provided | osi-prospect-qualification |
+| Shallow qualify path for HubSpot-sourced contacts (title + ICP only) | osi-prospect-qualification |
 | ZoomInfo enrichment (email, direct phone, mobile) | osi-prospect-qualification |
-| Strategy note on HubSpot contact (keywords, call script, VM, The Play, Personal Hook, ENROLL IN CALLS SEQUENCE label) | osi-prospect-qualification |
-| `LINKED_IN_CONNECT` task creation (subject, type, owner, LinkedIn invite text in notes, provisional due_date = next business day) | osi-prospect-qualification |
-| `LINKED_IN_CONNECT` task **final due_date** (updated to match Email 1's Day 1 after same-company stagger math) | **osi-outreach-sequence** (this skill) |
-| No-email-no-phone LinkedIn message fallback tasks (1st LI, 2nd LI) | osi-prospect-qualification |
+| Strategy note on HubSpot contact | osi-prospect-qualification |
+| `LINKED_IN_CONNECT` task creation (provisional due_date) | osi-prospect-qualification |
+| No-email-no-phone LinkedIn message fallback tasks | osi-prospect-qualification |
+| Kickoff: write state file + schedule Discovery/Processing/Wrap-up tasks | **osi-outreach-sequence** (this skill) |
+| Auto Mode cold-company selection (when no companies named) | **osi-outreach-sequence** (this skill) |
+| Discovery task: LinkedIn candidate search for one or more companies | **osi-outreach-sequence** (this skill) |
+| Processing batch: consume pending candidates, fire up to 3 sequences | **osi-outreach-sequence** (this skill) |
+| Wrap-up task: Tab 2 Excel summary + session log | **osi-outreach-sequence** (this skill) |
+| `LINKED_IN_CONNECT` task final due_date (match Email 1's Day 1) | **osi-outreach-sequence** (this skill) |
 | Drafting the 6 emails | **osi-outreach-sequence** (this skill) |
 | email-queue.json writes and scheduling | **osi-outreach-sequence** (this skill) |
-| Same-company stagger math | **osi-outreach-sequence** (this skill) |
+| Same-company stagger math (from state metadata) | **osi-outreach-sequence** (this skill) |
 | Active sequence check (prevent duplicate enrollment) | **osi-outreach-sequence** (this skill) |
-| Excel tracker Tab 1 (Prospects) and Tab 2 (Company Status) | **osi-outreach-sequence** (this skill) |
+| Excel tracker Tab 1 (Prospects) | **osi-outreach-sequence** (this skill) — appended per sequence |
+| Excel tracker Tab 2 (Company Status) | **osi-outreach-sequence** Wrap-up task |
 
 ---
 
 ## 🛑 STOP IF NO EMAIL — this skill requires a valid email address
 
-This skill drafts and schedules 6 emails via email-queue.json. No email means no sequence. If ZoomInfo did not return a valid email for this prospect, STOP immediately. Do not run this skill. Qualification's no-email-no-phone LinkedIn message fallback tasks are the complete plan in that case.
+This skill drafts and schedules 6 emails via email-queue.json. No email means no sequence. If ZoomInfo did not return a valid email for this prospect, STOP immediately. Qualification's no-email-no-phone LinkedIn message fallback tasks are the complete plan in that case.
 
 ---
 
-## 📥 HANDOFF FROM osi-prospect-qualification — assumes qualification has already run
+## RUN MODES — three ways a run starts
 
-When this skill runs, it assumes osi-prospect-qualification has ALREADY completed on this prospect, which means:
+Modes describe how a run is triggered. Task types (next section) describe how any overnight run executes.
 
-- LinkedIn profile has already been read in full
-- ZoomInfo has already been run (email, direct phone, mobile captured)
-- Strategy note is already live on the HubSpot contact record
-- `LINKED_IN_CONNECT` task is already created with the LinkedIn invite text
+### Interactive Mode
 
-**Do NOT re-read LinkedIn. Do NOT re-run ZoomInfo. Do NOT re-write the strategy note. Do NOT re-create the LINKED_IN_CONNECT task.** Those are qualification's jobs.
+Triggered by: Andy pastes a single LinkedIn profile URL, or says "build a sequence for [Name]", or a short multi-prospect prompt where Andy is present at the keyboard.
 
-**One thing this skill DOES update on the existing LINKED_IN_CONNECT task: its due_date.** Qualification creates the task with a provisional due_date of "next business day." Once this skill calculates the final Day 1 for Email 1 (applying same-company stagger), it must update the LINKED_IN_CONNECT task's due_date to match. This is critical because Andy's workflow is synchronized: LinkedIn invite sent at 2 PM, call sequence enrollment, voicemail, then Email 1 auto-fires at 4 PM, all on the same day. If the LINKED_IN_CONNECT due_date and Email 1's Day 1 drift apart, the touches fire on different days and the coordinated attack breaks.
+Bypasses the overnight pipeline entirely. Qualification runs live, this skill drafts 6 emails, Andy reviews and clicks send on Email 1, then Emails 2-6 are queued. One prospect at a time.
 
-Implementation: after Email 1's final send date is locked in, call `manage_crm_objects` updateRequest on the LINKED_IN_CONNECT task and set `hs_timestamp` (the task due_date) to Email 1's Day 1 date. Do this before writing to email-queue.json so the task queue reflects the correct morning-of-Day-1 surface.
+### Company Mode
 
-If the strategy note is missing on the contact (or this skill was triggered directly without qualification running first), STOP and invoke osi-prospect-qualification Profile Mode first. Then continue here.
+Triggered by: "run sequences for the following companies: X, Y, Z" or similar multi-company overnight command.
 
-When running in Company Mode (Andy provides company names) or Auto Mode (cold HubSpot companies picked by Claude): the first step is always to invoke qualification's Company Mode per company. Qualification returns a ranked shortlist. This skill then runs per ✅ Yes prospect (with email found) in that list.
+Andy provides the company list. Kickoff writes those companies directly into the state file (`overnight-candidates.json`) with status `discovery_pending`. Discovery tasks, Processing batches, and Wrap-up run as scheduled.
+
+### Auto Mode
+
+Triggered by: "run sequences tonight" or "find me targets" with no specific company names.
+
+No company list from Andy. Kickoff runs the cold-company selector:
+1. Search HubSpot for companies with `hubspot_owner_id: 196669355` (Andy) where `notes_last_contacted` is 6+ months ago or never.
+2. **Active client filter:** for each cold company, search HubSpot for closed-won deals or deals in an active pipeline stage. If a deal is found, skip the company. Do NOT use Lifecycle Stage (often wrong). Log the skip with reason: `SKIPPED: [Company] — active client (deal found: [deal name])`.
+3. **OSI fit check:** confirm the company operates networking, telecom, data center, or IT infrastructure at relevant scale. Skip retail, food service, pure software, anything clearly outside OSI's ICP.
+4. **Queue-prevent filter:** skip any company with pending entries in email-queue.json (already in an active sequence for another contact).
+5. Rank remaining companies by OSI fit and pick the top N (default 3-4 for a one-night run, scalable up for multi-night runs).
+6. Write the picked companies into the state file with status `discovery_pending`. From this point, Auto Mode proceeds identically to Company Mode — same Discovery → Processing → Wrap-up pipeline.
+
+Auto Mode is overnight-only. Never runs during the daytime interactive flow.
 
 ---
 
-## Your job
+## TASK TYPES — four distinct task types, each on its own clock
 
-Andy has given you a LinkedIn profile. Produce the full outreach package: 6 personalized emails sent automatically via Outlook (each email has its own dedicated send window — Email 1 at 4 PM ET, Email 2 at 11 AM, Email 3 at 12 PM, Email 4 at 1 PM, Email 5 at 2 PM, Email 6 at 3 PM), 7 call tasks in HubSpot, and a LinkedIn connection request task on Day 1. Andy calls and sends the invite in the afternoon. Email 1 fires at 4 PM Eastern. Everything else runs itself.
+This is the core execution architecture used by both Company Mode and Auto Mode. Interactive Mode bypasses it.
 
-Read this entire skill before producing any output.
+### 1. Kickoff (in-session, Andy at keyboard, ~2 minutes)
+
+Triggered by: any Company Mode or Auto Mode command. Runs in the foreground while Andy is present.
+
+Kickoff does four things:
+1. **Read leftover `overnight-candidates.json` if present.** Pending entries carry into tonight's run.
+2. **Populate the company list.** In Company Mode, write Andy's pasted company list into the state file with status `discovery_pending`. In Auto Mode, run the cold-company selector (see Auto Mode section above) and write the selected companies into the state file.
+3. **Schedule Discovery tasks** (grouped 3-4 companies per task) staggered 30-60 minutes apart at the start of the run.
+4. **Schedule Processing batches** at 2-hour intervals across the overnight window, plus the Wrap-up task to fire 15 minutes after the last Processing batch.
+
+Kickoff does NOT do LinkedIn candidate search. That happens in Discovery tasks. Kickoff also does NOT do HubSpot writes beyond the Auto Mode company selection queries. Andy approves each `create_scheduled_task` call once at kickoff, then walks away.
+
+**Why this matters:** the old design crammed LinkedIn search into the in-session kickoff window. 17 companies × multiple keyword rounds × pagination = hours of browser work that never fit in 20 minutes. Discovery tasks solve that by moving heavy search to their own scheduled time slots.
+
+### 2. Discovery task (scheduled, heavy token budget, one per 3-4 companies)
+
+Each Discovery task receives a list of 3-4 company names in its prompt. It processes them sequentially:
+
+For each company in its prompt:
+1. **M&A check** — web search for recent acquisitions, rebrands. Update company name if needed.
+2. **HubSpot ownership check** — apply JAM decision tree. Skip other-rep companies with recent activity. Log other-rep with 3+ months no activity for account-request. Proceed on JAM-owned or not-in-HubSpot.
+3. **Regular LinkedIn candidate search** (NOT Sales Navigator — see qualification skill's TOOL CHOICE section). Run all keyword rounds: English priority titles, French keywords for Quebec companies, secondary titles if first round is thin. Paginate through every page of every search.
+4. **Append candidates** to `overnight-candidates.json`. Each candidate entry: `{id, firstName, lastName, company, linkedinUrl (optional), source: "linkedin_search", status: "pending", addedDate}`.
+5. **Append status line** to `Claude-Brain/overnight-run-log.md`: `[timestamp] Discovery [company] — N candidates found, M qualified titles, HubSpot ownership: [owner]`.
+6. **Update company status** to `discovery_complete` in the state file.
+7. Move to next company in the list.
+
+Discovery tasks do NOT qualify, enrich, write strategy notes, or fire emails. They only produce the candidate list.
+
+### 3. Processing batch (scheduled, LIGHT token budget, 3 sequences per fire)
+
+Each Processing batch fires every 2 hours. Its token ceiling is the 3 Yes-with-email outreach sequences per batch — this constraint is hard and never expands.
+
+On fire:
+1. Open `overnight-candidates.json`. If missing OR zero pending candidates: write alert line to `overnight-run-log.md` (`[timestamp] BATCH N FIRED WITH EMPTY QUEUE`). Exit.
+2. Take first candidate with status `pending`.
+3. Invoke `osi-prospect-qualification` Profile Mode.
+   - If candidate has `linkedinUrl`: use it directly.
+   - If candidate has only `firstName` + `lastName` + `company` (no URL): qualification resolves the URL via LinkedIn search first, then proceeds.
+   - If `source: "hubspot_contact"` and `hubspotContactId` present: qualification may take the shallow-qualify path (title + ICP check only).
+4. Update candidate's status to one of `no`, `conditional`, `yes-no-email`, `yes-with-email`. Atomic write the state file.
+5. Branch by verdict:
+   - **No / Conditional:** STOP-GATE per qualification skill. No ZoomInfo, no HubSpot writes, no tasks. Return to step 2 for next candidate.
+   - **Yes-no-email:** qualification creates 2 LI fallback tasks. Does NOT count toward 3 outreach slots. Return to step 2.
+   - **Yes-with-email:** qualification writes strategy note + LINKED_IN_CONNECT task. Then this skill: calculate Email 1 Day 1 using same-company stagger from state metadata, update LINKED_IN_CONNECT due_date, append 6 emails to email-queue.json, append entry to prospects-tracker-new.xlsx Tab 1, update stagger metadata in state file. This counts as 1 of 3 slots.
+6. Continue until 3 outreach sequences fire OR queue has no pending candidates.
+7. Append status line to `overnight-run-log.md`: `[timestamp] Batch N — K outreach fired, L candidates evaluated, queue P pending`.
+8. Exit.
+
+### 4. Wrap-up task (scheduled, fires after last Processing batch)
+
+One dedicated task. Runs once at end of overnight window.
+
+1. Read `overnight-candidates.json` and `email-queue.json`.
+2. Tally per-company: prospects found, verdicts, sequences fired.
+3. Update `Claude-Brain/prospects-tracker-new.xlsx` Tab 2 (Company Status): one row per company for this run with Status (Completed / Partial / Not Started), Prospects Found, Sequences Created, Notes.
+4. Write session log to `Claude-Brain/sessions/session-YYYY-MM-DD.md` summarizing the run: total candidates processed, total sequences fired, per-company breakdown, anything needing Andy's attention.
+5. Leave remaining `status: "pending"` candidates in the state file untouched. They carry into the next run.
+6. Append final status line to `overnight-run-log.md`.
+
+Tab 2 summary lives in the Wrap-up task, not the last Processing batch. Keeping it separate means if a Processing batch fails or times out, the summary still gets written.
 
 ---
 
-## MODES
+## STATE FILE SCHEMA — overnight-candidates.json
 
-This skill has three modes. All three assume osi-prospect-qualification runs on each candidate per the HANDOFF block above. This skill orchestrates WHEN qualification and outreach work happen, across time and across multiple scheduled sessions. Qualification's content (profile reads, verdict, note, LINKED_IN_CONNECT task creation) is NOT duplicated here; it lives in osi-prospect-qualification.
-
-### Interactive Mode — Andy at the keyboard, single or small batch
-
-**Triggered by:** Andy pastes a single LinkedIn profile, or says "build a sequence for [Name]", or a short multi-prospect prompt where Andy is present.
-
-1. Invoke osi-prospect-qualification Profile Mode on the prospect. Qualification produces verdict. If No or Conditional: STOP-GATE applies, end here.
-2. If Yes with email: qualification has written the strategy note and created the LINKED_IN_CONNECT task (with provisional due_date).
-3. This skill drafts the 6 emails and call script using the Personal Hook from the strategy note.
-4. Present everything to Andy for review.
-5. Andy says "ready."
-6. Open Outlook in Chrome with Email 1 pre-composed. Andy clicks Send himself.
-7. Andy says "sent."
-8. Calculate Email 1's final Day 1 (applying same-company stagger if others at this company are already in the queue).
-9. Update the LINKED_IN_CONNECT task's due_date to match Email 1's Day 1.
-10. Schedule Emails 2-6 via email-queue.json.
-
-**Batch size in Interactive Mode is flexible.** Andy can run 4-5 prospects in one session when he is watching.
-
-### Company Mode — Andy names companies, runs overnight or unattended
-
-**Triggered by:** "run sequences for the following companies: X, Y, Z" or similar multi-company prompts. Typically scheduled overnight while Andy sleeps.
-
-Company Mode splits work across two phases:
-
-#### PHASE 1 — Kickoff (Andy at the keyboard, roughly 10-20 minutes)
-
-##### Step 0 — Check for leftover queue from last night (ALWAYS runs first, before any search work)
-
-Before doing any company checks or LinkedIn searches, open `Claude-Brain/overnight-candidates.json` if it exists. Count entries where `status == "pending"` (candidates from a prior night's kickoff that never got processed). This is the leftover queue.
-
-**Leftover queue is the front of tonight's batch work, always.** New candidates from tonight's kickoff (if any) append to the back of the queue. This guarantees that unfinished work from last night never gets stranded and wasted.
-
-Decision tree based on leftover count and Andy's command:
-
-- **Leftover count is 0 or file doesn't exist:** fresh run. Build the queue from scratch per the command (named companies or Auto Mode).
-
-- **Leftover count is between 1 and (batch count × batch size, default 21):** combine. Leftover entries stay at the front of the queue. Fill the remaining slot capacity with new candidates.
-  - If Andy named companies: run steps 1-4 below on those companies and append their candidates to the back of the queue.
-  - If Andy did NOT name companies (Auto Mode trigger): run the Auto Mode selector (cold companies + active-client filter + OSI fit check + queue-prevent filter, per the Auto Mode section), pick enough companies to cover the remaining gap, and append their candidates.
-  - Goal: every overnight batch has work.
-
-- **Leftover count is >= (batch count × batch size):** do NOT search for more. The pending queue already saturates tonight's capacity. Skip steps 1-4 entirely and go straight to the pre-schedule step. Tell Andy: "Leftover queue from [date] has N pending candidates, enough to fill tonight's 7 batches. No new search performed."
-
-Never reset or archive the queue automatically. The only way to start entirely fresh is an explicit Andy command: "fresh run" or "reset queue and run overnight sequences for [companies]." On a fresh-run command, archive the existing file as `overnight-candidates-YYYY-MM-DD-archived.json` and rebuild from scratch.
-
-##### Step 1 onward — company-by-company search work (only runs if Step 0 decided to add new candidates)
-
-For each company Andy named (or Auto Mode selected) in Step 0's gap-fill:
-
-1. **M&A check** — search for recent acquisitions, mergers, rebrands. Update company name if needed.
-2. **HubSpot ownership check** — apply the JAM ownership decision tree. Skip other-rep companies with recent activity; log other-rep with 3+ months no activity for account-request; proceed on JAM-owned or not-in-HubSpot.
-3. **Regular LinkedIn candidate search** (NOT Sales Navigator — see qualification skill's TOOL CHOICE section). Run all keyword rounds: English priority titles, French keywords for Quebec companies, secondary titles if first round is thin. Paginate through every page of every search. Collect every candidate whose title or search-result card suggests IT / network / telecom relevance.
-4. **No profile reads at kickoff. No ZoomInfo at kickoff. No HubSpot contact writes at kickoff.** Just candidate names, LinkedIn URLs, and source company.
-
-Append all newly-collected candidates to the back of `Claude-Brain/overnight-candidates.json` (after any leftover entries from Step 0). Queue order: leftover company A, leftover company B, ..., new company A, new company B, ... Each entry:
+Path: `C:\Claude-Brain\overnight-candidates.json` (local, git-versioned).
 
 ```json
 {
-  "company": "Desjardins",
-  "firstName": "...",
-  "lastName": "...",
-  "linkedinUrl": "https://www.linkedin.com/in/.../",
-  "status": "pending"
+  "run_id": "2026-04-24-weekend",
+  "created": "2026-04-24T17:00:00-04:00",
+  "mode": "company",
+  "companies": [
+    {"name": "Midcontinent Communications, Inc.", "status": "discovery_pending"},
+    {"name": "Lingo Communications", "status": "discovery_pending"},
+    {"name": "Visionary Broadband", "status": "discovery_complete"}
+  ],
+  "candidates": [
+    {
+      "id": "john-lubeck-midcontinent",
+      "firstName": "John",
+      "lastName": "Lubeck",
+      "company": "Midcontinent Communications, Inc.",
+      "linkedinUrl": "https://www.linkedin.com/in/john-lubeck-abc123/",
+      "source": "linkedin_search",
+      "hubspotContactId": null,
+      "status": "yes-with-email",
+      "verdict_reason": "Director Core IP & Transport at cable MSO — DWDM fit",
+      "addedDate": "2026-04-24",
+      "processedDate": "2026-04-24"
+    }
+  ],
+  "stagger": {
+    "Midcontinent Communications, Inc.": {
+      "last_day1": "2026-04-27",
+      "person_count": 1
+    }
+  },
+  "log": {
+    "discovery_runs": [
+      {"taskId": "discovery-a", "fired": "2026-04-24T18:00:00-04:00", "companies": ["Midco", "Lingo"], "candidates_added": 23}
+    ],
+    "processing_runs": [
+      {"taskId": "batch-1", "fired": "2026-04-24T21:30:00-04:00", "sequences_fired": 0, "empty_queue": true}
+    ]
+  }
 }
 ```
 
-Then **pre-schedule identical batches at 2-hour intervals** across the overnight window. Use `mcp__scheduled-tasks__create_scheduled_task` for each batch. Every batch fires with the same prompt: "read `overnight-candidates.json`, work the pending candidates from the top, run until 3 Yes-with-email outreach sequences fire OR the queue is exhausted, then end." Andy approves each `create_scheduled_task` call once at kickoff (session-level "always allow"), then walks away.
+**`mode`:** `"company"` | `"auto"` — records which mode kicked off the run. Informational.
 
-**Default batch schedule:** 7 batches at 7 PM / 9 PM / 11 PM / 1 AM / 3 AM / 5 AM / 7 AM = up to 21 sequences launched overnight. Andy can change batch count or spacing with an explicit override in the kickoff prompt.
+**Company statuses:** `discovery_pending` → `discovery_complete`. No further change; candidates carry their own status.
 
-**Why pre-schedule rather than self-spawn?** Tested 2026-04-17. An orchestrator scheduled task attempting to create child scheduled tasks in an unattended session failed silently because each `create_scheduled_task` call required a fresh tool approval Andy wasn't present to give. Pre-scheduling all batches at kickoff (while Andy is at the keyboard) sidesteps that constraint entirely.
+**Candidate statuses:** `pending` → one of `no`, `conditional`, `yes-no-email`, `yes-with-email`, `skipped-active-sequence`, `pending-retry`.
 
-#### PHASE 2 — Per-batch (overnight, each batch fires on its clock)
+**Stagger metadata** (`stagger[company_name]`):
+- `last_day1`: ISO date of the most recent Email 1 Day 1 scheduled for this company in this run.
+- `person_count`: how many Yes-with-email sequences scheduled at this company so far. Determines whether the next stagger gap is 4 biz days or the 10-biz-day cooling gap at person 6.
 
-Each scheduled batch runs identical logic. It is fully self-contained:
+**Candidate source values:**
+- `linkedin_search`: discovered via LinkedIn people search in a Discovery task. Full deep qualify required.
+- `hubspot_contact`: pulled from HubSpot with verified email + title + company. Eligible for shallow qualify path.
 
-1. Read `overnight-candidates.json`.
-2. Take the first candidate with `status: "pending"`.
-3. Invoke osi-prospect-qualification Profile Mode on that candidate. Qualification does the full regular-LinkedIn profile read (About, Experience, Skills, activity feed) and forms the verdict.
-4. Update the candidate's status in the queue to one of: `"no"`, `"conditional"`, `"yes-no-email"`, `"yes-with-email"`. Write the queue file back (atomic: `.tmp` then `os.replace`).
-5. Branch by verdict:
-   - **No or Conditional:** STOP-GATE applies (qualification's rule — no ZoomInfo, no HubSpot contact, no strategy note, no tasks). Return to step 2.
-   - **Yes with no email after ZoomInfo:** qualification creates the LinkedIn fallback tasks (1st LI + 2nd LI). This does NOT count toward the 3 outreach slots. Return to step 2.
-   - **Yes with email:** qualification writes the strategy note and creates the LINKED_IN_CONNECT task (with provisional due_date). This skill takes over: draft 6 emails, calculate Email 1's final Day 1 with same-company stagger, update the LINKED_IN_CONNECT task's due_date to match, append 6 entries to email-queue.json. **This is slot 1 (or 2, or 3) of 3.**
-6. Continue evaluating candidates until 3 outreach sequences have fired OR the queue has no pending candidates remaining.
-7. End the batch.
-
-**Same-company stagger math** is applied by this skill at step 5 when calculating Email 1's Day 1. Persons 1-5 at the same company: 4 business days between consecutive Day 1 dates. Person 6: 10 business days after person 5. Persons 7+: back to 4 business days. Stagger is per-company across the entire email queue, not per-batch.
-
-**Final-batch responsibility:** the last batch of the night (by scheduled fire time) updates Tab 2 of the Excel tracker with the full run summary (company-by-company: Yes count / Sequences Fired / Pending count), writes a session log to `Claude-Brain/sessions/session-YYYY-MM-DD.md`, and cleans up any remaining `status: "pending"` candidates in `overnight-candidates.json` (leaves them marked `pending` for the next night's run).
-
-### Auto Mode — Claude picks cold companies, runs overnight
-
-**Triggered by:** "run sequences tonight" or "find me targets" with no specific company names.
-
-Identical to Company Mode, with three additional checks at the top of Phase 1 kickoff:
-
-1. **Cold-company selection.** Search HubSpot for companies owned by Andy (`hubspot_owner_id: 196669355`) with `notes_last_contacted` 6+ months ago or never contacted.
-2. **Active client filter (Auto Mode only).** For each cold company, search HubSpot for closed-won deals or deals in an active pipeline stage. Do NOT use Lifecycle Stage (often wrong). If a deal is found, skip the company and note why:
-> SKIPPED: [Company] — active client (deal found: [deal name]). Not prospected.
-3. **OSI fit check (Auto Mode only).** For each remaining cold company, confirm it operates networking, telecom, data center, or IT infrastructure at relevant scale. Skip retail, food service, pure software, anything clearly outside OSI's ICP.
-4. **Queue-prevent filter.** Filter out any company with pending entries in the email queue (already in an active sequence).
-5. Rank remaining companies by OSI fit and pick the top N (default 3-4 for a one-night run).
-6. From this point, Auto Mode proceeds identically to Company Mode Phase 1 step 1 onward (M&A check per selected company, HubSpot ownership per company, regular-LinkedIn search, build overnight-candidates.json, pre-schedule batches).
-
-**Auto Mode never runs during the daytime interactive flow.** It is overnight-only.
-
-Token efficiency in Company mode: qualify all prospects at a company first, then run sequences for the Yes prospects without re-displaying all the qualification reasoning. Keep output tight. Never print full emails in the chat — write them directly into the scheduled tasks and HubSpot note only.
+**Atomic writes — apply to every write of this file or email-queue.json:** always write to `.tmp` then `os.replace`. Never delete-then-write; that leaves a window where the file doesn't exist and any concurrent read gets a missing-file error.
 
 ---
 
-## TOOLS — owned by osi-prospect-qualification
+## FAILURE MODES — explicit, loud, never silent
 
-This skill does not directly use HubSpot for contact lookup, ZoomInfo for enrichment, or LinkedIn for profile research. Qualification owns all three. See the ownership table at the top of this file. Tools this skill DOES use: `mcp__scheduled-tasks__*` for batch scheduling, Outlook via Chrome for Email 1 composition in Interactive Mode, and Python file I/O for email-queue.json writes.
+### Queue file missing or unreadable
+Processing batch: write alert line to `overnight-run-log.md`: `[timestamp] BATCH N — queue file missing or unreadable at [path]`. Exit.
+Discovery task: create the file with empty candidates array, then proceed.
+
+### Queue has zero pending candidates
+Processing batch: write alert line: `[timestamp] BATCH N — empty queue (N total, 0 pending)`. Exit. Do NOT silently exit.
+
+### LinkedIn unreachable or rate-limited
+Discovery task: log the failure, move to next company in its list. Do not block subsequent companies.
+Processing batch: if qualification fails to read a profile after retry, mark candidate `conditional` with reason, move on. Next batch may retry.
+
+### ZoomInfo returns no data for a Yes verdict
+Qualification handles this — marks candidate `yes-no-email`, creates 2 LI fallback tasks. Does not count toward outreach slots. Processing batch continues.
+
+### HubSpot write fails on strategy note or task
+Log the failure, mark candidate `yes-with-email-hubspot-incomplete` with reason. Still queue the 6 emails (email-queue.json is the authoritative outreach record). Surface in wrap-up for Andy to review.
+
+### Discovery task aborts mid-company
+Company's status stays `discovery_pending`. Next Discovery task in the chain retries it (or a manual re-fire can target just that company).
+
+### Chrome not responsive in scheduled session
+Retry once after 30s. If still broken, log alert line and exit. Next batch fires clean.
+
+**The rule:** every failure writes a line to `overnight-run-log.md` with timestamp, task ID, and reason. No silent exits. If Andy opens that file Monday morning, he sees the full run history.
 
 ---
 
-## QUALIFICATION GATE — owned by osi-prospect-qualification
+## MID-RUN COMPANY ADDITIONS
 
-The verdict (Yes / No / Conditional) is formed by osi-prospect-qualification before this skill runs. If qualification did not return a Yes with email, this skill should never have been invoked. See the STOP IF NO EMAIL block at the top of this file.
+If Andy pastes additional companies during an active overnight run:
+
+1. Append new companies to `companies[]` array in `overnight-candidates.json` with status `discovery_pending`.
+2. Schedule a new Discovery task for them (grouped 3-4 per task) to fire in the next available discovery slot before Monday morning.
+3. Their candidates enter the same queue and get picked up by subsequent Processing batches automatically.
+
+The state file is the source of truth. If a company isn't in `overnight-candidates.json`, it doesn't get processed.
 
 ---
 
@@ -234,7 +295,7 @@ OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/appr
 
 **If the prospect's company matches an approved-vendor entry:**
 - **Email 1:** Include ONE line acknowledging approved-vendor status. Soft, peer-to-peer phrasing. Examples:
-  - "Side note — we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast."
+  - "Side note, we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast."
   - "For context, we're an approved vendor at [Company] already, so standing up a PO is painless if it comes to that."
 - **ONE other email — Email 3 or Email 4 — Claude picks whichever fits the narrative:** Brief reminder. One line. Example: "Quick reminder we're already approved at [Company] if timing matters."
 - **All other emails:** Do NOT mention approved-vendor status.
@@ -243,10 +304,10 @@ OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/appr
 - Do NOT mention approved-vendor status anywhere in the sequence. Do not invent it.
 
 **Phrasing rules:**
-- Never "vetted" or "pre-approved" — sounds like marketing. "Approved vendor" is the term.
-- Never mention "procurement" in Email 1 — telegraphs the sales motion. Just note we're on the list.
+- Never "vetted" or "pre-approved". "Approved vendor" is the term.
+- Never mention "procurement" in Email 1. Telegraphs the sales motion. Just note we're on the list.
 
-To add a company to the approved-vendor list, Andy edits `Claude-Brain/approved-vendors.json` directly and adds the company name to `approved_vendor_companies`.
+To add a company to the approved-vendor list, Andy edits `Claude-Brain/approved-vendors.json` directly.
 
 ---
 
@@ -254,7 +315,7 @@ To add a company to the approved-vendor list, Andy edits `Claude-Brain/approved-
 
 Before any other work on this prospect, check the email queue. This prevents stacking duplicate sequences on the same person, which wrecks sender reputation and is bad form.
 
-Open `C:\Claude-Brain\email-queue.json` using the plain Python `open(path,'r')` (the file is on local disk now, not OneDrive). Scan every entry for a match with this prospect:
+Open `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json` using plain Python `open(path,'r')`. Scan every entry for a match:
 
 - Match by `to` field equal to the prospect's email address (case-insensitive), OR
 - Match by `prospectName` + `company` both matching the prospect's full name and company (case-insensitive)
@@ -263,38 +324,23 @@ Open `C:\Claude-Brain\email-queue.json` using the plain Python `open(path,'r')` 
 - `status: "pending"` (already enrolled in an active sequence), OR
 - `status: "sent"` with a `sendDate` within the last 30 calendar days (sequence recently completed)
 
-Entries with status `paused-*`, `canceled-*`, or older `sent` (>30 days ago) do NOT block. Proceed normally in those cases, but note in the strategy note that a prior sequence completed on [date] so this run is effectively a re-engagement.
+Entries with status `paused-*`, `canceled-*`, or older `sent` (>30 days ago) do NOT block. Proceed normally, but note in the strategy note that a prior sequence completed on [date] so this run is effectively a re-engagement.
 
 **Skip behavior by mode:**
+- **Interactive mode:** Tell Andy: `SKIPPED: [First Last] at [Company] — [reason]. Override?`. Wait for explicit "override" before proceeding.
+- **Processing batch:** skip silently. Log to `overnight-run-log.md` with reason. Mark candidate status `skipped-active-sequence`. Continue to next candidate.
 
-- **Interactive mode:** Tell Andy:
-  > SKIPPED: [First Last] at [Company] — [reason: "already enrolled, N emails pending, next send [date]" OR "recent sequence completed [date]"]. Override?
-
-  Wait for explicit "override" from Andy before proceeding. Without override, stop and move on to the next prospect (batch mode) or end (single-prospect mode).
-
-- **Overnight / Auto / Company / Batch modes:** Skip silently. Log the skip to `Claude-Brain/prospects-tracker-new.xlsx` Tab 2 (Company Status) with status `SKIPPED - already enrolled` or `SKIPPED - recent sequence` and the reason in the Notes column. Continue to the next prospect.
-
-This check runs BEFORE HubSpot ownership check, ZoomInfo enrichment, or any research. Fail fast and cheap. Never stack a sequence on top of an active or recently completed one.
+This check runs BEFORE qualification starts any deeper research. Fail fast and cheap.
 
 ---
 
-## Step 1: HubSpot ownership + contact lookup — owned by osi-prospect-qualification
+## OUTREACH FLOW — what a Yes-with-email sequence looks like
 
-Qualification performs the HubSpot ownership check (JAM only: Andy 196669355, Mark 210187184, John 210187193) and the contact-exists check. Do not repeat here. If the prospect reached this skill, qualification already cleared ownership.
+This is the work done per Yes-with-email prospect, inside a Processing batch or in Interactive Mode. Qualification has already done its job (verdict, strategy note, LINKED_IN_CONNECT task, call script, VM, LinkedIn invite).
 
----
+### Step 1: Determine Sequence Type
 
-## Step 2: ZoomInfo enrichment — owned by osi-prospect-qualification
-
-Qualification runs `enrich_contacts` for email, direct phone, mobile. Do not repeat here. If the prospect reached this skill, the email field on the HubSpot contact is already populated.
-
-Same-company stagger math (used by this skill at Step 4) reads the email queue for prior Day 1 dates at the same company. That is an internal check of this skill's own output — not a ZoomInfo call.
-
----
-
-## Step 3: Determine Sequence Type
-
-Based on role, title, and company — pick one:
+Based on role, title, and company vertical — pick one:
 
 | Sequence | Target roles | Lead angle |
 |---|---|---|
@@ -305,102 +351,63 @@ Based on role, title, and company — pick one:
 | Storage | Storage Admin, Storage Engineer | Pre-owned NetApp + TPM |
 | Pre-owned | Anyone managing Cisco/Juniper/Arista environments | Pre-owned gear + OSI TPM |
 
-**Calls sequence label** (used in the strategy note header): Call - Network / Call - Server / Call - TPM / Call - DWDM / Call - Storage / Call - Networking
+**Calls sequence label** (for the strategy note header): Call - Network / Call - Server / Call - TPM / Call - DWDM / Call - Storage / Call - Networking
 
----
+### Step 2: Calculate Dates — same-company stagger from state metadata
 
-## Step 4: Calculate Dates
+Open `overnight-candidates.json`. Read `stagger[company_name]`:
+- `last_day1`: ISO date of the most recent Day 1 scheduled for this company in this run.
+- `person_count`: how many Yes-with-email sequences scheduled at this company so far.
 
-### Same-company stagger rule — apply BEFORE setting Day 1
+Set this candidate's Day 1:
+- `person_count == 0` (first person at this company this run): Day 1 = next business day after today.
+- `person_count` in 1-4 (persons 2-5 at same company): Day 1 = `last_day1` + 4 business days.
+- `person_count == 5` (person 6): Day 1 = `last_day1` + 10 business days. Cooling gap for receiving domain rolling-velocity.
+- `person_count >= 6` (persons 7+): Day 1 = `last_day1` + 4 business days. Return to normal cadence.
 
-Check the email queue for other contacts at the same company. Count how many people at this company are already enrolled (status = "pending" or "sent" in the queue).
+After scheduling, update state metadata:
+- `stagger[company_name].last_day1` = this person's Day 1
+- `stagger[company_name].person_count += 1`
 
-- Persons 1-5 at the same company: set this person's Day 1 as **4 business days** after the most recent Day 1 at that company.
-- Person 6: set Day 1 as **10 business days** after person 5's Day 1. This is a one-time cooling gap to let the receiving domain's rolling-velocity window roll off before resuming.
-- Persons 7 and beyond: return to **4 business days** after the most recent Day 1. The 10-day gap already reset the receiving server's baseline; further spacing delays outreach without adding deliverability protection.
-
-This protects sender reputation by reducing email frequency to the same domain as volume increases.
+**Why read from state file, not email-queue:** the email queue has 500+ entries. Scanning every time is slow. State metadata is O(1) and cares about THIS run's scheduled Day 1s.
 
 ### Day 1 + cadence
 
-**Day 1** = next business day after today (or staggered per same-company rule above).
+Each email has its own dedicated send window:
 
-Each email in the sequence has its own dedicated send window. Set `sendTime` in the queue entry per email slot:
+| Email | sendTime | Window |
+|---|---|---|
+| 1 | `4pm` | 4 PM Eastern |
+| 2 | `11am` | 11 AM Eastern |
+| 3 | `12pm` | 12 PM Eastern |
+| 4 | `1pm` | 1 PM Eastern |
+| 5 | `2pm` | 2 PM Eastern |
+| 6 | `3pm` | 3 PM Eastern |
 
-- **Email 1** sends at **4 PM Eastern** — set sendTime: "4pm"
-- **Email 2** sends at **11 AM Eastern** — set sendTime: "11am"
-- **Email 3** sends at **12 PM Eastern** — set sendTime: "12pm"
-- **Email 4** sends at **1 PM Eastern** — set sendTime: "1pm"
-- **Email 5** sends at **2 PM Eastern** — set sendTime: "2pm"
-- **Email 6** sends at **3 PM Eastern** — set sendTime: "3pm"
+The master osi-email-sender task runs every weekday at 11 AM, 12 PM, 1 PM, 2 PM, 3 PM, and 4 PM Eastern. Each fire processes queue entries whose `sendTime` matches that window.
 
-The master osi-email-sender task runs every weekday at 11 AM, 12 PM, 1 PM, 2 PM, 3 PM, and 4 PM Eastern. Each fire processes the queue entries whose `sendTime` matches that window. This 6-window design distributes send load across the day so no single window carries a burst.
+**Full cadence:**
 
-**Full sequence cadence — 6 emails + LinkedIn task:**
+| # | Send date | Gap from prior |
+|---|---|---|
+| 1 | Day 1 | — |
+| 2 | 2 business days after Email 1 actual send | +2 bd |
+| 3 | 4 business days after Email 2 actual send | +4 bd |
+| 4 | 6 business days after Email 3 actual send | +6 bd |
+| 5 | 5 business days after Email 4 actual send | +5 bd |
+| 6 | 6 business days after Email 5 actual send | +6 bd |
 
-| # | Send date | Gap from prior | Type |
-|---|---|---|---|
-| 1 | Day 1 (next business day) | — | Email |
-| 2 | 2 business days after Email 1 actual send | +2 bd | Email |
-| 3 | 4 business days after Email 2 actual send | +4 bd | Email |
-| 4 | 6 business days after Email 3 actual send | +6 bd | Email |
-| 5 | 5 business days after Email 4 actual send | +5 bd | Email |
-| 6 | 6 business days after Email 5 actual send | +6 bd | Email |
+Total sequence length: 23 business days from Email 1 Day 1 to Email 6, assuming no slips.
 
-Total sequence length: 23 business days from Email 1's Day 1 to Email 6, assuming no slips.
+**Self-healing cadence — each email anchors to prior email's ACTUAL send date, not Email 1's planned date.** When the sender fires Email N, it updates Email N+1's `sendDate` in the queue to `N biz days after today`. If Email 1 slips a day because the 4 PM window was missed, Email 2 automatically shifts a day later.
 
-**Self-healing cadence — anchor to prior email's ACTUAL send date, not Email 1's planned date.**
-
-Each email's send date is calculated relative to the PRIOR email's actual fire date, not relative to Email 1's planned Day 1. This keeps the cadence intact when any send slips. If Email 1 fires a day late because the 4 PM sender window was missed, Email 2 automatically shifts a day later too. If Email 3 fires on time, Email 4 stays 6 business days after Email 3. The sequence self-corrects instead of compressing gaps.
-
-Implementation: at sequence creation time, write all 6 email entries to email-queue.json with provisional send dates calculated forward from Email 1's planned Day 1. When the sender fires Email N, it updates Email N+1's sendDate in the queue to `N biz days after today`, where N is the gap from the table above. If Email N+1 has already been recomputed and no longer matches the planned date, that is expected — the queue is the living schedule, not a frozen plan.
-
-**Skip weekends AND holidays on every send date, including Day 1.** If any calculated date lands on a Saturday, Sunday, or holiday below, push it to the next business day (and recompute subsequent sends from the new anchor if needed).
-
-**Holidays to avoid — never send on these dates:**
-
-US federal holidays (observed, 10 per year):
-- New Year's Day (Jan 1, observed nearest weekday)
-- Martin Luther King Jr. Day (3rd Monday of January)
-- Presidents Day (3rd Monday of February)
-- Memorial Day (last Monday of May)
-- Juneteenth (Jun 19, observed nearest weekday)
-- Independence Day (Jul 4, observed nearest weekday)
-- Labor Day (1st Monday of September)
-- Columbus Day (2nd Monday of October)
-- Veterans Day (Nov 11, observed nearest weekday)
-- Thanksgiving Day (4th Thursday of November)
-- Christmas Day (Dec 25, observed nearest weekday)
-
-Widely observed in B2B (skip these too):
-- Good Friday (varies; 2026 is Apr 3, 2027 is Mar 26)
-- Day after Thanksgiving (Black Friday)
-- Christmas Eve (Dec 24)
-- New Year's Eve (Dec 31)
-
-**Hardcoded dates for the active calendar window — reference when calculating:**
-
-2026: Jan 1 Thu, Jan 19 Mon (MLK), Feb 16 Mon (Presidents), **Apr 3 Fri (Good Friday)**, **May 25 Mon (Memorial)**, **Jun 19 Fri (Juneteenth)**, **Jul 3 Fri (Jul 4 observed)**, **Sep 7 Mon (Labor)**, Oct 12 Mon (Columbus), Nov 11 Wed (Veterans), **Nov 26 Thu (Thanksgiving)**, **Nov 27 Fri (Black Friday)**, **Dec 24 Thu (Xmas Eve)**, **Dec 25 Fri (Christmas)**, **Dec 31 Thu (NYE)**
-
-2027: **Jan 1 Fri (NYD)**, Jan 18 Mon (MLK), Feb 15 Mon (Presidents), **Mar 26 Fri (Good Friday)**, **May 31 Mon (Memorial)**, **Jun 18 Fri (Juneteenth observed)**, **Jul 5 Mon (Jul 4 observed)**, **Sep 6 Mon (Labor)**, Oct 11 Mon (Columbus), Nov 11 Thu (Veterans), **Nov 25 Thu (Thanksgiving)**, **Nov 26 Fri (Black Friday)**, **Dec 24 Fri (Xmas Eve + observed)**, **Dec 31 Fri (NYE)**
-
-**Apply to EVERY email in the sequence** — not just Day 1. If any email's computed send date lands on a holiday (e.g., Email 4 computed as 6 business days after Email 3 lands on Memorial Day), push to the next business day. The business-day count already skips weekends; the holiday overlay pushes any business day that lands on a holiday to the next business day. Subsequent emails then recalculate from that shifted date per the self-healing cadence rule.
-
-**Apply to same-company stagger too** — when calculating Day 1 for Person 2+ as "4 business days after most recent Day 1 at this company," count only real business days (skip weekends AND holidays).
+**Skip weekends AND holidays on every send date, including Day 1.** Holiday list lives in `Claude-Brain/holidays.json` — read at runtime, do not hardcode. If the file is missing, fall back to the standard US federal holidays plus Good Friday, Black Friday, Christmas Eve, New Year's Eve.
 
 Plus: LinkedIn connection request task due Day 1 (also skip weekends/holidays).
 
-No call tasks are created. The LOB is noted at the top of the strategy note so Andy can enroll the contact in the correct calls sequence manually.
+### Step 3: Write All 6 Emails
 
----
-
-## Step 5: Write All 6 Emails
-
-Write every email before doing anything else.
-
----
-
-### Email 1 (Day 1) — 1st Touch
+#### Email 1 (Day 1) — 1st Touch
 
 **Network sequence:**
 > Hi [First Name],
@@ -416,105 +423,45 @@ Write every email before doing anything else.
 >
 > Do you come into the office, or is there a better address to ship it to?
 
-(No name at the end of either template — Outlook signature handles the sign-off.)
+(No name at the end of either template. Outlook signature handles the sign-off.)
 
-**TPM / DWDM / Storage / Pre-owned sequences — pain-led opener:**
-Short. 3-4 sentences max. Lead with their specific pain based on role and company. Reference the Personal Hook. One clear ask at the end. No corporate speak. No "Andy" at the bottom — Outlook signature handles it.
+**TPM / DWDM / Storage / Pre-owned — pain-led opener:**
+Short. 3-4 sentences max. Lead with their specific pain based on role and company. Reference the Personal Hook. One clear ask at the end. No corporate speak. No "Andy" at the bottom.
 
 Subject line: Short, specific, not flaggable as spam. You decide based on the target.
 
----
-
-### Email 2 (2 business days after Email 1 actual send) — Sequence Email
+#### Email 2 (2 bd after Email 1 actual send) — Sequence Email
 
 Subject: RE: [same subject as Email 1]
 
-Email 2 content BRANCHES by Email 1 archetype. Do NOT write "Any thoughts?" for every sequence. That bump only works when Email 1 asked a one-line logistics question. For consultative pitches it lands weak and wastes the touch.
+Content branches by Email 1 archetype:
 
-**How to classify Email 1:**
-- Look at the body. If it contains any of: "sample", "swag", "Do you come into the office", "is there a better address to ship it to" → **sample-offer archetype** (Network SFP sequence, Server DIMM sequence, any Email 1 that asked for a shipping address).
-- Otherwise → **pain-led archetype** (TPM, DWDM, Storage, Pre-owned, or any consultative Email 1 that ended with "Worth X minutes?" or a similar conversation ask).
+- **Archetype A — sample-offer Email 1** (body contains "sample", "swag", or shipping address question): Body is literally "Any thoughts?" — nothing else.
+- **Archetype B — pain-led Email 1**: Body is 2-3 sentences. Do NOT repeat Email 1's argument. Pick ONE move: new data point on the same pain, adjacent pain on a related OSI product line, or company signal that surfaced since Email 1. End with ONE concrete ask.
 
-**Archetype A — sample-offer Email 1:**
+Quote Email 1 below in standard reply format. No greeting. No sign-off.
 
-Body is literally:
-> Any thoughts?
+#### Email 3 (4 bd after Email 2 actual send) — Sequence Email
 
-That's the whole thing. The prospect just needs to answer the shipping question. A longer Email 2 on a shipping ask looks like pressure.
+New subject line. Different angle from Email 1. Introduce a relevant pain point or OSI product line not covered in Email 1. Short. 3-4 sentences. One ask. Quote Email 2 below.
 
-**Archetype B — pain-led Email 1:**
+#### Email 4 (6 bd after Email 3 actual send) — Sequence Email
 
-Body is 2-3 sentences. Do NOT repeat Email 1's argument verbatim. Pick ONE of these moves:
-- **New data point on the same pain** — add a fresh stat, customer example, or lead-time number that sharpens Email 1's hook.
-- **Adjacent pain on a related OSI product line** — if Email 1 was DWDM, open a door on optics supply or TPM. If Email 1 was servers, open a door on DIMMs or storage.
-- **Company signal that surfaced since Email 1** — a news item, a hire, an acquisition, a build announcement that makes the pitch more relevant now than two days ago.
+New subject line. Different OSI product line. Short. 3-4 sentences. One ask. Quote Email 3.
 
-End with ONE concrete ask. Not "any thoughts?" Ask for a specific 15 minutes, a sample of a different product, a pointer to the right person, or a direct yes/no on a narrow question.
+#### Email 5 (5 bd after Email 4 actual send) — Sequence Email
 
-Example (Email 1 pitched DWDM): "Most carriers in active buildout see OEM transport lead times stretch past a quarter by Q3. SmartOptics usually ships in weeks and runs 30 to 50% below Ciena or Nokia. Worth 15 minutes to compare it against what you have on order?"
+New subject line. Another OSI product line not yet covered. Short. 3-4 sentences. One ask. Quote Email 4.
 
-Example (Email 1 pitched TPM): "Heard Pensando maintenance is running 40% higher on renewal this cycle. We run multi-vendor TPM on Cisco, Dell, HP, and NetApp at roughly half OEM. Worth a quick look at what's coming off contract in the next two quarters?"
+#### Email 6 (6 bd after Email 5 actual send) — Breakup
 
-Example (Email 1 pitched server refresh + DIMMs): "DDR4 DIMM pricing has softened another 15% since last month while DDR5 has not moved. If any of the refresh is going to workloads that don't need DDR5, we can save real budget on that line item. Want me to price out a sample config for your next rack?"
-
-**Both archetypes:**
-
-Then quoted Email 1 below in standard reply format:
-> On [Day 1 date], Andy McLean wrote:
-> [Full Email 1 text]
-
-No greeting. No sign-off. Outlook signature handles the sign-off. Never type "Andy" at the bottom.
-
-When writing the entry to email-queue.json, the `body` field is: [new reply text] + "\n\n" + [quote marker line] + "\n" + [Full Email 1 text]. The osi-email-sender parses out everything before the quote marker and uses native Outlook Reply, so the quote marker itself is just a parse anchor, not what actually goes in the rendered email.
-
----
-
-### Email 3 (4 business days after Email 2 actual send) — Sequence Email
-
-New subject line. Different angle from Email 1. Introduce a relevant pain point or OSI product line not covered in Email 1. Short. 3-4 sentences. One ask.
-
-Quote Email 2 below in standard reply format.
-
----
-
-### Email 4 (6 business days after Email 3 actual send) — Sequence Email
-
-New subject line. Introduce a different OSI product line relevant to this prospect. Short. 3-4 sentences. One ask. Reference something specific about their world where possible.
-
-Quote Email 3 below in standard reply format.
-
----
-
-### Email 5 (5 business days after Email 4 actual send) — Sequence Email
-
-New subject line. Introduce another OSI product line not yet covered. Short. 3-4 sentences. One ask.
-
-Quote Email 4 below in standard reply format.
-
----
-
-### Email 6 (6 business days after Email 5 actual send) — Breakup
-
-New subject line. Clean close. No ask. One sentence. Leave the door open.
-Examples:
+New subject line. Clean close. No ask. One sentence. Examples:
 - "Should I close the file on this one, or is the timing just off?"
 - "No worries if now isn't the right time. Happy to circle back when things shift."
 
-Quote Email 5 below in standard reply format.
+Quote Email 5.
 
----
-
-## Step 6: Call script, voicemail, and LinkedIn invite — owned by osi-prospect-qualification
-
-Qualification has already generated the full call script (KEYWORDS + HOOK + OPENER from the 12-opener library), the voicemail line, and the LinkedIn invite text. All three live in the strategy note and (for the LinkedIn invite) in the LINKED_IN_CONNECT task notes. Do not regenerate any of them here.
-
-If the strategy note is missing these pieces, qualification was skipped or failed. STOP and invoke qualification first.
-
----
-
-## Step 8: Present for Review (Interactive Mode Only)
-
-Skip entirely in overnight mode.
+### Step 4: Present for Review (Interactive Mode only — skip in Processing batch)
 
 Present all 6 emails with subject lines, call script, voicemail, LinkedIn invite, and proposed schedule as a table.
 
@@ -522,35 +469,26 @@ End with: "Look it over and say **ready** when you want to send."
 
 Stop. Do not open Outlook until Andy says ready.
 
----
+### Step 5: Send and Schedule
 
-## Step 9: Send and Schedule
-
-### Interactive Mode — on "ready"
-
-Open Outlook in Chrome with Email 1 pre-composed:
+**Interactive Mode on "ready":** Open Outlook in Chrome with Email 1 pre-composed:
 1. Navigate to https://outlook.office.com
 2. If login screen appears, stop and notify Andy
 3. Click New mail
 4. Enter prospect's email in To field, press Tab
 5. Enter subject line exactly
 6. Click in body above signature, type email body exactly as written
-7. Do NOT click Send — leave it pre-composed for Andy
+7. Do NOT click Send. Leave pre-composed for Andy.
 
 Tell Andy: "Email 1 is ready in Outlook. Click Send when you're good, then say **sent** and I'll schedule the rest."
 
-When Andy says "sent":
-- Confirm sent (check Sent Items briefly)
-- Schedule Emails 2-6 using overnight mode below
-- Create all HubSpot tasks
+When Andy says "sent": confirm, then schedule Emails 2-6 via email-queue.json.
 
-### Overnight Mode — fully automated
+**Processing batch:** Append all 6 emails directly to email-queue.json. No Outlook step.
 
-Do NOT create individual scheduled tasks for emails. Instead, append all 6 emails to the queue file.
+### email-queue.json entry format
 
-**Queue file:** C:\Claude-Brain\email-queue.json
-
-Each entry:
+Path: `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json`
 
 ```json
 {
@@ -561,80 +499,62 @@ Each entry:
   "subject": "[subject line exactly]",
   "body": "[full email body including quoted thread — preserve all line breaks]",
   "sendDate": "[YYYY-MM-DD]",
-  "sendTime": "[4pm for Email 1 / 11am for Email 2 / 12pm for Email 3 / 1pm for Email 4 / 2pm for Email 5 / 3pm for Email 6, all Eastern]",
+  "sendTime": "[4pm / 11am / 12pm / 1pm / 2pm / 3pm]",
   "status": "pending",
   "addedDate": "[today YYYY-MM-DD]"
 }
 ```
 
-The master osi-email-sender task runs every weekday at 11 AM, 12 PM, 1 PM, 2 PM, 3 PM, and 4 PM Eastern. Each fire window processes queue entries whose `sendTime` matches that specific window. No individual scheduled tasks needed.
-
-### How to write to the queue
-
-The queue file lives on local disk at `C:\Claude-Brain\email-queue.json`. Use Python's `open(path, 'w')` to overwrite cleanly:
+### How to write to the queue (atomic pattern — same as state file)
 
 ```python
 import json, os
 
-QUEUE = r'C:\Claude-Brain\email-queue.json'
-# Or from the sandbox mount:
-# QUEUE = '/sessions/.../mnt/Claude-Brain/email-queue.json'
+QUEUE = r'C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json'
 
-# Step 1: Read existing content (the file is on local disk, no cloud fallback needed).
 with open(QUEUE, 'r') as f:
     queue = json.load(f)
 
-# Step 2: Build new entries (Jan, Eric, Tina, Dimitar, or whoever).
 new_entries = [ ... ]  # array of entry dicts
 
-# Step 3: Dedupe by id so re-runs don't create duplicates.
 existing_ids = {e.get("id") for e in queue}
 to_add = [e for e in new_entries if e["id"] not in existing_ids]
 queue.extend(to_add)
 
-# Step 4: Atomic write with open('w'). Bypasses the Write-tool's prior-Read requirement
-#         and avoids needing cowork delete permission.
 tmp = QUEUE + '.tmp'
 with open(tmp, 'w') as f:
     json.dump(queue, f, indent=2)
 os.replace(tmp, QUEUE)
 ```
 
-Do NOT use the MCP Write tool for the queue file (its prior-Read requirement breaks on cloud-only files). Do NOT delete the file first (cowork delete permission does not reliably carry across scheduled sessions).
+Do NOT use the MCP Write tool for the queue (its prior-Read requirement breaks on large cloud-synced files).
 
-Same pattern applies to `prospects-tracker-new.xlsx` — read via SharePoint if local read fails, write via Python (use `openpyxl` with `load_workbook` on bytes from SharePoint, then `wb.save(path)`).
+### Respread / reschedule — sync BOTH layers
 
-### Respread / reschedule — sync BOTH layers, never just the queue
+Any time you touch an already-queued prospect's emails to change dates or times, you MUST also update any matching per-email scheduled tasks in the Cowork scheduler.
 
-Any time you touch an already-queued prospect's emails to change dates or times (respread, cancel-and-reschedule, bulk shift, same-company re-stagger, manual nudge, etc.), you MUST also update any matching per-email scheduled tasks in the Cowork scheduler. Editing email-queue.json alone is not enough.
+1. Call `mcp__scheduled-tasks__list_scheduled_tasks` and filter for taskIds starting with the prospect's prefix.
+2. For every matching task with a future `fireAt`, compare against the queue's new `sendDate` + `sendTime`. If they differ, call `mcp__scheduled-tasks__update_scheduled_task` with corrected `fireAt` in ISO 8601 with ET offset.
+3. Leave already-disabled tasks alone.
+4. If no per-email tasks exist, skip. The master sender handles the queue on its own fire windows.
+5. Re-list and diff at the end of the respread. Log any leftover drift.
 
-**Why this rule exists:** Some sequences (legacy or hybrid) have per-email scheduled tasks named `[firstname]-[lastname]-[company-slug]-email-[N]` that fire at their own `fireAt` regardless of what email-queue.json says. If those tasks hold stale dates from before a respread, they will spawn sessions on the old dates. On 2026-04-20, the 4/19 overnight respread updated email-queue.json for Brett Baker but not the per-email scheduled tasks. Stale Email 1 and Email 2 tasks fired hours before their respread queue times, three concurrent sessions launched, and Outlook was hijacked while the sessions clawed at the same tab.
+### Step 6: Update LINKED_IN_CONNECT task due_date + state metadata
 
-**How to sync after ANY queue edit that changes sendDate or sendTime:**
+After Email 1's final Day 1 is locked in:
 
-1. Call `mcp__scheduled-tasks__list_scheduled_tasks` and filter for taskIds starting with the prospect's `[firstname]-[lastname]-[company-slug]-email-` prefix.
-2. For every matching task with a future `fireAt`, compare against the queue's new `sendDate` + `sendTime`. If they differ, call `mcp__scheduled-tasks__update_scheduled_task` with the corrected `fireAt` in ISO 8601 with ET offset: `2026-04-22T11:00:00-04:00` during EDT, or `-05:00` during EST.
-3. Leave already-disabled tasks alone (those are one-time tasks that have already fired in the past).
-4. If NO per-email scheduled tasks exist for this prospect, skip — the master osi-email-sender handles the queue on its own fire windows.
-5. Before finishing the respread, re-list and diff every per-email task's `fireAt` against its matching queue entry. Both layers must agree. Log any leftover drift.
+1. **Find the existing `LINKED_IN_CONNECT` task** on the HubSpot contact (qualification created it with provisional due_date). Call `manage_crm_objects` updateRequest and set `hs_timestamp` to Email 1's Day 1. This is the ONLY HubSpot write this skill performs.
+2. **Update state metadata** in `overnight-candidates.json`: set `stagger[company_name].last_day1` = this prospect's Email 1 Day 1. Increment `stagger[company_name].person_count`. Atomic write.
 
-**Do not trust memory alone for this.** Always run the list-and-diff at the end of a respread.
+### Step 7: Append to Excel tracker Tab 1
 
----
+File: `Claude-Brain/prospects-tracker-new.xlsx`, Tab 1 — Prospects.
 
-## Step 10: Update the LINKED_IN_CONNECT task due_date to match Email 1's Day 1
+Append one row per person:
 
-This is the ONLY HubSpot write this skill performs. All contact creation, strategy note writing, and LINKED_IN_CONNECT task CREATION are owned by osi-prospect-qualification and have already happened before this skill runs.
+Columns: Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Date Added | Notes
 
-After Email 1's final Day 1 is locked in at Step 4, do this exactly once per prospect:
-
-1. Find the existing `LINKED_IN_CONNECT` task on the contact (subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`).
-2. Call `manage_crm_objects` updateRequest on that task and set `hs_timestamp` (the due_date field) to Email 1's Day 1 date.
-3. Do this BEFORE writing email-queue.json entries, so the task surface reflects the correct morning-of-Day-1 timing.
-
-**Why this matters:** Andy's workflow is synchronized. LinkedIn invite sent at 2 PM, call sequence enrollment, voicemail, then Email 1 auto-fires at 4 PM. All four touches must land on the same day. If the LINKED_IN_CONNECT due_date and Email 1's Day 1 drift apart, the coordinated attack breaks.
-
-**Everything else related to HubSpot (contact record, strategy note, LinkedIn invite text, LinkedIn message fallback tasks for no-email cases) is qualification's job.** If any of those are missing when this skill runs, STOP and invoke qualification first.
+Tab 2 (Company Status) is the Wrap-up task's job. Do NOT touch Tab 2 from a Processing batch.
 
 ---
 
@@ -684,10 +604,10 @@ Merger wedge: "With the Park Place and Service Express merger, a lot of teams ha
 ## DWDM / SmartOptics Talking Points
 
 - Cost: 30-50% below Ciena and Nokia. Minimal licensing fees.
-- Space and power: Significant reduction vs. traditional DWDM platforms.
-- Simplicity: Easier to deploy and manage.
-- Lead times: Ships faster than OEMs.
-- Pedigree: Backed by original engineering core. Not grey market.
+- Space and power: significant reduction vs. traditional DWDM platforms.
+- Simplicity: easier to deploy and manage.
+- Lead times: ships faster than OEMs.
+- Pedigree: backed by original engineering core. Not grey market.
 
 ---
 
@@ -697,35 +617,82 @@ Merger wedge: "With the Park Place and Service Express merger, a lot of teams ha
 2. State a clear reason for calling.
 3. End with a question about their world. Never "Is now a good time?"
 4. Never ask "Is now a good time?"
-5. Voicemails: 15 seconds max. No phone number. End with Andy's email address spelled audibly ("that's andy at osiglobal dot com"). Always present or future tense ("I'm sending" or "I'm about to send"). Never past tense.
+5. Voicemails: 15 seconds max. No phone number. End with Andy's email address spelled audibly ("that's andy at osiglobal dot com"). Always present or future tense. Never past tense.
 
 ---
 
-## Step 11: Update the Excel Tracker
+## PROMPT TEMPLATES — for scheduled tasks
 
-File: Claude-Brain/prospects-tracker-new.xlsx
+### Kickoff prompt (runs in-session, Andy at keyboard)
 
-### Tab 1 — Prospects
+```
+You are running Kickoff for an overnight OSI Global outreach run. Do NOT do LinkedIn search, qualification, or outreach here. Only schedule the work.
 
-Append one row per person after every sequence is created.
+1. Read existing C:\Claude-Brain\overnight-candidates.json if present. Preserve pending candidates.
 
-Columns: Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Date Added | Notes
+2. Populate the company list:
+   - If Andy provided companies: write them into the state file with status "discovery_pending".
+   - If Auto Mode (no companies named): run the cold-company selector — HubSpot search for owner 196669355 with notes_last_contacted 6+ months ago, apply active-client filter + OSI fit check + queue-prevent filter, pick top N, write to state file.
 
-- HubSpot Status: "Andy — HubSpot ID [id]" / "Not found"
-- Action: "Pursue — sequence live"
-- Notes: Personal Hook and lead angle in 1-2 sentences
+3. Write/update overnight-candidates.json with run_id, mode ("company" or "auto"), companies array, candidates array (preserving pending), and empty stagger metadata.
 
-### Tab 2 — Company Status
+4. Schedule Discovery tasks (3-4 companies each, staggered 30-60 min apart at run start).
 
-Update after every company is processed (or attempted). One row per company per run.
+5. Schedule Processing batches at 2-hour intervals across the overnight window.
 
-Columns: Company | Date Run | Status | Prospects Found | Sequences Created | Notes
+6. Schedule the Wrap-up task to fire 15 min after the last Processing batch.
 
-**Status values:**
-- Completed — all qualified prospects found and sequenced
-- Partial — started but did not finish (token limit or time). Note how many were done vs. remaining.
-- Not Started — ran out of time before this company was reached
+7. Report to Andy: state file created, N Discovery tasks scheduled, M Processing batches scheduled, 1 Wrap-up task scheduled.
+```
 
-After every overnight run, update Tab 2 for all 4 companies. Even companies that were not started get a row with status "Not Started" so Andy knows to carry them into the next run.
+### Discovery task prompt template
 
-**Never skip Tab 2.** If the session ends before all companies are done, write the company status rows first — this is more important than any individual prospect row.
+```
+You are running an OSI Global Discovery task. Process this list of companies sequentially:
+
+COMPANIES: [Midcontinent Communications, Inc., Lingo Communications, Visionary Broadband, Cincinnati Bell]
+
+Read C:\Claude-Brain\skills\osi-outreach-sequence\SKILL.md "Discovery task" section first.
+
+For each company:
+1. M&A check (web search for rebrand / acquisition).
+2. HubSpot ownership check. Apply JAM decision tree. Skip other-rep companies with recent activity.
+3. Regular LinkedIn candidate search (NOT Sales Navigator). All keyword rounds: English priority, French for Quebec companies, secondary titles if thin. Paginate every page.
+4. Append candidates to C:\Claude-Brain\overnight-candidates.json with status "pending". Fields: id, firstName, lastName, company, linkedinUrl (if found), source: "linkedin_search".
+5. Append status line to C:\Claude-Brain\overnight-run-log.md.
+6. Update company status to "discovery_complete" in state file.
+
+Do NOT qualify, enrich, or fire outreach. That's Processing batches' job.
+```
+
+### Processing batch prompt template
+
+```
+You are running Processing Batch N of M for an OSI Global overnight run.
+
+Read C:\Claude-Brain\skills\osi-prospect-qualification\SKILL.md and C:\Claude-Brain\skills\osi-outreach-sequence\SKILL.md first.
+
+Execute:
+1. Open C:\Claude-Brain\overnight-candidates.json. If missing OR zero pending candidates: append alert line to C:\Claude-Brain\overnight-run-log.md and exit.
+2. Take first pending candidate.
+3. Invoke qualification Profile Mode (accepts linkedinUrl or name+company or hubspot_contact source).
+4. Update candidate status atomically.
+5. Branch on verdict. Yes-with-email: apply same-company stagger from state metadata, update LINKED_IN_CONNECT due_date, append 6 emails to C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json, append row to Tab 1 of prospects-tracker-new.xlsx, update stagger metadata in state file.
+6. Continue until 3 outreach sequences fire OR queue has no pending.
+7. Append status line to overnight-run-log.md.
+```
+
+### Wrap-up task prompt template
+
+```
+You are running the Wrap-up task for an OSI Global overnight run.
+
+Read C:\Claude-Brain\skills\osi-outreach-sequence\SKILL.md "Wrap-up task" section first.
+
+1. Read C:\Claude-Brain\overnight-candidates.json and C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json.
+2. Tally per-company: prospects found, verdicts, sequences fired.
+3. Update C:\Claude-Brain\prospects-tracker-new.xlsx Tab 2 (Company Status).
+4. Write session log to C:\Claude-Brain\sessions\session-YYYY-MM-DD.md.
+5. Leave pending candidates in state file untouched for next run.
+6. Append final status line to overnight-run-log.md.
+```

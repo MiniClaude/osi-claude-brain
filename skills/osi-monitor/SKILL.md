@@ -86,7 +86,7 @@ Keywords: "out of office", "on vacation", "away from the office", "will return",
 If the reply is not an OOO, treat it as human engagement and auto-pause the remaining queue entries for that prospect immediately. No waiting for Andy's confirmation. No lost momentum while Andy is asleep.
 
 Steps:
-1. Read `C:\Claude-Brain\email-queue.json`.
+1. Read `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json`.
 2. Find every entry where the prospectName matches AND status is `"pending"`.
 3. Change each of those entries' status from `"pending"` to `"paused-reply-[YYYY-MM-DD]"`. Write the file back.
 4. Update the HubSpot strategy note on the contact — prepend this line:

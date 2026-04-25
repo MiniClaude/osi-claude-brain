@@ -1,0 +1,107 @@
+{
+  "run_id": "2026-04-24-weekend",
+  "created": "2026-04-25T02:53:30",
+  "mode": "company",
+  "companies": [
+    {
+      "name": "Midcontinent Communications, Inc.",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Lingo Communications",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Visionary Broadband",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Cincinnati Bell",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Armstrong Group of Companies",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Stellar",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Ahead",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Patrick Industries",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "S&P Global",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Saddleback Communications",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "360 Broadband",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Vermont Telephone",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Blue Valley Telecommunications",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "OEC Fiber",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Fidelity Communications",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Vero Networks",
+      "status": "discovery_pending"
+    },
+    {
+      "name": "Resound Networks",
+      "status": "discovery_pending"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "john-lubeck-midcontinent",
+      "firstName": "John",
+      "lastName": "Lubeck",
+      "company": "Midcontinent Communications, Inc.",
+      "linkedinUrl": null,
+      "source": "hubspot_contact",
+      "hubspotContactId": 215130729857,
+      "status": "yes-with-email",
+      "verdict_reason": "Director Core IP & Transport at cable MSO \u2014 DWDM fit. Already queued via direct write to email-queue.json (emails 1-6 scheduled).",
+      "addedDate": "2026-04-24",
+      "processedDate": "2026-04-24"
+    }
+  ],
+  "stagger": {
+    "Midcontinent Communications, Inc.": {
+      "last_day1": "2026-04-27",
+      "person_count": 1
+    }
+  },
+  "log": {
+    "discovery_runs": [],
+    "processing_runs": [
+      {
+        "taskId": "manual-interactive",
+        "fired": "2026-04-24T22:30:00-04:00",
+        "sequences_fired": 1,
+        "note": "John Lubeck queued directly, bypass of Processing batch flow"
+      }
+    ]
+  }
+}

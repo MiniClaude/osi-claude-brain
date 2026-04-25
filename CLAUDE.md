@@ -35,7 +35,7 @@ You are reading this file as part of session startup. Before doing anything else
 - **Company:** OSI Global  -  sells networking hardware including DWDM, 400G transceivers, and optical components
 - **CRM:** HubSpot (Owner ID: 196669355)
 - **Communication platform:** Microsoft Teams
-- **Working setup:** Two laptops, both synced via Git and GitHub. Working copy lives at `C:\Claude-Brain\` on both machines. Remote backup at `github.com/Drrewdy/Claude-Brain` (private repo). OneDrive is no longer used for syncing; any old OneDrive copy is archive only.
+- **Working setup:** Two laptops, both synced via Git and GitHub. Working copy lives at `C:\Claude-Brain\` on both machines. Remote backup at `github.com/Drrewdy/Claude-Brain` (private repo). OneDrive is no longer used for syncing Claude-Brain content. **ONE EXCEPTION:** the email queue (`email-queue.json`) lives on OneDrive at `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json` because it's written many times a day by scheduled tasks and needs real-time sync. Git's manual pull/push can't keep up. Everything else stays in Git.
 
 ---
 
@@ -153,6 +153,9 @@ If Claude is running a task that modifies files in this folder, Claude should of
 
 🚨 **HARD RULE: EVERY SKILL LIVES IN `Claude-Brain/skills/`. NO EXCEPTIONS.**
 Both the source folder (`skills/[skill-name]/SKILL.md`) AND the packaged `.skill` file (`skills/[skill-name].skill`) must be inside the `skills/` directory. Never at the root of `Claude-Brain/`. Never in a sibling folder. Never scattered across multiple locations. If a Claude session creates a `.skill` file anywhere other than `Claude-Brain/skills/`, move it immediately. Runtime data files (like `reengagement-tracker.json`) belong at the root of `Claude-Brain/`, NOT in `skills/`. Skills folder is ONLY for skill sources and their packages.
+
+🚨 **HARD RULE: `email-queue.json` LIVES ON ONEDRIVE, NOT IN CLAUDE-BRAIN.**
+As of 2026-04-24 the email queue moved to `C:\Users\Andy\OneDrive - OSI Hardware\Claude-Brain\email-queue.json` so it auto-syncs between Andy's two laptops in real time. Any skill that reads or writes the queue MUST use that OneDrive path. Do not create `C:\Claude-Brain\email-queue.json`. If you find a file there, it's a stale artifact - delete it. The hard-block list (`hard-block.json`) stays in Git at `C:\Claude-Brain\hard-block.json`.
 
 Reusable skills live in `Claude-Brain/skills/` (NOT `.claude/skills/` - that is read-only). Current skills:
 - `osi-outreach-7email` - Full 7-email hyper-personalized sequence. Trigger: "run the 7-email sequence for [name]"
