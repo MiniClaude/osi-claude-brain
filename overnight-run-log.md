@@ -102,3 +102,86 @@ Queue: pending 104 → 101 (3 evaluated, all yes-with-email). 18 emails appended
 Tab 1: 3 rows appended (345 Stephen, 346 Justin, 347 Shawn).
 Cincinnati Bell wrapped (all 4 yes-with-email + 3 cond + 1 active-skip; 0 pending). Armstrong batch started (2 of 16 candidates processed). 14 Armstrong candidates remain pending for next fire.
 [2026-04-25 16:21 UTC] GIT WARN — .git/index.lock STILL stuck since 03:56 UTC (sandbox lacks delete perms — same as 05:16, 05:32, 07:26, 08:26, 09:24, 10:24, 11:25, 12:09, 12:10, 12:33, 14:26 fires). State + log + queue + Excel ALL persisted to disk locally. Andy: rm C:\Claude-Brain\.git\index.lock then git add . && git commit -m "Processing batch 16:21 UTC" && git push. 19+ sequences uncommitted across the day.
+
+[2026-04-25 18:38 UTC] Processing Recurring batch -- 3 of 3 sequences fired (cap reached). 4 candidates evaluated.
+  - Rob Mikita (Network Engineer 9.8yr, Armstrong) | Day 1 = 2026-05-07 | Network sample-offer (free SFP wedge) | EXISTING HubSpot 540157, phones reconciled (direct 282-5304, mobile 991-8048) | rmikita@agoc.com (98%) | 3rd-deg restricted LinkedIn, ZoomInfo FULL_MATCH carries the qualification (20+ yrs total, prior Mitsubishi Electric Power Products + Titus Networking).
+  - Lindsey Quinn (Network Security Admin 6.5yr, Armstrong) | Day 1 = 2026-05-13 | Network sample-offer (free SFP wedge) | NEW HubSpot 217886009011 | lquinn@agoc.com (99%) | 3rd-deg restricted LinkedIn, ZoomInfo FULL_MATCH (last name Quinn resolved via search), prior Bayer Data Center Network roles + FedEx NOC.
+  - John McArdle III (Telecommunications Vendor Management 14yr, Armstrong) | Day 1 = 2026-05-28 (person 5 cooling gap) | DWDM pain-led | EXISTING HubSpot 540110, jobtitle/phones/LinkedIn updated | jmcardle@agoc.com (99%) | LinkedIn URL in queue file was 404 (john-mcardle-iii-22a31a14b), corrected to john-mcardle-iii-16152254 via people search. 30+ yrs experience including VarTec, McLeod USA, CapRock CLEC switching + AIT Director Engineering Japan + US Navy electronics. Highest-value Armstrong target.
+Skipped-active-sequence: Gregory Henry (Network and Security Admin) -- already in active sequence with Email 1 sent 2026-04-20, Email 2 sent 2026-04-22, E3-E6 pending. Doesn't count toward 3-of-3 cap. Existing HubSpot 539562.
+Stagger: Armstrong Group of Companies {last_day1: 2026-05-28, person_count: 5}.
+Queue: pending was 101 -> 97 pending (4 evaluated: 3 yes, 1 skip). 18 emails appended to email-queue.json.
+Tab 1: 3 rows to append (348 Rob, 349 Lindsey, 350 John). [Excel write follows.]
+Armstrong batch progress: 5 of 16 candidates processed (Pastore, Hillard, Rob, Lindsey, John yes-with-email + Gregory Henry skipped-active-sequence). 11 Armstrong candidates remain pending for next fire (McArdle slot continues with Hazard, Aulbach, Wonderling, Sutherin, Norman, Cieply, Thoma, Lauer, Adam I., plus 2 already-flagged conditionals if I find them).
+Voice check: no em-dashes, no hyphens in subjects, no banned vocab. PASS.
+[2026-04-25 18:38 UTC] GIT WARN -- writing locally per concurrent-run discipline. State + log + queue persisted to disk. .git/index.lock has been stuck since 03:56 UTC (sandbox lacks delete perms). Andy: rm C:\Claude-Brain\.git\index.lock then git add . && git commit -m "Processing batch 18:38 UTC Armstrong p3-p5" && git push.
+
+[2026-04-25 20:26 UTC] Processing Recurring batch -- 3 of 3 sequences fired (cap reached). 11 candidates evaluated.
+  - Eric Aulbach (Chief Information and Group Marketing Officer, Armstrong) | Day 1 = 2026-06-03 (person 6 cooling-gap+4bd from McArdle 2026-05-28) | Pain-led DWDM exec | EXISTING HubSpot 540160, phone fields fixed (mobile (724) 256-8054 promoted to direct, new mobile (724) 504-4603), LinkedIn URL added | eaulbach@agoc.com (FULL_MATCH 94) | Fresh hook: MCTV definitive agreement Feb 17 2026, 96k passings OH+WV, Q2 2026 close. 14yr in CIO seat, 30+ yr IT incl Marconi PLC. HubSpot shallow qualify path.
+  - Richard Laing (President & COO, Stellar Broadband) | Day 1 = 2026-04-27 (person 1 of new Stellar batch, next bd) | Pain-led DWDM exec, transition hook | NEW HubSpot 217896757426 | rlaing@stellarbb.com (FULL_MATCH 99) + direct (517) 203-3096 + mobile (517) 719-8470 | Just transitioned 2026-01-31 from Spartan Net CIO 22yr to Stellar P&COO. NOC Engineer career roots. Stellar company is unowned in HubSpot. Stagger initialized {last_day1: 2026-04-27, person_count: 1}.
+  - Charles Kelley (Corporate Network Administrator, Patrick Industries) | Day 1 = 2026-04-27 (person 1 of new Patrick Industries batch) | Network sample-offer (free SFP wedge) | EXISTING HubSpot 540826, mobile reconciled to (574) 274-3795, LinkedIn URL added | kelleyc@patrickind.com (FULL_MATCH 92) | USMC IT Supervisor 2012-2016 → Patrick since 2016. Lifecycle was stale "customer" but no deals; 10mo cold. Cold re-engagement via sample wedge. Stagger initialized {last_day1: 2026-04-27, person_count: 1}.
+Yes-no-email path (deferred LI fallback tasks to next fire due to token economy):
+  - Aaron Bretl (Tier III Network Engineer, Stellar) -- ZoomInfo no business email, only mobile (269) 965-4363. Defense IT background (CACI, DynCorp). FULL_MATCH 90.
+  - John Lentz (Network Operations Center, Stellar) -- ZoomInfo no business email, only mobile (989) 400-5226. Past Network Admin at American MITSUBA. FULL_MATCH 91.
+No / STOP-GATE:
+  - Jerry Hazard (Armstrong) -- ZoomInfo title "IT and End User Devices Manager, Service Desk" -- service desk / EUC, not OSI buyer.
+  - Dean Sutherin (Armstrong, Mgr Solution Development) -- software developer manager career.
+  - Kenneth Norman (Armstrong, Mgr Development) -- software developer manager career.
+  - John Thoma (Armstrong, GM Utilities) -- ops exec.
+  - Robert Lauer (Armstrong, GM Cable TV) -- ops exec.
+  - Will Huber (AHEAD, SVP Specialist Solutions Engineering) -- VAR sales engineering leader.
+  - Brian Raposo (AHEAD, EVP) -- VAR regional sales/GM.
+Conditional / STOP-GATE:
+  - Christopher Cieply (Armstrong, Mgr Information Security) -- infosec, not primary OSI buyer.
+  - Adam Inglis (Armstrong, Linux Administrator) -- IC, 50+ yrs but Non-Manager, adjacent only.
+  - Ryan Potter (Stellar, Director Network Ops) -- OWNED BY BRIAN CHARRETTE (not JAM), 11mo stale; account-request flag for Andy. Do NOT prospect.
+  - Matthew Sterling (Stellar, IT Director) -- ZoomInfo COMPANY_ONLY_MATCH; cannot create reliable record.
+Skipped-active-sequence:
+  - Stephen Wonderling (Armstrong) -- already in queue with E1 sent 2026-04-23 + full sequence pending. Active-sequence dedup.
+Stagger updates: Armstrong {last_day1: 2026-06-03, person_count: 6}; Stellar new {last_day1: 2026-04-27, person_count: 1}; Patrick Industries new {last_day1: 2026-04-27, person_count: 1}.
+Queue: pending 97 -> 82 (15 evaluated). 18 emails appended to email-queue.json (now 571 entries).
+Tab 1: 3 rows appended (351 Eric, 352 Richard, 353 Charles). Tab 1 now 353 rows.
+Voice check: no em-dashes, no hyphens in subjects, no banned vocab. PASS.
+Armstrong batch progress: 6 of 16 candidates processed yes-with-email (Pastore, Hillard, Mikita, Quinn, McArdle, Aulbach) + 1 skipped-active-sequence (Wonderling) + 5 no + 1 conditional + 1 conditional (Adam I.) = 14 of 16 evaluated. Remaining pending Armstrong (none in current next-up window).
+Stellar batch: 1 yes (Laing) + 2 yes-no-email (Bretl, Lentz, LI fallback deferred) + 2 conditional (Potter, Sterling) = 5 of 5 evaluated. Stellar wrapped this fire.
+Patrick Industries batch: 1 yes (Kelley) + 3 pending (Asmus security, Zakusilov sys eng, Schultz sysadmin).
+[2026-04-25 20:26 UTC] GIT WARN -- writing locally per concurrent-run discipline. State + log + queue + Excel persisted to disk. .git/index.lock has been stuck since 03:56 UTC (sandbox lacks delete perms). Andy: rm C:\Claude-Brain\.git\index.lock then git add . && git commit -m "Processing batch 20:26 UTC" && git push.
+
+[2026-04-25 22:19 UTC] Processing Recurring batch -- 3 of 3 sequences fired (cap reached). 15 candidates evaluated.
+  - John Calder (Director, Data Center Operations, S&P Global, Ypsilanti MI, ET) | Day 1 = 2026-04-27 | Network sample-offer wedge | EXISTING HubSpot 209780627792 | john.calder@spglobal.com | mobile +64 27 551 6582 (NZ format -- data hygiene flag, no direct phone) | Sales Nav LI URL on file | last contacted 2026-04-14. Shallow qualify path. Strategy note 108661227316, LINKED_IN_CONNECT task 108677274651. S&P Global stagger initialized {last_day1: 2026-04-27, person_count: 1}.
+  - Aidan Rigney (Vice President, Infrastructure & Operations, S&P Global, Dunleer Ireland) | Day 1 = 2026-05-01 | Pain-led TPM exec (8 to 12 percent SmartNet/ProSupport increases) | EXISTING HubSpot 180505461638 | aidan.rigney@spglobal.com | direct +44 20 7176 8549 (UK), mobile +353 83 150 5611 (Ireland) | last contacted 2025-12-10. Shallow qualify. Note 108674190746, task 108665842091. S&P Global stagger person 2.
+  - Gregg Blauth (Head of Global Network Services, S&P Global, Princeton NJ, ET) | Day 1 = 2026-05-07 | Network sample-offer wedge | EXISTING HubSpot 180505461635 | gregg.blauth@spglobal.com | direct +1 609 371 4023, mobile +1 646 499 0393 | Sales Nav LI URL on file | last contacted 2025-12-17. Shallow qualify. Note 108677142864, task 108684378206. S&P Global stagger person 3.
+No / STOP-GATE (8 AHEAD VAR/reseller pattern + 2 Patrick Industries):
+  - Tony Jaroszewski (AHEAD, Senior Director Network Specialty Sales Engineering) -- VAR pre-sales SE leadership.
+  - Scott Riser (AHEAD, Director Specialty Solutions Engineer Datacenter) -- VAR DC SE.
+  - David Smiley (AHEAD, Principal Specialist Solutions Engineer) -- VAR pre-sales IC.
+  - Ryan Lerew (AHEAD, Principal Security Engineer) -- VAR security SE, non-OSI buyer function.
+  - Ken Nalbone (AHEAD, Principal Specialist Solutions Engineer) -- VAR pre-sales IC.
+  - Michael Colonno (AHEAD, GTM/Presales Strategy Midmarket) -- VAR sales/GTM.
+  - Benjamin Salomon (AHEAD, Managing Director NY Region) -- VAR regional sales leadership.
+  - Chris Lawther (AHEAD, Principal Technical Consultant Lead Platform Eng) -- VAR consulting/platform SE.
+  - Tyler Asmus (Patrick Industries, IT Security Analyst) -- junior security analyst, not OSI buyer.
+  - Douglas Schultz (Patrick Industries, System Administrator) -- junior sysadmin, not buyer.
+Conditional / STOP-GATE (2 Patrick Industries):
+  - Oleg Zakusilov (Patrick Industries, System Engineer) -- ambiguous title, RV/marine manufacturer, defer pending deep profile read.
+  - Rod Utley (Patrick Industries, Information Technology) -- vague title, defer pending deep profile read.
+Stagger updates: S&P Global new {last_day1: 2026-05-07, person_count: 3}.
+Queue: pending 80 -> 65 (15 evaluated: 3 yes-with-email + 10 no + 2 conditional). 18 emails appended to email-queue.json (now 589 entries total).
+Tab 1: 3 rows appended (354 John, 355 Aidan, 356 Gregg). Tab 1 now 356 rows.
+AHEAD batch wrapped (10 of 10 evaluated this run + 2 prior fire = all NOs on consistent VAR/reseller pattern; partner-play recommendation flagged for Andy strategy review, NOT cold outreach).
+Patrick Industries batch progress: 1 yes (Kelley prior fire) + 2 no (Asmus, Schultz) + 2 cond (Zakusilov, Utley) = 5 of 5 evaluated this batch (Charles Kelley already done). Patrick Industries wrapped.
+S&P Global batch progress: 3 yes-with-email of 10 candidates -- 7 still pending for next fire (Nicholas Kolchev, Guruprasad Ramamoorthy, James Goring, Kory Grinberg, Roni Goldstein, Sean Shannon, Craig Suellentrop). All HubSpot-sourced JAM-owned, all OSI ICP fit titles.
+Voice check: all 18 email bodies + LinkedIn invites scanned for em-dashes, hyphens, banned vocab. PASS.
+[2026-04-25 22:19 UTC] GIT WARN -- writing locally per concurrent-run discipline. State + log + queue + Excel persisted to disk. .git/index.lock has been stuck since 03:56 UTC (sandbox lacks delete perms). Andy: rm C:\Claude-Brain\.git\index.lock then git add . && git commit -m "Processing batch 2026-04-25 22:19 UTC S&P Global 3x + AHEAD/Patrick STOP-GATE batch" && git push.
+
+[2026-04-26 00:16 UTC] Processing Recurring batch -- 3 of 3 sequences fired (cap reached). 4 candidates evaluated.
+  - Nicholas Kolchev (Senior Network Administrator & Engineer, S&P Global, Aurora CO) | Day 1 = 2026-05-13 | Network sample-offer wedge | EXISTING HubSpot 209783399847 | nick.kolchev@spglobal.com (FULL_MATCH 94) + direct (303) 858-6469 | LinkedIn nicholas-kolchev-49ab6961. Strategy note 108679446314, LINKED_IN_CONNECT task 108691815508. S&P Global stagger person 4.
+  - Guruprasad Ramamoorthy (Global VP, Head of Cloud & Infrastructure, S&P Global, NYC) | Day 1 = 2026-05-19 | Pain-led exec TPM (8-12% SmartNet/ProSupport) | EXISTING HubSpot 180505461639 | guruprasad.r@spglobal.com (FULL_MATCH 98) + direct (212) 438-3303 + India mobile +91 99728 77500 | LinkedIn guruprasadramamoorthy | last contacted 2025-12-11. Strategy note 108674199053, LINKED_IN_CONNECT task 108689803377. S&P Global stagger person 5.
+  - Craig Suellentrop (Director, Infrastructure Engineering & Automation, S&P Global, Englewood CO) | Day 1 = 2026-05-26 (post-Memorial Day Tue) | Network sample-offer wedge | EXISTING HubSpot 7455113472 | EMAIL CORRECTED craig.suellentrop@ihsmarkit.com -> craig.suellentrop@spglobal.com (ZoomInfo FULL_MATCH 94) + direct (303) 858-6925 | LinkedIn craigsuellentrop | last contacted 2024-05-06 (24 mo stale, cold re-engagement). Strategy note 108689728326, LINKED_IN_CONNECT task 108691884047. S&P Global stagger person 6.
+Conditional / STOP-GATE:
+  - Sean Shannon (S&P Global, formerly Senior Network Engineer) -- ZoomInfo lookup on sean.shannon@spglobal.com returned CONTACT_ONLY_MATCH (no current company) with title now "Senior Consultant" (no employer). Last HubSpot touch 2023-07-28 (33 mo stale). Email may still forward but role/company at S&P unverified. Marked conditional, holds for human review.
+Stagger updates: S&P Global {last_day1: 2026-05-26, person_count: 6}.
+Queue: pending 65 -> 61 (4 evaluated: 3 yes-with-email + 1 conditional). 18 emails appended to email-queue.json (now 607 entries total).
+Tab 1: 3 rows appended (357 Nicholas, 358 Guruprasad, 359 Craig). Tab 1 now 359 rows.
+Voice check: all 18 email bodies + 3 LinkedIn invite notes scrubbed for em-dashes, hyphens-in-subjects, banned vocab. PASS.
+S&P Global batch progress: 6 yes-with-email + 1 conditional (Sean) of 10 + 4 still pending (James Goring, Kory Grinberg, Roni Goldstein, plus James + Kory had no/COMPANY_ONLY_MATCH on this fire's enrich -- next fire should hit Roni + remaining names). Note: James Goring NO_MATCH and Kory Grinberg COMPANY_ONLY_MATCH on this run; will need deeper qualification or LinkedIn search next fire.
+[2026-04-26 00:16 UTC] GIT WARN -- writing locally per concurrent-run discipline. State + log + queue + Excel persisted to disk. .git/index.lock has been stuck since 03:56 UTC 2026-04-25 (sandbox lacks delete perms). Andy: rm C:\Claude-Brain\.git\index.lock then git add . && git commit -m "Processing batch 2026-04-26 00:16 UTC S&P Global p4-p6 (Nicholas, Guruprasad, Craig)" && git push.

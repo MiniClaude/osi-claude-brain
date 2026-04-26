@@ -154,8 +154,15 @@ If Claude is running a task that modifies files in this folder, Claude should of
 🚨 **HARD RULE: EVERY SKILL LIVES IN `Claude-Brain/skills/`. NO EXCEPTIONS.**
 Both the source folder (`skills/[skill-name]/SKILL.md`) AND the packaged `.skill` file (`skills/[skill-name].skill`) must be inside the `skills/` directory. Never at the root of `Claude-Brain/`. Never in a sibling folder. Never scattered across multiple locations. If a Claude session creates a `.skill` file anywhere other than `Claude-Brain/skills/`, move it immediately. Runtime data files (like `reengagement-tracker.json`) belong at the root of `Claude-Brain/`, NOT in `skills/`. Skills folder is ONLY for skill sources and their packages.
 
-🚨 **HARD RULE: `email-queue.json` LIVES IN `C:\Claude-Brain\` (synced via git).**
-As of 2026-04-25 the email queue moved BACK from OneDrive to `C:\Claude-Brain\email-queue.json`. The OneDrive sync was eliminating itself one prompt at a time: every scheduled-task session triggered a Cowork mount approval prompt. Now the queue is git-versioned along with everything else. Any skill that reads or writes the queue MUST `git pull` at the start of its run and `git push` at the end so the other laptop syncs automatically. The hard-block list (`hard-block.json`) also stays in Git at `C:\Claude-Brain\hard-block.json`.
+🚨 **HARD RULE: `email-queue.json` LIVES IN `C:\Claude-Brain\` (manual git only).**
+As of 2026-04-25 the email queue moved BACK from OneDrive to `C:\Claude-Brain\email-queue.json`. The OneDrive sync was eliminating itself one prompt at a time: every scheduled-task session triggered a Cowork mount approval prompt. Now the queue is git-versioned along with everything else.
+
+🚨 **HARD RULE: NO AUTO GIT IN SCHEDULED TASKS / RUNNERS.**
+Skills must NOT call `git pull` or `git push` automatically. Reasons: (1) `.git/index.lock` keeps getting stuck because the sandbox can't always delete it, blocking subsequent operations; (2) Andy only runs the runner on ONE laptop, so auto-sync isn't needed; (3) auto-git pollutes logs with `GIT WARN` noise every fire. Skills read and write to disk; Andy commits and pushes manually when he wants to sync to the other laptop.
+
+If a skill or scheduled task previously did `git pull` / `git push` automatically, remove that logic. Do NOT log `GIT WARN` lines about lock files. Just write to disk cleanly and exit.
+
+The hard-block list (`hard-block.json`) also stays in Git at `C:\Claude-Brain\hard-block.json` (manual sync, same rule).
 
 Reusable skills live in `Claude-Brain/skills/` (NOT `.claude/skills/` - that is read-only). Current skills:
 - `osi-outreach-7email` - Full 7-email hyper-personalized sequence. Trigger: "run the 7-email sequence for [name]"

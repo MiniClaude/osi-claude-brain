@@ -592,8 +592,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/rob-mikita-7a2344116",
       "title": "Network Engineer at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Network Engineer 9.8yr, ZoomInfo FULL_MATCH 98%, restricted 3rd-deg LinkedIn, sequence Day 1 2026-05-07",
+      "processedDate": "2026-04-25T18:38:46"
     },
     {
       "id": "lindsey-q-armstrong-group-of-companies",
@@ -603,8 +605,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/lindsey-q-5470ba71",
       "title": "Network Security Administrator at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Network Security Admin 6.5yr, ZoomInfo FULL_MATCH 99% (Quinn), restricted 3rd-deg LinkedIn, sequence Day 1 2026-05-13",
+      "processedDate": "2026-04-25T18:38:46"
     },
     {
       "id": "gregory-henry-armstrong-group-of-companies",
@@ -614,8 +618,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/gregory-henry-1121aa153",
       "title": "Network and Security Administrator at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "skipped-active-sequence",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Already in active sequence (Email 1 sent 2026-04-20). Existing HubSpot 539562.",
+      "processedDate": "2026-04-25T18:38:46"
     },
     {
       "id": "john-mcardle-iii-armstrong-group-of-companies",
@@ -625,8 +631,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/john-mcardle-iii-16152254",
       "title": "Telecommunications Vendor Management at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Telecom Vendor Mgmt 14yr, ZoomInfo FULL_MATCH 99%, LinkedIn URL corrected to john-mcardle-iii-16152254, DWDM pain-led, sequence Day 1 2026-05-28 cooling gap",
+      "processedDate": "2026-04-25T18:38:46"
     },
     {
       "id": "jerry-hazard-armstrong-group-of-companies",
@@ -636,8 +644,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/jerry-hazard-4a50b78",
       "title": "IT Manager at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "no",
+      "addedDate": "2026-04-25",
+      "processedDate": "2026-04-25T20:14:00Z",
+      "verdict_reason": "ZoomInfo title resolves to \"IT and End User Devices Manager, Service Desk\" \u2014 service desk / EUC operations role, not network infrastructure or optics buyer. STOP-GATE."
     },
     {
       "id": "eric-aulbach-armstrong-group-of-companies",
@@ -647,8 +657,13 @@
       "linkedinUrl": "https://www.linkedin.com/in/ericaulbach",
       "title": "Chief Information and Group Marketing Officer at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "hubspotContactId": 540160,
+      "email": "eaulbach@agoc.com",
+      "day1": "2026-06-03",
+      "processedDate": "2026-04-25T20:15:00Z",
+      "verdict_reason": "CIO + CMO at Armstrong, 14yr in seat. MCTV close (96k passings OH+WV, Q2 2026) is fresh hook. SmartOptics DWDM lead. HubSpot shallow qualify path. Person 6 of Armstrong batch."
     },
     {
       "id": "stephen-wonderling-armstrong-group-of-companies",
@@ -658,8 +673,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/stephen-wonderling-b051aa15",
       "title": "Manager, Systems & Storage at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "skipped-active-sequence",
+      "addedDate": "2026-04-25",
+      "processedDate": "2026-04-25T20:16:00Z",
+      "verdict_reason": "Already in active sequence (Email 1 sent 2026-04-23, full sequence pending). Active-sequence dedup. Doesn't count toward 3-cap."
     },
     {
       "id": "dean-sutherin-armstrong-group-of-companies",
@@ -669,8 +686,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/wdsutherin",
       "title": "Manager, Solution Development at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "no",
+      "addedDate": "2026-04-25",
+      "processedDate": "2026-04-25T20:17:00Z",
+      "verdict_reason": "Manager Solution Development at Armstrong. Career = software developer (Lead Solution Developer at Armstrong + Guardian + Programmer/Analyst at USG Insurance). Application dev manager, not infrastructure or hardware buyer. STOP-GATE."
     },
     {
       "id": "kenneth-norman-armstrong-group-of-companies",
@@ -680,8 +699,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/kenneth-norman-jr02",
       "title": "Lead Solutions Developer/Manager at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "no",
+      "addedDate": "2026-04-25",
+      "processedDate": "2026-04-25T20:17:00Z",
+      "verdict_reason": "Manager, Development at Armstrong. Career = software developer (Lead Solutions Developer + Developer Analyst at K&L Gates). Application dev manager, not infrastructure or hardware buyer. STOP-GATE."
     },
     {
       "id": "christopher-cieply-armstrong-group-of-companies",
@@ -691,8 +712,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/christopher-cieply-a02256b8",
       "title": "Information Security Manager at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "conditional",
+      "addedDate": "2026-04-25",
+      "processedDate": "2026-04-25T20:17:00Z",
+      "verdict_reason": "Manager Information Security at Armstrong. Past = Sr Sys Admin at Guardian Protection. InfoSec primarily buys security tools (firewalls, IDS, SIEM), not optical, transport, servers, or DIMMs. Adjacent influence at best. STOP-GATE."
     },
     {
       "id": "john-thoma-armstrong-group-of-companies",
@@ -702,8 +725,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/john-thoma-1495aabb",
       "title": "General Manager - Armstrong Utilities Inc. at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "no",
+      "addedDate": "2026-04-25",
+      "processedDate": "2026-04-25T20:17:00Z",
+      "verdict_reason": "GM Armstrong Utilities (utility operations exec). Not an IT or hardware buyer. STOP-GATE."
     },
     {
       "id": "robert-lauer-armstrong-group-of-companies",
@@ -713,8 +738,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/robert-lauer-4301b922",
       "title": "General Manager - Armstrong cable tv at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "no",
+      "addedDate": "2026-04-25",
+      "processedDate": "2026-04-25T20:17:00Z",
+      "verdict_reason": "GM Armstrong Cable TV (operations exec). Not an IT or hardware buyer. STOP-GATE."
     },
     {
       "id": "adam-i-armstrong-group-of-companies",
@@ -724,8 +751,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/adaminglis",
       "title": "Linux Administrator at Armstrong Group of Companies",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "conditional",
+      "addedDate": "2026-04-25",
+      "processedDate": "2026-04-25T20:22:00Z",
+      "verdict_reason": "Linux Administrator at Armstrong, individual contributor (Non-Manager, 50+ yrs experience). Past = Network Admin at Jumpline. Adjacent to network/systems but not the procurement decision-maker. STOP-GATE."
     },
     {
       "id": "aaron-bretl-stellar",
@@ -735,9 +764,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/aaron-bretl-658232205",
       "title": "Tier III Network Engineer at Stellar Broadband",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "yes-no-email",
       "addedDate": "2026-04-25",
-      "note": "Stellar Broadband (regional ISP, stellarbb.com) \u2014 chosen as IT/infrastructure-focused Stellar per task hint"
+      "note": "Stellar Broadband (regional ISP, stellarbb.com) \u2014 chosen as IT/infrastructure-focused Stellar per task hint",
+      "processedDate": "2026-04-25T20:22:00Z",
+      "verdict_reason": "Tier III Network Engineer at Stellar Broadband, 10-14 yrs, defense IT background (CACI, DynCorp). ZoomInfo no business email (only mobile (269) 965-4363). Yes-no-email path. LI fallback tasks deferred to next fire (token economy)."
     },
     {
       "id": "ryan-potter-stellar",
@@ -747,9 +778,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/ryan-potter-32344817",
       "title": "Director Of Network Operations at Stellar Broadband",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "conditional",
       "addedDate": "2026-04-25",
-      "note": "Stellar Broadband (regional ISP, stellarbb.com) \u2014 chosen as IT/infrastructure-focused Stellar per task hint"
+      "note": "Stellar Broadband (regional ISP, stellarbb.com) \u2014 chosen as IT/infrastructure-focused Stellar per task hint",
+      "processedDate": "2026-04-25T20:22:00Z",
+      "verdict_reason": "Director Network Operations at Stellar Broadband. ALREADY OWNED IN HUBSPOT BY BRIAN CHARRETTE (213536174), last contacted 2025-05-14 (~11 months ago). Account-request flag for Andy. Do NOT prospect. STOP-GATE."
     },
     {
       "id": "john-lentz-stellar",
@@ -759,9 +792,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/john-lentz-254241141",
       "title": "Network Administrator | Network Operations at Stellar Broadband",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "yes-no-email",
       "addedDate": "2026-04-25",
-      "note": "Stellar Broadband (regional ISP, stellarbb.com) \u2014 chosen as IT/infrastructure-focused Stellar per task hint"
+      "note": "Stellar Broadband (regional ISP, stellarbb.com) \u2014 chosen as IT/infrastructure-focused Stellar per task hint",
+      "processedDate": "2026-04-25T20:22:00Z",
+      "verdict_reason": "Network Operations Center engineer at Stellar Broadband, 10-14 yrs (American MITSUBA Network Admin past). ZoomInfo no business email (only mobile (989) 400-5226). Yes-no-email path. LI fallback tasks deferred to next fire (token economy)."
     },
     {
       "id": "matthew-sterling-stellar",
@@ -771,9 +806,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/matthew-sterling-1271b8250",
       "title": "IT Director at Stellar Broadband",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "conditional",
       "addedDate": "2026-04-25",
-      "note": "Stellar Broadband (regional ISP, stellarbb.com) \u2014 chosen as IT/infrastructure-focused Stellar per task hint"
+      "note": "Stellar Broadband (regional ISP, stellarbb.com) \u2014 chosen as IT/infrastructure-focused Stellar per task hint",
+      "processedDate": "2026-04-25T20:22:00Z",
+      "verdict_reason": "IT Director at Stellar Broadband per LinkedIn, but ZoomInfo COMPANY_ONLY_MATCH (no individual record). No email, no phone, no employment history confirmable. Cannot create reliable HubSpot record. STOP-GATE."
     },
     {
       "id": "richard-laing-stellar",
@@ -783,9 +820,14 @@
       "linkedinUrl": "https://www.linkedin.com/in/richard-laing-42744a1",
       "title": "President & COO at Stellar Broadband",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "yes-with-email",
       "addedDate": "2026-04-25",
-      "note": "Stellar Broadband (regional ISP, stellarbb.com) \u2014 chosen as IT/infrastructure-focused Stellar per task hint"
+      "note": "Stellar Broadband (regional ISP, stellarbb.com) \u2014 chosen as IT/infrastructure-focused Stellar per task hint",
+      "hubspotContactId": 217896757426,
+      "email": "rlaing@stellarbb.com",
+      "day1": "2026-04-27",
+      "processedDate": "2026-04-25T20:22:00Z",
+      "verdict_reason": "President & COO at Stellar Broadband (transitioned 2026-01-31 from Spartan Net CIO 22 years). Pain-led exec sequence. Person 1 of Stellar batch. ZoomInfo FULL_MATCH 99 accuracy."
     },
     {
       "id": "will-huber-ahead",
@@ -795,9 +837,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/huberw",
       "title": "SVP at AHEAD",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "no",
       "addedDate": "2026-04-25",
-      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play"
+      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play",
+      "processedDate": "2026-04-25T20:23:00Z",
+      "verdict_reason": "SVP Specialist Solutions Engineering at AHEAD. Past = CDI CTO. Career-long sales engineering / solutions architecture leader at VARs. AHEAD is a data center solution provider. SEs sell technology to clients, they do not buy network infrastructure for AHEAD itself. STOP-GATE."
     },
     {
       "id": "brian-raposo-ahead",
@@ -807,9 +851,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/brianraposo",
       "title": "Executive Vice President at AHEAD",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "no",
       "addedDate": "2026-04-25",
-      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play"
+      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play",
+      "processedDate": "2026-04-25T20:23:00Z",
+      "verdict_reason": "Executive Vice President at AHEAD. Past = Tricentis VP Ams West, Technologent GM, Dell EMC sales. Career sales / regional GM exec at VARs. Not an OSI infrastructure buyer. STOP-GATE."
     },
     {
       "id": "tony-jaroszewski-ahead",
@@ -819,9 +865,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/tonyjaroszewski",
       "title": "Senior Director Network Specialty Sales Engineering at AHEAD",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "no",
       "addedDate": "2026-04-25",
-      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play"
+      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play",
+      "verdict_reason": "Senior Director Network Specialty Sales Engineering at AHEAD - VAR pre-sales SE leadership. Not direct buyer; AHEAD resells networking gear to enterprises. Standard 6-email cold sequence pitches as buyer (incompatible). Channel/partner motion required, not cold outreach. STOP-GATE applied (consistent with Will Huber, Brian Raposo NOs prior fire).",
+      "processedDate": "2026-04-25T22:13:02Z"
     },
     {
       "id": "scott-riser-ahead",
@@ -831,9 +879,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/scott-riser-76228620",
       "title": "Director, Specialty Solutions Engineer - Datacenter at AHEAD",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "no",
       "addedDate": "2026-04-25",
-      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play"
+      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play",
+      "verdict_reason": "Director Specialty Solutions Engineer Datacenter at AHEAD - VAR DC SE role. Designs solutions for end customers; not buying for own infra. Same VAR/reseller pattern as Will Huber/Brian Raposo NOs.",
+      "processedDate": "2026-04-25T22:13:02Z"
     },
     {
       "id": "david-smiley-ahead",
@@ -843,9 +893,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/david-smiley-a136a54",
       "title": "Principal Specialist Solutions Engineer at AHEAD",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "no",
       "addedDate": "2026-04-25",
-      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play"
+      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play",
+      "verdict_reason": "Principal Specialist Solutions Engineer at AHEAD - VAR pre-sales IC. Not direct buyer. VAR/reseller pattern.",
+      "processedDate": "2026-04-25T22:13:02Z"
     },
     {
       "id": "ryan-lerew-ahead",
@@ -855,9 +907,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/ryan-lerew",
       "title": "Principal Security Engineer at AHEAD",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "no",
       "addedDate": "2026-04-25",
-      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play"
+      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play",
+      "verdict_reason": "Principal Security Engineer at AHEAD - VAR security SE, not networking infra buyer. VAR/reseller pattern + non-OSI buyer function.",
+      "processedDate": "2026-04-25T22:13:02Z"
     },
     {
       "id": "ken-nalbone-ahead",
@@ -867,9 +921,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/kennalbone",
       "title": "Principal Specialist Solutions Engineer at AHEAD",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "no",
       "addedDate": "2026-04-25",
-      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play"
+      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play",
+      "verdict_reason": "Principal Specialist Solutions Engineer at AHEAD - VAR pre-sales IC. Same as David Smiley. VAR/reseller pattern.",
+      "processedDate": "2026-04-25T22:13:02Z"
     },
     {
       "id": "michael-colonno-ahead",
@@ -879,9 +935,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/michael-colonno-387010a",
       "title": "Driving GTM & Presales Strategy for Midmarket Clients at AHEAD",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "no",
       "addedDate": "2026-04-25",
-      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play"
+      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play",
+      "verdict_reason": "Driving GTM & Presales Strategy for Midmarket Clients at AHEAD - VAR sales leadership/GTM. Hard No per disqualifier (Sales role, no direct IT infra buying authority).",
+      "processedDate": "2026-04-25T22:13:02Z"
     },
     {
       "id": "benjamin-salomon-ahead",
@@ -891,9 +949,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/benjamin-salomon-8b3bb1",
       "title": "Managing Director, NY Region at AHEAD",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "no",
       "addedDate": "2026-04-25",
-      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play"
+      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play",
+      "verdict_reason": "Managing Director NY Region at AHEAD - VAR regional sales leadership. Same as Brian Raposo (EVP) NO. VAR sales leadership disqualifier.",
+      "processedDate": "2026-04-25T22:13:02Z"
     },
     {
       "id": "chris-lawther-ahead",
@@ -903,9 +963,11 @@
       "linkedinUrl": "https://www.linkedin.com/in/lawther",
       "title": "Principal Technical Consultant Lead - Platform Engineering at AHEAD",
       "source": "linkedin_search",
-      "status": "pending",
+      "status": "no",
       "addedDate": "2026-04-25",
-      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play"
+      "note": "AHEAD IT solutions provider (Berkshire Partners majority owner) \u2014 relevant as supplier/partner play",
+      "verdict_reason": "Principal Technical Consultant Lead Platform Engineering at AHEAD - VAR consulting/platform SE. VAR/reseller pattern; not direct OSI buyer.",
+      "processedDate": "2026-04-25T22:13:02Z"
     },
     {
       "id": "charles-kelley-patrick-industries",
@@ -915,8 +977,13 @@
       "linkedinUrl": "https://www.linkedin.com/in/charles-kelley-b6b953116",
       "title": "Network Manager at Patrick Industries",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "yes-with-email",
+      "addedDate": "2026-04-25",
+      "hubspotContactId": 540826,
+      "email": "kelleyc@patrickind.com",
+      "day1": "2026-04-27",
+      "processedDate": "2026-04-25T20:26:00Z",
+      "verdict_reason": "Corporate Network Administrator at Patrick Industries (mfgr ~$3B). USMC IT Supervisor background. Existing HubSpot contact (Andy-owned), 10 mo cold, no deals. Network sample-offer wedge (free SFPs). Person 1 of Patrick Industries batch."
     },
     {
       "id": "tyler-asmus-patrick-industries",
@@ -926,8 +993,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/tyler-asmus-5576123b",
       "title": "IT Security Analyst at Patrick Industries",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "no",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "IT Security Analyst at Patrick Industries - junior security analyst (firewalls/IDS/SIEM territory). Not networking/optical/storage/compute buyer. Pattern matches Daniel N. (Midco) and Christopher Cieply (Armstrong) infosec NOs. STOP-GATE applied.",
+      "processedDate": "2026-04-25T22:13:02Z"
     },
     {
       "id": "oleg-zakusilov-patrick-industries",
@@ -937,8 +1006,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/oleg-zakusilov-1313624b",
       "title": "System Engineer at Patrick Industries",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "conditional",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "System Engineer at Patrick Industries - title ambiguous (could be Linux/VMware/Windows admin or could be infra engineer). Patrick is RV/marine manufacturer with limited IT infra at scale. Defer pending deep profile read (next fire if budget allows). STOP-GATE applied.",
+      "processedDate": "2026-04-25T22:13:02Z"
     },
     {
       "id": "douglas-schultz-patrick-industries",
@@ -948,8 +1019,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/douglas-schultz-itprofessional",
       "title": "System Administrator at Patrick Industries",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "no",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "System Administrator at Patrick Industries - junior sysadmin role. Not buying or specifying networking/optical/storage at scale. Tier-3 ops, not architecture/buyer. STOP-GATE applied.",
+      "processedDate": "2026-04-25T22:13:02Z"
     },
     {
       "id": "rod-utley-patrick-industries",
@@ -959,8 +1032,10 @@
       "linkedinUrl": "https://www.linkedin.com/in/rod-utley-59922a251",
       "title": "Information Technology at Patrick Industries",
       "source": "linkedin_search",
-      "status": "pending",
-      "addedDate": "2026-04-25"
+      "status": "conditional",
+      "addedDate": "2026-04-25",
+      "verdict_reason": "Information Technology at Patrick Industries - title too vague to qualify cold. Could be helpdesk through CIO. Defer pending deep profile read. STOP-GATE applied.",
+      "processedDate": "2026-04-25T22:13:02Z"
     },
     {
       "id": "john-calder-sp-global",
@@ -972,9 +1047,15 @@
       "source": "hubspot_contact",
       "hubspotContactId": 209780627792,
       "email": "john.calder@spglobal.com",
-      "status": "pending",
+      "status": "yes-with-email",
       "addedDate": "2026-04-25",
-      "note": "Director-level data center buyer. Recent contact 2026-04-14 \u2014 Processing batch must check active-sequence dedup before enroll. SLB acquired SPG Energy upstream software 2026-04-23 \u2014 restructuring hook."
+      "note": "Director-level data center buyer. Recent contact 2026-04-14 \u2014 Processing batch must check active-sequence dedup before enroll. SLB acquired SPG Energy upstream software 2026-04-23 \u2014 restructuring hook.",
+      "verdict_reason": "Director Data Center Operations at S&P Global. JAM owned, last contacted 2026-04-14. Network sample-offer wedge with DWDM, DIMMs, TPM follow-on. Day 1 = 2026-04-27 person 1.",
+      "day1": "2026-04-27",
+      "sequence": "Call - Network",
+      "hubspotNoteId": 108661227316,
+      "hubspotTaskId": 108677274651,
+      "processedDate": "2026-04-25T22:18:47Z"
     },
     {
       "id": "nicholas-kolchev-sp-global",
@@ -987,9 +1068,16 @@
       "hubspotContactId": 209783399847,
       "email": "nick.kolchev@spglobal.com",
       "phone": "+13038586469",
-      "status": "pending",
+      "status": "yes-with-email",
       "addedDate": "2026-04-25",
-      "note": "No prior outreach activity. Network ICP fit, free SFP wedge candidate."
+      "note": "No prior outreach activity. Network ICP fit, free SFP wedge candidate.",
+      "processed_at": "2026-04-26T00:16:00Z",
+      "day1": "2026-05-13",
+      "hubspot_contact_id": 209783399847,
+      "zoominfo_match": "FULL_MATCH 94",
+      "linkedin_url": "https://www.linkedin.com/in/nicholas-kolchev-49ab6961",
+      "li_connect_task_id": 108691815508,
+      "strategy_note_id": 108679446314
     },
     {
       "id": "aidan-rigney-sp-global",
@@ -1001,9 +1089,15 @@
       "source": "hubspot_contact",
       "hubspotContactId": 180505461638,
       "email": "aidan.rigney@spglobal.com",
-      "status": "pending",
+      "status": "yes-with-email",
       "addedDate": "2026-04-25",
-      "note": "VP-level infra buyer. Last touch 2025-12-10 (~4 mo). Director pain-led DWDM/TPM angle."
+      "note": "VP-level infra buyer. Last touch 2025-12-10 (~4 mo). Director pain-led DWDM/TPM angle.",
+      "verdict_reason": "VP Infrastructure & Operations at S&P Global, Ireland (Dunleer). JAM owned, last contacted 2025-12-10. Pain-led TPM exec opener (8-12% SmartNet/ProSupport increases). Day 1 = 2026-05-01 person 2.",
+      "day1": "2026-05-01",
+      "sequence": "Call - TPM",
+      "hubspotNoteId": 108674190746,
+      "hubspotTaskId": 108665842091,
+      "processedDate": "2026-04-25T22:18:47Z"
     },
     {
       "id": "gregg-blauth-sp-global",
@@ -1016,9 +1110,15 @@
       "hubspotContactId": 180505461635,
       "email": "gregg.blauth@spglobal.com",
       "phone": "+16093714023",
-      "status": "pending",
+      "status": "yes-with-email",
       "addedDate": "2026-04-25",
-      "note": "Head of Global Network Services \u2014 top buyer profile. Last touch 2025-12-17. DWDM + transceiver lead-time angle."
+      "note": "Head of Global Network Services \u2014 top buyer profile. Last touch 2025-12-17. DWDM + transceiver lead-time angle.",
+      "verdict_reason": "Head of Global Network Services at S&P Global, Princeton NJ. JAM owned, last contacted 2025-12-17. Network sample-offer wedge with DWDM, DIMMs, TPM follow-on. Day 1 = 2026-05-07 person 3.",
+      "day1": "2026-05-07",
+      "sequence": "Call - Network",
+      "hubspotNoteId": 108677142864,
+      "hubspotTaskId": 108684378206,
+      "processedDate": "2026-04-25T22:18:47Z"
     },
     {
       "id": "guruprasad-ramamoorthy-sp-global",
@@ -1031,9 +1131,16 @@
       "hubspotContactId": 180505461639,
       "email": "guruprasad.r@spglobal.com",
       "phone": "(212) 438-3303",
-      "status": "pending",
+      "status": "yes-with-email",
       "addedDate": "2026-04-25",
-      "note": "Global VP Cloud & Infrastructure. Last touch 2025-12-11. Senior buyer, director pain-led approach."
+      "note": "Global VP Cloud & Infrastructure. Last touch 2025-12-11. Senior buyer, director pain-led approach.",
+      "processed_at": "2026-04-26T00:16:00Z",
+      "day1": "2026-05-19",
+      "hubspot_contact_id": 180505461639,
+      "zoominfo_match": "FULL_MATCH 98",
+      "linkedin_url": "https://www.linkedin.com/in/guruprasadramamoorthy",
+      "li_connect_task_id": 108689803377,
+      "strategy_note_id": 108674199053
     },
     {
       "id": "james-goring-sp-global",
@@ -1088,9 +1195,11 @@
       "hubspotContactId": 532012,
       "email": "sean.shannon@spglobal.com",
       "phone": "(212) 438-1000",
-      "status": "pending",
+      "status": "conditional",
       "addedDate": "2026-04-25",
-      "note": "Stale \u2014 last touch 2023-07-28 (~33 mo). Re-engagement candidate with fresh SLB/upstream divestiture hook."
+      "note": "Stale \u2014 last touch 2023-07-28 (~33 mo). Re-engagement candidate with fresh SLB/upstream divestiture hook.",
+      "processed_at": "2026-04-26T00:16:00Z",
+      "stop_gate_reason": "ZoomInfo CONTACT_ONLY_MATCH (no current company). Title now 'Senior Consultant', employment at S&P unverified. Last touch 2023-07-28 (33 mo stale). spglobal.com email may forward but role/company not confirmed. Hold for human review."
     },
     {
       "id": "craig-suellentrop-sp-global",
@@ -1103,9 +1212,17 @@
       "hubspotContactId": 7455113472,
       "email": "craig.suellentrop@ihsmarkit.com",
       "phone": "(303) 858-6925",
-      "status": "pending",
+      "status": "yes-with-email",
       "addedDate": "2026-04-25",
-      "note": "Director-level infra/automation. Last touch 2024-05-06 (~24 mo). ihsmarkit.com email \u2014 verify deliverability or fall back to LinkedIn."
+      "note": "Director-level infra/automation. Last touch 2024-05-06 (~24 mo). ihsmarkit.com email \u2014 verify deliverability or fall back to LinkedIn.",
+      "processed_at": "2026-04-26T00:16:00Z",
+      "day1": "2026-05-26",
+      "hubspot_contact_id": 7455113472,
+      "zoominfo_match": "FULL_MATCH 94",
+      "linkedin_url": "https://www.linkedin.com/in/craigsuellentrop",
+      "li_connect_task_id": 108691884047,
+      "strategy_note_id": 108689728326,
+      "note_correction": "HubSpot email updated craig.suellentrop@ihsmarkit.com -> craig.suellentrop@spglobal.com (ZoomInfo FULL_MATCH 94 working address)"
     },
     {
       "id": "john-aker-saddleback-communications",
@@ -1869,8 +1986,20 @@
       "person_count": 4
     },
     "Armstrong Group of Companies": {
-      "last_day1": "2026-05-01",
-      "person_count": 2
+      "last_day1": "2026-06-03",
+      "person_count": 6
+    },
+    "Stellar": {
+      "last_day1": "2026-04-27",
+      "person_count": 1
+    },
+    "Patrick Industries": {
+      "last_day1": "2026-04-27",
+      "person_count": 1
+    },
+    "S&P Global": {
+      "last_day1": "2026-05-26",
+      "person_count": 6
     }
   },
   "log": {
@@ -1930,6 +2059,27 @@
           "conditional": 1
         },
         "note": "Steven Larson, Jeff Shields, Eric Tijerina queued. Daniel N. (Network Security Engineer I) marked no. Todd Kruid (Voice Engineer) marked conditional."
+      },
+      {
+        "timestamp": "2026-04-26T00:16:00Z",
+        "fired": 3,
+        "yes_with_email": [
+          "nicholas-kolchev-sp-global",
+          "guruprasad-ramamoorthy-sp-global",
+          "craig-suellentrop-sp-global"
+        ],
+        "conditional": [
+          "sean-shannon-sp-global"
+        ],
+        "no": [],
+        "yes_no_email": [],
+        "skipped_active_sequence": [],
+        "stagger_updates": {
+          "S&P Global": {
+            "last_day1": "2026-05-26",
+            "person_count": 6
+          }
+        }
       }
     ]
   }
