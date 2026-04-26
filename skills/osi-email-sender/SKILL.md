@@ -27,7 +27,7 @@ This skill sends cold outreach to real, paying-potential customers. One bad form
 
 ```python
 import json
-QUEUE_PATH = 'C:/Claude-Brain/email-queue.json'  # Live queue on OneDrive (real-time sync across laptops). Moved from C:/Claude-Brain/ on 2026-04-24.
+QUEUE_PATH = 'C:/Claude-Brain/email-queue.json'  # Live queue, Git-versioned. Andy syncs between laptops manually via git push/pull.
 HARD_BLOCK_PATH = 'C:/Claude-Brain/hard-block.json'  # Hard-block list stays in Git (manually maintained, low churn)
 
 with open(QUEUE_PATH) as f:
@@ -125,7 +125,7 @@ If the queue body contains an em-dash, it is a bug in whichever skill wrote the 
 
 Queue file: `C:\Claude-Brain\email-queue.json`
 
-Moved to OneDrive on 2026-04-24 specifically so the queue auto-syncs in real time between Andy's two laptops. OneDrive is the live sync mechanism for this ONE file. The rest of Claude-Brain still lives in Git at `C:\Claude-Brain\`. Do not read or write any `C:\Claude-Brain\email-queue.json` path. If the OneDrive path is unreachable, ABORT. Do not fall back to Git.
+The queue is Git-versioned along with the rest of Claude-Brain. Andy syncs between his two laptops manually via `git pull` / `git push`. The OneDrive experiment ran for one day (2026-04-24) and was rolled back the same evening because Cowork could not mount the OneDrive folder, which killed every send window that day. Do NOT auto-`git pull` or `git push` from this skill (the lock file gets stuck and pollutes logs). If the queue file is unreachable for any reason, ABORT and report. Do not fall back to a stale copy.
 
 Select entries where:
 - `sendDate` equals today's date (YYYY-MM-DD, ET)

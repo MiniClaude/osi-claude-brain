@@ -35,7 +35,7 @@ Read this entire skill before producing any output.
 
 Before any other work on this prospect, check the email queue. This prevents stacking duplicate sequences on the same person, which wrecks sender reputation and is bad form.
 
-Open `C:\Claude-Brain\email-queue.json` using plain Python `open(path,'r')`. The queue lives on OneDrive as of 2026-04-24 so it auto-syncs between Andy's two laptops in real time. Scan every entry for a match with this prospect:
+Open `C:\Claude-Brain\email-queue.json` using plain Python `open(path,'r')`. The queue is Git-versioned along with the rest of Claude-Brain. Andy syncs between his two laptops manually via `git pull` / `git push`. Scan every entry for a match with this prospect:
 
 - Match by `to` field equal to the prospect's email address (case-insensitive), OR
 - Match by `prospectName` + `company` both matching the prospect's full name and company (case-insensitive)
