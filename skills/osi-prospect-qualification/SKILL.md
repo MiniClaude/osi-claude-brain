@@ -21,11 +21,12 @@ Strict boundary with **osi-outreach-sequence**.
 | Shallow qualify path for HubSpot-sourced contacts | this skill |
 | ZoomInfo enrichment (email, direct phone, mobile) | this skill |
 | Strategy note + LINKED_IN_CONNECT task creation | this skill |
+| Email 1 Day 1 stagger calc + LINKED_IN_CONNECT `hs_timestamp` final | this skill |
 | No-email-no-phone LI fallback tasks | this skill |
-| Drafting 6 emails, email-queue writes, stagger math, LINKED_IN_CONNECT due_date final | osi-outreach-sequence |
+| Drafting 6 emails, email-queue writes | osi-outreach-sequence |
 | Excel tracker rows | osi-outreach-sequence |
 
-**Handoff rule:** when verdict is ✅ Yes AND ZoomInfo returns valid email, end with `HANDOFF: invoke osi-outreach-sequence on [First Last] at [Company]...`. If no email, the 2 LI fallback tasks are the complete plan; do NOT hand off.
+**Handoff rule:** when verdict is ✅ Yes AND ZoomInfo returns valid email, end with `HANDOFF: invoke osi-outreach-sequence on [First Last] at [Company]. email1_day1=<ISO>...`. The handoff payload carries `email1_day1` verbatim. If no email, the 2 LI fallback tasks are the complete plan; do NOT hand off.
 
 ---
 
@@ -114,7 +115,7 @@ If ANY fails → fall back to deep Profile Mode.
 
 3. **Active sequence check** — per outreach skill rule. Skip if already enrolled or recently sent.
 
-4. **ZoomInfo enrichment** — only if HubSpot is missing `email`, `phone`, or `mobilephone` properly formatted. If all three populated and phone formatted `+1 (XXX) XXX-XXXX`, skip ZoomInfo entirely.
+4. **ZoomInfo enrichment** — only if HubSpot is missing `email`, `phone`, or `mobilephone` properly formatted. If all three populated and phone formatted `+1 (XXX) XXX-XXXX`, skip ZoomInfo entirely. If ZoomInfo IS run, the 7-attempt retry matrix in the ZOOMINFO ENRICHMENT section below applies — no shortcut.
 
 5. **LinkedIn URL resolution** — if `hs_linkedin_url` populated, use it. If not, one-shot LinkedIn search by name+company; write back to HubSpot if resolved. If fails, proceed without — LINKED_IN_CONNECT task surfaces it for manual lookup.
 
@@ -122,7 +123,7 @@ If ANY fails → fall back to deep Profile Mode.
 
 7. **Generate outreach package** — strategy note, LINKED_IN_CONNECT task, call script, VM, LinkedIn invite, Email 1 opener with Personal Hook. Annotate strategy note with `SOURCE: HubSpot shallow qualify`.
 
-8. **Handoff** to osi-outreach-sequence — same format as deep path.
+8. **Handoff** to osi-outreach-sequence — same format as deep path. Email 1 Day 1 transactional rules below apply.
 
 ### When to escalate back to deep
 - Vague title ("IT Specialist", "Technology Manager" with no industry clue)
@@ -240,25 +241,71 @@ HubSpot slots and ZoomInfo credits are reserved for ✅ Yes only.
 
 ## ZOOMINFO ENRICHMENT — every ✅ Yes verdict
 
-After Yes verdict (and stop-gate), enrich before any HubSpot write or outreach.
+After Yes verdict (and stop-gate), enrich before any HubSpot write or outreach. ZoomInfo files companies under shorter names than HubSpot stores them ("Lingo" vs "Lingo Communications"). The skill MUST try multiple name variants before recording no-match.
 
-### What to pull
-`enrich_contacts` with required fields: `email`, `phone` (direct dial — NOT company main), `mobilePhone`.
+### 🛑 HARDWIRED RULE — ZOOMINFO RETRY MATRIX
+
+Every ZoomInfo enrichment for a Yes verdict MUST attempt the following lookups in order, stopping ONLY when `matchStatus === "FULL_MATCH"` with a non-empty `email` is returned. Each attempt's exact input + matchStatus is recorded verbatim in the strategy note's ZI ATTEMPTS block.
+
+**Attempt 1 — Stored company name** (HubSpot `company` field as-is):
+```
+enrich_contacts({contacts: [{firstName, lastName, companyName: "<HubSpot company>"}]})
+```
+
+**Attempt 2 — Short form** (strip suffixes: Communications, Inc, Inc., LLC, Group, Corp, Corporation, Holdings, Companies, Company, Technology, Industries, International, Solutions, Services, Systems, Networks, Telecom, Telecommunications, Broadband, Fiber, Cable). Skip-with-log if short form === stored.
+
+**Attempt 3 — First word only** ("Lingo Communications" → "Lingo", "Patrick Industries" → "Patrick", "Vero Networks" → "Vero").
+
+**Attempt 4 — Domain stem** (strip TLD and `www.`: "lingo.com" → "lingo", "spglobal.com" → "spglobal", "agoc.com" → "agoc").
+
+**Attempt 5 — name + companyId** (REQUIRED if any earlier attempt returned `COMPANY_ONLY_MATCH` carrying a `zoominfoCompanyId` — that ID proves the company is in ZI and the person record is filed under it under a different name spelling):
+```
+enrich_contacts({contacts: [{firstName, lastName, companyId: "<zoominfoCompanyId>"}]})
+```
+
+**Attempt 6 — search_contacts with name + short-form company** (the search endpoint allows looser matching than enrich):
+```
+search_contacts({firstName, lastName, companyName: "<short form>"})
+```
+
+**Attempt 7 — search_contacts via LinkedIn URL** (catches contacts ZI has under different name spellings; only run if the candidate has a LinkedIn URL):
+```
+search_contacts({externalURL: "<linkedin profile URL>"})
+```
+
+If ALL seven attempts return non-FULL_MATCH or empty email, ONLY THEN may the skill mark `yes-no-email`. Strategy note must contain all attempt logs verbatim — Andy reads them in pre-flight to confirm the matrix actually ran.
+
+Strategy note format (mandatory whether match found or not — placed at top of the note's EMAIL RESOLUTION block):
 
 ```
-enrich_contacts({
-  contacts: [{firstName, lastName, companyName}],
-  requiredFields: ["email", "phone", "mobilePhone"]
-})
+ZI ATTEMPTS (mandatory retry matrix):
+  1. companyName="Lingo Communications" → COMPANY_ONLY_MATCH (zoominfoCompanyId 456817366)
+  2. companyName="Lingo" → FULL_MATCH (id 9391145248, accuracyScore 99)
+  3-7. <skipped — match found at attempt 2>
+EMAIL RESOLUTION: zoominfo-full-match
+  chosen: kimberly.rodriguez@lingo.com
+  attempt: 2
 ```
 
-If empty, retry with `jobTitle` added. If still nothing, mark `yes-no-email`, create 2 LI fallback tasks, do NOT hand off to outreach.
+🛑 **FORBIDDEN: marking `yes-no-email` after fewer than 7 attempts.** A future Claude session that decides any of the following is bypassing this rule:
+- "The first call returned COMPANY_ONLY_MATCH, that's enough — mark yes-no-email." NO. Run all 7.
+- "Token budget feels tight, skip attempts 5-7." NO. Run all 7.
+- "Attempt 1 returned NO_MATCH, the others will too." NO. Run all 7. NO_MATCH and COMPANY_ONLY_MATCH on attempt 1 specifically PREDICT that a name-variant retry will match.
+- "The company name doesn't have a suffix to strip, attempt 2 = attempt 1." Skip-with-log if identical, then run attempts 3-7.
+- "There's no LinkedIn URL, attempt 7 is impossible." Skip-with-log if no URL. Still run attempts 1-6.
+- "I'll mark yes-no-email and let osi-outreach-sequence retry later." NO. Outreach-sequence does not retry. The retry happens HERE or never.
 
-### Results
+The cost is ~5-7 ZoomInfo credits per candidate worst case. The cost of skipping is queueing sequences with no email and no phone in HubSpot, which Andy then has to rebuild manually. Run all 7.
+
+**Why this rule exists:** 2026-04-28 — Kimberly Rodriguez at Lingo Communications was queued through qualification with NO email and NO phone in HubSpot. The skill called `enrich_contacts` once with `companyName="Lingo Communications"`, got `COMPANY_ONLY_MATCH` back, and bailed. ZoomInfo files the company as "Lingo" (no suffix). A single-word retry returned `FULL_MATCH` with email `kimberly.rodriguez@lingo.com`, accuracy 99/99, direct (478) 257-5964, mobile (661) 330-7202. Second Lingo contact in a row to slip through the same single-call path.
+
+**Why Attempt 5 specifically:** `COMPANY_ONLY_MATCH` carrying `zoominfoCompanyId` is ZI's strongest hint that the person is in their database under a slightly different name spelling. Skip Attempt 5 and the person stays invisible.
+
+### Results mapping (after FULL_MATCH)
 - Email found → HubSpot `email`.
 - Direct phone → HubSpot `phone`.
 - Mobile → HubSpot `mobilephone`.
-- Nothing → "ZoomInfo: no data found". `yes-no-email` path.
+- Nothing after all 7 attempts → "ZoomInfo: no data found across retry matrix". `yes-no-email` path.
 - Never confuse direct phone with company main.
 
 City / state / timezone → ALWAYS LinkedIn, NEVER ZoomInfo.
@@ -312,10 +359,48 @@ One search, no rabbit holes.
 ## HubSpot writes — for every ✅ Yes verdict
 
 Always create regardless of data:
-- LinkedIn connection request task (provisional due_date — outreach updates).
+- LinkedIn connection request task with `hs_timestamp = email1_day1` (NOT provisional, see hardwired rules below).
 - Strategy and Fit note.
 
-Email creation, scheduling, and the 6-email sequence are owned by `osi-outreach-sequence`, NOT here.
+Email creation, scheduling, and the 6-email sequence are owned by `osi-outreach-sequence`, NOT here. The sequence consumes `email1_day1` from the handoff payload and never recomputes.
+
+### 🛑 HARDWIRED RULE — EMAIL 1 DAY 1 IS A SINGLE SOURCE OF TRUTH
+
+Before any HubSpot write, compute the Email 1 send date ONCE and bind it to a single variable `email1_day1`. This same value is used for the LINKED_IN_CONNECT task `hs_timestamp` AND for the email-queue Email 1 `sendDate` (handed to `osi-outreach-sequence`). Two writes, one date — no drift.
+
+Compute by reading the company's stagger entry from `state.stagger[<company>]` in `overnight-candidates.json`:
+- If absent: `email1_day1` = next business day at 4 PM ET. Initialize `state.stagger[<company>] = { last_day1: <that date>, person_count: 1 }`.
+- If present: `email1_day1` = `last_day1 + 7 business days` at 4 PM ET. Increment `person_count`. Update `last_day1`.
+
+Skip US federal holidays (Memorial Day, Independence Day, Labor Day, Thanksgiving, Christmas, New Year's). Use ET local time. Format: ISO 8601 UTC, e.g. `2026-05-13T20:00:00Z` for 4 PM ET on 5/13.
+
+The following paths are FORBIDDEN:
+- "Use `now() + 1 day` as the LINKED_IN_CONNECT timestamp; outreach-sequence will backpatch it." NO. The previous wording said "provisional due_date — outreach updates" and the backpatch step failed silently for Atta Meer (task dated 5/2, queue dated 4/28). Single source of truth or it breaks. Compute `email1_day1` here, write it directly.
+- "Compute Day 1 here, then let outreach-sequence recompute its own Day 1 from scratch." NO. The handoff payload carries `email1_day1` verbatim. Outreach-sequence consumes it, never recomputes.
+- "Stagger calculation is outreach-sequence's job, not qualification's." NO. The stagger calculation moved here on 2026-04-28 to eliminate the dual-write divergence bug. If outreach-sequence still has a stagger calculator in its skill, both must agree to read from `state.stagger` written here, never recompute.
+
+**Why this rule exists:** 2026-04-28 — Atta Meer at Baxter was queued with Email 1 sendDate = 2026-04-28 (4 PM ET) but the LINKED_IN_CONNECT task hs_timestamp was set to 2026-05-02 17:00Z, four days after Email 1. Two independent computations produced two different Day 1 values. Andy caught this in the 4 PM audit. Fix: single computation, single binding, propagated to both writes.
+
+### 🛑 HARDWIRED RULE — STEPS 1-3.5 ARE TRANSACTIONAL
+
+Step 1, Step 2, Step 3, Step 3.5 below execute as one transaction. The order is fixed. If any step fails or its read-back fails, the skill aborts BEFORE handing off to `osi-outreach-sequence`. The candidate is flipped to status `pending-relookup` in `state.candidates` and a flag is logged to `overnight-run-log.md`. NO email queue entries are written for failed transactions. Andy reviews `pending-relookup` candidates manually next session.
+
+Order of execution:
+1. **Step 1** — Update or create contact (writes contact properties).
+2. **Step 2** — Create Strategy and Fit note (depends on Step 1 contact ID).
+3. **Step 3** — Create LINKED_IN_CONNECT task with `hs_timestamp = email1_day1`.
+4. **Step 3.5** — Read-back verification: search HubSpot for the just-created task ID. Confirm `hs_timestamp` matches `email1_day1`. Confirm task is associated to the contact. Confirm `hs_task_type` is `LINKED_IN_CONNECT`. If any check fails: ABORT. State → `pending-relookup`. Log. No handoff.
+5. **Handoff** — to `osi-outreach-sequence` with payload `{contactId, email1_day1, sequenceType, hookSummary, ...}`. Outreach-sequence does the email queue write using `email1_day1` from the payload — never recomputes.
+
+The following paths are FORBIDDEN:
+- "Hand off to outreach-sequence first, it will create the task as part of its queue write." NO. The task is owned by THIS skill. Outreach-sequence owns the queue. Joel Emter on 2026-04-28 had Email 1 queued and zero LINKED_IN_CONNECT task because the task creation was treated as optional and the handoff happened anyway. Order matters.
+- "Skip the read-back, the task creation returned a task ID, that's good enough." NO. The task ID returning does not prove the timestamp is right. Atta Meer's task creation returned an ID. The timestamp was still wrong. Read back and compare.
+- "If the read-back fails, retry once and continue." NO. Read-back failure means something is structurally wrong (auth, association, race). Flip to `pending-relookup` and let Andy review. Auto-retry hides the failure mode.
+- "Use `pending-pre-flight` or some new state instead of `pending-relookup`." NO. `pending-relookup` is the documented terminal state for failed transactions. Don't invent new states.
+
+**Why this rule exists:** 2026-04-28 audit found two failure modes that this rule prevents:
+- **Joel Emter (Consolidated Telcom):** Email 1 queued at 4 PM ET, ZERO LINKED_IN_CONNECT task in HubSpot. Step 3 either silently failed or was skipped, and the handoff happened anyway. Andy had to create the task manually before Email 1 fired.
+- **Atta Meer (Baxter International):** Email 1 queued 4 PM ET 4/28, LINKED_IN_CONNECT task dated 5/2. Day 1 computed twice, two values, no read-back to catch the drift. The single-source-of-truth + read-back rules above catch this.
 
 ### Data quality requirements
 
@@ -328,6 +413,8 @@ All required fields per data-quality playbook. If prospect not in HubSpot, creat
 ### Step 2: Create Strategy and Fit note
 
 objectType: `notes`, owner: 196669355, associated to contact.
+
+The note MUST start with the ZI ATTEMPTS + EMAIL RESOLUTION block from the ZoomInfo retry matrix (see ZOOMINFO ENRICHMENT section above) so Andy sees the audit trail at a glance. Then the existing structure:
 
 ```
 QUICK CONNECT KEYWORDS
@@ -353,13 +440,25 @@ Task housekeeping first: if prospect has an existing `LINKED_IN_CONNECT` task (e
 Create:
 - Subject: `Sales Nav -- Send connection request -- [First Last] | [Company]`
 - Type: `LINKED_IN_CONNECT` (never `LINKED_IN_MESSAGE`, never `TODO`)
-- Due: provisional next business day — outreach updates to Email 1 Day 1.
-- Notes: LinkedIn invite text (under 300 chars, references Personal Hook, no pitch, no mutual connections).
+- `hs_timestamp`: `email1_day1` from the single-source-of-truth computation (NOT `now()`, NOT "next business day", NOT a downstream backpatch).
+- Notes: LinkedIn invite text (under 300 chars, references Personal Hook, no pitch, no mutual connections). Body is ONLY the raw message text — no labels, no character counts, no framing.
 - Owner: 196669355.
+
+### Step 3.5: Read-back verification (MANDATORY before handoff)
+
+Immediately after creating the LINKED_IN_CONNECT task, fetch it back from HubSpot via `search_crm_objects` filtered by the new task's `hs_object_id`. Confirm all of:
+- Task exists.
+- `hs_timestamp` exactly matches `email1_day1`.
+- `hs_task_type` is `LINKED_IN_CONNECT`.
+- Task is associated to the contact ID from Step 1.
+
+If any check fails: ABORT the transaction. Flip candidate to `pending-relookup` in `state.candidates`. Log to `overnight-run-log.md`. Do NOT proceed to handoff. Do NOT write to email queue.
+
+If all checks pass: proceed to handoff.
 
 ### Step 4: If NO email — LinkedIn fallback tasks (regardless of phone availability)
 
-**Trigger:** ZoomInfo (or HubSpot for shallow path) did NOT return a valid business email. Phone availability is independent — if no email, create the LI tasks even if phone is available. The phone gets used in the call script (already in the strategy note).
+**Trigger:** the ZoomInfo retry matrix returned no FULL_MATCH after all 7 attempts (or HubSpot for shallow path had no email and ZoomInfo also produced none). Phone availability is independent — if no email, create the LI tasks even if phone is available. The phone gets used in the call script (already in the strategy note).
 
 These tasks are IN ADDITION to LINKED_IN_CONNECT (which is always created for every ✅ Yes), not instead of.
 
@@ -416,17 +515,17 @@ CRM/Engagement: [Prior HubSpot touchpoints]
 Verdict: ✅ Yes / ❌ No / ⚠️ Conditional
 [1-3 sentences max. Direct.]
 
-For ✅ Yes: run ZoomInfo, generate outreach package below. For No / Conditional: STOP-GATE.
+For ✅ Yes: run ZoomInfo retry matrix, generate outreach package below. For No / Conditional: STOP-GATE.
 
 Contact Info (ZoomInfo + LinkedIn):
-- Email: [verified or "not found"]
+- Email: [verified or "not found across 7 retries"]
 - Direct: [direct dial or "not found"]
 - Cell: [mobile or "not found"]
 - Location: [city, state from LinkedIn]
 - Timezone: [bucket]
 ```
 
-After ✅ Yes (with email): output Strategy and Fit, Live Call Script, Voicemail, LinkedIn invite. Then HANDOFF to outreach.
+After ✅ Yes (with email): output Strategy and Fit, Live Call Script, Voicemail, LinkedIn invite. Then HANDOFF to outreach with `email1_day1` in payload.
 
 ---
 
@@ -470,13 +569,13 @@ Under 300 chars. Low friction, networking framing, not pitching. Reference Perso
 
 ## HANDOFF to osi-outreach-sequence
 
-For every ✅ Yes with valid email, end with:
+For every ✅ Yes with valid email (after Step 3.5 read-back passes), end with:
 
-> HANDOFF: invoke osi-outreach-sequence on [First Last] at [Company]. Strategy note live on HubSpot contact ID [id]. Personal Hook: [hook]. Recommended sequence: [Call - Network / Server / TPM / DWDM / Storage / Networking].
+> HANDOFF: invoke osi-outreach-sequence on [First Last] at [Company]. Strategy note live on HubSpot contact ID [id]. LINKED_IN_CONNECT task ID [task id] verified at email1_day1 [ISO]. Personal Hook: [hook]. Recommended sequence: [Call - Network / Server / TPM / DWDM / Storage / Networking].
 
-Outreach updates LINKED_IN_CONNECT due_date to match Email 1 Day 1 (synchronized: LinkedIn invite 2 PM, call sequence enrollment, voicemail, Email 1 auto-fires 4 PM, all same day).
+Outreach-sequence consumes `email1_day1` from this payload as the Email 1 `sendDate`. It does NOT recompute. The LINKED_IN_CONNECT task is already final.
 
-If ZoomInfo NO email: do NOT hand off. The 2 LI fallback tasks ARE the plan.
+If the ZI retry matrix returned no email after all 7 attempts: do NOT hand off. The 2 LI fallback tasks ARE the plan.
 
 ---
 
@@ -498,9 +597,10 @@ Also log ❌ No prospects belonging to a company flagged for account-request.
 
 - LinkedIn URL unresolvable → mark `no` reason "could not resolve LinkedIn profile". Do NOT guess.
 - Profile restricted/closed/deleted → qualify on available data. Critical signals hidden → `conditional`. Don't Yes a closed profile without strong HubSpot evidence.
-- ZoomInfo no data on Yes → `yes-no-email`, 2 LI fallback tasks, NO handoff. Log.
+- ZoomInfo retry matrix returned no FULL_MATCH after all 7 attempts → `yes-no-email`, 2 LI fallback tasks, NO handoff. Log all 7 attempts in strategy note.
 - HubSpot ownership: other rep with recent activity → skip silent. Log to overnight-run-log if batch.
 - Shallow-qualify input but HubSpot record missing → fall back to deep.
+- Step 3.5 read-back fails → flip candidate to `pending-relookup`, log, no handoff, no queue write. Andy reviews next session.
 - Web search times out → proceed without, flag in strategy note.
 - Chrome unresponsive → retry once after 30s, log + mark `pending-retry`, next batch picks up.
 
@@ -520,7 +620,9 @@ Every failure logs to `Claude-Brain/overnight-run-log.md`. Never silent.
 - Check HubSpot on shortlist before recommending outreach.
 - Be a coach, not an assistant. Bad fit → say it directly.
 - Company Mode → return ranked shortlist, no raw lists.
-- Always ZoomInfo on every ✅ Yes — email, direct phone, mobile only. Never company main.
+- Always run the 7-attempt ZoomInfo retry matrix on every ✅ Yes — email, direct phone, mobile only. Never company main. Single call is forbidden.
 - City / state / timezone always from LinkedIn, never ZoomInfo.
 - HubSpot tasks for connection requests → ALWAYS `LINKED_IN_CONNECT`. Never `LINKED_IN_MESSAGE` (that's InMail). Never `TODO`.
+- LINKED_IN_CONNECT `hs_timestamp` is ALWAYS `email1_day1` from the single-source computation. Never `now()`, never provisional.
+- Step 3.5 read-back is MANDATORY before handoff. Failed read-back → `pending-relookup`, no queue write.
 - Timezone: 6-bucket only. See playbook/hubspot-data-quality.md.
