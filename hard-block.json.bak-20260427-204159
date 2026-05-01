@@ -1,0 +1,52 @@
+{
+  "_comment": "Single source of truth for OSI hard-block list. Updated every time Andy flags a bounce or tells Claude to cancel future emails to a company. Read at runtime by the Pre-Send Gate in osi-email-sender/SKILL.md. Do NOT hardcode these values anywhere else.",
+  "addresses": [
+    {
+      "email": "b.baker@lippert.com",
+      "reason": "Bad email. Confirmed by Andy 2026-04-22.",
+      "blockedAt": "2026-04-22"
+    },
+    {
+      "email": "tc@bigrivertelephone.com",
+      "reason": "Torrey Crabtree, Big River. Confirmed invalid by Andy 2026-04-22.",
+      "blockedAt": "2026-04-22"
+    },
+    {
+      "email": "mike.wills@altafiber.com",
+      "reason": "Mike Wills, altafiber. Bad email. Confirmed by Andy 2026-04-22.",
+      "blockedAt": "2026-04-22"
+    },
+    {
+      "email": "henry.jacobsen@mygrande.com",
+      "reason": "Henry Jacobsen, Grande Communications. Confirmed invalid by Andy 2026-04-22.",
+      "blockedAt": "2026-04-22"
+    },
+    {
+      "email": "lfedmond@nitelusa.com",
+      "reason": "Lawrence Edmond, Nitel. Replied that osiglobal.com domain is recognized as spam. 2026-04-23.",
+      "blockedAt": "2026-04-23"
+    },
+    {
+      "email": "garyduttenhefer@consolidatednd.com",
+      "reason": "Gary Duttenhefer, Consolidated Telcom. Hard-bounced after Email 2 of 6. HubSpot record lists garyduttenhefer48645152@gmail.com instead.",
+      "blockedAt": "2026-04-23"
+    },
+    {
+      "email": "kkarran@skywirenetworks.com",
+      "reason": "Kal Karran, Skywire Networks. Bounced. Confirmed by Andy 2026-04-27.",
+      "blockedAt": "2026-04-27"
+    }
+  ],
+  "domains": [
+    {
+      "domain": "nitelusa.com",
+      "reason": "Nitel flagged osiglobal.com as spam per Lawrence Edmond reply 2026-04-23. Block entire domain.",
+      "blockedAt": "2026-04-23"
+    },
+    {
+      "domain": "stellarbb.com",
+      "reason": "Andy spoke with Richard Laing directly 2026-04-27. Pause all stellarbb.com outreach until further notice. NOT a permanent block \u2014 remove this entry once Andy gives the all-clear.",
+      "blockedAt": "2026-04-27"
+    }
+  ]
+}

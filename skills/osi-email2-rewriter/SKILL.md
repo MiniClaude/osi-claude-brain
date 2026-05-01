@@ -7,7 +7,37 @@ description: Redraft pain-led Email 2s in the queue before the 11am send window.
 
 This skill fixes a gap in `osi-outreach-sequence`: for pain-led Email 1s (TPM, DWDM, storage, pre-owned, servers), the sequence writer ships Email 2 as a flat `Any thoughts?`, which is a weak bump for a consultative pitch. This skill rewrites those Email 2s the morning they're due, with Andy's review, before `osi-email-sender` fires at 11 AM.
 
-Sample-offer Email 2s (SFP sample, DIMM sample, shipping question) stay as `Any thoughts?` — that bump is correct for a logistics question. This skill ignores them.
+Sample-offer Email 2s (SFP sample, DIMM sample, shipping question) stay as `Any thoughts?`, that bump is correct for a logistics question. This skill ignores them.
+
+---
+
+## 🛑 STEP 0, MANDATORY READ OF DRAFTING RULES
+
+Before rewriting any Email 2 body, **Read `C:\Claude-Brain\playbook\drafting-rules.md` in full** and load it into context. Single source of truth for product lines, voice rules, branding rules, dead phrases, and the Bad Example anti-template.
+
+These are cold sequence Email 2s, so `is_cold=True` and `allow_circle_back=False` when calling the validator.
+
+---
+
+## 🛑 VALIDATOR BEFORE QUEUE WRITE-BACK
+
+Every rewritten body runs through `C:\Claude-Brain\scripts\validate_email.py` before being atomically written back into the queue entry.
+
+```python
+import sys
+sys.path.insert(0, r'C:\Claude-Brain\scripts')
+from validate_email import validate_or_raise
+
+validate_or_raise(
+    body=new_body,
+    subject=entry['subject'],  # subject is unchanged in the rewrite
+    email_index=2,
+    is_cold=True,
+    allow_circle_back=False,
+)
+```
+
+If `ValueError` raises: rewrite and re-validate. Do NOT write a failing body back to the queue. The candidate stays as the original `Any thoughts?` bump for that send window. Log the failure to `overnight-run-log.md`.
 
 ---
 
@@ -33,7 +63,7 @@ For each pain-led candidate:
 2. Read the prospect's `people/` file and `accounts/` file in Claude-Brain if present. Use that for role, tenure, and company context.
 3. Run ONE targeted external lookup for a fresh angle:
    - ZoomInfo scoops on the company (`mcp__...__enrich_scoops` or `search_scoops`) for news within the last 30 days.
-   - If ZoomInfo returns nothing useful, one web search: `"[company name] [product line from Email 1]" 2026` — look for build announcements, hires, acquisitions, earnings calls, outages, regulatory filings.
+   - If ZoomInfo returns nothing useful, one web search: `"[company name] [product line from Email 1]" 2026`, look for build announcements, hires, acquisitions, earnings calls, outages, regulatory filings.
 4. Write down the chosen angle as a single sentence: "New [stat / pain / signal]: [what changed or what's true now that wasn't in Email 1]."
 
 Do not spend more than 60 seconds per candidate on research. If nothing fresh surfaces, fall back to an adjacent-product-line angle (see Step 3B).
@@ -81,7 +111,7 @@ Output a concise block per candidate in chat. Format:
 ```
 [ID]  ·  [First Name] @ [Company]  ·  sendTime 11am [sendDate]
 Email 1 pitched: [one-line summary of Email 1's pain/product]
-Angle chosen: [3A new data / 3B adjacent / 3C fresh signal — one line]
+Angle chosen: [3A new data / 3B adjacent / 3C fresh signal, one line]
 Draft:
 [The 2-3 sentence body]
 ```
@@ -105,7 +135,7 @@ For each approved (or Andy-edited) entry, construct the new `body` field as:
 [Full Email 1 body text]
 ```
 
-The quote marker line anchors parsing in osi-email-sender — the sender uses native Outlook Reply at send time and the quote block Outlook auto-generates replaces this fake quote. The fake quote in the queue body is a parse anchor only.
+The quote marker line anchors parsing in osi-email-sender, the sender uses native Outlook Reply at send time and the quote block Outlook auto-generates replaces this fake quote. The fake quote in the queue body is a parse anchor only.
 
 Atomic write, one entry at a time:
 
@@ -125,7 +155,7 @@ os.replace(tmp, path)
 
 Never use the Write tool for the queue. Never delete first. One atomic write per rewritten entry.
 
-For "skip" entries, do not touch the queue — the existing `Any thoughts?` body stays.
+For "skip" entries, do not touch the queue, the existing `Any thoughts?` body stays.
 
 ---
 
@@ -141,9 +171,9 @@ Append to `C:\Claude-Brain\sessions\session-YYYY-MM-DD.md` under an "Email 2 rew
 ## Failure modes to watch
 
 - **Queue changed mid-flight.** Between presenting drafts and writing back, `osi-monitor` or Andy may have cancelled an entry. Re-read the entry's status right before writing; if not `pending`, skip the write and log it.
-- **Email 1 not found in queue.** If you cannot find the matching `-1` entry, fall back to using the Email 2's own subject (strip `RE: `) plus any context from `people/` files. If still nothing, skip the rewrite for that entry and leave `Any thoughts?` — do NOT invent a pain or company signal.
+- **Email 1 not found in queue.** If you cannot find the matching `-1` entry, fall back to using the Email 2's own subject (strip `RE: `) plus any context from `people/` files. If still nothing, skip the rewrite for that entry and leave `Any thoughts?`, do NOT invent a pain or company signal.
 - **Research came up empty.** Use 3B (adjacent product line) rather than skipping. Fabricating a fake "recent news" signal is worse than a generic product pivot.
-- **More than 6 candidates in one window.** That's a lot of drafting. Present all of them in one message anyway — Andy will bulk-approve. Do not silently defer any; if he runs out of time he'll tell you to skip the rest.
+- **More than 6 candidates in one window.** That's a lot of drafting. Present all of them in one message anyway, Andy will bulk-approve. Do not silently defer any; if he runs out of time he'll tell you to skip the rest.
 - **Fabricated stats.** If you claim "DDR4 softened 15%", you must have a source. If you cannot cite one mentally, rephrase softer: "DDR4 pricing has kept drifting lower" instead of a false hard number. Andy represents these numbers on calls.
 
 ---
@@ -154,4 +184,4 @@ Append to `C:\Claude-Brain\sessions\session-YYYY-MM-DD.md` under an "Email 2 rew
 - US federal holidays when the sender is off.
 - If `osi-email-sender` is disabled or the queue file is locked / unreadable.
 
-If run manually by Andy mid-day (after the 11am send has fired), report "11am window already fired today — next candidates will be for tomorrow 11am" and list tomorrow's pain-led candidates so Andy can draft them ahead.
+If run manually by Andy mid-day (after the 11am send has fired), report "11am window already fired today, next candidates will be for tomorrow 11am" and list tomorrow's pain-led candidates so Andy can draft them ahead.

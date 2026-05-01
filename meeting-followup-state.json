@@ -1,0 +1,22 @@
+{
+  "last_run": "2026-05-01T14:05:00Z",
+  "last_run_status": "ok",
+  "lookback_window_start": "2026-04-30T00:00:00Z",
+  "lookback_window_end": "2026-05-01T14:02:00Z",
+  "total_calls_in_window": 2,
+  "calls_processed": [
+    "109014716075"
+  ],
+  "calls_skipped_count": 1,
+  "calls_skipped": [
+    {"call_id": "108969292079", "title": "Call with Gary Chaney", "reason": "no AI summary populated, no duration metadata; same skip as 2026-04-30 run"}
+  ],
+  "tasks_created": [],
+  "tasks_updated": [
+    {"task_id": "108879161722", "contact_id": "209521302313", "contact": "Jeremy Fornasiero", "company": "Amundi", "due": "2026-05-04T12:00:00Z", "subject": "Email Jeremy Fornasiero, follow up on Amundi proposal review", "call_id": "109014716075", "note": "body was empty workflow placeholder -- enriched with auto draft + action items footer; subject renamed from generic 'follow up after meeting'; priority bumped NONE -> MEDIUM"}
+  ],
+  "tasks_left_alone": [],
+  "warnings": [
+    "hs_internal_meeting_notes property still does not exist on calls; used hs_call_body again. Skill spec section Step 6 still references the wrong property name -- patch when convenient."
+  ]
+}

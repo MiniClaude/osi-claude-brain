@@ -1,5 +1,57 @@
 # Andy's Second Brain  -  Master Instructions
 
+## 🚨 NO APPROVAL PROMPTS DURING SCHEDULED FIRES (added 2026-04-29)
+
+If any tool call triggers an approval prompt during a scheduled-task fire (overnight runner, processing recurring, monitor, email-sender, any cron-fired session), abort that step immediately. Apply the local stop-gate (mark candidate Conditional / `pending-relookup`, mark company skipped, etc.), log to `Claude-Brain/overnight-run-log.md` as a skill bug, continue with the next item or exit clean.
+
+Applies to the orchestrator AND to every subagent (Agent tool dispatch) it spawns. Subagents inherit the rule. The trigger is the prompt itself, not a specific tool. Do not maintain an allowlist that drifts. Do not rationalize "this prompt is small." Any prompt = abort.
+
+What this means in practice:
+- Verification during scheduled fires is LinkedIn (Chrome MCP) only. No corporate website fetches, no Google for bio confirmation, no podcast pages, no press release fetches.
+- M&A and personalization research during scheduled fires is ZoomInfo `enrich_scoops` / `enrich_news` / `account_research` only. ZI can be stale; the alternative (a prompt overnight) is not acceptable.
+- HubSpot reads/writes, ZoomInfo, Outlook compose (when pre-approved at kickoff), file system, atomic state writes: allowed.
+- If a verification fails because the only allowed source could not close it, mark Conditional and move on. Do NOT pivot to a different surface that might prompt.
+
+If a fire triggers a prompt, that is a bug in the skill that called the prompting tool. Stop and fix the skill. Do NOT one-off it.
+
+Interactive sessions (Andy at keyboard) keep the broader research surface. The rule fires only when the session is launched by a scheduled task.
+
+**Why this rule exists:** 2026-04-29 — overnight Processing Recurring fire ran a Patti Paulo (ExteNet Systems) qualification subagent that hit a restricted LinkedIn profile and followed the qualification skill's documented Path B fallback by `web_fetch`-ing `extenet.com/about-us/leadership/patti-paulo`. That fetch prompted Andy for browser permission overnight. The orchestrator promised zero prompts during scheduled fires; the qualification skill broke the promise via a documented fallback. The fix is the inverted rule above plus parallel rules in osi-overnight-runner, osi-prospect-qualification, osi-discovery-sweep, osi-outreach-sequence.
+
+---
+
+## 🚨 HUBSPOT-FIRST EMAIL RESOLUTION (added 2026-04-27)
+
+Before creating any new HubSpot contact OR queueing any email, search HubSpot by `firstname + lastname + company`. Use the existing contact's primary email. Do NOT trust ZoomInfo as the authority on contact identity. ZoomInfo is enrichment only.
+
+If no HubSpot match exists, derive the company's **verified** email pattern from engagement signals (replies, opens, bounces) at that company — not from "most common stored format." Stored formats include the bad ZoomInfo guesses we're trying to filter out. Full algorithm at `knowledge/email-pattern-resolver.md`.
+
+When ZoomInfo returns an email different from the chosen address, write the ZoomInfo address to the contact's `hs_additional_emails` and prepend a top-of-notes line: `ALT EMAIL <date>: ZoomInfo lists <email>. Using <chosen>. Pattern: <pattern> verified by <signal>.` Andy reviews every contact before sending — that line surfaces the alternate.
+
+**Why this rule exists:** on 2026-04-27 the prospecting flow created a duplicate John Lubeck contact at Midco using the ZoomInfo-pattern email `jlubeck@midco.com` instead of finding the existing HubSpot record under the verified primary `john.lubeck@midco.com`. Six emails queued to the wrong address before catch. The HubSpot-first rule prevents the dupe; the engagement-weighted pattern check prevents bad-pattern guesses; the alt-email note keeps Andy's manual-review step efficient.
+
+---
+
+## 🚨 NO EMPLOYER VERIFICATION, NO SEQUENCE (added 2026-04-26)
+
+Every candidate must have current employer verified before any verdict, any HubSpot write, any email queued. Two valid paths:
+
+**Path A (default, strongly preferred):** full LinkedIn profile read. About + Experience + Skills + Activity. The current Experience entry confirms the company and start date.
+
+**Path B (fallback, only when LinkedIn truly does not exist):** ZoomInfo email at the company's corporate domain AND a dated web-search confirmation that they currently work there. Acceptable sources: company website team page, conference speaker bio, press release, podcast bio, recent industry article naming them at the company. Source must be within the last 6 months. Strategy note carries an explicit `EMPLOYER VERIFICATION: [source URL + date]` line.
+
+If neither path closes: mark `no` for "could not verify current employer", STOP-GATE.
+
+🛑 **ZoomInfo NO_MATCH or COMPANY_ONLY_MATCH is NOT a verification failure.** ZI failing to match a person means ZI doesn't have them in its database. It does NOT mean their employer is unconfirmable. The employer truth lives on LinkedIn, not in ZoomInfo. When ZI returns NO_MATCH or COMPANY_ONLY_MATCH, the next step is ALWAYS Path A: LinkedIn search by name + company. Anyone with a LinkedIn presence is findable in under 30 seconds via name + employer search. A "could not verify current employer" Conditional verdict is ONLY valid after BOTH (a) LinkedIn search by name + company returned no live profile (try full name, last+first, common nickname variants), AND (b) a web search returned no dated source within 6 months. Skipping Path A because ZI whiffed is a bug. Re-process the candidate via Path A.
+
+What's NOT allowed: "they're in HubSpot so they probably still work there." HubSpot records go stale. ZoomInfo records go stale. Title alone never qualifies. The verification step is the whole point.
+
+**Why this rule exists:** on 2026-04-24 the qualification skill was rewritten to add a "shallow qualify path" that skipped LinkedIn for HubSpot-sourced contacts on the theory that human curation already happened. By 2026-04-26 this had produced 138 emails queued to 23 prospects across S&P Global, OEC Fiber, Fidelity Communications, Vero Networks, and Midcontinent without anyone confirming those people were still employed there. The path was ripped out the same day. If a future Claude session ever proposes a "speed up by skipping employer verification" optimization, point it at this section first.
+
+**Why the ZI NO_MATCH sub-rule exists:** on 2026-04-28 the 10:25Z runner fire processed 11 S&P Global candidates and marked 4 of them Conditional ("could not verify employer") solely on ZoomInfo NO_MATCH or COMPANY_ONLY_MATCH responses. Andy could find every one of them on LinkedIn in seconds. The shortcut treated ZoomInfo as the verification source, which is exactly backwards. ZoomInfo enriches. LinkedIn verifies. Same fire also flagged Daymond Tadlas at Consumer Cellular under the identical mistake. All five were flipped back to `pending` and the rule was hardwired so a future Claude session cannot repeat the shortcut.
+
+---
+
 ## 🚨 OSI PRODUCT LINES - EVALUATE ALL OF THESE EVERY TIME YOU QUALIFY A PROSPECT
 
 1. **Optics** - OSI transceivers (SmartOptics-manufactured, private-labeled). Sample offer is the opening wedge for any network engineer or architect.
@@ -171,42 +223,44 @@ Reusable skills live in `Claude-Brain/skills/` (NOT `.claude/skills/` - that is 
 - `osi-cold-reengagement` - Finds cold 1st-degree LinkedIn connections, creates 2 InMail tasks 2 weeks apart. Regular LinkedIn only. Trigger: "find cold connections"
 - `osi-prospect-qualification` - Qualification workflow for evaluating prospects against OSI ICP
 
-### Skill Editing & Install Workflow
+### Skill Editing & Install Workflow (REDIRECT-STUB ARCHITECTURE, 2026-04-29)
 
-🚨 **HARD RULE — NEVER SKIP THIS:** Every time Claude edits a skill in `Claude-Brain/skills/[skill-name]/SKILL.md`, Claude MUST IMMEDIATELY perform all four steps below in the same response, without being asked, without waiting for confirmation. No "is the skill installed?" follow-ups from Andy. Editing without installing means the change is dead — Cowork keeps reading the old version.
+🚨 **READ FIRST — the runtime is intentionally a stub.** As of 2026-04-29 the Cowork runtime backing store at `.../skills-plugin/<plugin-id>/<session-id>/skills/[skill-name]/SKILL.md` no longer contains real skill logic. It contains a one-line redirect that tells Claude to Read `C:\Claude-Brain\skills\[skill-name]\SKILL.md` and execute that file instead. Every scheduled-task fire, every skill triggering event, the runtime stub loads first, and the live source loads on top of it. The runtime cannot drift from source because it has no source-equivalent content of its own.
 
-**The four mandatory steps after every skill edit:**
+**If you find yourself "fixing" the runtime by copying full skill content over a stub, STOP.** That is the bug we just removed. The stub is correct. The runtime should be ~2 KB of redirect text and nothing else. If a skill behaves wrong, fix the source at `C:\Claude-Brain\skills\[skill-name]\SKILL.md`. Do not add content to the runtime.
 
-1. **Edit** `Claude-Brain/skills/[skill-name]/SKILL.md` (source of truth, Git-versioned).
-2. **Force-copy** the SKILL.md to the Cowork runtime backing store:
-   ```bash
-   cp -f /sessions/.../mnt/Claude-Brain/skills/[skill-name]/SKILL.md \
-         /sessions/.../mnt/skills-plugin/<plugin-id>/<session-id>/skills/[skill-name]/SKILL.md
-   ```
-   Mount the skills-plugin folder via `request_cowork_directory` once per session if not already mounted. The plugin-id and session-id are visible in Claude's environment context.
-3. **Repackage** the `.skill` file:
+**The new workflow when you edit a skill:**
+
+1. **Edit** `Claude-Brain/skills/[skill-name]/SKILL.md` (source of truth, Git-versioned). That is the live file. Cowork's runtime stub will Read this file on every fire.
+2. **(Optional) Repackage** the `.skill` zip for distribution between machines or for re-install via drag-drop:
    ```bash
    cd Claude-Brain/skills/[skill-name] && zip -rq /tmp/x.skill SKILL.md
    cp -f /tmp/x.skill Claude-Brain/skills/[skill-name].skill
    ```
-4. **Verify** by diffing the source against the backing store. They must be identical.
+   The `.skill` zip currently contains the FULL source content, not the stub. If anyone re-installs from the zip, they overwrite the stub with full content, which RE-INTRODUCES drift. The morning-skill-sync auto-heal (planned, not yet built) will detect that and re-stub. Until that's built, after a re-install you must manually re-apply the stub via the runtime install procedure below.
+3. **No "force-copy to runtime" step.** The runtime is already a stub that pulls from source on every fire.
 
-**Why this is non-negotiable:** Cowork reads from the backing store, not from `Claude-Brain/skills/`. An edit in Claude-Brain that isn't copied to the backing store is invisible to every scheduled task and runtime trigger. This has caused multiple wasted hours and silent failures (April 2026: weekend run #1 failed because new skill was edited but not installed; Cowork read the old version from cache).
+**If for any reason you need to install a stub (new skill, drift detected, post-reinstall heal):**
 
-**No exceptions.** Even small edits — a typo fix, a single-line change — get all four steps. The cost of running steps 2-4 is ~10 seconds. The cost of skipping them is hours of debugging when behavior doesn't match the file.
+```python
+# Pull the source frontmatter, generate a stub with the redirect body,
+# write to the runtime SKILL.md path. The full source stays untouched.
+# Reference implementation: see the 2026-04-29 stub deployment in this file's history.
+```
+
+The stub frontmatter must match the source frontmatter (preserves Cowork triggering by description). The stub body is the same redirect template across every skill.
+
+**Source skills with no runtime entry** (`osi-overnight-runner`, `osi-discovery-sweep`, `osi-meeting-followup`): these are read by direct file path from scheduled-task prompts. They never need a runtime stub. Do not add one.
+
+**Runtime-only skills** (`docx`, `pdf`, `pptx`, `xlsx`, `consolidate-memory`, `schedule`, `setup-cowork`, `skill-creator`): these ship with Cowork itself. We don't manage their source. Leave alone.
 
 **If `.skill` files anywhere outside `Claude-Brain/skills/` get created:** delete immediately. They cause duplicate-skill confusion (caused a mess in April 2026).
 
-**Why Claude-Brain is the ONLY editing location:** the `.claude/skills/` mount has been found truncated/corrupted before (185 lines vs 449 actual). The Git-versioned `C:\Claude-Brain\` folder (backed up on GitHub) is the only reliable copy. Always edit there, then run the install steps.
+**Why Claude-Brain is the ONLY editing location:** the runtime backing store has been found truncated/corrupted before (185 lines vs 449 actual). The Git-versioned `C:\Claude-Brain\` folder (backed up on GitHub) is the only reliable copy. Edit there. The runtime stub will pull the live version on every fire.
 
-**Morning skill sync (automated):** The `morning-skill-sync` scheduled task runs weekday mornings. It compares `.skill` files in `Claude-Brain/skills/` against what's installed in `.claude/skills/` and surfaces:
-- `.skill` files in `Claude-Brain/skills/` that are not yet installed (one-click to install)
-- Installed skills whose Claude-Brain source has drifted from the live copy (needs re-package + re-install)
-- Any gaps worth knowing about
+**Morning skill sync (auto-heal planned):** The `morning-skill-sync` scheduled task runs weekday mornings. Currently it reports drift; the planned upgrade is for it to auto-heal by re-stubbing the runtime if it detects full content where there should be a stub. Until that's built, drift is unlikely (because every fire reads source via the stub) but possible (if someone re-installs via drag-drop). If morning-skill-sync flags drift, force-stub the affected skills.
 
-Andy should not have to remember to install skills. If the sync flags something, act on it immediately.
-
-**Why reading Claude-Brain matters:** The `.claude/skills/` copy has been found truncated/corrupted before (185 lines vs 449 actual). The Git-versioned `C:\Claude-Brain\` folder (backed up on GitHub) is the only reliable copy. Always edit there.
+**Why this rewrite happened (2026-04-29 incident):** the `osi-email-sender` runtime fell 2,675 bytes behind source after multiple Claude sessions edited the source without doing the force-copy step. The email-sender then skipped 8 of 11 due entries because the runtime was missing a recent fix. Andy halted the run. The four-step manual workflow had been failing silently for at least a week. Architectural fix: replace the runtime with a redirect stub so drift becomes impossible by construction. The runtime cannot be stale if it contains no skill content.
 
 ### Cold Re-Engagement vs. Full Sequence - Keep These Separate
 - **Cold re-engagement** = 2 InMail tasks only (no strategy doc, no email sequence). Used when working existing 1st-degree LinkedIn connections who've gone cold.
@@ -277,4 +331,4 @@ Title says "Data Center Strategy & Operations" but his entire career is program 
 - This file lives in a private GitHub repo (`github.com/Drrewdy/Claude-Brain`) with the working copy at `C:\Claude-Brain\` on each laptop. The repo is private and only Andy has access.
 - Do not store specific serial numbers, unreleased pricing, or confidential customer contract details in plain text here
 - For sensitive deal specifics, reference HubSpot instead
-- The old OneDrive copy (`C:\Users\drrew\OneDrive\Claude-Brain` on personal laptop, `C:\Users\Andy\OneDrive - OSI Hardware\Documents\Claude\Claude-Brain` on work laptop) is no longer synced. Keep only as a read-only archive. Do not write to it.
+- The old OneDrive Claude-Brain folder was DELETED 2026-04-30 on the work laptop. The personal laptop's `C:\Users\drrew\OneDrive\Claude-Brain` may still exist as a stale copy; do NOT read or write to it. The single source of truth is `C:\Claude-Brain\` on each laptop, synced via Git. Cowork's scheduled-task storage still writes to `C:\Users\Andy\OneDrive - OSI Hardware\Documents\Claude\Scheduled\` because that path is hardcoded in Cowork's `create_scheduled_task` tool. That folder is local-only (OneDrive Backup off); the "OneDrive" in the path name is misleading. Scheduled tasks fire fine from there. The Cowork app config is the only thing that could redirect that path, and it's not exposed via MCP.

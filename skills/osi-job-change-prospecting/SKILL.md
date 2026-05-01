@@ -104,12 +104,12 @@ Skip anyone already in the tracker.
 
 ### Phase A: Job Changes
 Use the Phase A URL. Read all pages (navigate to &page=2, &page=3 as needed).
-Use get_page_text first — it loads all cards at once. If that fails, use read_page
+Use get_page_text first, it loads all cards at once. If that fails, use read_page
 with depth 5 and look for the list of lead cards.
 
 For each person shown:
 1. Note name, title, company, change type (hired vs promoted), timeframe.
-2. Quick ICP screen — Silent Skip (no log) if clearly not a buyer:
+2. Quick ICP screen, Silent Skip (no log) if clearly not a buyer:
    - Project/program managers, sales reps, designers, recruiters, finance/legal/HR roles
    - Hyperscaler employees (Google, Meta, Amazon at scale)
    - Anyone with zero networking/hardware/infrastructure signals
@@ -120,12 +120,12 @@ Use the Phase B URL. Same page navigation and loading approach as Phase A.
 
 For each person shown:
 1. Note name, title, company. Change type = "New Connection."
-2. Same quick ICP screen as Phase A — Silent Skip if clearly not a buyer.
-3. Check Excel tracker first — skip anyone already logged from a prior job change run.
+2. Same quick ICP screen as Phase A, Silent Skip if clearly not a buyer.
+3. Check Excel tracker first, skip anyone already logged from a prior job change run.
 4. Everyone else: full ICP check → history pull → HubSpot check → action.
 
 **Message tone for new connections:** These people just connected with Andy. The opener
-should acknowledge the new connection naturally — not a cold reach, but also not
+should acknowledge the new connection naturally, not a cold reach, but also not
 over-familiar. Reference something specific about their role or company. Keep it warm
 and conversational. No pitch in Touch 1.
 
@@ -149,7 +149,7 @@ making any HubSpot changes. Do this in parallel where possible.
 
 ### 4a. LinkedIn Message History (Sales Navigator)
 - Navigate to their Sales Nav lead page.
-- Read the Timeline / Relationship section — it shows past InMail threads, notes,
+- Read the Timeline / Relationship section, it shows past InMail threads, notes,
   and interactions Andy has had with this person.
 - Note: date of last contact, what was discussed, any responses received.
 
@@ -160,9 +160,9 @@ making any HubSpot changes. Do this in parallel where possible.
 
 ### 4c. HubSpot Contact History
 Search all of the following associated with the contact ID (sort DESCENDING by timestamp):
-- **Emails**: objectType "emails" — subject line, direction, date
-- **Calls**: objectType "calls" — outcome, notes, date
-- **Notes**: objectType "notes" — content, date
+- **Emails**: objectType "emails", subject line, direction, date
+- **Calls**: objectType "calls", outcome, notes, date
+- **Notes**: objectType "notes", content, date
 - **Tasks (completed)**: objectType "tasks", filter hs_task_status = COMPLETED
 
 Key questions to answer:
@@ -176,7 +176,7 @@ Search for deals associated with the contact's current or past company:
 - search_crm_objects objectType "deals", associatedWith the company ID
 - Note: deal name, stage, amount, close date, owner
 - If the company has been a customer or has an active deal, flag this prominently.
-  It changes the outreach angle entirely — reference the existing relationship.
+  It changes the outreach angle entirely, reference the existing relationship.
 
 ---
 
@@ -214,10 +214,33 @@ For companies NOT in HubSpot: create company record (owner: 196669355).
 **Duplicate-task check (MANDATORY before creating either task):** Query HubSpot for tasks associated to this contact. If the contact has ANY task where `hs_task_type` = `LINKED_IN_MESSAGE` AND `hs_task_status` is `NOT_STARTED` or `IN_PROGRESS`, skip BOTH tasks entirely. Log in Excel and session summary: "existing LinkedIn task on HubSpot. No new tasks created." This applies regardless of the existing task's subject line. One active LinkedIn message task already queued = we do not pile on more.
 
 For each qualified target eligible for tasks (and passing the duplicate check above):
-- Task 1: "LinkedIn InMail - [Name] - [Company] (Touch 1)" — LINKED_IN_MESSAGE — due TODAY
-- Task 2: "LinkedIn InMail - [Name] - [Company] (Touch 2)" — LINKED_IN_MESSAGE — due 2 WEEKS
+- Task 1: "LinkedIn InMail - [Name] - [Company] (Touch 1)", LINKED_IN_MESSAGE, due TODAY
+- Task 2: "LinkedIn InMail - [Name] - [Company] (Touch 2)", LINKED_IN_MESSAGE, due 2 WEEKS
 - Owner: 196669355
-- Body: Full drafted message
+- Body: **ONLY the raw draft message text. Nothing else.**
+
+### Task body rule (HARD RULE, no exceptions)
+The task body / note field on a Sales Navigator LinkedIn task is the literal message text Andy will paste into LinkedIn. It must contain ONLY the draft to send. Nothing else.
+
+Do NOT include any of the following in the task body:
+- Label prefixes like "LinkedIn invite (under 300 chars):", "Touch 1:", "Message:", "Draft:", "InMail body:"
+- Character-count annotations like "(under 300 chars)" or "(280/300)"
+- Subject lines, headers, or section dividers
+- Strategy notes, ICP rationale, history summaries, or context
+- Signoff metadata like a dash followed by "Andy" if it's not part of the actual message body
+- Any framing, commentary, or instructions to Andy
+
+❌ WRONG (do not do this):
+```
+LinkedIn invite (under 300 chars): Hey Charles, OSI worked with Patrick a while back. Sending a fresh batch of SmartOptics samples around to a few network admins this month. Open to swapping notes? Andy at OSI Global.
+```
+
+✅ RIGHT (the entire body field):
+```
+Hey Charles, OSI worked with Patrick a while back. Sending a fresh batch of SmartOptics samples around to a few network admins this month. Open to swapping notes? Andy at OSI Global.
+```
+
+The task subject already encodes the touch number and the contact. The body is just the message. Andy copies the body field straight into LinkedIn, anything other than the message itself has to be deleted by hand and that's the bug we're fixing.
 
 ### Message guidelines
 - Warm, peer-to-peer tone. Andy speaks as a person, not a company.
@@ -226,7 +249,7 @@ For each qualified target eligible for tasks (and passing the duplicate check ab
 - Always reference their new role and company specifically.
 - **If any prior history exists (LinkedIn messages, HubSpot emails, calls, samples sent):**
   The message MUST feel like picking up where you left off, not a cold intro. Reference
-  the specific interaction — what was discussed, what was sent, what was agreed. Never
+  the specific interaction, what was discussed, what was sent, what was agreed. Never
   write a cold opener to a warm contact.
 - **If the company has a purchasing history or active deal:** Reference the existing
   relationship directly. Lead with continuity, not prospecting.
@@ -257,7 +280,7 @@ Save updated file back to Claude-Brain.
 
 > **SYNC NOTE:** This skill exists in two locations that must ALWAYS be kept in sync:
 > - `C:\Claude-Brain\skills\osi-job-change-prospecting\SKILL.md` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain)
-> - `.claude/skills/osi-job-change-prospecting/SKILL.md` (Cowork local — what triggers the skill)
+> - `.claude/skills/osi-job-change-prospecting/SKILL.md` (Cowork local, what triggers the skill)
 >
 > Any time changes are made to one, apply them to the other immediately. After editing, repackage
 > `Claude-Brain/skills/osi-job-change-prospecting.skill` and reinstall via Cowork if the local

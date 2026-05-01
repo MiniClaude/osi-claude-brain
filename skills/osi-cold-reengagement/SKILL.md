@@ -22,9 +22,41 @@ Read this entire skill before starting.
 
 ---
 
+## 🛑 STEP 0, MANDATORY READ OF DRAFTING RULES
+
+Before drafting any LinkedIn InMail, **Read `C:\Claude-Brain\playbook\drafting-rules.md` in full** and load it into context. Single source of truth for product lines, voice rules, branding rules, dead phrases, hook priority, and the Bad Example anti-template.
+
+InMail bodies follow the same voice and branding rules as cold email bodies. No em-dashes. No "SmartOptics" by name. No "we manufacture." No credentials openers. No banned vocab. No dead phrases. Lead with the prospect's pain or hook, not OSI.
+
+---
+
+## 🛑 VALIDATOR BEFORE DELIVERY
+
+Every drafted InMail body runs through `C:\Claude-Brain\scripts\validate_email.py` before being saved to the HubSpot task notes. InMails are 1st-touch outreach, so `is_cold=True`.
+
+```python
+import sys
+sys.path.insert(0, r'C:\Claude-Brain\scripts')
+from validate_email import validate_or_raise
+
+# 2 InMails per prospect (1st touch + 2-week follow-up).
+for i, inmail in enumerate(inmails, start=1):
+    validate_or_raise(
+        body=inmail['body'],
+        subject=inmail.get('subject', '(InMail)'),
+        email_index=i,
+        is_cold=True,
+        allow_circle_back=False,
+    )
+```
+
+If `ValueError` raises: rewrite and re-validate. Do NOT save any failing draft to a HubSpot task.
+
+---
+
 ## Andy Rules
 
-- No em-dashes (—) anywhere. Split into two sentences instead.
+- No em-dashes (U+2014) anywhere. Split into two sentences instead.
 - Keep everything tight and direct.
 - Draft messages: peer-to-peer tone, not vendor-to-buyer.
 - Never create HubSpot tasks for contacts not owned by Andy McLean, Mark Metz, or John Houston.
@@ -34,7 +66,7 @@ Read this entire skill before starting.
 ## Step 1: Search LinkedIn for candidates
 
 Navigate to LinkedIn people search filtered to 1st-degree connections with relevant titles.
-Use regular LinkedIn only — not Sales Navigator.
+Use regular LinkedIn only, not Sales Navigator.
 
 Good search URL:
 `https://www.linkedin.com/search/results/people/?network=%5B%22F%22%5D&keywords=network+engineer+infrastructure+director`
@@ -55,11 +87,11 @@ Pull 5-8 names from the results. Focus on titles like:
 Search HubSpot for each candidate before doing any LinkedIn research.
 
 **Hard rule:** Only proceed with contacts owned by:
-- Andy McLean — owner ID 196669355
-- Mark Metz — owner ID 210187184
-- John Houston — owner ID 210187193
+- Andy McLean, owner ID 196669355
+- Mark Metz, owner ID 210187184
+- John Houston, owner ID 210187193
 
-Skip anyone owned by another rep. Do not flag it as an issue — just move on silently.
+Skip anyone owned by another rep. Do not flag it as an issue, just move on silently.
 
 Also note `notes_last_contacted` for each qualifying contact. This determines whether to
 check LinkedIn messages in the next step.
@@ -84,15 +116,15 @@ Use this rule to decide whether to check LinkedIn messages:
 Navigate to their LinkedIn profile and skills page. Evaluate against OSI's ICP:
 
 **Target:**
-- Title confirms they buy or specify networking/server/storage hardware — not just adjacent to it
+- Title confirms they buy or specify networking/server/storage hardware, not just adjacent to it
 - Skills with real endorsements: Cisco, optical networking, DWDM, transceivers, data center
   infrastructure, network design, vendor management for hardware, servers, storage
 - Works at a mid-to-large enterprise, carrier, telecom, or regional data center operator
-- Not a hyperscaler (Google, Meta, Amazon, ByteDance) — they build custom, OSI can't compete
+- Not a hyperscaler (Google, Meta, Amazon, ByteDance), they build custom, OSI can't compete
 
 **Disqualify if:**
 - Title is project/program management with no hardware skills
-- All skills are project management, Lean Six Sigma, Scrum, supply chain ops — zero networking
+- All skills are project management, Lean Six Sigma, Scrum, supply chain ops, zero networking
 - Works at a hyperscaler at scale
 
 **Verdict format:**
@@ -107,7 +139,7 @@ If No, move to the next candidate from the search results.
 
 Based on their profile, pick the right play. Do not limit to one if multiple apply:
 
-- **Optics/DWDM:** Network architects, transport engineers, carriers — any Cisco optical,
+- **Optics/DWDM:** Network architects, transport engineers, carriers, any Cisco optical,
   DWDM, or 400G signal. Lead with SmartOptics: 30-50% below Ciena/Nokia, ships fast.
 - **TPM:** Large enterprise with multi-vendor gear and vendor management skills. Lead with
   40-60% below OEM. Mention Park Place/Service Express merger as competitive context.

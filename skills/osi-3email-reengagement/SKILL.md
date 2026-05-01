@@ -16,15 +16,48 @@ description: >
 
 ## Your job
 
-Andy has given you a LinkedIn profile. This person has already been through a previous outreach sequence and did not respond. They know who OSI is. Your job is to re-open the door with fresh angles, not re-introduce the company. Produce the full outreach package: strategy note, call scripts, LinkedIn message, and individual HubSpot email tasks — each ready to press send.
+Andy has given you a LinkedIn profile. This person has already been through a previous outreach sequence and did not respond. They know who OSI is. Your job is to re-open the door with fresh angles, not re-introduce the company. Produce the full outreach package: strategy note, call scripts, LinkedIn message, and individual HubSpot email tasks, each ready to press send.
 
 Read this entire skill before producing any output.
 
 ---
 
-## Andy Rules — apply to every output
+## 🛑 STEP 0, MANDATORY READ OF DRAFTING RULES
 
-- No em-dashes (—) anywhere. Not once. Split into two sentences if needed.
+Before drafting any email body, subject line, LinkedIn message, voicemail script, or call opener, **Read `C:\Claude-Brain\playbook\drafting-rules.md` in full** and load it into context. Single source of truth for product lines, voice rules, branding rules, dead phrases, hook priority, templates, the Bad Example anti-template, and the 6-item self-check.
+
+Step 0 is non-negotiable. Do NOT rely on training data for the drafting rules.
+
+This is a re-engagement skill: pass `is_cold=False` and `allow_circle_back=True` to the validator. Branding rule still applies: SmartOptics is still NOT named in re-engagement bodies unless the prospect already knows them by name from a prior conversation. Default to "OSI transceivers".
+
+---
+
+## 🛑 VALIDATOR BEFORE DELIVERY
+
+Every drafted body and subject runs through `C:\Claude-Brain\scripts\validate_email.py` before being presented to Andy or written to any task.
+
+```python
+import sys
+sys.path.insert(0, r'C:\Claude-Brain\scripts')
+from validate_email import validate_or_raise
+
+for i, email in enumerate(emails, start=1):
+    validate_or_raise(
+        body=email['body'],
+        subject=email['subject'],
+        email_index=i,
+        is_cold=False,
+        allow_circle_back=True,
+    )
+```
+
+If `ValueError` raises: rewrite and re-validate. Do NOT deliver any email that fails validation.
+
+---
+
+## Andy Rules, apply to every output
+
+- No em-dashes (U+2014) anywhere. Not once. Split into two sentences if needed.
 - Keep prose tight and direct. No fluff.
 - Emails must feel like a human wrote them to one person, not a mass blast.
 - Tone: peer-to-peer. They have heard Andy's name before. Acknowledge time has passed without being awkward about it.
@@ -32,7 +65,7 @@ Read this entire skill before producing any output.
 
 ---
 
-## Active Sequence Check — hard stop before anything else
+## Active Sequence Check, hard stop before anything else
 
 Before any other work on this prospect, check the email queue. This prevents stacking duplicate sequences on the same person, which wrecks sender reputation and is bad form.
 
@@ -50,7 +83,7 @@ Entries with status `paused-*`, `canceled-*`, or older `sent` (>30 days ago) do 
 **Skip behavior by mode:**
 
 - **Interactive mode:** Tell Andy:
-  > SKIPPED: [First Last] at [Company] — [reason: "already enrolled, N emails pending, next send [date]" OR "recent sequence completed [date]"]. Override?
+  > SKIPPED: [First Last] at [Company], [reason: "already enrolled, N emails pending, next send [date]" OR "recent sequence completed [date]"]. Override?
 
   Wait for explicit "override" from Andy before proceeding. Without override, stop and move on to the next prospect (batch mode) or end (single-prospect mode).
 
@@ -60,23 +93,23 @@ This check runs BEFORE HubSpot ownership check, ZoomInfo enrichment, or any rese
 
 ---
 
-## Approved Vendor Rule — read list from Claude-Brain file
+## Approved Vendor Rule, read list from Claude-Brain file
 
 OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/approved-vendors.json`. Read that file at sequence-build time (plain Python: `open(path,'r')`) and check if the prospect's company matches any entry (case-insensitive substring match, e.g. "Desjardins Group" matches "Desjardins").
 
 **If the prospect's company matches an approved-vendor entry:**
 - **Email 1:** Include ONE line acknowledging approved-vendor status. Soft, peer-to-peer phrasing. Examples:
-  - "Side note — we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast."
+  - "Side note, we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast."
   - "For context, we're an approved vendor at [Company] already, so standing up a PO is painless if it comes to that."
-- **ONE other email — Email 3 or Email 4 — Claude picks whichever fits the narrative:** Brief reminder. One line. Example: "Quick reminder we're already approved at [Company] if timing matters."
+- **ONE other email, Email 3 or Email 4, Claude picks whichever fits the narrative:** Brief reminder. One line. Example: "Quick reminder we're already approved at [Company] if timing matters."
 - **All other emails:** Do NOT mention approved-vendor status.
 
 **If the prospect's company does NOT match the approved-vendor list:**
 - Do NOT mention approved-vendor status anywhere in the sequence. Do not invent it.
 
 **Phrasing rules:**
-- Never "vetted" or "pre-approved" — sounds like marketing. "Approved vendor" is the term.
-- Never mention "procurement" in Email 1 — telegraphs the sales motion. Just note we're on the list.
+- Never "vetted" or "pre-approved", sounds like marketing. "Approved vendor" is the term.
+- Never mention "procurement" in Email 1, telegraphs the sales motion. Just note we're on the list.
 
 To add a company to the approved-vendor list, Andy edits `Claude-Brain/approved-vendors.json` directly and adds the company name to `approved_vendor_companies`.
 
@@ -104,8 +137,8 @@ This feeds the hook in Email 1. If no news found, fall back to a market trigger:
 | Neither | No | No | No |
 
 **EVERYONE regardless of data:**
-- LinkedIn connection request task — always created
-- Strategy and Fit note — always saved to HubSpot
+- LinkedIn connection request task, always created
+- Strategy and Fit note, always saved to HubSpot
 
 ---
 
@@ -142,10 +175,10 @@ A timely trigger from research: company news, recent LinkedIn post, job change, 
 
 **Skip entirely if no phone number available.**
 
-Format exactly as below — no paragraphs, no extra text:
+Format exactly as below, no paragraphs, no extra text:
 
 KEYWORDS: [5-8 spoken trigger words including technical terms and any news-driven triggers]
-HOOK: [Company news or personal trigger in one sentence. If nothing: none — using library opener]
+HOOK: [Company news or personal trigger in one sentence. If nothing: none, using library opener]
 OPENER: [Full opener from OPENER LIBRARY, or custom if HOOK is populated]
 VM: [One line. 15 seconds max. One-sentence new hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Andy's email: "that's andy at osiglobal dot com." No phone number. Present or future tense only. Never past tense.]
 
@@ -166,25 +199,25 @@ VM: [One line. 15 seconds max. One-sentence new hook. "I'm sending you something
 **Director or VP any vertical**
 "Hey [Name], how have you been? It's Andy with OSI Global. We work with infrastructure leaders on two things mostly: third party maintenance and optical hardware where OEM timelines or costs have become a problem. Is either of those a live conversation for your team?"
 
-**Already has TPM — merger wedge**
+**Already has TPM, merger wedge**
 "Hey [Name], how have you been? It's Andy with OSI Global. With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
 
-**Systems / Infrastructure engineer — DIMMs**
+**Systems / Infrastructure engineer, DIMMs**
 "Hey [Name], how have you been? It's Andy with OSI Global. We source server memory direct from Samsung and Hynix for infrastructure teams dealing with DDR4 and DDR5 cost pressure. Is that on your radar right now?"
 
 **Storage engineer / admin**
 "Hey [Name], how have you been? It's Andy with OSI Global. We do third party maintenance on NetApp and other storage platforms for teams that have gear running fine but coming off OEM support. Is that a conversation you're having?"
 
-**IT Director — compute and infrastructure**
+**IT Director, compute and infrastructure**
 "Hey [Name], how have you been? It's Andy with OSI Global. We work with IT leaders on server memory and third party maintenance, mostly for teams carrying OEM costs on infrastructure that has been running fine for years. Is budget pressure on that something you're dealing with?"
 
-**Procurement — TPM competitive bid**
+**Procurement, TPM competitive bid**
 "Hey [Name], how have you been? It's Andy with OSI Global. We make competitive bids on multi-vendor maintenance contracts. A lot of procurement teams are using us to benchmark their current rates, especially since the Park Place and Service Express merger. Would a competitive bid be worth a look for your next cycle?"
 
-**Transport engineer / Optical network engineer — DWDM**
+**Transport engineer / Optical network engineer, DWDM**
 "Hey [Name], how have you been? It's Andy with OSI Global. We supply open line DWDM systems, 30 to 50% below Ciena and Nokia, with no licensing headaches. A few teams have been using us to fill capacity gaps without going back to the OEM. Is that a conversation worth having for your network?"
 
-**Network architect — metro or long-haul WDM**
+**Network architect, metro or long-haul WDM**
 "Hey [Name], how have you been? It's Andy with OSI Global. We do open architecture DWDM, SmartOptics platform, significantly less rack space and power than traditional Ciena or Nokia boxes, and ships faster. Is that something that fits anything on your roadmap right now?"
 
 ---
@@ -207,7 +240,7 @@ Under 300 characters. Short and timely. Reference the new hook. Do not mention i
 
 ### 5. The 3-Email Re-Engagement Sequence
 
-**Cadence (business days, self-healing — each email anchors to prior email's actual send date):**
+**Cadence (business days, self-healing, each email anchors to prior email's actual send date):**
 
 | # | Send date | Send window | Type |
 |---|---|---|---|
@@ -222,24 +255,20 @@ Total span: roughly 22 business days (about 30 calendar days) from Email 1 to Em
 - Email 2: RE: same subject as Email 1.
 - Email 3: New subject line. Clean close. Leave the door open.
 
-**Email 1 (Day 1, 4 PM ET) — 1st Touch**
+**Email 1 (Day 1, 4 PM ET), 1st Touch**
 Lead with the new hook. Company news, market trigger, or a product angle not covered in the original sequence. Do not re-introduce OSI. Do not acknowledge the previous sequence directly. Short, 3-4 sentences. One ask.
 
-**Email 2 (10 business days after Email 1 actual send, 11 AM ET) — Sequence Email**
+**Email 2 (10 business days after Email 1 actual send, 11 AM ET), Sequence Email**
 Body: "Any thoughts?"
 
-Then quoted Email 1 below in standard reply format:
-> On [Email 1 actual send date], Andy McLean wrote:
-> [Full Email 1 text]
+That is the entire body. Nothing else. The sender's Reply flow attaches the prior thread (grey divider + From/Sent/To/Subject header + original body) natively when it clicks Reply. Do NOT include any quoted text, "On X wrote:" placeholders, or `>` lines in the queue body. Just `Any thoughts?` is correct.
 
-No greeting. No sign-off. Just "Any thoughts?" and the quote.
-
-**Email 3 (12 business days after Email 2 actual send, 12 PM ET) — Sequence Email**
-New subject line. Clean close. No ask. Leave the door open with one sentence. Examples:
+**Email 3 (12 business days after Email 2 actual send, 12 PM ET), Sequence Email**
+🚫 **STANDALONE fresh-subject touch.** Email 3 has a NEW subject line, NEW MAIL flow types the body verbatim. The body must contain ONLY the new pitch. Clean close. No ask. Leave the door open with one sentence. Examples:
 - "Should I close the file on this one, or is the timing just off?"
 - "No worries if now isn't the right time. Happy to circle back when things shift."
 
-Quote Email 2 below in standard reply format.
+NEVER include `On <date>, Andy McLean wrote:`, `>` quoted lines, or any prior email content. Doing so causes the 2026-04-29 incident pattern.
 
 **Send-window assignments for the email-queue.json entries:**
 - Email 1: `sendTime: "4pm"`
@@ -248,10 +277,12 @@ Quote Email 2 below in standard reply format.
 
 The master osi-email-sender task runs every weekday at 11 AM, 12 PM, 1 PM, 2 PM, 3 PM, and 4 PM Eastern. Each fire window processes queue entries whose `sendTime` matches that window.
 
+**MANDATORY before queue write:** run the canonical sanitizer from `osi-outreach-sequence` Step 6.7 on every body and every subject. The sanitizer strips em-dashes / en-dashes (Andy Rule #4) and asserts the result is clean. For Email 3 (NEW MAIL flow), it also strips any quote markers as defense-in-depth. Same function, copy it from there. Do NOT skip this step.
+
 **Re-engagement tone rules:**
 - Do not re-introduce OSI or explain what they do.
 - Do not acknowledge the previous sequence directly.
-- Lead with something new — company news, market trigger, pricing window, product update.
+- Lead with something new, company news, market trigger, pricing window, product update.
 - Make them feel like this outreach is timely, not persistent.
 
 ---
@@ -268,13 +299,13 @@ The master osi-email-sender task runs every weekday at 11 AM, 12 PM, 1 PM, 2 PM,
 
 ## OSI Product Lines
 
-1. **Optics** — SmartOptics transceivers. Sample offer is the opening wedge.
-2. **DWDM and Open Line Systems** — SmartOptics DCP, 30-50% below Ciena/Nokia.
-3. **Compute and Components** — DIMMs from Samsung/Hynix/Micron. Lead with DIMMs.
-4. **Storage** — NetApp TPM, pre-owned storage.
-5. **TPM** — 40-60% below OEM. Multi-vendor. Gartner-recognized, privately owned, no PE.
-6. **Pre-Owned and New Networking** — Pre-owned Cisco/Juniper/Arista. New Nokia authorized.
-7. **Professional Services** — Strong signal only. Never lead cold.
+1. **Optics**, SmartOptics transceivers. Sample offer is the opening wedge.
+2. **DWDM and Open Line Systems**, SmartOptics DCP, 30-50% below Ciena/Nokia.
+3. **Compute and Components**, DIMMs from Samsung/Hynix/Micron. Lead with DIMMs.
+4. **Storage**, NetApp TPM, pre-owned storage.
+5. **TPM**, 40-60% below OEM. Multi-vendor. Gartner-recognized, privately owned, no PE.
+6. **Pre-Owned and New Networking**, Pre-owned Cisco/Juniper/Arista. New Nokia authorized.
+7. **Professional Services**, Strong signal only. Never lead cold.
 
 ---
 
@@ -299,7 +330,7 @@ TPM with documented SLAs. DIMMs for server refresh. Gartner-recognized, privatel
 
 ## COLD CALL OPENER RULES (Gong, 300M+ calls)
 
-1. Open with "How have you been?" — 6.6x baseline meeting rate.
+1. Open with "How have you been?", 6.6x baseline meeting rate.
 2. State a clear reason for calling.
 3. End with a question about their world. Never "Is now a good time?"
 4. Never ask "Is now a good time?"
@@ -323,7 +354,7 @@ Merger wedge: "With the Park Place and Service Express merger, a lot of teams ha
 
 ## Step 6: Save to HubSpot automatically
 
-### Task housekeeping — always do this first
+### Task housekeeping, always do this first
 
 When a prospect is being processed and they have an existing `LINKED_IN_CONNECT` task in HubSpot (the "Sales Nav -- Send connection request" task that triggered this sequence):
 
@@ -338,9 +369,9 @@ Do this for EVERY prospect regardless of whether they had an existing task or no
 
 ### Create or update contact record
 
-### Data quality — HARD REQUIREMENTS (do not skip)
+### Data quality, HARD REQUIREMENTS (do not skip)
 
-Every contact written to HubSpot MUST have these fields populated correctly. If any are missing or wrong, STOP — do not write the record. Research harder, then retry.
+Every contact written to HubSpot MUST have these fields populated correctly. If any are missing or wrong, STOP, do not write the record. Research harder, then retry.
 
 **Required fields on every save:**
 | Field | Source | Format | Enforcement |
@@ -356,17 +387,17 @@ Every contact written to HubSpot MUST have these fields populated correctly. If 
 | `hs_linkedin_url` | Sales Nav URL (`linkedin.com/sales/lead/[ID]/`) OR regular `linkedin.com/in/` URL | Full URL | **Hard** |
 
 **Phone format rule:**
-- US and Canada numbers: `+1 (XXX) XXX-XXXX` — with the space after `+1`, parentheses around area code, space before first block, hyphen before last 4.
+- US and Canada numbers: `+1 (XXX) XXX-XXXX`, with the space after `+1`, parentheses around area code, space before first block, hyphen before last 4.
 - Example: `+1 (440) 567-7444`
 - If existing HubSpot data has `(416) 353-7591` without country code, UPGRADE it to `+1 (416) 353-7591` when you write.
 - Non-US/CA: use `+[country code] [number]` appropriate to the region.
 
-**Mobile phone rule — never violate:**
+**Mobile phone rule, never violate:**
 - `mobilephone` holds the person's DIRECT mobile/cell ONLY.
 - NEVER put a company main/switchboard number in `mobilephone`.
 - If ZoomInfo returns no mobile, leave `mobilephone` BLANK. Do not substitute.
 
-**Pre-write checklist — run BEFORE every contact save:**
+**Pre-write checklist, run BEFORE every contact save:**
 1. jobtitle is current (pulled from LinkedIn top card, not HubSpot)
 2. phone formatted `+1 (XXX) XXX-XXXX` (if US/CA)
 3. mobilephone formatted OR blank (not HQ number)
@@ -379,22 +410,22 @@ If any check fails, FIX IT or leave the field blank. Do NOT write a partial reco
 ---
 
 
-### LinkedIn & association rules — apply on every contact save
+### LinkedIn & association rules, apply on every contact save
 
-**Job title — always refresh from LinkedIn (authoritative).**
+**Job title, always refresh from LinkedIn (authoritative).**
 Even if HubSpot already has a `jobtitle` value, pull the current title from the prospect's LinkedIn profile top card and overwrite. HubSpot titles go stale; LinkedIn is source of truth. Fallback order if LinkedIn is unreachable (closed profile, URL broken, private): use the ZoomInfo enriched `jobTitle` field. Only if neither is available, leave the existing HubSpot value alone.
 
-**Associated company — always link on contact creation.**
+**Associated company, always link on contact creation.**
 Before creating or updating a contact, search HubSpot for the company by name (`search_crm_objects` objectType=COMPANY, `query` = company name). If found, associate the contact to that company record via the `associations` parameter in `manage_crm_objects.createRequest` or `updateRequest`. If the company is not found in HubSpot, create a new company record first (owner: 196669355, name: company name from LinkedIn) and then associate the contact to it.
 
 Never leave a contact orphaned from its company. Unlinked contacts break same-company stagger logic, deal tracking, and reporting.
 
 
-Required fields: first name, last name, job title, company, email (if found), phone (if found), city, state, timezone (hs_timezone), LinkedIn URL (hs_linkedin_url — regular linkedin.com/in/ URL).
+Required fields: first name, last name, job title, company, email (if found), phone (if found), city, state, timezone (hs_timezone), LinkedIn URL (hs_linkedin_url, regular linkedin.com/in/ URL).
 
 Timezone values (6-bucket): us_slash_eastern / us_slash_central / us_slash_mountain / us_slash_pacific / us_slash_alaska (US Alaska) / canada_slash_atlantic (Canada Atlantic). Outside these six, use the closest matching bucket.
 
-### Strategy and Fit note — EVERYONE
+### Strategy and Fit note, EVERYONE
 
 objectType: "notes", owner 196669355, associated to contact.
 
@@ -424,15 +455,15 @@ Email 3 - Day 30 - [Date] - Subject: [new subject]
 
 Never use em-dashes anywhere in the note.
 
-### LinkedIn Connection Request task — EVERYONE
+### LinkedIn Connection Request task, EVERYONE
 
 Subject: "Sales Nav -- Send connection request -- [First Last] | [Company]"
 Type: LINKED_IN_CONNECT, due Day 1 (same date as Email 1 / 1st Touch), owner 196669355.
 Notes: LinkedIn re-engagement message text.
 Check for existing task first. If exists, skip.
 
-### If no email AND no phone — LinkedIn tasks only
+### If no email AND no phone, LinkedIn tasks only
 
-Task 1: LINKED_IN_MESSAGE, "1st LI — [First Last] | [Company]", due 7 days.
-Task 2: LINKED_IN_MESSAGE, "2nd LI — [First Last] | [Company]", due 21 days.
+Task 1: LINKED_IN_MESSAGE, "1st LI, [First Last] | [Company]", due 7 days.
+Task 2: LINKED_IN_MESSAGE, "2nd LI, [First Last] | [Company]", due 21 days.
 Check for existing tasks first. If exist, skip.
