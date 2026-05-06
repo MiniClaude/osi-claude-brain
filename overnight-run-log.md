@@ -1,4 +1,26 @@
 
+[2026-05-04 ~09:30 ET] osi-overnight-runner-recurring-cmig — PROCESSING branch, cap 2/2.
+
+SEQUENCES QUEUED (2):
+1. Ravi Kothari — Senior Manager IT, NAI Group LLC (North American Interconnect), Troy MI. Email: ravi.kothari@nai-group.com (ZoomInfo FULL_MATCH). HubSpot contact 176670122322. 6 emails queued (ravi-kothari-nai-group-1 through -6), Day 1 May 5. LinkedIn Connect task 109118107283. Strategy note 109119981367. Angles: DIMMs/compute, TPM, optics.
+2. Tim Chin — Director IT & Security, Rajant Corporation, Drexel Hill PA. Email: tchin@rajant.com (ZoomInfo FULL_MATCH, accuracy 99). HubSpot contact 3336301. 6 emails queued (tim-chin-rajant-1 through -6), Day 1 May 5. LinkedIn Connect task 109120076897. Strategy note 109098532236. Angles: TPM (AZ expansion hook), optics, DIMMs, preowned.
+
+DISQUALIFIED THIS FIRE:
+- Krishna Verma (JMA Wireless) — left company (now Verizon)
+- Oswaldo Colon (JMA Wireless) — product engineering
+- Spencer Updike (JMA Wireless) — India-based
+- Gilberto Brizzi (JMA Wireless) — product engineering (firmware)
+- Ivan Torres (JMA Wireless) — CONDITIONAL/pending-relookup. LinkedIn not findable via any search. Strong profile on paper (Network Engineer, 13yr at JMA). Needs manual LinkedIn search by Andy.
+- David Antonucci (JMA Wireless) — product engineering
+- Jason Pang, Norberto Rea, Daniel Limon, Victor Munguia (NAI Group) — Mexico/China geography
+- Alan Sanders (Rajant) — firmware developer, product engineering. NOT an IT buyer.
+
+STATE FILE BUG (BLOCKING): overnight-candidates.json became minified to a single line (~104,523 tokens) mid-fire. Read tool exceeds token limit. Edit returns "File has been modified since read." Bash unavailable. Alan Sanders (no) and Tim Chin (yes-with-email) verdicts NOT written to state file. Ravi Kothari and prior candidates ARE written. Manual fix required: reformat JSON to multi-line. Candidates Mir Khan (Rajant) and all Lantronix/Intelepeer/CVTC-remaining/Barry Communications/Brivo candidates not yet processed this fire due to context exhaustion from two compaction cycles.
+
+[2026-05-03 09:00 ET] osi-email-task-drafts-cmig — 0 tasks due, no-op.
+
+[2026-05-02 09:00 ET] osi-email-task-drafts-cmig — 0 tasks due, no-op.
+
 [2026-04-30 11:08 ET] osi-email-sender 11am window MANUAL RUN, 24/24 sent. Three skill bugs caught and patched live during the run:
   1. SKILL.md Step 4 TARGET=2 was empirically WRONG. First email (David Thomas / SiFi) shipped through trim with finalNewlinesBeforeBest=2, pass=true, but rendered email had ZERO visible blank line before "Best,". In current Outlook contenteditable, each insertParagraph at offset 0 of "Best," text node adds 2-3 newlines per call (not 1 as TARGET=2 assumed). TARGET=5 produces ONE visible blank line matching body-paragraph spacing. Patched SKILL.md Step 4: TARGET 2->5 with full rationale.
   2. SKILL.md Step 3B had no leading-blank cleanup. Compose loads with 1-2 empty paragraphs above signature; positioning cursor at "Best," and inserting body leaves those empty paragraphs ABOVE the inserted body, rendering 2-3 blank lines before "Hi <Name>,". Andy caught on first email of run. Added Step 3B step 7a: mandatory leading-blank strip after insertion. Same logic applied in JS used for remaining 23.
@@ -1666,3 +1688,297 @@ Exit: clean abort per no-prompt rule.
 - Suggested fix: skip bodyLen and dupe-hash flags when entry id ends in `-2` and subject starts with "RE: ", or expose a `_isEmail2Reply` short-circuit.
 
 **Outcome:** 3/10 sent successfully (eric-aitken, dimitar-petrovski, justin-pastore). 7 paused-validator. Visual blank-line check passed on all 3 sends.
+
+---
+## 2026-05-01 — Andy-named 12 staged for 7 PM Discovery Mega
+
+State file updated mid-day, NO scheduled-task call was made (no approval prompt fired). The osi-overnight-runner-recurring-cmig task fires next at 2026-05-01T23:07:13Z (~7:07 PM ET). On that fire it will hit Branch A-prime (ANDY-NAMED DISCOVERY PRIORITY) because all 12 discovery_pending companies have added_via starting `andy_named_` and were added in the last 24 hours. Branch A-prime schedules a fresh Discovery Mega one-time task to fire 2-5 minutes later, exits without running Branch A.
+
+Deferred to discovery_complete (was refill_2026-05-01, never processed): OTELCO, OneStream Networks, Impulse Advanced Communications, Millennium Communications Group, Flume, Computershare, UAB Health System, Northwestern Memorial Hospital, Erie County Medical Center, Andrews Federal Credit Union. State-dedup filter blocks them from re-pick on next refill.
+
+Appended as discovery_pending / andy_named_2026-05-01: Cellcom (21230162342), Videotron Communications (9126605722), Infrastructure Networks (9124909237), Satcom Direct (23099108105), JMA Wireless (9126707385), NAI Group LLC (34955056802), Rajant (18566667817), Lantronix (20704623973), Intelepeer (9127921064), Copper Valley Telecom (34954399064), Barry Communications (29702751626), Brivo Inc. (19235361163).
+
+State backup: overnight-candidates.json.bak-2026-05-01-pre-andy12.
+
+---
+## 2026-05-01T23:09Z — Processing Recurring fire (cmig)
+
+**Branch:** A-prime (ANDY-NAMED DISCOVERY PRIORITY)
+
+**State at fire:**
+- 12 companies status=discovery_pending, all `added_via=andy_named_2026-05-01`, added today (within 24h window)
+- 0 candidates status=pending
+- mode=auto, run_id=2026-04-24-weekend
+
+**Andy-named discovery_pending companies (all qualify for A-prime):**
+Cellcom, Videotron Communications, Infrastructure Networks, Satcom Direct, JMA Wireless, NAI Group LLC, Rajant, Lantronix, Intelepeer, Copper Valley Telecom, Barry Communications, Brivo, Inc.
+
+**Action attempted:** schedule one-time Discovery Mega task `osi-discovery-mega-2026-05-01-1913` to fire at 2026-05-01T19:13:00-04:00 with the standard Discovery Mega prompt template covering all 12 companies.
+
+**Result:** ❌ FAILED. `mcp__scheduled-tasks__create_scheduled_task` returned `Cannot create scheduled tasks from within a scheduled task session.`
+
+**This is a Cowork platform constraint, not a skill bug.** The orchestrator's hardwired rules require Branch A-prime to schedule Discovery Mega + exit. Cowork blocks scheduled-task creation from inside a scheduled fire. Per the runner's "Failure modes" rule, log + exit. Andy must schedule the Discovery Mega manually.
+
+**Andy action required (next time at keyboard):**
+1. Open Cowork, ask Claude to schedule a one-time Discovery Mega for the 12 Andy-named companies above — fire it within ~5 minutes of dispatch.
+2. Or, run Discovery Mega in-session by saying: "run Discovery Mega for the 12 Andy-named companies in state."
+3. Once Discovery Mega completes, the next Processing Recurring fire will resume Branch A on the resulting pending candidates.
+
+**No candidates qualified, no emails queued, no HubSpot writes this fire.** Branch A intentionally skipped per A-prime priority. Exit clean.
+
+---
+[2026-05-02T01:02:39Z] PROCESSING RECURRING FIRE | run_id=2026-04-24-weekend | mode=auto
+BRANCH: A-prime (ANDY-NAMED DISCOVERY PRIORITY)
+Trigger: 12 Andy-named companies with status=discovery_pending, all added 2026-05-01T18:30:49Z (within 24h).
+Companies: Cellcom, Videotron Communications, Infrastructure Networks, Satcom Direct, JMA Wireless, NAI Group LLC, Rajant, Lantronix, Intelepeer, Copper Valley Telecom, Barry Communications, Brivo Inc.
+Action: Attempted to schedule Discovery Mega one-time task via mcp__scheduled-tasks__create_scheduled_task.
+RESULT: FAILED — system returned "Cannot create scheduled tasks from within a scheduled task session."
+Retry: N/A — system-level constraint, not transient. Retry would fail identically.
+STATUS: SKILL BUG. The A-prime branch requires scheduling a one-time Discovery Mega from inside a recurring scheduled-task fire, but the Cowork runtime prohibits create_scheduled_task calls from within scheduled sessions.
+RECOMMENDATION FOR ANDY: Manually trigger the Discovery Mega for the 12 Andy-named companies, or kick off a new session and run "run sequences for: Cellcom, Videotron Communications, Infrastructure Networks, Satcom Direct, JMA Wireless, NAI Group LLC, Rajant, Lantronix, Intelepeer, Copper Valley Telecom, Barry Communications, Brivo Inc." to process them.
+EXIT: Exiting clean. State file unchanged (12 companies remain discovery_pending). Next Processing Recurring fire will hit the same A-prime branch and encounter the same constraint until Andy resolves manually.
+
+[2026-05-02T01:13:14Z] DISCOVERY SWEEP | company=Cellcom | hsId=21230162342 | M&A=None (Nsight parent, independent) | LI candidates captured=20 | HubSpot supplements=0 | skipped reasons=none
+[2026-05-02T01:20:02Z] DISCOVERY SWEEP | company=Videotron Communications | hsId=9126605722 | M&A=Subsidiary of Quebecor (Freedom Mobile integrated) | LI candidates captured=57 | HubSpot supplements=0 | skipped reasons=none
+[2026-05-02T01:21:58Z] DISCOVERY SWEEP | company=Infrastructure Networks | hsId=9124909237 | M&A=None | LI candidates captured=0 | HubSpot supplements=11 | skipped reasons=small company, LinkedIn thin[2026-05-02T01:24:25Z] DISCOVERY SWEEP | company=Satcom Direct | hsId=23099108105 | M&A=Acquired by Gogo Dec 2024, proceeding | LI candidates=1 | HubSpot supplements=12
+[2026-05-02T01:29:28Z] DISCOVERY SWEEP | company=JMA Wireless | hsId=9126707385 | M&A=none | LI candidates=1 | HubSpot supplements=24
+[2026-05-02T01:30:28Z] DISCOVERY SWEEP | company=NAI Group LLC | hsId=34955056802 | M&A=none | LI candidates=0 | HubSpot supplements=7
+[2026-05-02T01:33:57Z] DISCOVERY SWEEP | company=Rajant | hsId=18566667817 | M&A=none | LI candidates=3 | HubSpot supplements=12
+[2026-05-02T01:36:58Z] DISCOVERY SWEEP | company=Lantronix | hsId=20704623973 | M&A=none | LI candidates=1 | HubSpot supplements=5
+[2026-05-02T01:40:19Z] DISCOVERY SWEEP | company=Intelepeer | hsId=9127921064 | M&A=none | LI candidates=3 | HubSpot supplements=7
+[2026-05-02T01:43:55Z] DISCOVERY SWEEP | company=Copper Valley Telecom | hsId=34954399064 | M&A=none | LI candidates=3 | HubSpot supplements=8
+[2026-05-02T01:45:55Z] DISCOVERY SWEEP | company=Barry Communications | hsId=29702751626 | M&A=none | LI candidates=4 | HubSpot supplements=8
+[2026-05-02T01:48:55Z] DISCOVERY SWEEP | company=Brivo Inc | hsId=19235361163 | M&A=none | LI candidates=5 | HubSpot supplements=9
+[2026-05-02T01:48:55Z] DISCOVERY MEGA COMPLETE | 12 companies swept this session | total_candidates=520 | all_companies_complete=58
+
+---
+## Fire: 2026-05-01 (Processing Recurring) | resumed after context compaction
+
+### Verdicts this session:
+- Andy Schnese (Nsight) | No | Finance/budget manager (CMA, Network Cost Analyst, BBA Finance). Not hardware buyer. Status: no
+- Mason Moesch (Nsight) | Yes-with-email | Infrastructure Eng Manager, promoted Feb 2026, NetApp follower. Sequence queued. email1_day1=2026-05-04. Sequence: Pain-Led TPM. HubSpot 102931114785. LINKED_IN_CONNECT task 109054047519.
+
+### Sequences queued this fire: 1 of 2 cap
+### Logged: 2026-05-02T02:22:06Z
+
+---
+## 2026-05-01 — Overnight Fire (Branch A: PROCESSING) — Session 2 (post-compaction)
+
+**Sequence 2 of 2: Peter Whiteside — Brivo** ✅
+- Role: Vice President of Infrastructure
+- Verification: LinkedIn Path A (full profile read)
+- Hook: Eagle Eye Networks + Brivo merger Dec 2025. Inherited two infra stacks. Hiring posts confirm scale-up.
+- Email: peter.whiteside@brivo.com (pattern-inferred, firstname.lastname@brivo.com verified by 4 existing HubSpot contacts)
+- HubSpot contact created: 219246525852 (new, associated with company 19235361163)
+- ZI: COMPANY_ONLY_MATCH — not a verification failure per CLAUDE.md
+- 6-email sequence queued: 2026-05-04 through 2026-06-05
+- LinkedIn connect task: 2026-05-04
+- Strategy note: created (engagementId 109055566480)
+- Brivo stagger written: last_day1=2026-05-04, person_count=1
+
+**Cap hit: 2 of 2 sequences fired this run.**
+- Sequence 1: Mason Moesch (Nsight)
+- Sequence 2: Peter Whiteside (Brivo)
+
+**Fire complete. 2026-05-01.**
+
+## 2026-05-02T19:43:34Z | Weekend Processing Fire (2026-05-02)
+
+**BRANCH A: PROCESSING**
+
+**Candidate 1: Eric Menu | Videotron Communications**
+- Status: yes-no-email (does NOT count toward 2-cap)
+- Title: Technology planning architect (18+ yrs at Videotron, fiber optic/HFC/wireless convergence)
+- LinkedIn: https://www.linkedin.com/in/eric-menu-98a9a87/ (3rd degree, restricted)
+- ZoomInfo: 7 attempts exhausted. Company in ZI (ID 53952523) but no person record found.
+- HubSpot contact created: 219342639923
+- Strategy note: 109077388375
+- LINKED_IN_CONNECT task: 109077427316 (due 2026-05-05T20:00:00Z)
+- LI fallback tasks: 109081724556 (2026-05-19), 109081656440 (2026-06-02)
+- Read-back: PASSED (type=LINKED_IN_CONNECT, timestamp=2026-05-05T20:00:00Z)
+- Stagger: NOT updated (no email queued for yes-no-email)
+
+Advancing to candidate 2...
+
+---
+## Fire: 2026-05-02 Weekend (Continuation after context compaction)
+**Cap progress: 0/2 yes-with-email**
+**Context resumed from compaction. Candidates 2-4 (Benhalima, Leblanc, Kamraoui) processed in prior context.**
+
+### Candidate 5: Vincent Campeau (e57da77d) - Videotron
+- Title: Architecte reseau IP/MPLS
+- Status: YES - NO EMAIL
+- HubSpot ID: 219352141075
+- Verdict: IP/MPLS Network Architect, 13yr Videotron. P.Eng. Owns wired network planning under Mathieu Sevigny. DWDM/optics fit. ZI no-contact pattern confirmed.
+- Tasks: LI connect (May 5) + 2 InMail fallbacks (May 19, Jun 2)
+
+### Candidate 6: Isabelle Dufresne (806023ef) - Videotron
+- Title: Senior Director, Network Engineering (IP Networks)
+- Status: YES - NO EMAIL
+- HubSpot ID: 219347501633
+- Verdict: Sr Director owning IP network engineering. 17yr Videotron. Former Nortel Optical Division Supply Chain Mgr. Top DWDM/optics target.
+- Tasks: LI connect (May 5) + 2 InMail fallbacks (May 19, Jun 2)
+
+### Candidate 7: Eddy D. (e9f9a8cb) - Videotron
+- Title: Architecte securite reseau
+- Status: NO
+- Verdict: Network Security Architect (firewalls, Cloud, Aruba). No DWDM/optical background. Not hardware procurement path.
+
+### Candidate 8: Arnaud Barro (6c91c8aa) - Videotron
+- Title: Ingenieur IP Dorsale Internet
+- Status: YES - NO EMAIL
+- HubSpot ID: 219348503135
+- Verdict: IP Backbone Engineer (MPLS/BGP), 10yr Videotron. Juniper AJT certified. Backbone capacity augmentation = direct DWDM buyer.
+- Tasks: LI connect (May 5) + 2 InMail fallbacks (May 19, Jun 2)
+
+### Candidate 9: Mathieu Sevigny (6a0c1d85) - Videotron
+- Title: Directeur, Planification et Architecture des reseaux
+- Status: YES - NO EMAIL
+- HubSpot ID: 219352421770
+- Verdict: Director owning architecture AND financial planning for Videotron IP/wired/wireless. 20yr tenure. Budget decision maker. Vincent Campeau's manager. Highest-value Videotron target this fire.
+- Tasks: LI connect (May 5) + 2 InMail fallbacks (May 19, Jun 2)
+
+
+---
+## Run: 2026-05-02 20:47 UTC | osi-overnight-runner-recurring-weekend | Branch A PROCESSING
+
+**CAP:** 2/2 reached. Run complete.
+
+### YES-WITH-EMAIL (2)
+
+1. **Mitch Vieu** | Senior Manager Telecom Engineering and Operations | Copper Valley Telephone Cooperative
+   - Email: mvieu@cvtc.org | emailResolution: hubspot-existing
+   - Sequence: Pain-Led DWDM (6 emails)
+   - Day 1: 2026-05-04 | IDs: mitch-vieu-copper-valley-telecom-1 thru -6
+   - Hook: Prior OSI engagement Oct 2023 (hs_sales_email_last_replied)
+   - HubSpot note ID: 109077637752 | LI task ID: 109081658888
+
+2. **Robert Geraghty** | Lead Network Engineer | Copper Valley Telephone Cooperative
+   - Email: rgeraghty@cvtc.org | emailResolution: hubspot-existing
+   - Sequence: Sample-Offer Network (6 emails)
+   - Day 1: 2026-05-08 (stagger: CVTC person_count=2)
+   - IDs: robert-geraghty-copper-valley-telecom-1 thru -6
+   - Hook: Certified Optical Network Engineer cert Sep 2025 + 400G DWDM/EDFA at CVTC
+   - HubSpot note ID: 109081913370 | LI task ID: 109080517170
+
+### YES-NO-EMAIL (Videotron batch - prior fire)
+All processed in linkedin_search bucket. See previous run entries.
+
+### NO / CONDITIONAL (this fire)
+- James Dollar (Lantronix): role changed to Technical Product Management. NO.
+- Tyler Shue (JMA Wireless): LinkedIn search returned no profile. Conditional.
+- Nik Slater (Intelepeer): LinkedIn search returned no profile. HubSpot company stale (SlideShare). Conditional.
+- Casey Hutchinson (Barry Communications): last contacted Dec 2025, under 6 months. Skipped-too-recent.
+- Will Hinz (Infrastructure Networks): inetlte.com catch-all domain. NO.
+- Cody Griffiths (Infrastructure Networks): inetlte.com catch-all domain. NO.
+
+### QUEUE STATS
+- Email queue entries before run: 1201
+- Added this fire: 12 (6 Mitch Vieu + 6 Robert Geraghty)
+- Total queue entries: 1213
+
+### STAGGER STATE (Copper Valley Telecom)
+- person_count: 2
+- last_day1: 2026-05-08
+- Bryan Fisher (Network Engineer) and Adam Gilmore (System Admin) remain pending for next fire
+
+### PENDING HUBSPOT_CONTACT REMAINING: ~50
+Next priority: Kevin Allen (Infrastructure Networks, infrastructurenetworks.com domain), JMA Wireless (Tyler Shue conditional, Gilberto Brizzi CTO, Tyler Shue NE), Barry Communications team, Brivo team.
+
+
+2026-05-04T13:07:10Z | BRANCH-A | Michael Lam (2eba2ef3) | Infrastructure Networks | NO | Senior Solutions Architect at private 4G LTE/IoT company. Cellular/RF/microwave specialist. Wrong vertical, zero OSI fit. STOP-GATE. Advancing to next pending.
+
+2026-05-04T13:09:46Z | BRANCH-A | Richard Chu (98baaeed) | Infrastructure Networks/iNetLTE | CONDITIONAL | No LinkedIn profile found after 3 searches (Richard Chu, Rich Chu, variants). Shallow qualify gate failed (only inbound was OOO auto-reply). Web search prohibited during scheduled fire. STOP-GATE. Advancing to next pending.
+
+2026-05-04T13:10:55Z | BRANCH-A | William Wade (d797f7b2) | Infrastructure Networks/iNetLTE | CONDITIONAL | No LinkedIn profile found. No HubSpot email. iNetLTE is private LTE/IoT company for oil & gas. STOP-GATE. Advancing.
+
+2026-05-04T13:12:58Z | BRANCH-A | Rahul Nair (cbcf8f97) | Infrastructure Networks/iNetLTE | NO | Systems Admin at small private LTE/IoT company. Not ICP. STOP-GATE. Advancing.
+
+2026-05-04T13:13:38Z | BRANCH-A | Navin Mohan (792a6cc7) | Infrastructure Networks/iNetLTE | NO | Operational Sys Admin / Cloud Computing. Small private LTE company. Not ICP. STOP-GATE. Advancing.
+
+2026-05-04T13:14:33Z | BRANCH-A | Kori Kalich (3efdf8c6) | Infrastructure Networks | NO | LinkedIn: now President at Bue Sky Summit County (real estate). Left iNetLTE. STOP-GATE. Advancing.
+
+2026-05-04T13:15:10Z | BRANCH-A | Joseph Jen (a32d2bf8) | Infrastructure Networks/iNetLTE | NO | NOC Supervisor at small private LTE company. Not buyer, not ICP. STOP-GATE. Advancing.
+
+2026-05-04T13:15:45Z | BRANCH-A | Phillip Washington (18f9b87a) | Infrastructure Networks/iNetLTE | NO | Network Ops Analyst at small private LTE company. Not ICP. STOP-GATE. Infrastructure Networks batch complete (8 candidates: 6 No, 2 Conditional). Advancing to next company.
+
+## [2026-05-04] Spencer Updike | JMA Wireless | IT Network Engineer
+- Source: hubspot_contact
+- Shallow qualify gate: FAIL (last contact Sept 2024, ~19 months ago, no inbound reply)
+- Path A: LinkedIn found (https://www.linkedin.com/in/spencer-updike-9937a7b3/)
+- Employer verification: FAIL — no JMA Wireless entry on LinkedIn profile; last confirmed role was Network Administrator at Telos Corporation, ended Aug 2023. Profile appears stale.
+- Verdict: No — could not verify current employer at JMA Wireless. STOP-GATE.
+- Yes-with-email count: 0/2
+
+## [2026-05-04] Les Les | NAI Group LLC | Director, Information Technology
+- Source: hubspot_contact
+- Shallow qualify gate: FAIL (last contact July 2024, ~22 months, no email in HubSpot)
+- Path A: LinkedIn search returned no matching profile for "Les Les" at NAI Group
+- ZoomInfo: FULL_MATCH, accuracy 76, confirms Director IT at North American Interconnect — but NO EMAIL returned
+- Verdict: Conditional — employer/title confirmed but no email available from any source. Cannot queue sequence.
+- Yes-with-email count: 1/2
+
+## [2026-05-04] Rosicky Gui | NAI Group LLC | Manager, Information Technology
+- Source: hubspot_contact
+- Shallow qualify gate: FAIL (last contact July 2024, ~22 months, no inbound)
+- Path A: LinkedIn search — no profile found after 3 attempts
+- Web search prohibited during scheduled fire; cannot complete Path B
+- Verdict: Conditional — could not verify current employer. STOP-GATE.
+- Yes-with-email count: 1/2
+
+## [2026-05-04] STATE FILE REPAIR
+- overnight-candidates.json was truncated mid-JSON (stagger dict unclosed)
+- Fixed by stripping trailing comma and closing 2 open braces
+- File re-parsed cleanly: 520 candidates, 19 stagger keys, all data intact
+
+---
+## osi-email-task-drafts-cmig | 2026-05-04 ~09:00 ET
+32 custom email tasks due today or overdue. 4 parallel subagents dispatched.
+- DRAFTED (fresh): 28
+- DRAFTED (overwrote previous): 2 — Ben Russell/Stratus (108879161722 via task 105278268837), Jeremy Fornasiero/Amundi (108879161722)
+- THIN CONTEXT flagged: 2 — John Dopson/Chanel (103408106757, thin history), David Peacock/ImageQuest (108172465743, zero HubSpot engagements; note: ImageQuest acquired by Evergreen/Lyra — strong news hook exists)
+- NO CONTACT: 0 | ERRORS: 0
+
+FLAGS FOR ANDY:
+1. SHEIBLEY (108549046917): task note says "ask steve!" — loop in Steve before sending
+2. KLEPACZ (108977348992): "Jon-Paul" hyphen triggered validator; draft uses "JP" — confirm that's correct
+3. DOPSON (103408106757): thin context, old call note says DIR was bad — review before sending
+4. PEACOCK/ImageQuest (108172465743): zero HubSpot history, thin draft — ImageQuest was acquired (Evergreen/Lyra), strong hook if you want to rewrite manually
+
+---
+## 2026-05-04 | Tim Chin | Rajant Corp | YES-WITH-EMAIL (#2/2)
+- HubSpot contact ID: 3336301
+- Email: tchin@rajant.com (hubspot-existing)
+- Verification: LinkedIn Path A. Director of IT & Security, Rajant Corp (Feb 2023 - Present). Also runs The Network Doctors concurrently. Hiring posts confirmed active Rajant role.
+- Qualification: YES. DoD contractor on Cisco infrastructure. Cost-reduction focus confirmed on profile (27% savings). TPM lead wedge, secondary: DIMMs, spare optics.
+- Sequence: Pain-Led TPM, 6 emails queued
+  - E1: 2026-05-05 4pm | Cisco support at Rajant
+  - E2: 2026-05-07 11am | RE: Cisco support at Rajant
+  - E3: 2026-05-13 12pm | server components for Rajant
+  - E4: 2026-05-21 1pm | spare optics for Rajant
+  - E5: 2026-06-01 2pm | Cisco gear past support
+  - E6: 2026-06-10 3pm | closing the loop
+- HubSpot: strategy note created (ID 109119533056), LinkedIn task created (ID 109120195340, due 2026-05-05)
+- Stagger: Rajant last_day1=2026-05-05, person_count=1
+- CAP REACHED: 2/2 yes-with-email. Fire exiting cleanly.
+
+
+## Weekly validator audit -- 2026-05-04 (Monday)
+Found 73 sent entry violations across last 7 days. Top patterns:
+- rule: 1.2-smartoptics-in-cold-body -- SmartOptics brand name in cold email body (should say "OSI transceivers")
+- rule: quote-leak-onwrote / quote-leak-gtprefix / quote-leak-dashrun -- quoted prior thread text leaking into E3+ standalone emails
+- rule: 1.12-surgical-isolation -- multiple product lines (DWDM + optics, compute + TPM) in single email
+- rule: 14-word-limit-email-N -- word count over limit (E1=90, E2=50, E3=80)
+- rule: 1.6-dead-phrase-body -- "worth 15 minutes" / "worth a conversation" in body
+
+All violations are on already-sent entries (informational). Fix needed in osi-outreach-sequence skill:
+  1. Strip SmartOptics brand from cold email bodies -- use "OSI transceivers"
+  2. Ensure E3+ bodies are standalone and do not include quoted thread
+  3. Enforce one product line per email at draft time
+  4. Tighten word counts to limits before queueing
+
+2026-05-05 13:23 UTC — osi-email-task-drafts-cmig — 11 tasks drafted (4 overwrote previous, 1 thin-context flagged), 35 sequence tasks skipped. Flags: task 108171701160 (Joe Sleeper) needs tracking number filled in before send; task 105014359114 (Jeremy Lunsford/Sony) email is catch-all flagged, confirm deliverability; task 107588147865 (Syed Iqbal/Consolidated Trading) thin context, review before sending.
+
+
+## 2026-05-05 15:42 - Excel append skipped
+Sam Coleman / Vermont Telephone: prospects-tracker-new.xlsx locked (PermissionError). Queue written successfully. Add row manually: Sam Coleman | Network Engineer | Vermont Telephone | https://www.linkedin.com/in/scolemanvt/ | Network (optics + DWDM) | 2026-05-05 | Email flag: vermonttel.com vs vermontel.com

@@ -45,6 +45,11 @@
       "email": "ilyak@princeton.edu",
       "reason": "Ilya Knizhnik, Princeton. Bad email address. Confirmed by Andy 2026-04-30. 5 future emails cancelled.",
       "blockedAt": "2026-04-30"
+    },
+    {
+      "email": "peter.whiteside@brivo.com",
+      "reason": "Invalid email address",
+      "addedAt": "2026-05-04T19:41:02Z"
     }
   ],
   "domains": [

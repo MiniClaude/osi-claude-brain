@@ -301,8 +301,18 @@
     "body": "Hi Antonio,\n\nIf the Rackspace network group is planning any capacity adds on the DC interconnect side, OSI supplies open line DWDM on the SmartOptics DCP platform. 30 to 50% below Ciena and Nokia. No licensing headaches and ships fast.\n\nWorth a short conversation on whether that fits anything on your roadmap?\n",
     "sendDate": "2026-05-04",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-17"
+    "status": "sent",
+    "addedDate": "2026-04-17",
+    "audit": {
+      "sentAt": "2026-05-04T16:08:12Z",
+      "window": "12pm",
+      "flow": "new-mail",
+      "bodyHash": "preview-verified",
+      "bodyLen": 311,
+      "trimFinalCount": 5,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "antonio-kida-rackspace-4",
@@ -419,7 +429,7 @@
     "to": "jan.brooks@rackspace.com",
     "subject": "sample SFPs for your Rackspace links",
     "body": "Hi Jan,\n\nI am prepping a package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nSide note, we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast.\n\nDo you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -431,7 +441,7 @@
     "to": "jan.brooks@rackspace.com",
     "subject": "RE: sample SFPs for your Rackspace links",
     "body": "Any thoughts?\n\n---------- On May 11, Andy McLean wrote ----------\n[earlier thread]",
-    "sendDate": "2026-05-07",
+    "sendDate": "2026-05-08",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -443,7 +453,7 @@
     "to": "jan.brooks@rackspace.com",
     "subject": "spares on the Cisco side at Rackspace",
     "body": "Hi Jan,\n\nDifferent angle. If the Rackspace network group carries any Cisco that is coming off Smartnet, OSI runs a spares program with chassis and line cards on the shelf. OEM TPM is available on the same gear if that fits.\n\nWorth a short conversation?\n",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-05-14",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -455,7 +465,7 @@
     "to": "jan.brooks@rackspace.com",
     "subject": "DDR5 on the next compute refresh",
     "body": "Hi Jan,\n\nThe Rackspace engineering ramp likely puts new compute online this year. DDR5 pricing out of the OEMs stays elevated for the next two quarters.\n\nWe source DIMMs direct from Samsung and Hynix with manufacturer warranty. Ships same day from 6,000 units on the bench.\n\nIs the next refresh batch worth a quick look?\n\nQuick reminder we're already approved at Rackspace if timing matters.\n",
-    "sendDate": "2026-05-21",
+    "sendDate": "2026-05-22",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-17"
@@ -1681,8 +1691,17 @@
     "body": "Thomas,\n\nDifferent angle. We supply pre owned Cisco and Juniper networking gear, tested, with OSI TPM available. If you're refreshing any segment of the network and want to stretch the budget, it's worth a look.\n\nWe also source server memory direct from Samsung and Hynix if DIMM costs are on the refresh agenda, and we're an authorized SmartOptics partner for open line DWDM if that sits in your world.\n",
     "sendDate": "2026-05-04",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "sent",
+    "addedDate": "2026-04-18",
+    "audit": {
+      "sentAt": "2026-05-04T16:10:00Z",
+      "window": "12pm",
+      "flow": "new-mail",
+      "bodyLen": 404,
+      "trimFinalCount": 5,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "thomas-danz-nsight-4",
@@ -1754,8 +1773,17 @@
     "body": "Jason,\n\nDifferent subject.\n\nAs IT Operations Manager, you are likely sitting on Cisco SmartNet or similar OEM maintenance contracts. The Park Place and Service Express merger has put a lot of operators in a tough spot. If you are evaluating alternatives or have contracts coming up for renewal, this is the right moment.\n\nOSI offers TPM across Cisco, Juniper, Arista, Dell, and HP at 40 to 60% below OEM rates. No surprises on pricing and no consolidation risk.\n\nWorth 15 minutes to benchmark what you are paying today?\n",
     "sendDate": "2026-05-04",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "sent",
+    "addedDate": "2026-04-18",
+    "audit": {
+      "sentAt": "2026-05-04T16:11:06Z",
+      "window": "12pm",
+      "flow": "new-mail",
+      "bodyLen": 520,
+      "trimFinalCount": 5,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "jason-mccollough-armstrong-4",
@@ -2134,8 +2162,17 @@
     "body": "Dan,\n\nDifferent angle. We do third party maintenance on Cisco and Juniper at 40 to 60% below OEM. Gartner recognized, privately owned, no PE. For gear at Nsight running clean on SmartNet, a competitive bid is typically the fastest way to free up budget without disrupting uptime.\n\nOpen to looking at rates?\n",
     "sendDate": "2026-05-04",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "sent",
+    "addedDate": "2026-04-18",
+    "audit": {
+      "sentAt": "2026-05-04T16:12:05Z",
+      "window": "12pm",
+      "flow": "new-mail",
+      "bodyLen": 307,
+      "trimFinalCount": 5,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "dan-bradford-nsight-4",
@@ -2732,8 +2769,17 @@
     "body": "Hi Chris,\n\nOne more option. We also supply pre owned Cisco and Juniper gear, tested, with OSI TPM available on it if you want support baked in.\n\nUseful for hot spares or break fix replacements when OEM lead times drag. Does VTX1 keep spares on the shelf?\n",
     "sendDate": "2026-05-04",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "sent",
+    "addedDate": "2026-04-18",
+    "audit": {
+      "sentAt": "2026-05-04T16:13:02Z",
+      "window": "12pm",
+      "flow": "new-mail",
+      "bodyLen": 255,
+      "trimFinalCount": 5,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "chris-clinton-vtx1-companies-4",
@@ -2878,8 +2924,18 @@
     "body": "Hi Mike,\n\nOn a related note. We source server memory direct from Samsung and Hynix for IT Ops teams fighting DDR4 and DDR5 cost pressure. DDR4 is still significantly cheaper than DDR5 for workloads that don't need the upgrade.\n\nHappy to send current pricing if you've got a DIMM BOM coming up.\n\nOn May 4, 2026, Andy McLean wrote:\n",
     "sendDate": "2026-05-04",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "sent",
+    "addedDate": "2026-04-18",
+    "audit": {
+      "sentAt": "2026-05-04T16:14:03Z",
+      "window": "12pm",
+      "flow": "new-mail",
+      "bodyLen": 295,
+      "trimFinalCount": 5,
+      "previewChecksPassed": true,
+      "defensiveQuoteStrip": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "mike-fiszlewicz-altafiber-4",
@@ -3029,8 +3085,17 @@
     "body": "Kevin,\n\nSeparate from the SFPs. Another thing we do for carrier teams is supply ZR and ZR+ coherent optics as a secondary source when Cisco or Lumentum lead times slip.\n\nIs that something your team has been dealing with?\n",
     "sendDate": "2026-05-04",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "sent",
+    "addedDate": "2026-04-18",
+    "audit": {
+      "sentAt": "2026-05-04T16:15:04Z",
+      "window": "12pm",
+      "flow": "new-mail",
+      "bodyLen": 221,
+      "trimFinalCount": 5,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "kevin-dancs-spectrotel-4",
@@ -3291,7 +3356,7 @@
     "to": "valerie.kalti@altafiber.com",
     "subject": "AI infra at Altafiber",
     "body": "Hi Valerie,\n\nBuilding AI and automation infrastructure at a carrier means a lot of server and memory decisions. OSI Global supplies DIMMs direct from Samsung and Hynix with manufacturer warranty, well below OEM pricing.\n\nIs that on your radar as you scale the build out?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3303,7 +3368,7 @@
     "to": "valerie.kalti@altafiber.com",
     "subject": "RE: AI infra at Altafiber",
     "body": "Any thoughts?\n\nOn Wed, May 27, 2026, Andy McLean wrote:\n> Hi Valerie,\n> Building AI and automation infrastructure at a carrier means a lot of server and memory decisions. OSI Global supplies DIMMs direct from Samsung and Hynix with manufacturer warranty, well below OEM pricing.\n> Is that on your radar as you scale the build out?",
-    "sendDate": "2026-05-07",
+    "sendDate": "2026-05-08",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3315,7 +3380,7 @@
     "to": "valerie.kalti@altafiber.com",
     "subject": "Server refresh at Altafiber",
     "body": "Valerie,\n\nAlongside memory, we also move Dell and HP compute as an authorized partner, often below channel. If any of your AI workloads are pushing a server refresh, worth a look.\n\nAre you running Dell, HP, or a mix right now?\n",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-05-14",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3327,7 +3392,7 @@
     "to": "valerie.kalti@altafiber.com",
     "subject": "Multi vendor maintenance",
     "body": "Hi Valerie,\n\nDifferent angle. We do third party maintenance on multi vendor environments, 40 to 60% below OEM. With Park Place and Service Express merging, a lot of IT leaders are benchmarking rates again.\n\nWorth a competitive bid at your next renewal?\n",
-    "sendDate": "2026-05-21",
+    "sendDate": "2026-05-22",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3853,8 +3918,17 @@
     "body": "Hi Noriel,\n\nDifferent angle. Beyond the sample SFPs, we also do open line DWDM on the SmartOptics platform. 30 to 50% below Ciena or Nokia for carrier builds like the Marianas rollout.\n\nWorth a quick look?\n",
     "sendDate": "2026-05-04",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-18"
+    "status": "sent",
+    "addedDate": "2026-04-18",
+    "audit": {
+      "sentAt": "2026-05-04T16:16:06Z",
+      "window": "12pm",
+      "flow": "new-mail",
+      "bodyLen": 206,
+      "trimFinalCount": 5,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "noriel-ocampo-docomo-4",
@@ -3899,7 +3973,7 @@
     "to": "tprevost@agoc.com",
     "subject": "Quick sample from OSI",
     "body": "Hi Thomas,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3911,7 +3985,7 @@
     "to": "tprevost@agoc.com",
     "subject": "RE: Quick sample from OSI",
     "body": "Any thoughts?\n\nOn Wed, May 6, 2026 at 4:00 PM, Andy McLean <andy@osiglobal.com> wrote:\n> Hi Thomas,\n>\n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>\n> Do you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-07",
+    "sendDate": "2026-05-08",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3923,7 +3997,7 @@
     "to": "tprevost@agoc.com",
     "subject": "DWDM pricing for Armstrong's fiber footprint",
     "body": "Hi Thomas,\n\nGiven Armstrong's fiber footprint across PA and the surrounding region, I figured DWDM might be on your radar. We run open line systems on the SmartOptics platform at 30 to 50 percent below Ciena and Nokia. Ships in weeks.\n\nWorth a short look for anything on your roadmap?\n",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-05-14",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -3935,7 +4009,7 @@
     "to": "tprevost@agoc.com",
     "subject": "Pre owned Cisco for break glass",
     "body": "Hi Thomas,\n\nDifferent angle. Do you carry Cisco or Juniper spares on the shelf? We stock tested pre owned gear with full OSI TPM available if the original comes off OEM support.\n\nUseful as insurance, or is that already covered?\n",
-    "sendDate": "2026-05-21",
+    "sendDate": "2026-05-22",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-18"
@@ -4382,11 +4456,20 @@
     "body": "Hi Marc,\n\nDifferent angle. We supply SmartOptics open line DWDM, 30 to 50 percent below Ciena and Nokia. Less rack space and power, ships faster.\n\nIf Desjardins' core network has any capacity work on the roadmap, worth comparing.\n",
     "sendDate": "2026-05-04",
     "sendTime": "12pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-19",
     "fromAccount": "andy@osihardware.onmicrosoft.com",
     "fromAccountReason": "Desjardins blocks @osiglobal.com",
-    "fromAccountTaggedAt": "2026-04-21T18:02:03.944212"
+    "fromAccountTaggedAt": "2026-04-21T18:02:03.944212",
+    "audit": {
+      "sentAt": "2026-05-04T16:17:08Z",
+      "window": "12pm",
+      "flow": "new-mail",
+      "bodyLen": 230,
+      "trimFinalCount": 5,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "marc-delaune-desjardins-4",
@@ -4551,8 +4634,17 @@
     "body": "Hi Jonghwan,\n\nMost sys admin teams we work with hit the same wall at year 4: OEM support doubles on servers that still run fine. OSI Global runs TPM on Dell, HP, and Cisco UCS 40 to 60 percent below OEM, same parts SLA.\n\nAny of your fleet coming up on an OEM renewal you're not thrilled about?\n",
     "sendDate": "2026-05-04",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "sent",
+    "addedDate": "2026-04-19",
+    "audit": {
+      "sentAt": "2026-05-04T16:18:24Z",
+      "window": "12pm",
+      "flow": "new-mail",
+      "bodyLen": 294,
+      "trimFinalCount": 5,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "jonghwan-kim-lgcns-4",
@@ -4636,8 +4728,9 @@
     "body": "Hi Josh,\n\nOn the transport side, we carry SmartOptics open line DWDM. Ships in weeks, 30 to 50 percent below Ciena or Nokia, no licensing games. Regional fiber operators use it to fill capacity gaps without going back to the OEM.\n\nAny DWDM refresh or new builds coming down the pipe?\n",
     "sendDate": "2026-05-07",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "josh-harless-hunter-5",
@@ -4648,8 +4741,9 @@
     "body": "Hi Josh,\n\nLast one from me on the product side. We also do tested pre owned Cisco and Juniper for break glass spares, plus third party maintenance on gear coming off OEM warranty. Useful for NOCs that want budget room without losing coverage.\n\nWorth a quick pricing snapshot?\n",
     "sendDate": "2026-05-14",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "josh-harless-hunter-6",
@@ -4660,8 +4754,9 @@
     "body": "Should I close the file on this one, or is the timing just off?\n",
     "sendDate": "2026-05-22",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "david-hortsch-hunter-1",
@@ -4697,8 +4792,17 @@
     "body": "Hi David,\n\nHunter doing any 100G or 400G capacity work right now where OEM lead times are a problem? We carry ZR and ZR+ coherents in stock. Usually ships in days.\n\nWant me to send the current inventory list?\n",
     "sendDate": "2026-05-04",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "sent",
+    "addedDate": "2026-04-19",
+    "audit": {
+      "sentAt": "2026-05-04T16:19:31Z",
+      "window": "12pm",
+      "flow": "new-mail",
+      "bodyLen": 209,
+      "trimFinalCount": 5,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "david-hortsch-hunter-4",
@@ -4709,8 +4813,9 @@
     "body": "Hi David,\n\nAny Cisco gear at Hunter coming off SmartNet soon? We do third party maintenance across Cisco and Juniper, usually 40 to 60 percent below OEM.\n\nWorth a quick look at your renewal list?\n",
     "sendDate": "2026-05-12",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "david-hortsch-hunter-5",
@@ -4721,8 +4826,9 @@
     "body": "Hi David,\n\nIf Hunter has any DWDM capacity builds on the roadmap, we run SmartOptics open line platforms at 30 to 50 percent under Ciena and Nokia. Ships in weeks with no licensing friction.\n\nHappy to send the specs if there's a project in play.\n",
     "sendDate": "2026-05-19",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "david-hortsch-hunter-6",
@@ -4733,8 +4839,9 @@
     "body": "Should I close the file on this one, or is the timing just off?\n",
     "sendDate": "2026-05-28",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "ben-wexler-keybank-1",
@@ -4932,8 +5039,9 @@
     "body": "Scott, different angle. We supply open line DWDM gear and ZR/ZR+ coherent optics at 30 to 50% below Ciena and Nokia. Ships in weeks, not quarters.\n\nWorth a conversation for any capacity or fiber route buildouts on your roadmap?\n\nOn May 4, 2026, Andy McLean wrote:\n",
     "sendDate": "2026-05-07",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "scott-albert-hunter-communications-4",
@@ -4944,8 +5052,9 @@
     "body": "Scott, one more. A lot of carrier network teams are reviewing TPM to replace OEM support on gear that is running fine but coming off warranty. We cover most vendors, Cisco and Juniper included, at 40 to 60% below OEM.\n\nIs budget pressure on support renewals on your radar?\n\nOn May 8, 2026, Andy McLean wrote:\n",
     "sendDate": "2026-05-15",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "scott-albert-hunter-communications-5",
@@ -4956,8 +5065,9 @@
     "body": "Scott, last angle before I wrap. We source server memory direct from Samsung and Hynix with manufacturer warranties, priced well below OEM. DDR4 especially is a big spread.\n\nAnything on the compute side worth a quick look?\n\nOn May 18, 2026, Andy McLean wrote:\n",
     "sendDate": "2026-05-22",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "scott-albert-hunter-communications-6",
@@ -4968,8 +5078,9 @@
     "body": "No worries if the timing is just off. Should I close the file on this one, or is there a better moment to circle back?\n\nOn May 26, 2026, Andy McLean wrote:\n",
     "sendDate": "2026-06-02",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "walt-wollny-hurricane-electric-1",
@@ -5148,8 +5259,9 @@
     "body": "Hi Robert,\n\nRunning a fiber ISP means the FTTH rollout only pencils if the transport side behaves. We work with regional carriers on open line DWDM that sits roughly 40 percent below Ciena and Nokia, ships in weeks, and stays clear of licensing tiers.\n\nWorth a quick call to see if it fits anything on your Hunter roadmap?",
     "sendDate": "2026-05-19",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "robert-nance-hunter-communications-2",
@@ -5160,8 +5272,9 @@
     "body": "Any thoughts?\n\nOn May 6, 2026, Andy McLean wrote:\nHi Robert,\n\nRunning a fiber ISP means the FTTH rollout only pencils if the transport side behaves. We work with regional carriers on open line DWDM that sits roughly 40 percent below Ciena and Nokia, ships in weeks, and stays clear of licensing tiers.\n\nWorth a quick call to see if it fits anything on your Hunter roadmap?",
     "sendDate": "2026-05-21",
     "sendTime": "11am",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "robert-nance-hunter-communications-3",
@@ -5172,8 +5285,9 @@
     "body": "Robert, quick one. We ship sample SFPs and coherent pluggables free to fiber ISPs so field ops has a Plan B on the shelf when an OEM lead time slips. Works on Cisco and Juniper platforms.\n\nCan I send a pair to Hunter to kick the tires?\n\nOn May 8, 2026, Andy McLean wrote:\nAny thoughts?\n\nOn May 6, 2026, Andy McLean wrote:\nHi Robert,\n\nRunning a fiber ISP means the FTTH rollout only pencils if the transport side behaves. We work with regional carriers on open line DWDM that sits roughly 40 percent below Ciena and Nokia, ships in weeks, and stays clear of licensing tiers.\n\nWorth a quick call to see if it fits anything on your Hunter roadmap?",
     "sendDate": "2026-05-28",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "robert-nance-hunter-communications-4",
@@ -5184,8 +5298,9 @@
     "body": "Hi Robert, one more angle. We do third party maintenance on Cisco and Juniper at 40 to 60 percent below OEM. A lot of carriers use us to trim the bill on gear that is already running fine and just needs break fix.\n\nAnything coming up on renewal?\n\nOn May 14, 2026, Andy McLean wrote:\nRobert, quick one. We ship sample SFPs and coherent pluggables free to fiber ISPs so field ops has a Plan B on the shelf when an OEM lead time slips. Works on Cisco and Juniper platforms.\n\nCan I send a pair to Hunter to kick the tires?",
     "sendDate": "2026-06-05",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "robert-nance-hunter-communications-5",
@@ -5196,8 +5311,9 @@
     "body": "Robert, one last one. We source DDR4 and DDR5 DIMMs direct from Samsung and Hynix with manufacturer warranties, priced well below OEM. Most of our carrier customers use it to stretch their server refresh budget.\n\nWant a quick price check against whatever Dell or HP quoted you last?\n\nOn May 26, 2026, Andy McLean wrote:\nHi Robert, one more angle. We do third party maintenance on Cisco and Juniper at 40 to 60 percent below OEM. A lot of carriers use us to trim the bill on gear that is already running fine and just needs break fix.\n\nAnything coming up on renewal?",
     "sendDate": "2026-06-12",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "robert-nance-hunter-communications-6",
@@ -5208,8 +5324,9 @@
     "body": "Should I close the file on this one, or is the timing just off?\n\nOn June 1, 2026, Andy McLean wrote:\nRobert, one last one. We source DDR4 and DDR5 DIMMs direct from Samsung and Hynix with manufacturer warranties, priced well below OEM. Most of our carrier customers use it to stretch their server refresh budget.\n\nWant a quick price check against whatever Dell or HP quoted you last?",
     "sendDate": "2026-06-23",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-19"
+    "status": "paused",
+    "addedDate": "2026-04-19",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "daniel-windheim-hunter-communications-1",
@@ -5811,8 +5928,9 @@
     "body": "Any thoughts?\n\nOn Tue, Apr 21, 2026, Andy McLean wrote:\n> Hi David,\n> \n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n> \n> Do you come into the office, or is there a better address to ship it to?\n>\n",
     "sendDate": "2026-04-23",
     "sendTime": "10am",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelReason": "10am invalid window; Email 3 already sent \u2014 would land out of order. Cancelled 2026-05-04T19:34:41Z"
   },
   {
     "id": "david-thomas-sifi-3",
@@ -5845,7 +5963,7 @@
     "subject": "DWDM between FiberCities",
     "body": "Hi David,\n\nSeparate topic. If SiFi is connecting FiberCity markets with a backbone, SmartOptics DCP open line DWDM runs 30 to 50% below Ciena and Nokia. Less rack space, less power, ships in weeks.\n\nOpen to a short conversation on the DWDM side?\n",
     "sendDate": "2026-05-11",
-    "sendTime": "10am",
+    "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-20"
   },
@@ -5857,7 +5975,7 @@
     "subject": "Right person at SiFi for optics?",
     "body": "David,\n\nAre you the right contact for transceiver and DWDM procurement at SiFi, or is there someone else I should be talking to?\n\nHappy to redirect.\n",
     "sendDate": "2026-05-18",
-    "sendTime": "10am",
+    "sendTime": "2pm",
     "status": "pending",
     "addedDate": "2026-04-20"
   },
@@ -5869,7 +5987,7 @@
     "subject": "Closing the file?",
     "body": "David,\n\nShould I close the file on this one, or is the timing just off?\n",
     "sendDate": "2026-05-26",
-    "sendTime": "10am",
+    "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-20"
   },
@@ -5894,8 +6012,9 @@
     "body": "Any thoughts?\n\nOn Tue, Apr 21, 2026, Andy McLean wrote:\n> Hi Ed,\n> \n> With the Park Place and Service Express merger, a lot of network teams are taking a fresh look at their maintenance relationships. OSI is Gartner recognized TPM, no PE, 40 to 60% below OEM rates across Cisco, Juniper, Dell, HP, NetApp, Arista.\n> \n> Given the scale you run at MetTel, worth 15 minutes to benchmark?\n>\n",
     "sendDate": "2026-04-23",
     "sendTime": "10am",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "cancelled",
+    "addedDate": "2026-04-20",
+    "cancelReason": "10am invalid window; Email 3 already sent \u2014 would land out of order. Cancelled 2026-05-04T19:34:41Z"
   },
   {
     "id": "edward-fox-mettel-3",
@@ -5927,7 +6046,7 @@
     "subject": "Refurbished Cisco and Juniper for refresh cycles",
     "body": "Hi Ed,\n\nOne more angle. If MetTel runs refreshes on aging Cisco or Juniper gear, OSI supplies tested refurbished hardware with OSI TPM to cover it. Useful for stretching capex without losing support.\n\nFifteen minutes if this fits anything on your roadmap?\n",
     "sendDate": "2026-05-11",
-    "sendTime": "10am",
+    "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-20"
   },
@@ -5939,7 +6058,7 @@
     "subject": "Right person at MetTel for network infrastructure spend?",
     "body": "Ed,\n\nAre you the right person for maintenance and hardware spend at MetTel, or would Dennis Migardos or someone else on your team be the better first call?\n\nHappy to redirect.\n",
     "sendDate": "2026-05-18",
-    "sendTime": "10am",
+    "sendTime": "2pm",
     "status": "pending",
     "addedDate": "2026-04-20"
   },
@@ -5951,7 +6070,7 @@
     "subject": "No worries",
     "body": "Ed,\n\nNo worries if now isn't the right time. Happy to circle back when things shift.\n",
     "sendDate": "2026-05-26",
-    "sendTime": "10am",
+    "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-20"
   },
@@ -5964,8 +6083,9 @@
     "body": "Hi Joe,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?\n",
     "sendDate": "2026-05-07",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "status": "paused",
+    "addedDate": "2026-04-20",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "joseph-vandecoevering-hunter-2",
@@ -5975,9 +6095,10 @@
     "subject": "RE: Samples for your team",
     "body": "Any thoughts?\n\nOn Thu, May 7, 2026, Andy McLean wrote:\n> Hi Joe,\n> \n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n> \n> Do you come into the office, or is there a better address to ship it to?\n>\n",
     "sendDate": "2026-05-11",
-    "sendTime": "10am",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "sendTime": "11am",
+    "status": "paused",
+    "addedDate": "2026-04-20",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "joseph-vandecoevering-hunter-3",
@@ -5987,9 +6108,10 @@
     "subject": "Oregon expansion optics",
     "body": "Hi Joe,\n\nHunter closed with Oak Hill Capital to fund Salem and southern Oregon expansion. Your Verizon transmission engineering background means you know exactly what the OEM optics margin looks like.\n\nSmartOptics typically runs 80 to 90% below Cisco OEM list on the same glass. Worth a quick look before the Salem build plan locks in?\n",
     "sendDate": "2026-05-15",
-    "sendTime": "10am",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "sendTime": "12pm",
+    "status": "paused",
+    "addedDate": "2026-04-20",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "joseph-vandecoevering-hunter-4",
@@ -5999,9 +6121,10 @@
     "subject": "DWDM for Hunter's backbone",
     "body": "Joe,\n\nIf Hunter is evaluating DWDM for the Salem or Eugene backbone, SmartOptics DCP runs 30 to 50% below Ciena and Nokia. Less rack space and power, ships in weeks, open architecture.\n\nFifteen minutes if this fits anything on the build plan?\n",
     "sendDate": "2026-05-26",
-    "sendTime": "10am",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "sendTime": "1pm",
+    "status": "paused",
+    "addedDate": "2026-04-20",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "joseph-vandecoevering-hunter-5",
@@ -6011,9 +6134,10 @@
     "subject": "Right person at Hunter?",
     "body": "Joe,\n\nAre you the right contact for optics and DWDM procurement at Hunter, or is there someone else I should connect with?\n\nHappy to redirect.\n",
     "sendDate": "2026-06-02",
-    "sendTime": "10am",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "sendTime": "2pm",
+    "status": "paused",
+    "addedDate": "2026-04-20",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "joseph-vandecoevering-hunter-6",
@@ -6023,9 +6147,10 @@
     "subject": "Closing the file?",
     "body": "Joe,\n\nShould I close the file on this one, or is the timing just off?\n",
     "sendDate": "2026-06-10",
-    "sendTime": "10am",
-    "status": "pending",
-    "addedDate": "2026-04-20"
+    "sendTime": "3pm",
+    "status": "paused",
+    "addedDate": "2026-04-20",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "cooper-harless-hunter-communications-1",
@@ -6036,8 +6161,9 @@
     "body": "Hi Cooper,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Also noticed you picked up the Junos SR MPLS cert recently, nice one.\n\nDo you come into the office in Eugene, or is there a better address to ship it to?\n",
     "sendDate": "2026-05-13",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-21"
+    "status": "paused",
+    "addedDate": "2026-04-21",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "cooper-harless-hunter-communications-2",
@@ -6048,8 +6174,9 @@
     "body": "Any thoughts?\nOn May 13, 2026, Andy McLean wrote:\n> Hi Cooper,\n>\n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global. Also noticed you picked up the Junos SR MPLS cert recently, nice one.\n>\n> Do you come into the office in Eugene, or is there a better address to ship it to?",
     "sendDate": "2026-05-15",
     "sendTime": "11am",
-    "status": "pending",
-    "addedDate": "2026-04-21"
+    "status": "paused",
+    "addedDate": "2026-04-21",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "cooper-harless-hunter-communications-3",
@@ -6060,8 +6187,9 @@
     "body": "Hi Cooper,\n\nQuick one. We private label SmartOptics DWDM, typically 30 to 50% below Ciena or Nokia, and it ships in weeks rather than quarters. Plays well with Juniper on the transport side.\n\nIf Hunter's expanding capacity with the Oak Hill buildout, could be worth a short call.\n\nRelevant?\n\nOn May 15, 2026, Andy McLean wrote:\n",
     "sendDate": "2026-05-21",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-21"
+    "status": "paused",
+    "addedDate": "2026-04-21",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "cooper-harless-hunter-communications-4",
@@ -6072,8 +6200,9 @@
     "body": "Hi Cooper,\n\nOne more. We supply ZR and ZR+ coherent optics as a secondary source when the OEM timelines slip. Carrier teams use us for site to site and metro links that don't justify a full DWDM chassis.\n\nIs 400G coherent on the roadmap anywhere at Hunter?\n\nOn May 21, 2026, Andy McLean wrote:\n",
     "sendDate": "2026-06-01",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-21"
+    "status": "paused",
+    "addedDate": "2026-04-21",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "cooper-harless-hunter-communications-5",
@@ -6084,8 +6213,9 @@
     "body": "Hi Cooper,\n\nOne more angle. We do third party maintenance on Cisco, Juniper, Arista and other gear, typically 40 to 60% below OEM support. Recognized by Gartner and privately owned, so no PE pressure on rates.\n\nIf any kit is off warranty or coming up for renewal, we can put a competitive bid against whoever you're using.\n\nRelevant?\n\nOn June 1, 2026, Andy McLean wrote:\n",
     "sendDate": "2026-06-08",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-21"
+    "status": "paused",
+    "addedDate": "2026-04-21",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "cooper-harless-hunter-communications-6",
@@ -6096,8 +6226,9 @@
     "body": "Hi Cooper,\n\nShould I close the file on this one, or is the timing just off?\n\nOn June 8, 2026, Andy McLean wrote:\n",
     "sendDate": "2026-06-16",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-21"
+    "status": "paused",
+    "addedDate": "2026-04-21",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "paul-merritt-fatbeam-1",
@@ -6766,10 +6897,26 @@
     "to": "steven.larson@midco.com",
     "subject": "SFPs and swag for Midco",
     "body": "Hi Steven,\n\nSaw the SCI Broadband post come across the feed. Sounds like the Midco footprint is growing fast.\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-01",
+    "sendDate": "2026-05-04",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-25"
+    "status": "sent",
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-01",
+        "to": "2026-05-04",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T20:08:17Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "steven-larson-midcontinent-2",
@@ -6778,10 +6925,18 @@
     "to": "steven.larson@midco.com",
     "subject": "RE: SFPs and swag for Midco",
     "body": "Any thoughts?\n\n---------- On May 1, 2026, Andy McLean wrote ----------\nSubject: SFPs and swag for Midco\n\nHi Steven,\n\nSaw the SCI Broadband post come across the feed. Sounds like the Midco footprint is growing fast.\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "11am",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-05",
+        "to": "2026-05-06",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "steven-larson-midcontinent-3",
@@ -6790,10 +6945,18 @@
     "to": "steven.larson@midco.com",
     "subject": "Open line DWDM at cable MSOs",
     "body": "Hi Steven,\n\nDifferent angle. We supply SmartOptics open line DWDM to a few cable teams as a side door when Ciena or Nokia quotes are tying up the capacity build. Usually 30 to 50% under and ships in weeks.\n\nAnything pencilled against transport timelines this year?\n",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-12",
     "sendTime": "12pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-11",
+        "to": "2026-05-12",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "steven-larson-midcontinent-4",
@@ -6802,10 +6965,18 @@
     "to": "steven.larson@midco.com",
     "subject": "Cisco gear coming off SmartNet",
     "body": "Hi Steven,\n\nOther side of the house. We do third party maintenance on Cisco service provider gear that has been running fine but is coming off SmartNet. Across vendors, 40 to 60% under OEM rates, and we run our own engineering bench so the support is real.\n\nAnything in your stack you have been quoting renewal on?\n",
-    "sendDate": "2026-05-19",
+    "sendDate": "2026-05-20",
     "sendTime": "1pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-19",
+        "to": "2026-05-20",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "steven-larson-midcontinent-5",
@@ -6814,10 +6985,18 @@
     "to": "steven.larson@midco.com",
     "subject": "DIMMs from Samsung and Hynix",
     "body": "Hi Steven,\n\nLast one with a different wedge. We source server DDR4 and DDR5 direct from Samsung and Hynix. Manufacturer warranties, well below OEM list. A lot of teams are pulling the DDR4 path for workloads that don't need the DDR5 jump.\n\nWorth comparing against whatever you have on a PO?\n",
-    "sendDate": "2026-05-27",
+    "sendDate": "2026-05-28",
     "sendTime": "2pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-27",
+        "to": "2026-05-28",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "steven-larson-midcontinent-6",
@@ -6826,10 +7005,18 @@
     "to": "steven.larson@midco.com",
     "subject": "Should I close this one out?",
     "body": "Should I close the file on this one, or is the timing just off?\n",
-    "sendDate": "2026-06-04",
+    "sendDate": "2026-06-05",
     "sendTime": "3pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-06-04",
+        "to": "2026-06-05",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "jeff-shields-midcontinent-1",
@@ -7618,10 +7805,26 @@
     "to": "pschilling@office.vcn.com",
     "subject": "Quick transport optics question",
     "body": "Hi Preston,\n\nQuick question. As Visionary keeps expanding, how are you handling transport optics right now? We private label Smartoptics DCP for DWDM and open line systems, and the price delta against Ciena and Nokia tends to be 30 to 50% with lead time in weeks not quarters.\n\nHappy to send the spec sheet or set up 15 minutes if useful.",
-    "sendDate": "2026-05-01",
+    "sendDate": "2026-05-04",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-25"
+    "status": "sent",
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-01",
+        "to": "2026-05-04",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T20:09:23Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "preston-schilling-visionary-2",
@@ -7630,10 +7833,18 @@
     "to": "pschilling@office.vcn.com",
     "subject": "RE: Quick transport optics question",
     "body": "Hi Preston,\n\nFollowing up. The math that tends to win this conversation is on per route capacity. A 400G coherent transport link from Smartoptics typically lands at half the cost of the Ciena equivalent and ships in the same window most fiber crews can absorb. If your team has a route on the planning board right now, want me to run a like for like comparison?\n\n---\nOn Fri, May 1, 2026, Andy Mason <andy@osiglobal.com> wrote:\nSubject: Quick transport optics question\n\nHi Preston,\n\nQuick question. As Visionary keeps expanding, how are you handling transport optics right now? We private label Smartoptics DCP for DWDM and open line systems, and the price delta against Ciena and Nokia tends to be 30 to 50% with lead time in weeks not quarters.\n\nHappy to send the spec sheet or set up 15 minutes if useful.",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "11am",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-05",
+        "to": "2026-05-06",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "preston-schilling-visionary-3",
@@ -7642,10 +7853,18 @@
     "to": "pschilling@office.vcn.com",
     "subject": "Cisco and Juniper renewals",
     "body": "Hi Preston,\n\nDifferent angle. We do third party maintenance on Cisco, Juniper, Arista, and HP at 40 to 60% off OEM list, multiple vendors under one contract. For a regional broadband operator, the OPEX shave on inherited gear can be meaningful.\n\nWorth 10 minutes against your next renewal?\n\n---\n",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-12",
     "sendTime": "12pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-11",
+        "to": "2026-05-12",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "preston-schilling-visionary-4",
@@ -7654,10 +7873,18 @@
     "to": "pschilling@office.vcn.com",
     "subject": "DIMMs and servers below OEM",
     "body": "Hi Preston,\n\nOne more product line. We sell DDR4 and DDR5 DIMMs from Samsung and Hynix at well below OEM, plus Dell and HP servers as an authorized partner. DDR4 is significantly cheaper than DDR5 if your workloads do not need the extra speed.\n\nPull a quote against your current spec?\n\n---\n",
-    "sendDate": "2026-05-19",
+    "sendDate": "2026-05-20",
     "sendTime": "1pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-19",
+        "to": "2026-05-20",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "preston-schilling-visionary-5",
@@ -7666,10 +7893,18 @@
     "to": "pschilling@office.vcn.com",
     "subject": "Pre owned and new networking gear",
     "body": "Hi Preston,\n\nLast product line. We supply pre owned Cisco, Juniper, and Arista that is tested and OSI TPM eligible, plus new Nokia as an authorized partner. Useful for spares pools or capacity adds on a budget.\n\nWant a quick spares list?\n\n---\n",
-    "sendDate": "2026-05-27",
+    "sendDate": "2026-05-28",
     "sendTime": "2pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-27",
+        "to": "2026-05-28",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "preston-schilling-visionary-6",
@@ -7678,10 +7913,18 @@
     "to": "pschilling@office.vcn.com",
     "subject": "Should I close the file?",
     "body": "Hi Preston,\n\nShould I close the file on this one, or is the timing just off?\n\n---\n",
-    "sendDate": "2026-06-04",
+    "sendDate": "2026-06-05",
     "sendTime": "3pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-06-04",
+        "to": "2026-06-05",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "sarah-frisbie-altafiber-1",
@@ -8206,10 +8449,26 @@
     "to": "shillard@agoc.com",
     "subject": "sending you a sample SFP",
     "body": "Hi Shawn,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?\n",
-    "sendDate": "2026-05-01",
+    "sendDate": "2026-05-04",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-25"
+    "status": "sent",
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-01",
+        "to": "2026-05-04",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T20:10:45Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "shawn-hillard-armstrong-group-2",
@@ -8218,10 +8477,18 @@
     "to": "shillard@agoc.com",
     "subject": "RE: sending you a sample SFP",
     "body": "Any thoughts?\n\n> Hi Shawn,\n> \n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n> \n> Do you come into the office, or is there a better address to ship it to?\n> ",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "11am",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-05",
+        "to": "2026-05-06",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "shawn-hillard-armstrong-group-3",
@@ -8230,10 +8497,18 @@
     "to": "shillard@agoc.com",
     "subject": "Transport and DWDM for Armstrong",
     "body": "Hi Shawn,\n\nDifferent angle. We supply Smartoptics DCP for DWDM and open line systems. 30 to 50 percent below Ciena and Nokia, ships in weeks not months.\n\nIf Armstrong has any 400G or transport upgrade plans this year, we can usually compete on both lead time and price. Worth a quick look?\n",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-12",
     "sendTime": "12pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-11",
+        "to": "2026-05-12",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "shawn-hillard-armstrong-group-4",
@@ -8242,10 +8517,18 @@
     "to": "shillard@agoc.com",
     "subject": "Cisco SmartNet replacement",
     "body": "Different product line. We run third party maintenance for Cisco, Juniper, Arista, NetApp, Dell, and HP at typically 40 to 60 percent below SmartNet or equivalents. Gartner recognized, no PE.\n\nIf Armstrong has anything in renewal cycles, happy to put a head to head quote together. No charge.\n",
-    "sendDate": "2026-05-19",
+    "sendDate": "2026-05-20",
     "sendTime": "1pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-19",
+        "to": "2026-05-20",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "shawn-hillard-armstrong-group-5",
@@ -8254,10 +8537,18 @@
     "to": "shillard@agoc.com",
     "subject": "DIMMs and pre owned Cisco gear",
     "body": "One more angle. We move Samsung, Hynix, and Micron DIMMs at well below OEM pricing with manufacturer warranties. Plus pre owned and tested Cisco, Juniper, and Arista routers and switches for projects on tight timelines.\n\nWant me to send our current pre owned inventory list?\n",
-    "sendDate": "2026-05-27",
+    "sendDate": "2026-05-28",
     "sendTime": "2pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-27",
+        "to": "2026-05-28",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "shawn-hillard-armstrong-group-6",
@@ -8266,10 +8557,18 @@
     "to": "shillard@agoc.com",
     "subject": "Closing the file",
     "body": "No worries if now is not the right time. Happy to circle back when things shift on your end.\n",
-    "sendDate": "2026-06-04",
+    "sendDate": "2026-06-05",
     "sendTime": "3pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-06-04",
+        "to": "2026-06-05",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "rob-mikita-armstrong-1",
@@ -9757,10 +10056,26 @@
     "to": "ddahl@saddlebackcomm.com",
     "subject": "SFP samples",
     "body": "Hi David,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-01",
+    "sendDate": "2026-05-04",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-25"
+    "status": "sent",
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-01",
+        "to": "2026-05-04",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T20:11:38Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "david-dahl-saddleback-communications-2",
@@ -9769,10 +10084,18 @@
     "to": "ddahl@saddlebackcomm.com",
     "subject": "RE: SFP samples",
     "body": "Any thoughts?\n\n----\nOn 2026-05-01, Andy Welch <andy@osiglobal.com> wrote:\n\n> Hi David,\n>\n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>\n> Do you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "11am",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-05",
+        "to": "2026-05-06",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "david-dahl-saddleback-communications-3",
@@ -9781,10 +10104,18 @@
     "to": "ddahl@saddlebackcomm.com",
     "subject": "Quick DWDM cost question",
     "body": "Hi David,\n\nQuick one for you. We have been getting traction at regional carriers on SmartOptics DWDM, 30 to 50 percent below Ciena and Nokia, ships in weeks instead of quarters.\n\nIf Saddleback is still on a Ciena or Nokia open line for transport, worth a 15 minute look?\n\n----\nOn 2026-05-05, Andy Welch <andy@osiglobal.com> wrote:\n",
-    "sendDate": "2026-05-08",
+    "sendDate": "2026-05-11",
     "sendTime": "12pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-08",
+        "to": "2026-05-11",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "david-dahl-saddleback-communications-4",
@@ -9793,10 +10124,18 @@
     "to": "ddahl@saddlebackcomm.com",
     "subject": "DDR4 DIMM pricing",
     "body": "Hi David,\n\nDifferent angle. We are running heavy on Samsung and Hynix DDR4 right now, manufacturer warranties, well below OEM. A lot of older Dell and HP fleet is probably still DDR4, and the refresh number gets noticed.\n\nWant me to send a comparison sheet for the SKUs you run most?\n\n----\nOn 2026-05-08, Andy Welch <andy@osiglobal.com> wrote:\n",
-    "sendDate": "2026-05-19",
+    "sendDate": "2026-05-20",
     "sendTime": "1pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-19",
+        "to": "2026-05-20",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "david-dahl-saddleback-communications-5",
@@ -9805,10 +10144,18 @@
     "to": "ddahl@saddlebackcomm.com",
     "subject": "OEM support renewals",
     "body": "Hi David,\n\nLast angle from me. We are a Gartner recognized TPM, 40 to 60 percent below OEM on Cisco, Dell, HP, NetApp, Juniper, and Arista. Privately owned, no PE.\n\nIf you are staring down a SmartNet or ProSupport renewal in the next two quarters, I can run a quick number against what you are paying today.\n\n----\nOn 2026-05-19, Andy Welch <andy@osiglobal.com> wrote:\n",
-    "sendDate": "2026-05-28",
+    "sendDate": "2026-05-29",
     "sendTime": "2pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-28",
+        "to": "2026-05-29",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "david-dahl-saddleback-communications-6",
@@ -9817,10 +10164,18 @@
     "to": "ddahl@saddlebackcomm.com",
     "subject": "One last note",
     "body": "Hi David,\n\nNo worries if now is not the right time. Happy to circle back when things shift.\n\n----\nOn 2026-05-28, Andy Welch <andy@osiglobal.com> wrote:\n",
-    "sendDate": "2026-06-05",
+    "sendDate": "2026-06-08",
     "sendTime": "3pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-06-05",
+        "to": "2026-06-08",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "christopher-lawrence-bny-mellon-1",
@@ -9875,7 +10230,7 @@
     "body": "Christopher,\n\nFollowing up from earlier this week.\n\nTo give you a specific data point: we cover SFP, SFP+, QSFP28, and QSFP DD - private labeled by OSI under the SmartOptics engineering team. Tested to spec, not commodity product.\n\nHappy to start with a sample box on a single port type so you can validate quality without any commitment.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-25",
     "rescheduleHistory": [
       {
@@ -9898,7 +10253,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:11:42Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "christopher-lawrence-bny-mellon-3",
@@ -10043,10 +10406,26 @@
     "to": "steve.pragaspathy@bnymellon.com",
     "subject": "Optic pricing at BNY's scale",
     "body": "Steve,\n\nThree years running network engineering at BNY means you've dealt with Cisco transceiver pricing more times than you'd like.\n\nI'm Andy McLean at OSI Global. We manufacture optics under the SmartOptics brand and typically come in 80 to 90 percent below Cisco OEM list. Real optical engineers behind the glass, not commodity product.\n\nHappy to drop a sample box for you to bench test against whatever you're currently running. No commitment, just a data point.\n\nWorth 10 minutes?",
-    "sendDate": "2026-05-01",
+    "sendDate": "2026-05-04",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-25"
+    "status": "sent",
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-01",
+        "to": "2026-05-04",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T20:12:32Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "steve-pragaspathy-bny-mellon-2",
@@ -10055,10 +10434,18 @@
     "to": "steve.pragaspathy@bnymellon.com",
     "subject": "RE: Optic pricing at BNY's scale",
     "body": "Steve,\n\nFollowing up from earlier.\n\nThe sample offer stands. We cover SFP, SFP+, QSFP28, and QSFP DD. Tested to spec, private labeled by OSI under the SmartOptics engineering team.\n\nAt BNY's network scale, the pricing delta on transceivers adds up fast. Happy to start with a single port type to let you validate quality before any broader conversation.",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "11am",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-05",
+        "to": "2026-05-06",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "steve-pragaspathy-bny-mellon-3",
@@ -10067,10 +10454,18 @@
     "to": "steve.pragaspathy@bnymellon.com",
     "subject": "TPM for your Cisco and Arista gear",
     "body": "Steve,\n\nDifferent angle.\n\nIn addition to optics, OSI does multi vendor third party maintenance covering Cisco, Arista, Juniper, Dell, and NetApp. Gartner recognized, independently owned, 40 to 60 percent below OEM rates.\n\nPark Place and Service Express recently merged, which reduced the number of credible independent TPM options. OSI is still private.\n\nIf BNY has maintenance renewals coming up, worth a quick benchmark conversation.",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-12",
     "sendTime": "12pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-11",
+        "to": "2026-05-12",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "steve-pragaspathy-bny-mellon-4",
@@ -10079,10 +10474,18 @@
     "to": "steve.pragaspathy@bnymellon.com",
     "subject": "RE: TPM for your Cisco and Arista gear",
     "body": "Steve,\n\nStill think there is a fit here, either on optics or TPM.\n\nNetwork engineering directors at firms with BNY's infrastructure footprint tend to know exactly where the cost pain points are, even when purchasing handles the contracts. If inflated OEM pricing is one of them, that is exactly where we work.\n\n15 minutes, your choice of time.",
-    "sendDate": "2026-05-19",
+    "sendDate": "2026-05-20",
     "sendTime": "1pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-19",
+        "to": "2026-05-20",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "steve-pragaspathy-bny-mellon-5",
@@ -10091,10 +10494,18 @@
     "to": "steve.pragaspathy@bnymellon.com",
     "subject": "Last note",
     "body": "Steve,\n\nI have reached out several times without hearing back. That is fine.\n\nIf there is ever a point where you are evaluating optic vendors or benchmarking your Cisco or Arista maintenance contracts, OSI is worth a call. Sample boxes available anytime.\n\nHappy to be a resource rather than a sales call.",
-    "sendDate": "2026-05-27",
+    "sendDate": "2026-05-28",
     "sendTime": "2pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-27",
+        "to": "2026-05-28",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "steve-pragaspathy-bny-mellon-6",
@@ -10103,10 +10514,18 @@
     "to": "steve.pragaspathy@bnymellon.com",
     "subject": "RE: Last note",
     "body": "Steve,\n\nLast note from me. I will not keep filling your inbox.\n\nI will keep BNY on my radar. If something changes that makes a conversation relevant, I will check back in.\n\nGood luck with the network engineering work.",
-    "sendDate": "2026-06-04",
+    "sendDate": "2026-06-05",
     "sendTime": "3pm",
     "status": "pending",
-    "addedDate": "2026-04-25"
+    "addedDate": "2026-04-25",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-06-04",
+        "to": "2026-06-05",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "michael-kearney-bny-mellon-1",
@@ -10321,8 +10740,16 @@
     "body": "Alexandre,\n\nYour Bell cloud specialist background stood out - IS IS, IP MPLS, EVPN, Cisco NCS. That is a carrier grade optics and transport stack. Now you're applying it at Desjardins.\n\nI'm Andy at OSI Global. We manufacture compatible optics and coherent transceivers, used by bank and financial institution network teams as a secondary source for the break glass scenario. I wanted to send a few complimentary SFPs your way, no strings, so you've got options on the shelf when OEM lead times are a problem.\n\nSide note, we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast.\n\nWorth a quick call to match the right form factors to your environment?",
     "sendDate": "2026-05-04",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-25"
+    "status": "sent",
+    "addedDate": "2026-04-25",
+    "audit": {
+      "sentAt": "2026-05-04T20:13:38Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "alexandre-tiber-desjardins-2",
@@ -10424,7 +10851,7 @@
     "body": "Lamar,\n\nFollowing up from last week. I know you are deep in planning with the GFiber deal in motion.\n\nOne thing worth knowing: our DWDM lead times are materially faster than Ciena or Nokia, which matters when an integration timeline is set from above and the infrastructure needs to be ready.\n\nHappy to keep it to 20 minutes if now is not the right time.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-25",
     "rescheduleHistory": [
       {
@@ -10434,7 +10861,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:13:50Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "lamar-horton-grande-communicati-3",
@@ -10574,7 +11009,7 @@
     "body": "Christian,\n\nFollowing up on the maintenance note.\n\nIf you haven't had a chance to pull SmartNet invoices yet, no rush. When the timing is right, we can put a competitive bid together in a day and give you a number to compare against.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-25",
     "rescheduleHistory": [
       {
@@ -10597,7 +11032,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:15:43Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "christian-henn-thor-industries-3",
@@ -10872,7 +11315,7 @@
     "body": "Andy,\n\nFollowing up on the note I sent earlier this week.\n\nOne thing that usually changes when you move from banking to a wireless company is the IT budget pressure. The gear is often similar -- Cisco, HP, Dell -- but the cost pressure is different.\n\nWe have engineers on staff, 40-60% below OEM rates, and work with multi vendor environments. Happy to run a quick comparison on one piece of your stack to show you what we are seeing.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-25",
     "rescheduleHistory": [
       {
@@ -10895,7 +11338,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:17:11Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "andrew-hinegardner-consumer-cellular-3",
@@ -11086,7 +11537,7 @@
     "body": "John, any thoughts?\n\nWe are running benchmarks for several medical centers right now. Happy to put together a no pressure number for whatever Bergen New Bridge has under maintenance today.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-25",
     "rescheduleHistory": [
       {
@@ -11109,7 +11560,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:18:42Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "john-f-novak-bergen-new-bridge--3",
@@ -11300,7 +11759,7 @@
     "body": "Kenneth, any thoughts?\n\nIf there is a representative SKU that comes up most often on your migrations, I can build a sample around it. SFP+, QSFP28, QSFP DD all in stock.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-25",
     "rescheduleHistory": [
       {
@@ -11323,7 +11782,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:20:28Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "kenneth-dutton-axcent-networks-3",
@@ -11598,7 +12065,7 @@
     "body": "Patrick,\n\nFollowing up on the note I sent Monday.\n\nQuick question: how does SBA currently source transceivers for your NOC and backhaul connections? That is usually where we find the most immediate savings for operations teams at tower companies.\n\nHappy to walk through what we have seen for similar networks.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-25",
     "rescheduleHistory": [
       {
@@ -11621,7 +12088,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:21:55Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "patrick-o-donnell-sba-communications-3",
@@ -11812,7 +12287,7 @@
     "body": "Tim, any thoughts?\n\nGiven the procurement side of your background, happy to send the OSI vendor file and a representative DCP quote you can compare side by side. Zero pressure.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-25",
     "rescheduleHistory": [
       {
@@ -11835,7 +12310,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:25:10Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 10,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "tim-liford-dfa-milk-3",
@@ -12026,7 +12509,7 @@
     "body": "Joe,\n\nFollowing up on the note I sent earlier this week.\n\nOn the maintenance side specifically -- we work with telecom infrastructure teams who moved off OEM maintenance (Cisco Smartnet, Dell ProSupport) after an acquisition once they had a clear picture of the combined install base. Savings are typically 40-60%.\n\nIf that is on anyone's radar at TNS right now, happy to walk through what that looks like for a multi vendor environment like yours.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-25",
     "rescheduleHistory": [
       {
@@ -12049,7 +12532,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:27:04Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 16,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "joe-kennedy-transaction-networ-3",
@@ -12240,7 +12731,7 @@
     "body": "Meraz, any thoughts on the memory note?\n\nIf you can share the DIMM SKU your team buys most, I can send a current quote and lead time in 24 hours.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-25",
     "rescheduleHistory": [
       {
@@ -12263,7 +12754,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:28:01Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 10,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "meraz-nasir-atlantic-health-sy-3",
@@ -12454,7 +12953,7 @@
     "body": "Deo,\n\nOne thing worth adding to my last note. Lead times are one of the bigger frustrations for network teams running cable builds. We ship in days, not weeks, with compatibility testing on every unit.\n\nIf there are any optics going into the Echo routes or your existing FLAG network, I'm happy to run a comparison quote. Takes 10 minutes and costs nothing.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-25",
     "rescheduleHistory": [
       {
@@ -12477,7 +12976,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:29:07Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 13,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "deonarine-rajkumar-global-cloud-xchan-3",
@@ -12884,7 +13391,7 @@
     "body": "Any thoughts?\n\n----\nOn 2026-04-27, Andy Welch <andy@osiglobal.com> wrote:\n\n> Hi Samuel,\n>\n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>\n> Do you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-26",
     "rescheduleHistory": [
       {
@@ -12907,7 +13414,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:30:28Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "samuel-price-360-broadband-3",
@@ -13054,8 +13569,19 @@
     "body": "Hi Thad,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-01",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-26"
+    "status": "sent",
+    "addedDate": "2026-04-26",
+    "audit": {
+      "sentAt": "2026-05-01T20:09:20Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "bodyHash": "998488b5fd2c4e6081340596dfa8b558c1bc9c4ad7d6f0db2c73f68629e3a3db",
+      "bodyLen": 210,
+      "trimFinalCount": 4,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30",
+      "note": "trimFinalCount=4 (not 5). Visual verification: 1 blank line gap between body and Best, matches body-paragraph gap exactly. Visually correct on screen. TARGET=5 in skill produced 7 = 2 blank lines (overshoot). 4 was the natural settle point matching the GOOD example."
+    }
   },
   {
     "id": "thad-prater-360-broadband-2",
@@ -13066,8 +13592,18 @@
     "body": "Any thoughts?\n\n----\nOn 2026-05-01, Andy Welch <andy@osiglobal.com> wrote:\n\n> Hi Thad,\n>\n> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n>\n> Do you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-05",
     "sendTime": "11am",
-    "status": "pending",
-    "addedDate": "2026-04-26"
+    "status": "sent",
+    "addedDate": "2026-04-26",
+    "audit": {
+      "sentAt": "2026-05-05T15:10:28Z",
+      "window": "11am",
+      "flow": "reply",
+      "bodyHash": "any-thoughts-reply",
+      "bodyLen": 13,
+      "trimFinalCount": 4,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "thad-prater-360-broadband-3",
@@ -13246,7 +13782,7 @@
     "body": "Any thoughts?\n\n--- Prior message ---\nSubject: swag plus sample SFPs from OSI\nDate: 2026-04-27\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nHi Josh,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-26",
     "pausedAt": "2026-04-27T02:04:46.830290+00:00",
     "pauseReason": "Queued via shallow-qualify path that skipped LinkedIn read. Verify still at company before resuming.",
@@ -13274,7 +13810,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:31:51Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "joshua-nelson-vero-networks-3",
@@ -13285,7 +13829,7 @@
     "body": "Hi Josh,\n\nSaw the TEC close on April 14. Standardizing optics across two fiber footprints is where we usually save carriers a chunk on transceivers. We private label SmartOptics, ship in days, every part comes with manufacturer warranty.\n\nWorth a 10 minute look at our 100G and 400G pricing for the integrated network?\n\n--- Prior message ---\nSubject: RE: swag plus sample SFPs from OSI\nDate: 2026-04-29\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nAny thoughts?\n\n--- Prior message ---\nSubject: swag plus sample SFPs from OSI\nDate: 2026-04-27\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nHi Josh,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-08",
     "sendTime": "12pm",
-    "status": "pending",
+    "status": "cancelled",
     "addedDate": "2026-04-26",
     "pausedAt": "2026-04-27T02:04:46.830290+00:00",
     "pauseReason": "Queued via shallow-qualify path that skipped LinkedIn read. Verify still at company before resuming.",
@@ -13313,7 +13857,8 @@
         "toDate": "2026-05-07",
         "toTime": "12pm"
       }
-    ]
+    ],
+    "cancelReason": "Manually cancelled by Andy 2026-05-04T19:03:10Z"
   },
   {
     "id": "joshua-nelson-vero-networks-4",
@@ -13324,7 +13869,7 @@
     "body": "Hi Josh,\n\nCisco bumped SmartNet 8 to 12 percent again this cycle. We are Gartner recognized TPM, multi vendor, 40 to 60 percent below OEM on Cisco, Juniper, Arista, NetApp.\n\nWant me to send a sample line for what comes off the table at renewal?\n\n--- Prior message ---\nSubject: TEC integration optics\nDate: 2026-05-05\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nHi Josh,\n\nSaw the TEC close on April 14. Standardizing optics across two fiber footprints is where we usually save carriers a chunk on transceivers. We private label SmartOptics, ship in days, every part comes with manufacturer warranty.\n\nWorth a 10 minute look at our 100G and 400G pricing for the integrated network?\n\n--- Prior message ---\nSubject: RE: swag plus sample SFPs from OSI\nDate: 2026-04-29\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nAny thoughts?\n\n--- Prior message ---\nSubject: swag plus sample SFPs from OSI\nDate: 2026-04-27\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nHi Josh,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-18",
     "sendTime": "1pm",
-    "status": "pending",
+    "status": "cancelled",
     "addedDate": "2026-04-26",
     "pausedAt": "2026-04-27T02:04:46.830290+00:00",
     "pauseReason": "Queued via shallow-qualify path that skipped LinkedIn read. Verify still at company before resuming.",
@@ -13352,7 +13897,8 @@
         "toDate": "2026-05-15",
         "toTime": "1pm"
       }
-    ]
+    ],
+    "cancelReason": "Manually cancelled by Andy 2026-05-04T19:03:10Z"
   },
   {
     "id": "joshua-nelson-vero-networks-5",
@@ -13363,7 +13909,7 @@
     "body": "Hi Josh,\n\nOne more option for the integrated buildout. We move a lot of Samsung and Hynix DIMMs at well below OEM, manufacturer warranty intact, and DDR4 stays meaningfully cheaper than DDR5 for workloads that do not need the upgrade.\n\nOpen to a one page price snapshot?\n\n--- Prior message ---\nSubject: Cisco SmartNet pricing\nDate: 2026-05-13\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nHi Josh,\n\nCisco bumped SmartNet 8 to 12 percent again this cycle. We are Gartner recognized TPM, multi vendor, 40 to 60 percent below OEM on Cisco, Juniper, Arista, NetApp.\n\nWant me to send a sample line for what comes off the table at renewal?\n\n--- Prior message ---\nSubject: TEC integration optics\nDate: 2026-05-05\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nHi Josh,\n\nSaw the TEC close on April 14. Standardizing optics across two fiber footprints is where we usually save carriers a chunk on transceivers. We private label SmartOptics, ship in days, every part comes with manufacturer warranty.\n\nWorth a 10 minute look at our 100G and 400G pricing for the integrated network?\n\n--- Prior message ---\nSubject: RE: swag plus sample SFPs from OSI\nDate: 2026-04-29\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nAny thoughts?\n\n--- Prior message ---\nSubject: swag plus sample SFPs from OSI\nDate: 2026-04-27\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nHi Josh,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-25",
     "sendTime": "2pm",
-    "status": "pending",
+    "status": "cancelled",
     "addedDate": "2026-04-26",
     "pausedAt": "2026-04-27T02:04:46.830290+00:00",
     "pauseReason": "Queued via shallow-qualify path that skipped LinkedIn read. Verify still at company before resuming.",
@@ -13391,7 +13937,8 @@
         "toDate": "2026-05-22",
         "toTime": "2pm"
       }
-    ]
+    ],
+    "cancelReason": "Manually cancelled by Andy 2026-05-04T19:03:10Z"
   },
   {
     "id": "joshua-nelson-vero-networks-6",
@@ -13402,7 +13949,7 @@
     "body": "No worries if now is not the right time. Happy to circle back when things shift.\n\n--- Prior message ---\nSubject: DDR4 vs DDR5 spend\nDate: 2026-05-20\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nHi Josh,\n\nOne more option for the integrated buildout. We move a lot of Samsung and Hynix DIMMs at well below OEM, manufacturer warranty intact, and DDR4 stays meaningfully cheaper than DDR5 for workloads that do not need the upgrade.\n\nOpen to a one page price snapshot?\n\n--- Prior message ---\nSubject: Cisco SmartNet pricing\nDate: 2026-05-13\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nHi Josh,\n\nCisco bumped SmartNet 8 to 12 percent again this cycle. We are Gartner recognized TPM, multi vendor, 40 to 60 percent below OEM on Cisco, Juniper, Arista, NetApp.\n\nWant me to send a sample line for what comes off the table at renewal?\n\n--- Prior message ---\nSubject: TEC integration optics\nDate: 2026-05-05\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nHi Josh,\n\nSaw the TEC close on April 14. Standardizing optics across two fiber footprints is where we usually save carriers a chunk on transceivers. We private label SmartOptics, ship in days, every part comes with manufacturer warranty.\n\nWorth a 10 minute look at our 100G and 400G pricing for the integrated network?\n\n--- Prior message ---\nSubject: RE: swag plus sample SFPs from OSI\nDate: 2026-04-29\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nAny thoughts?\n\n--- Prior message ---\nSubject: swag plus sample SFPs from OSI\nDate: 2026-04-27\nFrom: Andy <andy@osiglobal.com>\nTo: jnelson@veronetworks.com\n\nHi Josh,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-06-03",
     "sendTime": "3pm",
-    "status": "pending",
+    "status": "cancelled",
     "addedDate": "2026-04-26",
     "pausedAt": "2026-04-27T02:04:46.830290+00:00",
     "pauseReason": "Queued via shallow-qualify path that skipped LinkedIn read. Verify still at company before resuming.",
@@ -13430,7 +13977,8 @@
         "toDate": "2026-06-02",
         "toTime": "3pm"
       }
-    ]
+    ],
+    "cancelReason": "Manually cancelled by Andy 2026-05-04T19:03:10Z"
   },
   {
     "id": "trenton-mcvicker-oec-fiber-1",
@@ -14411,14 +14959,30 @@
     "to": "rbauer@veronetworks.com",
     "subject": "TPM during the TEC overlay",
     "body": "Hi Ron,\n\nWith the TEC close in April and the $500M push for FTTP expansion, vendor support spend across IT and network gear is probably trending up fast. We are Gartner recognized TPM, multi vendor, 40 to 60 percent below OEM on Cisco, Juniper, Arista, NetApp, and Dell.\n\nWorth a 15 minute look at what comes up for renewal next quarter?\n",
-    "sendDate": "2026-05-01",
+    "sendDate": "2026-05-04",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-26",
     "pausedAt": "2026-04-27T02:04:46.830290+00:00",
     "pauseReason": "Queued via shallow-qualify path that skipped LinkedIn read. Verify still at company before resuming.",
     "resumedAt": "2026-04-27T02:36:56.805861+00:00",
-    "resumeReason": "VERIFIED 2026-04-26: Path B - The Org + Wiza confirm Director of Information Technology at Vero Networks. Plus 8+ active reposts of Vero job postings on his LinkedIn."
+    "resumeReason": "VERIFIED 2026-04-26: Path B - The Org + Wiza confirm Director of Information Technology at Vero Networks. Plus 8+ active reposts of Vero job postings on his LinkedIn.",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-01",
+        "to": "2026-05-04",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T20:14:41Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "ron-bauer-vero-networks-2",
@@ -14427,14 +14991,22 @@
     "to": "rbauer@veronetworks.com",
     "subject": "RE: TPM during the TEC overlay",
     "body": "Cisco bumped SmartNet 8 to 12 percent again this cycle. Same shift on Juniper Care. The pattern usually shows up first at carriers running fast on integrations like the TEC overlay.\n\nIf a sample renewal line would help size what shifts at OSI, send me one of the OEM quotes.\n\n---------- Original message ----------\nSubject: TPM during the TEC overlay\n\nHi Ron,\n\nWith the TEC close in April and the $500M push for FTTP expansion, vendor support spend across IT and network gear is probably trending up fast. We are Gartner recognized TPM, multi vendor, 40 to 60 percent below OEM on Cisco, Juniper, Arista, NetApp, and Dell.\n\nWorth a 15 minute look at what comes up for renewal next quarter?\n",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-26",
     "pausedAt": "2026-04-27T02:04:46.830290+00:00",
     "pauseReason": "Queued via shallow-qualify path that skipped LinkedIn read. Verify still at company before resuming.",
     "resumedAt": "2026-04-27T02:36:56.805861+00:00",
-    "resumeReason": "VERIFIED 2026-04-26: Path B - The Org + Wiza confirm Director of Information Technology at Vero Networks. Plus 8+ active reposts of Vero job postings on his LinkedIn."
+    "resumeReason": "VERIFIED 2026-04-26: Path B - The Org + Wiza confirm Director of Information Technology at Vero Networks. Plus 8+ active reposts of Vero job postings on his LinkedIn.",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-05",
+        "to": "2026-05-06",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "ron-bauer-vero-networks-3",
@@ -14443,14 +15015,22 @@
     "to": "rbauer@veronetworks.com",
     "subject": "Optics for the integrated footprint",
     "body": "Hi Ron,\n\nDifferent angle. The Vero plus TEC overlay likely produces some new transport spans across the southeast footprint. We private label SmartOptics, ship in days, every part has manufacturer warranty. Pricing on the open line system runs 30 to 50 percent below Ciena and Nokia.\n\nWorth a 15 minute look if any optical buildout is on the table?\n\n---------- Previous message ----------\nSubject: RE: TPM during the TEC overlay\n\nCisco bumped SmartNet 8 to 12 percent again this cycle. Same shift on Juniper Care. The pattern usually shows up first at carriers running fast on integrations like the TEC overlay.\n\nIf a sample renewal line would help size what shifts at OSI, send me one of the OEM quotes.\n\n---------- Original message ----------\nSubject: TPM during the TEC overlay\n\nHi Ron,\n\nWith the TEC close in April and the $500M push for FTTP expansion, vendor support spend across IT and network gear is probably trending up fast. We are Gartner recognized TPM, multi vendor, 40 to 60 percent below OEM on Cisco, Juniper, Arista, NetApp, and Dell.\n\nWorth a 15 minute look at what comes up for renewal next quarter?\n",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-12",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-26",
     "pausedAt": "2026-04-27T02:04:46.830290+00:00",
     "pauseReason": "Queued via shallow-qualify path that skipped LinkedIn read. Verify still at company before resuming.",
     "resumedAt": "2026-04-27T02:36:56.805861+00:00",
-    "resumeReason": "VERIFIED 2026-04-26: Path B - The Org + Wiza confirm Director of Information Technology at Vero Networks. Plus 8+ active reposts of Vero job postings on his LinkedIn."
+    "resumeReason": "VERIFIED 2026-04-26: Path B - The Org + Wiza confirm Director of Information Technology at Vero Networks. Plus 8+ active reposts of Vero job postings on his LinkedIn.",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-11",
+        "to": "2026-05-12",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "ron-bauer-vero-networks-4",
@@ -14459,14 +15039,22 @@
     "to": "rbauer@veronetworks.com",
     "subject": "DDR4 vs DDR5 spend",
     "body": "Hi Ron,\n\nOne more product line worth a flag. We are an authorized Dell and HP partner and a heavy DIMM seller, Samsung, Hynix, Micron, manufacturer warranty, below OEM. DDR4 stays meaningfully cheaper than DDR5 for back office workloads not needing the upgrade.\n\nWant a quick price snapshot on whatever is in your refresh cycle?\n\n---------- Previous message ----------\nSubject: Optics for the integrated footprint\n\nHi Ron,\n\nDifferent angle. The Vero plus TEC overlay likely produces some new transport spans across the southeast footprint. We private label SmartOptics, ship in days, every part has manufacturer warranty. Pricing on the open line system runs 30 to 50 percent below Ciena and Nokia.\n\nWorth a 15 minute look if any optical buildout is on the table?\n",
-    "sendDate": "2026-05-19",
+    "sendDate": "2026-05-20",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-26",
     "pausedAt": "2026-04-27T02:04:46.830290+00:00",
     "pauseReason": "Queued via shallow-qualify path that skipped LinkedIn read. Verify still at company before resuming.",
     "resumedAt": "2026-04-27T02:36:56.805861+00:00",
-    "resumeReason": "VERIFIED 2026-04-26: Path B - The Org + Wiza confirm Director of Information Technology at Vero Networks. Plus 8+ active reposts of Vero job postings on his LinkedIn."
+    "resumeReason": "VERIFIED 2026-04-26: Path B - The Org + Wiza confirm Director of Information Technology at Vero Networks. Plus 8+ active reposts of Vero job postings on his LinkedIn.",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-19",
+        "to": "2026-05-20",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "ron-bauer-vero-networks-5",
@@ -14475,14 +15063,22 @@
     "to": "rbauer@veronetworks.com",
     "subject": "Pre owned switching plus optics",
     "body": "Hi Ron,\n\nLast lane. We do pre owned Cisco, Juniper, Arista with full test reports, plus private label SmartOptics in 1G through 400G. Useful when a spare path matters on lead time or budget for the ongoing buildout.\n\nOpen to a 10 minute price check on anything you have in flight?\n\n---------- Previous message ----------\nSubject: DDR4 vs DDR5 spend\n\nHi Ron,\n\nOne more product line worth a flag. We are an authorized Dell and HP partner and a heavy DIMM seller, Samsung, Hynix, Micron, manufacturer warranty, below OEM. DDR4 stays meaningfully cheaper than DDR5 for back office workloads not needing the upgrade.\n\nWant a quick price snapshot on whatever is in your refresh cycle?\n",
-    "sendDate": "2026-05-27",
+    "sendDate": "2026-05-28",
     "sendTime": "2pm",
     "status": "pending",
     "addedDate": "2026-04-26",
     "pausedAt": "2026-04-27T02:04:46.830290+00:00",
     "pauseReason": "Queued via shallow-qualify path that skipped LinkedIn read. Verify still at company before resuming.",
     "resumedAt": "2026-04-27T02:36:56.805861+00:00",
-    "resumeReason": "VERIFIED 2026-04-26: Path B - The Org + Wiza confirm Director of Information Technology at Vero Networks. Plus 8+ active reposts of Vero job postings on his LinkedIn."
+    "resumeReason": "VERIFIED 2026-04-26: Path B - The Org + Wiza confirm Director of Information Technology at Vero Networks. Plus 8+ active reposts of Vero job postings on his LinkedIn.",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-27",
+        "to": "2026-05-28",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "ron-bauer-vero-networks-6",
@@ -14491,14 +15087,22 @@
     "to": "rbauer@veronetworks.com",
     "subject": "Closing the loop",
     "body": "Hi Ron,\n\nNo worries if now is not the right time. Happy to circle back when things shift.\n\n---------- Previous message ----------\nSubject: Pre owned switching plus optics\n\nHi Ron,\n\nLast lane. We do pre owned Cisco, Juniper, Arista with full test reports, plus private label SmartOptics in 1G through 400G. Useful when a spare path matters on lead time or budget for the ongoing buildout.\n\nOpen to a 10 minute price check on anything you have in flight?\n",
-    "sendDate": "2026-06-04",
+    "sendDate": "2026-06-05",
     "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-26",
     "pausedAt": "2026-04-27T02:04:46.830290+00:00",
     "pauseReason": "Queued via shallow-qualify path that skipped LinkedIn read. Verify still at company before resuming.",
     "resumedAt": "2026-04-27T02:36:56.805861+00:00",
-    "resumeReason": "VERIFIED 2026-04-26: Path B - The Org + Wiza confirm Director of Information Technology at Vero Networks. Plus 8+ active reposts of Vero job postings on his LinkedIn."
+    "resumeReason": "VERIFIED 2026-04-26: Path B - The Org + Wiza confirm Director of Information Technology at Vero Networks. Plus 8+ active reposts of Vero job postings on his LinkedIn.",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-06-04",
+        "to": "2026-06-05",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "joel-emter-consolidated-telco-1",
@@ -14540,7 +15144,7 @@
     "body": "Joel, any thoughts?\n\nIf you can share what is on the SmartNet line for Consolidated Telcom this year, we can put a benchmark together in 24 hours. No commitment.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-26",
     "rescheduleHistory": [
       {
@@ -14550,7 +15154,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:32:39Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 10,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "joel-emter-consolidated-telco-3",
@@ -14643,10 +15255,26 @@
     "to": "bonnie@consolidatednd.com",
     "subject": "Sample SFPs for Consolidated Telcom",
     "body": "Hi Bonnie,\n\nI am prepping a package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-01",
+    "sendDate": "2026-05-04",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-26"
+    "status": "sent",
+    "addedDate": "2026-04-26",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-01",
+        "to": "2026-05-04",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T20:15:35Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "bonnie-filipi-consolidated-telco-2",
@@ -14655,10 +15283,18 @@
     "to": "bonnie@consolidatednd.com",
     "subject": "RE: Sample SFPs for Consolidated Telcom",
     "body": "Any thoughts?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "11am",
     "status": "pending",
-    "addedDate": "2026-04-26"
+    "addedDate": "2026-04-26",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-05",
+        "to": "2026-05-06",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "bonnie-filipi-consolidated-telco-3",
@@ -14667,10 +15303,18 @@
     "to": "bonnie@consolidatednd.com",
     "subject": "Server memory and TPM for the IT systems team",
     "body": "Bonnie,\n\nDifferent angle. As IT Systems Supervisor you probably touch the server side as well. OSI sources DDR4 and DDR5 server memory direct from Samsung, Hynix, and Micron with manufacturer warranties. Typical pricing 25 to 35 percent below OEM channel.\n\nWe also do third party maintenance on Cisco, Dell, HP, and NetApp at 40 to 60 percent below OEM rates if any of that is renewing this year.\n\nWorth a 15 minute conversation?",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-12",
     "sendTime": "12pm",
     "status": "pending",
-    "addedDate": "2026-04-26"
+    "addedDate": "2026-04-26",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-11",
+        "to": "2026-05-12",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "bonnie-filipi-consolidated-telco-4",
@@ -14679,10 +15323,18 @@
     "to": "bonnie@consolidatednd.com",
     "subject": "RE: Server memory and TPM for the IT systems team",
     "body": "Bonnie,\n\nFollowing up. If there is a refresh cycle coming, we can pull current DDR4 / DDR5 quotes against your current SKUs in 24 hours.",
-    "sendDate": "2026-05-19",
+    "sendDate": "2026-05-20",
     "sendTime": "1pm",
     "status": "pending",
-    "addedDate": "2026-04-26"
+    "addedDate": "2026-04-26",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-19",
+        "to": "2026-05-20",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "bonnie-filipi-consolidated-telco-5",
@@ -14691,10 +15343,18 @@
     "to": "bonnie@consolidatednd.com",
     "subject": "Pre owned options for the network team",
     "body": "Bonnie,\n\nLast new angle. Pre owned Cisco and Juniper for the core and edge. Tested, OSI warrantied. Carriers your size cutting spares capex 50 to 70 percent without giving up support.\n\nIf any of the network gear is coming off OEM warranty soon, worth a quick look.",
-    "sendDate": "2026-05-27",
+    "sendDate": "2026-05-28",
     "sendTime": "2pm",
     "status": "pending",
-    "addedDate": "2026-04-26"
+    "addedDate": "2026-04-26",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-27",
+        "to": "2026-05-28",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "bonnie-filipi-consolidated-telco-6",
@@ -14703,10 +15363,18 @@
     "to": "bonnie@consolidatednd.com",
     "subject": "Closing the loop",
     "body": "Bonnie,\n\nShould I close the file on this one, or is the timing just off?",
-    "sendDate": "2026-06-04",
+    "sendDate": "2026-06-05",
     "sendTime": "3pm",
     "status": "pending",
-    "addedDate": "2026-04-26"
+    "addedDate": "2026-04-26",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-06-04",
+        "to": "2026-06-05",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "neil-bryan-vero-networks-1",
@@ -15049,7 +15717,7 @@
     "body": "Chadd, any thoughts on the samples?\n",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-26",
     "rescheduleHistory": [
       {
@@ -15072,7 +15740,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:33:27Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "chadd-giles-resound-networks-3",
@@ -15217,10 +15893,26 @@
     "to": "chris.vainrib@resoundnetworks.com",
     "subject": "Sample SFPs for Resound",
     "body": "Hi Chris,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?\n",
-    "sendDate": "2026-05-01",
+    "sendDate": "2026-05-04",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-26"
+    "status": "sent",
+    "addedDate": "2026-04-26",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-01",
+        "to": "2026-05-04",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T20:16:33Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "chris-vainrib-resound-networks-2",
@@ -15229,10 +15921,18 @@
     "to": "chris.vainrib@resoundnetworks.com",
     "subject": "RE: Sample SFPs for Resound",
     "body": "Chris, any thoughts on the samples?\n",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "11am",
     "status": "pending",
-    "addedDate": "2026-04-26"
+    "addedDate": "2026-04-26",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-05",
+        "to": "2026-05-06",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "chris-vainrib-resound-networks-3",
@@ -15241,10 +15941,18 @@
     "to": "chris.vainrib@resoundnetworks.com",
     "subject": "Smartoptics on the transport layer",
     "body": "Chris,\n\nDifferent angle. With Transport in your title and Resound moving into eight states, the DWDM question gets bigger fast. OSI runs Smartoptics DCP for DWDM and open line at 30 to 50 percent below Ciena and Nokia, ships in weeks not quarters.\n\nIf you are mapping out longer haul between markets, worth a 15 minute conversation.\n",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-12",
     "sendTime": "12pm",
     "status": "pending",
-    "addedDate": "2026-04-26"
+    "addedDate": "2026-04-26",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-11",
+        "to": "2026-05-12",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "chris-vainrib-resound-networks-4",
@@ -15253,10 +15961,18 @@
     "to": "chris.vainrib@resoundnetworks.com",
     "subject": "RE: Smartoptics on the transport layer",
     "body": "Chris, following up. If a transport quote against your current SKUs would help, 24 hour turn.\n",
-    "sendDate": "2026-05-19",
+    "sendDate": "2026-05-20",
     "sendTime": "1pm",
     "status": "pending",
-    "addedDate": "2026-04-26"
+    "addedDate": "2026-04-26",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-19",
+        "to": "2026-05-20",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "chris-vainrib-resound-networks-5",
@@ -15265,10 +15981,18 @@
     "to": "chris.vainrib@resoundnetworks.com",
     "subject": "Pre owned Cisco and Juniper for the network side",
     "body": "Chris,\n\nOne more angle. OSI stocks tested pre owned Cisco and Juniper for spares and edge, plus third party maintenance on Cisco, Dell, HP, NetApp at 40 to 60 percent below OEM SmartNet.\n\nIf any contracts are renewing or you are short on spares as the eight state footprint scales, easy quick win.\n",
-    "sendDate": "2026-05-27",
+    "sendDate": "2026-05-28",
     "sendTime": "2pm",
     "status": "pending",
-    "addedDate": "2026-04-26"
+    "addedDate": "2026-04-26",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-27",
+        "to": "2026-05-28",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "chris-vainrib-resound-networks-6",
@@ -15277,10 +16001,18 @@
     "to": "chris.vainrib@resoundnetworks.com",
     "subject": "Closing the loop",
     "body": "Chris,\n\nShould I close the file on this one, or is the timing just off?\n",
-    "sendDate": "2026-06-04",
+    "sendDate": "2026-06-05",
     "sendTime": "3pm",
     "status": "pending",
-    "addedDate": "2026-04-26"
+    "addedDate": "2026-04-26",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-06-04",
+        "to": "2026-06-05",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ]
   },
   {
     "id": "jay-kapadia-resound-networks-1",
@@ -15754,7 +16486,7 @@
     "body": "Any thoughts?\n\n--- Original Message ---\nFrom: Andy McLean <andy@osiglobal.com>\nSubject: optics samples for Momentum\n\nHi Bob,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-27",
     "rescheduleHistory": [
       {
@@ -15764,7 +16496,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:34:47Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "bob-hancock-momentum-3",
@@ -15859,8 +16599,16 @@
     "body": "Hi David,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-04",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-27"
+    "status": "sent",
+    "addedDate": "2026-04-27",
+    "audit": {
+      "sentAt": "2026-05-04T20:17:29Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "david-christian-momentum-2",
@@ -16675,8 +17423,9 @@
     "body": "Hi Jason,\n\nOak Hill closed at the start of April and the OR plus Northern CA expansion is on. We work with carriers on optical transport during fiber buildouts. SmartOptics SFPs and DWDM open line systems mostly. Send a few sample SFPs your way?\n\nAndy",
     "sendDate": "2026-06-05",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-28"
+    "status": "paused",
+    "addedDate": "2026-04-28",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "jason-robinson-hunter-2",
@@ -16687,8 +17436,9 @@
     "body": "Hi Jason,\n\nFollowing up. Samples ship the same week you ask. Lead times on the bigger optics orders run 4 to 6 weeks. Worth getting the spec match locked before the 8 Gbps rollout pace picks up.\n\nAndy",
     "sendDate": "2026-06-07",
     "sendTime": "11am",
-    "status": "pending",
-    "addedDate": "2026-04-28"
+    "status": "paused",
+    "addedDate": "2026-04-28",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "jason-robinson-hunter-3",
@@ -16699,8 +17449,9 @@
     "body": "Hi Jason,\n\nWith 3000 plus miles of fiber and Oak Hill backing the Salem and Eugene push, transport refresh is usually next. SmartOptics DCP runs 30 to 50 percent below Ciena and Nokia and ships in weeks. Worth a quick call?\n\nAndy",
     "sendDate": "2026-06-13",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-28"
+    "status": "paused",
+    "addedDate": "2026-04-28",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "jason-robinson-hunter-4",
@@ -16711,8 +17462,9 @@
     "body": "Hi Jason,\n\nDuring fast expansions, OEM support contracts on existing gear add up. OSI runs Gartner-recognized TPM at 40 to 60 percent below OEM across Cisco, Juniper, Arista, Dell. Bridges the budget while you scale.\n\nAndy",
     "sendDate": "2026-06-21",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-28"
+    "status": "paused",
+    "addedDate": "2026-04-28",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "jason-robinson-hunter-5",
@@ -16723,8 +17475,9 @@
     "body": "Hi Jason,\n\nFor the older switching and routing in the legacy Oregon footprint, OSI moves tested pre owned Cisco and Juniper at 40 to 60 percent under OEM. Stretches the capex while the new buildout takes priority.\n\nAndy",
     "sendDate": "2026-06-28",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-28"
+    "status": "paused",
+    "addedDate": "2026-04-28",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "jason-robinson-hunter-6",
@@ -16735,8 +17488,9 @@
     "body": "Hi Jason,\n\nLast note from me. If any of the angles I sent line up with your roadmap, drop me a reply. Otherwise I will let it rest.\n\nAndy",
     "sendDate": "2026-07-07",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-28"
+    "status": "paused",
+    "addedDate": "2026-04-28",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "brian-whitford-lingo-1",
@@ -16747,9 +17501,20 @@
     "body": "Hi Brian,\n\nI am just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-01",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-28",
-    "emailResolution": "hubspot-existing"
+    "emailResolution": "hubspot-existing",
+    "audit": {
+      "sentAt": "2026-05-01T20:10:54Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "bodyHash": "2901d2ec42682fb860285ca4a55179c1c5ede6a76f6f388a58579ba096a7932d",
+      "bodyLen": 211,
+      "trimFinalCount": 4,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30",
+      "note": "trimFinalCount=4 (visual: 1 blank line, matches body-paragraph gap exactly)."
+    }
   },
   {
     "id": "brian-whitford-lingo-2",
@@ -16760,9 +17525,10 @@
     "body": "Any thoughts?\n\n----- Original Message -----\nSubject: sample SFPs for the Lingo team\nDate: 2026-05-01\n\n> Hi Brian,\n> \n> I am just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n> \n> Do you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-05",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "paused",
     "addedDate": "2026-04-28",
-    "emailResolution": "hubspot-existing"
+    "emailResolution": "hubspot-existing",
+    "pauseReason": "REPLY DETECTED: Brian Whitford replied (Fri 5/1 4:55 PM). Andy already sent a follow-up on Mon 5/4 9:18 AM. Sequence is active conversation. Paused by email-sender 11am window 2026-05-05T15:11:25Z. Andy must review and decide next step."
   },
   {
     "id": "brian-whitford-lingo-3",
@@ -16848,9 +17614,17 @@
     "body": "Any thoughts?\n\n----- Original Message -----\nSubject: sample SFPs for the Consumer Cellular team\nDate: 2026-04-29\n\n> Hi Jacob,\n> \n> I am just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n> \n> Do you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-28",
-    "emailResolution": "hubspot-existing"
+    "emailResolution": "hubspot-existing",
+    "audit": {
+      "sentAt": "2026-05-04T15:35:31Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "jacob-britt-consumer-cellular-3",
@@ -16911,7 +17685,7 @@
     "to": "larry.asakura@consumercellular.com",
     "subject": "sample SFPs for the Consumer Cellular team",
     "body": "Hi Larry,\n\nI am just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -16924,7 +17698,7 @@
     "to": "larry.asakura@consumercellular.com",
     "subject": "RE: sample SFPs for the Consumer Cellular team",
     "body": "Any thoughts?\n\n----- Original Message -----\nSubject: sample SFPs for the Consumer Cellular team\nDate: 2026-05-05\n\n> Hi Larry,\n> \n> I am just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n> \n> Do you come into the office, or is there a better address to ship it to?",
-    "sendDate": "2026-05-07",
+    "sendDate": "2026-05-08",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -16937,7 +17711,7 @@
     "to": "larry.asakura@consumercellular.com",
     "subject": "DDR4 DIMMs for the OSS BSS side",
     "body": "Hi Larry,\n\nWe carry Samsung, Hynix, and Micron DIMMs in Dell and HP compatible spec, manufacturer warranties, well below OEM. DDR4 lands significantly cheaper than DDR5 for OSS BSS and back office workloads.\n\nIf memory refresh sits anywhere in your IT services budget this year, worth a quick spec compare?\n\n----- Original Message -----\nSubject: RE: sample SFPs for the Consumer Cellular team\nDate: 2026-05-07\n",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-05-14",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -16950,7 +17724,7 @@
     "to": "larry.asakura@consumercellular.com",
     "subject": "pre-owned Cisco and Juniper for retail backhaul",
     "body": "Hi Larry,\n\nHeard Consumer Cellular is adding retail stores while the MVNO repositions on price. We carry tested pre owned Cisco and Juniper with OSI TPM coverage. Same with NetApp on the storage side.\n\nUseful when you want OEM grade gear without the OEM line item. Want me to send a quick spec list?\n\n----- Original Message -----\nSubject: DDR4 DIMMs for the OSS BSS side\nDate: 2026-05-13\n",
-    "sendDate": "2026-05-21",
+    "sendDate": "2026-05-22",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -17069,9 +17843,16 @@
     "body": "Hi Tyler,\n\nI am just prepping this package for you. I have a sample DDR4 DIMM (Samsung or Hynix, manufacturer warranty) to send from the team at OSI Global. Same spec as what you are likely running, won't touch your OEM support contract.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-01",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "paused-validator",
     "addedDate": "2026-04-28",
-    "emailResolution": "hubspot-existing"
+    "emailResolution": "hubspot-existing",
+    "validatorPause": {
+      "pausedAt": "2026-05-01T20:06:00Z",
+      "rule": "1.12-surgical-isolation",
+      "detail": "Multiple product lines in one email: ['compute', 'tpm']. Surgical Isolation rule. One product line per email.",
+      "window": "4pm",
+      "pausedBy": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "tyler-burks-patrick-2",
@@ -17082,9 +17863,10 @@
     "body": "Any thoughts?\n\n> Hi Tyler,\n>\n> I am just prepping this package for you. I have a sample DDR4 DIMM (Samsung or Hynix, manufacturer warranty) to send from the team at OSI Global. Same spec as what you are likely running, won't touch your OEM support contract.\n>\n> Do you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-05-05",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "paused",
     "addedDate": "2026-04-28",
-    "emailResolution": "hubspot-existing"
+    "emailResolution": "hubspot-existing",
+    "pauseReason": "NO ORIGINAL THREAD FOUND: searched all folders for subject \"sample DIMM for the Patrick team\" to burkst@patrickind.com. Most recent email to Tyler Burks was 11/1/2023. Email 1 was never sent or was sent from a different account. Cannot reply. Paused by email-sender 11am window 2026-05-05T15:13:00Z. Andy must investigate and either send Email 1 manually or cancel this entry."
   },
   {
     "id": "tyler-burks-patrick-3",
@@ -17925,11 +18707,20 @@
     "to": "msterling@stellarbb.com",
     "subject": "transport stack as the Lansing to Grand Rapids fiber goes live",
     "body": "Hi Matthew,\n\nSaw the 123NET partnership announcement on the Lansing to Grand Rapids fiber. That kind of corridor build usually puts pressure on optics lead times right when you need them most.\n\nWe ship SmartOptics DWDM in weeks not months, typically 30 to 50 percent below Ciena and Nokia. A lot of regional ISPs run it on the 100G or 400G upgrade path.\n\nWorth a 15 minute look as the corridor lights up?",
-    "sendDate": "2026-05-01",
+    "sendDate": "2026-05-04",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "cancelled",
     "addedDate": "2026-04-28",
-    "emailResolution": "hubspot-existing"
+    "emailResolution": "hubspot-existing",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-01",
+        "to": "2026-05-04",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "cancelReason": "hard-blocked domain stellarbb.com. Enrolled by osi-outreach-sequence. Flagged and cancelled at 2026-05-04T17:06:19Z by osi-email-sender 1pm window fire."
   },
   {
     "id": "matthew-sterling-stellar-2",
@@ -17938,11 +18729,20 @@
     "to": "msterling@stellarbb.com",
     "subject": "RE: transport stack as the Lansing to Grand Rapids fiber goes live",
     "body": "Any thoughts on the transport piece as the new fiber turns up?\n\n---------- On May 1, Andy McLean wrote ----------\nHi Matthew,\n\nSaw the 123NET partnership announcement on the Lansing to Grand Rapids fiber. That kind of corridor build usually puts pressure on optics lead times right when you need them most.\n\nWe ship SmartOptics DWDM in weeks not months, typically 30 to 50 percent below Ciena and Nokia. A lot of regional ISPs run it on the 100G or 400G upgrade path.\n\nWorth a 15 minute look as the corridor lights up?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "cancelled",
     "addedDate": "2026-04-28",
-    "emailResolution": "hubspot-existing"
+    "emailResolution": "hubspot-existing",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-05",
+        "to": "2026-05-06",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "cancelReason": "hard-blocked domain stellarbb.com. Enrolled by osi-outreach-sequence. Flagged and cancelled at 2026-05-04T17:06:19Z by osi-email-sender 1pm window fire."
   },
   {
     "id": "matthew-sterling-stellar-3",
@@ -17951,11 +18751,20 @@
     "to": "msterling@stellarbb.com",
     "subject": "free SmartOptics SFPs for the Stellar team",
     "body": "Hi Matthew,\n\nDifferent angle. I keep a small batch of SmartOptics SFPs around to drop with network teams to test against incumbents. Same spec, manufacturer warranty, no obligation. Most teams use them as the side by side reference before the next big optics order.\n\nWant me to send a pair to the office?\n\n---\nPrior message: any thoughts on the transport piece as the new fiber turns up?",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-12",
     "sendTime": "12pm",
-    "status": "pending",
+    "status": "cancelled",
     "addedDate": "2026-04-28",
-    "emailResolution": "hubspot-existing"
+    "emailResolution": "hubspot-existing",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-11",
+        "to": "2026-05-12",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "cancelReason": "hard-blocked domain stellarbb.com. Enrolled by osi-outreach-sequence. Flagged and cancelled at 2026-05-04T17:06:19Z by osi-email-sender 1pm window fire."
   },
   {
     "id": "matthew-sterling-stellar-4",
@@ -17964,11 +18773,20 @@
     "to": "msterling@stellarbb.com",
     "subject": "TPM on the back office gear",
     "body": "Hi Matthew,\n\nOne more angle for the IT side. We run third party maintenance across Cisco, Juniper, Arista, Dell, HP, and NetApp. Typically 40 to 60 percent below OEM, Gartner recognized, privately held, no PE behind us.\n\nUseful when budget needs to stretch on legacy gear while the fiber and core get refreshed.\n\nWorth a 15 minute scope call?\n\n---\nPrior message: free SmartOptics SFPs for the Stellar team.",
-    "sendDate": "2026-05-19",
+    "sendDate": "2026-05-20",
     "sendTime": "1pm",
-    "status": "pending",
+    "status": "cancelled",
     "addedDate": "2026-04-28",
-    "emailResolution": "hubspot-existing"
+    "emailResolution": "hubspot-existing",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-19",
+        "to": "2026-05-20",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "cancelReason": "hard-blocked domain stellarbb.com. Enrolled by osi-outreach-sequence. Flagged and cancelled at 2026-05-04T17:06:19Z by osi-email-sender 1pm window fire."
   },
   {
     "id": "matthew-sterling-stellar-5",
@@ -17977,11 +18795,20 @@
     "to": "msterling@stellarbb.com",
     "subject": "DIMMs and server refresh",
     "body": "Hi Matthew,\n\nAnother lane. We move Samsung, Hynix, and Micron DIMMs at significant discounts to OEM, manufacturer warranty intact. DDR4 is much cheaper than DDR5 if your workload does not need it. Same story on Dell and HP server refresh, with OSI as an authorized partner.\n\nWant pricing in front of you on common SKUs?\n\n---\nPrior message: TPM on the back office gear.",
-    "sendDate": "2026-05-26",
+    "sendDate": "2026-05-27",
     "sendTime": "2pm",
-    "status": "pending",
+    "status": "cancelled",
     "addedDate": "2026-04-28",
-    "emailResolution": "hubspot-existing"
+    "emailResolution": "hubspot-existing",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-05-26",
+        "to": "2026-05-27",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "cancelReason": "hard-blocked domain stellarbb.com. Enrolled by osi-outreach-sequence. Flagged and cancelled at 2026-05-04T17:06:19Z by osi-email-sender 1pm window fire."
   },
   {
     "id": "matthew-sterling-stellar-6",
@@ -17990,11 +18817,20 @@
     "to": "msterling@stellarbb.com",
     "subject": "Should I close the file?",
     "body": "Hi Matthew,\n\nNo worries if the timing isn't right. Happy to circle back when things shift. Should I close the file on this one, or is the timing just off?\n\n---\nPrior message: DIMMs and server refresh.",
-    "sendDate": "2026-06-03",
+    "sendDate": "2026-06-04",
     "sendTime": "3pm",
-    "status": "pending",
+    "status": "cancelled",
     "addedDate": "2026-04-28",
-    "emailResolution": "hubspot-existing"
+    "emailResolution": "hubspot-existing",
+    "rescheduleHistory": [
+      {
+        "shiftedAt": "2026-05-01T20:03:48Z",
+        "from": "2026-06-03",
+        "to": "2026-06-04",
+        "reason": "Andy moved E1 from Fri 5/1 to Mon 5/4; rest of sequence shifted +1 biz day."
+      }
+    ],
+    "cancelReason": "hard-blocked domain stellarbb.com. Enrolled by osi-outreach-sequence. Flagged and cancelled at 2026-05-04T17:06:19Z by osi-email-sender 1pm window fire."
   },
   {
     "id": "tony-peffley-patrick-industries-1",
@@ -18192,7 +19028,7 @@
     "body": "Any thoughts?\n\nOn Tue, Apr 28, 2026, Andy McLean wrote:\n> Hi Atta,\n>\n> I have a new batch of sample SFPs in stock. Wanted to drop a pair in the mail to you with a bit of OSI swag along with it.\n>\n> Best address to send it to these days, office or home?",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-28",
     "rescheduleHistory": [
       {
@@ -18202,7 +19038,15 @@
         "toDate": "2026-05-01",
         "toTime": "11am"
       }
-    ]
+    ],
+    "audit": {
+      "sentAt": "2026-05-04T15:36:21Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "atta-meer-baxter-3",
@@ -18320,9 +19164,17 @@
     "body": "Any room on this? Quick adjacent angle. DDR4 DIMMs (Samsung, Hynix, Micron, manufacturer warranty) are running 40% under Dell list right now, and most TRC servers were spec'd DDR4. Lower cost than re-buying through Dell direct.\n\nWorth 10 minutes?\n\nOn Wed, Apr 29, 2026, Andy McLean wrote:\n> Subject: WSP + TRC vendor stack\n>\n> Hi Christophe,\n> \n> Saw the TRC close in February. That's a 13K-person team folding into WSP's IT footprint, which usually means duplicate Cisco, Dell, and HP support contracts and a pile of OEM renewals that don't actually need to live where they live.\n> \n> We do third-party maintenance across all of those, plus DIMMs and pre-owned networking when refresh cycles come up. 40-60% under OEM list, multi-vendor, no PE backing.\n> \n> Open to a 15-minute look at the renewal calendar?",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-28",
-    "emailResolution": "hubspot-existing"
+    "emailResolution": "hubspot-existing",
+    "audit": {
+      "sentAt": "2026-05-04T15:39:29Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 10,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "christophe-desmars-wsp-3",
@@ -18476,7 +19328,7 @@
     "to": "kh6@princeton.edu",
     "subject": "Sample 100G or 400G transceiver?",
     "body": "Hi Kevin,\n\nWith the AI Hub buildout coming, your team is going to be racking a lot of east-west capacity. Quick offer: I can send a free sample 100G or 400G transceiver from our line for the lab to bench-test before any commitment.\n\nWe also do Samsung, Hynix, and Micron DIMMs at 30 to 50 percent below OEM with manufacturer warranties intact. Useful when scale-up exceeds budget.\n\nWorth a 15-minute call to see if either lands?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -18489,7 +19341,7 @@
     "to": "kh6@princeton.edu",
     "subject": "RE: Sample 100G or 400G transceiver?",
     "body": "Hi Kevin,\n\nFollowing up. Sample transceivers ship within a few days, and the DIMM offer applies whether you're refreshing existing nodes or building net-new for the AI Hub. Either is a low-risk way to evaluate us.\n\nReply with form factor (QSFP28 / QSFP-DD) and reach (SR / LR / ZR) and I'll get the sample in motion.",
-    "sendDate": "2026-05-07",
+    "sendDate": "2026-05-08",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -18502,7 +19354,7 @@
     "to": "kh6@princeton.edu",
     "subject": "Pre-owned Cisco for the lab",
     "body": "Hi Kevin,\n\nDifferent wedge. Pre-owned Cisco, Juniper, and Arista with full OSI third-party maintenance, 40 to 60 percent below new list. Universities use this for lab networks, DR sites, and non-critical campus segments.\n\nIf Princeton is rolling refurbished gear into research labs or staging environments, I can pull a quote on a specific model.",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-05-14",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -18515,7 +19367,7 @@
     "to": "kh6@princeton.edu",
     "subject": "Smartoptics DWDM",
     "body": "Hi Kevin,\n\nSwitching angles. Smartoptics DCP DWDM platform, 30 to 50 percent below Ciena and Nokia, ships in weeks instead of months. If any of the AI Hub interconnect plan touches metro DWDM or DC-to-DC transport, this is worth a side-by-side spec comparison.\n\nHappy to send a one-pager if useful.",
-    "sendDate": "2026-05-21",
+    "sendDate": "2026-05-22",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -18541,7 +19393,7 @@
     "to": "kh6@princeton.edu",
     "subject": "closing the file?",
     "body": "Hi Kevin,\n\nClosing this out unless you say otherwise. Any of the sample transceiver, DIMMs, pre-owned networking, DWDM, or storage TPM still useful for Princeton Research IT this year?\n\nIf not, I'll archive and stop bumping. If yes, just reply with which and I'll get specs over.",
-    "sendDate": "2026-06-10",
+    "sendDate": "2026-06-08",
     "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -18579,9 +19431,17 @@
     "body": "Hi Ryan,\n\nQuick bump. We can ship a free 100G or 400G transceiver sample so the team can test before any commitment. Form factor and reach we cover (QSFP28 SR4/LR4, QSFP-DD SR8/DR4/FR4/LR4) covers most fin-serv DC fabrics.\n\nReply with what you'd want to bench and I'll get it out.",
     "sendDate": "2026-05-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-04-28",
-    "emailResolution": "zoominfo-derived"
+    "emailResolution": "zoominfo-derived",
+    "audit": {
+      "sentAt": "2026-05-04T15:40:55Z",
+      "window": "11am",
+      "flow": "reply",
+      "trimFinalCount": 13,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
   },
   {
     "id": "ryan-boyle-cantor-fitzgerald-3",
@@ -18642,7 +19502,7 @@
     "to": "frank.rosario@cantor.com",
     "subject": "Cantor Windows fleet refresh question",
     "body": "Hi Frank,\n\nSaw you running enterprise Windows systems at Cantor. With the firm putting 126 million into AI infra and leaning into AI Cloud Services, the compute layer underneath that Windows server fleet is the part that quietly takes the hit first. Memory density per box, OEM warranty pressure, refresh timing.\n\nWe're an OSI Global authorized partner for Dell and HP, plus we move OEM-spec Samsung and Hynix DIMMs at below-OEM pricing with manufacturer warranty intact. DDR4 still runs significantly cheaper than DDR5 for the workloads that don't need it.\n\nWorth a quick look at what's coming up on the server or memory side?",
-    "sendDate": "2026-05-05",
+    "sendDate": "2026-05-06",
     "sendTime": "4pm",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -18655,7 +19515,7 @@
     "to": "frank.rosario@cantor.com",
     "subject": "RE: Cantor Windows fleet refresh question",
     "body": "Any thoughts?\n\n> Hi Frank,\n>\n> Saw you running enterprise Windows systems at Cantor. With the firm putting 126 million into AI infra and leaning into AI Cloud Services, the compute layer underneath that Windows server fleet is the part that quietly takes the hit first. Memory density per box, OEM warranty pressure, refresh timing.\n>\n> We're an OSI Global authorized partner for Dell and HP, plus we move OEM-spec Samsung and Hynix DIMMs at below-OEM pricing with manufacturer warranty intact. DDR4 still runs significantly cheaper than DDR5 for the workloads that don't need it.\n>\n> Worth a quick look at what's coming up on the server or memory side?",
-    "sendDate": "2026-05-07",
+    "sendDate": "2026-05-08",
     "sendTime": "11am",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -18668,7 +19528,7 @@
     "to": "frank.rosario@cantor.com",
     "subject": "Cantor TPM on the network gear",
     "body": "Hi Frank,\n\nDifferent lane than the server side. For your Cisco and Arista network gear out of OEM warranty, OSI runs Gartner-recognized TPM at 40 to 60 percent below OEM list. Multi-vendor, we cover Cisco, Juniper, Arista, NetApp, HP, Dell.\n\nA lot of Wall Street IT teams are using TPM on the older switching layer to free up budget for the compute refresh. Worth a quick scan of what's coming off OEM support this year?\n",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-05-14",
     "sendTime": "12pm",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -18681,7 +19541,7 @@
     "to": "frank.rosario@cantor.com",
     "subject": "Storage at Cantor",
     "body": "Hi Frank,\n\nOne more lane, then I will stop crowding the inbox. NetApp TPM and pre-owned storage gear. We do a lot of array refresh and capacity expansion plays, all tested gear with our own TPM contract behind it. Same multi-vendor coverage as the networking TPM.\n\nTrading floors and back-office storage typically sit on different refresh clocks than the compute layer, but the buying owner is usually one team. Anyone on your side own that piece?\n",
-    "sendDate": "2026-05-21",
+    "sendDate": "2026-05-22",
     "sendTime": "1pm",
     "status": "pending",
     "addedDate": "2026-04-28",
@@ -19034,8 +19894,9 @@
     "body": "Hi Jeremy,\n\nI'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.\n\nDo you come into the office, or is there a better address to ship it to?",
     "sendDate": "2026-06-11",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "jeremy-keeney-hunter-2",
@@ -19046,8 +19907,9 @@
     "body": "Any thoughts?",
     "sendDate": "2026-06-15",
     "sendTime": "11am",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "jeremy-keeney-hunter-3",
@@ -19058,8 +19920,9 @@
     "body": "Hi Jeremy,\n\nWith Oak Hill backing the Salem and Eugene push, transport refresh is usually next on the roadmap. OSI runs DWDM open line systems 30 to 50 percent below Ciena and Nokia and ships in weeks. Worth a quick call?",
     "sendDate": "2026-06-19",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "jeremy-keeney-hunter-4",
@@ -19070,8 +19933,9 @@
     "body": "Hi Jeremy,\n\nDuring fast expansions, OEM support contracts on existing gear add up. OSI runs Gartner recognized TPM at 40 to 60 percent below OEM across Cisco, Juniper, Arista, Dell. Bridges the budget while you scale.",
     "sendDate": "2026-06-29",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "jeremy-keeney-hunter-5",
@@ -19082,8 +19946,9 @@
     "body": "Hi Jeremy,\n\nFor the older switching and routing in the legacy Oregon footprint, OSI moves tested pre owned Cisco and Juniper at 40 to 60 percent under OEM. Stretches the capex while the new buildout takes priority.",
     "sendDate": "2026-07-06",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "jeremy-keeney-hunter-6",
@@ -19094,8 +19959,9 @@
     "body": "Should I close the file on this one, or is the timing just off?",
     "sendDate": "2026-07-14",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "kasandra-dunn-hunter-1",
@@ -19106,8 +19972,9 @@
     "body": "Hi Kasandra,\n\nI'm prepping a package for you. Box of swag plus a pair of sample SFPs from the team at OSI Global.\n\nDo you come into the Portland office, or is there a better address to ship it to?",
     "sendDate": "2026-06-17",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "kasandra-dunn-hunter-2",
@@ -19118,8 +19985,9 @@
     "body": "Any thoughts?",
     "sendDate": "2026-06-19",
     "sendTime": "11am",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "kasandra-dunn-hunter-3",
@@ -19130,8 +19998,9 @@
     "body": "Hi Kasandra,\n\nWith Oak Hill backing the Salem and Eugene expansion, core transport refresh tends to land next on the roadmap. OSI runs DWDM open line systems 30 to 50 percent below Ciena and Nokia and ships in weeks. Worth a quick call?",
     "sendDate": "2026-06-25",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "kasandra-dunn-hunter-4",
@@ -19142,8 +20011,9 @@
     "body": "Hi Kasandra,\n\nDuring fast expansions, OEM support contracts on existing core gear add up. OSI runs Gartner recognized TPM at 40 to 60 percent below OEM across Cisco, Juniper, Arista, Dell. Bridges the budget while you scale.",
     "sendDate": "2026-07-03",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "kasandra-dunn-hunter-5",
@@ -19154,8 +20024,9 @@
     "body": "Hi Kasandra,\n\nFor the older switching and routing in the legacy Oregon footprint, OSI moves tested pre owned Cisco and Juniper at 40 to 60 percent under OEM. Stretches the capex while the new buildout takes priority.",
     "sendDate": "2026-07-10",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "kasandra-dunn-hunter-6",
@@ -19166,8 +20037,9 @@
     "body": "Should I close the file on this one, or is the timing just off?",
     "sendDate": "2026-07-20",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "ryan-gasik-hunter-1",
@@ -19178,8 +20050,9 @@
     "body": "Hi Ryan,\n\nI'm prepping a package for you. Box of swag plus a pair of sample SFPs from the team at OSI Global.\n\nDo you come into the Central Point office, or is there a better address to ship it to?",
     "sendDate": "2026-06-23",
     "sendTime": "4pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "ryan-gasik-hunter-2",
@@ -19190,8 +20063,9 @@
     "body": "Any thoughts?",
     "sendDate": "2026-06-25",
     "sendTime": "11am",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "ryan-gasik-hunter-3",
@@ -19202,8 +20076,9 @@
     "body": "Hi Ryan,\n\nWith Oak Hill backing the Salem and Eugene expansion, transport refresh tends to land next on the roadmap. OSI runs DWDM open line systems 30 to 50 percent below Ciena and Nokia and ships in weeks. Worth a quick call?",
     "sendDate": "2026-07-01",
     "sendTime": "12pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "ryan-gasik-hunter-4",
@@ -19214,8 +20089,9 @@
     "body": "Hi Ryan,\n\nDuring fast expansions, OEM support contracts on existing gear add up. OSI runs Gartner recognized TPM at 40 to 60 percent below OEM across Cisco, Juniper, Arista, Dell. Bridges the budget while you scale.",
     "sendDate": "2026-07-09",
     "sendTime": "1pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "ryan-gasik-hunter-5",
@@ -19226,8 +20102,9 @@
     "body": "Hi Ryan,\n\nFor the older switching and routing in the legacy Oregon footprint, OSI moves tested pre owned Cisco and Juniper at 40 to 60 percent under OEM. Stretches the capex while the new buildout takes priority.",
     "sendDate": "2026-07-16",
     "sendTime": "2pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "ryan-gasik-hunter-6",
@@ -19238,8 +20115,9 @@
     "body": "Should I close the file on this one, or is the timing just off?",
     "sendDate": "2026-07-24",
     "sendTime": "3pm",
-    "status": "pending",
-    "addedDate": "2026-04-30"
+    "status": "paused",
+    "addedDate": "2026-04-30",
+    "pauseReason": "Andy sent optics outreach directly. Hold until further notice. Paused 2026-05-04T19:36:05Z"
   },
   {
     "id": "deepak-peswani-rackspace-1",
@@ -19384,5 +20262,885 @@
     "sendTime": "3pm",
     "status": "pending",
     "addedDate": "2026-04-30"
+  },
+  {
+    "id": "mason-moesch-nsight-1",
+    "prospectName": "Mason Moesch",
+    "company": "Nsight",
+    "to": "mason.moesch@nsight.com",
+    "subject": "NetApp support at Nsight",
+    "body": "Hi Mason,\n\nCongrats on the move to Infrastructure Engineering Manager earlier this year. With a larger footprint to own now, NetApp support costs have a way of becoming one of the bigger line items in a hurry.\n\nOSI is recognized by Gartner as a third party maintenance provider at 40 to 60 percent below NetApp OEM rates, privately owned with no PE pressure on staffing or SLAs.\n\nOpen to a call Thursday to run through what Nsight is paying today?",
+    "sendDate": "2026-05-04",
+    "sendTime": "4pm",
+    "status": "sent",
+    "addedDate": "2026-05-01",
+    "emailResolution": "zoominfo-full-match",
+    "audit": {
+      "sentAt": "2026-05-04T20:18:26Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
+  },
+  {
+    "id": "mason-moesch-nsight-2",
+    "prospectName": "Mason Moesch",
+    "company": "Nsight",
+    "to": "mason.moesch@nsight.com",
+    "subject": "Re: NetApp support at Nsight",
+    "body": "Nsight added more IT roles in the last 12 months than any other stretch I can find. Growing teams usually mean more gear and higher support bills.\n\nHave 10 minutes Thursday or Friday to talk through what that looks like for your maintenance contracts?",
+    "sendDate": "2026-05-06",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-05-01",
+    "emailResolution": "zoominfo-full-match"
+  },
+  {
+    "id": "mason-moesch-nsight-3",
+    "prospectName": "Mason Moesch",
+    "company": "Nsight",
+    "to": "mason.moesch@nsight.com",
+    "subject": "DIMM pricing at Nsight",
+    "body": "Hi Mason,\n\nIf Nsight is running any server refresh cycles this year, DIMM pricing has shifted in our favor over the last few months.\n\nWe source Samsung and Hynix DIMMs with manufacturer warranties at below OEM pricing. DDR4 is still meaningfully cheaper than DDR5 for workloads that do not require the extra bandwidth.\n\nDo you have a refresh list I could benchmark against?",
+    "sendDate": "2026-05-12",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-05-01",
+    "emailResolution": "zoominfo-full-match"
+  },
+  {
+    "id": "mason-moesch-nsight-4",
+    "prospectName": "Mason Moesch",
+    "company": "Nsight",
+    "to": "mason.moesch@nsight.com",
+    "subject": "transceiver sourcing at Nsight",
+    "body": "Hi Mason,\n\nCarriers your size are running into 400G transceiver lead times that stretch months out when sourcing direct from OEMs.\n\nOSI sources and ships 400G transceivers from inventory. Typical lead time is two to three weeks on gear OEMs are currently quoting several months out.\n\nAny 400G projects in the pipeline this year I could put a number on?",
+    "sendDate": "2026-05-20",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-05-01",
+    "emailResolution": "zoominfo-full-match"
+  },
+  {
+    "id": "mason-moesch-nsight-5",
+    "prospectName": "Mason Moesch",
+    "company": "Nsight",
+    "to": "mason.moesch@nsight.com",
+    "subject": "DWDM at Nsight",
+    "body": "Hi Mason,\n\nFor carrier builds, the DWDM market has shifted. Ciena and Nokia still carry significant premiums but open line systems have caught up on performance at 30 to 50 percent less.\n\nOSI supplies DWDM open line systems that ship in weeks and run in multi vendor environments. No vendor lock on the management layer.\n\nAre you doing any backbone capacity work this year where we could run the numbers?",
+    "sendDate": "2026-05-28",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-05-01",
+    "emailResolution": "zoominfo-full-match"
+  },
+  {
+    "id": "mason-moesch-nsight-6",
+    "prospectName": "Mason Moesch",
+    "company": "Nsight",
+    "to": "mason.moesch@nsight.com",
+    "subject": "Nsight follow up",
+    "body": "Should I close the file on this one, or is the timing just off?",
+    "sendDate": "2026-06-05",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-05-01",
+    "emailResolution": "zoominfo-full-match"
+  },
+  {
+    "id": "peter-whiteside-brivo-1",
+    "prospectName": "Peter Whiteside",
+    "company": "Brivo",
+    "to": "peter.whiteside@brivo.com",
+    "subject": "hardware support at Brivo",
+    "body": "Hi Peter,\n\nManaging hardware warranties across two infrastructure stacks after the Eagle Eye and Brivo merger is the kind of problem that compounds quietly. We do multi vendor maintenance covering Dell, HP, and Cisco at 40 to 60 percent below OEM rates, privately owned with no PE pressure on SLAs.\n\nOpen to a call this week to run a benchmark against what you're paying now?",
+    "sendDate": "2026-05-04",
+    "sendTime": "4pm",
+    "status": "cancelled",
+    "addedDate": "2026-05-01",
+    "emailResolution": "pattern-inferred",
+    "cancelReason": "Invalid email address. Cancelled 2026-05-04T19:38:08Z"
+  },
+  {
+    "id": "peter-whiteside-brivo-2",
+    "prospectName": "Peter Whiteside",
+    "company": "Brivo",
+    "to": "peter.whiteside@brivo.com",
+    "subject": "RE: hardware support at Brivo",
+    "body": "Peter,\n\nBumping this in case it got buried. The first few months after a merger tend to be when teams find the most room in support contracts. If the timing is off I can check back later in the year.",
+    "sendDate": "2026-05-06",
+    "sendTime": "11am",
+    "status": "cancelled",
+    "addedDate": "2026-05-01",
+    "emailResolution": "pattern-inferred",
+    "cancelReason": "Invalid email address. Cancelled 2026-05-04T19:38:08Z"
+  },
+  {
+    "id": "peter-whiteside-brivo-3",
+    "prospectName": "Peter Whiteside",
+    "company": "Brivo",
+    "to": "peter.whiteside@brivo.com",
+    "subject": "server memory at Brivo",
+    "body": "Hi Peter,\n\nSeparate from the maintenance piece, server memory is one of the easier places to recapture budget right now. We supply Samsung and Hynix DIMMs with manufacturer warranties, below what Dell and HP charge direct. DDR4 is running significantly cheaper than DDR5 for workloads that don't need the extra speed.\n\nIf you're adding capacity for the merged environment, I can put together a quote.",
+    "sendDate": "2026-05-12",
+    "sendTime": "12pm",
+    "status": "cancelled",
+    "addedDate": "2026-05-01",
+    "emailResolution": "pattern-inferred",
+    "cancelReason": "Invalid email address. Cancelled 2026-05-04T19:38:08Z"
+  },
+  {
+    "id": "peter-whiteside-brivo-4",
+    "prospectName": "Peter Whiteside",
+    "company": "Brivo",
+    "to": "peter.whiteside@brivo.com",
+    "subject": "networking gear at Brivo",
+    "body": "Hi Peter,\n\nWanted to try a different angle. We carry refurbished Cisco and Juniper gear, tested and certified, with OSI maintenance included. A lot of teams use it to extend secondary or DR environments without paying OEM prices.\n\nIf anything in your Eagle Eye or Brivo stack is coming off manufacturer support in the next 12 months, I can run a list of what's available.",
+    "sendDate": "2026-05-20",
+    "sendTime": "1pm",
+    "status": "cancelled",
+    "addedDate": "2026-05-01",
+    "emailResolution": "pattern-inferred",
+    "cancelReason": "Invalid email address. Cancelled 2026-05-04T19:38:08Z"
+  },
+  {
+    "id": "peter-whiteside-brivo-5",
+    "prospectName": "Peter Whiteside",
+    "company": "Brivo",
+    "to": "peter.whiteside@brivo.com",
+    "subject": "storage at Brivo",
+    "body": "Hi Peter,\n\nVideo surveillance at Brivo's scale means a significant amount of storage to manage. We supply refurbished NetApp gear at a fraction of new pricing, which some infrastructure teams have used to build out archive or cold storage capacity without the new list price.\n\nIf you have storage refreshes planned for the merged environment, I can pull some options together.",
+    "sendDate": "2026-05-28",
+    "sendTime": "2pm",
+    "status": "cancelled",
+    "addedDate": "2026-05-01",
+    "emailResolution": "pattern-inferred",
+    "cancelReason": "Invalid email address. Cancelled 2026-05-04T19:38:08Z"
+  },
+  {
+    "id": "peter-whiteside-brivo-6",
+    "prospectName": "Peter Whiteside",
+    "company": "Brivo",
+    "to": "peter.whiteside@brivo.com",
+    "subject": "Brivo",
+    "body": "Peter, if the timing hasn't lined up I'll get out of your inbox. File this away if hardware comes back up later in the year.",
+    "sendDate": "2026-06-05",
+    "sendTime": "3pm",
+    "status": "cancelled",
+    "addedDate": "2026-05-01",
+    "emailResolution": "pattern-inferred",
+    "cancelReason": "Invalid email address. Cancelled 2026-05-04T19:38:08Z"
+  },
+  {
+    "id": "mitch-vieu-copper-valley-telecom-1",
+    "prospectName": "Mitch Vieu",
+    "company": "Copper Valley Telephone Cooperative",
+    "to": "mvieu@cvtc.org",
+    "subject": "CVTC transport refresh",
+    "body": "Hi Mitch,\n\nI reached out back in late 2023 and you responded. Checking back in now.\n\nRural carriers running long haul transport in challenging terrain hit the same bottleneck: DWDM capacity constraints and OEM lead times stretching four to six months.\n\nOSI supplies transport optics and DWDM gear to carriers your size at 30 to 50 percent below Ciena and Nokia pricing, shipping in weeks rather than months.\n\nAny transport refresh or capacity project coming up at CVTC where timing matters?",
+    "sendDate": "2026-05-04",
+    "sendTime": "4pm",
+    "status": "sent",
+    "addedDate": "2026-05-02",
+    "emailResolution": "hubspot-existing",
+    "audit": {
+      "sentAt": "2026-05-04T20:19:32Z",
+      "window": "4pm",
+      "flow": "new-mail",
+      "trimFinalCount": 7,
+      "previewChecksPassed": true,
+      "senderVersion": "osi-email-sender@2026-04-30"
+    }
+  },
+  {
+    "id": "mitch-vieu-copper-valley-telecom-2",
+    "prospectName": "Mitch Vieu",
+    "company": "Copper Valley Telephone Cooperative",
+    "to": "mvieu@cvtc.org",
+    "subject": "CVTC transport refresh",
+    "body": "One thing I've seen with Alaska carriers: limited vendor options make OEM lead times even more costly when a deadline hits. We've helped several rural carriers cut that wait down substantially. What does CVTC's transport procurement calendar look like for the next six months?",
+    "sendDate": "2026-05-06",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-05-02",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "mitch-vieu-copper-valley-telecom-3",
+    "prospectName": "Mitch Vieu",
+    "company": "Copper Valley Telephone Cooperative",
+    "to": "mvieu@cvtc.org",
+    "subject": "Cisco maintenance at CVTC",
+    "body": "Mitch,\n\nMost rural carriers I work with are running Cisco gear well past the OEM support window because replacement hardware is expensive and lead times are long.\n\nOSI provides third party maintenance on Cisco, Juniper, and Nokia at 40 to 60 percent below OEM rates, with the same SLAs and multi vendor coverage.\n\nIf CVTC has any gear coming off Cisco SmartNet, it might be worth a look.\n\nWhen does your next maintenance renewal hit?",
+    "sendDate": "2026-05-12",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-05-02",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "mitch-vieu-copper-valley-telecom-4",
+    "prospectName": "Mitch Vieu",
+    "company": "Copper Valley Telephone Cooperative",
+    "to": "mvieu@cvtc.org",
+    "subject": "network gear for CVTC buildouts",
+    "body": "Mitch,\n\nAnother angle we do well for rural carriers: used Cisco and Juniper networking gear, fully tested, at substantial discounts off new pricing.\n\nFor carriers managing capital budgets carefully, shifting planned buys to used gear can free up real budget on buildouts.\n\nAny network expansion or refresh in your plan for this year where that kind of discount would help?",
+    "sendDate": "2026-05-20",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-05-02",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "mitch-vieu-copper-valley-telecom-5",
+    "prospectName": "Mitch Vieu",
+    "company": "Copper Valley Telephone Cooperative",
+    "to": "mvieu@cvtc.org",
+    "subject": "optics sample for CVTC",
+    "body": "Mitch,\n\nI'd like to send you a couple of OSI transceivers to test in your environment. No commitment, no pitch.\n\nIf they perform the way we say they do, the conversation takes care of itself.\n\nDo you come into the Glennallen office, or is there a better address to ship to?",
+    "sendDate": "2026-05-28",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-05-02",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "mitch-vieu-copper-valley-telecom-6",
+    "prospectName": "Mitch Vieu",
+    "company": "Copper Valley Telephone Cooperative",
+    "to": "mvieu@cvtc.org",
+    "subject": "closing the loop",
+    "body": "Should I close the file on this one, or is the timing just off?",
+    "sendDate": "2026-06-05",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-05-02",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "robert-geraghty-copper-valley-telecom-1",
+    "prospectName": "Robert Geraghty",
+    "company": "Copper Valley Telephone Cooperative",
+    "to": "rgeraghty@cvtc.org",
+    "subject": "optics test for CVTC",
+    "body": "Hi Robert,\n\nSaw you just added your Certified Optical Network Engineer cert while actively running 400G long haul DWDM at CVTC.\n\nI'd like to send you a couple of OSI transceivers to test in your environment. No commitment, no pitch. If they perform the way we say they do, the conversation takes care of itself.\n\nDo you come into the Valdez office, or is there a better address to ship to?",
+    "sendDate": "2026-05-08",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-05-02",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "robert-geraghty-copper-valley-telecom-2",
+    "prospectName": "Robert Geraghty",
+    "company": "Copper Valley Telephone Cooperative",
+    "to": "rgeraghty@cvtc.org",
+    "subject": "optics test for CVTC",
+    "body": "Any thoughts?",
+    "sendDate": "2026-05-12",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-05-02",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "robert-geraghty-copper-valley-telecom-3",
+    "prospectName": "Robert Geraghty",
+    "company": "Copper Valley Telephone Cooperative",
+    "to": "rgeraghty@cvtc.org",
+    "subject": "CVTC DWDM supply chain",
+    "body": "Robert,\n\nRunning 400G long haul DWDM over remote Alaska terrain means any gap in your optics supply chain hits at the worst possible time.\n\nOSI supplies coherent transceivers and DWDM line gear to rural carriers at 30 to 50 percent below Ciena and Nokia pricing, shipping in weeks.\n\nIs there a buildout or refresh in the plan where that lead time would matter?",
+    "sendDate": "2026-05-18",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-05-02",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "robert-geraghty-copper-valley-telecom-4",
+    "prospectName": "Robert Geraghty",
+    "company": "Copper Valley Telephone Cooperative",
+    "to": "rgeraghty@cvtc.org",
+    "subject": "Cisco maintenance at CVTC",
+    "body": "Robert,\n\nRunning a mixed vendor stack at CVTC means maintenance contracts can stack up fast. When gear ages off OEM support, third party maintenance is typically 40 to 60 percent cheaper than renewing Cisco, Juniper, or Nokia contracts directly.\n\nOSI covers multi vendor environments with the same SLAs and 24/7 support.\n\nAny gear coming off SmartNet or similar in the next 12 months?",
+    "sendDate": "2026-05-27",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-05-02",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "robert-geraghty-copper-valley-telecom-5",
+    "prospectName": "Robert Geraghty",
+    "company": "Copper Valley Telephone Cooperative",
+    "to": "rgeraghty@cvtc.org",
+    "subject": "network gear for remote sites",
+    "body": "Robert,\n\nOne angle that works well for network engineers building in remote locations: used and tested Cisco, Juniper, and Arista gear at substantial discounts off new pricing.\n\nHaving trusted equipment available faster than standard OEM timelines matters when something breaks unexpectedly at a remote site.\n\nAny hardware refresh or emergency stock in your plans for this year?",
+    "sendDate": "2026-06-03",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-05-02",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "robert-geraghty-copper-valley-telecom-6",
+    "prospectName": "Robert Geraghty",
+    "company": "Copper Valley Telephone Cooperative",
+    "to": "rgeraghty@cvtc.org",
+    "subject": "closing the loop",
+    "body": "Should I close the file on this one, or is the timing just off?",
+    "sendDate": "2026-06-11",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-05-02",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "ravi-kothari-nai-group-1",
+    "prospectName": "Ravi Kothari",
+    "company": "North American Interconnect",
+    "to": "ravi.kothari@nai-group.com",
+    "subject": "sample DIMM for your team",
+    "body": "Hi Ravi,\n\nI'd like to send you a sample DIMM from our current batch. Same spec as what you're running, manufacturer warranty, won't touch your OEM support contract.\n\nDo you come into the office, or is there a better address to ship it to?",
+    "sendDate": "2026-05-06",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-05-04",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "ravi-kothari-nai-group-2",
+    "prospectName": "Ravi Kothari",
+    "company": "North American Interconnect",
+    "to": "ravi.kothari@nai-group.com",
+    "subject": "RE: sample DIMM for your team",
+    "body": "Any thoughts?",
+    "sendDate": "2026-05-08",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-05-04",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "ravi-kothari-nai-group-3",
+    "prospectName": "Ravi Kothari",
+    "company": "North American Interconnect",
+    "to": "ravi.kothari@nai-group.com",
+    "subject": "SFP samples for your team",
+    "body": "Coming from network infrastructure at North American Interconnect, you've probably had the transceiver sourcing conversation before.\n\nWe supply OSI transceivers for 1G through 400G deployments. Same form factor you're running, manufacturer warranty, ships in days. Happy to drop a pair in the mail for lab testing.\n\nOpen to a 10 minute call this week, or should I just ship the samples?",
+    "sendDate": "2026-05-14",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-05-04",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "ravi-kothari-nai-group-4",
+    "prospectName": "Ravi Kothari",
+    "company": "North American Interconnect",
+    "to": "ravi.kothari@nai-group.com",
+    "subject": "support costs past OEM at NAI",
+    "body": "Supporting Cisco, Dell, and HP across a telecom network adds up fast once gear ages past OEM coverage.\n\nOSI TPM covers multi vendor environments at 40 to 60 percent below OEM rates. Gartner recognized, privately owned, no PE margin pressure. If you have gear coming off SmartNet or Dell ProSupport in the next 90 days, I can run a benchmark.",
+    "sendDate": "2026-05-22",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-05-04",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "ravi-kothari-nai-group-5",
+    "prospectName": "Ravi Kothari",
+    "company": "North American Interconnect",
+    "to": "ravi.kothari@nai-group.com",
+    "subject": "preowned gear for your switches",
+    "body": "If your internal switches or routers are aging and you're not ready for full OEM pricing, we carry tested, warrantied preowned Cisco and Juniper.\n\nShips in days. If there's gear on your refresh list for Q3, I can put a quote together this week.",
+    "sendDate": "2026-05-29",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-05-04",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "ravi-kothari-nai-group-6",
+    "prospectName": "Ravi Kothari",
+    "company": "North American Interconnect",
+    "to": "ravi.kothari@nai-group.com",
+    "subject": "closing the loop",
+    "body": "Should I close the file on this one, or is the timing just off?",
+    "sendDate": "2026-06-08",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-05-04",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "tim-chin-rajant-1",
+    "prospectName": "Tim Chin",
+    "company": "Rajant",
+    "to": "tchin@rajant.com",
+    "subject": "Cisco support at Rajant",
+    "body": "Hi Tim,\n\nRunning the Cisco infrastructure for a DoD contractor like Rajant, SmartNet renewals alone can add up fast. Your profile mentions reducing enterprise costs by 27% at Rajant, so this is likely a number you already track.\n\nOSI's third party maintenance covers Cisco, Dell, HP, and Juniper at 40 to 60 percent below OEM rates. Privately owned, recognized by Gartner, no PE pressure on pricing.\n\nIf you have renewals coming up in the next 90 days, open to a quick benchmark?",
+    "sendDate": "2026-05-06",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-05-04",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "tim-chin-rajant-2",
+    "prospectName": "Tim Chin",
+    "company": "Rajant",
+    "to": "tchin@rajant.com",
+    "subject": "RE: Cisco support at Rajant",
+    "body": "A lot of DoD contractors have been reconsidering their TPM relationships since the Park Place and Service Express merger. If Rajant is still on the same rates, it may be time for a fresh look.\n\nOpen to 10 minutes Thursday or Friday?",
+    "sendDate": "2026-05-08",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-05-04",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "tim-chin-rajant-3",
+    "prospectName": "Tim Chin",
+    "company": "Rajant",
+    "to": "tchin@rajant.com",
+    "subject": "server components for Rajant",
+    "body": "Hi Tim,\n\nOn a different note: with Rajant running edge computing nodes across critical infrastructure deployments, server components are probably a constant refresh item.\n\nOSI carries Samsung, Hynix, and Micron DIMMs below OEM pricing with manufacturer warranties. DDR4 runs significantly cheaper than DDR5 for workloads that don't require it. We can pull a quote comparison against what you're currently sourcing in about 24 hours.\n\nWorth sending specs over?",
+    "sendDate": "2026-05-14",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-05-04",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "tim-chin-rajant-4",
+    "prospectName": "Tim Chin",
+    "company": "Rajant",
+    "to": "tchin@rajant.com",
+    "subject": "spare optics for Rajant",
+    "body": "Hi Tim,\n\nOne more angle: Rajant's mesh nodes run on standard transceiver form factors. If you're sourcing spares or building inventory for field deployments, OSI carries tested optics at well below list.\n\nNo commitment, no pitch deck. If you want to send me a model or form factor, I can have pricing back to you today.",
+    "sendDate": "2026-05-22",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-05-04",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "tim-chin-rajant-5",
+    "prospectName": "Tim Chin",
+    "company": "Rajant",
+    "to": "tchin@rajant.com",
+    "subject": "Cisco gear past support",
+    "body": "Hi Tim,\n\nQuick one: if any of Rajant's Cisco gear has aged past OEM support dates, OSI can cover it without SmartNet dependency. We carry tested secondary market Cisco hardware at 40 to 60 percent below new, with OSI maintenance coverage available.\n\nUseful for budget cycles where full replacement isn't justified yet.",
+    "sendDate": "2026-05-29",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-05-04",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "tim-chin-rajant-6",
+    "prospectName": "Tim Chin",
+    "company": "Rajant",
+    "to": "tchin@rajant.com",
+    "subject": "closing the loop",
+    "body": "Should I close the file on this one, or is the timing just off?",
+    "sendDate": "2026-06-08",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-05-04",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "sam-coleman-vermonttelephone-1",
+    "prospectName": "Sam Coleman",
+    "company": "Vermont Telephone",
+    "to": "scoleman@vermonttel.com",
+    "subject": "quick question, Sam",
+    "body": "Hi Sam,\n\nSaw VTel's Ericsson 5G Standalone partnership announcement last month. A 5G buildout on top of an active 10G fiber rollout means a lot of optics moving fast.\n\nI'd like to send you a couple of OSI transceivers to test in your environment. No commitment, no pitch. If they perform the way we say they do, the conversation takes care of itself.\n\nDo you come into the office, or is there a better address to ship to?",
+    "sendDate": "2026-05-06",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "sam-coleman-vermonttelephone-2",
+    "prospectName": "Sam Coleman",
+    "company": "Vermont Telephone",
+    "to": "scoleman@vermonttel.com",
+    "subject": "Re: quick question, Sam",
+    "body": "Any thoughts?",
+    "sendDate": "2026-05-08",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "sam-coleman-vermonttelephone-3",
+    "prospectName": "Sam Coleman",
+    "company": "Vermont Telephone",
+    "to": "scoleman@vermonttel.com",
+    "subject": "VTel backbone capacity",
+    "body": "Hi Sam,\n\nWith a 5G Standalone buildout spinning up and 10G fiber going in statewide, you may be looking at more wavelength capacity on the long haul. We supply open line DWDM systems at 30 to 50 percent below Ciena and Nokia. Ships in weeks, no licensing fees.\n\nIf you're filling gaps without going back to the OEM, it might be useful. Open to a 10 minute call?",
+    "sendDate": "2026-05-14",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "sam-coleman-vermonttelephone-4",
+    "prospectName": "Sam Coleman",
+    "company": "Vermont Telephone",
+    "to": "scoleman@vermonttel.com",
+    "subject": "OEM support on your Cisco and Juniper",
+    "body": "Hi Sam,\n\nA lot of network teams at regional telcos are carrying OEM support on gear that has been running fine for years. We do multi vendor third party maintenance at 40 to 60 percent below OEM rates. Gartner recognized, privately owned, no PE.\n\nIf anything is coming off SmartNet or OEM support in the next 90 days, I can run a benchmark on the cost delta.",
+    "sendDate": "2026-05-22",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "sam-coleman-vermonttelephone-5",
+    "prospectName": "Sam Coleman",
+    "company": "Vermont Telephone",
+    "to": "scoleman@vermonttel.com",
+    "subject": "Cisco and Juniper at VTel",
+    "body": "Hi Sam,\n\nIf VTel runs any Cisco or Juniper gear past OEM support, we carry tested pre owned inventory with spares on the shelf for fast swap. No long lead times if something fails overnight.\n\nGood to have a secondary source in your back pocket. Open to a quick call?",
+    "sendDate": "2026-05-29",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "sam-coleman-vermonttelephone-6",
+    "prospectName": "Sam Coleman",
+    "company": "Vermont Telephone",
+    "to": "scoleman@vermonttel.com",
+    "subject": "closing the loop, Sam",
+    "body": "Should I close the file on this one, or is the timing just off?",
+    "sendDate": "2026-06-08",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "hubspot-existing"
+  },
+  {
+    "id": "yuri-cralcev-siemens-energy-1",
+    "prospectName": "Yuri Cralcev",
+    "company": "Siemens Energy",
+    "to": "yuri.cralcev@siemens-energy.com",
+    "subject": "sample DIMM for Siemens Energy",
+    "body": "Hi Yuri,\n\nSaw you were selected for Siemens Energy's Talent Pool program. Someone running a $3.5M hardware budget with EUR 880K in annual savings knows how to find a cost lever.\n\nI'd like to send you a sample DIMM from our current batch. Samsung, Hynix, and Micron with manufacturer warranty, below OEM on DDR4 especially.\n\nSide note, we're already on your approved vendor list, so no new vendor onboarding if anything needs to move fast.\n\nDo you come into the office, or is there a better address to ship to?",
+    "sendDate": "2026-05-06",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "yuri-cralcev-siemens-energy-2",
+    "prospectName": "Yuri Cralcev",
+    "company": "Siemens Energy",
+    "to": "yuri.cralcev@siemens-energy.com",
+    "subject": "Re: sample DIMM for Siemens Energy",
+    "body": "Any thoughts?",
+    "sendDate": "2026-05-08",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "yuri-cralcev-siemens-energy-3",
+    "prospectName": "Yuri Cralcev",
+    "company": "Siemens Energy",
+    "to": "yuri.cralcev@siemens-energy.com",
+    "subject": "third party maintenance at Siemens Energy",
+    "body": "Yuri,\n\nWith $3.5M in hardware running through refresh cycles, your OEM maintenance spend is likely a big line item. We do third party maintenance on Cisco, Dell, HP, NetApp, Juniper, and Arista at 40 to 60 percent below OEM rates. Gartner-recognized, privately owned.\n\nQuick reminder we're already approved at Siemens Energy if timing matters.\n\nOpen to a benchmark on your current maintenance stack?",
+    "sendDate": "2026-05-14",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "yuri-cralcev-siemens-energy-4",
+    "prospectName": "Yuri Cralcev",
+    "company": "Siemens Energy",
+    "to": "yuri.cralcev@siemens-energy.com",
+    "subject": "pre-owned networking gear for Siemens Energy",
+    "body": "Yuri,\n\nIf refresh cycles at Siemens Energy include Cisco, Juniper, or Arista gear coming off support, we have tested pre-owned inventory available. Same specs, 50 to 70 percent below OEM pricing, ready to ship.\n\nOpen to a 10-minute call to see if there's fit?",
+    "sendDate": "2026-05-22",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "yuri-cralcev-siemens-energy-5",
+    "prospectName": "Yuri Cralcev",
+    "company": "Siemens Energy",
+    "to": "yuri.cralcev@siemens-energy.com",
+    "subject": "OSI transceivers for Siemens Energy",
+    "body": "Yuri,\n\nIf your infrastructure refresh includes any network hardware, I'd like to send you a couple of OSI transceivers to test in your environment. No commitment, no pitch. If they perform the way we say they do, the conversation takes care of itself.\n\nDo you come into the office, or is there a better address to ship to?",
+    "sendDate": "2026-06-01",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "yuri-cralcev-siemens-energy-6",
+    "prospectName": "Yuri Cralcev",
+    "company": "Siemens Energy",
+    "to": "yuri.cralcev@siemens-energy.com",
+    "subject": "closing the loop",
+    "body": "Should I close the file on this one, or is the timing just off?",
+    "sendDate": "2026-06-09",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "alain-caspersz-siemens-energy-1",
+    "prospectName": "Alain Caspersz",
+    "company": "Siemens Energy",
+    "to": "alain.caspersz@siemens-energy.com",
+    "subject": "sample DIMM for Siemens Energy",
+    "body": "Hi Alain,\n\nSaw you're heading IT Infrastructure and End User Solutions at Siemens Energy. That scope means you're the right person to talk to about what we're shipping.\n\nI'd like to send you a sample DIMM from our current batch. Same spec as what you're running, manufacturer warranty, won't touch your OEM support contract.\n\nSide note, we're already on your approved vendor list, so no new vendor onboarding if anything needs to move fast.\n\nDo you come into the office, or is there a better address to ship to?",
+    "sendDate": "2026-05-12",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "alain-caspersz-siemens-energy-2",
+    "prospectName": "Alain Caspersz",
+    "company": "Siemens Energy",
+    "to": "alain.caspersz@siemens-energy.com",
+    "subject": "Re: sample DIMM for Siemens Energy",
+    "body": "Any thoughts?",
+    "sendDate": "2026-05-14",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "alain-caspersz-siemens-energy-3",
+    "prospectName": "Alain Caspersz",
+    "company": "Siemens Energy",
+    "to": "alain.caspersz@siemens-energy.com",
+    "subject": "third party maintenance at Siemens Energy",
+    "body": "Alain,\n\nGlobal infrastructure refreshes mean multi-vendor maintenance contracts pile up fast. We do TPM on Cisco, Dell, HP, NetApp, Juniper, and Arista at 40 to 60 percent below OEM. Gartner-recognized, privately owned, no PE.\n\nQuick reminder we're already approved at Siemens Energy if timing matters.\n\nOpen to a 10-minute call?",
+    "sendDate": "2026-05-20",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "alain-caspersz-siemens-energy-4",
+    "prospectName": "Alain Caspersz",
+    "company": "Siemens Energy",
+    "to": "alain.caspersz@siemens-energy.com",
+    "subject": "pre-owned gear for Siemens Energy refresh",
+    "body": "Alain,\n\nIf any of your refresh cycles include Cisco, Juniper, or Arista gear coming off support, we have tested pre-owned inventory ready to ship. Same specs, 50 to 70 percent below OEM list pricing.\n\nOpen to a 10-minute call to see if there's fit?",
+    "sendDate": "2026-05-29",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "alain-caspersz-siemens-energy-5",
+    "prospectName": "Alain Caspersz",
+    "company": "Siemens Energy",
+    "to": "alain.caspersz@siemens-energy.com",
+    "subject": "Dell/HP servers for Siemens Energy",
+    "body": "Alain,\n\nIf server refresh is on the roadmap, we're an authorized Dell and HP partner. Same product, same warranty, with better lead times than going direct on large orders.\n\nOpen to a 10-minute call to see if server timing works?",
+    "sendDate": "2026-06-05",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "alain-caspersz-siemens-energy-6",
+    "prospectName": "Alain Caspersz",
+    "company": "Siemens Energy",
+    "to": "alain.caspersz@siemens-energy.com",
+    "subject": "closing the loop",
+    "body": "Should I close the file on this one, or is the timing just off?",
+    "sendDate": "2026-06-15",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "jamie-ross-siemens-energy-1",
+    "prospectName": "Jamie Ross",
+    "company": "Siemens Energy",
+    "to": "jamie.ross@siemens-energy.com",
+    "subject": "Siemens Energy ATOS contract",
+    "body": "Hi Jamie,\n\nCaught that you're in the middle of ramping down the Siemens AG ATOS MMSA contract and building a new Siemens Energy frame agreement. If third party maintenance is anywhere on the list of what you're re-evaluating, we cover Cisco, Dell, HP, NetApp, Juniper, and Arista at 40 to 60 percent below OEM rates. Gartner-recognized, privately owned.\n\nSide note, we're already on your approved vendor list, so no new vendor onboarding if anything needs to move fast.\n\nOpen to a 10-minute call this week?",
+    "sendDate": "2026-05-18",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "dominant-pattern"
+  },
+  {
+    "id": "jamie-ross-siemens-energy-2",
+    "prospectName": "Jamie Ross",
+    "company": "Siemens Energy",
+    "to": "jamie.ross@siemens-energy.com",
+    "subject": "Re: Siemens Energy ATOS contract",
+    "body": "Your finance background tells me you already know what OEM maintenance costs on gear that's 5 to 7 years old and running fine. The delta we see is usually 40 to 50 percent per year. Happy to run a model if you can share the rough contract value.",
+    "sendDate": "2026-05-20",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "dominant-pattern"
+  },
+  {
+    "id": "jamie-ross-siemens-energy-3",
+    "prospectName": "Jamie Ross",
+    "company": "Siemens Energy",
+    "to": "jamie.ross@siemens-energy.com",
+    "subject": "DIMMs for Siemens Energy infrastructure",
+    "body": "Jamie,\n\nIf server infrastructure is part of what you're rebuilding under the new frame agreement, we supply Samsung, Hynix, and Micron DIMMs with manufacturer warranties at below-OEM pricing. DDR4 especially if workloads don't need DDR5.\n\nOpen to a 10-minute call to see if compute is in scope?",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "dominant-pattern"
+  },
+  {
+    "id": "jamie-ross-siemens-energy-4",
+    "prospectName": "Jamie Ross",
+    "company": "Siemens Energy",
+    "to": "jamie.ross@siemens-energy.com",
+    "subject": "networking gear for Siemens Energy",
+    "body": "Jamie,\n\nIf the frame agreement rebuild includes Cisco, Juniper, or Arista gear, we have tested pre-owned inventory at 50 to 70 percent below OEM list. Same specs, ready to ship.\n\nQuick reminder we're already approved at Siemens Energy if timing matters.\n\nOpen to a 10-minute call?",
+    "sendDate": "2026-06-04",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "dominant-pattern"
+  },
+  {
+    "id": "jamie-ross-siemens-energy-5",
+    "prospectName": "Jamie Ross",
+    "company": "Siemens Energy",
+    "to": "jamie.ross@siemens-energy.com",
+    "subject": "OSI transceivers for Siemens Energy",
+    "body": "Jamie,\n\nOne more angle we haven't covered: if network infrastructure refresh includes any transceivers, I'd like to send you a couple of OSI transceivers to test. No commitment, no pitch. If they perform the way we say they do, the conversation takes care of itself.\n\nDo you come into the office, or is there a better address to ship to?",
+    "sendDate": "2026-06-11",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "dominant-pattern"
+  },
+  {
+    "id": "jamie-ross-siemens-energy-6",
+    "prospectName": "Jamie Ross",
+    "company": "Siemens Energy",
+    "to": "jamie.ross@siemens-energy.com",
+    "subject": "closing the loop",
+    "body": "Should I close the file on this one, or is the timing just off?",
+    "sendDate": "2026-06-22",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "dominant-pattern"
+  },
+  {
+    "id": "andre-cockerham-siemens-energy-1",
+    "prospectName": "Andre Cockerham",
+    "company": "Siemens Energy",
+    "to": "andre.cockerham@siemens-energy.com",
+    "subject": "OSI transceivers for Siemens Energy",
+    "body": "Hi Andre,\n\nYou've been running Siemens Energy's US network since before it was Siemens Energy. I'd like to send you a couple of OSI transceivers to test in your environment. No commitment, no pitch. If they perform the way we say they do, the conversation takes care of itself.\n\nSide note, we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast.\n\nDo you come into the office, or is there a better address to ship to?",
+    "sendDate": "2026-05-22",
+    "sendTime": "4pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "andre-cockerham-siemens-energy-2",
+    "prospectName": "Andre Cockerham",
+    "company": "Siemens Energy",
+    "to": "andre.cockerham@siemens-energy.com",
+    "subject": "Re: OSI transceivers for Siemens Energy",
+    "body": "Any thoughts?",
+    "sendDate": "2026-05-27",
+    "sendTime": "11am",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "andre-cockerham-siemens-energy-3",
+    "prospectName": "Andre Cockerham",
+    "company": "Siemens Energy",
+    "to": "andre.cockerham@siemens-energy.com",
+    "subject": "DIMMs for Siemens Energy",
+    "body": "Andre,\n\nSeparate from optics: if there are any server refreshes tied to the network infrastructure work, we have Samsung, Hynix, and Micron DIMMs with manufacturer warranties at below-OEM pricing. DDR4 especially is significantly cheaper than DDR5 for workloads that don't need it.\n\nDo you come into the office, or is there a better person to send a sample to?",
+    "sendDate": "2026-06-02",
+    "sendTime": "12pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "andre-cockerham-siemens-energy-4",
+    "prospectName": "Andre Cockerham",
+    "company": "Siemens Energy",
+    "to": "andre.cockerham@siemens-energy.com",
+    "subject": "third party maintenance for Siemens Energy",
+    "body": "Andre,\n\nNetwork infrastructure that's 5 to 7 years old and running fine doesn't need OEM support at OEM prices. We do third party maintenance on Cisco, Juniper, and Arista at 40 to 60 percent below OEM rates. Gartner-recognized, no PE.\n\nQuick reminder we're already approved at Siemens Energy if timing matters.\n\nOpen to a 10-minute call?",
+    "sendDate": "2026-06-10",
+    "sendTime": "1pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "andre-cockerham-siemens-energy-5",
+    "prospectName": "Andre Cockerham",
+    "company": "Siemens Energy",
+    "to": "andre.cockerham@siemens-energy.com",
+    "subject": "pre-owned networking gear for Siemens Energy",
+    "body": "Andre,\n\nIf any Cisco, Juniper, or Arista gear in the US network is coming off support, we have tested pre-owned inventory at 50 to 70 percent below OEM list. Same specs, ships fast.\n\nOpen to a 10-minute call to see if there's fit?",
+    "sendDate": "2026-06-17",
+    "sendTime": "2pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
+  },
+  {
+    "id": "andre-cockerham-siemens-energy-6",
+    "prospectName": "Andre Cockerham",
+    "company": "Siemens Energy",
+    "to": "andre.cockerham@siemens-energy.com",
+    "subject": "closing the loop",
+    "body": "Should I close the file on this one, or is the timing just off?",
+    "sendDate": "2026-06-26",
+    "sendTime": "3pm",
+    "status": "pending",
+    "addedDate": "2026-05-05",
+    "emailResolution": "verified-pattern"
   }
 ]

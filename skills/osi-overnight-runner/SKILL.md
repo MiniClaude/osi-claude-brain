@@ -90,7 +90,7 @@ The following are NOT valid reasons to exit Branch A early. Do not invent them, 
 - "First N candidates were all No / Conditional, the pattern will continue", keep going. The next pending may be the Yes.
 - "The next pending is a `hubspot_contact` source and is heavier", qualify it anyway, or skip ahead per the cadence rule below, but do NOT exit.
 
-If 3 yes-with-email haven't fired and there are pending candidates remaining, keep qualifying. Always. Why this rule exists: 2026-04-27 fire processed 3 candidates (1 No, 2 Conditional), exited at 0 of 3 yes-with-email citing token budget, leaving 94 pending. Token budget was a fabricated concern not present in the rule. This block prevents that recurrence.
+If 2 yes-with-email haven't fired and there are pending candidates remaining, keep qualifying. Always. Why this rule exists: 2026-04-27 fire processed 3 candidates (1 No, 2 Conditional), exited at 0 of (then-)3 yes-with-email citing token budget, leaving 94 pending. Token budget was a fabricated concern not present in the rule. This block prevents that recurrence. (Cap was 3 at the time of that incident; lowered to 2 on 2026-05-01. The rule itself, "don't exit early on token-budget excuses," is independent of the cap value.)
 
 ---
 

@@ -1,5 +1,24 @@
 # Andy's Second Brain  -  Master Instructions
 
+## 🚨 READ THE SKILL FIRST. EVERY TIME. NO EXCEPTIONS. (added 2026-05-05)
+
+When Andy's message mentions a skill by name OR triggers a skill workflow, the FIRST action is to read that skill's SKILL.md. Before any HubSpot call. Before any LinkedIn search. Before any ZoomInfo call. Before writing a single word of outreach.
+
+Trigger -> Skill to read FIRST:
+- "find prospects at [company]" / "find me people at" / "qualify" -> `C:\Claude-Brain\skills\osi-prospect-qualification\SKILL.md`
+- "run a sequence" / "outreach sequence" / "build a sequence" -> `C:\Claude-Brain\skills\osi-outreach-sequence\SKILL.md`
+- "re-engage" / "re-engagement" -> `C:\Claude-Brain\skills\osi-3email-reengagement\SKILL.md`
+- "3-email" / "short sequence" -> `C:\Claude-Brain\skills\osi-3email-new\SKILL.md`
+- "find cold connections" -> `C:\Claude-Brain\skills\osi-cold-reengagement\SKILL.md`
+- "run the monitor" / "sequence status" -> `C:\Claude-Brain\skills\osi-monitor\SKILL.md`
+- "send emails" / "email sender" -> `C:\Claude-Brain\skills\osi-email-sender\SKILL.md`
+
+If Andy says "read the [X] skill" in his message: read it IMMEDIATELY as the first tool call. Not after trying something. Not after asking a clarifying question. First.
+
+**Why this rule exists:** 2026-05-05 -- Andy's very first message said "find prospects at siemens energy... read the prospecting skill and outreach skill." Claude ignored the instruction, improvised the workflow wrong, and Andy had to send three angry messages before Claude read the skill. The skill had been there the whole time with the correct workflow written down.
+
+---
+
 ## 🚨 NO APPROVAL PROMPTS DURING SCHEDULED FIRES (added 2026-04-29)
 
 If any tool call triggers an approval prompt during a scheduled-task fire (overnight runner, processing recurring, monitor, email-sender, any cron-fired session), abort that step immediately. Apply the local stop-gate (mark candidate Conditional / `pending-relookup`, mark company skipped, etc.), log to `Claude-Brain/overnight-run-log.md` as a skill bug, continue with the next item or exit clean.

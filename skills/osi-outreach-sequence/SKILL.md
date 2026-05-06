@@ -15,29 +15,6 @@ description: >
 
 ---
 
-## 🛑 HARDWIRED RULE, RUN INLINE, NO AGENT-TOOL DISPATCHES
-
-This skill is invoked inline from the qualification skill's handoff. Read this SKILL.md into the same context, draft and queue the 6 emails there. The orchestrator must NOT dispatch an `Agent` subagent to run this skill on a scheduled fire, every dispatch spawns a fresh sandbox that re-prompts Andy for folder mount approval. See osi-overnight-runner SKILL.md for the longer explanation. **Why:** 2026-04-29 fire dispatched 8 subagents (qualification + outreach handoffs) and triggered mount prompts before Andy halted the run.
-
----
-
-## 🛑 HARDWIRED RULE, NO APPROVAL PROMPTS DURING SCHEDULED FIRES
-
-If any tool call triggers an approval prompt during a scheduled-task fire, abort the queue write. Do not proceed. Do not retry. Flip the candidate to `pending-relookup` in `state.candidates` so Andy can review interactively next session. Log to `Claude-Brain/overnight-run-log.md`. No partial queue write.
-
-What this means for personalization and hook research during scheduled fires:
-- Personalization hooks come from the strategy note (already written by qualification) plus ZoomInfo `enrich_scoops` / `enrich_news` / `account_research` (already-approved MCP). No `web_fetch` / `WebFetch` / `WebSearch` to arbitrary domains for fresher hooks.
-- ZI scoops can be stale. Use what is in the strategy note. The alternative (a prompt overnight) is not acceptable.
-- HubSpot reads/writes: allowed.
-- Outlook compose / sharepoint reads: allowed only if pre-approved at kickoff.
-- Anything that prompts: abort.
-
-Interactive sessions (Andy at keyboard) keep the broader research surface for personalization. The rule fires only when the session is launched by a scheduled task.
-
-**Why this rule exists:** 2026-04-29, Patti Paulo qualification subagent triggered an overnight permission prompt via web_fetch. Outreach-sequence has parallel surface (web research for fresh hooks) that could trigger the same. Inverted rule applied here too: any prompt = abort.
-
----
-
 ## 🛑 HARDWIRED RULE, NO EMPLOYER VERIFICATION, NO SEQUENCE
 
 This skill never queues a 6-email sequence on faith of a stale HubSpot record. It only runs when invoked via handoff from `osi-prospect-qualification` after a ✅ Yes-with-email verdict that was backed by Path A (full LinkedIn read) or Path B (ZoomInfo + corporate-domain email + dated web-search confirmation, with explicit `EMPLOYER VERIFICATION:` line in the strategy note).
@@ -62,8 +39,6 @@ If the strategy note is missing, employer verification is missing, or the verdic
 **This skill DOES NOT:**
 - Qualify. Verdict is `osi-prospect-qualification`'s job. This skill assumes qualification already produced ✅ Yes-with-email.
 - Discover candidates. That's `osi-discovery-sweep`.
-- Schedule scheduled tasks (Discovery Mega, Refill, etc.). That's `osi-overnight-runner`.
-- Pick the next candidate to process. That's `osi-overnight-runner`.
 - Run on multiple candidates at once. ONE per invocation.
 
 ---
@@ -122,19 +97,17 @@ After this skill runs on one qualified candidate:
 - Excel Tab 1 row appended (Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Date Added | Notes)
 - `state.stagger[company_name].last_day1` updated to Email 1 Day 1
 - `state.stagger[company_name].person_count` incremented
-- Candidate status in `state.candidates` updated to confirm sequence queued
 
 ---
 
 ## HANDOFF
 
-NONE. After 6 emails are queued and the LI task is updated, this skill exits. The orchestrator (`osi-overnight-runner`) is responsible for moving to the next pending candidate (up to 3 sequences per Processing Recurring fire).
+NONE. After 6 emails are queued and the LI task is updated, this skill exits. Control returns to the caller (typically `osi-prospect-qualification` inline flow).
 
 ---
 
 ## RELATED SKILLS
 
-- **`osi-overnight-runner`**, orchestrator. Invokes this skill via the qualification handoff in Processing fires.
 - **`osi-prospect-qualification`**, produces the strategy note + verdict that this skill consumes. Hands off here on ✅ Yes-with-email.
 - **`osi-discovery-sweep`**, produces the candidates that qualification eventually qualifies for this skill. Two skills upstream.
 - **`osi-email-sender`** (separate skill, not orchestrated by runner), fires every 11am-4pm ET weekdays, picks up `pending` entries from `email-queue.json` whose `sendDate <= today` and matching `sendTime`, sends via Outlook.
@@ -153,7 +126,7 @@ Before drafting anything, open `C:\Claude-Brain\email-queue.json`. Match by `to`
 
 **Behavior:**
 - Interactive (Andy at keyboard), ask Andy "Override?".
-- Recurring runner, skip silently, log, mark candidate `skipped-active-sequence`, continue. No emails queued for this candidate.
+- If running inline (not interactive), skip silently, log to `overnight-run-log.md`, and exit. No emails queued for this candidate.
 
 ---
 
@@ -217,7 +190,45 @@ Master `osi-email-sender` fires 11 AM-4 PM ET weekdays. Each window processes qu
 
 LinkedIn connection request task due Day 1 (skip weekends/holidays).
 
-### Step 4, Write 6 Emails
+### Step 4, Duplicate-contact check (MANDATORY before drafting)
+
+Before drafting anything, confirm the `hubspotContactId` in the handoff payload actually exists in HubSpot and is the UNIQUE record for this person:
+
+```
+search_crm_objects({
+  objectType: "contacts",
+  filterGroups: [{filters: [
+    {propertyName: "firstname", operator: "EQ", value: "<First>"},
+    {propertyName: "lastname",  operator: "EQ", value: "<Last>"}
+  ]}],
+  properties: ["firstname","lastname","email","company","hs_object_id"]
+})
+```
+
+- If exactly one result and it matches the handoff `hubspotContactId`: proceed.
+- If one result but the ID does NOT match the handoff: STOP-GATE. The qualification skill created a duplicate. Surface to Andy: `"Duplicate contact detected for <Name> at <Company>. HubSpot has contact <found ID> but handoff says <handoff ID>. Resolve before queuing."` Do not queue.
+- If zero results: the handoff contact ID is stale or mis-typed. STOP-GATE. Do not queue.
+- If multiple results: STOP-GATE. Surface all IDs to Andy for manual merge before queuing.
+
+### Step 5, Email-pattern verification (MANDATORY before drafting)
+
+Before drafting, verify the prospect's `to:` address against the company's verified email pattern. Algorithm: `knowledge/email-pattern-resolver.md`.
+
+The qualification skill should have populated an EMAIL RESOLUTION block in the contact's strategy note. Read that note. If it says:
+
+- `hubspot-existing` or `verified-pattern` → proceed.
+- `dominant-pattern` → proceed but include `"emailResolution": "dominant-pattern"` in each queue entry so the monitor's pre-flight section knows there's no engagement signal yet.
+- `manual-required` → STOP. Do NOT draft or queue. Return: `"Pattern signal too weak at <Company>. Andy must verify <email> before queueing."` Do not retry; do not auto-pick.
+
+If the strategy note has NO EMAIL RESOLUTION block (legacy contact, or qualification skipped this step), run the resolver inline now:
+1. Search HubSpot for all contacts at the same company.
+2. Bucket emails by pattern, score per `email-pattern-resolver.md`.
+3. If the prospect's `to:` matches the verified or dominant pattern, proceed.
+4. If it doesn't, STOP-GATE. Append entry to a separate `pattern-mismatch-flagged.json` file with the prospect's name, the queued address, the verified pattern, and a recommendation. Surface in pre-flight.
+
+Never draft or queue an entry whose `to:` pattern is `manual-required` OR mismatches a verified company pattern.
+
+### Step 6, Write 6 Emails
 
 **Source of truth for templates, rules, and bad examples:** `C:\Claude-Brain\playbook\drafting-rules.md` (already read in Step 0). The templates below are reference summaries. The full templates, the Bad Example anti-template (Christopher Lawrence breakdown), and the 6-item self-check live in that file.
 
@@ -286,38 +297,7 @@ Clean close, no ask. One sentence. Examples: *"Should I close the file on this o
 
 🚫 **Body must contain ONLY the one breakup sentence.** Same rule as Email 3. Standalone fresh-subject touch. No quoted thread.
 
-### Step 5, Present for review (Interactive only)
-
-If invoked interactively (Andy at keyboard, single profile pasted):
-- Show all 6 + send schedule.
-- End with: *"Look it over and say **ready** when you want to send."*
-- Stop. Wait for `ready`.
-
-### Step 6, Send + Schedule
-
-**Interactive on `ready`:** open `https://outlook.office.com` in Chrome. New mail → To, subject, body. Do NOT click Send. Tell Andy: *"Email 1 ready in Outlook. Click Send when good, then say **sent**."* On `sent`: confirm Sent Items, queue Emails 2-6.
-
-**Recurring runner:** append all 6 to `email-queue.json`. No Outlook step. The email-sender skill handles actual sending during 11am-4pm windows.
-
-### Step 6.5, Email-pattern verification (MANDATORY before queue write)
-
-Before any queue entries are appended, verify the prospect's `to:` address against the company's verified email pattern. Algorithm: `knowledge/email-pattern-resolver.md`.
-
-The qualification skill should have populated an EMAIL RESOLUTION block in the contact's strategy note. Read that note. If it says:
-
-- `hubspot-existing` or `verified-pattern` → proceed.
-- `dominant-pattern` → proceed but include `"emailResolution": "dominant-pattern"` in each queue entry so the monitor's pre-flight section knows there's no engagement signal yet.
-- `manual-required` → STOP. Do NOT append to queue. Return: `"Pattern signal too weak at <Company>. Andy must verify <email> before queueing."` Do not retry; do not auto-pick.
-
-If the strategy note has NO EMAIL RESOLUTION block (legacy contact, or qualification skipped this step), run the resolver inline now:
-1. Search HubSpot for all contacts at the same company.
-2. Bucket emails by pattern, score per `email-pattern-resolver.md`.
-3. If the prospect's `to:` matches the verified or dominant pattern, proceed.
-4. If it doesn't, STOP-GATE. Append entry to a separate `pattern-mismatch-flagged.json` file with the prospect's name, the queued address, the verified pattern, and a recommendation. Surface in pre-flight.
-
-Never queue an entry whose `to:` pattern is `manual-required` OR mismatches a verified company pattern.
-
-### Step 6.6, 6-ITEM SELF-CHECK (MANDATORY before sanitize and validator)
+### Step 7, 6-ITEM SELF-CHECK (MANDATORY before sanitize and validator)
 
 For every drafted email body, write out answers to these six questions in working context BEFORE calling sanitize and validator. The validator catches strings; this self-check catches semantics the validator can't see.
 
@@ -330,9 +310,9 @@ For every drafted email body, write out answers to these six questions in workin
 
 If any answer is wrong, REWRITE before passing to sanitize. Do not paper over with sanitize.
 
-If question 2 fails (no hook or thin hook), do NOT write Email 1. Flip the candidate to `pending-needs-hook` in `state.candidates` (atomic write per the rule above), log to `overnight-run-log.md`, and exit. Andy will pull a real hook manually next session. The skill does not write filler.
+If question 2 fails (no hook or thin hook), do NOT write Email 1. Log to `overnight-run-log.md` and exit. Andy will pull a real hook manually next session. The skill does not write filler.
 
-### Step 6.7, Sanitize bodies (MANDATORY before validator)
+### Step 8, Sanitize bodies (MANDATORY before validator)
 
 The queue is the source of truth for what gets sent. Every consumer (osi-email-sender, osi-monitor, future Andy edits) trusts the body field as-is. This step makes the body trustworthy. NEVER skip it.
 
@@ -434,7 +414,7 @@ If `sanitize_body` raises (em-dash or en-dash leaked through, or a body went emp
 
 The sender's defense-in-depth (Step 3B.4 mandatory pre-insertion strip) stays in place but is now redundant for properly-written entries. Belt and suspenders.
 
-### Step 6.8, Validator (MANDATORY before queue append)
+### Step 9, Validator (MANDATORY before queue append)
 
 After sanitize succeeds, run the hard-stop validator on every email in the sequence BEFORE any entry is written to the queue. Single import, one call per email.
 
@@ -473,14 +453,17 @@ Rules the validator enforces (codified mirror of drafting-rules.md):
 - 14 Word-count limit per email index
 
 If the validator raises:
-1. Atomic write candidate status to `pending-relookup` in `state.candidates`.
-2. Log timestamp + violation list to `Claude-Brain/overnight-run-log.md`.
-3. Do NOT write any partial queue entries. Do NOT proceed to Step 7.
-4. Exit cleanly.
+1. Log timestamp + violation list to `Claude-Brain/overnight-run-log.md`.
+2. Do NOT write any partial queue entries. Do NOT proceed to Step 10.
+3. Exit cleanly. Surface the violation to Andy if running interactively.
 
 The validator is also called by `osi-email-sender` at send time as belt-and-suspenders. So even if a queue entry was hand-edited and bypassed the write-time validator, the sender refuses to send it.
 
-### Step 7, email-queue.json entry format
+### Step 10, Write to queue
+
+Build 6 entries in memory, then append atomically. DO NOT display email bodies in chat. DO NOT ask Andy to say "ready." DO NOT open Outlook. The email-sender skill handles actual sending during 11am-4pm windows.
+
+#### Entry format
 
 Path: `C:\Claude-Brain\email-queue.json`
 
@@ -491,7 +474,7 @@ Path: `C:\Claude-Brain\email-queue.json`
   "company": "[Company]",
   "to": "[email]",
   "subject": "[subject, sanitized]",
-  "body": "[sanitized body. Email 1: full new-pitch. Email 2 (RE: subject): just the new reply text, sender's Reply flow attaches prior thread natively. Emails 3/4/5/6: ONLY the new pitch, NEVER any quoted thread. ALL bodies are em-dash and en-dash free per sanitize_body in Step 6.7.]",
+  "body": "[sanitized body. Email 1: full new-pitch. Email 2 (RE: subject): just the new reply text, sender's Reply flow attaches prior thread natively. Emails 3/4/5/6: ONLY the new pitch, NEVER any quoted thread. ALL bodies are em-dash and en-dash free per sanitize_body in Step 8.]",
   "sendDate": "YYYY-MM-DD",
   "sendTime": "[4pm/11am/12pm/1pm/2pm/3pm]",
   "status": "pending",
@@ -500,9 +483,9 @@ Path: `C:\Claude-Brain\email-queue.json`
 }
 ```
 
-`emailResolution` is required on every new entry. The monitor's pre-flight uses it to know which queue entries had strong vs weak signal at queue time.
+`emailResolution` is required on every entry. The monitor's pre-flight uses it to distinguish strong vs weak signal at queue time.
 
-#### Atomic queue write
+#### Atomic write
 
 ```python
 import json, os
@@ -515,21 +498,27 @@ with open(tmp, 'w') as f: json.dump(queue, f, indent=2)
 os.replace(tmp, QUEUE)
 ```
 
-Do NOT use the MCP Write tool for the queue. The sanitize step in 6.7 must have run on every entry in `new_entries` before this code runs.
+Do NOT use the MCP Write tool for the queue. Step 8 sanitize must have run on every entry in `new_entries` before this code runs. If the write fails, retry once, then log and exit. Do NOT proceed on a stale queue.
 
-### Step 8, Re-spread (sync per-email scheduled tasks if any)
+After the write succeeds, output exactly one confirmation line and nothing else:
 
-If there are per-email scheduled tasks for this prospect (older architecture used these, current architecture uses the email-sender skill to fire 11am-4pm windows directly), list them via `mcp__scheduled-tasks__list_scheduled_tasks` and update via `update_scheduled_task` to match new `sendDate + sendTime`. Re-list and diff at the end.
+`Queued: [First Last] | [Sequence type] | Day 1 [YYYY-MM-DD]`
 
-In the current architecture this is usually a no-op (the email-sender skill reads `email-queue.json` directly).
+Move immediately to the next candidate or exit. Displaying email bodies in chat burns tokens, causes context overflow on multi-candidate sweeps, and adds no value.
 
-### Step 9, Update LINKED_IN_CONNECT due_date
+### Step 11, Update LINKED_IN_CONNECT due_date
 
-Find the existing LINKED_IN_CONNECT task on the contact (qualification created it with provisional due_date). `manage_crm_objects` updateRequest, set `hs_timestamp` to Email 1 Day 1 (skip weekends/holidays).
+🚨 **HARDWIRED RULE: LINKED_IN_CONNECT task date = Email 1 sendDate. Always. No exceptions.**
+
+Whenever Email 1's sendDate is set or changed -- at initial queue write, at reschedule, at any other point -- the LINKED_IN_CONNECT task on the contact MUST be updated to match. These two values are never allowed to diverge.
+
+Find the LINKED_IN_CONNECT task on the contact. `manage_crm_objects` updateRequest, set `hs_timestamp` to Email 1 Day 1 (skip weekends/holidays).
 
 This synchronizes: LinkedIn invite due Day 1 + Email 1 fires Day 1 4pm + first call attempt Day 1 + voicemail Day 1 if no answer. All Day 1.
 
-### Step 10, Update stagger metadata + state
+**This step also applies to reschedules.** Any script or workflow that modifies Email 1's sendDate in the queue must also call this step to sync the HubSpot task. If the queue changes and the HubSpot task does not, the contact gets a connection request on the wrong day.
+
+### Step 12, Update stagger metadata + state
 
 Update `state.stagger[company_name]`:
 - `last_day1`: today's just-computed Day 1
@@ -537,15 +526,15 @@ Update `state.stagger[company_name]`:
 
 Atomic write.
 
-Update candidate status in `state.candidates` to confirm sequence queued. Optional flag like `outreach_queued_at: [timestamp]`.
+Update stagger metadata confirms the sequence is queued for this candidate. Log completion to `overnight-run-log.md`.
 
-### Step 11, Append Excel Tab 1
+### Step 13, Append Excel Tab 1
 
 `Claude-Brain/prospects-tracker-new.xlsx`, Tab 1.
 
 Columns: Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Date Added | Notes
 
-Tab 2 is the wrap-up phase (handled by `osi-overnight-runner` at run end), not per-prospect.
+Tab 2 is the wrap-up phase, not per-prospect. Andy updates Tab 2 manually at session end.
 
 ---
 
@@ -562,20 +551,10 @@ Every failure logs to `Claude-Brain/overnight-run-log.md` with timestamp + reaso
 
 ---
 
-## RULES
+## RULES (index, single source of truth is the step)
 
-- **Step 0 mandatory: read `C:\Claude-Brain\playbook\drafting-rules.md` in full before drafting anything.** Single source of truth for product lines, voice rules, branding rules, dead phrases, hook priority, and the Bad Example anti-template.
-- **Step 6.6 mandatory: 6-item self-check** before sanitize and validator. Catches semantics the validator can't see (hook quality, lead-with-pain, one product line).
-- **Step 6.8 mandatory: validator** (`C:\Claude-Brain\scripts\validate_email.py`) on every body and subject before queue append. ValueError on abort-level violation, no partial queue write.
-- Only invoked after `osi-prospect-qualification` returns ✅ Yes-with-email + verified employer.
-- One candidate per invocation. Never sweep.
-- 6 emails per qualified candidate. Never more, never fewer.
-- email-queue.json writes are always atomic (`.tmp` + `os.replace`).
-- LINKED_IN_CONNECT task `hs_timestamp` always synced to Email 1 Day 1.
-- Same-company stagger always read from `state.stagger`, never from email-queue scan.
-- Skip weekends + holidays for all dates (sendDate, LINKED_IN_CONNECT due, etc.).
-- No em-dashes, no en-dashes, no "Andy" sign-off, no banned vocab, no dead phrases, no SmartOptics in cold, no "we manufacture" claim, no credentials openers, one product line per email. Validator enforces. See drafting-rules.md.
-- Approved Vendor mention: only if `approved-vendors.json` matches. Never invent. Verbatim phrasing in drafting-rules.md Section 9.
-- Active Sequence Check is non-negotiable, always run first before drafting anything.
-- If anything in the input handoff is missing, refuse cleanly. Don't proceed on partial data.
-- If the Personal Hook is generic geography or thin, flip candidate to `pending-needs-hook` and exit. Never write filler.
+Quality gates in order: Step 0 (drafting-rules.md), Step 4 (duplicate-contact check), Step 5 (email-pattern check), Step 7 (6-item self-check), Step 9 (validator). None are skippable.
+
+Hard constraints: one candidate per invocation, 6 emails only, atomic queue writes (Step 10), LINKED_IN_CONNECT always synced to Email 1 sendDate (Step 11).
+
+If any of these change, update the step. This index is not the source of truth.

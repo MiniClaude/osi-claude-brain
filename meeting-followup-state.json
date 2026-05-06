@@ -1,22 +1,25 @@
 {
-  "last_run": "2026-05-01T14:05:00Z",
+  "last_run": "2026-05-05T14:09:00Z",
   "last_run_status": "ok",
-  "lookback_window_start": "2026-04-30T00:00:00Z",
-  "lookback_window_end": "2026-05-01T14:02:00Z",
-  "total_calls_in_window": 2,
-  "calls_processed": [
-    "109014716075"
-  ],
-  "calls_skipped_count": 1,
+  "lookback_window_start": "2026-05-04T00:00:00Z",
+  "lookback_window_end": "2026-05-05T14:09:00Z",
+  "total_calls_in_window": 8,
+  "calls_processed": [],
+  "calls_skipped_count": 8,
   "calls_skipped": [
-    {"call_id": "108969292079", "title": "Call with Gary Chaney", "reason": "no AI summary populated, no duration metadata; same skip as 2026-04-30 run"}
+    {"id": "109139337143", "name": "David Christian", "reason": "voicemail, 31s < 60s"},
+    {"id": "109139362448", "name": "Chris Vainrib", "reason": "voicemail, 37s < 60s"},
+    {"id": "109139390767", "name": "Ron Bauer", "reason": "IVR/forwarded to voicemail, missing <h5> markers, 9s < 60s"},
+    {"id": "109139327848", "name": "David Dahl", "reason": "voicemail, 39s < 60s"},
+    {"id": "109139272113", "name": "David Dahl", "reason": "automated IVR, missing Key notes marker, 11s < 60s"},
+    {"id": "109139352461", "name": "Steven Larson", "reason": "36s < 60s threshold"},
+    {"id": "109139266839", "name": "Shawn Hillard", "reason": "no AI summary, 27s < 60s"},
+    {"id": "109139262644", "name": "Steve Pragaspathy", "reason": "voicemail (person unavailable), 23s < 60s"}
   ],
   "tasks_created": [],
-  "tasks_updated": [
-    {"task_id": "108879161722", "contact_id": "209521302313", "contact": "Jeremy Fornasiero", "company": "Amundi", "due": "2026-05-04T12:00:00Z", "subject": "Email Jeremy Fornasiero, follow up on Amundi proposal review", "call_id": "109014716075", "note": "body was empty workflow placeholder -- enriched with auto draft + action items footer; subject renamed from generic 'follow up after meeting'; priority bumped NONE -> MEDIUM"}
-  ],
+  "tasks_updated": [],
   "tasks_left_alone": [],
   "warnings": [
-    "hs_internal_meeting_notes property still does not exist on calls; used hs_call_body again. Skill spec section Step 6 still references the wrong property name -- patch when convenient."
+    "hs_internal_meeting_notes property still does not exist on calls; use hs_call_body as workaround. Skill spec Step 6 still references the wrong property name -- patch when convenient."
   ]
 }

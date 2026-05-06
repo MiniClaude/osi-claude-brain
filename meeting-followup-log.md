@@ -76,6 +76,23 @@ Repackaged `osi-meeting-followup.skill`. Source-vs-package diff verified clean.
 - All voice-rules.md checks applied to drafts: no em-dashes, no word-internal hyphens (rack mounted, splice case, third party, follow up), no banned vocab, no -ing pile-ups at sentence ends, no rule of three, no "Andy" sign-off, 3-4 sentences each.
 - Step 1.5 hard gate (added 2026-04-29) worked as designed. Joel Emter, Bob Hancock, Daniel Windheim all had structured-CI summaries but failed duration check (< 60s). Pre-gate behavior would have drafted email follow-ups on those voicemails -- exactly the regression we patched out yesterday.
 
+## 2026-05-04 14:30 UTC run (osi-meeting-followup)
+- Window: 2026-05-02 00:00 UTC -> 2026-05-04 14:30 UTC (Mon run, lookback = Fri)
+- Calls returned by HubSpot search: 0
+- No meetings on Friday 2026-05-02. Exit clean.
+
+## 2026-05-05 14:09 UTC run (osi-meeting-followup)
+- Window: 2026-05-04 00:00 UTC -> 2026-05-05 14:09 UTC (previous business day -> now)
+- Calls returned by HubSpot search: 8
+- Step 1.5 Teams-meeting hard gate applied to all 8.
+
+### Processed (0)
+- No qualifying Teams meetings.
+
+### Skipped (8) -- gate breakdown
+- **Voicemails / dial attempts under 60s duration (8):** David Christian (31s, left voicemail), Chris Vainrib (37s, key notes confirm "voicemail message"), Ron Bauer (9s, forwarded to voicemail system, missing Key notes/Topics markers), David Dahl/109139327848 (39s, "left a message"), David Dahl/109139272113 (11s, automated IVR, missing Key notes marker), Steven Larson (36s, outbound reach-out description, 36s < 60s), Shawn Hillard (27s, no AI summary), Steve Pragaspathy (23s, "was unavailable to take the call").
+- All correctly gated per Step 1.5. No email tasks created.
+
 ## 2026-05-01 14:05 UTC run (osi-meeting-followup)
 - Window: 2026-04-30 00:00 UTC -> 2026-05-01 14:02 UTC (previous business day -> now)
 - Calls returned by HubSpot search: 2

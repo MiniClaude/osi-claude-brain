@@ -2,11 +2,11 @@
 name: osi-job-change-prospecting
 description: >
   Weekly LinkedIn Sales Navigator prospecting workflow with two phases. Phase A: finds
-  1st-degree connections who changed jobs or got promoted in the past week (or 3 months
-  for the initial run). Phase B: finds new 1st-degree connections made in the past week.
-  Both phases qualify against OSI ICP, check HubSpot company ownership, pull full contact
-  and company history before writing outreach, create 2 LinkedIn InMail tasks (2 weeks apart)
-  for qualified JAM-owned targets, and log everyone worth noting in the Excel tracker.
+  1st-degree connections who changed jobs or got promoted in the past week. Phase B: finds
+  new 1st-degree connections made in the past week. Both phases qualify against OSI ICP,
+  check HubSpot company ownership, pull full contact and company history before writing
+  outreach, create 2 LinkedIn InMail tasks (2 weeks apart) for qualified JAM-owned targets,
+  and log everyone worth noting in the Excel tracker.
   Trigger on: "run job change search", "check for new job changes", "weekly prospecting",
   "new connections", or when the scheduled Monday task fires.
 ---
@@ -20,27 +20,29 @@ Navigate here for job change prospecting. LinkedIn generates a new session autom
 even when the sessionId in the URL has expired.
 
 ```
-https://www.linkedin.com/sales/search/people?query=(recentSearchParam%3A(id%3A5452872586%2CdoLogHistory%3Atrue)%2Cfilters%3AList((type%3ARECENTLY_CHANGED_JOBS%2Cvalues%3AList((id%3ARPC%2Ctext%3AChanged%2520jobs%2CselectionType%3AINCLUDED)))%2C(type%3ARELATIONSHIP%2Cvalues%3AList((id%3AF%2Ctext%3A1st%2520degree%2520connections%2CselectionType%3AINCLUDED)))))
+https://www.linkedin.com/sales/search/people?query=(recentSearchParam%3A(id%3A5452872586%2CdoLogHistory%3Atrue)%2Cfilters%3AList((type%3ARECENTLY_CHANGED_JOBS%2Cvalues%3AList((id%3ARPW%2Ctext%3AChanged%2520jobs%2CselectionType%3AINCLUDED)))%2C(type%3ARELATIONSHIP%2Cvalues%3AList((id%3AF%2Ctext%3A1st%2520degree%2520connections%2CselectionType%3AINCLUDED)))))
 ```
 
-This filter shows: 1st-degree connections who changed jobs in the last 90 days.
+This filter shows: 1st-degree connections who changed jobs in the past week.
 
-**For the weekly run:** Focus on entries showing "less than 1 month ago" or
-"X weeks ago" that were not present in the previous week's run. Cross-reference
-the Excel tracker (Claude-Brain/job-change-tracker.xlsx) to avoid duplicates.
+**If this returns 0 or unexpectedly many results:** The `RPW` filter ID may have drifted.
+Go to Sales Nav manually, apply 1st degree + "Changed jobs" with the Past Week timeframe,
+save the search, and update the `recentSearchParam id` and filter value in this URL.
+For a one-time backfill (first ever run), replace `RPW` with `RPC` to get the last 90 days.
 
 ### Phase B: New Connections
 Navigate here for new connections from the past week.
 
 ```
-https://www.linkedin.com/sales/search/people?query=(recentSearchParam%3A(id%3ANEW_CONNECTIONS_SEARCH_ID%2CdoLogHistory%3Atrue)%2Cfilters%3AList((type%3ACONNECTION_DATE%2Cvalues%3AList((id%3APW%2Ctext%3APast%2520week%2CselectionType%3AINCLUDED)))%2C(type%3ARELATIONSHIP%2Cvalues%3AList((id%3AF%2Ctext%3A1st%2520degree%2520connections%2CselectionType%3AINCLUDED)))))
+https://www.linkedin.com/sales/search/people?query=(recentSearchParam%3A(id%3A5522322210%2CdoLogHistory%3Atrue)%2Cfilters%3AList((type%3ACONNECTION_DATE%2Cvalues%3AList((id%3APW%2Ctext%3APast%2520week%2CselectionType%3AINCLUDED)))%2C(type%3ARELATIONSHIP%2Cvalues%3AList((id%3AF%2Ctext%3A1st%2520degree%2520connections%2CselectionType%3AINCLUDED)))))
 ```
 
-**IMPORTANT:** Replace `NEW_CONNECTIONS_SEARCH_ID` with your actual saved search ID.
-To get it: run this filter manually in Sales Nav (1st degree + Connection date: Past week),
-save the search, then copy the `recentSearchParam id` from the URL and paste it here.
-
 This filter shows: 1st-degree connections added in the past week.
+Saved search ID `5522322210` confirmed 2026-05-04.
+
+**If this returns 1K+ results:** The saved search ID has expired or the filter is not
+applying correctly. Go to Sales Nav manually, apply 1st degree + Connection date: Past week,
+save the search, then update the `recentSearchParam id` in this URL with the new ID.
 
 ---
 
@@ -108,7 +110,7 @@ Use get_page_text first, it loads all cards at once. If that fails, use read_pag
 with depth 5 and look for the list of lead cards.
 
 For each person shown:
-1. Note name, title, company, change type (hired vs promoted), timeframe.
+1. Note name, title, company, change type (hired vs promoted).
 2. Quick ICP screen, Silent Skip (no log) if clearly not a buyer:
    - Project/program managers, sales reps, designers, recruiters, finance/legal/HR roles
    - Hyperscaler employees (Google, Meta, Amazon at scale)
