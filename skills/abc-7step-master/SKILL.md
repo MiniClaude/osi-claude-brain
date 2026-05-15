@@ -62,9 +62,9 @@ This skill drafts and queues 7 emails. No email means no sequence. If neither Br
 
 Before researching, writing emails, or touching HubSpot, open the queue:
 
-`C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json`
+`C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json`
 
-Use the OneDrive-safe pattern: try local `open(path, 'r')` first; on EINVAL fall back to the SharePoint MCP (`mcp__3d844455-*__sharepoint_search` for `email-queue.json`, then `read_resource`).
+Open the file directly with `open(path, 'r')`. The queue lives in the git repo — no fallback needed.
 
 Scan every entry for a match with this prospect:
 - `to` field equals the prospect's email (case-insensitive), OR
@@ -119,7 +119,7 @@ Associate to the company. If the company doesn't exist in HubSpot, create it fir
 
 ### Approved vendor check
 
-Read `OSI-Brain/approved-vendors.json` (OneDrive-safe pattern). Case-insensitive substring match on the prospect's company against `approved_vendor_companies`.
+Read `C:\Users\Mini\Documents\osi-claude-brain\automation\approved-vendors.json`. Case-insensitive substring match on the prospect's company against `approved_vendor_companies`.
 
 **If match:**
 - Email 1 includes ONE soft line acknowledging approved-vendor status. Examples: "Side note — we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast." Or: "For context, we're an approved vendor at [Company] already, so standing up a PO is painless if it comes to that."
@@ -462,7 +462,7 @@ Email 1 just fired live, so Day 1 is locked in as TODAY. If 9d wrote the task wi
 
 ### 11d. Write Emails 2-7 to the queue
 
-Open `C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json` using the OneDrive-safe Python pattern (try local `open(path, 'r')`, fall back to SharePoint MCP on EINVAL — see Queue Write Pattern below).
+Open `C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json` using `open(path, 'r')` — see Queue Write Pattern below).
 
 Build 6 new entries (Emails 2 through 7). Each entry:
 
@@ -496,20 +496,19 @@ Build 6 new entries (Emails 2 through 7). Each entry:
 
 **Dedup before append:** scan the existing queue for entries with the same `id`. If any match, do not append duplicates. This prevents accidental double-enrollment if the skill is re-run on the same prospect.
 
-### Queue Write Pattern (OneDrive-safe, no permission prompts)
+### Queue Write Pattern
 
 ```python
 import json, os
 
-QUEUE = r'C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json'
+QUEUE = r'C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json'
 
 # Read existing
 try:
     with open(QUEUE, 'r') as f:
         queue = json.load(f)
-except (OSError, ValueError):
-    # Cloud-only file — fall back to SharePoint MCP fetch, parse JSON string into `queue`
-    raise SystemExit("FALLBACK: use SharePoint MCP to fetch current queue, then continue")
+except (OSError, ValueError) as e:
+    raise SystemExit(f"ERROR: Cannot open queue at C:\\Users\\Mini\\Documents\\osi-claude-brain\\automation\\email-queue.json — {e}")
 
 new_entries = [ ... ]  # 6 entry dicts for Emails 2-7
 
@@ -546,7 +545,7 @@ Use the Write tool to save `[lastname]-[company]-sequence.md` to Brian's Email f
 
 ## Step 13 — Excel Tracker Update
 
-File: `C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\prospects-tracker-new.xlsx`
+File: `C:\Users\Mini\Documents\osi-claude-brain\automation\prospects-tracker-new.xlsx`
 
 ### Tab 1 — Prospects
 
@@ -562,7 +561,7 @@ Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Da
 
 One row per company per run. Status: Completed / Partial / Not Started. Skip Tab 2 for one-off interactive runs on a single prospect.
 
-OneDrive-safe Python: `openpyxl.load_workbook` on local path first; on EINVAL fetch bytes via SharePoint MCP, load with `load_workbook(BytesIO(bytes))`, edit, save to local path via `wb.save(QUEUE_PATH)`.
+Open with `openpyxl.load_workbook` on the local path directly, edit, save with `wb.save(path)`.
 
 ---
 
@@ -640,4 +639,3 @@ bc-7step-w-tracking gave us BCC tracking, weekend-skip, signature management, th
 bc-osi-outreach-sequence-v2 gave us the queue, self-healing cadence, same-company stagger, holiday avoidance, and the full Orum-ready call script package. Its weakness was the rigid handoff requirement — couldn't run on its own.
 
 abc-7step-master inherits all the strengths of both. It is the only skill Brian needs for new prospect outreach going forward.
-                                                                                                                                                                                                                                                                                                                                                                
