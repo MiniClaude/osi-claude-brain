@@ -206,15 +206,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "One more thought",
     "body": "Neal,\n\nOne thing I've noticed working with operations teams at manufacturing companies like yours-when equipment hits that 8-10 year mark, the support costs usually spike before they level off.\n\nNot trying to push anything on you. But if you're looking at hardware spend projections for next year, TPM could cut that line item in half. And no more waiting for OEM support on legacy equipment.\n\nWorth a conversation if you're in planning mode.\n\nBrian",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-26",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "neal-hickey-hexion-email-3",
     "originalFireAtUtc": "2026-05-11T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "neal-hickey-hexion-email-4",
@@ -222,15 +222,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Your peers are already doing this",
     "body": "Neal,\n\nI work with a lot of directors and managers at companies in the same space as Hexion. The ones who made the shift to TPM for their legacy equipment tell me the same thing-they wish they'd done it sooner.\n\nThe thing is, they didn't see it as a cost-saver at first. They just got tired of being on hold with OEM support.\n\nIf that sounds familiar, it's worth a 15-minute call.\n\nBrian",
-    "sendDate": "2026-05-12",
+    "sendDate": "2026-06-01",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "neal-hickey-hexion-email-4",
     "originalFireAtUtc": "2026-05-12T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "neal-hickey-hexion-email-5",
@@ -238,15 +238,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Last thought",
     "body": "Neal,\n\nI know you're probably juggling a lot right now. That's exactly why I wanted to reach out.\n\nWhen you get to that point where legacy equipment becomes a problem-whether that's next quarter or next year-give me a call. We can have a quick conversation about what TPM looks like for your operation, no strings attached.\n\nIf it doesn't make sense for you, that's totally fine. But I'd rather you know it's an option.\n\nBrian",
-    "sendDate": "2026-05-14",
+    "sendDate": "2026-06-05",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "neal-hickey-hexion-email-5",
     "originalFireAtUtc": "2026-05-14T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "neal-hickey-hexion-email-6",
@@ -254,15 +254,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Quick check-in",
     "body": "Neal,\n\nWanted to check in one more time. Have you had a chance to think about the hardware situation at Hexion?\n\nNo pressure at all if now isn't the right time. I just know that when you're ready to have that conversation, we can help.\n\nHere's my cell if you want to reach out: 805.682.9358\n\nBrian",
-    "sendDate": "2026-05-18",
+    "sendDate": "2026-06-11",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "neal-hickey-hexion-email-6",
     "originalFireAtUtc": "2026-05-18T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "neal-hickey-hexion-email-7",
@@ -284,15 +284,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Still here, no pressure",
     "body": "Sam,\n\nI've sent a couple of notes without a response. No hard feelings. I get it.\n\nWhat I hear pretty consistently from IT directors at distributed service companies is that maintenance is either already locked in or on the back burner until a contract renewal forces the conversation. Either one is fine.\n\nIf timing is off, just say the word and I'll leave you alone. If not, happy to find 15 minutes whenever it works.\n\nBrian",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-26",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "sam-bailey-trugreen-email-3",
     "originalFireAtUtc": "2026-05-11T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "sam-bailey-trugreen-email-4",
@@ -300,15 +300,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Re: Confirming address",
     "body": "I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.\n\nDo you come into the office? Is that the best address to send it to right now?\n\nBrian",
-    "sendDate": "2026-05-12",
+    "sendDate": "2026-06-01",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "sam-bailey-trugreen-email-4",
     "originalFireAtUtc": "2026-05-12T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "sam-bailey-trugreen-email-5",
@@ -316,15 +316,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "RE: 495 locations worth of SmartNet",
     "body": "Any thoughts?",
-    "sendDate": "2026-05-14",
+    "sendDate": "2026-06-05",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "sam-bailey-trugreen-email-5",
     "originalFireAtUtc": "2026-05-14T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": true,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "sam-bailey-trugreen-email-6",
@@ -332,15 +332,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Quick yes or no on Cisco EOL",
     "body": "Sam,\n\nQuick yes or no: are you running any Cisco gear across TruGreen's locations that's either end of life or coming off SmartNet in the next 12 months?\n\nIf yes, worth talking. If no, I'll get out of your inbox.\n\nBrian",
-    "sendDate": "2026-05-18",
+    "sendDate": "2026-06-11",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "sam-bailey-trugreen-email-6",
     "originalFireAtUtc": "2026-05-18T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "sam-bailey-trugreen-email-7",
@@ -362,15 +362,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Quiet networks",
     "body": "Vahan,\n\nI've noticed a pattern with infrastructure teams at utilities and large energy companies. They tend to operate on longer buying cycles, which means they're usually deep in evaluation phase for months before anything moves forward.\n\nIf that's where you're at with any network modernization, that's fine. If timing is off or you're not exploring refresh right now, just say the word and I'll stop bothering you.\n\nEither way, no hard feelings.\n\nBrian",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-26",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "vahan-sahagian-constellation-email-3",
     "originalFireAtUtc": "2026-05-11T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "vahan-sahagian-constellation-email-4",
@@ -378,15 +378,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Re: Confirming address",
     "body": "I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.\n\nDo you come into the office? Is that the best address to send it to right now?\n\nBrian",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-06-01",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "vahan-sahagian-constellation-email-4",
     "originalFireAtUtc": "2026-05-13T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "vahan-sahagian-constellation-email-6",
@@ -422,15 +422,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Just wanted to check",
     "body": "Michael,\n\nI know you're probably buried with a dozen things. Just wanted to check in and see if any of the ideas I've sent along have been on your radar at all.\n\nNo pressure either way. just want to know whether it makes sense to keep the conversation going.\n\nBrian",
-    "sendDate": "2026-05-12",
+    "sendDate": "2026-05-26",
     "sendTime": "1pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "michael-grosser-email-3",
     "originalFireAtUtc": "2026-05-12T17:00:00.000Z",
     "originalEt": "13:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "michael-grosser-email-4",
@@ -438,15 +438,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Re: Confirming address",
     "body": "Michael,\n\nOne last thing. if you're open to it, I'd like to send over a small package: a couple of SFP+ transceivers coded for your platform, plus some OSI swag. Not a sales thing, just want to put real hardware in your hands so you can see what we work with.\n\nLet me know if you want it. I just need a good mailing address.\n\nBrian",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-06-01",
     "sendTime": "1pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "michael-grosser-email-4",
     "originalFireAtUtc": "2026-05-13T17:00:00.000Z",
     "originalEt": "13:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "michael-grosser-email-5",
@@ -454,15 +454,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Re: Nuclear ops and network EOL. worth 15 min?",
     "body": "Any thoughts?\n\nBrian",
-    "sendDate": "2026-05-15",
+    "sendDate": "2026-06-05",
     "sendTime": "1pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "michael-grosser-email-5",
     "originalFireAtUtc": "2026-05-15T17:00:00.000Z",
     "originalEt": "13:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "michael-grosser-email-6",
@@ -472,11 +472,13 @@
     "body": "Michael,\n\nQuick question. is your team currently running any out-of-contract hardware that's sitting in production? I ask because a lot of the nuclear and utility teams we work with have gear that's technically \"end of life\" but still mission-critical. It's one of those things that's hard to justify ripping out if it's still working.\n\nWe've built the whole company around supporting exactly that scenario. Might be a fit, might not be. but figured I'd ask.\n\nBrian",
     "sendDate": "2026-05-19",
     "sendTime": "1pm",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "michael-grosser-email-6",
     "originalFireAtUtc": "2026-05-19T17:00:00.000Z",
     "originalEt": "13:00",
-    "isReply": false
+    "isReply": false,
+    "sentAt": "2026-05-19T13:26:39 PT",
+    "sentInWindow": "1pm"
   },
   {
     "id": "michael-grosser-email-7",
@@ -498,15 +500,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "You're probably in the middle of another build",
     "body": "James,\n\nYou're probably heads-down on another property or chasing a network issue somewhere in the stack. I'll keep this short.\n\nMost MDU-focused ISPs I work with were spending more than they needed to on Cisco gear and OEM support. That usually changes after one conversation about what they're actually spending per year.\n\nIf the timing is off, just say the word. Happy to revisit when it makes more sense.\n\nBrian",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-26",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "james-jakimowicz-synergy-fiber-email-3",
     "originalFireAtUtc": "2026-05-11T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "james-jakimowicz-synergy-fiber-email-4",
@@ -514,15 +516,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Re: Confirming address",
     "body": "I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.\n\nDo you come into the office? Is that the best address to send it to right now?\n\nBrian",
-    "sendDate": "2026-05-13",
+    "sendDate": "2026-06-01",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "james-jakimowicz-synergy-fiber-email-4",
     "originalFireAtUtc": "2026-05-13T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "james-jakimowicz-synergy-fiber-email-5",
@@ -530,15 +532,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "RE: The Texas A&M build",
     "body": "Any thoughts?",
-    "sendDate": "2026-05-15",
+    "sendDate": "2026-06-05",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "james-jakimowicz-synergy-fiber-email-5",
     "originalFireAtUtc": "2026-05-15T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": true,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "james-jakimowicz-synergy-fiber-email-6",
@@ -574,15 +576,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Bad timing or just not the right fit?",
     "body": "Hi Zain,\n\nI'll keep this short. One more check-in.\n\nI know senior network engineers at companies managing infrastructure at SS&C's scale aren't usually sitting around waiting for vendor emails. Totally get it.\n\nIf the timing is off, just say the word and I'll stop. If there's any part of your environment. EOL coverage, optics supply, hardware sourcing. where a second option is worth 15 minutes, I'm still here.\n\nNo pressure either way.\n\nBrian",
-    "sendDate": "2026-05-14",
+    "sendDate": "2026-05-26",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "zain-karmally-ssc-email-3",
     "originalFireAtUtc": "2026-05-14T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "zain-karmally-ssc-email-4",
@@ -590,15 +592,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Re: Confirming address",
     "body": "I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.\n\nDo you come into the office? Is that the best address to send it to right now?\n\nBrian",
-    "sendDate": "2026-05-18",
+    "sendDate": "2026-06-01",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "zain-karmally-ssc-email-4",
     "originalFireAtUtc": "2026-05-18T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "zain-karmally-ssc-email-6",
@@ -634,15 +636,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Following up",
     "body": "Jake-\n\nI've sent a couple of notes your way. If timing's off or it's just not a fit right now, totally get it-no offense taken.\n\nBut if you're wrestling with EOL gear, vendor costs, or just want to bounce ideas off someone who works with global manufacturing companies all day, that's exactly what we do. Easy conversation.\n\nLet me know.\n\nBrian",
-    "sendDate": "2026-05-14",
+    "sendDate": "2026-05-20",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "jake-rog-email-3",
     "originalFireAtUtc": "2026-05-14T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Clean resume \u2014 start 5/20"
   },
   {
     "id": "jake-rog-email-4",
@@ -650,15 +652,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Re: Confirming address",
     "body": "I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.\n\nDo you come into the office? Is that the best address to send it to right now?\n\nBrian",
-    "sendDate": "2026-05-18",
+    "sendDate": "2026-05-27",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "jake-rog-email-4",
     "originalFireAtUtc": "2026-05-18T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Clean resume \u2014 start 5/20"
   },
   {
     "id": "jake-rog-email-6",
@@ -694,15 +696,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "RE: Probably not the right week",
     "body": "Glenn,\n\nHeard nothing back, which is fine.\n\nPattern I see at companies going through major M&A: network teams get buried in integration planning for the first 90 days and outside vendors get ignored. That makes sense.\n\nIf timing is off, just say the word and I will back off. If a future quarter is better, tell me when.\n\nBrian",
-    "sendDate": "2026-05-14",
+    "sendDate": "2026-05-26",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "glenn-borowski-chart-industries-email-3",
     "originalFireAtUtc": "2026-05-14T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "glenn-borowski-chart-industries-email-4",
@@ -710,15 +712,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "RE: Re: Confirming address",
     "body": "I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.\n\nDo you come into the office? Is that the best address to send it to right now?\n\nBrian",
-    "sendDate": "2026-05-18",
+    "sendDate": "2026-06-01",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "glenn-borowski-chart-industries-email-4",
     "originalFireAtUtc": "2026-05-18T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "glenn-borowski-chart-industries-email-5",
@@ -768,15 +770,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "If timing's off, just say it",
     "body": "Abdi,\n\nSent you a couple notes. If timing's off or this isn't a fit, I get it. Just say so and I'll back off.\n\nReal reason I'm reaching out: most network teams your size refresh optics or transceivers every 18-24 months. When that happens, it's usually \"stick with OEM or switch.\" We're the third option a lot of architects prefer.\n\nIf that's interesting, I'm around. No pressure either way.",
-    "sendDate": "2026-05-14",
+    "sendDate": "2026-05-26",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "abdi-mohamed-emerson-email-3",
     "originalFireAtUtc": "2026-05-14T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "abdi-mohamed-emerson-email-4",
@@ -784,15 +786,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Re: Confirming address",
     "body": "I'm putting together a package for you. Swag and a pair of sample SFPs from the team here.\n\nDo you come in to the office? What's the best address to send it?\n\nBrian",
-    "sendDate": "2026-05-16",
+    "sendDate": "2026-06-01",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "abdi-mohamed-emerson-email-4",
     "originalFireAtUtc": "2026-05-16T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "abdi-mohamed-emerson-email-5",
@@ -842,15 +844,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "One quick follow-up",
     "body": "Kal,\n\nI know your inbox is slammed. I've sent a couple notes, and you may just not have had a chance to look at them yet. totally understand.\n\nIf timing's off or it's just not a fit right now, say the word and I'll drop it. But if there's any shot you're dealing with infrastructure refresh, EOL support, or optics costs later this year, I'm the guy to loop in early.\n\nBrian",
-    "sendDate": "2026-05-14",
+    "sendDate": "2026-05-26",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "kal-safah-ccm-email-3",
     "originalFireAtUtc": "2026-05-14T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "kal-safah-ccm-email-4",
@@ -858,15 +860,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Re: Confirming address",
     "body": "I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.\n\nDo you come into the office? Is that the best address to send it to right now?\n\nBrian",
-    "sendDate": "2026-05-18",
+    "sendDate": "2026-06-01",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "kal-safah-ccm-email-4",
     "originalFireAtUtc": "2026-05-18T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "kal-safah-ccm-email-6",
@@ -902,15 +904,15 @@
     "bcc": "",
     "subject": "Is this on your radar at all?",
     "body": "Adam,\n\nSent a couple of notes. no problem if timing is off.\n\nI work with a lot of infrastructure managers at large engineering firms, and the TPM conversation usually comes up when a contract renewal is approaching or when a merger brings inherited contracts to the surface. If neither of those is on your plate right now, I get it.\n\nIf you'd rather I come back later in the year, just say the word. If this isn't relevant at all, that works too.",
-    "sendDate": "2026-05-15",
+    "sendDate": "2026-05-26",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "adam-morris-gft-email-3",
     "originalFireAtUtc": "2026-05-15T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "adam-morris-gft-email-4",
@@ -918,15 +920,15 @@
     "bcc": "",
     "subject": "Re: Confirming address",
     "body": "I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.\n\nDo you come into the office? Is that the best address to send it to right now?",
-    "sendDate": "2026-05-17",
+    "sendDate": "2026-06-01",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "adam-morris-gft-email-4",
     "originalFireAtUtc": "2026-05-17T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "adam-morris-gft-email-5",
@@ -976,15 +978,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Your Cisco gear probably has years left in it",
     "body": "Robert,\n\nDifferent angle from my last note.\n\nWith a network that size coming together, there's gear at every stage of the lifecycle. some of it probably coming off OEM support in the next year or two. The options are usually renew at full price, refresh early, or find a third party.\n\nWe run Systain, a Gartner-recognized third party maintenance program. Multi-vendor, 24/7 coverage, roughly half of what OEM charges. Teams use it to extend the life of hardware that still works fine but is past the OEM window.\n\nIf any contracts are coming up, worth a look.\n\nBrian",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-26",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "robert-creel-astound-email-2",
     "originalFireAtUtc": "2026-05-11T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "robert-creel-astound-email-3",
@@ -992,15 +994,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "No pressure",
     "body": "Robert,\n\nTwo notes in, nothing back. I get it. people in your seat get a lot of these.\n\nI'm not going to pitch again. The companies that come back to us usually do it when a contract is about to expire or a build creates an optics gap they didn't plan for. With the GFiber integration still working toward a Q4 close, that second one seems likely at some point.\n\nIf the timing is just off, say the word and I'll clear out.\n\nBrian",
-    "sendDate": "2026-05-15",
+    "sendDate": "2026-06-01",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "robert-creel-astound-email-3",
     "originalFireAtUtc": "2026-05-15T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "robert-creel-astound-email-4",
@@ -1008,15 +1010,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Re: Confirming address",
     "body": "I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.\n\nDo you come into the office? Is that the best address to send it to right now?\n\nBrian",
-    "sendDate": "2026-05-18",
+    "sendDate": "2026-06-05",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "robert-creel-astound-email-4",
     "originalFireAtUtc": "2026-05-18T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "robert-creel-astound-email-5",
@@ -1038,13 +1040,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "One quick question",
     "body": "Robert,\n\nWhen your network team needs an optic in a hurry. unplanned outage, port swap, something the integration throws at you. is there already a secondary supplier in place or does it always go back to the OEM?\n\nIf yes, worth talking. If no, I'll stop.\n\nBrian",
-    "sendDate": "2026-05-25",
+    "sendDate": "2026-05-27",
     "sendTime": "12pm",
     "status": "pending",
     "sourceTask": "robert-creel-astound-email-6",
     "originalFireAtUtc": "2026-05-25T16:00:00.000Z",
     "originalEt": "12:00",
-    "isReply": false
+    "isReply": false,
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "robert-creel-astound-email-7",
@@ -1066,15 +1070,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "400G transceivers, same day",
     "body": "Matt,\n\nSent you a note last week about DWDM. Coming at this from a different direction.\n\nWe also supply transceivers from 1G to 400G, coded for Cisco, Juniper, Aruba, and about 40 other platforms. Same day ship on most. A lot of infrastructure teams keep a supply on hand for when OEM lead times or pricing make things complicated.\n\nIf any ZR or ZR+ coherent needs are tied to the new route, worth a quick look.\n\nBrian",
-    "sendDate": "2026-05-11",
+    "sendDate": "2026-05-26",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "matt-updenkelder-email-2",
     "originalFireAtUtc": "2026-05-11T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "matt-updenkelder-email-3",
@@ -1082,15 +1086,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "You are not obligated to respond",
     "body": "Matt,\n\nA few notes in and no reply. I get it.\n\nThe teams that tend to respond fastest are usually dealing with one of two things: a build where OEM lead times are creating problems, or a refresh where Ciena or Nokia pricing made someone in finance uncomfortable.\n\nIf neither is on your plate right now, just say the word and I will stop. If one hits close to home, 15 minutes is all I need.\n\nBrian",
-    "sendDate": "2026-05-15",
+    "sendDate": "2026-06-01",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "matt-updenkelder-email-3",
     "originalFireAtUtc": "2026-05-15T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "matt-updenkelder-email-4",
@@ -1098,15 +1102,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Re: Confirming address",
     "body": "I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.\n\nDo you come into the office? Is that the best address to send it to right now?\n\nBrian",
-    "sendDate": "2026-05-18",
+    "sendDate": "2026-06-05",
     "sendTime": "12pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "matt-updenkelder-email-4",
     "originalFireAtUtc": "2026-05-18T16:00:00.000Z",
     "originalEt": "12:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Dupe-protected resume \u2014 12 recipients got dupes today; started 5/26 after Memorial Day"
   },
   {
     "id": "matt-updenkelder-email-5",
@@ -1128,13 +1132,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "Yes or no",
     "body": "Matt,\n\nQuick yes or no: are you sourcing optics for the new East Coast route through Ciena or Nokia right now, or do you have flexibility on vendor for that build?\n\nIf yes, worth a conversation. If no, I will stop cluttering your inbox.\n\nBrian",
-    "sendDate": "2026-05-25",
+    "sendDate": "2026-05-27",
     "sendTime": "12pm",
     "status": "pending",
     "sourceTask": "matt-updenkelder-email-6",
     "originalFireAtUtc": "2026-05-25T16:00:00.000Z",
     "originalEt": "12:00",
-    "isReply": false
+    "isReply": false,
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "matt-updenkelder-email-7",
@@ -1156,15 +1162,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "RE: wave extension costs",
     "body": "Hey Darrell, wanted to bump this up. Any thoughts?",
-    "sendDate": "2026-05-18",
+    "sendDate": "2026-05-20",
     "sendTime": "11am",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "darrell-walker-zirrus-email-2",
     "originalFireAtUtc": "2026-05-18T15:00:00.000Z",
     "originalEt": "11:00",
     "isReply": true,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Clean resume \u2014 start 5/20"
   },
   {
     "id": "darrell-walker-zirrus-email-3",
@@ -1312,15 +1318,15 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "DWDM for SBG",
     "body": "Hi Jim,\n\nI have a sample kit from our SmartOptics line to send your team. Open line DWDM, 30 to 50% below Ciena and Nokia.\n\nWith SBG scaling Flight Fiber across multiple properties, the timing felt right. Do you come into the office, or is there a better address to ship it?",
-    "sendDate": "2026-05-18",
+    "sendDate": "2026-05-20",
     "sendTime": "4pm",
-    "status": "paused-overdue",
+    "status": "pending",
     "sourceTask": "jim-kronebusch-sbg-email-1",
     "originalFireAtUtc": "2026-05-18T20:00:00.000Z",
     "originalEt": "16:00",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Clean resume \u2014 start 5/20"
   },
   {
     "id": "jim-kronebusch-sbg-email-2",
@@ -1554,13 +1560,14 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "catching up, what's on your plate at Good Shepherd?",
     "body": "Hey Jeff,\n\nHope things are going well at Good Shepherd. We last connected back in November, wanted to circle back and see what's been happening on the network side over there since then.\n\nI'm not coming at you with a pitch, just genuinely curious what the organization is focused on right now. Refresh cycles, anything in the works on the infrastructure or connectivity side, capacity planning, whatever's keeping you busy.\n\nAny chance you'd have 20 minutes in the next couple weeks for a quick call? Happy to work around your schedule.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-18",
-    "sendTime": "9am",
-    "status": "paused-overdue",
+    "sendDate": "2026-05-20",
+    "sendTime": "11am",
+    "status": "pending",
     "addedDate": "2026-05-15",
     "isReply": false,
-    "pausedAt": "2026-05-19T16:30:00-07:00",
-    "pausedReason": "Overdue at master sender setup \u2014 review before resending"
+    "resumedAt": "2026-05-19T17:15:00-07:00",
+    "resumedReason": "Clean resume \u2014 start 5/20",
+    "originalSendTime": "9am"
   },
   {
     "id": "jeff-webb-gsrh-email-2",
@@ -1721,12 +1728,14 @@
     ],
     "subject": "Checking in without being that guy",
     "body": "Sean,\n\nOne more check-in before I leave you alone.\n\nHealthcare IT moves on its own schedule, I know that. If spending is locked or you're in the middle of something bigger, no worries.\n\nIf timing's off, just say the word. If not, I'm here.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-25",
-    "sendTime": "12:00",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
     "status": "pending",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "sean-firus-inspira-email-3"
+    "originalTaskId": "sean-firus-inspira-email-3",
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "sean-firus-inspira-email-4-migrated",
@@ -1801,12 +1810,14 @@
     ],
     "subject": "One more before I leave you alone",
     "body": "Ryan,\n\nReaching out one more time. I know your inbox probably isn't short on vendor outreach, especially with Epic prep picking up steam.\n\nI work with a lot of healthcare network teams that push the gear and support conversation until something breaks. Usually right when capacity to deal with it is lowest.\n\nIf the timing is off, just say the word and I'll stop. If there's a window, I'm easy to reach.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-25",
-    "sendTime": "12:00",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
     "status": "pending",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "ryan-meehl-inspira-health-email-3"
+    "originalTaskId": "ryan-meehl-inspira-health-email-3",
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "ryan-meehl-inspira-health-email-4-migrated",
@@ -1881,12 +1892,14 @@
     ],
     "subject": "If the timing is off, just say so",
     "body": "Gordon,\n\nNo response after a couple of notes. That is usually timing, a budget freeze, or just not a priority right now, and all of those are fine.\n\nWhat I see consistently at companies going through restructuring is that infrastructure support costs are one of the last budgets to get a real look. The contracts auto-renew, nobody flags them, and they keep running.\n\nIf that is not where you are, just say the word and I will get off your radar.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-25",
-    "sendTime": "12:00",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
     "status": "pending",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "gordon-greenland-jeldwen-email-3"
+    "originalTaskId": "gordon-greenland-jeldwen-email-3",
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "gordon-greenland-jeldwen-email-4-migrated",
@@ -1993,12 +2006,14 @@
     ],
     "subject": "I promise this is short",
     "body": "Kevin,\n\nStill here, just keeping it short.\n\nIf the timing is off, totally fine, just say the word and I'll get out of your inbox. But if there's something coming up on the network side, a refresh, a support contract, a fiber gap at one of your sites, I'd rather talk before it turns into a problem.\n\nWhat's your world looking like right now?\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-25",
-    "sendTime": "12:00",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
     "status": "pending",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "kevin-burns-jeldwen-email-3"
+    "originalTaskId": "kevin-burns-jeldwen-email-3",
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "kevin-burns-jeldwen-email-4-migrated",
@@ -2073,12 +2088,14 @@
     ],
     "subject": "The most patient vendor in Alabama",
     "body": "Mark,\n\nSent a couple notes and haven't heard back, which is fine. People running operations for a 4,200 mile network don't have a lot of open calendar space.\n\nThe pattern I see with most co-ops and rural broadband operators is that optics and maintenance costs don't become a priority until something breaks or a contract renewal shows up. If that's where things stand right now, I get it.\n\nIf the timing is just off, say the word and I'll check back in a few months. And if there's a better person on your team to talk to about this, I'm happy to reach out there instead.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-25",
-    "sendTime": "12:00",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
     "status": "pending",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "mark-carden-tombigbee-email-3"
+    "originalTaskId": "mark-carden-tombigbee-email-3",
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "mark-carden-tombigbee-email-4-migrated",
@@ -2153,12 +2170,14 @@
     ],
     "subject": "Timing off?",
     "body": "William,\n\nI know you're probably not sitting around waiting for vendor emails. No worries.\n\nMost network ops managers I talk to in your position are either heads down on a build or dealing with something that's actively on fire. Either way, fair.\n\nIf the timing is just off right now, tell me and I'll follow up in a few months. If optics or maintenance are on the radar at all, 15 minutes would be enough.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-25",
-    "sendTime": "12:00",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
     "status": "pending",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "william-graves-midsouthsynergy-email-3"
+    "originalTaskId": "william-graves-midsouthsynergy-email-3",
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "william-graves-midsouthsynergy-email-4-migrated",
@@ -2233,12 +2252,14 @@
     ],
     "subject": "Not going to keep filling your inbox",
     "body": "Tim,\n\nI know the inbox gets crowded, especially when you're in the middle of a buildout like the one Trailwave has going.\n\nIf the timing's off, just say the word and I'll check back in a few months. If you're open to it, I'm still happy to drop some eval SFPs in the mail and let the hardware do the talking.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-25",
-    "sendTime": "12:00",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
     "status": "pending",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "tim-rothkopf-hemc-email-3"
+    "originalTaskId": "tim-rothkopf-hemc-email-3",
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "tim-rothkopf-hemc-email-4-migrated",
@@ -2313,12 +2334,14 @@
     ],
     "subject": "Still here if timing is off",
     "body": "David,\n\nA couple of notes and no response usually means one of two things: either the timing is not right, or this just is not relevant for where you are right now.\n\nEither answer is fine. A lot of the infrastructure teams we talk to at municipal utilities are heads down on big projects and the inbox suffers for it.\n\nIf optics sourcing or third party maintenance is somewhere on your list, I am around. If not, just say the word and I will stop sending.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-25",
-    "sendTime": "12:00",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
     "status": "pending",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "david-hacker-btes-email-3"
+    "originalTaskId": "david-hacker-btes-email-3",
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "david-hacker-btes-email-4-migrated",
@@ -2393,12 +2416,14 @@
     ],
     "subject": "Not trying to be annoying, just persistent",
     "body": "Mitchell,\n\nI've sent a couple of notes and I know your inbox doesn't slow down. If the timing isn't right, just say the word and I'll leave you alone.\n\nWhat I typically see at networks your size is that optics spend and maintenance contracts fall below the radar until a renewal hits or a platform goes EOL and suddenly it's a fire drill. I'd rather get you the pricing now so you're not caught off guard.\n\nIf any of that lands, I'm easy to reach.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-25",
-    "sendTime": "12:00",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
     "status": "pending",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "mitchell-clouatre-ngn-email-3"
+    "originalTaskId": "mitchell-clouatre-ngn-email-3",
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "mitchell-clouatre-ngn-email-4-migrated",
@@ -2553,12 +2578,14 @@
     ],
     "subject": "Still here if timing changes",
     "body": "Mark,\n\nHaven't heard back so I'll keep it short. I know directors of operations at growing ISPs don't have a lot of spare time, especially mid-expansion.\n\nIf the timing just isn't right, say the word and I'll take you off my list. If optics supply or maintenance costs do come up, I'm easy to find.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-25",
-    "sendTime": "12:00",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
     "status": "pending",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "mark-hurley-zirrus-email-3"
+    "originalTaskId": "mark-hurley-zirrus-email-3",
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "mark-hurley-zirrus-email-4-migrated",
@@ -2633,12 +2660,14 @@
     ],
     "subject": "You're busy building fiber. I'll be brief.",
     "body": "Hi Mary,\n\nI know you've got a lot of builds happening at once. I've sent a couple of notes and haven't heard back, which is fine.\n\nMost OSP teams at companies growing as fast as Surf hit the same two friction points: optics availability when builds accelerate faster than OEM fulfillment, and field site power equipment that shows up late or runs out of stock at the wrong time.\n\nIf that's not where you are right now, just say the word and I'll leave you alone. If it is, I'm easy to reach.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-25",
-    "sendTime": "12:00",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
     "status": "pending",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "surf-mary-e3"
+    "originalTaskId": "surf-mary-e3",
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "surf-mary-e4-migrated",
@@ -3097,12 +3126,14 @@
     ],
     "subject": "checking in, Mark",
     "body": "Mark,\n\nJust checking back in. I know you're heads down on the build.\n\nQuick question, and you can shoot back a one liner: are you handling optical transport procurement in house, or is there a vendor already locked in for the Highline expansion?\n\nIf it's locked in, no problem at all. If it's still open, I'd like to stay on your radar.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
-    "sendDate": "2026-05-25",
-    "sendTime": "12:00",
+    "sendDate": "2026-05-27",
+    "sendTime": "12pm",
     "status": "pending",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "highline-davis-email3-may25"
+    "originalTaskId": "highline-davis-email3-may25",
+    "movedAt": "2026-05-19T17:25:00-07:00",
+    "movedReason": "Memorial Day skip \u2014 pushed 2 days past holiday"
   },
   {
     "id": "highline-davis-email4-may26-migrated",
