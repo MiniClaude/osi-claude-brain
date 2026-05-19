@@ -1,0 +1,12 @@
+[
+  {
+    "company": "T-Mobile",
+    "reason": "Not a target for Auto Mode (too large / strategic only)",
+    "dateAdded": "2026-05-15"
+  },
+  {
+    "company": "Panasonic",
+    "reason": "Not a target for Auto Mode (complex org / strategic only)",
+    "dateAdded": "2026-05-15"
+  }
+]

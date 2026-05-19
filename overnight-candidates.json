@@ -8076,8 +8076,122 @@
       "person_count": 5
     },
     "NFL": {
-      "last_day1": "2026-05-18",
+      "last_day1": "2026-08-04",
+      "person_count": 15
+    },
+    "Instinet": {
+      "last_day1": "2026-06-09",
+      "person_count": 6
+    },
+    "Blue Valley Tele-Communications": {
+      "last_day1": "2026-05-20",
       "person_count": 3
+    },
+    "Congruex": {
+      "last_day1": "2026-05-15",
+      "person_count": 2,
+      "updated": "2026-05-08",
+      "candidates": [
+        "David Bratton",
+        "Rob Reynolds"
+      ]
+    },
+    "Wilmington Trust": {
+      "last_day1": "2026-05-15",
+      "person_count": 2
+    },
+    "GM Financial": {
+      "last_day1": "2026-05-19",
+      "person_count": 4
+    },
+    "NEC Corporation of America": {
+      "last_day1": "2026-06-01",
+      "person_count": 4,
+      "note": "All 4 candidates pending-needs-hook. No sequences queued until hooks found."
+    },
+    "Black Box Network Services": {
+      "last_day1": "2026-06-22",
+      "person_count": 6
+    },
+    "JMA Wireless": {
+      "last_day1": "2026-05-19",
+      "person_count": 4
+    },
+    "Fifth Third Bank": {
+      "last_day1": "2026-05-19",
+      "person_count": 5
+    },
+    "MUFG": {
+      "last_day1": "2026-05-19",
+      "person_count": 3
+    },
+    "IntelePeer": {
+      "last_day1": "2026-05-19",
+      "person_count": 5
+    },
+    "Intercontinental Exchange": {
+      "last_day1": "2026-05-19",
+      "person_count": 5
+    },
+    "Pratt & Whitney": {
+      "last_day1": "2026-05-19",
+      "person_count": 4
+    },
+    "ABB Group": {
+      "last_day1": "2026-05-19",
+      "person_count": 4
+    },
+    "Bonneville Power Administration": {
+      "last_day1": "2026-05-19",
+      "person_count": 4
+    },
+    "Mechanics Bank": {
+      "last_day1": "2026-05-19",
+      "person_count": 3
+    },
+    "ISO New England": {
+      "last_day1": "2026-07-28",
+      "person_count": 10
+    },
+    "Nuveen": {
+      "last_day1": "2026-07-06",
+      "person_count": 6
+    },
+    "Live! Casino & Hotel": {
+      "last_day1": "2026-08-31",
+      "person_count": 6
+    },
+    "IDEX Corporation": {
+      "last_day1": "2026-09-22",
+      "person_count": 4
+    },
+    "UHG / Optum": {
+      "last_day1": "2026-10-08",
+      "person_count": 3
+    },
+    "Cellcom": {
+      "last_day1": "2026-05-23",
+      "person_count": 2
+    },
+    "L.A. Care Health Plan": {
+      "last_day1": "2026-05-18",
+      "person_count": 1
+    },
+    "Ole Communications": {
+      "last_day1": "2026-06-10",
+      "person_count": 2
+    },
+    "Gogo": {
+      "last_day1": "2026-05-29",
+      "person_count": 3
+    },
+    "JMARK": {
+      "last_day1": "2026-06-23",
+      "person_count": 2
+    },
+    "IT-CNP": {
+      "last_day1": "2026-07-06",
+      "person_count": 4
     }
   },
   "state": {
@@ -8089,7 +8203,109 @@
       "Vermont Telephone": {
         "last_day1": "2026-05-06",
         "person_count": 1
+      },
+      "The D.E. Shaw Group": {
+        "last_day1": "2026-05-20",
+        "person_count": 3
+      },
+      "The D. E. Shaw Group": {
+        "last_day1": "2026-07-16",
+        "person_count": 11
+      },
+      "Citco": {
+        "last_day1": "2026-05-28",
+        "person_count": 4
+      },
+      "Wilmington Trust": {
+        "last_day1": "2026-05-11",
+        "person_count": 1
+      },
+      "Black Box Network Services": {
+        "last_day1": "2026-05-21",
+        "person_count": 3
+      },
+      "ISO New England": {
+        "last_day1": "2026-06-10",
+        "person_count": 2
+      },
+      "Nuveen": {
+        "last_day1": "2026-06-10",
+        "person_count": 2
+      },
+      "Live! Casino & Hotel": {
+        "last_day1": "2026-06-04",
+        "person_count": 1
+      },
+      "IDEX Corporation": {
+        "last_day1": "2026-06-04",
+        "person_count": 1
+      },
+      "UnitedHealth Group": {
+        "last_day1": "2026-06-04",
+        "person_count": 1
+      },
+      "Huntington Bancshares": {
+        "last_day1": "2026-06-10",
+        "person_count": 2
+      },
+      "BCBS Association": {
+        "last_day1": "2026-06-04",
+        "person_count": 1
+      },
+      "General Atlantic": {
+        "last_day1": "2026-07-22",
+        "person_count": 4
+      },
+      "Computershare": {
+        "last_day1": "2026-08-10",
+        "person_count": 3
       }
     }
+  },
+  "epson": {
+    "last_day1": "2026-05-08",
+    "person_count": 1
+  },
+  "gm_financial": {
+    "last_day1": "2026-06-02",
+    "person_count": 5
+  },
+  "abb": {
+    "last_day1": "2026-05-14",
+    "person_count": 2
+  },
+  "pending_needs_hook": [],
+  "no_match_companies": [
+    {
+      "company": "Decisive Communications",
+      "hubspot_id": "9126200343",
+      "domain": "decisiveinc.com",
+      "reason": "Telecom contractor (fiber/OSP construction), not an operator. No IT/networking hardware buyer in org. Former VP Tech Eugene Harwood departed. Current local IT role is a hybrid coordinator. Company fails OSI ICP.",
+      "date_assessed": "2026-05-12"
+    }
+  ],
+  "IntelePeer": {
+    "last_day1": "2026-05-19",
+    "person_count": 5
+  },
+  "Intuit": {
+    "last_day1": "2026-07-13",
+    "person_count": 9
+  },
+  "Stony Brook Medicine": {
+    "last_day1": "2026-06-04",
+    "person_count": 13
+  },
+  "First Tech Federal Credit Union": {
+    "last_day1": "2026-06-30",
+    "person_count": 7
+  },
+  "General Atlantic": {
+    "last_day1": "2026-07-22",
+    "person_count": 4
+  },
+  "Computershare": {
+    "last_day1": "2026-08-10",
+    "person_count": 3
   }
 }

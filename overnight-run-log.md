@@ -1,4 +1,36 @@
 
+[2026-05-15 09:00 ET] osi-email-task-drafts-cmig — 86 tasks drafted. TASKS REVIEWED: 86. SKIPPED (sequence tasks): 0 (pre-filtered). DRAFTED (overwrote previous): 72. DRAFTED (fresh, no prior body): 14. THIN CONTEXT flagged: 9. NO CONTACT: 0. RETAINED WITHOUT OVERWRITE (batch 8 agent judgment): 4 tasks (109172310130, 107948177804, 108396069391, 107922206094 — no new engagement since 2026-05-13 run). All drafts written to HubSpot task bodies via 9 parallel subagents. Validator enforced on all.
+
+FLAGS FOR ANDY (2026-05-15):
+- Steve DeCubellis / Cigna (task 109179904918): DO NOT SEND to record email (bounced). Use steve.abernathy@cigna.com. Update contact record.
+- Lissan Zahid (task 103886232691): verify LinkedIn before sending — HubSpot shows Clifford Chance but email domain is hugoboss.com.
+- Julie Reiman / Charter (task 109139080050): prior draft (2026-05-13) was incorrectly written for Chris/Agnico Eagle. Now corrected.
+- Tien Boyd / UNCC (task 108279799423): May 14 call happened — draft updated to post-call follow-up requesting DIMM specs for HPC refresh quote.
+- Anand Ayyangar / PayPal (task 108936164991): task says "thank you after meeting" but no call/note for today's meeting found in HubSpot. Andy should add specifics from the actual meeting before sending.
+- Magdi Hanna / MedAire (task 106056759826): email flagged catch-all. Confirm deliverability before sending.
+- Leroy Javois / Datto-Kaseya (task 107562521251): thin context. Andy should review before sending.
+- Matthew Winter / Cencora (task 108171752753): thin context. Verify if referral came through before sending.
+- Prem Karunakaran / TECO (task 106024803604): contact has left TECO; only personal Gmail on file. Draft goes to personal address.
+- Matt Fish / Independence Blue Cross (task 103717544242): contact left Oct 2025, severance runs to Aug 2026. Draft is a check-in on where he landed.
+
+[2026-05-13 09:00 ET] osi-email-task-drafts-cmig — 71 tasks drafted. TASKS REVIEWED: 107. SKIPPED (sequence tasks, empty body "Send follow-up email"): 36. DRAFTED (overwrote previous auto-draft): 58. DRAFTED (fresh, no prior draft): 13. THIN CONTEXT flagged: ~10. NO CONTACT: 0. All 71 drafts written to HubSpot task bodies via 8 parallel subagents. Validator enforced on all.
+
+FLAGS FOR ANDY:
+- Magdi Hanna / MedAire (task 106056759826): email flagged catch-all by ZeroBounce. Confirm deliverability before sending.
+- Steve DeCubellis / Cigna (task 109179904918): email bounced. Correct address appears to be steve.abernathy@cigna.com. Update contact before sending.
+- Lissan Zahid (task 103886232691): HubSpot shows Clifford Chance but email domain is hugoboss.com — verify on LinkedIn before sending.
+- Saurabh Mehta / Willkie Farr (tasks 108719102238 + 108719186287): both point to same open items (hardware list + Luis intro). Treat as one send.
+- Amanda Sheibley / AOPC (task 109014275881): internal note says "ask Steve" before sending — loop in colleague Steve first.
+- Rigardt Graaff / Siemens Energy (task 104063275442): redirected Andy to Robert Cevette. Consider moving this task to Cevette.
+- Ambrose Wang / Foxsemicon (task 109224733581): replied 2026-05-12 asking for 256GB RAM quote. Needs actual quote as follow-on.
+- Brian Whitford / Lingo (task 109119700822): active reply chain, provided home shipping address. Package can ship immediately.
+
+[2026-05-12 09:00 ET] osi-email-task-drafts-cmig — 0 tasks due, no-op.
+
+[2026-05-09 09:00 ET] osi-email-task-drafts-cmig — 0 tasks due, no-op.
+
+[2026-05-06 09:00 ET] osi-email-task-drafts-cmig — 19 tasks drafted. DRAFTED (fresh): 11. DRAFTED (overwrote previous): 8. SKIPPED (sequence tasks): 36. THIN CONTEXT (flagged): 1 (Danilo Murbach / WiLine, task 108019839846). All drafts written to HubSpot task bodies.
+
 [2026-05-04 ~09:30 ET] osi-overnight-runner-recurring-cmig — PROCESSING branch, cap 2/2.
 
 SEQUENCES QUEUED (2):
@@ -1982,3 +2014,228 @@ All violations are on already-sent entries (informational). Fix needed in osi-ou
 
 ## 2026-05-05 15:42 - Excel append skipped
 Sam Coleman / Vermont Telephone: prospects-tracker-new.xlsx locked (PermissionError). Queue written successfully. Add row manually: Sam Coleman | Network Engineer | Vermont Telephone | https://www.linkedin.com/in/scolemanvt/ | Network (optics + DWDM) | 2026-05-05 | Email flag: vermonttel.com vs vermontel.com
+
+---
+## 2026-05-08 BVT Company Mode — Blue Valley Tele-Communications
+
+**Session type:** Interactive (Andy blanket "go" approval)
+**Company:** Blue Valley Tele-Communications
+**Candidates qualified:** 3 Yes verdicts
+
+### Sequenced
+| Contact | Title | Sequence | Day 1 | Email |
+|---------|-------|----------|-------|-------|
+| Kent Kuckelman | NOC Supervisor | Sample-Offer Network | 2026-05-08 | kentk@bluevalley.net (hubspot-existing) |
+| Karron Swift | IT Manager | Sample-Offer Network | 2026-05-14 | kswift@bluevalley.net (dominant-pattern) |
+| Gary Sparling | Director IT | Pain-Led TPM | 2026-05-20 | gsparling@bluevalley.net (dominant-pattern) |
+
+### Notes
+- Kent and Gary: no LinkedIn profiles found. Used BVT WiFi rollout in Home KS (April 2026) as fresh hook (network expansion announcement).
+- Karron: LinkedIn Path A confirmed IT Manager, VMware across 7 entities as personal hook.
+- ZoomInfo rate limited during session; Karron and Gary emails derived from verified BVT pattern (first initial + last name @bluevalley.net, verified by kentk@ and mspence@).
+- Greg Boss (VP): Conditional — no LinkedIn, ZoomInfo rate limited, team page 403. Pending ZoomInfo re-enrich to verify employer and get email.
+- 18 emails queued (6 per contact), all passed validator.
+- LINKED_IN_CONNECT tasks created for all 3 contacts.
+
+### Next: Congruex Company Mode
+
+---
+## 2026-05-08 — Congruex Company Mode Qualification (Interactive Session)
+
+**Company:** Congruex Group LLC (linkedin.com/company/congruexgroup/)
+**Session type:** Interactive (Andy approved Company Mode at session start)
+**Candidates processed:** 10 total (8 NO, 2 YES)
+
+### Disqualified Candidates
+- **Amit Garg** (HubSpot "Assoc Dir IT") — LinkedIn confirmed Director of IT, Congruex Asia-Pacific (Chandigarh, India). Not US corporate. Disqualified.
+- **Darin Johnson** (VP Procurement) — Procurement scope is construction materials (telecom construction roll-up), not IT hardware. Also showing concurrent VP Operations at HHS Construction. Disqualified.
+- **Jesse Starkey** (Dir Program Management) — Program/project management function, not hardware procurement. Disqualified.
+- **Various construction/field ops roles** — Congruex is 2,260-person telecom construction company; majority are field engineers, PMs, construction supervisors. Not hardware buyers.
+
+### YES Candidates
+1. **David Bratton** | VP Security and Networking | Congruex Group LLC
+   - HubSpot ID: 566848 | Email: david@congruex.com (hubspot-existing)
+   - LinkedIn: linkedin.com/in/dbratto/ | 1st degree (connected 2022)
+   - Employer verification: Path A confirmed
+   - Sequence: Sample-Offer Network | Day 1: 2026-05-11
+   - Hook: 3mo ago reposted content on risk conversations turning into cost debates
+   - Fresh hook: Congruex acquired Ohio Valley Excavating 2026
+   - Strategy note written: HubSpot note 109353125741
+   - LI task created: 109336237439 (due 2026-05-11)
+   - Emails queued: david-bratton-congruex-1 through -6
+
+2. **Rob Reynolds** | CIO and Emerging Technologies | Congruex
+   - HubSpot ID: 568710 | Email: rob@congruex.com (hubspot-existing)
+   - LinkedIn: linkedin.com/in/reynoldsrob/ | 1st degree
+   - Employer verification: Path A confirmed (title updated from "President & Head Engineer" to "CIO & Emerging Technologies")
+   - Sequence: Pain-Led TPM | Day 1: 2026-05-15
+   - Hook: 7mo ago published "AI, Meet Cybersecurity, Your New Best Frenemy"
+   - Fresh hook: Congruex acquired Ohio Valley Excavating 2026
+   - Strategy note written: HubSpot note 109321640234
+   - LI task created: 109335458443 (due 2026-05-15)
+   - Emails queued: rob-reynolds-congruex-1 through -6
+
+### Stagger
+- Congruex last_day1: 2026-05-15 | person_count: 2
+
+### Notes
+- ZoomInfo rate-limited for entire session; all enrichment done via LinkedIn + web search
+- Congruex LinkedIn slug is congruexgroup (not congruex)
+- Both YES candidates are already 1st degree connections; LINKED_IN_CONNECT tasks repurposed as Day 1 reminder to check LinkedIn activity before E1 fires
+- HubSpot title for Rob Reynolds was stale ("President & Head Engineer"); updated context to reflect current title (CIO & Emerging Technologies)
+
+---
+## osi-email-task-drafts-cmig — 2026-05-11
+
+**Run time:** 2026-05-11 (scheduled 9 AM ET fire)
+**Tasks reviewed:** 93
+**Sequence tasks skipped:** 36 (subject="Send follow-up email", empty body)
+**Draft tasks processed:** 57
+**Drafted (fresh/overwrote):** 57
+**Errors:** 0
+
+### Thin-context flags (low history — review before sending)
+- Danilo Murbach / WiLine (108019839846) — zero engagement history
+- Bob Zook / Charter (109138978958, 109138979469) — new contact, no prior engagement
+- Michelle Hawkins / Charter (109138934677, 109135842612) — new contact, no prior engagement
+- Jarrod McDaniel / Charter (109135856776, 109138901545) — minimal engagement, connection request context only
+
+### Deliverability flags
+- Steve DeCubellis / Cigna-Evernorth (109179904918) — email bounced; check alternate steve.abernathy@cigna.com
+- Magdi Hanna / MedAire (106056759826) — ZeroBounce flagged address as catch-all; verify before sending
+
+### Departed contacts (verify current employer before sending)
+- Premchandran Karunakaran / ex-TECO (106024803604) — no longer at TECO; only Gmail on file
+- Matt Fish / ex-IBX (103717544242) — left Oct 31 2025; took severance; check LinkedIn for current role
+
+**Status:** COMPLETE — all 57 drafts written to HubSpot task bodies.
+
+---
+osi-email-task-drafts-cmig at 2026-05-11 09:00 ET
+Tasks reviewed: 80 | Sequence skipped: 36 | Drafted (overwrote previous): 44 | No-contact: 0 | Thin context flagged: 6 | Departed contacts: 3
+STATUS: COMPLETE -- all drafts written to HubSpot. Andy reviews in HubSpot before sending.
+THIN CONTEXT / REVIEW BEFORE SENDING:
+  - 108019839846 Danilo Murbach (WiLine) -- confirm Leonardo intro was made before sending
+  - 103464589218 Matt McWilliams (CTDI) -- 6 outreach attempts, zero replies ever; consider archiving
+  - 103499641965 Kaushik Reddy (formerly Granite) -- no confirmed new employer; neutral check-in only
+  - 109135885569 Julie Reiman (Charter) -- 17+ months cold, no reply ever
+  - 109138978958 Bob Zook (Charter) -- new contact, zero prior engagement
+  - 106056759826 Magdi Hanna (MedAire) -- catch-all email flag; verify deliverability
+DEPARTED CONTACTS (confirm current location before sending):
+  - 106024803604 Premchandran Karunakaran -- left TECO July 2025; draft goes to personal Gmail
+  - 103717544242 Matt Fish -- left IBX Oct 2025; draft is a "where did you land" check-in
+
+
+## Monitor Run -- 2026-05-11 2:20 PM ET
+
+### CRITICAL: Email sender not processing queue since ~May 7
+- 81 entries overdue (due May 7-9, still pending)
+- 10 today 11am entries still pending at 2:20pm ET (all stranded E2s)
+- `osi-email-sender-v2-cmig` IS enabled and fired today at 18:04Z but 0 entries updated to sent
+- Root cause unknown -- Andy must investigate before 4pm fire
+
+### Stranded sequences: 22
+All E1 entries due 2026-05-07 or 2026-05-08 never sent. Today's 11am E2 entries are RE: subject lines that would land out-of-thread. Do NOT send E2s without fixing E1 first.
+
+### Paused on reply (from Apr 30, pending Andy decision)
+- Charles Kelley | Patrick Industries | 5 entries
+- John Calder | S&P Global | 5 entries
+
+### Bounces
+No new bounces in last 48 hours. One old bounce Apr 30 (ilyak@princeton.edu / Princeton) -- outside 48h window, no action taken.
+
+### Weekly validator audit (Monday)
+30 violations in last 7 days of sent entries. Top issues: SmartOptics named in cold body, Surgical Isolation (multiple product lines per email), dead phrases, word limit, quote-leak in E3+ body.
+
+---
+## OSI Sequence Monitor -- Tuesday, 2026-05-12 -- 2:20 PM ET
+
+**Run:** osi-sequence-monitor-v2-cmig (scheduled 2:15 PM ET)
+
+### Findings
+
+**Sequences in flight:** 186 prospects, 887 pending entries, 108 paused entries.
+
+**Bounces (last 48h):** 1 routing-loop delivery failure from Postmaster@desjardins.com for etienne.trudel@desjardins.com -- subject "Cisco support renewal". NOT an OSI outreach email. Etienne Trudel is already paused-validator. No auto-cancel taken.
+
+**Paused on reply (existing since Apr 30, awaiting Andy decision):**
+- Charles Kelley | Patrick Industries | paused-reply-2026-04-30 | 5 entries remaining
+- John Calder | S&P Global | paused-reply-2026-04-30 | 5 entries remaining
+
+**Paused (older, no-reply reason):**
+- Hunter Communications: 10 prospects (Cooper Harless, David Hortsch, Jason Robinson, Jeremy Keeney, Joseph Vandecoevering, Josh Harless, Kasandra Dunn, Robert Nance, Ryan Gasik, Scott Albert)
+- OEC Fiber: 3 prospects (David Godspeed, Joe Torres, Michael Thomas)
+- Brian Whitford | Lingo Communications
+
+**CRITICAL -- Email sender dormancy gap:** 91 pending entries have sendDates of 2026-05-07 or 2026-05-08 and have never been sent. The osi-email-sender-v2-cmig task shows lastRunAt of 2026-05-12 only, suggesting the sender was dormant from approx. Apr 29 to May 12 (~2 weeks). These emails are stuck pending. Andy must decide: reschedule dates forward or cancel.
+
+**Today's sends:**
+- Leo Pang | D.E. Shaw | "Re: sample optics - D.E. Shaw" | 11:00 AM -- still pending at 2:20 PM (OVERDUE, email sender may have missed the 11 AM window)
+- Alain Caspersz | Siemens Energy | "sample DIMM for Siemens Energy" | 4 PM
+- Douglas Neu | NFL | "DIMM sample for NFL" | 4 PM
+
+**Stranded sequences:** None detected.
+
+**No auto-writes taken this run** (no confirmed hard bounces, no new non-OOO replies detected in inbox).
+
+osi-email-task-drafts-cmig at 2026-05-14 17:18 ET -- 0 tasks due, no-op.
+
+---
+## OSI Sequence Monitor -- Thursday, 2026-05-14 -- 2:15 PM ET
+
+**Run:** osi-sequence-monitor-v2-cmig (scheduled 2:15 PM ET)
+
+### Sequences in flight
+1,227 pending queue entries across a large prospect set.
+Active scheduled tasks: osi-email-sender-v2-cmig (enabled), osi-meeting-followup-cmig (enabled). No individual email-N scheduled tasks in Cowork (all sends are queue-driven).
+
+### CRITICAL: Email sender failure -- May 13 (Tuesday)
+All 56 May 13 queue entries are still pending. May 12 had 21 entries sent successfully. May 13 the sender appears to have not run or failed silently. Today's 11 AM entries (Alain Caspersz/Siemens Energy E2, Douglas Neu/NFL E2) are also still pending at time of monitor run.
+
+### Bounces (last 48h)
+None. Outlook search found no new mailer-daemon/postmaster/undeliverable messages since May 12. Old Princeton bounce (Apr 30, ilyak@princeton.edu) already outside window.
+
+### Paused on reply (awaiting Andy decision since Apr 30)
+- Charles Kelley | Patrick Industries | paused-reply-2026-04-30 | 5 entries
+- John Calder | S&P Global | paused-reply-2026-04-30 | 5 entries
+
+### Stranded sequences
+- Ming Ikehara | NEC Corporation of America | E1 due 2026-05-13 | 5 later emails blocked
+- Kevin Parsons | Black Box Network Services | E1 due 2026-05-13 | 5 later emails blocked
+
+### Overdue entries (sendDate = 2026-05-13, all still pending)
+56 total. Key names: Lance Weaver, Joe Zarcone, Jim Weinheimer, Eric Aitken, Dimitar Petrovski (Rackspace); Roweenza Atangan, Eric Dessureault (Bell Canada); Andrew Schnese, Thomas Danz, Dan Bradford (Nsight); Marcus Ramirez, Jeff Dear (GVTC); Ron Holt (Dark Fiber); Gregory Henry, Joshua Young, Justin Pastore, Stephen Wonderling (Armstrong); John Sasser (Sabey); Amre Hamouda (Spectrotel); Vito Ciminello (Astound); Juan Pardo, Chris Clinton (VTX1); Brad Arthur, Sarah Frisbie (Altafiber); Dave Tofts (EastLink); Michael Soileau (LFT Fiber); Clarence Black (Plateau); LuAnn Argenta (Bausch); Ben Wexler (KeyBank); Bryan Ackerman (BNY Mellon); Christopher Lawrence (BNY Mellon); Lamar Horton (Grande); Christian Henn (Thor Industries); Andrew Hinegardner, Jacob Britt, Tom Morgan (Consumer Cellular); John Novak (Bergen New Bridge Medical); Kenneth Dutton, Derek Fogle (Axcent); Patrick O'Donnell (SBA Communications); Tim Liford (DFA Milk); Joe Kennedy (TNS); Meraz Nasir (Atlantic Health); Deonarine Rajkumar (Global Cloud Xchange); Samuel Price (360 Broadband); Joel Emter (Consolidated Telcom); Chadd Giles (Resound); Bob Hancock (Momentum); Atta Meer (Baxter); Christophe Desmars (WSP); Ryan Boyle, Sonny Baillargeon (Cantor Fitzgerald); David Bratton (Congruex); John Lachance (Lingo); Colin Vesper (Visionary); John Lubeck (Midcontinent); Ming Ikehara (NEC E1), Kevin Parsons (Black Box E1).
+
+### Today's sends (2pm window, still pending)
+20 prospects at 2pm: Lance Weaver, Joe Zarcone, Roweenza Atangan, Andrew Schnese, Marcus Ramirez, Ron Holt, Jeff Dear, Eric Dessureault, Gregory Henry, John Sasser, Amre Hamouda, Vito Ciminello, Juan Pardo, Pete Johnson, Dave Tofts, Michael Soileau, Clarence Black, LuAnn Argenta, Ben Wexler, Bryan Ackerman (all Email 5).
+2 at 11am (OVERDUE -- missed send window): Alain Caspersz (Siemens Energy, E2), Douglas Neu (NFL, E2).
+
+STATUS: ISSUES FOUND -- email sender dormancy on May 13, 56 overdue entries, 2 stranded E1s, 2 paused-reply awaiting Andy.
+
+## 2026-05-15 18:52 | JMARK | Tony Beabout | pending-needs-hook
+Contact created: HubSpot ID 221868257687. LINKED_IN_CONNECT task set for 2026-06-10.
+Email 1 ABORTED: Personal hook is thin (15-year tenure only). Tenure alone is not a valid hook per drafting-rules Section 7.
+Fresh hook available: JMARK Tulsa office opening Nov 2025 (journalrecord.com). Can anchor Pain-Led TPM opener.
+Action required: Andy revisits Tony's LinkedIn profile for a recent post, certification, or named project. Once hook is identified, re-run outreach sequence for Tony Beabout (Pain-Led TPM, Day 1 will be JMARK last_day1 + 4bd = ~2026-06-29).
+Emails 2-6 NOT queued. Stagger reflects 2 queued candidates (DongHoon Shin + Jim Neal) only.
+
+---
+## osi-email-task-drafts-cmig | 2026-05-19
+
+**Run time:** 2026-05-19 20:04 UTC
+**Status:** COMPLETED
+
+- Total tasks found: 155
+- Skipped (sequence tasks - subject: Send follow-up email, empty body): 36
+- Already have drafts from 2026-05-13 to 2026-05-15 (not re-processed this run): 88
+- Drafted fresh today: 31
+  - Drafted successfully: 27
+  - Thin-context flags (drafted but needs Andy review): 4
+    - Bibek Ban (PubMatic) - Systain/VP onsite context not in HubSpot
+    - Jarrod McDaniel (Charter) - zero email history
+    - Bob Zook (Charter) - zero engagement history
+    - James Kim (DRW Holdings) - zero engagement history
+
+No approval prompts encountered. All writes via manage_crm_objects confirmationStatus CONFIRMATION_WAIVED_FOR_SESSION.
+
+NOTE: 88 tasks have existing drafts from May 13-15 that were not refreshed in this run due to volume. These are available for Andy to review in HubSpot.

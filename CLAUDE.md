@@ -6,7 +6,7 @@ When Andy's message mentions a skill by name OR triggers a skill workflow, the F
 
 Trigger -> Skill to read FIRST:
 - "find prospects at [company]" / "find me people at" / "qualify" -> `C:\Claude-Brain\skills\osi-prospect-qualification\SKILL.md`
-- "run a sequence" / "outreach sequence" / "build a sequence" -> `C:\Claude-Brain\skills\osi-outreach-sequence\SKILL.md`
+- "run a sequence" / "outreach sequence" / "build a sequence" -> BOTH `C:\Claude-Brain\skills\osi-prospect-qualification\SKILL.md` AND `C:\Claude-Brain\skills\osi-outreach-sequence\SKILL.md`. Read both. Not one. Both.
 - "re-engage" / "re-engagement" -> `C:\Claude-Brain\skills\osi-3email-reengagement\SKILL.md`
 - "3-email" / "short sequence" -> `C:\Claude-Brain\skills\osi-3email-new\SKILL.md`
 - "find cold connections" -> `C:\Claude-Brain\skills\osi-cold-reengagement\SKILL.md`
@@ -15,7 +15,11 @@ Trigger -> Skill to read FIRST:
 
 If Andy says "read the [X] skill" in his message: read it IMMEDIATELY as the first tool call. Not after trying something. Not after asking a clarifying question. First.
 
-**Why this rule exists:** 2026-05-05 -- Andy's very first message said "find prospects at siemens energy... read the prospecting skill and outreach skill." Claude ignored the instruction, improvised the workflow wrong, and Andy had to send three angry messages before Claude read the skill. The skill had been there the whole time with the correct workflow written down.
+**Company Mode always requires BOTH skills.** If Andy asks to find AND sequence prospects at a company, that is Company Mode. Company Mode is governed by osi-prospect-qualification (discovery, qualification, LinkedIn browsing) AND osi-outreach-sequence (drafting, queueing). Reading only the outreach skill and skipping the qualification skill is a guaranteed failure mode -- the outreach skill contains zero discovery logic.
+
+**Special alert -- hedge funds and quant firms:** D.E. Shaw, Renaissance, Two Sigma, Citadel, Jane Street, Millennium, Point72, and similar firms have employees who deliberately scrub LinkedIn profiles. Keyword searches return near-zero results at these firms. The ONLY viable discovery path is the Round 0 card browse in the qualification skill. If the qualification skill has not been read, you do not know this rule. Read it first.
+
+**Why this rule exists:** 2026-05-05 -- Andy's first message said "find prospects at siemens energy... read the prospecting skill and outreach skill." Claude ignored it and improvised. 2026-05-08 -- Company Mode on D.E. Shaw read the outreach skill but not the qualification skill. The Round 0 browse was skipped. Three VP-level data center targets were missed because keyword searches returned nothing against a firm where employees deliberately strip their profiles.
 
 ---
 

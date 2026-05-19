@@ -9,6 +9,36 @@ description: Qualify LinkedIn prospects for OSI Global. Use whenever Andy pastes
 
 ---
 
+## 🚨 STEP -1: TOOL PREFETCH (MANDATORY, RUNS ONCE BEFORE ANY COMPANY WORK)
+
+**The very first action in any session that triggers this skill — before reading files, before HubSpot, before LinkedIn, before anything — is a single ToolSearch call that loads every tool schema needed for the full run. Do this ONCE. After this step, no further ToolSearch calls are needed.**
+
+Run ONE ToolSearch call with this exact query (all tools comma-separated, max_results=15):
+
+```
+ToolSearch({
+  query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_owners,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__search_contacts,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_news,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_scoops",
+  max_results: 9
+})
+```
+
+Then immediately run a SECOND ToolSearch call:
+
+```
+ToolSearch({
+  query: "select:mcp__Claude_in_Chrome__tabs_context_mcp,mcp__Claude_in_Chrome__navigate,mcp__Claude_in_Chrome__get_page_text,mcp__Claude_in_Chrome__find,mcp__Claude_in_Chrome__browser_batch,WebSearch,TaskCreate,TaskUpdate,TaskList",
+  max_results: 9
+})
+```
+
+Both calls can fire in the SAME message (parallel). After both return, all tool schemas are live. Do not call ToolSearch again during the run.
+
+**Why this rule exists:** Without prefetch, ToolSearch calls interrupt the run every time a new tool category is needed — HubSpot, ZoomInfo, LinkedIn, bash, web search each trigger a separate load. Andy wants to say "go" and have zero interruptions. Prefetching all schemas at session start eliminates every mid-run ToolSearch call.
+
+**If a tool schema was already loaded earlier in the conversation:** skip that tool from the prefetch. Already-loaded schemas stay live for the session. The prefetch only needs to fire for tools not yet loaded.
+
+---
+
 ## WHO OWNS WHAT
 
 Strict boundary with **osi-outreach-sequence**.
@@ -90,9 +120,37 @@ Navigate to the URL. Expand and read EVERYTHING:
 
 > Skills = most important qualification signal. Activity = most important personalization signal. Never qualify on title alone. Never skim search result previews, always navigate to the actual profile page.
 
-If LinkedIn restricts or 404s the profile, fall back to web search: `"[First Last]" "[Company]" site:linkedin.com` or a general Google search for their current role. If still unresolvable, mark Conditional with reason "profile restricted, could not verify employer."
+If the regular LinkedIn profile is restricted or returns minimal info (no About, no Experience, no Skills visible), DO NOT immediately mark Conditional. Follow this fallback ladder in order:
+
+1. **Try Sales Nav.** Navigate to the candidate's Sales Nav profile (`linkedin.com/sales/lead/...` or search Sales Nav by name + company). Sales Nav frequently shows full Experience and About sections for 3rd-degree connections even when the regular profile is locked. If Sales Nav has the full experience, use it to qualify -- it is authoritative.
+2. **Web search fallback.** If Sales Nav also shows nothing, search `"[First Last]" "[Company]" site:linkedin.com` or Google for their current role. Acceptable sources: company website bio, conference speaker page, press release, dated industry article within 6 months.
+3. Only after steps 1 AND 2 both fail: mark Conditional with reason "profile restricted, could not verify role scope."
+
+**Why this rule exists:** 2026-05-05, Girish Budibetta at Siemens Energy was marked Conditional because his regular LinkedIn profile was 3rd-degree restricted and returned no Experience or Skills. His Sales Nav profile had his full 19-year experience description visible including "Global Lead for Data Center Transformation" and "Oversee service delivery and demand management for Data Center services." The regular-profile-only check produced a wrong verdict. Sales Nav must always be tried before giving up.
+
+**Activity-only profile load is NOT a qualification.** If LinkedIn loads a profile but only shows the Activity section with no About, no Experience, no Skills visible (symptom: page is very short, only the activity feed renders), DO NOT attempt a verdict. Activity is a personalization source, not a qualification source. A person reposting a colleague's job opening or commenting on a post tells you nothing about what they actually do day-to-day. Follow the fallback ladder above: try Sales Nav, then web search. Only after both fail may you mark Conditional.
+
+**Sparse connection count is not a disqualifier.** A profile with very few connections (under 50) is not restricted -- it is simply a low-activity LinkedIn user. Apply the exact same fallback ladder. Do not mark Conditional based on sparse profile alone.
 
 **Sales Nav restricted panel does NOT mean the LinkedIn profile is restricted.** Sales Navigator sometimes shows a "restricted" or "limited" panel for 2nd/3rd degree connections while the actual `linkedin.com/in/` URL is fully readable. If a candidate was surfaced from Sales Nav and the Sales Nav panel looks restricted, ALWAYS attempt to navigate to the direct `linkedin.com/in/<handle>` URL before concluding the profile is inaccessible. The handle is often derivable from the name + company search. Only mark Conditional on profile restriction after a direct `linkedin.com/in/` attempt also fails.
+
+## 🚨 HARDWIRED RULE -- pending-needs-hook IS NEVER A FIRST RESPONSE TO A GATED PROFILE (added 2026-05-12)
+
+`pending-needs-hook` is only valid after the FULL fallback ladder above has been exhausted AND the sparse profile rule below has been applied. The complete sequence is:
+
+1. Regular LinkedIn gated → Try Sales Nav
+2. Sales Nav also gated OR fails to render in the automation browser → Apply sparse profile rule (see PERSONAL HOOK QUALITY GATE section)
+3. Sparse profile rule: if title + company clearly confirm ICP target → use company-level hook (news, ZoomInfo scoops, infrastructure signal) and QUEUE IT
+
+It is NEVER valid to declare `pending-needs-hook` and present candidates to Andy asking him to go look in Sales Nav. That is Claude's job, not Andy's.
+
+**When Sales Nav automation fails to render (browser cards stuck in skeleton/placeholder state):**
+Do not treat this as "Sales Nav returned nothing." Browser rendering failures are not data. When Sales Nav cards won't load in the automation browser, move IMMEDIATELY to the sparse profile rule -- do not stop, do not declare pending-needs-hook, do not ask Andy to check. If the title and company clearly confirm an ICP target: use company-level hooks (news, ZoomInfo scoops, acquisition signal, revenue growth news), write the strategy note with that hook, and queue the sequence.
+
+**The only legitimate use of pending-needs-hook:**
+A candidate whose title AND company are genuinely ambiguous, whose profile is completely empty, AND where both Sales Nav and web search returned nothing that resolves the ambiguity. If the title and company clearly confirm an ICP target, sparse profile is NOT a blocker. Queue it with the best available hook.
+
+**Why this rule exists:** 2026-05-12, 10 candidates (6 Black Box Network Services, 4 NEC Corporation of America) were declared pending-needs-hook after their regular LinkedIn profiles were gated (3rd+ degree). Sales Nav was never attempted. The session told Andy to go look in Sales Nav himself. Andy: "YOU DO FUCKING EVERYTHING. THAT IS THE POINT OF THIS." The sparse profile rule was already in the skill. The ladder was not followed. The fix is this hard rule: declare pending-needs-hook only after the full ladder including sparse profile fallback has been applied and truly failed. Never hand research back to Andy.
 
 ---
 
@@ -148,11 +206,36 @@ If gate passes -> shallow qualify steps below. If fails -> log `engagement_gate_
 🚨 **NEVER CAP CANDIDATES AT A COMPANY. EVER.**
 Cast the widest net possible. If 12 people at a company are worth qualifying, qualify all 12. If you stop early, you will not come back to this company for months and those people will never get contacted. The only reason to stop qualifying people at a company is that you have genuinely run out of relevant titles -- not because some arbitrary number was hit. This rule is non-negotiable.
 
+🚨 **HARDWIRED RULE -- BATCH SIZE DOES NOT CHANGE THE PROCESS. EVER. (added 2026-05-14)**
+
+When Andy provides a list of companies to run in one session (2 companies, 7 companies, 20 companies -- any number), output this statement BEFORE starting the first company and DO NOT deviate from it:
+
+```
+Running full 4-source discovery on [N] companies. Process is identical regardless of batch size:
+  1A HubSpot -> 1B ZoomInfo (search_contacts) -> 1C LinkedIn browse -> 1D LinkedIn keywords -> qualify all candidates.
+Discovery log will be shown before qualification begins at each company.
+No shortcuts. No stopping after HubSpot.
+```
+
+The number of companies in the batch is NEVER a reason to compress, skip, or abbreviate any discovery step. A 7-company batch gets the same per-company rigor as a 1-company session. If the batch is too large to run properly in one session, the right answer is to tell Andy "I can complete [N] companies fully in this session -- want me to start and continue in the next session?" NOT to silently thin the discovery to get through more companies faster.
+
+**Why this rule exists:** 2026-05-14, a 7-company batch was run where most companies received only HubSpot-sourced contacts (1-2 per company) because the pace was too fast. ZoomInfo search_contacts, LinkedIn browse, and keyword rounds were all skipped to get through the list faster. The session produced 9 contacts across 7 companies when it should have found 30-50+. Batch size is not an excuse. The process is the process.
+
+🚨 **HARDWIRED RULE -- NEVER ASK "SHOULD I PROCEED TO THE NEXT COMPANY?" IN A PRE-APPROVED BATCH. (added 2026-05-15)**
+
+When Andy provides a list of companies at session start, that list is blanket approval for ALL companies in it. When one company is fully processed (all YES candidates sequenced, stagger updated, tracker updated), immediately start the next company without pausing. Do not ask "Should I proceed to Company 4?" or "Ready for the next one?" or "Want me to continue?" or any similar checkpoint prompt.
+
+The only legitimate reason to pause between companies is a hard blocker that Andy must resolve (e.g., LinkedIn browser inaccessible, HubSpot auth failure). A successful company completion is not a pause point. Proceed automatically.
+
+**Why this rule exists:** 2026-05-15 -- after completing IT-CNP (Company 3 of a pre-approved 10-company batch), Claude stopped and asked "Should I proceed to Company 4?" The batch was approved at session kickoff. The prompt wasted time and contradicted the no-approval-prompt rule.
+
 When Andy says "find me prospects at [Company]" without running a full discovery sweep.
 
 ### Step 0: Company pre-checks
 
 **THIS STEP IS MANDATORY BEFORE TOUCHING LINKEDIN OR ZOOMINFO. DO NOT SKIP.**
+
+🚨 **THIS STEP ALSO RUNS IN AUTO MODE BEFORE THE SHORTLIST IS PRESENTED TO ANDY.** If you are in Auto Mode Step 2.5 and have not yet run this step on a candidate company, run it now. The list Andy sees must already be clean. Presenting first and checking later is the bug this rule exists to prevent.
 
 #### 0A. Build the company name variant list
 
@@ -218,11 +301,128 @@ From the unioned HubSpot results, determine ownership:
 
 **The flag message must always say: company name as stored in HubSpot, domain, owner name, last activity date, and what Andy should do next. Never skip silently.**
 
-### Step 1: LinkedIn candidate search
+### Step 1: Candidate discovery -- LOCKED ORDER, FOUR SOURCES
 
-**Exhaust the search.** Finding 1-2 and stopping is not acceptable.
+🚨 **THIS IS THE ONLY VALID SEQUENCE. DO NOT REORDER. DO NOT SKIP A SOURCE BECAUSE A PRIOR SOURCE FOUND PEOPLE. ALL FOUR RUN EVERY TIME.**
 
-**Round 1, English priority titles:**
+```
+STEP 1A: HubSpot  →  complete →  STEP 1B: ZoomInfo  →  complete  →  STEP 1C: LinkedIn browse (no filter)  →  complete  →  STEP 1D: LinkedIn keywords  →  complete  →  STEP 1E: Deduplicate into master list  →  STEP 2: Qualify each person
+```
+
+No source replaces another. HubSpot finding 5 people does not shorten the LinkedIn browse. ZoomInfo finding 8 people does not skip the LinkedIn keyword searches. Every source runs to completion. Only after all four sources are exhausted does qualification begin.
+
+**Pull from all four sources before qualifying anyone. Deduplicate by name + company into one master list. Then qualify the full list person by person.**
+
+🚨 **HARDWIRED RULE -- DISCOVERY LOG IS MANDATORY BEFORE QUALIFICATION BEGINS (added 2026-05-14)**
+
+After Step 1E (deduplication), before touching a single profile, Claude MUST output this exact table:
+
+```
+DISCOVERY LOG -- [Company]
+  1A HubSpot:          X candidates
+  1B ZoomInfo:         Y candidates
+  1C LinkedIn browse:  Z candidates
+  1D LinkedIn kw:      W candidates
+  Master list:         N total
+```
+
+Rules:
+- Any row showing 0 MUST include a one-line reason in parentheses: `0 (enrich_contacts credits exhausted, search_contacts returned 0)` or `0 (company too small for keyword results, browse covered it)`. A blank 0 with no reason is a red flag that the source was skipped, not exhausted.
+- If the master list total is fewer than 3 candidates AND the company has 200+ employees, that is a discovery failure signal -- not a signal that the company is thin. Do NOT proceed to qualification. Re-run Step 1C with additional browse pages and Step 1D with additional keyword rounds until either more candidates are found or every round returns empty.
+- This table is output to the conversation (visible to Andy). It is not optional, not skippable, and not replaceable with a prose summary. Andy can see exactly what was found at each source and call out a skip instantly.
+
+**Why this rule exists:** 2026-05-14, a 7-company batch was run in Company Mode where most companies got 1 person sequenced. The root cause was stopping after HubSpot found 1-2 contacts without running ZoomInfo, LinkedIn browse, or keyword searches. The discovery log makes that shortcut immediately visible -- if 1C and 1D both show 0 with no reason, Andy knows the browse was skipped. You cannot hide a skipped source in a discovery log.
+
+---
+
+#### Step 1A: HubSpot contacts at this company
+
+Search HubSpot for existing contacts associated with the company record(s) found in Step 0. Pull all contacts, not just ones with good titles.
+
+For each contact, pull: firstname, lastname, jobtitle, email, company, hs_object_id, notes_last_contacted, hs_email_last_reply_date.
+
+**Title pre-filter:** discard obvious No's by title alone (facilities/M&E, HR, finance, marketing, legal, sales with no IT component). Do NOT read LinkedIn for these -- they are instant No by the DISQUALIFIERS list.
+
+**Re-outreach eligibility check (MANDATORY for every remaining contact):** Pull the full email and call engagement history from HubSpot. Check:
+
+1. Any inbound reply OR logged call with engagement on record?
+   - YES: this is a warm contact. Only eligible if 9+ months have passed since that reply/call. If eligible, flag for re-engagement sequence (NOT cold sequence). If under 9 months, SKIP.
+   - NO (zero replies, zero engaged calls): eligible if last outreach was 6+ months ago. Use cold sequence.
+   - Last touch under 6 months ago regardless of reply history: SKIP entirely.
+
+2. Hard bounce on record: SKIP.
+3. On hard-block list (`C:\Claude-Brain\hard-block.json`): SKIP.
+
+Add eligible contacts to the master candidate list with source tag `hubspot`.
+
+---
+
+#### Step 1B: ZoomInfo company search (discovery)
+
+**NOTE: ZoomInfo is used TWICE in this workflow -- here for discovery (finding people by title at the company), and later for enrichment (email/phone for Yes verdicts only). These are two separate calls at different stages.**
+
+Run `search_contacts` with the company name (use the short-form variant that ZoomInfo responds to best -- see the retry matrix naming logic). Pull all contacts ZoomInfo has at this company. Do NOT limit by title in the API call -- pull everything and apply the title filter here.
+
+**Title pre-filter:** discard obvious No's by title alone (same DISQUALIFIERS list). Keep anyone with network, IT infrastructure, data center, compute, storage, telecom, vendor management, or procurement (IT hardware) in their title.
+
+Deduplicate against Step 1A results (same person already in HubSpot = keep the HubSpot record, add ZoomInfo data as enrichment context, do not add as a second entry).
+
+Add new candidates to the master list with source tag `zoominfo`.
+
+**ZoomInfo warning for large financial institutions** (Desjardins, National Bank, Caisse, Intact, etc.): ZoomInfo is UNRELIABLE for finding IT titles at these companies. Do not skip LinkedIn for them.
+
+🚨 **HARDWIRED RULE -- enrich_contacts CREDITS EXHAUSTED DOES NOT CANCEL STEP 1B (added 2026-05-14)**
+
+Discovery and enrichment are two completely separate ZoomInfo operations.
+
+- **Step 1B (discovery):** uses `search_contacts` to find people by title at the company. This is discovery. It does NOT use `enrich_contacts`. It is NOT affected by enrichment credit exhaustion.
+- **ZoomInfo enrichment (after Yes verdict):** uses `enrich_contacts` to retrieve email and phone for a confirmed Yes. This is where credits are consumed.
+
+If `enrich_contacts` returns a credit-limit error during the enrichment phase, that does NOT cancel Step 1B for any company in the session. `search_contacts` for discovery must still run on every company regardless of enrichment credit status.
+
+When credits are exhausted for enrichment, the fallback for email resolution is: HubSpot existing email (if present) OR dominant company email pattern derived from verified HubSpot contacts at that company. Log this in the strategy note under EMAIL RESOLUTION: `dominant-pattern (enrich_contacts credits exhausted; pattern derived from [N] verified HubSpot contacts)`.
+
+**Why this rule exists:** 2026-05-14, ZoomInfo enrich_contacts credits were exhausted mid-session. Step 1B was silently skipped for the remaining 5 companies on the grounds that "ZoomInfo is unavailable." search_contacts for discovery was never tried. These are different API calls. One being unavailable does not cancel the other.
+
+---
+
+#### Step 1C + 1D: LinkedIn full search
+
+Run AFTER HubSpot and ZoomInfo. Find everyone they missed. Do not stop early regardless of how many candidates HubSpot and ZoomInfo already produced.
+
+🚨 **BROWSE FIRST. READ EVERY CARD. KEYWORD SEARCH SECOND. THIS ORDER IS NON-NEGOTIABLE.**
+
+## 🚨 PROFILE-SCRUBBING FIRMS -- KEYWORD SEARCHES WILL FAIL. ROUND 0 IS THE ONLY PATH. (added 2026-05-08)
+
+Certain firms have a deliberate culture of LinkedIn opacity. Employees are trained (formally or informally) to strip their profiles: headlines show "--" or nothing, job descriptions are blank, skills are hidden, activity is off. Keyword searches against these firms return zero people not because nobody is there, but because there are no keywords to hit.
+
+**Named firms where this is known to apply:**
+D.E. Shaw, Renaissance Technologies, Two Sigma, Citadel, Jane Street, Hudson River Trading, Millennium Management, Point72, Bridgewater, DE Shaw Research, Jump Trading, Virtu Financial, DRW
+
+**The rule for these firms:**
+- Keyword rounds (Rounds 1-4) WILL return near-zero results. This is expected. Do not mistake it for "nobody worth targeting here."
+- Round 0 (company People tab, no filter, card browse) is the ONLY viable discovery path. The card browse shows current titles pulled from the profile header even when everything else is hidden.
+- Browse ALL available pages -- not just 5. If the firm has 500+ employees on LinkedIn, keep browsing until LinkedIn says no more or cards stop showing relevant titles.
+- If keyword rounds return fewer than 4 people at a firm with 500+ LinkedIn employees, that is a signal the keyword approach failed -- not a signal that the firm is a thin target. Go back to Round 0 and browse more.
+- Do NOT mark a firm as exhausted after keywords fail. Round 0 browse is the check. If Round 0 was not completed in full, the firm has not been worked.
+
+**Why this rule exists:** 2026-05-08, D.E. Shaw Company Mode returned only 1 person because the session went straight to keyword searches without completing Round 0. Three VP-level data center targets (Matt Kong, Leonardo Palazzo, Michael De Candia) were visible on the company People tab by title alone and were missed entirely. D.E. Shaw has 3,000+ employees on LinkedIn -- "1 person found" was a clear signal that the discovery was incomplete, not that the firm was thin.
+
+LinkedIn search result cards show TWO things: the title AND a truncated About snippet underneath. The About snippet is qualification signal visible without clicking. "Engineering Leader with 15 years of enterprise network infrastructure design" tells you everything you need to know -- the title ("Senior Manager, Technology Operations") would have been filtered out by any keyword search, but the About line makes her an obvious Yes. Amanda Sarmiento at NFL was missed because the search used keyword filters instead of reading cards. Never again.
+
+**Round 0 (MANDATORY FIRST STEP): Company people browse, no keyword filter. Read every card.**
+
+Navigate to the company's LinkedIn people page. Browse with NO keyword filter. Read every card on the first 5 pages -- title AND the About snippet. Do not filter by title at the results page stage. The About snippet is the signal. Add to the candidate list anyone whose About snippet mentions: network infrastructure, data center, compute, storage, hardware, vendor management, IT procurement, optical, telecom, DWDM, DIMMs, Cisco, or any infrastructure technology. If the About is blank but the title is plausible, add them too. Only skip people whose title is an obvious No (HR, finance, marketing, facilities) AND whose About snippet (if visible) confirms no IT hardware relevance.
+
+**Round 1 (MANDATORY SECOND STEP): "IT procurement" keyword search**
+
+Search the company with keyword "IT procurement". All pages. Read every card. Same card-reading rule as Round 0.
+
+**Round 2: "cloud" keyword search**
+
+Search the company with keyword "cloud". All pages. Read every card. Same card-reading rule as Round 0. Surfaces Cloud Architects, Cloud Infrastructure Engineers, VP of Cloud, Cloud Operations Managers, and similar roles that are valid OSI buyers but are missed by procurement and engineering keyword searches.
+
+**Round 3, Engineering and infrastructure keywords:**
 - "network engineer" OR "network architect"
 - "transport engineer" OR "optical engineer" OR "DWDM"
 - "IT infrastructure" OR "infrastructure architect"
@@ -230,31 +430,57 @@ From the unioned HubSpot results, determine ownership:
 - "IT asset manager" OR "IT vendor manager"
 - "telecom" OR "telecommunications engineer"
 
-**Round 2, French keywords (REQUIRED for Quebec: Desjardins, National Bank, Caisse, Hydro-Quebec, Bell, Videotron, Cogeco):**
+**Round 4, French keywords (REQUIRED for Quebec: Desjardins, National Bank, Caisse, Hydro-Quebec, Bell, Videotron, Cogeco):**
 - "ingenieur reseau" OR "architecte reseau"
 - "architecte telecom" OR "ingenieur telecom"
 - "infrastructure TI" OR "architecte infrastructure"
 - "architecture detaillee" OR "expert telecom"
 - "conception reseaux" OR "operations telecom"
 
-**Round 3, Secondary titles** (when Round 1-2 thin, or any enterprise company):
+**Round 5, Secondary titles** (when Rounds 0-3 thin, or any enterprise company):
 - Senior Infrastructure Engineer, Systems Engineer / Administrator
 - Storage Engineer / Administrator, Virtualization Engineer
 - NOC Manager, Director of IT Operations, VP of Technology
-- Head of IT, Technology Manager
+- Head of IT, Technology Manager, Technology Operations
 
 **Pagination, non-negotiable:** every page of every search until LinkedIn says no more.
 
-**ZoomInfo warning for large financial institutions** (Desjardins, National Bank, Caisse, Intact, etc.): ZoomInfo is UNRELIABLE for finding IT titles. Use LinkedIn directly.
-
 **Minimum effort:**
-- Small/mid (under 500 emp): 2+ combinations, all pages.
-- Large (500-5,000): 4+ combinations, all pages.
-- Enterprise (5,000+): 6+ combinations. Fewer than 5 found = not enough.
+- Small/mid (under 500 emp): Browse + 2+ keyword combos, all pages.
+- Large (500-5,000): Browse + 5+ keyword combos, all pages.
+- Enterprise (5,000+): Browse + 7+ keyword combos. Fewer than 5 found = not enough.
+
+🚨 **HARDWIRED RULE -- LOW LINKEDIN COUNT IS A BROWSE FAILURE SIGNAL, NOT A THIN-COMPANY SIGNAL (added 2026-05-14)**
+
+If after completing all LinkedIn rounds (1C + 1D) the master list has fewer than 3 candidates from LinkedIn at a company with 200+ employees, STOP before qualification. Do NOT proceed. This is a discovery failure, not evidence that the company is thin.
+
+Required action:
+1. Check that Round 0 (company people page, no filter) was actually completed to at least 3 pages. If not, complete it now.
+2. Check that the correct company LinkedIn ID or slug was used. If the browse loaded the wrong company (verify by checking company name in the page header), find the correct ID and re-run.
+3. Run at minimum 2 additional keyword rounds from the Round 3 or Round 5 list that were not yet tried.
+4. Only after re-running and STILL finding fewer than 3 LinkedIn candidates may you proceed and log `1C/1D: X candidates (re-ran browse + keywords, company appears LinkedIn-thin)` in the discovery log.
+
+**Why this rule exists:** 2026-05-14, BCBS Association's LinkedIn browse failed because the wrong company ID (2490 = Cigna Healthcare) was used in Sales Nav. The browse loaded Cigna data and returned nothing useful. The failure was logged as "company too small for LinkedIn" rather than recognized as a wrong-ID problem. The rule: always verify the company name in the page header before reading browse results, and always treat a near-zero LinkedIn count at a company with 200+ employees as a signal to investigate, not accept.
+
+**Title pre-filter on search results:** discard obvious No's by title alone before doing any profile reads. Instant No = facilities/M&E, HR, finance, marketing, legal, sales with no IT component. Do NOT navigate to their profile.
+
+**Why browse-first matters:** keyword searches only surface people whose titles contain your exact keywords. "Technology Operations," "Infrastructure Services," "Platform Engineering," "Technology Manager" and dozens of other valid ICP titles contain zero of the Round 2 keywords. Browse surfaces them all. Keywords then add depth. Never keywords-only.
+
+Deduplicate against Steps 1A and 1B. Add new candidates to master list with source tag `linkedin`.
+
+---
+
+#### Step 1E: Deduplicated master candidate list
+
+Union of all three sources. One row per person. Columns: Name | Title | Company | Source (hubspot/zoominfo/linkedin) | LinkedIn URL (if known) | Re-outreach eligibility (for hubspot-sourced).
+
+This is the full candidate pool for Step 2 qualification.
 
 ### Step 2: Read EVERY relevant profile in full
 
-No cap. Every candidate whose card suggests IT/network/telecom relevance gets a full profile read (About, Experience, Skills via `/details/skills/`, Activity, city/state, timezone bucket).
+No cap. Every candidate on the master list from Step 1 gets a full profile read (About, Experience, Skills via `/details/skills/`, Activity, city/state, timezone bucket).
+
+Obvious No's by title were already eliminated in Step 1 pre-filter. Do NOT re-read those. Every candidate who made it to the master list gets read. No skipping, no sampling.
 
 ### Step 3: Return ranked shortlist
 
@@ -397,6 +623,8 @@ One search, no rabbit holes.
 
 ## DISQUALIFIERS (Hard No)
 
+**Engineer and Architect titles are NEVER on this list.** Infrastructure Architect, Cloud Infrastructure Engineer, Network Engineer, Systems Engineer, Storage Engineer, Solutions Architect -- these roles design, specify, and manage the hardware OSI sells. They are ICP targets. Never skip them based on title alone. Read the full profile every time.
+
 - Current role is Facilities / M&E (chillers, generators, UPS, PDUs).
 - Current role is HR / Finance / Legal / Marketing / Sales with no IT infrastructure component.
 - Skills entirely facility services (carrier hotel, colocation, HVAC, electrical).
@@ -427,6 +655,26 @@ One search, no rabbit holes.
 ---
 
 ## HubSpot writes -- for every Yes verdict
+
+### 🚨 HARDWIRED RULE -- NO MID-RUN APPROVAL PROMPTS. EVER.
+
+`manage_crm_objects` has a built-in confirmation step. **This skill always bypasses it by setting `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"` on every single call.**
+
+Andy's session kick-off ("go", "proceed", "run it", or any equivalent) is blanket approval for all HubSpot contact creates, updates, note creates, and task creates that this skill produces during that session. Do not interpret the tool's confirmation requirement as a reason to stop. Do not show a "proposed changes" table. Do not ask "Approve?" Do not ask "proceed?". Do not pause for any reason mid-run.
+
+This applies to:
+- Contact creates and updates (Step 1)
+- Strategy note creates (Step 2)
+- LINKED_IN_CONNECT task creates (Step 3)
+- Any other `manage_crm_objects` call this skill makes
+
+**Forbidden patterns:**
+- Showing a proposed-changes table and asking Andy to approve -> NEVER
+- "Approve this update?" -> NEVER
+- "Want to skip confirmations for this chat?" -> NEVER (already waived at session start)
+- Pausing between candidates for any HubSpot write reason -> NEVER
+
+**Why this rule exists:** 2026-05-06, Company Mode qualification of Instinet stopped mid-run to ask Andy to approve a contact update for Andrew Banhidi (stale @baml.com -> @instinet.com). Andy had already said "go" at session start. The tool's confirmation step is a safety measure for ad-hoc use; it is not intended to interrupt a pre-approved qualification batch. The fix is to always use `CONFIRMATION_WAIVED_FOR_SESSION` so the tool never prompts.
 
 Always create regardless of data:
 - LinkedIn connection request task with a provisional `hs_timestamp` = next business day at 4 PM ET.
@@ -481,6 +729,11 @@ Order:
 Read `C:\Claude-Brain\playbook\hubspot-data-quality.md` for required fields, phone format, mobile rule, timezone bucket, pre-write checklist.
 
 ### Step 1: Create or update contact record
+
+🚨 **HARDWIRED: LINKEDIN TITLE IS CANONICAL. ZOOMINFO NEVER SETS `jobtitle`.**
+The `jobtitle` field in HubSpot is ALWAYS populated from what was read on the LinkedIn profile. ZoomInfo provides email and phone only. If ZoomInfo returns a title that differs from LinkedIn, ignore the ZoomInfo title completely. Write the LinkedIn title. If ZoomInfo is run before LinkedIn has been fully read (should not happen, but defensive rule): do NOT write `jobtitle` until the LinkedIn read is complete.
+
+**Why this rule exists:** 2026-05-05, Carlos Cruz at NFL was created with ZoomInfo title "Infrastructure Architect" when his LinkedIn clearly showed "System Engineer." The wrong title went into HubSpot and could not be corrected via API due to an authorization issue. LinkedIn title is ground truth, always.
 
 **HUBSPOT-FIRST SEARCH (mandatory before any create):**
 Before writing anything to HubSpot, run TWO searches and union the results.
@@ -601,14 +854,55 @@ THE PLAY
 THE PERSONAL HOOK
 [1-2 specific LinkedIn details that anchor Email 1 + LinkedIn invite when outreach runs.]
 
-ZI ATTEMPTS (mandatory retry matrix):
-  1. companyName="..." -> ...
-EMAIL RESOLUTION: zoominfo-full-match
+EMAIL RESOLUTION: [hubspot-existing | zoominfo-full-match | dominant-pattern]
   chosen: email@domain.com
-  attempt: N
+  [ZI ATTEMPTS block: ONLY include when ZoomInfo was actually run. Log each attempt verbatim. Omit entirely when email came from HubSpot.]
 ```
 
-**Forbidden labels:** `ANGLE FOR EMAIL 1`, `WHY HE'S A YES`, `OSI ANGLES`. These are not part of the format. If you find yourself writing them, stop and use `THE PLAY` and `THE PERSONAL HOOK` instead.
+**EMAIL RESOLUTION rules:**
+- `hubspot-existing`: email was already on the HubSpot contact record. No ZI attempts needed. One line only: `EMAIL RESOLUTION: hubspot-existing | chosen@domain.com`
+- `zoominfo-full-match`: ZoomInfo returned a verified email. Include the full ZI ATTEMPTS log below the EMAIL RESOLUTION line.
+- `dominant-pattern`: email was derived from company pattern, no ZoomInfo match. Note the pattern and the signal used.
+
+Do NOT log ZI ATTEMPTS when the email came from HubSpot. There is nothing to log.
+
+**PRE-WRITE CHECKLIST -- complete before calling manage_crm_objects:**
+- [ ] All research finished BEFORE writing: LinkedIn full read, ZoomInfo (if needed), fresh hook search
+- [ ] Sections are in the exact order above: Fresh hook, QUICK CONNECT KEYWORDS, LIVE CALL SCRIPT, THE PLAY, THE PERSONAL HOOK, EMAIL RESOLUTION
+- [ ] Labels are exact: `THE PLAY` not `QUALIFICATION`, `THE PERSONAL HOOK` not `PERSONAL HOOK:`, `QUICK CONNECT KEYWORDS` not `KEYWORDS`
+- [ ] LIVE CALL SCRIPT omitted entirely if no phone (do not write the header with blank fields)
+- [ ] ZI ATTEMPTS block included only if ZoomInfo was actually run
+- [ ] EMAIL RESOLUTION is one line if hubspot-existing, full retry log if ZoomInfo was used
+- [ ] No extra sections: no `STRATEGY NOTE --`, no `EMPLOYER VERIFICATION:`, no `SEQUENCE:`, no `STAGGER:`
+- [ ] No em-dashes anywhere in the note
+
+**CORRECT example (Tim Davidson, VP IT Infrastructure, NFL):**
+```
+Fresh hook (30-day news): none
+
+QUICK CONNECT KEYWORDS
+IT infrastructure, optical gear, NFL, network architecture, data center, infrastructure services, engineering team
+
+THE PLAY
+VP of IT Infrastructure at the NFL for 25 years, leading the team that architects and manages all IT infrastructure services. Full decision-maker. Sample-Offer Network is the right opener -- optics sample gets him into the conversation, follow with DWDM, compute, and TPM on engagement.
+
+THE PERSONAL HOOK
+Tim has spent 25 years leading the team that architects and runs NFL IT infrastructure. He has personally overseen every generation of networking hardware the league has run. That tenure is the hook.
+
+EMAIL RESOLUTION: hubspot-existing | tim.davidson@nfl.com
+```
+
+**WRONG examples (these have been written before -- never again):**
+```
+WRONG: Opens with "STRATEGY NOTE - Tim Davidson, VP IT Infrastructure, NFL" header -- not in the format.
+WRONG: "EMPLOYER VERIFICATION: LinkedIn confirmed..." -- not a section in the format.
+WRONG: "PERSONAL HOOK:" -- label must be "THE PERSONAL HOOK" (exact match, outreach skill parses by label).
+WRONG: "QUALIFICATION: YES - Sample-Offer Network" -- label must be "THE PLAY".
+WRONG: Sections in wrong order (e.g., Fresh hook at the bottom).
+WRONG: "SEQUENCE: Sample-Offer Network" and "STAGGER: ..." at the bottom -- not in the format, these are outreach-sequence's job.
+```
+
+**Forbidden labels:** `ANGLE FOR EMAIL 1`, `WHY HE'S A YES`, `OSI ANGLES`, `QUALIFICATION`, `PERSONAL HOOK:`. If you find yourself writing them, stop and use `THE PLAY` and `THE PERSONAL HOOK` instead.
 
 The outreach skill reads `THE PERSONAL HOOK` and `THE PLAY` by exact label match. If the labels are wrong, the outreach skill cannot parse the note and will draft from memory, which produces wrong emails.
 
@@ -624,6 +918,30 @@ Create:
 - `hs_timestamp`: provisional -- next business day at 4 PM ET. `osi-outreach-sequence` will update this to the real Day 1 after computing the stagger.
 - Notes: LinkedIn invite text (under 300 chars, references Personal Hook, no pitch). Body is ONLY the raw message text, no labels, no character counts.
 - Owner: 196669355.
+
+**PRE-WRITE CHECKLIST -- complete before calling manage_crm_objects:**
+- [ ] Subject contains "Sales Nav -- Send connection request --" followed by full name and company
+- [ ] Body is the actual invite message Andy will copy-paste into LinkedIn. NOT an instruction. NOT "Lead with X angle." NOT a description of what to do.
+- [ ] Body references the Personal Hook from THE PERSONAL HOOK section
+- [ ] Body has no pitch, no OSI mention, no product names
+- [ ] Body is under 300 characters (count it)
+- [ ] Body ends naturally -- no sign-off, no "Andy"
+
+**CORRECT example (Tim Davidson, VP IT Infrastructure, NFL):**
+```
+Subject: Sales Nav -- Send connection request -- Tim Davidson | National Football League
+Body:   Tim, 25 years running NFL IT infrastructure is a long time to see every generation of optical gear come and go. I'd love to connect.
+```
+138 characters. Invite text only. Personal Hook embedded. No pitch.
+
+**WRONG examples (these have been written before -- never again):**
+```
+WRONG body: "Send LinkedIn connection request to Tim Davidson. Lead with the 25-year infrastructure tenure angle."
+-- This is an instruction to Claude, not a message Andy can send. The task note is what Andy copies into LinkedIn.
+
+WRONG body: "Reaching out because I noticed you work in IT infrastructure at the NFL and I'd like to connect about OSI's products."
+-- Contains a pitch. Credentials-first. Andy would never send this.
+```
 
 ### Step 3.5: Read-back verification (MANDATORY before handoff)
 
@@ -729,9 +1047,16 @@ The hook MUST be one of the 5 priority types above. The following are NOT Person
 - Company size or industry alone.
 - Generic compliments. "Impressive background" is not a hook.
 
-If after a full LinkedIn read (About + Experience + Skills + Activity feed) NO qualifying hook of priority types 1 through 5 can be pulled, the verdict is downgraded to Conditional with reason "no Personal Hook available."
+**Sparse profile rule:** If the LinkedIn profile has no About, no job descriptions, no Activity, and no meaningful Skills -- but the title and company clearly confirm an ICP target -- do NOT downgrade to Conditional. Sequence them. Use the best available hook from this fallback order:
+1. Company-level fresh hook (news, ZoomInfo scoops, acquisition signal, revenue growth in last 30 days)
+2. Career trajectory from Experience entries alone (moved up from engineer to director = hook)
+3. Previous employers from Experience (worked at OSI customer = hook)
 
-**Why this rule exists:** 2026-04-30, Christopher Lawrence email shipped with "BNY's Pittsburgh infrastructure footprint is significant" as the Personal Hook. That is not a hook. The fix lives at strategy-note-write time.
+This rule is the FINAL STEP of the restricted-profile fallback ladder (see Step 1 above). It applies after Sales Nav was tried (or failed to render in the automation browser). It is not a last resort -- it is a valid path. Company-level hooks produce real Email 1s. A Sample-Offer sequence does not require a deep personal hook. Queue it.
+
+Only downgrade to Conditional on "no Personal Hook" if the profile is sparse AND qualification itself is genuinely ambiguous (title is unclear, role scope is unknown). If they are clearly the right person at the right company, sparse profile is not a blocker. Never declare pending-needs-hook and hand research back to Andy when the sparse profile rule could close it.
+
+**Why this rule exists:** 2026-04-30, Christopher Lawrence email shipped with "BNY's Pittsburgh infrastructure footprint is significant" as the Personal Hook. That is not a hook. The fix lives at strategy-note-write time. The sparse-profile addendum was added 2026-05-06 after Andy found multiple valid NFL targets that were being skipped because their LinkedIn profiles had no About or job descriptions.
 
 ### 2. Live Call Script
 
@@ -761,13 +1086,17 @@ Under 300 chars. Low friction, networking framing, not pitching. Reference Perso
 
 For every Yes with valid email (after Step 3.5 read-back passes), end with:
 
-> HANDOFF: invoke osi-outreach-sequence on [First Last] at [Company]. Strategy note live on HubSpot contact ID [id]. LINKED_IN_CONNECT task ID [task id] (provisional timestamp, outreach-sequence will update). Personal Hook: [hook]. Recommended sequence: [Call - Network / Server / TPM / DWDM / Storage / Networking].
+> HANDOFF: invoke osi-outreach-sequence on [First Last] at [Company]. Strategy note live on HubSpot contact ID [id]. LINKED_IN_CONNECT task ID [task id] (provisional timestamp, outreach-sequence will update). Personal Hook: [full hook text verbatim from THE PERSONAL HOOK section -- do NOT truncate or summarize]. Fresh hook: [full one-line summary + URL, or "none"]. Recommended sequence: [Sample-Offer Network / Sample-Offer Server / Pain-Led TPM / Pain-Led DWDM / Pain-Led Storage / Pain-Led Pre-Owned]. Email: [verified email address].
+
+The handoff Personal Hook must be the complete text written to the strategy note, not a paraphrase. osi-outreach-sequence uses it verbatim to draft Email 1 and the LinkedIn invite WITHOUT re-reading the strategy note or LinkedIn profile. If the hook is truncated here, the drafter has to go back to HubSpot, which burns extra tokens for no reason.
 
 Outreach-sequence owns stagger computation. It computes the real Day 1, queues all 6 emails, and updates the LINKED_IN_CONNECT task timestamp in its Step 11.
 
 If ZI retry matrix returned no email after all 7 attempts: do NOT hand off. The 2 LI fallback tasks ARE the plan.
 
 **IMMEDIATE HANDOFF -- NO BATCHING.** When a candidate in a Company Mode sweep is verdicted Yes, hand off to osi-outreach-sequence immediately before qualifying the next candidate. Do NOT accumulate Yes verdicts and hand off in a batch at the end. Batching causes context overflow, loses candidates, and breaks the per-candidate stagger logic. The flow is: qualify candidate -> verdict Yes -> handoff -> queue confirmed -> next candidate. Repeat. Never "I'll sequence all of them at the end."
+
+🚨 **NO MID-BATCH APPROVAL PROMPTS. EVER.** Once Andy has kicked off a Company Mode or Profile Mode batch, this skill and osi-outreach-sequence execute through every candidate without stopping to ask "proceed?", "should I continue?", "ready to queue?", or any equivalent. Andy trusted you to find and sequence the right people. He does not want to approve each one. The only time you stop and ask is: (1) hard conflict requiring Andy's judgment (account owned by another rep with recent activity), (2) validator raises a fatal error, or (3) the active sequence check asks about an override in an interactive session. Everything else runs automatically. Do not ask. Do not confirm. Execute.
 
 ---
 
@@ -784,6 +1113,8 @@ Read `C:\Claude-Brain\email-queue.json`. Extract every unique `company` value (c
 
 Also read the "Companies Prospected" tab of `C:\Claude-Brain\prospects-tracker-new.xlsx` for any additional historically prospected companies.
 
+**DNP filter:** Read `C:\Claude-Brain\do-not-auto-prospect.json`. Any company whose name case-insensitively matches (substring or exact) a name in that file is permanently excluded from Auto Mode. This list covers companies Andy does not want surfaced by automation -- they can still be manually prospected if Andy names them explicitly, but they will never appear in an auto-generated shortlist. Add these to the exclusion set alongside the queue companies.
+
 After building the exclusion list:
 - Update the "Companies Prospected" tab in `C:\Claude-Brain\prospects-tracker-new.xlsx` with any companies from the queue that are not already listed there (company name + last sequence date, sorted by date descending).
 - This tab is the running log of every company ever prospected. Keep it current at the start of every Auto Mode run.
@@ -796,8 +1127,47 @@ For each company, read: name, industry, employee count, city/state. Apply TWO fi
 1. Discard obvious non-fits (hyperscalers, pure software SaaS, gov agencies with no IT infra footprint). Keep telecom, ISPs, regional carriers, mid-large enterprise with data center or network infrastructure.
 2. **Cross-check against the exclusion list from Step 0.** Any company whose name fuzzy-matches a name on the exclusion list (same root word, common abbreviation, or known alias -- e.g. "altafiber" = "Altafiber", "Midco" = "Midcontinent Communications") is EXCLUDED from the presented list. Do not present it. Do not mention it. It has active sequences.
 
+### Step 2.5: Pre-check every surviving company BEFORE presenting (MANDATORY)
+
+🚨 **THIS STEP RUNS IN AUTO MODE BEFORE ANDY SEES ANY COMPANY NAME. NO EXCEPTIONS.**
+
+For every company that survived Steps 1 and 2, run Company Mode Step 0 in full: the HubSpot multi-variant name + domain search (0A), the M&A web search (0B), and the ownership decision (0C). Do this NOW, before Step 3. Not after Andy picks. Not during Company Mode. Before the list is shown.
+
+🚨 **BATCH GATE -- ALL CHECKS COMPLETE BEFORE ANY OUTPUT. NO EXCEPTIONS.**
+
+Do NOT present a partial list. Do NOT present companies whose checks have returned while others are still pending. The sequence is:
+
+1. Identify all N surviving candidates from Steps 1-2.
+2. Fire ALL 0A dupe searches AND ALL 0B M&A web searches in parallel (one batch of N*2 calls).
+3. Wait for EVERY check to return.
+4. Apply 0C ownership decisions to every result.
+5. ONLY THEN present the final list.
+
+If the list comes out short (companies dropped from 0A/0B/0C results), find replacements from the remaining HubSpot pool. Run 0A + 0B on EVERY replacement. Wait for all replacement checks to return. Only add a replacement to the list after its own 0A + 0B are confirmed clean. Do NOT present the list until the target count is reached OR the candidate pool is exhausted.
+
+**The failure mode this prevents:** presenting 7 checked companies while 3 replacements are added without checks. That is exactly how Evoque (Centersquare), Nordcloud (IBM acquired), and Panasonic (NA entity owned by another rep) ended up on a list presented as clean -- they were added mid-run as replacements and never got the same checks as the original batch.
+
+**Why this rule exists:** 2026-05-12 Auto Mode session. The initial 10 had incomplete checks on replacement companies. Evoque, Nordcloud, and Panasonic all required retraction after Andy challenged the list. Every check must complete on every company -- including replacements -- before the list is shown. No exceptions.
+
+🚨 **THE STEP 1 PULL IS NOT A SUBSTITUTE FOR STEP 0A. EVER.**
+
+The cold-company HubSpot pull (Step 1) is filtered by owner ID 196669355. It is structurally blind to duplicate company records owned by other reps. A company appearing in the Step 1 results does NOT mean it has no other HubSpot record under a different owner. Step 0A (name variants + domain search, NO owner filter) MUST run on every candidate regardless of how it was sourced. The most dangerous failure mode is: company appears in Andy-owned pull -> Claude skips 0A reasoning "ownership is already confirmed" -> duplicate under another rep missed -> company presented as clean when it is not.
+
+Named incidents (do not repeat):
+- **Sonic.net Inc -- 2026-05-07:** appeared in Andy-owned pull, 0A skipped, duplicate owned by Nick Sibersky missed, presented as clean.
+- **Whidbey Telecom -- 2026-05-07:** same skip, duplicate owned by May Jareda (actively reaching out) missed, presented as clean.
+
+**Why this rule exists:** 2026-05-06, Claude presented Cequel Communications (Suddenlink) as a clean pick. It is now Optimum/Altice USA, actively worked by Stephen Craig with activity logged TODAY. The M&A check and ownership check were only run after Andy pushed back. The presented list must be clean before Andy sees it.
+
+Apply the Company Mode Step 0C ownership table to every company:
+- Fails ownership (other rep, active in 3 months): remove from list silently.
+- Needs Andy's judgment (duplicate ownership, M&A ambiguity, other rep inactive 3+ months): keep on list but flag it explicitly next to the company name.
+- Passes: present as clean.
+
+No company appears on the presented list as a clean pick without a completed Step 0 pre-check.
+
 ### Step 3: Present the list to Andy
-Show the filtered, excluded list with company name, industry, employee count, last activity date. Ask: "Which of these do you want to run first, or should I start from the top?"
+Show the filtered, pre-checked list with company name, industry, employee count, last activity date, and any flags from Step 2.5. Ask: "Which of these do you want to run first, or should I start from the top?"
 
 ### Step 4: Run Company Mode on each selected company
 For each company Andy approves (or starting from the top if he says go): run the full MODE 2 Company Mode workflow. Find every relevant title. Qualify each one. Never stop early.
@@ -839,7 +1209,9 @@ Every failure logs to `Claude-Brain/overnight-run-log.md`. Never silent.
 ## RULES
 
 - Never Yes on title alone -- verify with skills + trajectory.
+- Never No or Conditional on title alone either -- Engineer and Architect titles (Infrastructure Architect, Cloud Infrastructure Engineer, Network Engineer, Systems Engineer, etc.) are ICP targets. Always read the full profile.
 - Never skim search result previews -- always navigate to full profile.
+- Never qualify from Activity feed alone -- Activity is a hook source, not a qualification source. A person's reposts and comments say nothing about their actual function. If Experience and Skills did not load, follow the Sales Nav fallback before drawing any verdict.
 - "VP" at banks (BNY, Citi, JPM) is a job grade, not seniority -- verify with skills + trajectory.
 - Never disqualify based on technical depth -- OSI has engineers who join calls.
 - Never guess at tech stack or buying authority -- only reference what is confirmed.

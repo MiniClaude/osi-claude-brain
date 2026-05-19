@@ -93,6 +93,41 @@ Repackaged `osi-meeting-followup.skill`. Source-vs-package diff verified clean.
 - **Voicemails / dial attempts under 60s duration (8):** David Christian (31s, left voicemail), Chris Vainrib (37s, key notes confirm "voicemail message"), Ron Bauer (9s, forwarded to voicemail system, missing Key notes/Topics markers), David Dahl/109139327848 (39s, "left a message"), David Dahl/109139272113 (11s, automated IVR, missing Key notes marker), Steven Larson (36s, outbound reach-out description, 36s < 60s), Shawn Hillard (27s, no AI summary), Steve Pragaspathy (23s, "was unavailable to take the call").
 - All correctly gated per Step 1.5. No email tasks created.
 
+## 2026-05-07 14:12 UTC run (osi-meeting-followup)
+- Window: 2026-05-06 00:00 UTC -> 2026-05-07 14:12 UTC (previous business day -> now)
+- Calls returned by HubSpot search: 2
+- Step 1.5 Teams-meeting hard gate applied to both.
+
+### Processed (0)
+- No qualifying Teams meetings.
+
+### Skipped (2) -- gate breakdown
+- **Orum Call with Daniel Hulse** (109249302181, 2026-05-06 20:00 UTC) -- duration 0ms < 60s threshold, no AI summary. Orum auto-dialer attempt with no conversation.
+- **Orum Call with Ziad Nasser** (109217976608, 2026-05-06 08:02 UTC) -- duration 0ms < 60s threshold, no AI summary. Orum auto-dialer attempt with no conversation.
+
+### Notes
+- Both calls correctly gated per Step 1.5. No email tasks created.
+
+## 2026-05-08 14:10 UTC run (osi-meeting-followup)
+- Window: 2026-05-07 00:00 UTC -> 2026-05-08 14:10 UTC (previous business day -> now)
+- Calls returned by HubSpot search: 0
+- No meetings on Thursday 2026-05-07. Exit clean.
+
+## 2026-05-11 14:10 UTC run (osi-meeting-followup)
+- Window: 2026-05-08 00:00 UTC -> 2026-05-11 14:10 UTC (Mon run, lookback = Fri)
+- Calls returned by HubSpot search: 0
+- No meetings on Friday 2026-05-08 (or over the weekend). Exit clean.
+
+## 2026-05-12 14:10 UTC run (osi-meeting-followup)
+- Window: 2026-05-11 00:00 UTC -> 2026-05-12 14:10 UTC (previous business day -> now)
+- Calls returned by HubSpot search: 0
+- No meetings on Monday 2026-05-11. Exit clean.
+
+## 2026-05-13 14:10 UTC run (osi-meeting-followup)
+- Window: 2026-05-12 00:00 UTC -> 2026-05-13 14:10 UTC (previous business day -> now)
+- Calls returned by HubSpot search: 0
+- No meetings on Tuesday 2026-05-12. Exit clean.
+
 ## 2026-05-01 14:05 UTC run (osi-meeting-followup)
 - Window: 2026-04-30 00:00 UTC -> 2026-05-01 14:02 UTC (previous business day -> now)
 - Calls returned by HubSpot search: 2

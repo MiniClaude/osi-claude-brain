@@ -15,6 +15,18 @@ description: >
 
 ---
 
+## 🚨 STOP -- DID YOU READ OSI-PROSPECT-QUALIFICATION THIS SESSION? (added 2026-05-08)
+
+This skill handles sequencing only. It does not govern candidate discovery, LinkedIn browsing, or Company Mode search. All of that lives in `osi-prospect-qualification`.
+
+If you are running Company Mode (finding prospects at a company) and you have NOT read `C:\Claude-Brain\skills\osi-prospect-qualification\SKILL.md` in this session: **STOP. Read it now. Then proceed.**
+
+Do not assume you remember the qualification workflow from training or a prior session. The skill has been updated multiple times. The Round 0 browse-first rule, the profile-scrubbing firms alert, and the stagger ownership rules are all in that file. Reading the outreach skill without reading the qualification skill first produced the D.E. Shaw miss on 2026-05-08 -- three strong VP-level targets gone for months.
+
+**Why this rule exists:** 2026-05-08, a Company Mode run on D.E. Shaw read the outreach skill but not the qualification skill. The Round 0 mandatory card browse (the only viable source for firms where employees scrub their LinkedIn profiles) was skipped in favor of keyword searches, which returned nothing because D.E. Shaw employees deliberately remove all profile content. Matt Kong (VP, Data Center Manager), Leonardo Palazzo (VP, Data Center Management), and Michael De Candia (SVP) were all missed as a result.
+
+---
+
 ## 🛑 HARDWIRED RULE, NO EMPLOYER VERIFICATION, NO SEQUENCE
 
 This skill never queues a 6-email sequence on faith of a stale HubSpot record. It only runs when invoked via handoff from `osi-prospect-qualification` after a ✅ Yes-with-email verdict that was backed by Path A (full LinkedIn read) or Path B (ZoomInfo + corporate-domain email + dated web-search confirmation, with explicit `EMPLOYER VERIFICATION:` line in the strategy note).
@@ -40,6 +52,25 @@ If the strategy note is missing, employer verification is missing, or the verdic
 - Qualify. Verdict is `osi-prospect-qualification`'s job. This skill assumes qualification already produced ✅ Yes-with-email.
 - Discover candidates. That's `osi-discovery-sweep`.
 - Run on multiple candidates at once. ONE per invocation.
+- Navigate to LinkedIn. All prospect context comes from the handoff payload and HubSpot strategy note.
+- Ask Andy for approval mid-run. Queue writes and task updates are automatic. Andy approved the batch at session start. Do not ask "ready?" or "proceed?" or display email bodies for review. One confirmation line per queued candidate, nothing else.
+- Ask "should I proceed to the next company?" or "ready for Company X?" in a pre-approved batch. The company list was approved at session kickoff. That approval covers ALL companies in the list. When one company is done, immediately start the next. Never pause between companies. **Why this rule exists:** 2026-05-15 — after completing IT-CNP (Company 3 of 10), Claude asked "Should I proceed to Company 4?" instead of starting immediately. The batch was pre-approved at session start. The pause wasted time and violated the no-approval-prompt rule. Fix: batch kickoff approval = blanket approval for all companies in the list, in sequence, without checkpoints.
+- Stop for `manage_crm_objects` confirmation prompts. ALL `manage_crm_objects` calls in this skill use `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. Never show a proposed-changes table. Never ask "Approve?". Andy's session kick-off is blanket approval for all HubSpot writes this skill produces. **Why this rule exists:** 2026-05-06, qualification of Andrew Banhidi at Instinet stopped mid-run to show a proposed-changes table for a contact update. Session kick-off ("go") is blanket approval. The tool's own confirmation step is bypassed via `CONFIRMATION_WAIVED_FOR_SESSION` on every call.
+
+---
+
+## 🛑 STEP -1: TOOL PREFETCH (MANDATORY if not already done this session)
+
+If osi-prospect-qualification already ran its Step -1 prefetch earlier in this conversation, skip this step — schemas are already live.
+
+If this skill is running standalone (not following a qualification session), fire these TWO ToolSearch calls in the same message before doing anything else:
+
+```
+ToolSearch({ query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_news", max_results: 6 })
+ToolSearch({ query: "select:mcp__Claude_in_Chrome__tabs_context_mcp,mcp__Claude_in_Chrome__navigate,mcp__Claude_in_Chrome__get_page_text,WebSearch,TaskCreate,TaskUpdate", max_results: 6 })
+```
+
+After both return, all schemas are live. Do not call ToolSearch again during the run.
 
 ---
 
@@ -125,8 +156,7 @@ Before drafting anything, open `C:\Claude-Brain\email-queue.json`. Match by `to`
 `paused-*`, `canceled-*`, `sent` >30 days do NOT block. Note in strategy note this is a re-engagement.
 
 **Behavior:**
-- Interactive (Andy at keyboard), ask Andy "Override?".
-- If running inline (not interactive), skip silently, log to `overnight-run-log.md`, and exit. No emails queued for this candidate.
+- Always skip silently regardless of mode. Log to `overnight-run-log.md` as "skipped-active-sequence". No emails queued for this candidate. Never ask "Override?" -- Andy will review the log and re-run manually if he wants to override.
 
 ---
 
@@ -149,10 +179,14 @@ Strategy note + LINKED_IN_CONNECT task already exist (qualification produced the
 
 ### Step 1, Read strategy note + sequence type
 
-Pull the strategy note from HubSpot (associated to the contact). Read:
-- THE PERSONAL HOOK
-- Fresh hook (30-day news)
-- THE PLAY
+🚨 **DO NOT NAVIGATE TO LINKEDIN. EVER. This skill does not touch LinkedIn.** All prospect context (hook, title, company, fresh news) is in the handoff payload and the HubSpot strategy note. Re-reading LinkedIn from here is a token waste and is forbidden. If you find yourself about to open a LinkedIn URL for context, stop. Use what is in the handoff.
+
+Use the handoff payload directly:
+- Personal Hook: already in the handoff `Personal Hook:` field. Use as-is. Do not re-derive.
+- Fresh hook: already in the handoff `Fresh hook:` field. Use as-is.
+- Sequence type: already in the handoff `Recommended sequence:` field.
+
+If the handoff payload is incomplete or missing one of these fields, THEN pull the strategy note from HubSpot (associated to the contact) and read THE PERSONAL HOOK, Fresh hook (30-day news), and THE PLAY sections. This HubSpot read is the fallback, not the default.
 
 The recommended sequence type came in via the handoff. If unsure or unspecified, read `Claude-Brain/playbook/product-lines.md` for the title-to-sequence mapping. Read `Claude-Brain/playbook/vertical-intel.md` for what to lead with by industry.
 
