@@ -21,7 +21,7 @@ search, read, and browse notes — and keeps Cowork memory in sync with new Clip
 ## Connection Details
 
 - **Base URL**: `http://127.0.0.1:27123`
-- **API Key**: `f6e58142e450d6e7447193fe5b13efb0a138c2a8b7790c6c6c52b2370dad684c`
+- **API Key**: `a1a68a2680b43aa49c05f36041c7746c16144a1f5cd70305d4ec7986ac7c8b42`
 - **Method**: All API calls go through `mcp__Claude_in_Chrome__javascript_tool` (browser fetch)
 - **Important**: The bash sandbox cannot reach Brian's localhost — only Chrome browser tools can.
 
@@ -36,7 +36,7 @@ personal and work reference material and should inform everything you do in the 
 Personal recipes, cooking notes, food knowledge.
 ```javascript
 (async () => {
-  const K = 'f6e58142e450d6e7447193fe5b13efb0a138c2a8b7790c6c6c52b2370dad684c';
+  const K = 'a1a68a2680b43aa49c05f36041c7746c16144a1f5cd70305d4ec7986ac7c8b42';
   const r = await fetch("http://127.0.0.1:27123/vault/Brian's%20Kitchen.md", {
     headers: { 'Authorization': 'Bearer ' + K }
   });
@@ -48,7 +48,7 @@ Personal recipes, cooking notes, food knowledge.
 Brian's personal prospecting notes, targets, and mini outreach tracker.
 ```javascript
 (async () => {
-  const K = 'f6e58142e450d6e7447193fe5b13efb0a138c2a8b7790c6c6c52b2370dad684c';
+  const K = 'a1a68a2680b43aa49c05f36041c7746c16144a1f5cd70305d4ec7986ac7c8b42';
   const r = await fetch('http://127.0.0.1:27123/vault/Mini%20Prospecting.md', {
     headers: { 'Authorization': 'Bearer ' + K }
   });
@@ -63,7 +63,7 @@ OSI product knowledge, ICP, sales playbook, and reference material. Read all fil
 
 ```javascript
 (async () => {
-  const K = 'f6e58142e450d6e7447193fe5b13efb0a138c2a8b7790c6c6c52b2370dad684c';
+  const K = 'a1a68a2680b43aa49c05f36041c7746c16144a1f5cd70305d4ec7986ac7c8b42';
   const files = ['ICP.md','OSI-Overview.md','Products-Hardware.md','Products-Optics.md','Products-Systain.md','Sales-Playbook.md'];
   const results = {};
   for (const f of files) {
@@ -86,7 +86,7 @@ Before doing any work, confirm the correct vault is open:
 
 ```javascript
 (async () => {
-  const K = 'f6e58142e450d6e7447193fe5b13efb0a138c2a8b7790c6c6c52b2370dad684c';
+  const K = 'a1a68a2680b43aa49c05f36041c7746c16144a1f5cd70305d4ec7986ac7c8b42';
   const r = await fetch('http://127.0.0.1:27123/vault/', {
     headers: { 'Authorization': 'Bearer ' + K }
   });
@@ -131,7 +131,7 @@ Use when Brian asks about any topic, account, contact, or concept.
 
 ```javascript
 (async () => {
-  const K = 'f6e58142e450d6e7447193fe5b13efb0a138c2a8b7790c6c6c52b2370dad684c';
+  const K = 'a1a68a2680b43aa49c05f36041c7746c16144a1f5cd70305d4ec7986ac7c8b42';
   const query = "YOUR_SEARCH_TERM";
   const r = await fetch(`http://127.0.0.1:27123/search/simple/?query=${encodeURIComponent(query)}&contextLength=200`, {
     method: 'POST',
@@ -146,7 +146,7 @@ Use when Brian asks about any topic, account, contact, or concept.
 
 ```javascript
 (async () => {
-  const K = 'f6e58142e450d6e7447193fe5b13efb0a138c2a8b7790c6c6c52b2370dad684c';
+  const K = 'a1a68a2680b43aa49c05f36041c7746c16144a1f5cd70305d4ec7986ac7c8b42';
   const path = 'Folder/Note-Name.md'; // adjust path — do NOT encode slashes
   const r = await fetch('http://127.0.0.1:27123/vault/' + path, {
     headers: { 'Authorization': 'Bearer ' + K }
@@ -162,7 +162,7 @@ Use when Brian asks about any topic, account, contact, or concept.
 
 ```javascript
 (async () => {
-  const K = 'f6e58142e450d6e7447193fe5b13efb0a138c2a8b7790c6c6c52b2370dad684c';
+  const K = 'a1a68a2680b43aa49c05f36041c7746c16144a1f5cd70305d4ec7986ac7c8b42';
   const r = await fetch('http://127.0.0.1:27123/vault/Folder/', {
     headers: { 'Authorization': 'Bearer ' + K }
   });
@@ -181,7 +181,7 @@ clipping, or at the start of a session if it hasn't been run recently.
 ### Step 1: Get current Clippings list
 ```javascript
 (async () => {
-  const K = 'f6e58142e450d6e7447193fe5b13efb0a138c2a8b7790c6c6c52b2370dad684c';
+  const K = 'a1a68a2680b43aa49c05f36041c7746c16144a1f5cd70305d4ec7986ac7c8b42';
   const r = await fetch('http://127.0.0.1:27123/vault/Clippings/', {
     headers: { 'Authorization': 'Bearer ' + K }
   });

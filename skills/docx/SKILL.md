@@ -14,7 +14,7 @@ A .docx file is a ZIP archive containing XML files.
 
 | Task | Approach |
 |------|----------|
-| Read/analyze content | `extract-text`, or unpack for raw XML |
+| Read/analyze content | `pandoc` or unpack for raw XML |
 | Create new document | Use `docx-js` - see Creating New Documents below |
 | Edit existing document | Unpack → edit XML → repack - see Editing Existing Documents below |
 
@@ -29,10 +29,7 @@ python scripts/office/soffice.py --headless --convert-to docx document.doc
 ### Reading Content
 
 ```bash
-# Text extraction as markdown
-extract-text document.docx
-
-# Show tracked changes instead of accepting them
+# Text extraction with tracked changes
 pandoc --track-changes=all document.docx -o output.md
 
 # Raw XML access

@@ -1,14 +1,14 @@
 ---
 name: bc-osi-email-sender
-description: A/B TEST VERSION of osi-email-sender. Send all due emails from C:\Claude-Brain\email-queue.json via Outlook with bi-directional signature trim, em-dash/en-dash sanitizer, OneDrive-synced queue, externalized hard-block.json, mandatory pre-flight hard-block scan, and ET send windows. ONLY trigger this skill when the user explicitly says "run bc-osi email sender", "bc-osi-email-sender", "run the BC sender", "run the new sender", "test the new sender", "A/B sender", or invokes /bc-osi-email-sender. Do NOT auto-trigger on generic phrases like "send my emails", "run the queue", or "send due emails" — those route to the legacy osi-email-sender. Runs 11am, 12pm, 1pm, 2pm, 3pm, 4pm ET weekdays.
+description: A/B TEST VERSION of osi-email-sender. Send all due emails from C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json via Outlook with bi-directional signature trim, em-dash/en-dash sanitizer, OneDrive-synced queue, externalized hard-block.json, mandatory pre-flight hard-block scan, and ET send windows. ONLY trigger this skill when the user explicitly says "run bc-osi email sender", "bc-osi-email-sender", "run the BC sender", "run the new sender", "test the new sender", "A/B sender", or invokes /bc-osi-email-sender. Do NOT auto-trigger on generic phrases like "send my emails", "run the queue", or "send due emails" — those route to the legacy osi-email-sender. Runs 11am, 12pm, 1pm, 2pm, 3pm, 4pm ET weekdays.
 ---
 
 # 🛑 ABSOLUTE FIRST ACTION: VERIFY YOU ARE READING THE LIVE SKILL 🛑
 
 **Before doing anything else, run this check:**
 
-1. Use the Read tool on `C:\Claude-Brain\skills\osi-email-sender\SKILL.md`. That file is the ONLY authoritative version.
-2. If you are currently reading any other copy (e.g., a `SKILL.md` in `/mnt/uploads/`, an inlined copy pasted into a scheduled task prompt, a `.claude/skills/` runtime snapshot, or anything attached to this session that was written before today), STOP and reload from `C:\Claude-Brain\skills\osi-email-sender\SKILL.md`. Stale copies have caused real prospects to receive malformed emails. 2026-04-23: Joe Zarcone / Rackspace went out with a hand-rolled quote header and no grey divider because the runner was following a stale upload that did not contain Step 3A REPLY flow logic. This must not happen again.
+1. Use the Read tool on `C:\Users\Mini\Documents\osi-claude-brain\skills\osi-email-sender\SKILL.md`. That file is the ONLY authoritative version.
+2. If you are currently reading any other copy (e.g., a `SKILL.md` in `/mnt/uploads/`, an inlined copy pasted into a scheduled task prompt, a `.claude/skills/` runtime snapshot, or anything attached to this session that was written before today), STOP and reload from `C:\Users\Mini\Documents\osi-claude-brain\skills\osi-email-sender\SKILL.md`. Stale copies have caused real prospects to receive malformed emails. 2026-04-23: Joe Zarcone / Rackspace went out with a hand-rolled quote header and no grey divider because the runner was following a stale upload that did not contain Step 3A REPLY flow logic. This must not happen again.
 3. The live file on disk is authoritative. Any version that disagrees with the live file is wrong. If you see two copies and they differ, follow the live file and surface the drift to Andy at the end of the run.
 
 If the live file is unreachable for any reason, ABORT the run. Do not fall back to an older copy. Report the failure and let Andy decide.
@@ -27,8 +27,8 @@ This skill sends cold outreach to real, paying-potential customers. One bad form
 
 ```python
 import json
-QUEUE_PATH = 'C:/Claude-Brain/email-queue.json'  # Live queue on OneDrive (real-time sync across laptops). Moved from C:/Claude-Brain/ on 2026-04-24.
-HARD_BLOCK_PATH = 'C:/Claude-Brain/hard-block.json'  # Hard-block list stays in Git (manually maintained, low churn)
+QUEUE_PATH = 'C:/Users/Mini/Documents/osi-claude-brain/automation/email-queue.json'  # Live queue on OneDrive (real-time sync across laptops). Moved from C:/Users/Mini/Documents/osi-claude-brain/ on 2026-04-24.
+HARD_BLOCK_PATH = 'C:/Users/Mini/Documents/osi-claude-brain/automation/hard-block.json'  # Hard-block list stays in Git (manually maintained, low churn)
 
 with open(QUEUE_PATH) as f:
     queue = json.load(f)
@@ -39,7 +39,7 @@ entry = next((e for e in queue if e.get('id') == ENTRY_ID), None)
 assert entry is not None, f"Entry {ENTRY_ID} not in queue"
 assert entry['status'] == 'pending', f"SKIP: {ENTRY_ID} status is {entry['status']}, not pending"
 
-# Hard-block enforcement. Single source of truth is C:/Claude-Brain/hard-block.json.
+# Hard-block enforcement. Single source of truth is C:/Users/Mini/Documents/osi-claude-brain/automation/hard-block.json.
 # Never hardcode addresses or domains anywhere else. To block a new address/domain,
 # edit hard-block.json. Do not touch this gate code.
 blocked_addrs = {a['email'].lower() for a in hb.get('addresses', [])}
@@ -123,9 +123,9 @@ If the queue body contains an em-dash, it is a bug in whichever skill wrote the 
 
 ### 1A. Select candidate entries
 
-Queue file: `C:\Claude-Brain\email-queue.json`
+Queue file: `C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json`
 
-Moved to OneDrive on 2026-04-24 specifically so the queue auto-syncs in real time between Andy's two laptops. OneDrive is the live sync mechanism for this ONE file. The rest of Claude-Brain still lives in Git at `C:\Claude-Brain\`. Do not read or write any `C:\Claude-Brain\email-queue.json` path. If the OneDrive path is unreachable, ABORT. Do not fall back to Git.
+Moved to OneDrive on 2026-04-24 specifically so the queue auto-syncs in real time between Andy's two laptops. OneDrive is the live sync mechanism for this ONE file. The rest of Claude-Brain still lives in Git at `C:\Users\Mini\Documents\osi-claude-brain\`. Do not read or write any `C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json` path. If the OneDrive path is unreachable, ABORT. Do not fall back to Git.
 
 Select entries where:
 - `sendDate` equals today's date (YYYY-MM-DD, ET)
@@ -138,7 +138,7 @@ If current hour is outside the six windows, do nothing and log the no-op. Do not
 
 ### 1B. Pre-flight hard-block scan (MANDATORY — Andy must always know)
 
-Before composing ANY email this window, scan the pending candidate set against `C:\Claude-Brain\hard-block.json`. For every pending entry whose `to` matches a blocked address or whose domain matches a blocked domain, collect it into a `hard_block_hits` list.
+Before composing ANY email this window, scan the pending candidate set against `C:\Users\Mini\Documents\osi-claude-brain\automation\hard-block.json`. For every pending entry whose `to` matches a blocked address or whose domain matches a blocked domain, collect it into a `hard_block_hits` list.
 
 Andy wants to be NOTIFIED any time an upstream sequence enrolled a prospect against a blocked address or domain. Silent skipping is not acceptable — a new sequence quietly failing to send is worse than visible failure, because Andy thinks outreach is going out when it isn't.
 
@@ -152,8 +152,8 @@ If there are zero hits, say so explicitly in the report ("Hard-block scan: clean
 ```python
 import json
 from datetime import datetime
-with open('C:/Claude-Brain/email-queue.json') as f: queue = json.load(f)
-with open('C:/Claude-Brain/hard-block.json') as f: hb = json.load(f)
+with open('C:/Users/Mini/Documents/osi-claude-brain/automation/email-queue.json') as f: queue = json.load(f)
+with open('C:/Users/Mini/Documents/osi-claude-brain/automation/hard-block.json') as f: hb = json.load(f)
 blocked_addrs = {a['email'].lower() for a in hb.get('addresses', [])}
 blocked_domains = {d['domain'].lower() for d in hb.get('domains', [])}
 
@@ -388,7 +388,7 @@ After each successful send, set that entry's `status` to `sent` via a plain Pyth
 
 ```python
 import json, os, tempfile
-path = 'C:/Claude-Brain/email-queue.json'
+path = 'C:/Users/Mini/Documents/osi-claude-brain/automation/email-queue.json'
 with open(path) as f: q = json.load(f)
 for e in q:
     if e.get('id') == '<id>':
@@ -404,7 +404,7 @@ Never delete the file first. Never use the Write tool for the queue. One atomic 
 
 ## Step 7: Log the run
 
-Append a summary to `C:\Claude-Brain\sessions\session-YYYY-MM-DD.md` under a heading for the window that just fired. Include:
+Append a summary to `C:\Users\Mini\Documents\osi-claude-brain\sessions\session-YYYY-MM-DD.md` under a heading for the window that just fired. Include:
 - Window (e.g., `11am ET`)
 - Count sent, count skipped, count errored
 - List of IDs sent, with any flags or anomalies

@@ -7,9 +7,9 @@ When using an existing presentation as a template:
 1. **Analyze existing slides**:
    ```bash
    python scripts/thumbnail.py template.pptx
-   extract-text template.pptx
+   python -m markitdown template.pptx   # .pptx only — markitdown[docx] is not installed
    ```
-   Review `thumbnails.jpg` to see layouts, and `extract-text` output to see placeholder text.
+   Review `thumbnails.jpg` to see layouts, and markitdown output to see placeholder text.
 
 2. **Plan slide mapping**: For each content section, choose a template slide.
 
