@@ -256,7 +256,7 @@ To add a company to the approved-vendor list, Brian edits `OSI-Brain/approved-ve
 
 Before any other work on this prospect, check the email queue. This prevents stacking duplicate sequences on the same person, which wrecks sender reputation and is bad form.
 
-Open `C:\Claude-Brain\email-queue.json` using Python `open(path,'r')`. Scan every entry for a match with this prospect:
+Open `C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json` using the OneDrive-safe Python read pattern (try local `open(path,'r')` first, fall back to SharePoint MCP on EINVAL). Scan every entry for a match with this prospect:
 
 - Match by `to` field equal to the prospect's email address (case-insensitive), OR
 - Match by `prospectName` + `company` both matching the prospect's full name and company (case-insensitive)
@@ -521,7 +521,7 @@ When Brian says "sent":
 
 Do NOT create individual scheduled tasks for emails. Instead, append all 6 emails to the queue file.
 
-**Queue file:** C:\Claude-Brain\email-queue.json
+**Queue file:** C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json
 
 Each entry:
 
@@ -549,7 +549,9 @@ The queue file lives in OneDrive and may be dehydrated (cloud-only placeholder) 
 ```python
 import json, sys, os
 
-QUEUE = r'C:\Claude-Brain\email-queue.json'
+QUEUE = r'C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json'
+# Or from the sandbox mount:
+# QUEUE = '/sessions/vigilant-upbeat-faraday/mnt/osi-claude-brain/automation/email-queue.json'
 
 # Step 1: Read existing content. Try local first, fall back to SharePoint on EINVAL.
 try:
