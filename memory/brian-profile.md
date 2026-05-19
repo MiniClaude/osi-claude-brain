@@ -37,7 +37,8 @@
 - Default to action — start the task, ask clarifying questions after if needed
 - NO em dashes (—), NO en dashes (–)
 - Never say "Worth 15 minutes this week to compare?"
-- No dashes in emails
+- No dashes in emails (no hyphens used as pauses or connectors in email copy)
+- Use commas instead of dashes when a pause or list is needed in email sentences
 - No bullet-heavy AI-sounding language — humanized, natural prose in outreach
 
 ## Working Style

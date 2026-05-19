@@ -19,6 +19,9 @@ At the start of a new Cowork session, read this file + any topic files relevant 
 - [Active Sequences](active-sequences.md) — All contacts currently in email sequences as of last update. Refresh with `bc-task-alarm` or `osi-sequence-monitor`.
 - [Skills and Automation](skills-and-automation.md) — Full skills library, folder structure, email automation system, scheduled tasks. Reference when building or debugging workflows.
 
+### Winning Emails
+- [Smartoptics — Fiber/Carrier Providers](winning-emails/smartoptics-fiber-provider-openers.md) — Situation/Solution/Result format. 100G wave cost + lead time pain. Works for regional ISPs, broadband operators, fiber carriers. Pull when targeting Astound, Breezeline, Zirrus, Synergy Fiber, Surf Internet, and similar.
+
 ---
 
 ## Key Facts (Quick Reference)
@@ -38,7 +41,7 @@ At the start of a new Cowork session, read this file + any topic files relevant 
 **Hard rules for emails and all writing:**
 - No em dashes (—), no en dashes (–)
 - Never say "Worth 15 minutes this week to compare?"
-- No dashes in emails
+- No dashes or hyphens in emails — use commas instead
 - No AI filler language — concise, direct, humanized
 
 **Obsidian vault:** osi-brian (Local REST API) — check before saying "I don't have context on that"
