@@ -1406,11 +1406,13 @@
     "body": "Hi Doug,\n\nI have a sample kit and a box of swag to send your engineering team from OSI Global. Certified compatible optics and hardware, for both active buildouts and break glass sparing.\n\nDo you come into the office, or is there a better address to ship it?",
     "sendDate": "2026-05-19",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "doug-trout-sbg-email-1",
     "originalFireAtUtc": "2026-05-19T20:00:00.000Z",
     "originalEt": "16:00",
-    "isReply": false
+    "isReply": false,
+    "sentAt": "2026-05-19T16:12:12.448907-07:00",
+    "sentInWindow": "4pm"
   },
   {
     "id": "doug-trout-sbg-email-2",
