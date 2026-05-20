@@ -118,7 +118,39 @@ Steps:
    > REPLY RECEIVED [date], sequence auto-paused. Andy to review and decide whether to resume or cancel.
 5. Add to the monitor output in the PAUSED ON REPLY section.
 
-Special case: if the reply is specifically a shipping address tied to a swag or sample request, still auto-pause. Flag it distinctly in the summary as SHIPMENT REQUESTED so Andy knows to ship before doing anything else.
+Special case: if the reply contains a shipping address (street number, city, state, zip — or explicit "ship to" / "send to" / "address is" language), treat it as a SHIPMENT REQUESTED reply. Still auto-pause the sequence. Then do all of the following automatically:
+
+**1. Determine product to send.**
+Check the queue entry for this prospect's Email 1 `id` suffix to find the sequence type from the strategy note or queue metadata:
+- `Sample-Offer Network` or any Pain-Led optics/DWDM sequence → **SFPs**
+- `Sample-Offer Server` or any Pain-Led DIMM/compute sequence → **DIMMs**
+- Unknown / cannot determine → default to **SFPs**, flag in summary
+
+**2. Write a row to the Swag tab in `Claude-Brain/prospects-tracker-new.xlsx`.**
+Tab name: "Swag". Create it if it doesn't exist. Columns:
+Name | Company | Title | Email | Date Reply Received | Shipping Address | Product to Send | Date Shipped | Tracking # | Follow-up Status
+
+Fill in everything known now. Leave Date Shipped, Tracking #, and Follow-up Status blank for Andy to complete.
+
+**3. Create two HubSpot tasks on the contact.**
+
+Task 1 — Ship task:
+- Subject: `Ship swag to [First Name] at [Company]`
+- Due: today
+- Type: `TODO`
+- Owner: Andy (196669355)
+- Body: `[First Name] replied with a shipping address. Send [SFPs/DIMMs]. Address: [extracted address].`
+
+Task 2 — Follow-up task:
+- Subject: `Follow up with [First Name] re: swag shipment`
+- Due: 4 business days from today (so it fires after delivery)
+- Type: `TODO`
+- Owner: Andy (196669355)
+- Body: `Check in after swag shipment. Ask if the [SFPs/DIMMs] arrived and if they had a chance to test them.`
+
+**4. Log in the summary under SHIPMENT REQUESTED:** Name | Company | product | address | "Ship task + follow-up task created in HubSpot. Row added to Swag tab."
+
+If the HubSpot task creation fails, flag it but still write the Swag tab row. If the Excel write fails, flag it but still create the HubSpot tasks. Never block the auto-pause on a downstream write failure.
 
 ### Resuming or canceling a paused sequence
 When Andy says "resume [name]": flip those entries back to `"pending"` and adjust send dates if needed so the next send is at least 2 business days out from today. **Atomic write only** (`.tmp` + `os.replace`), never direct.
@@ -338,7 +370,7 @@ PAUSED ON REPLY: [N]
 [If none: None.]
 
 SHIPMENT REQUESTED: [N]
-[If any: Name | Company | reply date | address | "Confirm shipment"]
+[If any: Name | Company | product | address | HubSpot ship task due today | follow-up task due [date] | Swag tab updated]
 [If none: None.]
 
 AUTO-FIXED OVERDUE: [N]
