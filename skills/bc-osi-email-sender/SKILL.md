@@ -134,6 +134,48 @@ Select entries where:
 
 Skip `cancelled` and `sent` entries.
 
+### 1A-PLUS: ONE-EMAIL-PER-PERSON-PER-DAY GUARD (runs immediately after candidate selection, before hard-block scan)
+
+This is the explicit backstop against ever sending two emails to the same person on the same day. The self-healing cadence in abc-7step-master is designed so this situation never arises -- but if the recalculation misfired, a queue entry was manually edited incorrectly, or a past-due entry sat in the queue while the machine was off for days, two entries for the same `to` address could both appear as pending today. This guard catches that.
+
+Two checks:
+
+**Check 1 -- Already sent today:** scan the full queue for entries where `status == "sent"` AND `sendDate == today`. Collect their `to` addresses. Any candidate whose `to` matches gets skipped and left `pending`. It will be picked up at tomorrow's first applicable window.
+
+**Check 2 -- Duplicate within today's candidate list:** if two candidates in this window share the same `to` address, keep only the one with the lowest `emailNumber`. Skip the others, leave as `pending`.
+
+```python
+from datetime import datetime
+
+today = datetime.now().strftime('%Y-%m-%d')
+
+# Check 1: already sent to this address today (anywhere in queue history)
+already_sent_today = {
+    e.get('to', '').lower().strip()
+    for e in queue
+    if e.get('status') == 'sent' and e.get('sendDate') == today
+}
+
+# Check 2: dedup within today's window -- lowest emailNumber wins per address
+candidates.sort(key=lambda e: e.get('emailNumber', 99))
+seen_today = set()
+deduped = []
+for entry in candidates:
+    addr = (entry.get('to') or '').lower().strip()
+    if addr in already_sent_today:
+        print(f"SKIP one-email-per-day (already sent today): {entry.get('id')} -> {addr}")
+        continue
+    if addr in seen_today:
+        print(f"SKIP one-email-per-day (duplicate in window): {entry.get('id')} -> {addr}")
+        continue
+    seen_today.add(addr)
+    deduped.append(entry)
+
+candidates = deduped
+```
+
+Log every skip in the Step 7 run report under a "One-email-per-day skips" section. These are expected when a sequence is running behind -- not errors. If the same address is skipped on multiple consecutive days, flag it: the self-healing recalculation may not be running and the sequence is stalling.
+
 If current hour is outside the six windows, do nothing and log the no-op. Do not dispatch.
 
 ### 1B. Pre-flight hard-block scan (MANDATORY — Andy must always know)

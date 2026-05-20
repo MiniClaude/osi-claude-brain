@@ -193,7 +193,7 @@ At creation time, write all 7 entries to the queue with provisional `sendDate` v
 
 That means: if Email 2 fires a day late because the 11am PT window was missed and got picked up at 12pm next day, Email 3's `sendDate` shifts forward a day automatically. The gap from the table stays intact instead of compressing. The queue is the living schedule, not a frozen plan.
 
-This is the responsibility of the master `osi-email-sender` task, not this skill. This skill writes the provisional dates and trusts the sender to recompute as it goes.
+This is the responsibility of the master `osi-email-sender` task, not this skill. This skill writes the provisional dates and trusts the sender to recompute as it goes. As a hard backstop, the sender also enforces a one-email-per-person-per-day rule: if any entry for a given `to` address already has `status: "sent"` and `sendDate` matching today, all other pending entries for that address are skipped until tomorrow. This means a sequence that is weeks behind will catch up at most one email per person per day -- never three in a row.
 
 ### 5e. Print the schedule for review
 
