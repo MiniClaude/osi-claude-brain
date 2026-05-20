@@ -16,9 +16,24 @@ description: >
 
 ## Your job
 
-Check everything running, catch anything broken, flag anything Andy needs to act on. Output a clean summary. Fast.
+Check everything running, catch anything broken, fix it automatically, tell Andy what you did. Output a clean summary. Fast.
 
 Read this entire skill before producing any output.
+
+---
+
+## 🚨 SALES NAV RULE — NON-NEGOTIABLE, APPLIES EVERYWHERE IN THIS SKILL
+
+**Any time Email 1's send date changes for any reason — stranded fix, overdue fix, ordering fix, Andy request, any reason at all — the HubSpot "Sales Nav -- Send connection request" task for that prospect MUST be rescheduled to match the new Email 1 date. This is not optional. This is not a secondary step. Do it in the same write pass.**
+
+Procedure (applies every single time E1 date changes):
+1. Find the contact in HubSpot by email address.
+2. Search tasks on that contact where `hs_task_subject` contains "Sales Nav -- Send connection request" AND `hs_task_status = NOT_STARTED`.
+3. Exactly one match: update `hs_timestamp` to the new E1 date at 20:00 UTC (4pm ET).
+4. Already COMPLETED: leave it. Flag in summary: "Sales Nav connect already sent on [old date] — LinkedIn arm fired ahead of rescheduled E1."
+5. Zero or multiple NOT_STARTED matches: do NOT auto-update. Flag for Andy to handle manually. Still fix the email queue.
+
+Never reschedule E1 without also addressing this task. If the HubSpot lookup fails, note it and move on — but do not skip the email queue fix.
 
 ---
 
@@ -37,24 +52,32 @@ For each prospect, build a status list:
 
 ---
 
-## Step 2: Flag Overdue Tasks
+## Step 2: Full Queue Sweep — Auto-Fix All Overdue Entries
 
-Any task where enabled: true and fireAt is in the past is a failure. It should have sent but did not.
+Read `C:\Claude-Brain\email-queue.json`. Scan every entry where `status: "pending"` AND `sentAt: null` AND `sendDate` is in the past. There is no lookback ceiling. If an entry is 10 days overdue, it still gets fixed.
 
-Flag each one:
-> OVERDUE: [Name] at [Company], Email [N] was due [date/time]. Still enabled. Check Cowork Scheduled Tasks sidebar.
+**E1 overdue:** handled by Step 5 (stranded sequence auto-fix). Skip here — do not double-process.
 
-Do not attempt to resend automatically. Flag only.
+**E2-6 overdue:** auto-fix immediately.
+
+For each overdue E2-6 entry:
+1. **New send date:** if the monitor fires before 3:30 PM ET, reschedule to today. After 3:30 PM ET, use the next business day.
+2. **Respread remaining entries:** calculate the offset in business days between the original sendDate and the new date. Push every subsequent pending entry for that prospect forward by the same offset, preserving original cadence gaps exactly.
+3. **Audit trail:** add `rescheduled` field to each updated entry: `"From <old-date> to <new-date> on <today> (overdue-auto-fix)"`. Atomic write only: write to `email-queue.json.tmp`, then `os.replace(tmp, original)`.
+
+Report each fix in the summary under AUTO-FIXED OVERDUE: Name | Company | Email N | was due [old date] | rescheduled to [new date] | E[N+1]-6 respread.
 
 ---
 
 ## Step 3: Scan Outlook Inbox for Bounces
 
+**Lookback window:** read `C:\Claude-Brain\monitor-last-run.json` to get the timestamp of the last successful monitor run. Search Outlook for bounces received since that timestamp. If the file is missing, or if the last run was more than 7 days ago, use a 7-day lookback. This ensures nothing is missed if the monitor skips days.
+
 Navigate to https://outlook.office.com in Chrome.
 
 If login screen appears, stop and note it in the summary. Do not proceed with Outlook checks.
 
-Go to Inbox. Search for emails received in the last 48 hours where sender contains: mailer-daemon OR postmaster, OR subject contains: undeliverable OR delivery failed OR returned mail.
+Go to Inbox. Search for emails received since the last run (see above) where sender contains: mailer-daemon OR postmaster, OR subject contains: undeliverable OR delivery failed OR returned mail.
 
 For each bounce found:
 1. Extract the original recipient email address from the bounce notification
@@ -70,7 +93,9 @@ For each bounce found:
 
 ## Step 4: Check HubSpot for Replies, Auto-Pause on non-OOO
 
-For each prospect who had an email task fire in the last 48 hours:
+**Lookback window:** use the same last-run timestamp from `monitor-last-run.json` (see Step 3). Check for replies received since that timestamp, not just 48 hours. If file missing, use 7 days.
+
+For each prospect who had an email task fire since the last monitor run:
 
 Search HubSpot for recent inbound activity on that contact:
 - Inbound emails logged in the last 7 days
@@ -104,37 +129,92 @@ When Andy says "cancel [name]": change to `"canceled-reply"` and leave them. **A
 
 ---
 
-## Step 5: Stranded Sequences, Detect and Repair
+## Step 5: Stranded Sequences, Detect and Auto-Fix
 
-A sequence is "stranded" when Email 2 or later is queued in `pending` but the matching Email 1 was never actually sent (status still `pending`, sentAt null). This happens when a send window misfires (sender skipped, OneDrive migration, scheduler outage). Email 2's subject is `RE: …`, so if the sender ever fires it, it lands as an out-of-thread fresh email and looks broken to the prospect.
+A sequence is "stranded" when Email 2 or later is queued in `pending` but the matching Email 1 was never actually sent (status still `pending`, sentAt null). This happens when a send window misfires (sender skipped, scheduler outage, validator failure). Email 2's subject is `RE: …`, so if the sender fires it before E1 goes out, it lands as an out-of-thread fresh email and looks broken to the prospect.
 
 ### Detection
-Read `C:\Claude-Brain\email-queue.json`. For each prospect with any pending entry, check whether their Email 1 entry (the `-1` id suffix) has `status: pending` and `sentAt: null` AND a `sendDate` in the past. If yes, the whole sequence is stranded.
+Read `C:\Claude-Brain\email-queue.json`. For each prospect with any pending entry, check whether their Email 1 entry (the `-1` id suffix) has `status: pending` AND `sentAt: null` AND a `sendDate` in the past. If yes, the whole sequence is stranded.
 
-### Surface to Andy
-List each stranded prospect in the monitor summary under a dedicated **STRANDED SEQUENCES** section, before the daily send list. For each one:
-- Name | Company | E1 was due [date] | E2+ scheduled but blocked
+### Auto-fix, no decision required
 
-Offer Andy three options: (a) reschedule E1 to a future weekday and respread E2-6 forward, (b) cancel all remaining entries, (c) Andy sends E1 manually then I respread E2-6.
+Do not ask Andy what to do. Auto-reschedule immediately.
 
-### When rescheduling, REQUIRED steps
-If Andy picks reschedule (option a or c):
+**New E1 date:** reschedule E1 to today if the monitor is firing before 3:30 PM ET (4pm send window still reachable). If the monitor fires after 3:30 PM ET, use the next business day instead.
 
-1. Update the queue entry for E1 to the new sendDate/sendTime. Push E2-6 forward by the same business-day offset to preserve the original cadence. Add a `rescheduled` audit field on each updated entry: `"From <old> to <new> on <today> (<reason>)"`.
+**Respread E2-6:** calculate the business-day offset between the original E1 date and the new E1 date. Push every subsequent entry (E2-6) forward by that same offset, preserving the original cadence gaps exactly.
 
-2. **🚨 CRITICAL, also reschedule the Sales Nav connection request task in HubSpot.** The prospect's Day-1 LinkedIn connection request task is tied to the original E1 date. If E1 moves, the connection task moves with it, otherwise the LinkedIn touch fires before the email arm and the cadence breaks.
+**Audit trail:** add a `rescheduled` field to each updated queue entry: `"From <old-date> to <new-date> on <today> (stranded-sequence auto-fix)"`. Atomic write only: write to `email-queue.json.tmp`, then `os.replace(tmp, original)`. Never write directly to the live file.
 
-   For each rescheduled prospect:
-   - Find the contact in HubSpot by email address.
-   - Search for tasks associated with that contact where `hs_task_subject` contains "Sales Nav -- Send connection request" AND `hs_task_status = NOT_STARTED`.
-   - If exactly one match: update its `hs_timestamp` to the new E1 datetime (use the same time-of-day as the new E1 send window, e.g. 4pm ET = 20:00 UTC).
-   - If COMPLETED already: leave it alone but flag in the summary as "Sales Nav connect already sent on <old date>, connection arm fired ahead of new E1 date".
-   - If multiple NOT_STARTED matches or none: do NOT auto-update. Flag for Andy to handle manually.
+**🚨 CRITICAL: also reschedule the Sales Nav connection request task in HubSpot.** The LinkedIn connection request is tied to E1's date. If E1 moves, the task must move with it or the LinkedIn arm fires out of sync with the email arm.
 
-3. Confirm in the monitor output:
-   > Rescheduled E1-E6 for [Name]. Sales Nav connect task moved to [new date].
+For each rescheduled prospect:
+- Find the contact in HubSpot by email address.
+- Search for tasks on that contact where `hs_task_subject` contains "Sales Nav -- Send connection request" AND `hs_task_status = NOT_STARTED`.
+- If exactly one match: update its `hs_timestamp` to the new E1 date at 20:00 UTC (4pm ET).
+- If COMPLETED already: leave it. Flag in the summary: "Sales Nav connect already sent on <old date>, LinkedIn arm fired ahead of rescheduled E1."
+- If zero matches or multiple NOT_STARTED matches: do NOT auto-update. Flag for Andy to handle manually.
 
-Never reschedule the queue without also addressing the Sales Nav task. Skipping step 2 silently breaks the cadence.
+**Report in the summary:**
+> AUTO-FIXED STRANDED: [Name] | [Company] | E1 moved from [old date] to [new date] | E2-6 respread | Sales Nav task moved to [new date]
+
+Never reschedule the queue without also addressing the Sales Nav task. Skipping that step silently breaks the cadence.
+
+---
+
+## Step 5.1: Ordering Sweep — Fix E2+ Scheduled Before E1
+
+After Steps 2 and 5, do a pass over all pending entries. For each prospect, check whether any E2-6 entry has the same `sendDate` as E1 AND a `sendTime` that is earlier in the day than E1's `sendTime` (e.g. E2 at 11am, E1 at 4pm — same day, wrong order).
+
+**Auto-fix:** keep E1 where it is. Push E2 to the next business day at 11am. Respread E3-6 from there using the original cadence gaps.
+
+Atomic write. Add `rescheduled` audit field to each changed entry: `"From <old> to <new> on <today> (ordering-fix)"`.
+
+Report under AUTO-FIXED ORDERING: Name | Company | E2 moved from [date 11am] to [new date] | E3-6 respread.
+
+**🚨 If E1's date also changed as part of this fix, apply the Sales Nav rule at the top of this skill immediately.**
+
+---
+
+## Step 5.2: Company Gap Sweep — No Two Prospects at Same Company Same Day
+
+After all queue fixes in Steps 2, 5, and 5.1, scan all pending entries and group by company. If two or more prospects at the same company have a pending entry on the same `sendDate`, there is a conflict.
+
+**Auto-fix:** keep the entry with the earlier `addedDate` on its current date. Push the later-added entry forward one business day. If that day also has a conflict, push again. Repeat until clear.
+
+Atomic write. Add `rescheduled` audit field: `"From <old> to <new> on <today> (company-gap-fix)"`.
+
+Report under AUTO-FIXED COMPANY GAP: Name | Company | moved from [date] to [new date] | conflict with [other prospect name].
+
+---
+
+## Step 5.3: Cadence Integrity Check
+
+After all reschedules in Steps 2, 5, 5.1, and 5.2, do a final pass on every prospect's pending entries. Verify the gap between each consecutive pair (E1-E2, E2-E3, E3-E4, E4-E5, E5-E6) is at least 1 business day.
+
+If any gap is zero or negative (two entries on the same day or out of order after compounding fixes), push the later entry forward until the gap is at least 1 business day and run the company gap check again.
+
+Atomic write. Report any corrections under AUTO-FIXED CADENCE: Name | Company | which pair was compressed | fix applied.
+
+---
+
+## Step 5.4: Sales Nav Task Audit — Every E1 Going Out Today
+
+For every prospect with a pending Email 1 (`-1` id suffix) scheduled for today's 4pm window:
+
+1. Find the contact in HubSpot by email address.
+2. Search for a task on that contact where `hs_task_subject` contains "Sales Nav -- Send connection request" AND `hs_task_status = NOT_STARTED` AND the task due date matches today.
+3. **If found:** all good. No action.
+4. **If NOT found:** create the task now. Fields:
+   - Subject: `Sales Nav -- Send connection request to [First Name] [Last Name]`
+   - Due date: today
+   - Type: `TODO`
+   - Owner: Andy (HubSpot owner ID 196669355)
+   - Body: `Day 1 connection request. Email 1 goes out at 4pm today.`
+5. Report in the summary under SALES NAV TASKS CREATED: Name | Company | task created for today.
+6. If the HubSpot contact lookup fails, flag it: Name | Company | contact not found, Sales Nav task could not be created — verify manually.
+
+This runs every day before the pre-flight risk check. No E1 should go out without a same-day Sales Nav task in HubSpot.
 
 ---
 
@@ -261,13 +341,29 @@ SHIPMENT REQUESTED: [N]
 [If any: Name | Company | reply date | address | "Confirm shipment"]
 [If none: None.]
 
-OVERDUE TASKS: [N]
-[If any: Name | Company | Email N | was due date]
+AUTO-FIXED OVERDUE: [N]
+[If any: Name | Company | Email N | was due [old date] | rescheduled to [new date] | remaining respread]
 [If none: None.]
 
-STRANDED SEQUENCES: [N]
-[If any: Name | Company | E1 was due [date] | E2+ blocked | needs decision]
+AUTO-FIXED STRANDED: [N]
+[If any: Name | Company | E1 moved from [old date] to [new date] | E2-6 respread | Sales Nav task moved]
 [If none: None.]
+
+AUTO-FIXED ORDERING: [N]
+[If any: Name | Company | E2 moved from [same-day] to [new date] | E3-6 respread]
+[If none: None.]
+
+AUTO-FIXED COMPANY GAP: [N]
+[If any: Name | Company | moved from [date] to [new date] | conflict with [other prospect]]
+[If none: None.]
+
+AUTO-FIXED CADENCE: [N]
+[If any: Name | Company | compressed gap fixed between [EN] and [EN+1] | new dates]
+[If none: None.]
+
+SALES NAV TASKS CREATED: [N]
+[If any: Name | Company | task created for today]
+[If none: All E1s today have Sales Nav tasks.]
 
 PRE-FLIGHT RISKS: [N]
 [If any: [risk-type] Name | Company | reason | recommended action]
@@ -281,6 +377,18 @@ STATUS: [ALL CLEAR / ISSUES FOUND -- see above]
 ---
 
 If everything is clean, end with: "All clear. [N] sequences running."
+
+---
+
+## Step 7.5: Write Last-Run Timestamp
+
+After producing the summary output, write `C:\Claude-Brain\monitor-last-run.json` with the current UTC timestamp:
+
+```json
+{"lastRun": "2026-05-20T18:15:00Z", "status": "success"}
+```
+
+Atomic write (`.tmp` + `os.replace`). This file is what Steps 3 and 4 use on the next run to know how far back to look. If the monitor errors out before this step, the file is not written, which means next run will use the 7-day fallback — safe behavior.
 
 ---
 
@@ -316,7 +424,9 @@ If no one was unenrolled this run, skip this step entirely.
 - Never modify tasks except to cancel on a confirmed hard bounce, auto-pause on a non-OOO reply, or Andy's explicit instruction.
 - Never flag out-of-office auto-replies as actionable. Never pause on OOO.
 - Auto-pause (not cancel) on non-OOO replies. Andy decides whether to resume or cancel after reviewing.
-- **Whenever Email 1 is rescheduled (stranded-sequence repair or any other reason), the matching Sales Nav connection request task in HubSpot must be moved to the same date.** Never reschedule the email arm without addressing the LinkedIn arm. See Step 5 for the procedure.
+- **🚨 SALES NAV RULE — see the prominent callout at the top of this skill. Any time E1's date changes for any reason, the HubSpot Sales Nav connection request task moves with it. No exceptions. No "I'll flag it for Andy." Fix it in the same pass.**
+- Auto-fix everything: overdue entries, stranded sequences, ordering violations, company gap conflicts, cadence compression. Report what was fixed. Do not ask for permission first.
+- Never reschedule the queue without also addressing the Sales Nav task. Skipping it silently breaks the LinkedIn arm of the cadence.
 - If Outlook login screen appears, note it and skip all Outlook-dependent checks.
 - If scheduled tasks API returns an error, note it in the summary and move on.
 - Keep the summary under 30 lines if possible. Andy reads this at 11 AM and needs to act on it fast.

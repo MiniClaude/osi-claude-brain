@@ -209,20 +209,31 @@ Why state metadata, not email-queue scan: queue has 500+ entries; state metadata
 
 ### Step 3, Cadence
 
-| Email | sendTime | Gap from prior actual send |
+🚨 **COMPUTE ALL 6 DATES FROM THE FINAL DAY 1 ONLY. Day 1 must be fully resolved from the stagger (Step 2) before any other date is computed. Never compute E2-E6 from an intermediate or pre-stagger Day 1. The most common source of the E1/E2 same-day bug is computing E2 before the stagger pushes E1 forward.**
+
+| Email | sendTime | Offset from Day 1 |
 |---|---|---|
-| 1 | `4pm` |, (Day 1) |
-| 2 | `11am` | +2 business days |
-| 3 | `12pm` | +4 business days |
-| 4 | `1pm` | +6 business days |
-| 5 | `2pm` | +5 business days |
-| 6 | `3pm` | +6 business days |
+| 1 | `4pm` | Day 1 |
+| 2 | `11am` | Day 1 + 2 business days |
+| 3 | `12pm` | Day 1 + 6 business days |
+| 4 | `1pm` | Day 1 + 12 business days |
+| 5 | `2pm` | Day 1 + 17 business days |
+| 6 | `3pm` | Day 1 + 23 business days |
+
+All offsets are from Day 1. Skip weekends and holidays for every date. Use `holidays.json` (fallback: US federal + Good Friday + Black Friday + Christmas Eve + New Year's Eve).
+
+**Pre-write date order check (MANDATORY before Step 10):**
+
+After computing all 6 dates, verify the following before writing anything to the queue:
+1. E1 < E2 < E3 < E4 < E5 < E6 (strictly ascending dates, no ties)
+2. No two entries share the same sendDate
+3. E2 sendDate is at least 1 business day after E1 sendDate
+
+If any check fails: log to `overnight-run-log.md` with all 6 computed dates, raise an error, and exit without writing to the queue. Do not write a partial or mis-ordered sequence. The monitor's ordering sweep (Step 5.1) is a safety net, not a substitute for correct initial scheduling.
 
 Master `osi-email-sender` fires 11 AM-4 PM ET weekdays. Each window processes queue entries with matching `sendTime`.
 
-**Self-healing:** when Email N fires (in the email-sender skill, not here), it recomputes Email N+1's `sendDate` as `N business days after today`. So if a sequence is paused/resumed, the cadence stays correct.
-
-LinkedIn connection request task due Day 1 (skip weekends/holidays).
+🚨 **LinkedIn connection request task in HubSpot MUST match Day 1 exactly.** Set or update the "Sales Nav -- Send connection request" task due date to Day 1 when the sequence is first queued (Step 11). If Day 1 ever changes for any reason, the task date changes with it. These two values are never allowed to diverge.
 
 ### Step 4, Duplicate-contact check (MANDATORY before drafting)
 
@@ -540,17 +551,26 @@ After the write succeeds, output exactly one confirmation line and nothing else:
 
 Move immediately to the next candidate or exit. Displaying email bodies in chat burns tokens, causes context overflow on multi-candidate sweeps, and adds no value.
 
-### Step 11, Update LINKED_IN_CONNECT due_date
+### Step 11, Sync Sales Nav Connection Request Task in HubSpot
 
-🚨 **HARDWIRED RULE: LINKED_IN_CONNECT task date = Email 1 sendDate. Always. No exceptions.**
+🚨 **HARDWIRED RULE: The "Sales Nav -- Send connection request" task due date MUST equal Email 1 sendDate. Always. No exceptions. If no such task exists, CREATE IT.**
 
-Whenever Email 1's sendDate is set or changed -- at initial queue write, at reschedule, at any other point -- the LINKED_IN_CONNECT task on the contact MUST be updated to match. These two values are never allowed to diverge.
+Search HubSpot for a task on this contact where `hs_task_subject` contains "Sales Nav -- Send connection request":
 
-Find the LINKED_IN_CONNECT task on the contact. `manage_crm_objects` updateRequest, set `hs_timestamp` to Email 1 Day 1 (skip weekends/holidays).
+**Task found, NOT_STARTED:** update `hs_timestamp` to Email 1 Day 1 at 20:00 UTC (4pm ET).
 
-This synchronizes: LinkedIn invite due Day 1 + Email 1 fires Day 1 4pm + first call attempt Day 1 + voicemail Day 1 if no answer. All Day 1.
+**Task found, COMPLETED:** leave it. Log: "Sales Nav connect already completed — LinkedIn arm may have fired ahead of schedule."
 
-**This step also applies to reschedules.** Any script or workflow that modifies Email 1's sendDate in the queue must also call this step to sync the HubSpot task. If the queue changes and the HubSpot task does not, the contact gets a connection request on the wrong day.
+**No task found:** CREATE the task now. Fields:
+- Subject: `Sales Nav -- Send connection request to [First Name] [Last Name]`
+- Due date: Email 1 Day 1 at 20:00 UTC (4pm ET)
+- Type: `TODO`
+- Owner: Andy (HubSpot owner ID 196669355)
+- Body: `Day 1 LinkedIn connection request. Email 1 goes out at 4pm same day.`
+
+Never leave this step incomplete. A queued sequence with no Sales Nav task means the LinkedIn arm of the cadence is silently broken. If the HubSpot write fails, log to `overnight-run-log.md` as `linkedin-task-sync-failed` but still keep the 6 emails in the queue.
+
+**This step also applies to any reschedule.** Any time Email 1's sendDate changes, come back here and re-run this step. The task date always mirrors Email 1.
 
 ### Step 12, Update stagger metadata + state
 
@@ -564,31 +584,4 @@ Update stagger metadata confirms the sequence is queued for this candidate. Log 
 
 ### Step 13, Append Excel Tab 1
 
-`Claude-Brain/prospects-tracker-new.xlsx`, Tab 1.
-
-Columns: Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Date Added | Notes
-
-Tab 2 is the wrap-up phase, not per-prospect. Andy updates Tab 2 manually at session end.
-
----
-
-## FAILURE MODES, never silent
-
-Every failure logs to `Claude-Brain/overnight-run-log.md` with timestamp + reason:
-
-- Strategy note missing → log alert, mark candidate `yes-with-email-strategy-missing`, do NOT queue.
-- Active sequence check returns a hit → log "skipped-active-sequence", mark candidate, exit.
-- email-queue.json write fails → retry once, then log + exit. Do NOT proceed on stale queue.
-- LINKED_IN_CONNECT update fails → mark candidate `yes-with-email-linkedin-task-incomplete`. Still keep the 6 emails in the queue (queue is authoritative).
-- Excel append fails → log warning, do NOT block the queue. Excel is a tracker, not the source of truth.
-- Stagger metadata write fails → retry once. If still fails, log and continue with a defaulted Day 1 (next business day) but flag for manual review.
-
----
-
-## RULES (index, single source of truth is the step)
-
-Quality gates in order: Step 0 (drafting-rules.md), Step 4 (duplicate-contact check), Step 5 (email-pattern check), Step 7 (6-item self-check), Step 9 (validator). None are skippable.
-
-Hard constraints: one candidate per invocation, 6 emails only, atomic queue writes (Step 10), LINKED_IN_CONNECT always synced to Email 1 sendDate (Step 11).
-
-If any of these change, update the step. This index is not the source of truth.
+`Claude-Brain/prospect
