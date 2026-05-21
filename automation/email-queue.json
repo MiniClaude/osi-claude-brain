@@ -1436,11 +1436,13 @@
     "body": "Doug,\n\nAny thoughts on this?\n\nFrom: Brian Charrette <bc@osihardware.com>\nSubject: optics for SBG buildout and sparing\n\nHi Doug,\n\nI have a sample kit and a box of swag to send your engineering team from OSI Global. Certified compatible optics and hardware, for both active buildouts and break glass sparing.\n\nDo you come into the office, or is there a better address to ship it?",
     "sendDate": "2026-05-21",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "doug-trout-sbg-email-2",
     "originalFireAtUtc": "2026-05-21T15:00:00.000Z",
     "originalEt": "11:00",
-    "isReply": true
+    "isReply": true,
+    "sentAt": "2026-05-21T11:12:00.111741-07:00",
+    "sentInWindow": "11am"
   },
   {
     "id": "doug-trout-sbg-email-3",
@@ -1655,11 +1657,13 @@
     "body": "Aleksandr,\n\nWanted to send a quick overview of what we do since we touched on a few things on the call.\n\nOSI Global is a hardware solutions partner focused on networking, optics, servers, storage, and power infrastructure. On the optics side we work with SmartOptics and can source SFP, SFP+, QSFP28, and QSFP-DD transceivers at a significant discount off OEM list, typically 80 to 90 percent. We also carry Dell and HP servers, Samsung and Hynix memory, pre-owned Cisco and Arista gear, and APC and Eaton power infrastructure.\n\nFor teams running Cisco gear past support windows, we also offer third-party maintenance through OSI at 40 to 60 percent below SmartNet rates.\n\nWe are not a massive VAR, we are a boutique shop with real engineers behind the products we sell. Most of our relationships start the same way, a sample run or a second opinion on one project.\n\nHappy to be that second opinion for your team whenever it makes sense.\n\nBrian",
     "sendDate": "2026-05-20",
     "sendTime": "4pm",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "aleksandr-khalitov-ues-email-2",
     "originalFireAtUtc": "2026-05-19T15:00:00.000Z",
     "originalEt": "11:00",
-    "isReply": false
+    "isReply": false,
+    "sentAt": "2026-05-20T16:10:30 PT",
+    "sentInWindow": "4pm"
   },
   {
     "id": "jd-cheek-vertafore-email-3-migrated",
@@ -3302,5 +3306,107 @@
     "isReply": false,
     "source": "migrated-from-cowork-task",
     "originalTaskId": "highline-hayes-email7-jun11"
+  },
+  {
+    "id": "tim-krzyzanowski-exelon-email-2",
+    "to": "timothy.krzyzanowski@exeloncorp.com",
+    "bcc": [
+      "bc@osihardware.com",
+      "21878985@bcc.hubspot.com"
+    ],
+    "subject": "DWDM without the vendor markup",
+    "body": "Tim,\n\nQuick different angle from my last note.\n\nWe carry Smart Optics line systems and DWDM transceivers for long haul and metro applications, compatible with Nokia and other vendor platforms already in your network. The $1.5B Exelon shifted toward transmission this year tells me you're not standing still on infrastructure.\n\nIf you're adding 100G or 400G wavelength capacity across ComEd or any of the subsidiaries, it's worth knowing what third party DWDM looks like compared to OEM pricing at that volume.\n\nWorth a quick conversation if the timing lines up.\n\nBrian\n\nBrian Charrette\nSenior Account Executive\nOSI Global | IT Hardware Solutions\nDirect: 805-308-0809\nbc@osihardware.com\nwww.osihardware.com",
+    "sendDate": "2026-05-25",
+    "sendTime": "9am",
+    "fireAt": 1779724800000,
+    "status": "pending",
+    "isReply": false,
+    "sequence": "krzyzanowski-exelon-7step",
+    "emailNum": 2
+  },
+  {
+    "id": "tim-krzyzanowski-exelon-email-3",
+    "to": "timothy.krzyzanowski@exeloncorp.com",
+    "bcc": [
+      "bc@osihardware.com",
+      "21878985@bcc.hubspot.com"
+    ],
+    "subject": "Not going to keep filling your inbox",
+    "body": "Tim,\n\nI know the inbox fills up fast, especially when you're mid buildout.\n\nA pattern I see pretty consistently at utilities running major transmission upgrades is that the optics spend is the last thing to get renegotiated, even when everything else is being scrutinized. Sometimes it's just because no one's brought an alternative to the table yet.\n\nIf the timing isn't right, just say so and I'll check back later. If you're open to a quick look, I'm easy to reach.\n\nBrian\n\nBrian Charrette\nSenior Account Executive\nOSI Global | IT Hardware Solutions\nDirect: 805-308-0809\nbc@osihardware.com\nwww.osihardware.com",
+    "sendDate": "2026-06-01",
+    "sendTime": "9am",
+    "fireAt": 1780329600000,
+    "status": "pending",
+    "isReply": false,
+    "sequence": "krzyzanowski-exelon-7step",
+    "emailNum": 3
+  },
+  {
+    "id": "tim-krzyzanowski-exelon-email-4",
+    "to": "timothy.krzyzanowski@exeloncorp.com",
+    "bcc": [
+      "bc@osihardware.com",
+      "21878985@bcc.hubspot.com"
+    ],
+    "subject": "Re: Confirming address",
+    "body": "I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.\n\nDo you come into the office? Is that the best address to send it to right now?\n\nBrian\n\nBrian Charrette\nSenior Account Executive\nOSI Global | IT Hardware Solutions\nDirect: 805-308-0809\nbc@osihardware.com\nwww.osihardware.com",
+    "sendDate": "2026-06-02",
+    "sendTime": "9am",
+    "fireAt": 1780416000000,
+    "status": "pending",
+    "isReply": false,
+    "sequence": "krzyzanowski-exelon-7step",
+    "emailNum": 4
+  },
+  {
+    "id": "tim-krzyzanowski-exelon-email-5",
+    "to": "timothy.krzyzanowski@exeloncorp.com",
+    "bcc": [
+      "bc@osihardware.com",
+      "21878985@bcc.hubspot.com"
+    ],
+    "subject": "Re: Paying Nokia retail for every SFP?",
+    "body": "Any thoughts?",
+    "sendDate": "2026-06-04",
+    "sendTime": "9am",
+    "fireAt": 1780588800000,
+    "status": "pending",
+    "isReply": true,
+    "sequence": "krzyzanowski-exelon-7step",
+    "emailNum": 5
+  },
+  {
+    "id": "tim-krzyzanowski-exelon-email-6",
+    "to": "timothy.krzyzanowski@exeloncorp.com",
+    "bcc": [
+      "bc@osihardware.com",
+      "21878985@bcc.hubspot.com"
+    ],
+    "subject": "Quick question on your Nokia interfaces",
+    "body": "Tim,\n\nQuick question: are you running any Nokia 7750 or 7450 routers on interfaces where you're still paying Nokia list price for optics?\n\nIf yes, it's probably worth 15 minutes. If no, I'll stop sending.\n\nBrian\n\nBrian Charrette\nSenior Account Executive\nOSI Global | IT Hardware Solutions\nDirect: 805-308-0809\nbc@osihardware.com\nwww.osihardware.com",
+    "sendDate": "2026-06-08",
+    "sendTime": "9am",
+    "fireAt": 1780934400000,
+    "status": "pending",
+    "isReply": false,
+    "sequence": "krzyzanowski-exelon-7step",
+    "emailNum": 6
+  },
+  {
+    "id": "tim-krzyzanowski-exelon-email-7",
+    "to": "timothy.krzyzanowski@exeloncorp.com",
+    "bcc": [
+      "bc@osihardware.com",
+      "21878985@bcc.hubspot.com"
+    ],
+    "subject": "Closing the loop",
+    "body": "Tim,\n\nI've sent a few notes and haven't heard back, which tells me either the timing is off or this just isn't a fit right now. Either is fine.\n\nIf you ever have an optics refresh, a DWDM build, or a TPM conversation coming up, I'm easy to find. Happy to pick this back up whenever it makes sense.\n\nBrian\n\nBrian Charrette\nSenior Account Executive\nOSI Global | IT Hardware Solutions\nDirect: 805-308-0809\nbc@osihardware.com\nwww.osihardware.com",
+    "sendDate": "2026-06-18",
+    "sendTime": "9am",
+    "fireAt": 1781798400000,
+    "status": "pending",
+    "isReply": false,
+    "sequence": "krzyzanowski-exelon-7step",
+    "emailNum": 7
   }
 ]
