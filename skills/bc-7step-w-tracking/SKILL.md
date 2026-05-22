@@ -240,7 +240,7 @@ End with: "Look it over and say **run** when you're ready."
 
 ---
 
-## Step 8: On "Run" — Send Email 1 Immediately, Then Queue the Rest
+## Step 8: On "Run" — Send Email 1 Immediately, Then Schedule the Rest
 
 When Brian says "run" (or any clear go-ahead like "send it", "looks good", "do it"):
 
@@ -270,115 +270,129 @@ Service: Systain Third Party Maintenance / Professional Services
 7. Click Send
 8. Confirm the email was sent before moving on to scheduling
 
-BCC on every send covers both records at once. bc@osihardware.com puts a copy in Brian's inbox so he can see the send actually fired. 21878985@bcc.hubspot.com auto-logs the email to the HubSpot contact timeline. No extension, no integration sign-in required. If Brian's BCC tracking addresses ever change, update them in Step 8b (live Email 1 send) AND the queue entry `bcc` field used by all 6 queued emails in Step 8d.
+BCC on every send covers both records at once. bc@osihardware.com puts a copy in Brian's inbox so he can see the send actually fired. 21878985@bcc.hubspot.com auto-logs the email to the HubSpot contact timeline. No extension, no integration sign-in required. If Brian's personal BCC address ever changes, update the two references in Step 7b and the task prompts in Step 7d.
 
-### 8c — Compute Weekday + Holiday-Safe Send Dates for Emails 2 Through 7
+### 8c — Compute Weekday-Only Send Dates for Emails 2 Through 7
 
-**CRITICAL RULE: No email is ever allowed to fire on a Saturday, Sunday, or a US federal / B2B-observed holiday.**
+**CRITICAL RULE: No email is ever allowed to fire on a Saturday or Sunday. No exceptions.**
 
-Base cadence (business days from Day 0, where Day 0 is today — the day Brian said "run"):
+Reason: Scheduled tasks in Cowork only fire when the desktop app is running. Brian's machine is typically off on weekends, so weekend tasks queue up and fire in a burst on Monday morning, often before Chrome/Outlook is open and signed in. That causes the browser automation to fail silently: the task fires, lastRunAt gets set, but no email goes out. Beyond the technical failure, Brian doesn't want prospects receiving emails stamped with weekend timestamps either.
 
-| # | Days from Day 0 | Send window (PT) | Type |
-|---|---|---|---|
-| 2 | +4 bd | 11am | Different angle |
-| 3 | +10 bd | 12pm | Soft touch |
-| 4 | +12 bd | 1pm | Swag / address confirm |
-| 5 | +14 bd | 2pm | "Any thoughts?" reply |
-| 6 | +18 bd | 3pm | Pattern interrupt |
-| 7 | +28 bd | 4pm | Breakup |
+Base cadence (days from Day 0, where Day 0 is today — the day Brian said "run"):
+- Email 2: Day 0 + 4 days, 9:00 AM Pacific
+- Email 3: Day 0 + 10 days, 9:00 AM Pacific
+- Email 4: Day 0 + 12 days, 9:00 AM Pacific
+- Email 5: Day 0 + 14 days, 9:00 AM Pacific (reply in original thread)
+- Email 6: Day 0 + 18 days, 9:00 AM Pacific
+- Email 7: Day 0 + 28 days, 9:00 AM Pacific
 
-The send windows map to the master `osi-email-sender` scheduled task, which sweeps the queue at 11am / 12pm / 1pm / 2pm / 3pm / 4pm PT every weekday. The master sender dedupes per-recipient (max one send per recipient per day) so any catch-up of overdue entries can't fire duplicates.
+**Weekend-skip logic — apply to every computed fireAt:**
 
-**Weekend + holiday skip — apply to every computed sendDate:**
+1. Compute the raw date from the base cadence above.
+2. Check the day of the week:
+   - Monday through Friday → keep the date as-is
+   - Saturday → push forward to the following Monday (same 9:00 AM PT)
+   - Sunday → push forward to the following Monday (same 9:00 AM PT)
+3. If two adjacent emails now collide on the same Monday (e.g., Email 3 Sat and Email 4 Sun both got pushed to the same Monday), keep them on that Monday but stagger the send times by 5 minutes each (9:00, 9:05, 9:10, etc.).
+4. Before creating each task, state the final fireAt in chat: "Email 3 → Mon 4/27 @ 9:00 AM PT (originally Sat 4/25, shifted to next weekday)". Brian should be able to visually confirm every date is a weekday.
 
-1. Compute the raw date by adding the business-day count from Day 0 (skipping weekends automatically).
-2. If the result lands on a US federal or B2B-observed holiday, push to the next business day.
+**Timezone offsets:** Use -07:00 April through October, -08:00 November through March.
 
-**Holidays to avoid:** New Year's Day, MLK Day, Presidents Day, Good Friday, Memorial Day, Juneteenth, Independence Day, Labor Day, Columbus Day, Veterans Day, Thanksgiving, Black Friday, Christmas Eve, Christmas Day, New Year's Eve.
+### 8d — Create the Scheduled Tasks
 
-Hardcoded 2026: Jan 1 Thu, Jan 19 Mon, Feb 16 Mon, Apr 3 Fri, May 25 Mon, Jun 19 Fri, Jul 3 Fri, Sep 7 Mon, Oct 12 Mon, Nov 11 Wed, Nov 26 Thu, Nov 27 Fri, Dec 24 Thu, Dec 25 Fri, Dec 31 Thu.
+**Task ID format:** `[firstname]-[lastname]-[company-slug]-email-[N]`
+Example: `jane-smith-acme-email-2`
 
-Print the proposed schedule in chat with both raw cadence day and final shifted send date for Brian to eyeball before queueing.
+Use `mcp__scheduled-tasks__create_scheduled_task` with the computed weekday-only fireAt for each task.
 
-### 8d — Append Emails 2-7 to email-queue.json
+**Task prompt for Emails 2, 3, 6, 7 (new emails):**
 
-**Queue file:** `C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json`
+```
+Send an email to [NAME] at [COMPANY] using Outlook. Follow these steps exactly:
 
-This is the single source of truth for all outbound sequence sends. The master `osi-email-sender` scheduled task reads this queue every weekday at 11am / 12pm / 1pm / 2pm / 3pm / 4pm PT and sends whatever's due in that window, with hard dedup so a recipient never gets more than one email per calendar day.
+1. Navigate to https://outlook.office.com in Chrome
+2. If a login screen appears, STOP and notify Brian via a notification — do not attempt to send the email. Also create a todo in the task list titled "Outlook session expired — resend [NAME] Email [N]" so Brian can recover manually.
+3. Click New mail
+4. In the To field, enter: [EMAIL ADDRESS] and press Tab
+5. Click "Bcc" in the compose header to reveal the BCC field, then in that field type exactly: bc@osihardware.com, 21878985@bcc.hubspot.com and press Tab. Confirm both pills appear before continuing.
+6. Click the Subject field and enter exactly: [SUBJECT LINE]
+7. Click anywhere in the email body area. Press Ctrl+A to select all text (clears any Outlook auto-signature), then press Delete.
+8. Type the following exactly:
 
-**Do NOT create individual Cowork scheduled tasks for emails.** That was the old architecture, which caused duplicate sends every time the machine was off and a stack of past-due tasks fired all at once when it came back. The queue + master sender model is retry-safe and dedup-safe.
+[EMAIL BODY]
 
-**Queue entry schema — one entry per email (6 total: Emails 2 through 7):**
+Then press Enter twice and type the following signature exactly:
 
-```json
-{
-  "id": "[firstname]-[lastname]-[company-slug]-email-[N]",
-  "to": "prospect@company.com",
-  "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
-  "subject": "[selected subject line — or 'Re: Confirming address' for Email 4 — or empty string for Email 5 which is a reply]",
-  "body": "[full body text, exactly as written, no signature — the master sender appends the canonical signature block]",
-  "sendDate": "YYYY-MM-DD",
-  "sendTime": "11am | 12pm | 1pm | 2pm | 3pm | 4pm",
-  "status": "pending",
-  "isReply": false,
-  "emailNumber": 2,
-  "cadenceGap": 4,
-  "priorEmailId": "[firstname]-[lastname]-[company-slug]-email-1",
-  "sequenceId": "[firstname]-[lastname]-[company-slug]",
-  "addedDate": "[today YYYY-MM-DD]"
-}
+Brian Charrette
+Director of Key Accounts
+Desk: 805.845.5167 | Cell: 805.682.9358
+Systems: HPE / Dell / Cisco UCS / Supermicro / APC
+Network: Cisco / Aruba / Juniper / Fortinet / APC / Opengear
+Optical: Transceivers / DAC / AOC / Cables / DWDM Line Systems
+Service: Systain Third Party Maintenance / Professional Services
+
+9. Click Send
+10. Verify the email appears in Outlook Sent Items within the last 2 minutes. If it is not found, report failure and stop.
+11. Confirm the email was sent and report back.
+
+Do not modify the email body in any way.
 ```
 
-**Special fields per email:**
+**Task prompt for Email 4 (swag/address confirm):**
 
-- **Email 4 (swag/address confirm):** `subject: "Re: Confirming address"`, `isReply: false`, body is the fixed swag/SFP text (see Step 3 Email 4). No personalization. Cadence gap from Email 3: 2 bd.
-- **Email 5 ("Any thoughts?"):** `isReply: true`, `subject: ""`, `body: "Any thoughts?"`. The master sender will find the oldest Sent Item to this recipient and click Reply on it. No signature on this one. Cadence gap from Email 4: 2 bd.
-- **Email 7 (breakup):** Cadence gap from Email 6: 10 bd.
+```
+Send an email to [NAME] at [COMPANY] using Outlook. Follow these steps exactly:
 
-`cadenceGap` is the business-day gap from the prior email. The master sender uses this to self-heal the cadence: when it fires email N, it updates email N+1's `sendDate` to `[today + cadenceGap business days, skipping weekends and holidays]`. That means if email 3 slips a day for any reason, email 4 automatically shifts a day later too — the gap stays intact instead of compressing.
+1. Navigate to https://outlook.office.com in Chrome
+2. If a login screen appears, STOP and notify Brian via a notification — do not attempt to send the email. Also create a todo in the task list titled "Outlook session expired — resend [NAME] Email 4" so Brian can recover manually.
+3. Click New mail
+4. In the To field, enter: [EMAIL ADDRESS] and press Tab
+5. Click "Bcc" in the compose header to reveal the BCC field, then in that field type exactly: bc@osihardware.com, 21878985@bcc.hubspot.com and press Tab. Confirm both pills appear before continuing.
+6. Click the Subject field and enter exactly: Re: Confirming address
+7. Click anywhere in the email body area. Press Ctrl+A to select all text (clears any Outlook auto-signature), then press Delete.
+8. Type the following exactly:
 
-**Dedup before append — required:**
+I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.
 
-Before appending, scan the existing queue for entries where `to` matches this prospect's email (case-insensitive). If any have `status: "pending"` or `status: "sent"` within the last 30 days, STOP and tell Brian: "SKIPPED: [Name] is already enrolled or recently completed a sequence. Override?" Wait for explicit "override" before proceeding.
+Do you come into the office? Is that the best address to send it to right now?
 
-This prevents the bug where running this skill twice on the same prospect doubles up the queue.
+Brian
 
-**Queue write — OneDrive-safe Python pattern (no permission prompts, atomic):**
+Then press Enter twice and type the following signature exactly:
 
-```python
-import json, os
+Brian Charrette
+Director of Key Accounts
+Desk: 805.845.5167 | Cell: 805.682.9358
+Systems: HPE / Dell / Cisco UCS / Supermicro / APC
+Network: Cisco / Aruba / Juniper / Fortinet / APC / Opengear
+Optical: Transceivers / DAC / AOC / Cables / DWDM Line Systems
+Service: Systain Third Party Maintenance / Professional Services
 
-QUEUE = r'C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json'
-
-# 1. Read existing queue
-with open(QUEUE, 'r') as f:
-    queue = json.load(f)
-
-# 2. Build the 6 new entries (Emails 2 through 7)
-new_entries = [ ... ]  # list of entry dicts per schema above
-
-# 3. Dedup by id (prevents accidental re-add on rerun)
-existing_ids = {e.get('id') for e in queue}
-to_add = [e for e in new_entries if e['id'] not in existing_ids]
-queue.extend(to_add)
-
-# 4. Atomic write
-tmp = QUEUE + '.tmp'
-with open(tmp, 'w') as f:
-    json.dump(queue, f, indent=2)
-os.replace(tmp, QUEUE)
+9. Click Send
+10. Verify the email appears in Outlook Sent Items within the last 2 minutes. If it is not found, report failure and stop.
+11. Confirm the email was sent and report back.
 ```
 
-Do NOT use the MCP Write tool — its prior-Read requirement breaks on cloud-synced files. Do NOT delete the file first.
+**Task prompt for Email 5 ("Any thoughts?" — reply in original thread):**
 
-### 8e — Confirm
+```
+Send a reply to [NAME] at [COMPANY] using Outlook. This must be a REPLY in the original thread, not a new email.
 
-After the write, confirm in chat:
+1. Navigate to https://outlook.office.com in Chrome
+2. If a login screen appears, STOP and notify Brian via a notification — do not attempt to send the email. Also create a todo in the task list titled "Outlook session expired — resend [NAME] Email 5" so Brian can recover manually.
+3. Go to Sent Items
+4. Find the oldest email sent to [EMAIL ADDRESS] — that is the original cold outreach
+5. Open it and click Reply
+6. Press Ctrl+A to select all body text (including any auto-inserted signature), then press Delete — this email has no signature at all.
+7. Click "Bcc" in the compose header to reveal the BCC field, then in that field type exactly: bc@osihardware.com, 21878985@bcc.hubspot.com and press Tab. Confirm both pills appear before continuing.
+8. Type only: Any thoughts?
+9. Do not add any greeting, signature, or additional text
+10. Click Send
+11. Verify the reply appears in Outlook Sent Items within the last 2 minutes. If it is not found, report failure and stop.
+12. Confirm the reply was sent and report back.
+```
 
-- `Email 1 sent to [prospect@email] at [HH:MM PT] with BCC tracking.`
-- `6 emails queued (Emails 2-7) at [sendDate 1] / [2] / [3] / [4] / [5] / [6]. Master osi-email-sender will pick them up at the right PT window.`
-- `LinkedIn task synced to today: [date].`
-- `Call script + voicemail live on HubSpot contact note.`
+Set `notifyOnCompletion: true` on all tasks.
 
 ---
 

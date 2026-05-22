@@ -5,14 +5,13 @@ description: "Drafts 7 personalized OSI Global outreach emails for a prospect an
 
 # aaa-hs-7step — OSI Global 7-Email Draft to HubSpot
 
-Drafts a personalized 7-email outreach sequence for any OSI Global prospect, saves all 7 subjects and bodies to the contact's `ai_email_subject_1-7` and `ai_email_body_1-7` fields, creates a `LINKED_IN_CONNECT` task on the contact, and prints a suggested cadence in chat. Brian sends the emails manually from HubSpot or Outlook on his own schedule.
+Drafts a personalized 7-email outreach sequence for any OSI Global prospect, saves all 7 subjects and bodies to the contact's `ai_email_subject_1-7` and `ai_email_body_1-7` fields, creates a `LINKED_IN_CONNECT` task on the contact, generates a full Orum-ready call script package (voicemail + 12-opener library + bridge + discovery + objections) saved as a HubSpot note, and prints a suggested cadence in chat. Brian sends the emails manually from HubSpot or Outlook on his own schedule.
 
 **What this skill does NOT do:**
 - Does not write to `email-queue.json`. There is no queue.
 - Does not invoke the `osi-email-sender`. Nothing auto-sends.
 - Does not open Chrome or Outlook to fire Email 1 live.
 - Does not enforce holiday avoidance or weekend skipping. The cadence is a suggestion Brian follows manually.
-- Does not write a 12-opener call script note. (If Brian wants the full Orum-ready call script package on the contact, use `abc-7step-master` instead.)
 - Does not update the local Excel tracker.
 
 **What this skill DOES do:**
@@ -21,8 +20,9 @@ Drafts a personalized 7-email outreach sequence for any OSI Global prospect, sav
 3. Checks for an existing draft on the AI fields and warns before overwriting.
 4. Writes 7 emails in Brian's voice, humanizes them, generates 5 subject line options for each.
 5. Drafts a LinkedIn invite under 300 characters and creates a `LINKED_IN_CONNECT` task on the contact, due today.
-6. Prints a suggested cadence (Day 1 = today, Day 5, Day 11, Day 13, Day 15, Day 19, Day 29) with weekend skipping.
-7. On Brian's "save," writes all 14 AI field properties to the contact in a single call.
+6. Generates a full Orum-ready call script package — voicemail script + 12-opener live call script — and saves it as a HubSpot note on the contact.
+7. Prints a suggested cadence (Day 1 = today, Day 5, Day 11, Day 13, Day 15, Day 19, Day 29) with weekend skipping.
+8. On Brian's "save," writes all 14 AI field properties to the contact in a single call.
 
 ---
 
@@ -248,7 +248,121 @@ Confirm in chat: `LinkedIn task created on contact [HubSpot URL] — due today.`
 
 ---
 
-## Step 9 — Print Suggested Cadence
+## Step 9 — Generate the Full Call Script Package + HubSpot Note
+
+Do this automatically before presenting to Brian. No input needed.
+
+### 9a. Voicemail Script
+
+15 seconds max. One-sentence hook drawn from the Personal Hook. Say you are sending or about to send the email, name the Email 1 subject line, end with Brian's email spelled audibly ("that's bc at osihardware dot com"). No phone number. Present or future tense only ("I'm sending" / "I'm about to send"). Never past tense.
+
+Apply Step 6 humanization rules. Read it aloud mentally — if it sounds like a recording, rewrite it until it sounds like a person leaving a voicemail.
+
+### 9b. Live Call Script (Orum surface)
+
+This is what Orum displays when Brian dials. Build it in memory with every bracket fully substituted using the research from Step 3. **Verify no [Name], [Title], [Company], [Vertical], [Insert], or [Paste...] tokens remain before saving to HubSpot.**
+
+Structure — use this exact format as the HubSpot note body:
+
+---
+
+**VOICEMAIL**
+[Fully written voicemail from 9a — no brackets, no tokens]
+
+---
+
+**OPENER LIBRARY — pick the one that fits**
+
+Telco / Service Provider network engineer:
+"Hey [First Name], how have you been? It's Brian with OSI Global. We supply ZR and ZR+ coherent optics to carrier teams as a secondary source when Cisco or Lumentum timelines slip. Is that something your team is running into right now?"
+
+Bank / Financial Institution network engineer:
+"Hey [First Name], how have you been? It's Brian with OSI Global. We supply certified compatible optics to bank IT teams, mostly for the break-glass scenario where something fails and you can't wait two weeks for OEM. I was going to send a few complimentary SFPs your way. Would that be useful?"
+
+Enterprise IT / Consulting network engineer:
+"Hey [First Name], how have you been? It's Brian with OSI Global. We work with enterprise IT teams on third party maintenance, specifically replacing OEM support on Cisco gear that is running fine but coming off warranty. Is that a conversation your team is having right now?"
+
+Manufacturing network engineer:
+"Hey [First Name], how have you been? It's Brian with OSI Global. We supply certified compatible optics and networking spares to manufacturing IT teams for the break-glass scenario. I was going to send a few complimentary SFPs so you've got a Plan B on the shelf. Worth it?"
+
+Director or VP, any vertical:
+"Hey [First Name], how have you been? It's Brian with OSI Global. We work with infrastructure leaders on two things mostly: third party maintenance and optical hardware where OEM timelines or costs have become a problem. Is either of those a live conversation for your team?"
+
+Already has TPM — merger wedge:
+"Hey [First Name], how have you been? It's Brian with OSI Global. With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
+
+Systems / Infrastructure engineer — DIMMs:
+"Hey [First Name], how have you been? It's Brian with OSI Global. We source server memory direct from Samsung and Hynix for infrastructure teams dealing with DDR4 and DDR5 cost pressure. Is that on your radar right now?"
+
+Storage engineer / admin:
+"Hey [First Name], how have you been? It's Brian with OSI Global. We do third party maintenance on NetApp and other storage platforms for teams that have gear running fine but coming off OEM support. Is that a conversation you're having?"
+
+IT Director — compute and infrastructure:
+"Hey [First Name], how have you been? It's Brian with OSI Global. We work with IT leaders on server memory and third party maintenance, mostly for teams carrying OEM costs on infrastructure that has been running fine for years. Is budget pressure on that something you're dealing with?"
+
+Procurement — TPM competitive bid:
+"Hey [First Name], how have you been? It's Brian with OSI Global. We make competitive bids on multi-vendor maintenance contracts. A lot of procurement teams are using us to benchmark their current rates, especially since the Park Place and Service Express merger. Would a competitive bid be worth a look for your next cycle?"
+
+Transport engineer / Optical network engineer — DWDM:
+"Hey [First Name], how have you been? It's Brian with OSI Global. We supply open line DWDM systems, 30 to 50% below Ciena and Nokia, with no licensing headaches. A few teams have been using us to fill capacity gaps without going back to the OEM. Is that a conversation worth having for your network?"
+
+Network architect — metro or long-haul WDM:
+"Hey [First Name], how have you been? It's Brian with OSI Global. We do open architecture DWDM, SmartOptics platform, significantly less rack space and power than traditional Ciena or Nokia boxes, and ships faster. Is that something that fits anything on your roadmap right now?"
+
+---
+
+**RECOMMENDED OPENER FOR THIS PROSPECT**
+[Pick the single best-fit opener from the library above based on Step 3 research. State it again fully, with the prospect's actual first name substituted in. One sentence explaining why you picked it.]
+
+---
+
+**BRIDGE**
+"The reason I'm reaching out is [one sentence from Email 1 cold intro — the core value prop for their role and vertical]. I sent you an email about this — subject line was [Email 1 selected subject]. Did you get a chance to see it?"
+
+---
+
+**DISCOVERY QUESTIONS** (pick 2-3 that fit the vertical)
+- "What's your current source for optics when you have a lead time issue or something fails unexpectedly?"
+- "Are you on an OEM support contract for your Cisco gear, or have you looked at third party maintenance?"
+- "When your DDR4 or DDR5 memory needs come up, are you going direct to Dell or HPE, or do you have another source?"
+- "Have you looked at open line DWDM as an alternative to Ciena or Nokia for your next capacity add?"
+- "Is your TPM provider still Park Place or Service Express, or did you move somewhere else after the merger?"
+- "What does your hardware refresh cycle look like right now — are you mid-cycle or coming up on a decision?"
+
+---
+
+**OBJECTION HANDLERS**
+"We already have a vendor for that" → "Totally understand. Most of our best customers have OEM or a primary vendor. We work as a secondary source — faster lead times, lower cost, no disruption to what's already working. Worth keeping a number on file for the next time timing or cost becomes an issue?"
+
+"Send me an email / I'll look at your email" → "Already did — subject was [Email 1 selected subject]. I'll make sure it didn't land in spam. Is [email address] still the best place to reach you?"
+
+"Not interested" → "Fair enough. Is it timing, or is this genuinely not a fit for your team right now?" [If timing: "Got it. When would be a better time to circle back?"] [If not a fit: "No worries at all. Thanks for being straight with me."]
+
+"Too busy right now" → "I'll be quick. One question: is [core pain point from opener] something that's come up for your team in the last six months? If yes, worth 15 minutes. If no, I'll leave you alone."
+
+---
+
+**VOICEMAIL (if no answer)**
+[Repeat the voicemail from 9a here for quick reference during the call]
+
+---
+
+### 9c. Save as HubSpot Note
+
+Using `mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects`, create a note (object type `notes`) on the contact:
+
+- `hs_note_body` = the full call script text from 9b (voicemail through objection handlers)
+- `hs_timestamp` = today's date in epoch ms
+- `hubspot_owner_id` = `213536174`
+- Associate to the contact
+
+**Token verification before saving:** scan the note body for any remaining bracket tokens — [Name], [First Name], [Title], [Company], [Vertical], [Insert], [Paste...], or similar. If any exist, substitute them with the actual prospect data before saving. A note with unresolved tokens is worse than no note.
+
+Confirm in chat: `Call script note saved to contact [HubSpot URL].`
+
+---
+
+## Step 10 — Print Suggested Cadence
 
 Print a simple table Brian can follow when sending manually. Use these gaps from today, with weekend skipping applied (if a date lands on Saturday or Sunday, push to the next Monday). Do NOT enforce holidays — Brian uses his judgment when he sends.
 
@@ -268,17 +382,20 @@ Total span: ~28 business days. The dates are a guide — Brian sends when he sen
 
 ---
 
-## Step 10 — Present for Review — Wait for "Save"
+## Step 11 — Present for Review — Wait for "Save"
 
-After Steps 1-9 complete, present everything to Brian in one block:
+After Steps 1-10 complete, present everything to Brian in one block:
 
 1. **Prospect summary** — name, title, company, OSI angle, sequence type, approved vendor Y/N, HubSpot contact ID + URL
-2. **Suggested cadence table** from Step 9
+2. **Suggested cadence table** from Step 10
 3. **All 5 subject line options per email** (Emails 1, 2, 3, 6, 7) with the selected one marked. Email 4 fixed (`Re: Confirming address`). Email 5 stored as `Re: [Email 1 subject]`.
 4. **Full body of every email** — exactly what will land in `ai_email_body_N`
 5. **LinkedIn invite text** with character count under 300
 6. **Confirmation that the LinkedIn task was created** (link to the contact)
-7. **What "save" will do** — write all 14 AI field properties to the contact in one call
+7. **Voicemail script** from Step 9a
+8. **Recommended opener** from Step 9b (the single best-fit opener with the prospect's name substituted in)
+9. **Confirmation that the call script note was saved** (link to the contact)
+10. **What "save" will do** — write all 14 AI field properties to the contact in one call
 
 **Stop. Do not write to HubSpot AI fields yet. Wait.**
 
@@ -286,7 +403,7 @@ End with: `Look it over and say **save** when you're ready.`
 
 ---
 
-## Step 11 — On "Save" — Write 14 Properties to HubSpot AI Fields
+## Step 12 — On "Save" — Write 14 Properties to HubSpot AI Fields
 
 When Brian says "save" (or any clear go-ahead: "looks good", "ship it", "do it", "overwrite"):
 
@@ -310,11 +427,12 @@ Use `mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects` with an `upd
 
 **Verify after write:** fetch the contact back and confirm `ai_email_subject_1` matches the selected Email 1 subject and `ai_email_body_1` matches what was drafted. If either is blank or doesn't match, retry once. If it still fails, tell Brian which fields didn't write so he can fix them by hand on the contact.
 
-### 11a. Confirm
+### 12a. Confirm
 
 Confirm in chat:
 - `HubSpot AI fields populated: ai_email_subject_1-7 + ai_email_body_1-7 on contact [HubSpot URL].`
 - `LinkedIn task created and due today.`
+- `Call script note on contact — voicemail + 12-opener library + bridge + discovery + objections.`
 - `Suggested cadence above — send manually starting today.`
 - `No queue, no auto-send. Your call when to fire each email.`
 
@@ -377,9 +495,8 @@ Confirm in chat:
 
 ## Why this skill exists
 
-`aaa-hubspot-7-step` wrote 7 emails to the contact's AI fields and stopped there. Useful, but no research enrichment, no LinkedIn task, no suggested cadence — Brian had to remember to do each of those manually.
+`aaa-hubspot-7-step` wrote 7 emails to the contact's AI fields and stopped there. Useful, but no research enrichment, no LinkedIn task, no call script, no suggested cadence — Brian had to remember to do each of those manually.
 
-`abc-7step-master` did all of that plus the full queue + auto-send + 12-opener call script. Powerful, but the auto-send half doesn't fit Brian's current workflow when he wants to draft into HubSpot and send manually.
+`abc-7step-master` did all of that plus the full queue + auto-send. Powerful, but the auto-send half doesn't fit Brian's current workflow when he wants to draft into HubSpot and send manually.
 
-`aaa-hs-7step` is the right middle: the research, the contact create, the approved vendor wedge, the 7 humanized emails, the LinkedIn task, the cadence suggestion, and the field write. No queue, no auto-send. Brian owns the send.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+`aaa-hs-7step` is the right middle: the research, the contact create, the approved vendor wedge, the 7 humanized emails, the LinkedIn task, the full Orum-ready call script package saved as a HubSpot note, the cadence suggestion, and the field write. No queue, no auto-send. Brian owns the send.

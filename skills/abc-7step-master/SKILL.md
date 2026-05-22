@@ -62,9 +62,9 @@ This skill drafts and queues 7 emails. No email means no sequence. If neither Br
 
 Before researching, writing emails, or touching HubSpot, open the queue:
 
-`C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json`
+`C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json`
 
-Use the OneDrive-safe pattern: try local `open(path, 'r')` first; on EINVAL fall back to the SharePoint MCP (`mcp__3d844455-*__sharepoint_search` for `email-queue.json`, then `read_resource`).
+Read it locally: `ls` the path first to confirm it exists on the local machine, then `open(path, 'r')` to load it. Do NOT fall back to OneDrive sync or the SharePoint MCP — local file access only.
 
 Scan every entry for a match with this prospect:
 - `to` field equals the prospect's email (case-insensitive), OR
@@ -193,7 +193,7 @@ At creation time, write all 7 entries to the queue with provisional `sendDate` v
 
 That means: if Email 2 fires a day late because the 11am PT window was missed and got picked up at 12pm next day, Email 3's `sendDate` shifts forward a day automatically. The gap from the table stays intact instead of compressing. The queue is the living schedule, not a frozen plan.
 
-This is the responsibility of the master `osi-email-sender` task, not this skill. This skill writes the provisional dates and trusts the sender to recompute as it goes. As a hard backstop, the sender also enforces a one-email-per-person-per-day rule: if any entry for a given `to` address already has `status: "sent"` and `sendDate` matching today, all other pending entries for that address are skipped until tomorrow. This means a sequence that is weeks behind will catch up at most one email per person per day -- never three in a row.
+This is the responsibility of the master `osi-email-sender` task, not this skill. This skill writes the provisional dates and trusts the sender to recompute as it goes.
 
 ### 5e. Print the schedule for review
 
@@ -462,7 +462,7 @@ Email 1 just fired live, so Day 1 is locked in as TODAY. If 9d wrote the task wi
 
 ### 11d. Write Emails 2-7 to the queue
 
-Open `C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json` using the OneDrive-safe Python pattern (try local `open(path, 'r')`, fall back to SharePoint MCP on EINVAL — see Queue Write Pattern below).
+Open `C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json` using local file access only — `ls` to confirm it exists, then read/write directly (see Queue Write Pattern below). Do NOT use OneDrive sync or the SharePoint MCP.
 
 Build 6 new entries (Emails 2 through 7). Each entry:
 
@@ -496,20 +496,18 @@ Build 6 new entries (Emails 2 through 7). Each entry:
 
 **Dedup before append:** scan the existing queue for entries with the same `id`. If any match, do not append duplicates. This prevents accidental double-enrollment if the skill is re-run on the same prospect.
 
-### Queue Write Pattern (OneDrive-safe, no permission prompts)
+### Queue Write Pattern (local file access only)
 
 ```python
 import json, os
 
-QUEUE = r'C:\Users\Mini\Documents\osi-claude-brain\automation\email-queue.json'
+QUEUE = r'C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json'
 
-# Read existing
-try:
-    with open(QUEUE, 'r') as f:
-        queue = json.load(f)
-except (OSError, ValueError):
-    # Cloud-only file — fall back to SharePoint MCP fetch, parse JSON string into `queue`
-    raise SystemExit("FALLBACK: use SharePoint MCP to fetch current queue, then continue")
+# Read existing — local only, no OneDrive/SharePoint fallback
+import subprocess
+subprocess.run(['ls', QUEUE], check=True)  # confirm file is present on local machine
+with open(QUEUE, 'r') as f:
+    queue = json.load(f)
 
 new_entries = [ ... ]  # 6 entry dicts for Emails 2-7
 
@@ -562,7 +560,7 @@ Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Da
 
 One row per company per run. Status: Completed / Partial / Not Started. Skip Tab 2 for one-off interactive runs on a single prospect.
 
-OneDrive-safe Python: `openpyxl.load_workbook` on local path first; on EINVAL fetch bytes via SharePoint MCP, load with `load_workbook(BytesIO(bytes))`, edit, save to local path via `wb.save(QUEUE_PATH)`.
+Local file access: `openpyxl.load_workbook` on the local path directly. Do NOT use SharePoint MCP or OneDrive sync.
 
 ---
 
@@ -640,4 +638,4 @@ bc-7step-w-tracking gave us BCC tracking, weekend-skip, signature management, th
 bc-osi-outreach-sequence-v2 gave us the queue, self-healing cadence, same-company stagger, holiday avoidance, and the full Orum-ready call script package. Its weakness was the rigid handoff requirement — couldn't run on its own.
 
 abc-7step-master inherits all the strengths of both. It is the only skill Brian needs for new prospect outreach going forward.
-
+                                                                                                                                                                                                                                                                                                                                                                

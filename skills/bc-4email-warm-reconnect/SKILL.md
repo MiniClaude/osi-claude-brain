@@ -151,13 +151,13 @@ When Brian says "run", "send it", "looks good", or any clear go-ahead:
 
 ### 7a: Write all 4 emails to the queue
 
-Queue file: `C:\Users\Mini\Documents\osi-claude-brain\email-queue.json`
+Queue file: `C:\Claude-Brain\email-queue.json`
 
 Use the OneDrive-safe Python pattern:
 ```python
 import json, os
 
-QUEUE = r'C:\Users\Mini\Documents\osi-claude-brain\email-queue.json'
+QUEUE = r'C:\Claude-Brain\email-queue.json'
 
 try:
     with open(QUEUE, 'r') as f:
