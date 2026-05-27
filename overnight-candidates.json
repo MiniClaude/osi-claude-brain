@@ -504,6 +504,13 @@
       "selection_notes": "Andy-named 2026-05-01 (2026-05-01T18:30:49.925862Z) for 7 PM ET Discovery Mega; HubSpot ID 19235361163",
       "discovery_completed_at": "2026-05-02T01:48:49.454232+00:00",
       "discovery_notes": "Physical security/access control SaaS, Bethesda MD. 9 HubSpot ICP contacts (SysAdmins, Systems Engineers, VP & Chief Architect, IT/IS Director). 5 LinkedIn-only: VP Infrastructure, IT Systems Engineer, SysAdmin, Purchasing Agent. 11 LinkedIn pages scanned."
+    },
+    {
+      "name": "Citco",
+      "status": "sequences_active",
+      "stagger_person_count": 6,
+      "stagger_last_day1": "2026-06-29",
+      "hubspot_company_id": 9129994783
     }
   ],
   "candidates": [
@@ -8040,8 +8047,8 @@
       "person_count": 6
     },
     "Stellar": {
-      "last_day1": "2026-05-01",
-      "person_count": 2
+      "last_day1": "2026-06-03",
+      "person_count": 1
     },
     "Patrick Industries": {
       "last_day1": "2026-05-13",
@@ -8170,8 +8177,8 @@
       "person_count": 3
     },
     "Cellcom": {
-      "last_day1": "2026-05-23",
-      "person_count": 2
+      "last_day1": "2026-06-22",
+      "person_count": 7
     },
     "L.A. Care Health Plan": {
       "last_day1": "2026-05-18",
@@ -8192,6 +8199,54 @@
     "IT-CNP": {
       "last_day1": "2026-07-06",
       "person_count": 4
+    },
+    "RSUI Group": {
+      "last_day1": "2026-07-22",
+      "person_count": 6
+    },
+    "Hypertherm Associates": {
+      "last_day1": "2026-08-01",
+      "person_count": 2
+    },
+    "Trenton Technology Inc.": {
+      "last_day1": "2026-08-13",
+      "person_count": 2
+    },
+    "EssilorLuxottica": {
+      "last_day1": "2026-08-19",
+      "person_count": 1
+    },
+    "University of Wisconsin-Madison": {
+      "last_day1": "2026-09-04",
+      "person_count": 3
+    },
+    "UF Health Shands": {
+      "last_day1": "2026-09-14",
+      "person_count": 2
+    },
+    "Distributel Communications": {
+      "last_day1": "2026-06-08",
+      "person_count": 4
+    },
+    "Hyland": {
+      "last_day1": "2026-07-22",
+      "person_count": 10
+    },
+    "Hamilton Telecommunications": {
+      "last_day1": "2026-06-22",
+      "person_count": 5
+    },
+    "Hamilton Business Technologies": {
+      "last_day1": "2026-06-09",
+      "person_count": 3
+    },
+    "Nex-Tech Wireless": {
+      "last_day1": "2026-06-09",
+      "person_count": 3
+    },
+    "ePlus": {
+      "last_day1": "2026-05-28",
+      "person_count": 2
     }
   },
   "state": {
@@ -8259,6 +8314,10 @@
       "Computershare": {
         "last_day1": "2026-08-10",
         "person_count": 3
+      },
+      "Lumentum": {
+        "last_day1": "2026-07-07",
+        "person_count": 7
       }
     }
   },
@@ -8271,8 +8330,8 @@
     "person_count": 5
   },
   "abb": {
-    "last_day1": "2026-05-14",
-    "person_count": 2
+    "last_day1": "2026-06-05",
+    "person_count": 5
   },
   "pending_needs_hook": [],
   "no_match_companies": [
@@ -8307,5 +8366,9 @@
   "Computershare": {
     "last_day1": "2026-08-10",
     "person_count": 3
+  },
+  "royal_bank_of_canada": {
+    "last_day1": "2026-07-06",
+    "person_count": 7
   }
 }
