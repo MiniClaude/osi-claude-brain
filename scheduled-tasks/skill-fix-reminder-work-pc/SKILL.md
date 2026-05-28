@@ -9,13 +9,13 @@ Remind him:
 
 **Apply the two skill fixes on your work PC.**
 
-Yesterday (2026-04-16) Claude rewrote two skills to remove "Andy" references and update owner IDs to Brian's ID (213536174). The corrected files are in OneDrive at:
+Yesterday (2026-04-16) Claude rewrote two skills to remove "Andy" references and update owner IDs to Brian's ID (213536174). The corrected files are in osi-claude-brain at:
 - `Projects\Skill_Fixes\osi-prospect-qualification\SKILL.md`
 - `Projects\Skill_Fixes\osi-job-change-prospecting\SKILL.md`
 
 **Steps on the work PC:**
 1. Open File Explorer, enable "Show hidden items" under the View tab.
-2. Navigate to your OneDrive `.claude\skills\` folder.
+2. Navigate to your osi-claude-brain `.claude\skills\` folder.
 3. Overwrite the existing SKILL.md in each of these two folders with the fixed version from `Projects\Skill_Fixes\`:
    - `osi-prospect-qualification\SKILL.md`
    - `osi-job-change-prospecting\SKILL.md`

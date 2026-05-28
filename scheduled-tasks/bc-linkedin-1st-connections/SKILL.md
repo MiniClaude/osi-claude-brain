@@ -33,7 +33,7 @@ Instructions:
    - New technology adoption (400G, AI networking)
 
 4. DOCUMENT OUTPUT
-   Save findings to: C:\Users\MINI OSI RIG\AppData\Roaming\Claude\local-agent-mode-sessions\f2c37a34-61ab-4aec-859e-9d84203c1e7a\f739b7db-6b05-4960-a80a-699458ce501c\local_c0b56ea6-2d28-47b9-bb2a-224d3d4ffa33\outputs\bc-linkedIn-1st-connections-messaging-workspace\iteration-1\eval-3-schedule-setup\without_skill\outputs\
+   Save findings to: C:\Users\Mini\AppData\Roaming\Claude\local-agent-mode-sessions\f2c37a34-61ab-4aec-859e-9d84203c1e7a\f739b7db-6b05-4960-a80a-699458ce501c\local_c0b56ea6-2d28-47b9-bb2a-224d3d4ffa33\outputs\bc-linkedIn-1st-connections-messaging-workspace\iteration-1\eval-3-schedule-setup\without_skill\outputs\
    Include:
    - Date/time run
    - Number of connections scanned

@@ -612,11 +612,13 @@
     "body": "Hi Zain,\n\nQuick question: is SS&C running any Cisco gear that's already past end of life or within the next year of going out of support?\n\nIf yes, worth a 15-minute call. we cover it at about half the OEM rate with the same TAC support. If no, I'll stop showing up in your inbox.\n\nBrian",
     "sendDate": "2026-05-22",
     "sendTime": "12pm",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "zain-karmally-ssc-email-6",
     "originalFireAtUtc": "2026-05-22T16:00:00.000Z",
     "originalEt": "12:00",
-    "isReply": false
+    "isReply": false,
+    "sentAt": "2026-05-22T12:12:00-07:00",
+    "sentInWindow": "12pm"
   },
   {
     "id": "zain-karmally-ssc-email-7",
@@ -674,11 +676,13 @@
     "body": "Jake-\n\nOne question: are you currently managing any end-of-life inventory from OEMs? Gear that's still solid, OEM support is gone or expensive, and you're stuck deciding whether to rip and replace or limp along?\n\nIf yes, we should talk. If no, I'll stop bothering you.\n\nBrian",
     "sendDate": "2026-05-22",
     "sendTime": "12pm",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "jake-rog-email-6",
     "originalFireAtUtc": "2026-05-22T16:00:00.000Z",
     "originalEt": "12:00",
-    "isReply": false
+    "isReply": false,
+    "sentAt": "2026-05-22T12:16:00-07:00",
+    "sentInWindow": "12pm"
   },
   {
     "id": "jake-rog-email-7",
@@ -750,11 +754,13 @@
     "body": "Glenn,\n\nOne direct question: do you have any Cisco or Juniper gear at Chart sites approaching end of support, and is the integration team pushing you to refresh it or extend it?\n\nIf yes, this is worth a conversation. If no, I will stop bothering you.\n\nBrian",
     "sendDate": "2026-05-22",
     "sendTime": "12pm",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "glenn-borowski-chart-industries-email-6",
     "originalFireAtUtc": "2026-05-22T16:00:00.000Z",
     "originalEt": "12:00",
-    "isReply": false
+    "isReply": false,
+    "sentAt": "2026-05-22T12:17:00-07:00",
+    "sentInWindow": "12pm"
   },
   {
     "id": "glenn-borowski-chart-industries-email-7",
@@ -826,11 +832,13 @@
     "body": "Quick one: when you're refreshing transceivers or DAC cables, do you buy OEM or are you open to third-party?\n\nIf yes, worth a conversation. If no, I'll stop.",
     "sendDate": "2026-05-22",
     "sendTime": "12pm",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "abdi-mohamed-emerson-email-6",
     "originalFireAtUtc": "2026-05-22T16:00:00.000Z",
     "originalEt": "12:00",
-    "isReply": false
+    "isReply": false,
+    "sentAt": "2026-05-22T12:18:00-07:00",
+    "sentInWindow": "12pm"
   },
   {
     "id": "abdi-mohamed-emerson-email-7",
@@ -886,11 +894,13 @@
     "body": "Kal,\n\nQuick yes-or-no: are you planning any infrastructure refresh or data center upgrades in the next 12 months that would touch branch connectivity or core optics?\n\nIf yes, worth a conversation. If no, I'll stop reaching out.\n\nBrian",
     "sendDate": "2026-05-22",
     "sendTime": "12pm",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "kal-safah-ccm-email-6",
     "originalFireAtUtc": "2026-05-22T16:00:00.000Z",
     "originalEt": "12:00",
-    "isReply": false
+    "isReply": false,
+    "sentAt": "2026-05-22T12:19:00-07:00",
+    "sentInWindow": "12pm"
   },
   {
     "id": "kal-safah-ccm-email-7",
@@ -1192,11 +1202,13 @@
     "body": "Darrell,\n\nFigured I'd give you the full picture on what we carry in the optical space.\n\nOn the passive side, muxes and amplifiers that drop right into existing builds. Stepping up from there, the muxponders handle 100G client services with alien wave capability so you can light circuits across another carrier's DWDM infrastructure without buying into their ecosystem.\n\nOn the active side, we do full ROADM deployments. Carriers we work with use a hybrid approach a lot right now, passive mux on the short hauls, muxponder or ROADM where they need the flexibility. Cell site backhaul is a big one too, the economics work out well when you're running a high site count.\n\nAll of it is Tier 1 certified and compatible with the major platforms. Carriers have been winning deals they couldn't have touched before because they can price the transport competitively.\n\nLet me know if you want to dig into any of this.",
     "sendDate": "2026-05-22",
     "sendTime": "12pm",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "darrell-walker-zirrus-email-3",
     "originalFireAtUtc": "2026-05-22T16:00:00.000Z",
     "originalEt": "12:00",
-    "isReply": false
+    "isReply": false,
+    "sentAt": "2026-05-22T12:21:00-07:00",
+    "sentInWindow": "12pm"
   },
   {
     "id": "darrell-walker-zirrus-email-4",
@@ -1601,9 +1613,11 @@
     "body": "Jeff, just bumping this up in case it got buried.\n\nEven just a quick conversation would be helpful, I like to stay in the loop with what's happening at Good Shepherd so I'm useful when something does come up.\n\n20 minutes whenever works for you. Let me know.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
     "sendDate": "2026-05-22",
     "sendTime": "3pm",
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-05-15",
-    "isReply": false
+    "isReply": false,
+    "sentAt": "2026-05-22T15:11:26.856663-07:00",
+    "sentInWindow": "3pm"
   },
   {
     "id": "carlos-mainetto-asarco-email-1",
@@ -1629,11 +1643,13 @@
     "body": "Carlos,\n\nCircling back in case this got buried.\n\nOne thing that resonates with network teams in your space is our TPM coverage. Multi-vendor (Cisco, Dell, HP, NetApp), 40-60% below OEM, and we cover gear OEMs have already EOL'd. The 2504 WLC situation Shawn mentioned last year is a good example of where we fill gaps.\n\nHappy to put a coverage comparison together if you can spare 15 minutes.\n\nBrian",
     "sendDate": "2026-05-22",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "carlos-mainetto-asarco-email-2",
     "originalFireAtUtc": "2026-05-22T15:00:00.000Z",
     "originalEt": "11:00",
-    "isReply": true
+    "isReply": true,
+    "sentAt": "2026-05-22T11:11:26.136575-07:00",
+    "sentInWindow": "11am"
   },
   {
     "id": "carlos-mainetto-asarco-email-3",
@@ -1676,10 +1692,12 @@
     "body": "JD,\n\nNo stress if this isn't the right time.\n\nOne thing I see a lot with IT directors at software companies: infrastructure spend gets deprioritized while the product and engineering side takes all the budget attention. Then renewal season shows up and the OEM maintenance number is a lot higher than anyone expected.\n\nIf the timing's just off, say the word and I'll circle back. If it's not relevant at all, tell me and I'll stop.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
     "sendDate": "2026-05-22",
     "sendTime": "12:00",
-    "status": "pending",
+    "status": "sent",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "jd-cheek-vertafore-email-3"
+    "originalTaskId": "jd-cheek-vertafore-email-3",
+    "sentAt": "2026-05-22T12:22:00-07:00",
+    "sentInWindow": "12pm"
   },
   {
     "id": "jd-cheek-vertafore-email-4-migrated",
@@ -2772,10 +2790,12 @@
     "body": "Hi Patrick,\n\nSeparate topic from Smartoptics.\n\nEleven years in and with the network growing the way it has, some of your original access layer gear has probably hit Cisco or Juniper end of support. OEM coverage gets expensive or disappears entirely at that point.\n\nSystain is OSI's third party maintenance brand. For gear the OEM has walked away from, we provide 24/7/365 TAC coverage at roughly half the OEM rate. A lot of customers use that savings to fund new deployments rather than accelerate replacements they don't need yet.\n\nIf that's relevant to anything in your current stack, worth a quick conversation.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
     "sendDate": "2026-05-22",
     "sendTime": "12:00",
-    "status": "pending",
+    "status": "sent",
     "isReply": false,
     "source": "migrated-from-cowork-task",
-    "originalTaskId": "surf-patrick-e2"
+    "originalTaskId": "surf-patrick-e2",
+    "sentAt": "2026-05-22T12:23:00-07:00",
+    "sentInWindow": "12pm"
   },
   {
     "id": "surf-patrick-e3-migrated",

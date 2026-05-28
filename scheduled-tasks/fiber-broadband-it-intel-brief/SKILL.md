@@ -6,7 +6,7 @@ description: Weekly fiber/broadband/IT industry intelligence brief — new compa
 You are running a weekly industry intelligence sweep for Brian Charrette, senior IT hardware sales rep at OSI Global in Santa Barbara, CA. Brian sells networking gear, optics (SFP/QSFP), servers, storage, power infrastructure (APC/Eaton), and TPM to enterprise buyers. His goal: surface net-new prospecting targets BEFORE competitors do — new fiber operators, companies in build phase, M&A activity that creates hardware refresh cycles, and IT decision-makers speaking at shows.
 
 ## OBJECTIVE
-Produce a concise weekly intel brief covering fiber/broadband, data center, and IT industry news from the past 7 days. Cross-reference new companies against HubSpot to flag greenfield opportunities. Save a Word doc to C:\Users\Mini\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\TradeShows.Internet.Trolling\
+Produce a concise weekly intel brief covering fiber/broadband, data center, and IT industry news from the past 7 days. Cross-reference new companies against HubSpot to flag greenfield opportunities. Save a Word doc to C:\Users\Mini\Documents\Documents\Claude\OSI-Brain\TradeShows.Internet.Trolling\
 
 ---
 
@@ -81,7 +81,7 @@ Score each company 1-10 for OSI fit:
 ## STEP 5 — BUILD THE WORD DOC
 
 Create a Word doc named: `Intel_Brief_[YYYY-MM-DD].docx`
-Save to: `C:\Users\Mini\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\TradeShows.Internet.Trolling\`
+Save to: `C:\Users\Mini\Documents\Documents\Claude\OSI-Brain\TradeShows.Internet.Trolling\`
 
 Structure:
 ```

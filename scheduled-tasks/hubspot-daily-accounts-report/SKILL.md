@@ -5,7 +5,7 @@ description: Rebuild the 10-tab Brian_HubSpot_Accounts.xlsx from HubSpot data ev
 
 You are rebuilding a multi-tab Excel report for Brian Cosi at OSI Global IT. Your goal is to pull fresh data from HubSpot and write a complete, up-to-date spreadsheet to:
 
-C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\Projects\Daily Accounts\Brian_HubSpot_Accounts.xlsx
+C:\Users\Mini\Documents\Documents\Claude\Projects\Daily Accounts\Brian_HubSpot_Accounts.xlsx
 
 **HubSpot credentials:**
 - Owner ID: 213536174

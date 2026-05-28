@@ -39,7 +39,7 @@ If the current time does not match any of those windows (manual test run, DST tr
 
 ## Step 2: Read the queue
 
-Read: `C:\Users\Brian\OneDrive - OSI Hardware\Documents\Claude\Claude-Brain\email-queue.json`
+Read: `C:\Users\Brian\Documents\Documents\Claude\Claude-Brain\email-queue.json`
 
 If the file does not exist, stop silently and log "Queue file not yet created — no emails to process." This is expected until Brian's sequence-builder skills start writing to it.
 
@@ -102,7 +102,7 @@ Example 2 (slip): Email 1 fires Monday April 20. Step 4 sets Email 2 to April 22
 - Rescheduled emails: update sendDate and sendTime to new calculated values
 - Fire-no-send failures (Sent Items confirmation failed at Step 3.12): do NOT set status = "sent". Leave as "pending" and flag in the report so Brian can manually verify and resend.
 
-Write the full updated array back to: `C:\Users\Brian\OneDrive - OSI Hardware\Documents\Claude\Claude-Brain\email-queue.json`
+Write the full updated array back to: `C:\Users\Brian\Documents\Documents\Claude\Claude-Brain\email-queue.json`
 
 Keep all entries.
 

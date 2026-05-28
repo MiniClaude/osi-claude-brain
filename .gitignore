@@ -17,7 +17,7 @@ $RECYCLE.BIN/
 *credentials*
 *.env
 
-# OneDrive junk
+# osi-claude-brain junk
 *.lnk
 
 # Node / Python artifacts (just in case)

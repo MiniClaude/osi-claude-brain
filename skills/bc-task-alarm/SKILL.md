@@ -34,9 +34,9 @@ Properties to request: `["hs_task_subject", "hs_task_body", "hs_task_status", "h
 
 ### 2. Email Queue (Stuck Sequence Sends)
 Read the queue file:
-`C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json`
+`C:\Users\Mini\Documents\osi-claude-brain\email-queue.json`
 
-Use the Read file tool directly on the Windows path first (this is the preferred method in Cowork — it has direct file system access). If the Read tool fails, fall back to the SharePoint MCP (`mcp__3d844455-*__sharepoint_search` for `email-queue.json`, then `read_resource`). If still unreachable, note "email queue unavailable — OneDrive sync may be paused" in the output and continue.
+Use the Read file tool directly on the Windows path first (this is the preferred method in Cowork — it has direct file system access). If the Read tool fails. If the file is missing, note "email queue unavailable" in the output and continue.
 
 **What to flag:**
 - `status: "pending"` entries where `sendDate` is today or earlier — these are emails that should have fired but haven't yet (may be waiting for the next send window, or genuinely stuck)
@@ -65,7 +65,7 @@ For recurring tasks (have a cron pattern), show next fire time only.
 ---
 
 ## Cross-Computer Note
-Cowork scheduled tasks are **local to this machine**. If Brian set up a task on another computer, it won't appear here unless it was written to the OneDrive queue or HubSpot. The email queue IS cross-machine (OneDrive-synced), so sequence sends from either computer show up. HubSpot tasks are cloud and always current.
+Cowork scheduled tasks are **local to this machine**. The email queue lives at the local path above. HubSpot tasks are cloud and always current.
 
 ---
 
@@ -156,6 +156,6 @@ End with one of these (pick whichever fits):
 
 ## Error Handling
 - If HubSpot returns an error or times out, note it and continue with the other sources.
-- If the email queue is unreachable, note "email queue offline (OneDrive sync may be paused)" and continue.
+- If the email queue is unreachable, note "email queue offline" and continue.
 - If scheduled tasks fail, note it and continue.
 - Never abort the whole report because one source fails.

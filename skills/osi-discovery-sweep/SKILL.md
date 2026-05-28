@@ -9,7 +9,7 @@ description: >
   company.
 ---
 
-> Source: `C:\Claude-Brain\skills\osi-discovery-sweep\` (Git, github.com/Drrewdy/Claude-Brain). Cowork `.claude/skills/` is a copy. Edit source, repackage, install.
+> Source: `C:\Users\Mini\Documents\osi-claude-brain\skills\osi-discovery-sweep\` (Git, github.com/Drrewdy/Claude-Brain). Cowork `.claude/skills/` is a copy. Edit source, repackage, install.
 
 # OSI Discovery Sweep
 

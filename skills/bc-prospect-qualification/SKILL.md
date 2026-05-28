@@ -292,7 +292,7 @@ Flag any account ownership issues before Brian reaches out.
 
 ## EXCEL TRACKER — log every qualified prospect
 
-After completing Company Mode, append all ✅ Yes and ⚠️ Conditional prospects to the running tracker at `OSI-Brain/prospects-tracker.xlsx`.
+After completing Company Mode, append all ✅ Yes and ⚠️ Conditional prospects to the running tracker at `C:\Users\Mini\Documents\osi-claude-brain\prospects-tracker.xlsx`.
 
 Columns: Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Date Added | Notes
 

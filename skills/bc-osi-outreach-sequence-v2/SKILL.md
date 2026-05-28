@@ -12,7 +12,7 @@ description: >
   Owner: Brian Charrette (hubspot_owner_id: 213536174).
 ---
 
-> **SYNC NOTE:** This skill exists in two locations: `OSI-Brain/skills/BC-osi-outreach-sequence-V2/` (OneDrive — source of truth) and local Cowork `.claude/skills/`. Any edits must be applied to both. If returning after days away, check OneDrive version first and sync local if newer.
+> **NOTE:** Skill source of truth: `C:\Users\Mini\Documents\osi-claude-brain\skills\BC-osi-outreach-sequence-V2\`. Local Cowork `.claude/skills/` is the active copy.
 
 # OSI Global Outreach Sequence — BC V2
 
@@ -105,7 +105,7 @@ Company Mode splits work across two phases:
 
 ##### Step 0 — Check for leftover queue from last night (ALWAYS runs first, before any search work)
 
-Before doing any company checks or LinkedIn searches, open `OSI-Brain/overnight-candidates.json` if it exists. Count entries where `status == "pending"` (candidates from a prior night's kickoff that never got processed). This is the leftover queue.
+Before doing any company checks or LinkedIn searches, open `C:\Users\Mini\Documents\osi-claude-brain\overnight-candidates.json` if it exists. Count entries where `status == "pending"` (candidates from a prior night's kickoff that never got processed). This is the leftover queue.
 
 **Leftover queue is the front of tonight's batch work, always.** New candidates from tonight's kickoff (if any) append to the back of the queue. This guarantees that unfinished work from last night never gets stranded and wasted.
 
@@ -131,7 +131,7 @@ For each company Brian named (or Auto Mode selected) in Step 0's gap-fill:
 3. **Regular LinkedIn candidate search** (NOT Sales Navigator — see qualification skill's TOOL CHOICE section). Run all keyword rounds: English priority titles, French keywords for Quebec companies, secondary titles if first round is thin. Paginate through every page of every search. Collect every candidate whose title or search-result card suggests IT / network / telecom relevance.
 4. **No profile reads at kickoff. No ZoomInfo at kickoff. No HubSpot contact writes at kickoff.** Just candidate names, LinkedIn URLs, and source company.
 
-Append all newly-collected candidates to the back of `OSI-Brain/overnight-candidates.json` (after any leftover entries from Step 0). Queue order: leftover company A, leftover company B, ..., new company A, new company B, ... Each entry:
+Append all newly-collected candidates to the back of `C:\Users\Mini\Documents\osi-claude-brain\overnight-candidates.json` (after any leftover entries from Step 0). Queue order: leftover company A, leftover company B, ..., new company A, new company B, ... Each entry:
 
 ```json
 {
@@ -153,7 +153,7 @@ Then **pre-schedule identical batches at 2-hour intervals** across the overnight
 
 Each scheduled batch runs identical logic. It is fully self-contained:
 
-1. Read `OSI-Brain/overnight-candidates.json`.
+1. Read `C:\Users\Mini\Documents\osi-claude-brain\overnight-candidates.json`.
 2. Take the first candidate with `status: "pending"`.
 3. Invoke bc-prospect-qualification Profile Mode on that candidate. Qualification does the full regular-LinkedIn profile read (About, Experience, Skills, activity feed) and forms the verdict.
 4. Update the candidate's status in the queue to one of: `"no"`, `"conditional"`, `"yes-no-email"`, `"yes-with-email"`. Write the queue file back (atomic: `.tmp` then `os.replace`).
@@ -166,7 +166,7 @@ Each scheduled batch runs identical logic. It is fully self-contained:
 
 **Same-company stagger math** is applied by this skill at step 5 when calculating Email 1's Day 1. Persons 1-5 at the same company: 4 business days between consecutive Day 1 dates. Person 6: 10 business days after person 5. Persons 7+: back to 4 business days. Stagger is per-company across the entire email queue, not per-batch.
 
-**Final-batch responsibility:** the last batch of the night (by scheduled fire time) updates Tab 2 of the Excel tracker with the full run summary (company-by-company: Yes count / Sequences Fired / Pending count), writes a session log to `OSI-Brain/sessions/session-YYYY-MM-DD.md`, and cleans up any remaining `status: "pending"` candidates in `OSI-Brain/overnight-candidates.json` (leaves them marked `pending` for the next night's run).
+**Final-batch responsibility:** the last batch of the night (by scheduled fire time) updates Tab 2 of the Excel tracker with the full run summary (company-by-company: Yes count / Sequences Fired / Pending count), writes a session log to `C:\Users\Mini\Documents\osi-claude-brain\sessions/session-YYYY-MM-DD.md`, and cleans up any remaining `status: "pending"` candidates in `C:\Users\Mini\Documents\osi-claude-brain\overnight-candidates.json` (leaves them marked `pending` for the next night's run).
 
 ### Auto Mode — Claude picks cold companies, runs overnight
 
@@ -232,7 +232,7 @@ Any email that fails any of the above gets rewritten before it is saved or sched
 
 ## Approved Vendor Rule — read list from OSI-Brain file
 
-OSI is an approved vendor at a list of accounts maintained in `OSI-Brain/approved-vendors.json`. Read that file at sequence-build time (OneDrive-safe Python: `open(path,'r')`, fall back to SharePoint MCP on EINVAL) and check if the prospect's company matches any entry (case-insensitive substring match, e.g. "Desjardins Group" matches "Desjardins").
+OSI is an approved vendor at a list of accounts maintained in `C:\Users\Mini\Documents\osi-claude-brain\approved-vendors.json`. Read that file at sequence-build time using local file access and check if the prospect's company matches any entry (case-insensitive substring match, e.g. "Desjardins Group" matches "Desjardins").
 
 **If the prospect's company matches an approved-vendor entry:**
 - **Email 1:** Include ONE line acknowledging approved-vendor status. Soft, peer-to-peer phrasing. Examples:
@@ -248,7 +248,7 @@ OSI is an approved vendor at a list of accounts maintained in `OSI-Brain/approve
 - Never "vetted" or "pre-approved" — sounds like marketing. "Approved vendor" is the term.
 - Never mention "procurement" in Email 1 — telegraphs the sales motion. Just note we're on the list.
 
-To add a company to the approved-vendor list, Brian edits `OSI-Brain/approved-vendors.json` directly and adds the company name to `approved_vendor_companies`.
+To add a company to the approved-vendor list, Brian edits `C:\Users\Mini\Documents\osi-claude-brain\approved-vendors.json` directly and adds the company name to `approved_vendor_companies`.
 
 ---
 
@@ -256,7 +256,7 @@ To add a company to the approved-vendor list, Brian edits `OSI-Brain/approved-ve
 
 Before any other work on this prospect, check the email queue. This prevents stacking duplicate sequences on the same person, which wrecks sender reputation and is bad form.
 
-Open `C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json` using the OneDrive-safe Python read pattern (try local `open(path,'r')` first, fall back to SharePoint MCP on EINVAL). Scan every entry for a match with this prospect:
+Open `C:\Users\Mini\Documents\osi-claude-brain\email-queue.json` using local file access (`open(path,'r')`). Scan every entry for a match with this prospect:
 
 - Match by `to` field equal to the prospect's email address (case-insensitive), OR
 - Match by `prospectName` + `company` both matching the prospect's full name and company (case-insensitive)
@@ -274,7 +274,7 @@ Entries with status `paused-*`, `canceled-*`, or older `sent` (>30 days ago) do 
 
   Wait for explicit "override" from Brian before proceeding. Without override, stop and move on to the next prospect (batch mode) or end (single-prospect mode).
 
-- **Overnight / Auto / Company / Batch modes:** Skip silently. Log the skip to `OSI-Brain/prospects-tracker-new.xlsx` Tab 2 (Company Status) with status `SKIPPED - already enrolled` or `SKIPPED - recent sequence` and the reason in the Notes column. Continue to the next prospect.
+- **Overnight / Auto / Company / Batch modes:** Skip silently. Log the skip to `C:\Users\Mini\Documents\osi-claude-brain\prospects-tracker-new.xlsx` Tab 2 (Company Status) with status `SKIPPED - already enrolled` or `SKIPPED - recent sequence` and the reason in the Notes column. Continue to the next prospect.
 
 This check runs BEFORE HubSpot ownership check, ZoomInfo enrichment, or any research. Fail fast and cheap. Never stack a sequence on top of an active or recently completed one.
 
@@ -521,7 +521,7 @@ When Brian says "sent":
 
 Do NOT create individual scheduled tasks for emails. Instead, append all 6 emails to the queue file.
 
-**Queue file:** C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json
+**Queue file:** C:\Users\Mini\Documents\osi-claude-brain\email-queue.json
 
 Each entry:
 
@@ -542,27 +542,27 @@ Each entry:
 
 The master osi-email-sender task runs every weekday at 11 AM, 12 PM, 1 PM, 2 PM, 3 PM, and 4 PM Eastern. Each fire window processes queue entries whose `sendTime` matches that specific window. No individual scheduled tasks needed.
 
-### How to write to the queue (OneDrive-safe, no permission prompts)
+### How to write to the queue (local file access)
 
-The queue file lives in OneDrive and may be dehydrated (cloud-only placeholder) between sessions. The MCP Read tool returns EINVAL on cloud-only files, and the Write tool refuses without a prior Read. Python's `open(path, 'w')` does NOT have either limitation and overwrites cloud-only placeholders cleanly. Use this pattern every time:
+The queue file lives at the path above. Python's `open(path, 'w')` is the correct write method. Use this pattern every time:
 
 ```python
 import json, sys, os
 
-QUEUE = r'C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json'
+QUEUE = r'C:\Users\Mini\Documents\osi-claude-brain\email-queue.json'
 # Or from the sandbox mount:
-# QUEUE = '/sessions/vigilant-upbeat-faraday/mnt/OSI-Brain/email-queue.json'
+# QUEUE = '/sessions/vigilant-upbeat-faraday/mnt/C:\Users\Mini\Documents\osi-claude-brain\email-queue.json'
 
-# Step 1: Read existing content. Try local first, fall back to SharePoint on EINVAL.
+# Step 1: Read existing content from local file.
 try:
     with open(QUEUE, 'r') as f:
         queue = json.load(f)
 except (OSError, ValueError) as e:
-    # Local read failed — file is cloud-only. Fetch via SharePoint MCP.
+    # File missing or unreadable — abort.
     # Use mcp__3d844455-*__sharepoint_search for query "email-queue.json",
     # get the file URI, then mcp__3d844455-*__read_resource on it.
     # Parse the returned JSON string into `queue`.
-    raise SystemExit("FALLBACK: use SharePoint MCP to fetch current queue content, then continue with the merge below")
+    raise SystemExit("ABORT: email queue file not found at expected path")
 
 # Step 2: Build new entries (prospect name, company, etc.).
 new_entries = [ ... ]  # array of entry dicts
@@ -582,7 +582,7 @@ os.replace(tmp, QUEUE)
 
 Do NOT use the MCP Write tool for the queue file (its prior-Read requirement breaks on cloud-only files). Do NOT delete the file first (cowork delete permission does not reliably carry across scheduled sessions).
 
-Same pattern applies to `OSI-Brain/prospects-tracker-new.xlsx` — read via SharePoint if local read fails, write via Python (use `openpyxl` with `load_workbook` on bytes from SharePoint, then `wb.save(path)`).
+Same pattern applies to `C:\Users\Mini\Documents\osi-claude-brain\prospects-tracker-new.xlsx` — local file access only, use `openpyxl.load_workbook(path)` then `wb.save(path)`.
 
 ---
 
@@ -667,7 +667,7 @@ Merger wedge: "With the Park Place and Service Express merger, a lot of teams ha
 
 ## Step 11: Update the Excel Tracker
 
-File: OSI-Brain/prospects-tracker-new.xlsx
+File: C:\Users\Mini\Documents\osi-claude-brain\prospects-tracker-new.xlsx
 
 ### Tab 1 — Prospects
 

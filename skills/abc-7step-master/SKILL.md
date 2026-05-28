@@ -62,9 +62,9 @@ This skill drafts and queues 7 emails. No email means no sequence. If neither Br
 
 Before researching, writing emails, or touching HubSpot, open the queue:
 
-`C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json`
+`C:\Users\Mini\Documents\osi-claude-brain\email-queue.json`
 
-Read it locally: `ls` the path first to confirm it exists on the local machine, then `open(path, 'r')` to load it. Do NOT fall back to OneDrive sync or the SharePoint MCP — local file access only.
+Read it locally: `ls` the path first to confirm it exists on the local machine, then `open(path, 'r')` to load it. Local file access only.
 
 Scan every entry for a match with this prospect:
 - `to` field equals the prospect's email (case-insensitive), OR
@@ -119,7 +119,7 @@ Associate to the company. If the company doesn't exist in HubSpot, create it fir
 
 ### Approved vendor check
 
-Read `OSI-Brain/approved-vendors.json` (OneDrive-safe pattern). Case-insensitive substring match on the prospect's company against `approved_vendor_companies`.
+Read `C:\Users\Mini\Documents\osi-claude-brain\approved-vendors.json` using local file access. Case-insensitive substring match on the prospect's company against `approved_vendor_companies`.
 
 **If match:**
 - Email 1 includes ONE soft line acknowledging approved-vendor status. Examples: "Side note — we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast." Or: "For context, we're an approved vendor at [Company] already, so standing up a PO is painless if it comes to that."
@@ -462,7 +462,7 @@ Email 1 just fired live, so Day 1 is locked in as TODAY. If 9d wrote the task wi
 
 ### 11d. Write Emails 2-7 to the queue
 
-Open `C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json` using local file access only — `ls` to confirm it exists, then read/write directly (see Queue Write Pattern below). Do NOT use OneDrive sync or the SharePoint MCP.
+Open `C:\Users\Mini\Documents\osi-claude-brain\email-queue.json` using local file access only — `ls` to confirm it exists, then read/write directly (see Queue Write Pattern below). Local file access only.
 
 Build 6 new entries (Emails 2 through 7). Each entry:
 
@@ -501,9 +501,9 @@ Build 6 new entries (Emails 2 through 7). Each entry:
 ```python
 import json, os
 
-QUEUE = r'C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\email-queue.json'
+QUEUE = r'C:\Users\Mini\Documents\osi-claude-brain\email-queue.json'
 
-# Read existing — local only, no OneDrive/SharePoint fallback
+# Read existing — local file access only
 import subprocess
 subprocess.run(['ls', QUEUE], check=True)  # confirm file is present on local machine
 with open(QUEUE, 'r') as f:
@@ -544,7 +544,7 @@ Use the Write tool to save `[lastname]-[company]-sequence.md` to Brian's Email f
 
 ## Step 13 — Excel Tracker Update
 
-File: `C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\prospects-tracker-new.xlsx`
+File: `C:\Users\Mini\Documents\osi-claude-brain\prospects-tracker-new.xlsx`
 
 ### Tab 1 — Prospects
 
@@ -560,7 +560,7 @@ Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Da
 
 One row per company per run. Status: Completed / Partial / Not Started. Skip Tab 2 for one-off interactive runs on a single prospect.
 
-Local file access: `openpyxl.load_workbook` on the local path directly. Do NOT use SharePoint MCP or OneDrive sync.
+Local file access: `openpyxl.load_workbook` on the local path directly. Local file access only.
 
 ---
 

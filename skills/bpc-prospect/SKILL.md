@@ -55,7 +55,7 @@ Use **regular LinkedIn** (`linkedin.com/in/...`) for both search and profile rea
 
 ## Approved Vendor Check — flag only, no email instructions
 
-Read `OSI-Brain/approved-vendors.json` (OneDrive-safe Python: `open(path,'r')`, fall back to SharePoint MCP on EINVAL). Check if the prospect's company matches any entry using a case-insensitive substring match (e.g. "Desjardins Group" matches "Desjardins").
+Read `C:\Users\Mini\Documents\osi-claude-brain\approved-vendors.json` using local file access. Check if the prospect's company matches any entry using a case-insensitive substring match (e.g. "Desjardins Group" matches "Desjardins").
 
 Include this flag in the HANDOFF line passed to osi-outreach-sequence:
 
@@ -64,7 +64,7 @@ Include this flag in the HANDOFF line passed to osi-outreach-sequence:
 
 Do NOT write any email content here. Do NOT include phrasing suggestions. That is osi-outreach-sequence's job.
 
-To add a company to the approved-vendor list, Brian edits `OSI-Brain/approved-vendors.json` directly and adds the company name to `approved_vendor_companies`.
+To add a company to the approved-vendor list, Brian edits `C:\Users\Mini\Documents\osi-claude-brain\approved-vendors.json` directly and adds the company name to `approved_vendor_companies`.
 
 ---
 

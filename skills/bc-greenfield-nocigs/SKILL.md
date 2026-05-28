@@ -150,7 +150,7 @@ These people's companies are owned by another rep. Do not pursue without checkin
 ## Step 5: Save and Present the Report
 
 1. Save the report as a `.md` file to Brian's workspace:
-   `C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\BC Enrichment\Greenfield_[SearchName]_[YYYY-MM-DD].md`
+   `C:\Users\Mini\Documents\osi-claude-brain\BC Enrichment\Greenfield_[SearchName]_[YYYY-MM-DD].md`
 
 2. Provide the `computer://` link so Brian can open it.
 

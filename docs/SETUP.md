@@ -64,7 +64,7 @@ git config --global credential.helper manager
 
 In PowerShell, navigate to your Claude folder:
 ```powershell
-cd "C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\Projects\GitHub"
+cd "C:\Users\Mini\Documents\Documents\Claude\Projects\GitHub"
 ```
 
 Initialize git in this folder:

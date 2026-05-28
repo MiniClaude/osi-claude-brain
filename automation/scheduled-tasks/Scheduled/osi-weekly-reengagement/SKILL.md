@@ -8,10 +8,10 @@ Run the osi-weekly-reengagement skill.
 This is a standalone weekly automation that runs independently of any other re-engagement tasks.
 
 TRACKER FILE (read and write ONLY this file — never touch any other tracker):
-C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\skills\osi-weekly-reengagement\weekly-reengagement-tracker.json
+C:\Users\Mini\Documents\Documents\Claude\skills\osi-weekly-reengagement\weekly-reengagement-tracker.json
 
 SKILL FILE (full instructions):
-C:\Users\MINI OSI RIG\OneDrive - OSI Hardware\Documents\Claude\skills\osi-weekly-reengagement\SKILL.md
+C:\Users\Mini\Documents\Documents\Claude\skills\osi-weekly-reengagement\SKILL.md
 
 Follow the skill instructions exactly:
 1. Read the tracker file to get current state (last keyword, last page, processed IDs)

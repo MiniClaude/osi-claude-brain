@@ -209,12 +209,12 @@ Save updated file back to Claude-Brain.
 ---
 
 > **SYNC NOTE:** This skill exists in two locations that must ALWAYS be kept in sync:
-> - `Claude-Brain/skills/osi-job-change-prospecting/SKILL.md` (OneDrive — source of truth)
+> - `C:\Users\Mini\Documents\osi-claude-brain\skills\osi-job-change-prospecting\SKILL.md` (source of truth)
 > - `.claude/skills/osi-job-change-prospecting/SKILL.md` (Cowork local — what triggers the skill)
 >
 > Any time changes are made to one, apply them to the other immediately. After editing, repackage
 > `Claude-Brain/skills/osi-job-change-prospecting.skill` and reinstall via Cowork if the local
-> Cowork copy was updated directly. If only the local copy was updated, sync back to OneDrive.
+> Source of truth: `C:\Users\Mini\Documents\osi-claude-brain\`. Keep the Cowork copy in sync.
 
 ---
 

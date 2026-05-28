@@ -151,22 +151,22 @@ When Brian says "run", "send it", "looks good", or any clear go-ahead:
 
 ### 7a: Write all 4 emails to the queue
 
-Queue file: `C:\Claude-Brain\email-queue.json`
+Queue file: `C:\Users\Mini\Documents\osi-claude-brain\email-queue.json`
 
-Use the OneDrive-safe Python pattern:
+Use direct local file access:
 ```python
 import json, os
 
-QUEUE = r'C:\Claude-Brain\email-queue.json'
+QUEUE = r'C:\Users\Mini\Documents\osi-claude-brain\email-queue.json'
 
 try:
     with open(QUEUE, 'r') as f:
         queue = json.load(f)
 except (OSError, ValueError):
-    raise SystemExit("FALLBACK: use SharePoint MCP to fetch queue, then continue")
+    raise SystemExit("ABORT: email queue file not found at expected path")
 ```
 
-If the local open fails, search SharePoint for `email-queue.json` using the Microsoft 365 MCP, fetch the most recently modified version, and parse the JSON from the response.
+If the local open fails, the file is missing. ABORT and tell Brian the queue file was not found. MCP, fetch the most recently modified version, and parse the JSON from the response.
 
 Build 4 entries. Each entry:
 

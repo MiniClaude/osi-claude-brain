@@ -115,7 +115,7 @@ If ZoomInfo returns no `account_research` data (typical for newer JV entities or
 
 ### Phase 6 — Output: markdown screening report
 
-Save to: `C:\Users\Mini\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\TradeShows.Internet.Trolling\[source-slug]-Greenfield-Screening.md`
+Save to: `C:\Users\Mini\Documents\Documents\Claude\OSI-Brain\TradeShows.Internet.Trolling\[source-slug]-Greenfield-Screening.md`
 
 Use this structure (keep tables tight, don't pad):
 
@@ -182,7 +182,7 @@ Reply in chat with:
 ## Conventions Brian relies on
 
 - **Owner ID:** Brian's hubspot_owner_id is `213536174`. HubSpot portal `21878985`.
-- **Workspace folder:** Always save outputs to `C:\Users\Mini\OneDrive - OSI Hardware\Documents\Claude\OSI-Brain\TradeShows.Internet.Trolling`. This is OneDrive-synced; files persist across sessions.
+- **Workspace folder:** Always save outputs to `C:\Users\Mini\Documents\Documents\Claude\OSI-Brain\TradeShows.Internet.Trolling`. This is locally stored; files persist across sessions.
 - **Tone in the deliverables:** Direct, action-oriented. Brian's preference is concise prose, no filler, no disclaimers, no AI-style hedge language. Tables over paragraphs when listing companies. Bullets over walls of text for outreach angles.
 - **Top decision-maker definition:** VP/Director-level only, Information Technology / Engineering & Technical / Operations departments only. No Managers, no other departments. This is a deliberate signal-vs-noise tradeoff Brian asked for.
 - **OSI products to reference in plays:** Optics (SFP+/QSFP/DWDM, especially Nokia/Cisco/Adtran/Calix-compatible), servers/storage (Dell/HPE refresh), DDR4/DDR5 memory, power (APC/Eaton at huts/POPs/substations), TPM (third-party maintenance on aging gear), pro services. Match the angle to whatever signal surfaced in enrichment.
