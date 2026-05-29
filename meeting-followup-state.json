@@ -1,8 +1,8 @@
 {
-  "last_run": "2026-05-13T14:10:00Z",
+  "last_run": "2026-05-26T14:09:00Z",
   "last_run_status": "ok",
-  "lookback_window_start": "2026-05-12T00:00:00Z",
-  "lookback_window_end": "2026-05-13T14:10:00Z",
+  "lookback_window_start": "2026-05-25T00:00:00Z",
+  "lookback_window_end": "2026-05-26T14:09:00Z",
   "total_calls_in_window": 0,
   "calls_processed": [],
   "calls_skipped_count": 0,

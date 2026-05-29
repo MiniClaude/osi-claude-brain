@@ -839,6 +839,8 @@ objectType: `notes`, owner: 196669355, associated to contact.
 Write in this exact order with these exact labels:
 
 ```
+SEQUENCE: [Network | DWDM | Server/Storage | TPM]
+
 Fresh hook (30-day news): [one-line summary + URL, or "none"]
 
 QUICK CONNECT KEYWORDS
@@ -859,6 +861,14 @@ EMAIL RESOLUTION: [hubspot-existing | zoominfo-full-match | dominant-pattern]
   [ZI ATTEMPTS block: ONLY include when ZoomInfo was actually run. Log each attempt verbatim. Omit entirely when email came from HubSpot.]
 ```
 
+**SEQUENCE values:**
+- `Network` — Sample-Offer Network. Target: network engineers, architects, transport engineers.
+- `DWDM` — Pain-Led DWDM. Target: transport/optical engineers, network planners at carriers, CLECs, MSOs.
+- `Server/Storage` — Sample-Offer Server or Pain-Led Storage. Target: systems engineers, infrastructure engineers, storage admins.
+- `TPM` — Pain-Led TPM. Target: IT directors, DC managers, asset managers, procurement, mid-market CIOs.
+
+This is the first thing Andy reads when a LINKED_IN_CONNECT task comes due. It tells him which HubSpot sequence to enroll the contact in.
+
 **EMAIL RESOLUTION rules:**
 - `hubspot-existing`: email was already on the HubSpot contact record. No ZI attempts needed. One line only: `EMAIL RESOLUTION: hubspot-existing | chosen@domain.com`
 - `zoominfo-full-match`: ZoomInfo returned a verified email. Include the full ZI ATTEMPTS log below the EMAIL RESOLUTION line.
@@ -868,16 +878,19 @@ Do NOT log ZI ATTEMPTS when the email came from HubSpot. There is nothing to log
 
 **PRE-WRITE CHECKLIST -- complete before calling manage_crm_objects:**
 - [ ] All research finished BEFORE writing: LinkedIn full read, ZoomInfo (if needed), fresh hook search
-- [ ] Sections are in the exact order above: Fresh hook, QUICK CONNECT KEYWORDS, LIVE CALL SCRIPT, THE PLAY, THE PERSONAL HOOK, EMAIL RESOLUTION
+- [ ] Sections are in the exact order above: SEQUENCE, Fresh hook, QUICK CONNECT KEYWORDS, LIVE CALL SCRIPT, THE PLAY, THE PERSONAL HOOK, EMAIL RESOLUTION
+- [ ] SEQUENCE is the very first line. One of: Network, DWDM, Server/Storage, TPM. No other values.
 - [ ] Labels are exact: `THE PLAY` not `QUALIFICATION`, `THE PERSONAL HOOK` not `PERSONAL HOOK:`, `QUICK CONNECT KEYWORDS` not `KEYWORDS`
 - [ ] LIVE CALL SCRIPT omitted entirely if no phone (do not write the header with blank fields)
 - [ ] ZI ATTEMPTS block included only if ZoomInfo was actually run
 - [ ] EMAIL RESOLUTION is one line if hubspot-existing, full retry log if ZoomInfo was used
-- [ ] No extra sections: no `STRATEGY NOTE --`, no `EMPLOYER VERIFICATION:`, no `SEQUENCE:`, no `STAGGER:`
+- [ ] No extra sections: no `STRATEGY NOTE --`, no `EMPLOYER VERIFICATION:`, no `STAGGER:`
 - [ ] No em-dashes anywhere in the note
 
 **CORRECT example (Tim Davidson, VP IT Infrastructure, NFL):**
 ```
+SEQUENCE: Network
+
 Fresh hook (30-day news): none
 
 QUICK CONNECT KEYWORDS
@@ -1105,7 +1118,27 @@ Trigger: Andy says "find me cold companies", "auto mode", "sweep my accounts", o
 
 🚨 **SAME RULE AS COMPANY MODE: NEVER CAP CANDIDATES PER COMPANY. FIND EVERYONE WORTH REACHING OUT TO.**
 
-### Step 0: Build the exclusion list (MANDATORY, before any HubSpot pull)
+🚨 **HARDWIRED RULE -- ANDY'S COMPANIES ONLY. NEVER JAM. (added 2026-05-19)**
+
+Auto Mode ONLY pulls companies owned by Andy (owner ID **196669355**). Never expand this to Mark (210187184) or John (210187193). The CLAUDE.md rule that "JAM accounts are fair game" means Andy can prospect into those accounts if he chooses -- it does NOT mean Auto Mode should pull them automatically. Andy has corrected this mistake multiple times. The owner ID in every filter is 196669355 and nothing else.
+
+🚨 **HARDWIRED RULE -- USE THE MASTER PIPELINE LIST FIRST. HUBSPOT PULL IS FALLBACK ONLY. (added 2026-05-19)**
+
+The "Company Pipeline" tab of `C:\Claude-Brain\prospects-tracker-new.xlsx` is the primary source for Auto Mode targets. It was built on 2026-05-19 from all Andy-owned HubSpot companies with 200+ employees, pre-scored by ICP fit (HIGH / MEDIUM / UNKNOWN / LOW), and sorted with HIGH-fit companies first then coldest last activity first within each tier. Do NOT pull from HubSpot live if the Pipeline tab has Pending companies. Use the tab.
+
+**Master Pipeline tab logic:**
+1. Read "Company Pipeline" tab from `C:\Claude-Brain\prospects-tracker-new.xlsx`.
+2. Filter to rows where Status = "Pending".
+3. Cross-check each Pending company against the current `email-queue.json` (skip any with active/pending sequences).
+4. Cross-check against `do-not-auto-prospect.json` (skip DNP).
+5. Work through companies in order (HIGH ICP first, then MEDIUM, coldest last-activity first within tier).
+6. Keep pulling the next Pending row until 3 viable candidates are confirmed clean via Step 2.5 pre-checks.
+7. After completing a company (regardless of result), mark its row Status = "Done" and write today's date to Date Processed. Use openpyxl via bash.
+8. If the Pipeline tab has no remaining Pending rows: fall back to the live HubSpot pull below.
+
+**Rebuilding the Pipeline tab:** Run a fresh build when Andy says "rebuild pipeline" or "refresh company list". Pull all Andy-owned (196669355) companies with `numberofemployees >= 200` from HubSpot, cross-ref queue and DNP, score by industry, write to the tab. This replaces all existing rows.
+
+### Step 0: Build the exclusion list (MANDATORY, runs even when using Pipeline tab)
 
 🚨 **DO THIS BEFORE PRESENTING ANY COMPANIES. Never skip.**
 
@@ -1119,13 +1152,37 @@ After building the exclusion list:
 - Update the "Companies Prospected" tab in `C:\Claude-Brain\prospects-tracker-new.xlsx` with any companies from the queue that are not already listed there (company name + last sequence date, sorted by date descending).
 - This tab is the running log of every company ever prospected. Keep it current at the start of every Auto Mode run.
 
-### Step 1: Pull cold HubSpot companies
-Search HubSpot for companies owned by Andy (owner ID 196669355) with no activity in 6+ months. Use `search_crm_objects` on the companies object, filter by `notes_last_contacted` < 180 days ago or null, `hubspot_owner_id` = 196669355. Pull up to 50 results sorted by last activity ascending (coldest first).
+### Step 1: Pipeline tab (PRIMARY) or HubSpot pull (FALLBACK)
+
+**PRIMARY -- Pipeline tab:** Read the "Company Pipeline" tab. Take the next N rows with Status = "Pending" that are not in the exclusion list. N = however many it takes to get 3 viable candidates through Step 2.5 pre-checks. No cap on how many rows to read -- keep going until 3 clean companies are found or the tab is exhausted.
+
+**FALLBACK -- Live HubSpot pull (only when Pipeline tab is exhausted):** Search HubSpot for companies owned by Andy (**owner ID 196669355 ONLY**) with no activity in 6+ months. Filter: `notes_last_contacted` < 180 days ago or null, `hubspot_owner_id` = 196669355, `numberofemployees` >= 200. Pull 50 at a time, keep pulling batches until 3 viable candidates survive Step 2.5. Never stop after one batch.
 
 ### Step 2: ICP pre-filter + queue exclusion
-For each company, read: name, industry, employee count, city/state. Apply TWO filters:
-1. Discard obvious non-fits (hyperscalers, pure software SaaS, gov agencies with no IT infra footprint). Keep telecom, ISPs, regional carriers, mid-large enterprise with data center or network infrastructure.
-2. **Cross-check against the exclusion list from Step 0.** Any company whose name fuzzy-matches a name on the exclusion list (same root word, common abbreviation, or known alias -- e.g. "altafiber" = "Altafiber", "Midco" = "Midcontinent Communications") is EXCLUDED from the presented list. Do not present it. Do not mention it. It has active sequences.
+
+🚨 **HARDWIRED RULE -- APPLY THIS FILTER EVEN ON HIGH-SCORED PIPELINE ROWS. (added 2026-05-19)**
+
+The Pipeline's ICP scoring is broad and was built algorithmically. HIGH does not mean "obviously good OSI target." A printer company (Epson), a break-fix field services company (Barrister Global Services Network), a ticketing SaaS (JW Player), or a security analytics startup (BitSight) can all score HIGH in the pipeline and still be worthless targets for OSI. Claude must apply its own judgment at this step and skip anything that is clearly not an OSI buyer, regardless of the pipeline score.
+
+**HARD SKIP -- never present these even if HIGH-scored:**
+- COMPUTER_SOFTWARE industry with fewer than 5,000 employees. SaaS companies of this size run cloud-native stacks and do not buy the hardware OSI sells.
+- Hardware manufacturers (printer companies, consumer electronics, audio/video gear, networking equipment vendors who MAKE product -- e.g., Epson, Grandstream, AsusTek, Plantronics, Polycom). These are vendors, not infrastructure operators.
+- IT field services / break-fix companies (e.g., Barrister Global Services Network, Presidio if small, CompuCom). They service other people's hardware, they do not buy optical gear or DIMMs for their own infrastructure at scale.
+- Media / entertainment companies under 10,000 employees (Raycom, CBS Interactive, broadcast media). Their IT is not large enough to be a meaningful OSI account.
+- Staffing, recruiting, HR tech, legal tech, marketing SaaS -- no infrastructure footprint.
+- Hyperscalers at any size (Google, Meta, AWS, Microsoft, ByteDance). Already handled in DISQUALIFIERS but explicit here.
+- Non-US companies (check the domain: .kz, .ca that are Canadian with no US presence, .eu, .co.il, etc.) unless Andy explicitly named them. OSI ships primarily in North America.
+
+**STRONG KEEP -- these are the target profile:**
+- Carriers, CLECs, ISPs, regional telecoms, cable companies, wireless carriers (any size with 200+ emp)
+- Managed services providers / VAR / solution providers who run their OWN infrastructure (not just reselling)
+- Mid-to-large enterprises (1,000+ emp) in: financial services, healthcare/hospitals, utilities, manufacturing, federal contractors, universities with real IT infrastructure
+- Data center operators, colocation providers, fiber network operators
+- COMPUTER_SOFTWARE companies with 5,000+ employees (large enough to have a real IT infrastructure team managing data center, servers, networking)
+
+Cross-check against the exclusion list from Step 0. Skip queue matches. Skip DNP matches. Skip LOW-scored rows unless nothing better exists. Apply the hard-skip / strong-keep criteria above to EVERY row, including HIGH-scored pipeline rows.
+
+**Why this rule exists:** 2026-05-19, Auto Mode presented Barrister Global Services Network (IT field services) and Epson America (printer manufacturer) as HIGH ICP targets. Both were immediately flagged by Andy as obviously wrong. The Pipeline ICP score was assigned algorithmically and does not reflect OSI's actual buyer profile. This filter is the human judgment layer that the pipeline build is missing.
 
 ### Step 2.5: Pre-check every surviving company BEFORE presenting (MANDATORY)
 
@@ -1175,7 +1232,23 @@ For each company Andy approves (or starting from the top if he says go): run the
 ### Step 5: After each company
 Report results (X yes, Y no, Z conditional), then move to the next company. Andy can stop after any company by saying "that's enough."
 
-After completing a company (win or no), add it to the "Companies Prospected" tab if not already there.
+After completing a company (win or no):
+1. Add it to the "Companies Prospected" tab if not already there.
+2. **Mark its row in "Company Pipeline" tab as Done + today's date** (use openpyxl via bash -- find the row by HubSpot ID or company name, set Status = "Done", set Date Processed = YYYY-MM-DD).
+
+```python
+import openpyxl
+from datetime import date
+wb = openpyxl.load_workbook(r'C:\Claude-Brain\prospects-tracker-new.xlsx')
+ws = wb['Company Pipeline']
+today = date.today().isoformat()
+for row in ws.iter_rows(min_row=2):
+    if str(row[0].value).strip().lower() == company_name.strip().lower():
+        row[7].value = 'Done'      # Status column (H)
+        row[8].value = today       # Date Processed column (I)
+        break
+wb.save(r'C:\Claude-Brain\prospects-tracker-new.xlsx')
+```
 
 Default batch: 3 companies per session unless Andy specifies otherwise or says "keep going". Within each company: NO CAP -- find everyone worth contacting.
 

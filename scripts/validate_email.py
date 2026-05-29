@@ -415,7 +415,8 @@ def _check_surgical_isolation(body: str) -> List[Dict]:
     matched_clusters = []
     for cluster, keywords in PRODUCT_LINE_KEYWORDS.items():
         for kw in keywords:
-            if kw.lower() in body_l:
+            # Use word-boundary match to avoid false substring hits (e.g. "RAM" in "Ramana")
+            if re.search(r'\b' + re.escape(kw.lower()) + r'\b', body_l):
                 matched_clusters.append(cluster)
                 break
     matched_unique = set(matched_clusters)

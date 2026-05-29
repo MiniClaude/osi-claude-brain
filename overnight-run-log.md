@@ -1,4 +1,24 @@
 
+[2026-05-29 09:00 ET] osi-email-task-drafts-cmig — 18 tasks drafted (priority pass). TOTAL IN QUEUE: 183. SKIPPED (sequence, empty "Send follow-up email"): 36. DRAFTED THIS RUN: 18 (9 no-prior-draft due today + 9 overdue May-28 overwrites). DRAFTED-FRESH: 9. DRAFTED-OVERWROTE: 9. MANUAL-ACTION FLAGGED: 1. REMAINING (not processed this run): 165 tasks (147 with existing drafts from prior runs, 18 future-dated no-draft tasks).
+
+FLAGS FOR ANDY (2026-05-29):
+- Daniel Schatte / Charter Communications (106004473102): MANUAL ACTION NEEDED. Task says "Put in Sequence" but BOTH known email addresses flagged invalid. Do NOT send. Verify email before enrolling. Craig Mathis (Distinguished Engineer) or Chris Bauer (Principal Engineer II) may be better entry points.
+- John Weston / WiLine Networks (107118256146): catch-all email domain flagged. Verify john.weston@wiline.com delivers before sending thank-you.
+- Erik Schneider / Alaska Airlines (108928592473): 12 months cold, no reply. Title "FCF Pilot" may indicate wrong contact entirely. Review before sending.
+- Alexandr Zaytsev / Hudson River Trading (109642976866): third outbound with no reply. HRT B200/Lambda hook is strong but may need LinkedIn approach if this email also goes unanswered.
+- Anthony Gambino / Bausch Health (107102195265): THIN CONTEXT on "meeting" -- no meeting found in HubSpot. Draft built from TPM thread. Primary contact is Margie St. Julien-Valbrun, not Anthony.
+
+[2026-05-28 09:00 ET] osi-email-task-drafts-cmig — 17 tasks drafted (priority pass). TASKS REVIEWED: 119. SKIPPED (sequence, empty "Send follow-up email"): 37. DRAFT QUEUE TOTAL: 82. DRAFTED THIS RUN: 17 (9 no-prior-draft due today + 8 with stale 5/15 drafts). DRAFTED-FRESH: 10. DRAFTED-OVERWROTE: 6. THIN CONTEXT: 1. ALREADY CURRENT (drafted 2026-05-27, skipped re-run): 65.
+
+FLAGS FOR ANDY (2026-05-28):
+- Erik Schneider / Alaska Airlines (108928592473): thin context. Only history is a June 2025 NANOG intro email with no reply. Draft is a lightweight TPM revival. Review before sending — his title "FCF Pilot" (flight crew) may mean he's the wrong contact entirely.
+- Anand Ayyangar / PayPal (109591711118 + 108936164991): Task says "email thank you after meeting" but no meeting notes found in HubSpot for any recent meeting. Andy should add specifics from the actual meeting before sending.
+- Sukhi Sandhu / AMD (108448444761): AMD EPYC Venice (2nm) May 2026 announcement used as fresh hook for DDR4 DIMM angle. Verify hook is accurate before sending.
+- Con Edison / Ronald StaRosa (107392755864): $21B infrastructure plan 2026-2028 used as fresh hook. Strong signal — Con Ed is actively spending.
+- Forest River / Michael Finnigan (104744689971): draft anchored to active Cisco gear sourcing thread (C9300NM-8X in transit), not the stale 2024 WDM meeting. Correct thread.
+
+[2026-05-20 09:00 ET] osi-email-task-drafts-cmig — 0 tasks due, no-op.
+
 [2026-05-15 09:00 ET] osi-email-task-drafts-cmig — 86 tasks drafted. TASKS REVIEWED: 86. SKIPPED (sequence tasks): 0 (pre-filtered). DRAFTED (overwrote previous): 72. DRAFTED (fresh, no prior body): 14. THIN CONTEXT flagged: 9. NO CONTACT: 0. RETAINED WITHOUT OVERWRITE (batch 8 agent judgment): 4 tasks (109172310130, 107948177804, 108396069391, 107922206094 — no new engagement since 2026-05-13 run). All drafts written to HubSpot task bodies via 9 parallel subagents. Validator enforced on all.
 
 FLAGS FOR ANDY (2026-05-15):
@@ -2239,3 +2259,40 @@ Emails 2-6 NOT queued. Stagger reflects 2 queued candidates (DongHoon Shin + Jim
 No approval prompts encountered. All writes via manage_crm_objects confirmationStatus CONFIRMATION_WAIVED_FOR_SESSION.
 
 NOTE: 88 tasks have existing drafts from May 13-15 that were not refreshed in this run due to volume. These are available for Andy to review in HubSpot.
+osi-email-task-drafts-cmig at 2026-05-26 09:53 ET -- 0 tasks due, no-op.
+
+## osi-email-task-drafts-cmig — 2026-05-27
+
+**Run completed: 2026-05-27**
+
+TASKS REVIEWED: 148
+DRAFTED (fresh — no prior body): 35
+DRAFTED (overwrote previous May 15-19 drafts): 77
+SKIPPED (sequence tasks — "Send follow-up email"): 36
+
+**FLAGS REQUIRING ANDY'S ATTENTION BEFORE SENDING:**
+- Danilo Murbach (WiLine) — thin context, "Leonardo" not identified in HubSpot
+- Bob Zook (Charter) — May 21 onsite visit happened; draft may need updating with actual context
+- Steve DeCubellis (Cigna/Evernorth) — original email bounced; confirm steve.abernathy@cigna.com is live
+- Michelle Hawkins (Charter) — no company or engagement history; verify before sending
+- Lissan Zahid — left Clifford Chance June 2025, current employer unknown; LinkedIn check needed before sending
+- Mike Guo (NS Power) — email flagged catch-all by ZeroBounce; confirm deliverability
+- Matt Fish (ex-IBX) — left Oct 2024; don't send to old IBX address, find current address first
+- Prem Karunakaran (ex-TECO) — left, using personal Gmail; verify current employer
+- Allied Telecom / Andrew Ntuyo — Allied filed Chapter 11 Dec 2025; verify he is still there
+- Laurent Dumont-Gagnon (Bell/Desjardins) — zero live conversations, only power dials; verify employment
+- Paul Collado (Radial) — "worth 15 minutes" dead phrase found post-write; recommend manual edit
+- Atef Al-Debs (Express Scripts/Evernorth) — thin context, only 1 confirmed specifics thread
+
+**BUG NOTE:** Task 109276617101 (Gavin Budd / Fatbeam) — drafting subagent pulled wrong engagement thread (optics sample instead of NDA/Ciena/Boise). Andy corrected manually. Root cause: subagent engagement history retrieval pulled a different contact's thread. Recommend adding contact-name verification step to subagent prompt.
+
+
+## 2026-05-28 Craig Selland (Alliance Communications) - CONDITIONAL SKIP
+
+**Reason:** Employer verification incomplete. Path A: LinkedIn search returned no results (no profile found). Path B: ZI email c***@alliancecom.net confirms corporate domain, but no dated external web source within 6 months was found (ZI validDate 2025-11-14 is ~6.5 months ago; ZI lastUpdated 2026-04-24 is not an acceptable Path B source per the playbook). Alliance website has no staff directory listing Craig.
+
+**Additional blocker:** hs_linkedin_url is a Hard required field; no URL obtainable with no LinkedIn presence.
+
+**ZI data:** Accuracy 93, lastUpdated 2026-04-24, title Network Administrator, ZI ID -2123685062.
+
+**Action:** Mark pending-relookup. Andy to verify manually (LinkedIn premium search, direct call, or industry conference speaker listing).

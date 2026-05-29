@@ -166,8 +166,34 @@ Queue file: `C:\Claude-Brain\email-queue.json`
 
 The queue is Git-versioned along with the rest of Claude-Brain. Andy syncs between his two laptops manually via `git pull` / `git push`. Do NOT auto-`git pull` or `git push` from this skill (the lock file gets stuck and pollutes logs). If the queue file is unreachable for any reason, ABORT and report. Do not fall back to a stale copy. (Historical note: a one-day OneDrive sync experiment ran 2026-04-24 and was rolled back same evening; the OneDrive Claude-Brain folder was permanently deleted 2026-04-30. C:\Claude-Brain is the only valid location.)
 
+### ⚠️ MANDATORY DATE VALIDATION: CROSS-CHECK BASH TIME AGAINST ENV DATE
+
+Before computing `today` or selecting any candidates, resolve the authoritative date:
+
+```python
+import subprocess
+from datetime import datetime
+
+# Get bash system date
+bash_result = subprocess.run(['date', '+%Y-%m-%d %H:%M:%S %Z'], capture_output=True, text=True)
+bash_date = bash_result.stdout.strip().split()[0]  # e.g. "2026-05-26"
+
+# ENV_DATE must be read from the system prompt's "Today's date:" field before this skill fires.
+# It is the authoritative date. Bash clock has been observed returning yesterday's date.
+# 2026-05-27 incident: bash returned 2026-05-26 16:04:53 EDT at 9:29 AM real time on May 27.
+# Result: 5 Email 1s sent at 9:29 AM because the runner saw them as overdue 4pm entries.
+# This must never happen again. ENV_DATE wins, always.
+
+if bash_date != ENV_DATE:
+    print(f"WARN: Bash date ({bash_date}) disagrees with env date ({ENV_DATE}). Using env date.")
+
+today = ENV_DATE  # Always use the env date. Never trust bash date alone.
+```
+
+`ENV_DATE` is the `YYYY-MM-DD` string parsed from the system prompt's "Today's date:" line. If it is unavailable for any reason, ABORT the run and report. Do not fall back to bash date.
+
 Select entries where:
-- `sendDate` equals today's date (YYYY-MM-DD, ET)
+- `sendDate` equals `today` (from ENV_DATE above)
 - `sendTime` matches the current hour window: one of `11am`, `12pm`, `1pm`, `2pm`, `3pm`, `4pm`
 - `status` equals `pending`
 
@@ -262,9 +288,150 @@ Why this matters: on 2026-04-30 the Christopher Lawrence Email 1 shipped because
 Look at the queue entry's `subject`. Strip any surrounding whitespace.
 
 - If it starts with `RE: ` (case-insensitive, with the space after the colon), it is a follow-up. Go to **Step 3A: REPLY flow**.
-- Otherwise it is a fresh outreach. Go to **Step 3B: NEW MAIL flow**.
+- Otherwise it is a fresh outreach. Run **Step 2C** first, then go to **Step 3B: NEW MAIL flow**.
 
-This decision is not a judgment call. It's a string prefix check. `RE: ` → Reply. Anything else → New mail.
+This decision is not a judgment call. It's a string prefix check. `RE: ` → Reply. Anything else → New mail (after Step 2C gate).
+
+---
+
+## Step 2C: Connection Request Gate (Email 1 / fresh-subject only)
+
+**This gate applies ONLY to Email 1 entries.** RE: follow-ups skip it entirely and go straight to Step 3A.
+
+An Email 1 is a queue entry that has a fresh subject (no `RE:` prefix) AND whose `id` ends with `-1` (e.g. `david-thomas-sifi-1`). OR, equivalently, the `sendTime` is `4pm` and the subject has no `RE:` prefix, since Email 1 is the only entry that goes out at 4pm. Use either signal to confirm.
+
+**Why this gate exists:** The qualification skill creates a HubSpot `LINKED_IN_CONNECT` task for every new prospect at enrollment. That task tracks whether Andy has sent the Sales Navigator connection request. Email 1 must NOT go out until Andy has sent the connection request. If the LI task is still `NOT_STARTED`, the prospect has not been warmed up on LinkedIn and the email sequence must wait. This was not enforced before 2026-05-27. Five Email 1s went out to prospects whose connection requests had not yet been sent.
+
+### Gate logic
+
+```python
+import json, os, datetime, tempfile
+from pathlib import Path
+
+QUEUE_PATH = 'C:/Claude-Brain/email-queue.json'
+HOLIDAYS_PATH = 'C:/Claude-Brain/holidays.json'
+
+# Load holidays as a set of YYYY-MM-DD strings
+with open(HOLIDAYS_PATH) as f:
+    holidays_raw = json.load(f)
+holidays = set(holidays_raw) if isinstance(holidays_raw, list) else set(holidays_raw.get('holidays', []))
+
+def is_business_day(d):
+    # d is a datetime.date object
+    return d.weekday() < 5 and d.strftime('%Y-%m-%d') not in holidays
+
+def next_business_day(d):
+    # Returns the next business day after d (never same day)
+    nxt = d + datetime.timedelta(days=1)
+    while not is_business_day(nxt):
+        nxt += datetime.timedelta(days=1)
+    return nxt
+
+def add_business_days(d, n):
+    # Adds n business days to date d
+    cur = d
+    added = 0
+    while added < n:
+        cur += datetime.timedelta(days=1)
+        if is_business_day(cur):
+            added += 1
+    return cur
+
+def business_days_between(d_start, d_end):
+    # Counts business days from d_start to d_end (exclusive of start, inclusive of end).
+    # Returns a positive integer if d_end > d_start.
+    count = 0
+    cur = d_start
+    while cur < d_end:
+        cur += datetime.timedelta(days=1)
+        if is_business_day(cur):
+            count += 1
+    return count
+```
+
+For each Email 1 candidate (before composing):
+
+```python
+# 1. Confirm this is an Email 1
+entry_id = entry['id']
+is_email_1 = entry_id.endswith('-1') or (entry.get('sendTime') == '4pm' and not entry['subject'].upper().startswith('RE:'))
+if not is_email_1:
+    # Not Email 1. Skip this gate.
+    pass  # proceed to Step 3B normally
+else:
+    prospect_email = entry['to'].lower().strip()
+
+    # 2. Look up the HubSpot contact by email address
+    # Use search_crm_objects: objectType=contacts, filterGroups on email = prospect_email
+    # (call mcp tool: mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects)
+    # contact_id = result.results[0].id if results else None
+    # If no contact found, proceed with send (gate cannot fire without a contact record)
+
+    # 3. Search for a NOT_STARTED LINKED_IN_CONNECT task on that contact
+    # Use search_crm_objects: objectType=tasks,
+    #   filter: associations.contact = contact_id AND hs_task_type = LINKED_IN_CONNECT
+    #           AND hs_task_status = NOT_STARTED
+    #   subject CONTAINS "Sales Nav -- Send connection request"
+    # li_task = first matching result, or None
+
+    if li_task is not None:
+        # CONNECTION REQUEST NOT YET SENT. Gate fires.
+
+        # 4. Compute new E1 date = next business day after today
+        today_date = datetime.date.fromisoformat(today)  # today = ENV_DATE from Step 1A
+        new_e1_date = next_business_day(today_date)
+
+        # 5. Compute the business-day offset between old sendDate and new E1 date
+        old_e1_date = datetime.date.fromisoformat(entry['sendDate'])
+        # The offset is how many business days we are pushing forward.
+        # new_e1_date is always >= today > old_e1_date in the overdue case.
+        # Use: offset = business_days_between(old_e1_date, new_e1_date)
+        offset_bdays = business_days_between(old_e1_date, new_e1_date)
+
+        # 6. Load full queue and update all pending entries for this prospect
+        with open(QUEUE_PATH) as f:
+            queue = json.load(f)
+
+        for e in queue:
+            if e.get('to', '').lower().strip() != prospect_email:
+                continue
+            if e.get('status') != 'pending':
+                continue
+            old_date = datetime.date.fromisoformat(e['sendDate'])
+            new_date = add_business_days(old_date, offset_bdays)
+            e['sendDate'] = new_date.strftime('%Y-%m-%d')
+
+        # 7. Atomic write
+        fd, tmp = tempfile.mkstemp(dir=os.path.dirname(QUEUE_PATH), prefix='email-queue.', suffix='.tmp')
+        with os.fdopen(fd, 'w') as f:
+            json.dump(queue, f, indent=2)
+        os.replace(tmp, QUEUE_PATH)
+
+        # 8. Update the HubSpot LINKED_IN_CONNECT task hs_timestamp to new E1 at 20:00 UTC (4pm ET)
+        import datetime as dt
+        new_e1_ts_utc = dt.datetime.combine(new_e1_date, dt.time(20, 0, 0), tzinfo=dt.timezone.utc)
+        new_e1_ts_ms = int(new_e1_ts_utc.timestamp() * 1000)
+        # Call manage_crm_objects: objectType=tasks, objectId=li_task.id, action=update
+        # properties: { hs_timestamp: str(new_e1_ts_ms) }
+
+        # 9. Log the skip
+        print(
+            f"CONN-REQUEST-GATE: {entry_id} skipped. LI task NOT_STARTED ({li_task.id}). "
+            f"E1 rescheduled from {old_e1_date} to {new_e1_date}. "
+            f"All pending entries for {prospect_email} pushed forward {offset_bdays} business days. "
+            f"HubSpot LI task updated to {new_e1_date} 20:00 UTC."
+        )
+
+        # SKIP to next entry. Do NOT proceed to Step 3B.
+        continue
+
+    # If li_task is None (no NOT_STARTED task found, task already completed or never existed):
+    # proceed normally to Step 3B.
+```
+
+**Cadence preservation rule:** When the gate fires, EVERY pending entry for that prospect (identified by `to` address) must be pushed forward by the exact same business-day offset. This keeps the E1-E2-E3-E4-E5-E6 gaps intact. Do not slide E1 alone while leaving E2-E6 behind.
+
+**Log the gate skip in the Step 7 run report** under a dedicated section: "🔗 CONNECTION REQUEST GATES FIRED". Include: entry ID, old date, new date, offset, HubSpot task ID updated. If no gates fired, write "Connection request gate: clean, 0 fires" so Andy has positive confirmation the check ran.
 
 ---
 
@@ -322,16 +489,42 @@ The grey divider + From/Sent/To/Subject header block + original body are all pro
 
 ## Step 3B: NEW MAIL flow (subject does NOT start with `RE: `)
 
-0. **RUN THE PRE-SEND GATE FIRST.** See the 🛑 MANDATORY PRE-SEND GATE 🛑 section at the top of this file. Re-read the queue entry from disk by `id`. Confirm `status == "pending"` and `to` is not in the hard-block list. If either fails, SKIP this entry. This is not optional. Brett Baker / Lippert 2026-04-22 is why.
+0. **Step 2C CONNECTION REQUEST GATE must have already run for this entry.** If this is an Email 1 (id ends in `-1` or sendTime=4pm with no RE: prefix), Step 2C already checked for an open LI task. If the gate fired, you would not be here (it skips to the next entry). If you are here, the gate ran and found no NOT_STARTED task. Proceed.
+0a. **RUN THE PRE-SEND GATE FIRST.** See the 🛑 MANDATORY PRE-SEND GATE 🛑 section at the top of this file. Re-read the queue entry from disk by `id`. Confirm `status == "pending"` and `to` is not in the hard-block list. If either fails, SKIP this entry. This is not optional. Brett Baker / Lippert 2026-04-22 is why.
 1. Navigate to `https://outlook.office.com/mail/deeplink/compose?to=<URL-encoded to>&subject=<URL-encoded subject>`.
 2. Wait up to 6 seconds for the compose body to render (`[aria-label="Message body"][role="textbox"]` must exist).
 3. Verify the To and Subject fields are populated correctly from the URL. If either is empty or wrong, STOP.
 4. **MANDATORY pre-insertion strip.** Before typing anything, sanitize the queue `body` by removing any prior-thread placeholder content. Fresh-subject Email 3/4/5/6 entries must NEVER ship with `On <date>, Andy McLean wrote:` separators or `>` quoted lines in the body, those are upstream-skill bugs and they produce malformed emails (2026-04-29 incident: 11 prospects received Email 3s with hand-rolled quote blocks because the chat-session runner skipped this strip). Apply the same regex the Reply flow uses in Step 3A.7. If a quote marker is found, take everything BEFORE it, strip trailing whitespace, and use that as the body to insert. Do NOT abort; do NOT skip the entry; just clean and continue. Log the strip in the Step 7 run report under a "Defensive quote-strip" line so Andy can see which upstream entries had the bug.
 5. Click at position 0 of the body (top, above the signature).
-6. Insert the SANITIZED body (from step 4), splitting on `\n\n` for paragraph breaks. Between paragraphs insert one `insertParagraph` call followed by another `insertParagraph` call. The first ends the paragraph, the second creates the blank line between paragraphs.
-7. Do NOT add an extra `insertParagraph` after the last paragraph. The signature already has a leading gap above it.
+6. Insert the SANITIZED body (from step 4), splitting on `\n\n` for paragraph breaks. Use this exact cursor-positioning pattern:
+
+```js
+// Position cursor INSIDE the first <p> child of the body (not before it).
+// setStart(body, 0) puts the cursor before ALL child nodes, which means
+// insertParagraph would push an empty <p> above the first line and render
+// as a visible blank line before "Hi Name," in the received email.
+// Setting the range start on the first child positions it inside that <p>.
+const firstChild = body.firstChild;
+const r = document.createRange();
+r.setStart(firstChild, 0);
+r.collapse(true);
+const s = window.getSelection();
+s.removeAllRanges();
+s.addRange(r);
+
+// DO NOT call insertParagraph here. Type directly into the existing first <p>.
+for (let i = 0; i < paras.length; i++) {
+  document.execCommand('insertText', false, paras[i]);
+  document.execCommand('insertLineBreak');
+  document.execCommand('insertLineBreak');
+}
+```
+
+Two `insertLineBreak` calls after every paragraph (including the last) produce `<br><br>` which Outlook renders as exactly one blank line. The last pair gives `nlBB=2` before "Best," matching TARGET=2. Do NOT use `insertParagraph` anywhere in the body insertion -- it creates separate `<p>` elements whose CSS margin causes double-spacing (2026-05-20 bug, 6 real sends) or a leading blank line above the first name (2026-05-20 second bug).
+
+7. Do NOT add any extra calls after the last paragraph. The `insertLineBreak x2` after the last paragraph already provides the gap before "Best,".
 7a. **MANDATORY leading-blank strip.** After insertion, position the cursor immediately before the FIRST character of the first body paragraph (e.g., before "Hi" in "Hi David,"). Count `\n` characters preceding it in innerText. While that count is greater than 0, run `document.execCommand('delete', false)` to Backspace each one out. This is required because Outlook's empty compose has 1-2 empty paragraphs above the signature; positioning the cursor at "Best," and inserting body text leaves those empty paragraphs ABOVE the inserted body, which renders as 2-3 blank lines above "Hi <Name>,". Andy caught this on 2026-04-30 (David Thomas/SiFi was the first email of that 11am run). Without this strip the email looks malformed even when the rest is correct. Same logic must run on Reply flow too. See Step 3A addition.
-8. **Trim the signature's leading blank to TARGET=5.** Same rule as Reply flow. See Step 4.
+8. **Trim the signature's leading blank to TARGET=2.** Same rule as Reply flow. See Step 4.
 9. Run the preview check in Step 5.
 10. Click `Send`.
 11. Confirm success: compose closes, email in Sent Items.
@@ -354,13 +547,9 @@ Solutions Executive
 ...
 ```
 
-**TARGET = exactly 5 `\n` characters in `body.innerText` immediately before `Best,`.** 5 newlines is what the body-paragraph gap shows in innerText (Outlook structures each body paragraph as a `<p>` and the gap between two paragraphs reads as 5 `\n` in innerText). Matching that count before "Best," produces ONE visible blank line that exactly matches the body-paragraph gap. Anything less produces ZERO visible blank lines (the BAD pattern).
+**TARGET = exactly 2 `\n` characters in `body.innerText` immediately before `Best,`.** With the `insertLineBreak` × 2 paragraph approach, each `<br>` in the body creates 1 `\n` in innerText. Two `<br>` tags between paragraphs = 2 `\n` = one visible blank line. The same count applies before "Best,": TARGET=2 pads to exactly one visible blank line. Confirmed empirically on 2026-05-20 via formatting test 2 (nlBB=2, correct render in Outlook reading pane).
 
-Why 5 and not 1, 2, or 3: in this Outlook contenteditable, when the cursor is at offset 0 of an existing text node ("Best,"), each `insertParagraph` call rewrites the surrounding paragraph structure and adds 2-3 `\n` to innerText per call (not 1). TARGET=1 hits 0->2 or 0->3 in one call and exits, zero blanks. TARGET=2 same story, exits early, zero blanks. TARGET=3 same, exits at 3, still zero blanks. Only when the loop runs a second insertParagraph (which takes count from ~2/3 up to 5) does an actual `<p><br></p>` empty paragraph land between user content and "Best,", which is what renders as one visible blank line.
-
-History: TARGET was 1 pre-2026-04-29 (zero-blank bug, hit Bryan Ackerman/BNY Mellon and ~10 others). 2026-04-29 patch set TARGET=2 thinking that was the fix. 2026-04-30 11am manual run by Andy proved TARGET=2 still produced zero blanks (David Thomas/SiFi was the first email of the run and Andy caught it before sending). Bumped to 5 live, confirmed visible blank line matches body-paragraph gap, and locked in 5 here.
-
-Target 5. Never 1. Never 2. Never 3. Never 4. Re-test in a live compose with the real signature attached if you ever consider lowering it.
+History: TARGET was 5 with the old `insertParagraph` × 2 approach, because Outlook's `<p>` structure reads as 5 `\n` between paragraphs. That approach was retired on 2026-05-20 after 6 real sends went out double-spaced (2 visible blank lines between every paragraph). The root cause was that 2 `insertParagraph` calls create a separate empty `<p>` element whose CSS margin stacks against adjacent paragraphs, rendering as 2 visible blank lines. The `insertLineBreak` approach writes `<br>` inside the current `<p>`, which Outlook renders at exactly 1 line height. TARGET=2 is correct for this approach. Do NOT revert to TARGET=5 or insertParagraph × 2.
 
 The trim below is bi-directional: it Backspaces if there are too many newlines AND inserts paragraph breaks if there are too few. Do not assume the starting state. Always run this.
 
@@ -395,23 +584,20 @@ const sel = window.getSelection();
 sel.removeAllRanges();
 sel.addRange(range);
 
-// TARGET STATE: exactly 5 newlines immediately before "Best,".
-// EMPIRICAL FINDING (2026-04-30): in the current Outlook contenteditable,
-// when the cursor is at offset 0 of an existing text node ("Best,"), each
-// insertParagraph call adds ~3 newlines to innerText (not 1). This means
-// TARGET=2 lands AFTER the first insertParagraph (count goes 0 -> 2 or 0 -> 3
-// in one call), the loop exits, and the rendered email shows ZERO visible
-// blank lines before "Best," (the BAD pattern we keep trying to fix).
-// One additional insertParagraph takes count from 2 -> 5 and produces ONE
-// visible blank line, matching the gap between body paragraphs (which also
-// have 5 newlines in innerText). 5 is the empirically correct TARGET.
-// History: 2026-04-29 patch set TARGET=2 thinking that fixed the zero-blank
-// 2026-04-29 incident. Andy reviewed the first email of the 2026-04-30
-// 11am manual run and saw the layout was still broken; we bumped to 5 live
-// and confirmed the rendered output finally matches the GOOD example.
-// Do not lower below 5 without re-testing in a live compose with a real
-// signature attached.
-const TARGET = 5;
+// TARGET STATE: exactly 2 newlines immediately before "Best,".
+// EMPIRICAL FINDING (2026-05-20): with the insertLineBreak x2 paragraph approach,
+// each <br> tag = 1 \n in innerText. Two insertLineBreak calls between
+// paragraphs = 2 \n = one visible blank line. The same count before "Best,"
+// (TARGET=2) produces one visible blank line matching the body paragraph gap.
+// Confirmed in formatting test 2 on 2026-05-20: nlBB=2 rendered correctly.
+//
+// History: the old approach used insertParagraph x2 between paragraphs with
+// TARGET=5. That approach created separate empty <p> elements whose CSS margin
+// stacked, producing double-spacing (2 visible blank lines). 6 real sends on
+// 2026-05-20 went out double-spaced before the bug was caught. Switched to
+// insertLineBreak x2 approach and TARGET=2 on 2026-05-20.
+// Do NOT revert to TARGET=5 or insertParagraph x2.
+const TARGET = 2;
 
 // Too many newlines: Backspace down to TARGET.
 let guard = 0;
@@ -445,7 +631,7 @@ Best,                                Andy
 Andy
 ```
 
-The GOOD column has one visible blank line between the last sentence and "Best,". That requires **5 `\n` in innerText** (TARGET=5, see Step 4). The BAD column has zero blank lines and "Best," sits directly on the next line. That happens with 1, 2, or 3 `\n` in innerText. **TARGET=5.** Lower targets land before the trim's first `insertParagraph` completes its paragraph split, leaving the layout still tight. See Step 4 rationale block for the full empirical history.
+The GOOD column has one visible blank line between the last sentence and "Best,". That requires **2 `\n` in innerText** (TARGET=2, see Step 4) with the `insertLineBreak` x2 paragraph approach. The BAD column has zero blank lines. **TARGET=2.** See Step 4 rationale block for the full empirical history.
 
 ### Two spaces after every sentence
 
@@ -463,9 +649,13 @@ Apply per paragraph (after splitting on `\n\n`). Abbreviations like `Mr. Fox`, `
 
 ### Paragraph spacing
 
-Every real paragraph in the body is separated by a full blank line in the rendered email. Mechanically: between two real paragraphs, call `insertParagraph` twice. One ends the current paragraph, the second creates the empty paragraph that renders as the blank line.
+Every real paragraph in the body is separated by a full blank line in the rendered email. Mechanically: type each paragraph with `insertText`, then call `insertLineBreak` twice. Two `insertLineBreak` calls produce `<br><br>` within the same `<p>`, which Outlook renders as exactly one visible blank line.
 
-Do NOT call `insertParagraph` after the last real paragraph. The signature's leading blank provides the gap.
+**CRITICAL: cursor positioning at the start.** Always use `range.setStart(body.firstChild, 0)` to place the cursor INSIDE the first `<p>`. NEVER use `range.setStart(body, 0)` followed by `insertParagraph` -- that creates an empty `<p>` above the first line which renders as a blank line before "Hi Name," in the received email (2026-05-20 bug).
+
+Do NOT use `insertParagraph` anywhere in the body insertion. It creates separate `<p>` elements whose CSS margin causes either double-spacing between paragraphs or a spurious blank line at the top of the email.
+
+Call `insertLineBreak` twice after every paragraph including the last. This gives `nlBB=2` before "Best," without any separate trim step needed (though the trim still runs as a safety check).
 
 ### Never type a sign-off
 
@@ -634,6 +824,22 @@ If anomalies:
 
 If clean: state "Audit anomaly scan: clean, N sends, all fields nominal" so Andy has positive confirmation the scan ran.
 
+### 🔗 Connection Request Gates section (mandatory, even when empty)
+
+Every run report MUST include a "Connection request gate" section. This is how Andy knows which Email 1s were held and rescheduled.
+
+Format:
+
+```
+🔗 CONNECTION REQUEST GATES
+Status: <clean (0 fires) | N gates fired>
+
+If gates fired:
+  - <entry id>: LI task NOT_STARTED (<task id>). E1 rescheduled from <old date> to <new date>. E2-E6 respread +<N> business days. HubSpot task updated.
+```
+
+If clean: write "Connection request gate: clean, 0 fires" so Andy has positive confirmation the check ran.
+
 ### 🚨 Hard-block hits section (mandatory, even when empty)
 
 Every run report MUST include a "Hard-block scan" section. This is how Andy knows whether upstream sequences are enrolling prospects against blocked contacts.
@@ -655,8 +861,10 @@ This is the piece Andy explicitly asked for on 2026-04-23: notify on every block
 ## Failure modes (learned the hard way, don't repeat these)
 
 - **Hand-rolled quote headers (2026-04-22).** Brett Baker / Lippert was left sitting as a draft in Sent Items, and Lance Weaver / Rackspace went out to a real prospect, both with the entire queue body typed into a New mail compose including a fake `---------- On April 16, Andy McLean wrote ----------` separator. No grey divider. No real From/Sent/To/Subject header. The original body was retyped instead of quoted natively. It looks like spam. Root cause: sender ignored Step 2 and went straight to New mail for every entry. For `RE: ` subjects the ONLY correct flow is Step 3A. New mail is for fresh subjects only.
-- **Wrong-sized gap before signature.** The target is ALWAYS exactly one visible blank line between the last typed sentence and `Best,`. Mechanically, **exactly 5 newlines in `innerText` immediately before `Best,`** (TARGET=5 in Step 4). The Step 4 trim is bi-directional. It pads up or Backspaces down to that target regardless of what Outlook's signature block starts with. Historical context: Josh Harless / Hunter went out with too many blanks. Ben Wexler / KeyBank went out with zero. Noriel Ocampo / DOCOMO 2026-04-22 shipped with four. The 2026-04-29 chat-session run shipped 11 Email 3s and 13 Email 1s with ZERO visible blank lines before "Best," because the skill had TARGET incorrectly set to 1; the 2026-04-29 patch bumped it to 2 thinking that fixed it, but the 2026-04-30 11am manual run by Andy proved TARGET=2 ALSO produces zero blank lines (David Thomas/SiFi was the first email of the run). Bumped to 5 live during the run, confirmed visible blank line matches body-paragraph gap. **TARGET is 5. Do not lower it back to 1, 2, 3, or 4.** Each `insertParagraph` at the cursor-before-existing-text position adds 2-3 newlines per call, so anything below 5 lands before the trim's first paragraph split actually creates a visible empty paragraph. See Step 4 rationale block for the full theory.
-- **Paragraphs mashed together.** If you insert with a single `insertParagraph` between paragraphs, `innerText` shows a single `\n` between them and the rendered email has no visible gap. Always two `insertParagraph` calls between paragraphs.
+- **Wrong-sized gap before signature.** The target is ALWAYS exactly one visible blank line between the last typed sentence and `Best,`. Mechanically, **exactly 2 newlines in `innerText` immediately before `Best,`** (TARGET=2 in Step 4, with the insertLineBreak x2 paragraph approach). The Step 4 trim is bi-directional. It pads up or Backspaces down to that target. Historical context: Josh Harless / Hunter went out with too many blanks. Ben Wexler / KeyBank went out with zero. Noriel Ocampo / DOCOMO 2026-04-22 shipped with four. The 2026-04-29 run shipped with ZERO (TARGET was 1, bumped to 2, but 2 still failed with insertParagraph approach so it went to 5). 2026-05-20: switched to insertLineBreak x2 approach, TARGET=2 now correct and empirically confirmed. **TARGET is 2 with the insertLineBreak approach. Do NOT revert to TARGET=5 or insertParagraph x2.**
+- **Paragraphs double-spaced (2026-05-20 bug).** Using `insertParagraph` x2 between paragraphs creates a separate empty `<p>` element. Outlook's CSS gives each `<p>` a margin, so an empty `<p>` between two content `<p>` elements renders as approximately 2 visible blank lines. 6 real sends went out double-spaced on 2026-05-20 before Andy caught it. Fix: use `insertLineBreak` x2 between paragraphs instead. This writes `<br><br>` within the same `<p>`, rendering as exactly 1 visible blank line.
+- **Spurious blank line before first name (2026-05-20 second bug).** Using `range.setStart(body, 0)` then `insertParagraph` to open the body pushes an empty `<p>` ABOVE the cursor. That empty paragraph renders as a blank line before "Hi Name," in the received email. 7 sends went out with this leading blank on 2026-05-20 (Kevin Dancs, Noriel Ocampo, Etienne Trudel, Marc Delaune, Jonghwan Kim, David Thomas, Edward Fox). Fix: use `range.setStart(body.firstChild, 0)` to place the cursor INSIDE the existing first `<p>`, then type directly. No `insertParagraph` call at the start, ever.
+- **Paragraphs with zero spacing.** Using a single `insertLineBreak` (or no call) produces 1 `\n` in innerText, which Outlook renders as 0 visible blank lines (line wrap only). Always use `insertLineBreak` x2 between paragraphs.
 - **Sending before verifying.** Clicking Send before running the preview check has burned real prospect outreach multiple times. Do the preview check every single email, even if the previous 9 looked fine.
 - **Signature dup.** Typing `Best,` or `Andy` at the bottom of the body produces a doubled sign-off. The queue body never contains a sign-off. Respect that and insert only what's there.
 - **Draft left in Sent Items on a failed Send.** If the Send click is intercepted by a Discard dialog, the compose closes without actually sending but leaves a `[Draft]` entry in Sent Items. After every Send, confirm the Sent Items item does NOT have the `[Draft]` prefix before marking the queue entry as `sent`.

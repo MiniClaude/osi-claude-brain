@@ -1,15 +1,15 @@
 ---
 name: osi-outreach-sequence
 description: >
-  Drafts and queues the 6-email outreach sequence for ONE qualified OSI Global prospect. Reads
+  Drafts the 6-email outreach sequence for ONE qualified OSI Global prospect. Reads
   the strategy note + Personal Hook + Fresh Hook from HubSpot, picks sequence type, computes
-  Day 1 from same-company stagger metadata, drafts all 6 emails, appends them atomically to
-  email-queue.json with proper sendDate + sendTime, updates the LINKED_IN_CONNECT task due_date
-  to match Email 1, appends Excel Tab 1. Triggers when invoked by osi-prospect-qualification's
-  handoff on a Yes-with-email verdict.
+  Day 1 from same-company stagger metadata, drafts all 6 emails, writes them to the contact's
+  HubSpot AI fields (ai_email_subject_1-6 + ai_email_body_1-6), creates a LINKED_IN_CONNECT
+  task on Day 1 as Andy's enrollment cue, and appends Excel Tab 1. Triggers when invoked by
+  osi-prospect-qualification's handoff on a Yes-with-email verdict.
 ---
 
-> Source: `C:\Claude-Brain\skills\osi-outreach-sequence\` (Git, github.com/Drrewdy/Claude-Brain). Cowork `.claude/skills/` is a copy. Edit source, repackage, install.
+> Source: `C:\Claude-Brain\skills\osi-outreach-sequence\` (Git, github.com/Drrewdy/Claude-Brain). Edit source, repackage, install.
 
 # OSI Outreach Sequence
 
@@ -19,94 +19,113 @@ description: >
 
 This skill handles sequencing only. It does not govern candidate discovery, LinkedIn browsing, or Company Mode search. All of that lives in `osi-prospect-qualification`.
 
-If you are running Company Mode (finding prospects at a company) and you have NOT read `C:\Claude-Brain\skills\osi-prospect-qualification\SKILL.md` in this session: **STOP. Read it now. Then proceed.**
+If you are running Company Mode and you have NOT read `C:\Claude-Brain\skills\osi-prospect-qualification\SKILL.md` in this session: **STOP. Read it now. Then proceed.**
 
-Do not assume you remember the qualification workflow from training or a prior session. The skill has been updated multiple times. The Round 0 browse-first rule, the profile-scrubbing firms alert, and the stagger ownership rules are all in that file. Reading the outreach skill without reading the qualification skill first produced the D.E. Shaw miss on 2026-05-08 -- three strong VP-level targets gone for months.
-
-**Why this rule exists:** 2026-05-08, a Company Mode run on D.E. Shaw read the outreach skill but not the qualification skill. The Round 0 mandatory card browse (the only viable source for firms where employees scrub their LinkedIn profiles) was skipped in favor of keyword searches, which returned nothing because D.E. Shaw employees deliberately remove all profile content. Matt Kong (VP, Data Center Manager), Leonardo Palazzo (VP, Data Center Management), and Michael De Candia (SVP) were all missed as a result.
+**Why this rule exists:** 2026-05-08, a Company Mode run on D.E. Shaw read the outreach skill but not the qualification skill. The Round 0 mandatory card browse was skipped. Matt Kong, Leonardo Palazzo, and Michael De Candia were all missed as a result.
 
 ---
 
 ## 🛑 HARDWIRED RULE, NO EMPLOYER VERIFICATION, NO SEQUENCE
 
-This skill never queues a 6-email sequence on faith of a stale HubSpot record. It only runs when invoked via handoff from `osi-prospect-qualification` after a ✅ Yes-with-email verdict that was backed by Path A (full LinkedIn read) or Path B (ZoomInfo + corporate-domain email + dated web-search confirmation, with explicit `EMPLOYER VERIFICATION:` line in the strategy note).
-
-If the strategy note is missing, employer verification is missing, or the verdict was anything other than Yes-with-email: this skill does not run.
+This skill only runs when invoked via handoff from `osi-prospect-qualification` after a Yes-with-email verdict backed by Path A (full LinkedIn read) or Path B (ZoomInfo + corporate-domain email + dated web-search confirmation). If the strategy note is missing, employer verification is missing, or the verdict was anything other than Yes-with-email: this skill does not run.
 
 ---
 
 ## 🛑 HARDWIRED RULES
 
 **This skill DOES:**
-- Read the strategy note from HubSpot (Personal Hook, Fresh Hook, sequence type recommendation)
-- Active Sequence Check (skip if a live sequence already exists for this contact)
-- Approved Vendor check (read `Claude-Brain/approved-vendors.json`)
-- Compute Day 1 from same-company stagger metadata in state file
-- Draft 6 emails per the cadence and templates below
-- Append all 6 to `C:\Claude-Brain\email-queue.json` (atomic `.tmp` + `os.replace`)
-- Update the LINKED_IN_CONNECT task's `hs_timestamp` to Email 1 Day 1
+- Read the strategy note from HubSpot (Personal Hook, Fresh Hook, sequence type)
+- Active sequence check (checks if AI fields already populated on the contact)
+- Approved Vendor check (`Claude-Brain/approved-vendors.json`)
+- Compute Day 1 from same-company stagger metadata
+- Draft 6 emails using the formatting standard below
+- Write all 12 AI field properties to the HubSpot contact in one call (`ai_email_subject_1-6` + `ai_email_body_1-6`)
+- Create a LINKED_IN_CONNECT task on Day 1 (this is Andy's cue to enroll the contact in the HubSpot sequence)
 - Append a Tab 1 row to `Claude-Brain/prospects-tracker-new.xlsx`
 - Update stagger metadata (`last_day1`, `person_count`)
 
 **This skill DOES NOT:**
-- Qualify. Verdict is `osi-prospect-qualification`'s job. This skill assumes qualification already produced ✅ Yes-with-email.
-- Discover candidates. That's `osi-discovery-sweep`.
+- Write to `email-queue.json`. The queue is no longer used for new sequences.
+- Compute sendDates or sendTimes. HubSpot sequences handle cadence once enrolled.
+- Invoke osi-email-sender. Sending is handled by HubSpot after Andy enrolls.
+- Qualify. Verdict is `osi-prospect-qualification`'s job.
 - Run on multiple candidates at once. ONE per invocation.
-- Navigate to LinkedIn. All prospect context comes from the handoff payload and HubSpot strategy note.
-- Ask Andy for approval mid-run. Queue writes and task updates are automatic. Andy approved the batch at session start. Do not ask "ready?" or "proceed?" or display email bodies for review. One confirmation line per queued candidate, nothing else.
-- Ask "should I proceed to the next company?" or "ready for Company X?" in a pre-approved batch. The company list was approved at session kickoff. That approval covers ALL companies in the list. When one company is done, immediately start the next. Never pause between companies. **Why this rule exists:** 2026-05-15 — after completing IT-CNP (Company 3 of 10), Claude asked "Should I proceed to Company 4?" instead of starting immediately. The batch was pre-approved at session start. The pause wasted time and violated the no-approval-prompt rule. Fix: batch kickoff approval = blanket approval for all companies in the list, in sequence, without checkpoints.
-- Stop for `manage_crm_objects` confirmation prompts. ALL `manage_crm_objects` calls in this skill use `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. Never show a proposed-changes table. Never ask "Approve?". Andy's session kick-off is blanket approval for all HubSpot writes this skill produces. **Why this rule exists:** 2026-05-06, qualification of Andrew Banhidi at Instinet stopped mid-run to show a proposed-changes table for a contact update. Session kick-off ("go") is blanket approval. The tool's own confirmation step is bypassed via `CONFIRMATION_WAIVED_FOR_SESSION` on every call.
+- Navigate to LinkedIn. All context comes from the handoff payload and HubSpot strategy note.
+- Ask Andy for approval mid-run. AI field writes and task creation are automatic. Andy approved at session start.
+- Stop for `manage_crm_objects` confirmation prompts. ALL calls use `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`.
 
 ---
 
 ## 🛑 STEP -1: TOOL PREFETCH (MANDATORY if not already done this session)
 
-If osi-prospect-qualification already ran its Step -1 prefetch earlier in this conversation, skip this step — schemas are already live.
+If osi-prospect-qualification already ran its prefetch earlier in this conversation, skip this step.
 
-If this skill is running standalone (not following a qualification session), fire these TWO ToolSearch calls in the same message before doing anything else:
+If running standalone, fire these TWO ToolSearch calls in the same message:
 
 ```
 ToolSearch({ query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_news", max_results: 6 })
 ToolSearch({ query: "select:mcp__Claude_in_Chrome__tabs_context_mcp,mcp__Claude_in_Chrome__navigate,mcp__Claude_in_Chrome__get_page_text,WebSearch,TaskCreate,TaskUpdate", max_results: 6 })
 ```
 
-After both return, all schemas are live. Do not call ToolSearch again during the run.
-
 ---
 
 ## 🛑 STEP 0, MANDATORY READ OF DRAFTING RULES
 
-Before drafting any email body, subject line, or LinkedIn invite, **Read `C:\Claude-Brain\playbook\drafting-rules.md` in full** and load it into the working context. This file is the single source of truth for:
+Before drafting any email, **Read `C:\Claude-Brain\playbook\drafting-rules.md` in full**. This is non-negotiable. Do NOT rely on training data.
 
-- Absolute bans (em-dashes, en-dashes, SmartOptics in cold, "we manufacture" claims, credentials openers, banned vocab, dead phrases, hyphens, rule of three, sign-off rules)
-- OSI Product Lines and the one-product-line-per-email rule (Surgical Isolation)
-- Sequence type to target role mapping
-- Key Sales Wedges
-- Vertical Intel (telco, banks, consulting, manufacturing, healthcare, Quebec)
-- Park Place / Service Express merger wedge
-- Personal Hook priority and the "what is NOT a Personal Hook" gate
-- Fresh Hook scoring
-- Approved Vendor Rule (with verbatim phrasing)
-- Email 1 templates (Sample-Offer Network, Sample-Offer Server, Pain-Led)
-- Bad Example anti-template (the Christopher Lawrence email that broke 7 rules)
-- 6-item self-check
-- Brevity word limits per email index
-
-This Step 0 read is non-negotiable. The skill assumes the rules are loaded into context for every email it drafts. Do NOT skip and rely on training data.
-
-After reading drafting-rules.md, proceed to INPUT below.
+After reading drafting-rules.md, proceed below.
 
 ---
 
 ## 🛑 HARDWIRED RULE, NO EM-DASHES OR EN-DASHES, EVER
 
-Andy Rule #4 from `CLAUDE.md`. The Unicode characters at codepoint U+2014 (em-dash) and U+2013 (en-dash) are FORBIDDEN in every body, subject, note, voicemail, LinkedIn message, and task description that this skill produces. The validator at `C:\Claude-Brain\scripts\validate_email.py` rejects any string containing either character at write time. Any drafting session that produces an em-dash is a bug. Period. Use commas to add a clause. Use periods to split sentences. Use parentheses for asides. Never the dash characters. This skill file deliberately does not display the banned glyphs; the validator references them via `chr(0x2014)` and `chr(0x2013)`.
+Andy Rule #4 from `CLAUDE.md`. U+2014 (em-dash) and U+2013 (en-dash) are FORBIDDEN everywhere. Use periods to split sentences. Use commas for parenthetical clauses.
+
+---
+
+## 🛑 EMAIL FORMATTING STANDARD (added 2026-05-28)
+
+These rules apply to EVERY email in EVERY sequence. No exceptions.
+
+### Greeting
+Every email starts with the prospect's first name and a comma on its own line. NO "Hi". NO "Hello". Just the name.
+
+```
+Adam,
+```
+
+### Sign-off
+Every email ends with a blank line, then "Best," on its own line, then "Andy" on its own line, then a blank line.
+
+```
+[last line of body]
+
+Best,
+Andy
+
+```
+
+### Exception: Email 2 on Sample-Offer sequences
+When Email 1 was a Sample-Offer (SFPs or DIMMs), Email 2 body is:
+
+```
+Any thoughts?
+
+Best,
+Andy
+
+```
+
+No greeting. No name at the top. Just "Any thoughts?" followed by the standard sign-off.
+
+### Email 2 on Pain-Led sequences
+Has the full standard formatting: first name greeting + substance + Best/Andy sign-off.
 
 ---
 
 ## INPUT
 
-Output of `osi-prospect-qualification`'s handoff:
+Output of `osi-prospect-qualification` handoff:
 - `hubspotContactId`
 - Verdict: must be `yes-with-email`
 - Strategy note location (HubSpot note ID associated to the contact)
@@ -114,7 +133,7 @@ Output of `osi-prospect-qualification`'s handoff:
 - Fresh hook (30-day news summary + URL, if any)
 - Recommended sequence type: one of `Sample-Offer Network`, `Sample-Offer Server`, `Pain-Led TPM`, `Pain-Led DWDM`, `Pain-Led Storage`, `Pain-Led Pre-Owned`
 - Company name (for stagger lookup)
-- Verified email (the ZoomInfo email that passed domain validation)
+- Verified email
 
 If any of these are missing, refuse and log. Don't proceed on partial data.
 
@@ -123,72 +142,49 @@ If any of these are missing, refuse and log. Don't proceed on partial data.
 ## OUTPUT
 
 After this skill runs on one qualified candidate:
-- 6 entries appended to `email-queue.json`, status `pending`, with proper `sendDate` + `sendTime` per cadence
-- LINKED_IN_CONNECT task `hs_timestamp` updated to Email 1 Day 1 (skips weekends + holidays)
-- Excel Tab 1 row appended (Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Date Added | Notes)
-- `state.stagger[company_name].last_day1` updated to Email 1 Day 1
+- 12 AI field properties written to the HubSpot contact (`ai_email_subject_1-6` + `ai_email_body_1-6`)
+- LINKED_IN_CONNECT task created on Day 1 (Andy's cue to enroll in HubSpot sequence)
+- Excel Tab 1 row appended
+- `state.stagger[company_name].last_day1` updated to Day 1
 - `state.stagger[company_name].person_count` incremented
-
----
-
-## HANDOFF
-
-NONE. After 6 emails are queued and the LI task is updated, this skill exits. Control returns to the caller (typically `osi-prospect-qualification` inline flow).
-
----
-
-## RELATED SKILLS
-
-- **`osi-prospect-qualification`**, produces the strategy note + verdict that this skill consumes. Hands off here on ✅ Yes-with-email.
-- **`osi-discovery-sweep`**, produces the candidates that qualification eventually qualifies for this skill. Two skills upstream.
-- **`osi-email-sender`** (separate skill, not orchestrated by runner), fires every 11am-4pm ET weekdays, picks up `pending` entries from `email-queue.json` whose `sendDate <= today` and matching `sendTime`, sends via Outlook.
 
 ---
 
 ## ACTIVE SEQUENCE CHECK, runs first
 
-Before drafting anything, open `C:\Claude-Brain\email-queue.json`. Match by `to` (email, case-insensitive) OR `prospectName + company`.
+Before drafting anything, pull the contact's `ai_email_subject_1` field from HubSpot.
 
-**Skip if any matched entry has:**
-- `status: "pending"`, OR
-- `status: "sent"` with `sendDate` in last 30 calendar days.
+**If populated:** the contact already has a drafted sequence in the AI fields. Tell Andy:
+> "Contact already has AI Email Subject 1 populated: `[first 60 chars]...`. Overwrite with a fresh sequence?"
 
-`paused-*`, `canceled-*`, `sent` >30 days do NOT block. Note in strategy note this is a re-engagement.
+Wait for explicit yes before proceeding. Without that, stop.
 
-**Behavior:**
-- Always skip silently regardless of mode. Log to `overnight-run-log.md` as "skipped-active-sequence". No emails queued for this candidate. Never ask "Override?" -- Andy will review the log and re-run manually if he wants to override.
+**If blank:** proceed without prompting.
 
 ---
 
 ## APPROVED VENDOR RULE
 
-OSI is approved at companies in `Claude-Brain/approved-vendors.json`. Read at sequence-build time. Case-insensitive substring match.
+Read `Claude-Brain/approved-vendors.json`. Case-insensitive substring match on prospect's company.
 
 **If matched:**
-- Email 1: ONE soft acknowledgment. *"Side note, we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast."*
-- One of Email 3 OR Email 4 (Claude picks): one-line reminder. *"Quick reminder we're already approved at [Company] if timing matters."*
-- Other emails: silent.
+- Email 1: ONE soft line. "Side note, we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast."
+- Email 3 OR 4 (pick whichever fits): "Quick reminder we're already approved at [Company] if timing matters."
+- All other emails: silent.
 
-**If not matched:** never mention. Don't invent. Never use "vetted" / "pre-approved" / mention "procurement" in Email 1.
+**If not matched:** never mention it.
 
 ---
 
-## OUTREACH FLOW, per Yes-with-email prospect
-
-Strategy note + LINKED_IN_CONNECT task already exist (qualification produced them). This skill builds the email sequence on top.
+## OUTREACH FLOW
 
 ### Step 1, Read strategy note + sequence type
 
-🚨 **DO NOT NAVIGATE TO LINKEDIN. EVER. This skill does not touch LinkedIn.** All prospect context (hook, title, company, fresh news) is in the handoff payload and the HubSpot strategy note. Re-reading LinkedIn from here is a token waste and is forbidden. If you find yourself about to open a LinkedIn URL for context, stop. Use what is in the handoff.
+DO NOT navigate to LinkedIn. All context comes from the handoff payload. Use it directly.
 
-Use the handoff payload directly:
-- Personal Hook: already in the handoff `Personal Hook:` field. Use as-is. Do not re-derive.
-- Fresh hook: already in the handoff `Fresh hook:` field. Use as-is.
-- Sequence type: already in the handoff `Recommended sequence:` field.
+If the handoff payload is incomplete, pull the strategy note from HubSpot and read THE PERSONAL HOOK, Fresh hook, and THE PLAY sections.
 
-If the handoff payload is incomplete or missing one of these fields, THEN pull the strategy note from HubSpot (associated to the contact) and read THE PERSONAL HOOK, Fresh hook (30-day news), and THE PLAY sections. This HubSpot read is the fallback, not the default.
-
-The recommended sequence type came in via the handoff. If unsure or unspecified, read `Claude-Brain/playbook/product-lines.md` for the title-to-sequence mapping. Read `Claude-Brain/playbook/vertical-intel.md` for what to lead with by industry.
+Read `Claude-Brain/playbook/product-lines.md` if sequence type is unclear.
 
 ### Step 2, Compute Day 1 (same-company stagger)
 
@@ -201,43 +197,11 @@ Read `state.stagger[company_name]` from `C:\Claude-Brain\overnight-candidates.js
 | `5` | `last_day1` + 10 business days (cooling gap) |
 | `6+` | `last_day1` + 4 business days |
 
-After scheduling Email 1, update `last_day1` and increment `person_count`. Atomic write to state file.
+Day 1 is the date Andy should enroll the contact in the HubSpot sequence. The LINKED_IN_CONNECT task is due on this date — when Andy sees it in his task queue, that is his cue to enroll.
 
-Why state metadata, not email-queue scan: queue has 500+ entries; state metadata is O(1) and tracks THIS run only.
+Skip weekends + holidays. Holiday list: `Claude-Brain/holidays.json`. Fallback: US federal holidays + Good Friday + Black Friday + Christmas Eve + New Year's Eve.
 
-**Skip weekends + holidays.** Holiday list: `Claude-Brain/holidays.json` (read at runtime). Fallback if missing: US federal holidays + Good Friday + Black Friday + Christmas Eve + New Year's Eve.
-
-### Step 3, Cadence
-
-🚨 **COMPUTE ALL 6 DATES FROM THE FINAL DAY 1 ONLY. Day 1 must be fully resolved from the stagger (Step 2) before any other date is computed. Never compute E2-E6 from an intermediate or pre-stagger Day 1. The most common source of the E1/E2 same-day bug is computing E2 before the stagger pushes E1 forward.**
-
-| Email | sendTime | Offset from Day 1 |
-|---|---|---|
-| 1 | `4pm` | Day 1 |
-| 2 | `11am` | Day 1 + 2 business days |
-| 3 | `12pm` | Day 1 + 6 business days |
-| 4 | `1pm` | Day 1 + 12 business days |
-| 5 | `2pm` | Day 1 + 17 business days |
-| 6 | `3pm` | Day 1 + 23 business days |
-
-All offsets are from Day 1. Skip weekends and holidays for every date. Use `holidays.json` (fallback: US federal + Good Friday + Black Friday + Christmas Eve + New Year's Eve).
-
-**Pre-write date order check (MANDATORY before Step 10):**
-
-After computing all 6 dates, verify the following before writing anything to the queue:
-1. E1 < E2 < E3 < E4 < E5 < E6 (strictly ascending dates, no ties)
-2. No two entries share the same sendDate
-3. E2 sendDate is at least 1 business day after E1 sendDate
-
-If any check fails: log to `overnight-run-log.md` with all 6 computed dates, raise an error, and exit without writing to the queue. Do not write a partial or mis-ordered sequence. The monitor's ordering sweep (Step 5.1) is a safety net, not a substitute for correct initial scheduling.
-
-Master `osi-email-sender` fires 11 AM-4 PM ET weekdays. Each window processes queue entries with matching `sendTime`.
-
-🚨 **LinkedIn connection request task in HubSpot MUST match Day 1 exactly.** Set or update the "Sales Nav -- Send connection request" task due date to Day 1 when the sequence is first queued (Step 11). If Day 1 ever changes for any reason, the task date changes with it. These two values are never allowed to diverge.
-
-### Step 4, Duplicate-contact check (MANDATORY before drafting)
-
-Before drafting anything, confirm the `hubspotContactId` in the handoff payload actually exists in HubSpot and is the UNIQUE record for this person:
+### Step 3, Duplicate-contact check (MANDATORY before drafting)
 
 ```
 search_crm_objects({
@@ -250,338 +214,268 @@ search_crm_objects({
 })
 ```
 
-- If exactly one result and it matches the handoff `hubspotContactId`: proceed.
-- If one result but the ID does NOT match the handoff: STOP-GATE. The qualification skill created a duplicate. Surface to Andy: `"Duplicate contact detected for <Name> at <Company>. HubSpot has contact <found ID> but handoff says <handoff ID>. Resolve before queuing."` Do not queue.
-- If zero results: the handoff contact ID is stale or mis-typed. STOP-GATE. Do not queue.
-- If multiple results: STOP-GATE. Surface all IDs to Andy for manual merge before queuing.
+- Exactly one result matching handoff ID: proceed.
+- ID mismatch: STOP-GATE. Surface duplicate to Andy.
+- Zero results: STOP-GATE.
+- Multiple results: STOP-GATE. Surface all IDs for manual merge.
 
-### Step 5, Email-pattern verification (MANDATORY before drafting)
+### Step 4, Email-pattern verification (MANDATORY before drafting)
 
-Before drafting, verify the prospect's `to:` address against the company's verified email pattern. Algorithm: `knowledge/email-pattern-resolver.md`.
+Read the EMAIL RESOLUTION block in the contact's strategy note.
 
-The qualification skill should have populated an EMAIL RESOLUTION block in the contact's strategy note. Read that note. If it says:
+- `hubspot-existing` or `verified-pattern`: proceed.
+- `dominant-pattern`: proceed, note in output.
+- `manual-required`: STOP. Do not draft or write.
 
-- `hubspot-existing` or `verified-pattern` → proceed.
-- `dominant-pattern` → proceed but include `"emailResolution": "dominant-pattern"` in each queue entry so the monitor's pre-flight section knows there's no engagement signal yet.
-- `manual-required` → STOP. Do NOT draft or queue. Return: `"Pattern signal too weak at <Company>. Andy must verify <email> before queueing."` Do not retry; do not auto-pick.
+If no EMAIL RESOLUTION block exists, run the resolver inline per `knowledge/email-pattern-resolver.md`.
 
-If the strategy note has NO EMAIL RESOLUTION block (legacy contact, or qualification skipped this step), run the resolver inline now:
-1. Search HubSpot for all contacts at the same company.
-2. Bucket emails by pattern, score per `email-pattern-resolver.md`.
-3. If the prospect's `to:` matches the verified or dominant pattern, proceed.
-4. If it doesn't, STOP-GATE. Append entry to a separate `pattern-mismatch-flagged.json` file with the prospect's name, the queued address, the verified pattern, and a recommendation. Surface in pre-flight.
+### Step 5, Write 6 Emails
 
-Never draft or queue an entry whose `to:` pattern is `manual-required` OR mismatches a verified company pattern.
+**Source of truth for all drafting rules:** `C:\Claude-Brain\playbook\drafting-rules.md` (read in Step 0).
 
-### Step 6, Write 6 Emails
+**Formatting standard for every email** (from EMAIL FORMATTING STANDARD above):
+- First line: `[First name],`
+- Body paragraphs
+- Blank line
+- `Best,`
+- `Andy`
+- Blank line
 
-**Source of truth for templates, rules, and bad examples:** `C:\Claude-Brain\playbook\drafting-rules.md` (already read in Step 0). The templates below are reference summaries. The full templates, the Bad Example anti-template (Christopher Lawrence breakdown), and the 6-item self-check live in that file.
+**Exception:** Email 2 on Sample-Offer sequences = `Any thoughts?` with no greeting, followed by the standard Best/Andy sign-off. No first name at the top.
 
-Hard rules to remember while drafting (full list in drafting-rules.md Section 1):
-- No em-dashes or en-dashes (Andy Rule #4 from CLAUDE.md, validator enforces)
-- No "SmartOptics" by name in cold (refer to optics as "OSI transceivers")
-- No "we manufacture" claim (OSI does NOT manufacture, SmartOptics does)
-- No credentials-first openers ("I'm Andy", "I work with", "Hi I'm")
-- No hyphens (except in product names like QSFP-DD)
-- No "Andy" sign-off (Outlook signature handles it)
-- One product line per email (Surgical Isolation)
-- Lead with the prospect's pain or hook, not OSI
+#### Email 1 (by sequence type)
 
-If the strategy note's Personal Hook is generic geography, thin tenure, or industry alone, ABORT Email 1 and flip the candidate to `pending-needs-hook`. Do not write filler.
+**Sample-Offer Network:**
+```
+[First],
 
-#### Email 1 templates (by sequence type)
+I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.
 
-**Sample-Offer (Network):**
-> Hi [First],
->
-> I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send from the team at OSI Global.
->
-> Do you come into the office, or is there a better address to ship it to?
+Do you come into the office, or is there a better address to ship it to?
 
-**Sample-Offer (Server):**
-> Hi [First],
->
-> I'd like to send you a sample DIMM from our current batch. Same spec as what you're running, manufacturer warranty, won't touch your OEM support contract.
->
-> Do you come into the office, or is there a better address to ship it to?
+Best,
+Andy
+
+```
+
+**Sample-Offer Server:**
+```
+[First],
+
+I'd like to send you a sample DIMM from our current batch. Same spec as what you're running, manufacturer warranty, won't touch your OEM support contract.
+
+Do you come into the office, or is there a better address to ship it to?
+
+Best,
+Andy
+
+```
 
 **Pain-Led (TPM / DWDM / Storage / Pre-owned):**
-3-4 sentences. Lead with their specific pain (role + company). Reference Personal Hook from strategy note. Reference Fresh Hook if it's a strong news signal. One clear ask. No name at bottom.
+3-4 sentences. Lead with their specific pain. Reference Personal Hook. Reference Fresh Hook if strong. One concrete ask.
 
-Subject: short, specific, not spam-flaggable. Examples: `quick question on [their stack]`, `[Company] backbone refresh`, `your [role] team`.
+```
+[First],
 
-#### Email 2 (RE: same subject as Email 1)
+[Sentence 1: Personal Hook + pain.]
+[Sentence 2: One OSI angle addressing that pain. ONE product line.]
+[Sentence 3 optional: Fresh hook or data point.]
+[Sentence 4: ONE concrete ask.]
 
-Branches by Email 1 archetype:
-- **Sample-offer Email 1:** Email 2 body literally `Any thoughts?`, nothing else.
-- **Pain-led Email 1:** 2-3 sentences. Pick ONE move: new data point on same pain / adjacent product line / fresh company signal. End with ONE concrete ask.
+Best,
+Andy
 
-The queue body is JUST the new reply text. The sender's Reply flow attaches the prior thread natively (grey divider + From/Sent/To/Subject header + original body). Do NOT include `On X wrote:` placeholders or `>` lines in the queue body. No greeting. No sign-off.
-
-#### Email 3 (new subject, STANDALONE, NO QUOTED THREAD)
-
-Different angle / product line not yet covered. 3-4 sentences. One ask.
-
-🚫 **Body must contain ONLY the new pitch.** No `On <date>, Andy McLean wrote:` separator. No `>` quoted lines. No prior email content of any kind. Email 3 is a fresh-subject standalone touch, it goes through the sender's NEW MAIL flow, which types the queue body verbatim. Anything you put in the body lands in the prospect's inbox exactly as written. Including quoted prior thread is what produced the 2026-04-29 incident where 11 prospects received malformed Email 3s with hand-rolled `On <date>, Andy McLean wrote:` blocks. NEVER do this.
-
-#### Email 4 (new subject, STANDALONE, NO QUOTED THREAD)
-
-Another product line. 3-4 sentences. One ask.
-
-🚫 **Body must contain ONLY the new pitch.** Same rule as Email 3: no quoted thread, no `On <date>, Andy McLean wrote:` separator, no `>` lines, no prior email content. Standalone fresh-subject touch.
-
-#### Email 5 (new subject, STANDALONE, NO QUOTED THREAD)
-
-Another product line. 3-4 sentences. One ask.
-
-🚫 **Body must contain ONLY the new pitch.** Same rule as Email 3. Standalone fresh-subject touch.
-
-#### Email 6, breakup (new subject, STANDALONE, NO QUOTED THREAD)
-
-Clean close, no ask. One sentence. Examples: *"Should I close the file on this one, or is the timing just off?"* or *"No worries if now isn't the right time. Happy to circle back when things shift."*
-
-🚫 **Body must contain ONLY the one breakup sentence.** Same rule as Email 3. Standalone fresh-subject touch. No quoted thread.
-
-### Step 7, 6-ITEM SELF-CHECK (MANDATORY before sanitize and validator)
-
-For every drafted email body, write out answers to these six questions in working context BEFORE calling sanitize and validator. The validator catches strings; this self-check catches semantics the validator can't see.
-
-1. **Does the first sentence reference the prospect, not OSI?** (Email 1 only. Pass = prospect name, role, post, project, company news. Fail = "I'm Andy", "I work with", "I help", any opener that puts OSI before the prospect.)
-2. **Is the Personal Hook from the strategy note actually in this email?** (Email 1 only. The hook from THE PERSONAL HOOK section of the strategy note must appear in the body. If the note's hook is generic geography or thin, ABORT and flip candidate to `pending-needs-hook`.)
-3. **Is there exactly ONE product line in this email?** (All emails. Surgical Isolation rule. The validator will catch keyword density violations but the drafter must intentionally pick ONE line per email.)
-4. **Did I name SmartOptics?** (Cold sequences only. Must be no. The validator catches the string but the drafter should not be reaching for the name in the first place.)
-5. **Did I claim OSI manufactures?** (All emails. Must be no.)
-6. **Did I sign with "Andy" at the bottom?** (All emails. Must be no. Outlook signature handles it.)
-
-If any answer is wrong, REWRITE before passing to sanitize. Do not paper over with sanitize.
-
-If question 2 fails (no hook or thin hook), do NOT write Email 1. Log to `overnight-run-log.md` and exit. Andy will pull a real hook manually next session. The skill does not write filler.
-
-### Step 8, Sanitize bodies (MANDATORY before validator)
-
-The queue is the source of truth for what gets sent. Every consumer (osi-email-sender, osi-monitor, future Andy edits) trusts the body field as-is. This step makes the body trustworthy. NEVER skip it.
-
-The 2026-04-29 incident happened because sanitization was outsourced to the sender (em-dash strip + quote-strip + double-space-after-period). The chat-session runner skipped those steps and shipped malformed Email 3s. Doing the cleaning at WRITE time fixes that whole class of bug, the body that lands in the queue is the body that ships, no in-flight repair needed.
-
-Run this on every body before it goes into the queue entry. Run it on subjects too.
-
-```python
-import re
-
-def sanitize_body(text: str, email_index: int) -> str:
-    """
-    Sanitize an outreach body before queue write.
-
-    Args:
-      text: the raw body string written by the drafter.
-      email_index: 1, 2, 3, 4, 5, or 6 (which email in the sequence).
-
-    Returns:
-      Cleaned body. Caller asserts the result is non-empty before queue append.
-    """
-    if text is None:
-        return ""
-
-    # 1. Em-dash (U+2014) and en-dash (U+2013): banned by Andy Rule #4.
-    #    Replace with sentence breaks or hyphens depending on context.
-    #    The banned characters are constructed via chr(codepoint) so this source
-    #    file itself contains zero literal em-dashes or en-dashes per Andy Rule #4.
-    EM = chr(0x2014)   # em-dash
-    EN = chr(0x2013)   # en-dash
-    text = (text
-        .replace(" " + EM + " ", ". ")
-        .replace(EM + " ", ". ")
-        .replace(" " + EM, ".")
-        .replace(EM, "-")
-        .replace(" " + EN + " ", ". ")
-        .replace(EN, "-"))
-
-    # 2. Email 3/4/5/6 are STANDALONE fresh-subject touches. Strip any quote
-    #    markers and everything after them. Defense-in-depth, the drafter
-    #    should never put these in 3+ bodies but if it does, kill them here.
-    if email_index >= 3:
-        markers = [
-            r"\n*\s*-{5,}\s*On .* wrote\s*-{5,}",       # ----- On X wrote -----
-            r"\nOn .*,? .* (?:McLean )?(?:wrote|wrote:)",  # On Mon, Andy McLean wrote:
-            r"\n>+ ",                                     # > quoted lines
-            r"\nFrom: Andrew McLean",                     # Outlook header
-        ]
-        for m in markers:
-            match = re.search(m, text)
-            if match:
-                text = text[:match.start()].rstrip()
-                break
-
-    # 3. Normalize multiple consecutive spaces (NOT newlines) inside lines.
-    #    Two-spaces-after-sentence is handled at SEND time via non-breaking
-    #    space, so we want exactly one space here.
-    text = re.sub(r" {2,}", " ", text)
-
-    # 4. Trim trailing whitespace per line.
-    text = "\n".join(line.rstrip() for line in text.split("\n"))
-
-    # 5. Collapse runs of 3+ blank lines down to a single blank line.
-    text = re.sub(r"\n{3,}", "\n\n", text)
-
-    # 6. Final assertion, body must be em-dash and en-dash free.
-    if EM in text or EN in text:
-        raise ValueError(f"sanitize_body left dashes in body. Bug. Text starts: {text[:80]!r}")
-
-    return text.strip()
-
-
-def sanitize_subject(subject: str) -> str:
-    """Sanitize the subject line. Same dash rules. Subjects are never quoted."""
-    if subject is None:
-        return ""
-    EM = chr(0x2014)
-    EN = chr(0x2013)
-    subject = (subject
-        .replace(" " + EM + " ", ", ")
-        .replace(EM, "-")
-        .replace(" " + EN + " ", ", ")
-        .replace(EN, "-"))
-    subject = re.sub(r"\s+", " ", subject).strip()
-    if EM in subject or EN in subject:
-        raise ValueError(f"sanitize_subject left dashes. Bug. Subject: {subject!r}")
-    return subject
-
-
-# Apply to every email in the sequence before queue append.
-for i, email in enumerate(emails, start=1):
-    email["body"]    = sanitize_body(email["body"], i)
-    email["subject"] = sanitize_subject(email["subject"])
-    if not email["body"]:
-        raise ValueError(f"Email {i} body is empty after sanitization. Stopping. ID will be {email.get('id')}.")
 ```
 
-If `sanitize_body` raises (em-dash or en-dash leaked through, or a body went empty after stripping a quote marker), STOP the entire queue write. Do NOT append a partial sequence. Do NOT use the MCP Write tool for the queue. Surface the error to Andy with the offending email index and ID. Andy fixes the drafter and re-runs.
+Subject: short, specific. Examples: `[Company] backbone costs`, `quick question on [stack]`, `maintenance at [Company]`.
 
-The sender's defense-in-depth (Step 3B.4 mandatory pre-insertion strip) stays in place but is now redundant for properly-written entries. Belt and suspenders.
+#### Email 2
 
-### Step 9, Validator (MANDATORY before queue append)
+**Sample-Offer sequence:**
+Subject: `Re: [Email 1 subject]`
+Body:
+```
+Any thoughts?
 
-After sanitize succeeds, run the hard-stop validator on every email in the sequence BEFORE any entry is written to the queue. Single import, one call per email.
+Best,
+Andy
 
-```python
-import sys
-sys.path.insert(0, r'C:\Claude-Brain\scripts')
-from validate_email import validate_or_raise
-
-# Each email in the sequence is validated. is_cold=True for cold sequences.
-# Re-engagement skills pass is_cold=False and allow_circle_back=True.
-for i, email in enumerate(emails, start=1):
-    validate_or_raise(
-        body=email['body'],
-        subject=email['subject'],
-        email_index=i,
-        is_cold=True,           # cold sequence; re-engagement skills override this
-        allow_circle_back=False, # cold sequence; re-engagement skills override this
-        company_name=company_name,
-        sequence_type=sequence_type,
-    )
 ```
 
-`validate_or_raise` checks all 11 hard-stop rules from `playbook/drafting-rules.md` Section 1 plus the word-count limits from Section 14. If any abort-level violation hits, it raises `ValueError` with the full violation list. The skill MUST NOT catch this exception and continue. Let it propagate, log to `overnight-run-log.md`, and exit. The candidate flips to `pending-relookup` so Andy reviews next session.
+**Pain-Led sequence:**
+Subject: `Re: [Email 1 subject]`
+2-3 sentences. ONE move: new data point on same pain / adjacent signal. End with ONE concrete ask (a real question, not a passive statement).
 
-Rules the validator enforces (codified mirror of drafting-rules.md):
-- 1.1 No em-dashes or en-dashes anywhere
-- 1.2 No "SmartOptics" by name in cold body or subject
-- 1.3 No "we manufacture" / "manufactured by us" / "OSI manufactures" / "we make our own optics"
-- 1.4 No credentials-first openers in Email 1 ("I'm Andy", "I work with", "I help", "Hi I'm", "I wanted to reach out", "I'm reaching out")
-- 1.5 No banned vocab (crucial, pivotal, delve, showcase, leverage, foster, etc.)
-- 1.6 No dead phrases ("worth a conversation", "worth 15 minutes", "quick overview", "circle back" in cold, "touch base", "pick your brain", "hop on a call")
-- 1.7 No hyphens in bodies except inside the product-name allowlist (QSFP-DD, Wi-Fi, Tier-1, etc.)
-- 1.10 No negative parallelisms ("It's not just X, it's Y")
-- 1.11 No "Andy" sign-off
-- 1.12 One product line per email (Surgical Isolation, keyword density check)
-- 14 Word-count limit per email index
+```
+[First],
 
-If the validator raises:
-1. Log timestamp + violation list to `Claude-Brain/overnight-run-log.md`.
-2. Do NOT write any partial queue entries. Do NOT proceed to Step 10.
-3. Exit cleanly. Surface the violation to Andy if running interactively.
+[New data point or signal.]
+[Concrete ask ending with a question mark.]
 
-The validator is also called by `osi-email-sender` at send time as belt-and-suspenders. So even if a queue entry was hand-edited and bypassed the write-time validator, the sender refuses to send it.
+Best,
+Andy
 
-### Step 10, Write to queue
+```
 
-Build 6 entries in memory, then append atomically. DO NOT display email bodies in chat. DO NOT ask Andy to say "ready." DO NOT open Outlook. The email-sender skill handles actual sending during 11am-4pm windows.
+#### Email 3 (new subject, STANDALONE)
 
-#### Entry format
+Different product line. 3-4 sentences. One ask.
 
-Path: `C:\Claude-Brain\email-queue.json`
+```
+[First],
+
+[Body. New product line only. No quoted thread, no prior email reference.]
+
+Best,
+Andy
+
+```
+
+🚫 No quoted thread. No `On <date>, Andy wrote:`. No `>` lines.
+
+#### Email 4 (new subject, STANDALONE)
+
+Another product line. Same structure as Email 3.
+
+🚫 No quoted thread.
+
+#### Email 5 (new subject, STANDALONE)
+
+Another product line. Same structure as Email 3.
+
+🚫 No quoted thread.
+
+#### Email 6, breakup (new subject, STANDALONE)
+
+One sentence. Clean close. No ask.
+
+```
+[First],
+
+Should I close the file on this one, or is the timing just off?
+
+Best,
+Andy
+
+```
+
+🚫 No quoted thread.
+
+### Step 6, 6-ITEM SELF-CHECK (MANDATORY before sanitize)
+
+For every email body, answer these six questions before sanitizing:
+
+1. Does the first line after the greeting reference the prospect, not OSI? (Email 1 only)
+2. Is the Personal Hook from the strategy note in this email? (Email 1 only — if hook is thin, ABORT and flip to `pending-needs-hook`)
+3. Is there exactly ONE product line in this email?
+4. Did I name SmartOptics? (must be no for cold)
+5. Did I claim OSI manufactures? (must be no)
+6. Does every email end with the sign-off: blank line, "Best,", "Andy", blank line? (All 6 emails including "Any thoughts?" Email 2. No exceptions.)
+
+If any answer is wrong, rewrite before sanitizing.
+
+### Step 7, Sanitize bodies (MANDATORY before validator)
+
+Run `sanitize_body(text, email_index)` on every body and `sanitize_subject(subject)` on every subject before writing to HubSpot. See the sanitize functions in the previous version of this skill for the full implementation. Key operations:
+- Strip em-dashes and en-dashes
+- Strip quoted thread markers from emails 3-6 (defense-in-depth)
+- Normalize spaces
+- Trim trailing whitespace
+
+If sanitize raises (dashes leaked through or body went empty): STOP. Do not write anything. Surface the error to Andy.
+
+### Step 8, Validator (MANDATORY before HubSpot write)
+
+Run `validate_or_raise` on every email per `C:\Claude-Brain\scripts\validate_email.py`.
+
+**NOTE on rule 1.11 (sign-off ban):** The validator was written for the old email-queue workflow where Outlook appended the signature. In the new HubSpot AI fields workflow, "Best, Andy" is explicitly required in the body. The validator's 1.11 sign-off check does NOT apply to this skill. All other rules apply unchanged.
+
+If the validator raises on any other rule: log to `overnight-run-log.md`, do NOT write any AI fields, flip candidate to `pending-relookup`.
+
+### Step 9, Write 12 AI Field Properties to HubSpot
+
+Build all 12 field values in memory (6 subjects + 6 bodies). Write in a SINGLE `manage_crm_objects` update call. Never write partial.
 
 ```json
 {
-  "id": "[firstname]-[lastname]-[company-slug]-[N]",
-  "prospectName": "[First Last]",
-  "company": "[Company]",
-  "to": "[email]",
-  "subject": "[subject, sanitized]",
-  "body": "[sanitized body. Email 1: full new-pitch. Email 2 (RE: subject): just the new reply text, sender's Reply flow attaches prior thread natively. Emails 3/4/5/6: ONLY the new pitch, NEVER any quoted thread. ALL bodies are em-dash and en-dash free per sanitize_body in Step 8.]",
-  "sendDate": "YYYY-MM-DD",
-  "sendTime": "[4pm/11am/12pm/1pm/2pm/3pm]",
-  "status": "pending",
-  "addedDate": "YYYY-MM-DD",
-  "emailResolution": "[hubspot-existing | verified-pattern | dominant-pattern]"
+  "ai_email_subject_1": "[subject]",
+  "ai_email_body_1": "[full body with formatting]",
+  "ai_email_subject_2": "[subject]",
+  "ai_email_body_2": "[full body]",
+  "ai_email_subject_3": "[subject]",
+  "ai_email_body_3": "[full body]",
+  "ai_email_subject_4": "[subject]",
+  "ai_email_body_4": "[full body]",
+  "ai_email_subject_5": "[subject]",
+  "ai_email_body_5": "[full body]",
+  "ai_email_subject_6": "[subject]",
+  "ai_email_body_6": "[full body]"
 }
 ```
 
-`emailResolution` is required on every entry. The monitor's pre-flight uses it to distinguish strong vs weak signal at queue time.
+After write succeeds, output exactly one confirmation line:
 
-#### Atomic write
+`AI fields written: [First Last] | [Sequence type] | Enroll by [Day 1 date]`
 
-```python
-import json, os
-QUEUE = r'C:\Claude-Brain\email-queue.json'
-with open(QUEUE, 'r') as f: queue = json.load(f)
-existing_ids = {e.get("id") for e in queue}
-queue.extend([e for e in new_entries if e["id"] not in existing_ids])
-tmp = QUEUE + '.tmp'
-with open(tmp, 'w') as f: json.dump(queue, f, indent=2)
-os.replace(tmp, QUEUE)
-```
+Do NOT display email bodies in chat. Do NOT ask "ready?". Move immediately to Step 10.
 
-Do NOT use the MCP Write tool for the queue. Step 8 sanitize must have run on every entry in `new_entries` before this code runs. If the write fails, retry once, then log and exit. Do NOT proceed on a stale queue.
+### Step 10, Create LINKED_IN_CONNECT Task
 
-After the write succeeds, output exactly one confirmation line and nothing else:
+🚨 **Task type is ALWAYS `LINKED_IN_CONNECT`. NEVER `TODO`.** A TODO task does not appear in the LinkedIn Sales Navigator task queue.
 
-`Queued: [First Last] | [Sequence type] | Day 1 [YYYY-MM-DD]`
+Search HubSpot for an existing "Sales Nav -- Send connection request" task on this contact:
 
-Move immediately to the next candidate or exit. Displaying email bodies in chat burns tokens, causes context overflow on multi-candidate sweeps, and adds no value.
+**Found, NOT_STARTED:** update `hs_timestamp` to Day 1 at 20:00 UTC. Also fix `hs_task_type` to `LINKED_IN_CONNECT` if currently `TODO`.
 
-### Step 11, Sync Sales Nav Connection Request Task in HubSpot
+**Found, COMPLETED:** leave it. Log: "Sales Nav connect already completed."
 
-🚨 **HARDWIRED RULE: The "Sales Nav -- Send connection request" task due date MUST equal Email 1 sendDate. Always. No exceptions. If no such task exists, CREATE IT.**
+**Not found:** CREATE:
+- Subject: `Sales Nav -- Send connection request -- [First Last] | [Company]`
+- Due date: Day 1 at 20:00 UTC (4pm ET)
+- Type: `LINKED_IN_CONNECT`
+- Owner: 196669355
+- Body: the actual LinkedIn invite message Andy will send (under 300 chars, references Personal Hook, no pitch)
 
-Search HubSpot for a task on this contact where `hs_task_subject` contains "Sales Nav -- Send connection request":
+This task is Andy's cue. When it appears due in his task queue, he enrolls the contact in the HubSpot sequence and sends Email 1. The task date and enrollment date are always the same.
 
-**Task found, NOT_STARTED:** update `hs_timestamp` to Email 1 Day 1 at 20:00 UTC (4pm ET).
+If write fails: log `linkedin-task-sync-failed` to `overnight-run-log.md`. AI fields stay written (they are the authoritative record).
 
-**Task found, COMPLETED:** leave it. Log: "Sales Nav connect already completed — LinkedIn arm may have fired ahead of schedule."
+### Step 11, Update Stagger Metadata
 
-**No task found:** CREATE the task now. Fields:
-- Subject: `Sales Nav -- Send connection request to [First Name] [Last Name]`
-- Due date: Email 1 Day 1 at 20:00 UTC (4pm ET)
-- Type: `TODO`
-- Owner: Andy (HubSpot owner ID 196669355)
-- Body: `Day 1 LinkedIn connection request. Email 1 goes out at 4pm same day.`
-
-Never leave this step incomplete. A queued sequence with no Sales Nav task means the LinkedIn arm of the cadence is silently broken. If the HubSpot write fails, log to `overnight-run-log.md` as `linkedin-task-sync-failed` but still keep the 6 emails in the queue.
-
-**This step also applies to any reschedule.** Any time Email 1's sendDate changes, come back here and re-run this step. The task date always mirrors Email 1.
-
-### Step 12, Update stagger metadata + state
-
-Update `state.stagger[company_name]`:
-- `last_day1`: today's just-computed Day 1
+Update `state.stagger[company_name]` in `C:\Claude-Brain\overnight-candidates.json`:
+- `last_day1`: Day 1 computed in Step 2
 - `person_count`: incremented by 1
 
-Atomic write.
+Atomic write (read full file, modify in memory, write to `.tmp`, `os.replace`).
 
-Update stagger metadata confirms the sequence is queued for this candidate. Log completion to `overnight-run-log.md`.
+### Step 12, Append Excel Tab 1
 
-### Step 13, Append Excel Tab 1
+`Claude-Brain/prospects-tracker-new.xlsx`, Tab 1.
 
-`Claude-Brain/prospect
+Columns: Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Date Added | Notes
+
+---
+
+## FAILURE MODES, never silent
+
+Every failure logs to `Claude-Brain/overnight-run-log.md` with timestamp + reason:
+
+- Strategy note missing: log, mark `yes-with-email-strategy-missing`, do NOT write AI fields.
+- Active sequence check: AI fields already populated and Andy did not confirm overwrite: log, stop.
+- AI field write fails: retry once, then log + exit.
+- LINKED_IN_CONNECT task fails: log `linkedin-task-sync-failed`, keep AI fields written.
+- Excel append fails: log warning, do NOT block the field write. Excel is a tracker, not source of truth.
+- Stagger metadata write fails: retry once. If still fails, log and continue with defaulted Day 1.
+- Validator raises: log violation list, do NOT write any AI fields, flip to `pending-relookup`.
+
+---
+
+## RULES (index)
+
+Quality gates in order: Step 0 (drafting-rules.md), Step 3 (duplicate check), Step 4 (email pattern), Step 6 (self-check), Step 7 (sanitize), Step 8 (validator). None skippable.
+
+Hard constraints: one candidate per invocation, 6 emails only, single atomic AI field write (Step 9), LINKED_IN_CONNECT task always on Day 1 (Step 10).
+
+Sign-off rule: "Best, Andy" on every single email. No exceptions. Including "Any thoughts?" Email 2.
+
+Greeting rule: first name + comma only. No "Hi". No "Hello".

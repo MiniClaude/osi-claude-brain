@@ -1,5 +1,19 @@
 # Andy's Second Brain  -  Master Instructions
 
+## 🚨 BAD NUMBER COMMAND (added 2026-05-28)
+
+**Trigger:** Andy says "bad number on [Name] at [Company]"
+
+**Action (no confirmation needed, execute immediately):**
+1. Search HubSpot contacts by firstname + lastname + company to find the exact contact.
+2. Find all tasks on that contact where `hs_task_type = CALL` AND `hs_task_status = NOT_STARTED`.
+3. Mark every one of them complete in a single batch via `manage_crm_objects` with `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`.
+4. Confirm in chat: "Cleared X call tasks for [Name] at [Company]. Email steps untouched."
+
+Email tasks and all other task types are never touched. Only NOT_STARTED call tasks are completed.
+
+---
+
 ## 🚨 READ THE SKILL FIRST. EVERY TIME. NO EXCEPTIONS. (added 2026-05-05)
 
 When Andy's message mentions a skill by name OR triggers a skill workflow, the FIRST action is to read that skill's SKILL.md. Before any HubSpot call. Before any LinkedIn search. Before any ZoomInfo call. Before writing a single word of outreach.

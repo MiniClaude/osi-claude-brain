@@ -128,6 +128,16 @@ Repackaged `osi-meeting-followup.skill`. Source-vs-package diff verified clean.
 - Calls returned by HubSpot search: 0
 - No meetings on Tuesday 2026-05-12. Exit clean.
 
+## 2026-05-20 14:10 UTC run (osi-meeting-followup)
+- Window: 2026-05-19 00:00 UTC -> 2026-05-20 14:10 UTC (previous business day -> now)
+- Calls returned by HubSpot search: 0
+- No meetings on Tuesday 2026-05-19. Exit clean.
+
+## 2026-05-26 14:09 UTC run (osi-meeting-followup)
+- Window: 2026-05-25 00:00 UTC -> 2026-05-26 14:09 UTC (previous business day -> now)
+- Calls returned by HubSpot search: 0
+- No meetings on Monday 2026-05-25. Exit clean.
+
 ## 2026-05-01 14:05 UTC run (osi-meeting-followup)
 - Window: 2026-04-30 00:00 UTC -> 2026-05-01 14:02 UTC (previous business day -> now)
 - Calls returned by HubSpot search: 2

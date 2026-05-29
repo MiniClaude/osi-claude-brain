@@ -8247,6 +8247,14 @@
     "ePlus": {
       "last_day1": "2026-05-28",
       "person_count": 2
+    },
+    "Dobson Fiber": {
+      "last_day1": "2026-07-17",
+      "person_count": 8
+    },
+    "Alliance Communications": {
+      "last_day1": "2026-06-10",
+      "person_count": 3
     }
   },
   "state": {
@@ -8318,6 +8326,10 @@
       "Lumentum": {
         "last_day1": "2026-07-07",
         "person_count": 7
+      },
+      "Dobson Fiber": {
+        "last_day1": "2026-06-09",
+        "person_count": 3
       }
     }
   },
@@ -8370,5 +8382,7 @@
   "royal_bank_of_canada": {
     "last_day1": "2026-07-06",
     "person_count": 7
-  }
+  },
+  "last_day1": "2026-08-14",
+  "person_count": 13
 }

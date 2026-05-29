@@ -160,7 +160,22 @@ Give each agent this prompt (substitute the batch's task list):
 >
 >    ONE search per contact. Do not run a second search, do not pivot keywords, do not chase results. If the first search does not surface a usable hook, move on. Do NOT run `outlook_email_search`, LinkedIn, or ZoomInfo.
 >
-> 5. **Before drafting, extract a "specifics inventory" from HubSpot history + the fresh hook (if found).** List, for yourself:
+> 5. **🚨 MANDATORY THREAD ANCHOR — output this block before writing anything else. Do not skip. Do not abbreviate.**
+>
+>    ```
+>    THREAD ANCHOR for [Contact Name] at [Company]:
+>    LAST OUTBOUND (Andy → Contact): [date] | Subject: "[subject]" | Body (first 300 chars): "[text]"
+>    LAST INBOUND (Contact → Andy): [date] | Subject: "[subject]" | Body (first 200 chars): "[text]" — OR "no reply on record"
+>    LAST NOTE/CALL: [date] | [1-line summary of topic/disposition]
+>    ```
+>
+>    **Rules for this block:**
+>    - Pull the most recent EMAIL where `hs_email_direction = OUTGOING` for LAST OUTBOUND. This is the last thing Andy actually sent. The draft must continue this thread.
+>    - If no outbound email exists in HubSpot: write thin-context fallback + ⚠️ NO OUTBOUND EMAIL FOUND. Do not invent thread context.
+>    - **SELF-CHECK before proceeding:** Does the subject and body of the LAST OUTBOUND match the topic you are about to draft? If not — stop, re-read the history, find the correct email. A draft about optics samples when the last outbound was about an NDA is wrong. A draft about TPM when the last outbound was about DIMMs is wrong. Fix the anchor, then draft.
+>    - The "Last engagement" line in the final draft format MUST be copied verbatim from this anchor block, specifically from LAST OUTBOUND. Not from a call. Not from a note. The outbound email is the thread anchor.
+>
+> 6. **Before drafting, extract a "specifics inventory" from HubSpot history + the fresh hook (if found).** List, for yourself:
 >    - Named products / model families (e.g., SAR-Hm/Hmc, ACX5448, Nutanix, VxRail)
 >    - Technical standards / specs (e.g., IEC 61850, 10G SR, port density requirements)
 >    - Project / initiative names (e.g., Nokia pilot, Dallas lab visit, HP/Cisco rightsizing, Thanksgiving data center build)
@@ -171,16 +186,16 @@ Give each agent this prompt (substitute the batch's task list):
 >
 >    If your inventory has **2+ specifics** (HubSpot history + fresh hook both count), you can write a full substantive draft weaving them in. If it has fewer, write the shorter thin-context fallback + ⚠️ flag, do NOT invent specifics.
 >
-> 6. **Draft a substantive 3-5 paragraph reply in Andy's voice** that weaves in **at least 2 specifics from your inventory**. Match the formality/length/tone of the most recent real reply from the contact. NEVER draft from the task title, it is stale reference only.
+> 7. **Draft a reply in Andy's voice that continues the LAST OUTBOUND thread.** The draft picks up exactly where the last outbound left off — same topic, same thread, next logical message. Match the formality/length/tone of the conversation so far. NEVER draft from the task title. NEVER pivot to a different product line or topic than what the last outbound established unless the contact explicitly changed the subject in their reply.
 >
-> 7. Write to `hs_task_body` via `manage_crm_objects` updateRequest, `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. **OVERWRITE** the body with the fresh draft. Do not append, do not preserve the prior draft. The task body after this write should contain ONLY the fresh draft, nothing else. If the task had a previous draft, note that in the output status (`drafted (overwrote previous)`) but do not keep any of the prior content.
+> 8. Write to `hs_task_body` via `manage_crm_objects` updateRequest, `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. **OVERWRITE** the body with the fresh draft. Do not append, do not preserve the prior draft. The task body after this write should contain ONLY the fresh draft, nothing else. If the task had a previous draft, note that in the output status (`drafted (overwrote previous)`) but do not keep any of the prior content.
 >
 > **Draft format:**
 > ```
-> <div dir="auto"><p style="margin:0;"><strong>DRAFT (auto-generated {today}, based on HubSpot engagement history):</strong></p><p style="margin:0;"><em>Last engagement: {most recent email/call/meeting with 1-line summary and date}</em></p><p style="margin:0;"><br></p><p style="margin:0;">Subject: [subject line]</p><p style="margin:0;"><br></p><p style="margin:0;">Hi [Name],</p><p style="margin:0;"><br></p><p style="margin:0;">[body]</p><p style="margin:0;"><br></p><p style="margin:0;">Andy</p></div>
+> <div dir="auto"><p style="margin:0;"><strong>DRAFT (auto-generated {today}, based on HubSpot engagement history):</strong></p><p style="margin:0;"><em>Last outbound: {LAST OUTBOUND date} — "{LAST OUTBOUND subject}" — {first 80 chars of outbound body}</em></p><p style="margin:0;"><br></p><p style="margin:0;">Subject: [subject line]</p><p style="margin:0;"><br></p><p style="margin:0;">Hi [Name],</p><p style="margin:0;"><br></p><p style="margin:0;">[body]</p></div>
 > ```
 >
-> Including the "Last engagement" line lets Andy see at a glance what the draft is anchored on, if it's stale or wrong, he can skip.
+> The "Last outbound" line is copied from the THREAD ANCHOR block (step 5). It must show the actual last email Andy sent, not a call or note. This lets Andy verify at a glance that the draft is on the right thread before he opens it.
 >
 > **Edge cases:**
 > - Existing body has a previous draft → overwrite it with the fresh draft. Status = `drafted (overwrote previous)`.

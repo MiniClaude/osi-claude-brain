@@ -8,5 +8,10 @@
     "company": "Panasonic",
     "reason": "Not a target for Auto Mode (complex org / strategic only)",
     "dateAdded": "2026-05-15"
+  },
+  {
+    "company": "Altatelecom",
+    "reason": "Dead company \u2014 altatelecom.com redirects to AFL (fiber optic manufacturer, absorbed 2012). LinkedIn shows French electronics company in Lille. HubSpot data is junk.",
+    "dateAdded": "2026-05-20"
   }
 ]

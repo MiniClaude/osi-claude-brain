@@ -61,7 +61,12 @@ Read `C:\Claude-Brain\email-queue.json`. Scan every entry where `status: "pendin
 **E2-6 overdue:** auto-fix immediately.
 
 For each overdue E2-6 entry:
-1. **New send date:** if the monitor fires before 3:30 PM ET, reschedule to today. After 3:30 PM ET, use the next business day.
+1. **New send date AND send time:** determine the new date and time together.
+   - Send windows (ET): 11:00, 12:00, 13:00, 14:00, 15:00, 16:00.
+   - Get current ET hour (convert from UTC: ET = UTC - 4 in summer, UTC - 5 in winter).
+   - **Next unfired window** = smallest window hour that is strictly greater than the current ET hour. E.g., monitor runs at 11:45 ET → next window = 12:00. Monitor runs at 13:20 ET → next window = 14:00. Monitor runs at 15:10 ET → next window = 16:00.
+   - If a next unfired window exists AND current ET time is before 15:30 → reschedule to **today**, set `sendTime` to that window (e.g. "16:00"). Do NOT keep the entry's original sendTime; the original window has already passed.
+   - If current ET time is 15:30 or later (only the 4pm window remains and there is not enough time for Andy to act on pre-flight risks) → reschedule to the **next business day**. Keep the entry's original `sendTime` (it will hit its normal window the next day).
 2. **Respread remaining entries:** calculate the offset in business days between the original sendDate and the new date. Push every subsequent pending entry for that prospect forward by the same offset, preserving original cadence gaps exactly.
 3. **Audit trail:** add `rescheduled` field to each updated entry: `"From <old-date> to <new-date> on <today> (overdue-auto-fix)"`. Atomic write only: write to `email-queue.json.tmp`, then `os.replace(tmp, original)`.
 
@@ -172,7 +177,9 @@ Read `C:\Claude-Brain\email-queue.json`. For each prospect with any pending entr
 
 Do not ask Andy what to do. Auto-reschedule immediately.
 
-**New E1 date:** reschedule E1 to today if the monitor is firing before 3:30 PM ET (4pm send window still reachable). If the monitor fires after 3:30 PM ET, use the next business day instead.
+**New E1 date and send time:** E1 always uses the 4pm (16:00 ET) window.
+   - If current ET time is before 15:30 → reschedule E1 to **today**, `sendTime: "16:00"`.
+   - If current ET time is 15:30 or later → reschedule E1 to the **next business day**, `sendTime: "16:00"`.
 
 **Respread E2-6:** calculate the business-day offset between the original E1 date and the new E1 date. Push every subsequent entry (E2-6) forward by that same offset, preserving the original cadence gaps exactly.
 
@@ -235,18 +242,28 @@ Atomic write. Report any corrections under AUTO-FIXED CADENCE: Name | Company | 
 For every prospect with a pending Email 1 (`-1` id suffix) scheduled for today's 4pm window:
 
 1. Find the contact in HubSpot by email address.
-2. Search for a task on that contact where `hs_task_subject` contains "Sales Nav -- Send connection request" AND `hs_task_status = NOT_STARTED` AND the task due date matches today.
-3. **If found:** all good. No action.
-4. **If NOT found:** create the task now. Fields:
+2. Search for ALL tasks on that contact where `hs_task_subject` contains "Sales Nav -- Send connection request".
+3. Three cases:
+
+   **Case A — Task found AND status is COMPLETED:** All good. Connection request already sent. No action needed.
+
+   **Case B — Task found AND status is NOT_STARTED:** The email-sender gate will hold this E1 at 4pm and push it to tomorrow. Flag immediately as a pre-flight risk:
+   - Risk type: `li-task-pending`
+   - Message: `LI connection request not sent. Email-sender gate WILL hold E1 at 4pm and reschedule to tomorrow unless you send the connection request first.`
+   - Recommended action: `Send Sales Nav connection request now, or let the gate push it.`
+   - List under PRE-FLIGHT RISKS, not SALES NAV TASKS CREATED.
+
+   **Case C — No task found:** Create the task now. Fields:
    - Subject: `Sales Nav -- Send connection request to [First Name] [Last Name]`
    - Due date: today
    - Type: `TODO`
    - Owner: Andy (HubSpot owner ID 196669355)
    - Body: `Day 1 connection request. Email 1 goes out at 4pm today.`
-5. Report in the summary under SALES NAV TASKS CREATED: Name | Company | task created for today.
-6. If the HubSpot contact lookup fails, flag it: Name | Company | contact not found, Sales Nav task could not be created — verify manually.
+   - Report under SALES NAV TASKS CREATED: Name | Company | task created for today.
 
-This runs every day before the pre-flight risk check. No E1 should go out without a same-day Sales Nav task in HubSpot.
+4. If the HubSpot contact lookup fails, flag it: Name | Company | contact not found, Sales Nav task could not be verified — check manually.
+
+This runs every day before the pre-flight risk check. No E1 should go out without Andy knowing whether the connection request has been sent.
 
 ---
 
@@ -300,7 +317,7 @@ PRE-FLIGHT RISKS, review before 4 PM:
 [If none: All pre-flight checks clean.]
 ```
 
-Examples of risk-type tags: `pattern-mismatch`, `dominant-pattern-only`, `manual-verify`, `recent-reply-co`, `recent-bounce-co`, `recent-opens-co`, `employer-unverified`, `alt-email-target`.
+Examples of risk-type tags: `pattern-mismatch`, `dominant-pattern-only`, `manual-verify`, `recent-reply-co`, `recent-bounce-co`, `recent-opens-co`, `employer-unverified`, `alt-email-target`, `li-task-pending`.
 
 Keep recommendations to 5-10 words: `Swap to john.lubeck@`, `Hold, verify employer`, `Confirm primary vs alt`, etc.
 
