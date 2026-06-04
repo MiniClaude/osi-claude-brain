@@ -3562,13 +3562,15 @@
     "body": "Hey Harold,\n\nDifferent angle on this one.\n\nA lot of organizations your size are paying full OEM rates on hardware that's well past its prime. We offer third party maintenance on Dell, Cisco, HPE, and others at 40% to 60% less than OEM renewal. Same day response, same SLAs, no surprises.\n\nFor a nonprofit watching every dollar, that gap usually gets attention fast.\n\nNot asking you to switch anything. Just curious if you know what your current support spend actually looks like, and whether there's room to squeeze it.\n\nWorth a conversation?\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
     "sendDate": "2026-06-04",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "isReply": false,
     "prospectName": "Harold Simpson",
     "company": "Buckner International",
     "addedDate": "2026-05-28",
     "emailNumber": 2,
-    "sequenceId": "harold-simpson-buckner-7step"
+    "sequenceId": "harold-simpson-buckner-7step",
+    "sentAt": "2026-06-04T11:12:00-07:00",
+    "sentInWindow": "11am"
   },
   {
     "id": "harold-simpson-buckner-email-3",
@@ -3662,12 +3664,14 @@
     "sendTime": "11am",
     "sendTimeZone": "PT",
     "replyMode": false,
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-06-01",
     "sequenceId": "daniel-bloor-thalesgroup",
     "emailNumber": 2,
     "cadenceGap": 3,
-    "priorEmailId": "daniel-bloor-thalesgroup-1"
+    "priorEmailId": "daniel-bloor-thalesgroup-1",
+    "sentAt": "2026-06-04T11:12:00-07:00",
+    "sentInWindow": "11am"
   },
   {
     "id": "daniel-bloor-thalesgroup-3",
@@ -3677,7 +3681,7 @@
     "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
     "subject": "One more thing. Hardware + TPM opportunity",
     "body": "Daniel,\n\nLast note on this thread.\n\nI don't know if your 7 site footprint is running to refresh cycles, but if it is, there are two things we can help with:\n\n1. TPM competitive bid on your current fleet (replace Park Place or whoever you're with, or just benchmark it). That's 40 to 60% off on maintenance, no churn, same quality.\n2. Hardware sourcing if you're adding capacity or replacing aging inventory. We source Dell, HP servers, Samsung/Hynix DDR4/DDR5, optical transceivers, and networking gear. Direct from suppliers. Warranties included. Faster lead times than OEM.\n\nMost teams use us for both. They keep OEM relationships where it matters (critical new infrastructure), and they optimize costs on the rest of the stack.\n\nI'm in Austin. Coffee to walk through what that could look like for Thales would be easy. Or a call if that's simpler.\n\nLet me know.\n\nBrian",
-    "sendDate": "2026-06-08",
+    "sendDate": "2026-06-15",
     "sendTime": "11am",
     "sendTimeZone": "PT",
     "replyMode": false,
@@ -3888,5 +3892,53 @@
     "addedDate": "2026-06-03",
     "emailNumber": 7,
     "sequenceId": "john-pobalis-sciremc-7step"
+  },
+  {
+    "id": "dan-doughty-lambweston-swag-1",
+    "to": "dan.doughty@lambweston.com",
+    "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
+    "subject": "Confirming address",
+    "body": "Dan,\n\nWe put together a small package of complimentary SmartOptics SFPs for a few infrastructure engineers we'd like to get in front of. I'd like to send one your way, no strings.\n\nCan you confirm the best shipping address at Lamb Weston, or a better one if you'd rather it go elsewhere?\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
+    "sendDate": "2026-07-21",
+    "sendTime": "4pm",
+    "status": "pending",
+    "isReply": false,
+    "prospectName": "Dan Doughty",
+    "company": "Lamb Weston",
+    "addedDate": "2026-06-04",
+    "emailNumber": 1,
+    "sequenceId": "dan-doughty-lambweston-swag"
+  },
+  {
+    "id": "dan-doughty-lambweston-swag-2",
+    "to": "dan.doughty@lambweston.com",
+    "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
+    "subject": "RE: Confirming address",
+    "body": "Dan,\n\nCircling back on the optics sample. Still happy to drop a few complimentary SFPs in the mail so you've got break glass spares on the shelf.\n\nJust need an address to send them to. Where's best?\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
+    "sendDate": "2026-07-24",
+    "sendTime": "4pm",
+    "status": "pending",
+    "isReply": true,
+    "prospectName": "Dan Doughty",
+    "company": "Lamb Weston",
+    "addedDate": "2026-06-04",
+    "emailNumber": 2,
+    "sequenceId": "dan-doughty-lambweston-swag"
+  },
+  {
+    "id": "dan-doughty-lambweston-swag-3",
+    "to": "dan.doughty@lambweston.com",
+    "bcc": "bc@osihardware.com, 21878985@bcc.hubspot.com",
+    "subject": "RE: Confirming address",
+    "body": "Dan,\n\nLast one on the swag. If you send me an address I'll get the SFPs out this week. If it's easier to grab 10 minutes and talk through TPM or server memory instead, happy to do that too.\n\nEither way, just say the word.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
+    "sendDate": "2026-07-28",
+    "sendTime": "4pm",
+    "status": "pending",
+    "isReply": true,
+    "prospectName": "Dan Doughty",
+    "company": "Lamb Weston",
+    "addedDate": "2026-06-04",
+    "emailNumber": 3,
+    "sequenceId": "dan-doughty-lambweston-swag"
   }
 ]

@@ -1,5 +1,5 @@
 # PoE 2 — Monk Leveling Guide & Build Research
-*0.5 Return of the Ancients — Updated June 1, 2026*
+*0.5 Return of the Ancients — Updated June 4, 2026*
 
 ---
 
@@ -250,13 +250,103 @@ https://www.filterblade.xyz/?profile=RealP4wnyhof%237009&saveState=J4ZJOG9W2LJN4
 
 | Milestone | Status |
 |---|---|
-| Current Level | 50 |
-| Act 1 loop (Wind Blast → Wing Blast → Falling Thunder) | ✅ Done |
-| Acts 2–3 loop (Storm Wave → Siphoning Strike → Falling Thunder) | 🔄 In progress |
-| Act 4+ (Whirling Assault + Staggering Palm + Tempest Bell) | ⏳ Upcoming |
+| Current Level | **71** |
+| Demon Chant equipped (+3 Melee Skills, 6.34% leech) | ✅ Done |
+| Whirling Assault active (primary clear) | ✅ Done |
+| Hollow Palm removed from tree | ✅ Done |
+| Tempest Bell added for bossing | ✅ Done |
+| Movement Speed 125% on boots | ✅ Done |
+| Fire Resistance capped (75%) | ❌ At 41% — need +34% |
+| Cold Resistance capped (75%) | ❌ At 35% — need +40% |
+| Lightning Resistance capped (75%) | ❌ At 34% — need +41% |
+| Life 2,000+ | ❌ At 1,435 |
+| Energy Shield 1,000+ | ❌ At 507 |
+| Stonefist Glove conversion | ❌ Pending |
+| Amulet upgrade (+1 Melee Skills) | ❌ Pending |
+| Staff upgrade (400+ pDPS Sinister/Waxing) | ❌ Pending |
 | Level 75 (3rd Ascendancy) | ⏳ Upcoming |
 | Level 85 Budget | ⏳ Upcoming |
 | Level 85 Juiced | ⏳ Upcoming |
 
 ---
-*Last updated: June 1, 2026*
+
+## Current Build State (June 4, 2026) — Level 71
+
+**PoB:** https://maxroll.gg/poe2/pob/07ch1306
+
+### Stats
+| Stat | Value | Status |
+|---|---|---|
+| Life | 1,435 | ⚠️ Low — target 2,000+ |
+| Energy Shield | 507 | ⚠️ Low — target 1,000+ |
+| eHP | 2,577 | Improving |
+| Evasion | 1,703 | OK |
+| Movement Speed | **125%** | ✅ Fixed |
+| Fire Resistance | **41%** | ❌ Uncapped — need +34% |
+| Cold Resistance | **35%** | ❌ Uncapped — need +40% |
+| Lightning Resistance | **34%** | ❌ Uncapped — need +41% |
+| STR / DEX / INT | 74 / 109 / 96 | OK |
+| Ascendancy | **6/8** | Way of Stonefist + Hollow Focus + 2 more |
+| Passive Nodes | 94/123 | In progress |
+
+### Current Gear Summary
+| Slot | Item | Notes |
+|---|---|---|
+| Weapon | Demon Chant, Waxing QS (iLvl 54) | 10% crit, +3 Melee Skills, 6.34% leech — keep until 400+ pDPS upgrade |
+| Helmet | Beast Salvation, Solid Mask (iLvl 49) | EV/ES hybrid, no resists |
+| Gloves | Chimeric Fist, Fine Bracers (iLvl 51) | NOT converted — replace before Stonefist |
+| Body Armour | Unknown | Update when inspected |
+| Belt | Demon Leash, Ornate Belt (iLvl 65) | +121 Life, 3 Charm slots, +11% Fire Res |
+| Ring 1 | Tempest Band, Topaz Ring (iLvl 55) | Replace with Sapphire Ring (cold implicit + fire res) |
+| Ring 2 | Pandemonium Hold, Topaz Ring (iLvl 58) | Keep — +46% Lightning total |
+| Amulet | Demon Medallion, Pearlescent (iLvl 46) | Upgrade to Damnation Rosary when resists capped |
+| Boots | Carrion League, Bound Sandals (iLvl 65) | ✅ Keep — 125% MS, +125 Life, +31% Cold Res |
+
+### Active Skill Setup (Set 1)
+| Skill | Supports |
+|---|---|
+| Quarterstaff Strike | Culling Strike II, Elemental Armament II |
+| Hollow Form → Whirling Assault | Blindside, Magnified Area II, Heft |
+| Hollow Focus | Magnified Area II, Elemental Armament II, Cooldown Recovery II, Pinpoint Critical |
+| Whirling Assault (main) | Magnified Area II, Rage III, Embitter, Heavy Swing |
+| Ice Strike | Elemental Armament II, Cold Attunement, Crescendo II |
+| **Tempest Bell** | Close Combat II, Ancestral Call II, Heavy Swing |
+| Killing Palm | Thrill of the Kill II, Charge Profusion I, Life Leech II |
+| Wind Dancer | Maim, Blind II, Magnified Area I |
+| Reaper's Invocation | Profane Ritual, Compressed Duration II |
+| Falling Thunder | Elemental Armament I, Perpetual Charge, Lightning Attunement |
+| Charged Staff | Prolonged Duration II, Innervate, Blind II, Elemental Armament II |
+| Herald of Thunder | Magnified Area I, Elemental Armament I, Elemental Focus |
+
+### Priority Action List
+**🔴 Urgent:**
+1. Cap resistances — replace Ring 1 (Tempest Band) with Sapphire Ring (cold implicit + fire res mods)
+2. Stonefist Gloves — iLvl 68+ EV/ES base with flat phys + cold + lightning prefixes + Crit Damage Bonus suffix
+
+**🟡 High Priority:**
+3. Fix Killing Palm — swap Life Leech II for something more useful (only culls bells)
+4. Upgrade amulet to Damnation Rosary (+1 Melee Skills) once resists covered
+5. Grow Life to 2,000+ on next gear upgrades
+
+**🟢 Medium Priority:**
+6. Staff upgrade — 400+ pDPS Sinister/Bladed/Bolting QS
+7. ES to 1,000+ via body armour and helmet upgrades
+
+### Target Ring Replacement
+Replace Tempest Band (Ring 1) with:
+- **Sapphire Ring** (implicit: +21-28% Cold Resistance) with Fire Resistance + Life mods
+- Budget: 1-2 Exalted Orbs
+
+### Weapon Upgrade Threshold
+Demon Chant is the bridge staff. Upgrade when you find a **Sinister, Bladed, or Bolting Quarterstaff** at **400+ pDPS** with +1 Melee Skills.
+
+### Stonefist Glove Target
+Find iLvl 68+ Evasion/ES base and craft:
+- Prefix: Adds Flat Physical Damage to Attacks
+- Prefix: Adds Flat Cold Damage to Attacks
+- Prefix: Adds Flat Lightning Damage to Attacks
+- Suffix: % Increased Critical Damage Bonus
+Then apply Way of the Stonefist to convert permanently.
+
+---
+*Last updated: June 4, 2026*
