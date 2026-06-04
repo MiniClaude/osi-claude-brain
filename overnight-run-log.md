@@ -1,4 +1,36 @@
 
+[2026-06-03 09:00 ET] osi-email-task-drafts-cmig -- COMPLETED. TASKS REVIEWED: 173 total (36 sequence skipped, 97 recent-draft preserved). DRAFTED THIS RUN: 40 (8 fresh/empty + 32 overwrote stale drafts from May 12-21). THIN-CONTEXT FLAGS: 2 (Jason Boryk/Kaseya -- no email on file; Joao Walter Silva/Ascenty -- no outbound email found). DELIVERABILITY FLAGS: 5 contacts with catch-all or bad email addresses (see below).
+
+FLAGS FOR ANDY (2026-06-03):
+- John Singleton / i3 Broadband (107400186034): i3 being acquired by T-Mobile/Wren House JV, expected H2 2026 close. Sequence still running. Decide if you want to pause or lean into the acquisition angle.
+- Benjamin Ayuardo / H5 Data Centers (109847526452): HubSpot has a mangled Gmail address. Use benjamin.ayluardo@h5datacenters.com from the actual email thread. Fix before sending.
+- Lance Bezek / Vitamix (106895149642): lbezek@vitamix.com flagged catch-all by ZeroBounce. Verify deliverability.
+- Jason Boryk / Kaseya (107390483731): NO email on record in HubSpot. Draft staged but cannot send until you add his address.
+- Mike Guo / Nova Scotia Power (104983551834): mike.guo@nspower.ca flagged catch-all. Confirm deliverability.
+- Dan Huhr / XR Trading (108719816367): dan.huhr@xrtrading.com flagged catch-all. Worth verifying.
+- Bibek Ban / PubMatic (108797689189): "Systain and his VP coming onsite" not traceable in HubSpot. Verify who/when before sending.
+- Andrei Kachkov / Discovery Silver (108719152663): Kidd acquisition closed June 1. Fresh angle used. Good time to send.
+- Mark Williams / BorgWarner (107836644147): BorgWarner $100M Henderson County expansion -- used as fresh hook.
+- Cliff Dowden / Star Furniture (108718731380): Met recently, confirmed 5 Dell XC640s need coverage. Hot.
+
+NOT DRAFTED THIS RUN (97 tasks with recent drafts from May 21 - June 2): These include the 36 NANOG 97 tasks drafted June 2 and all May 21-June 2 regular tasks. Re-run to refresh if needed.
+
+[2026-06-02 09:00 ET] osi-email-task-drafts-cmig -- COMPLETED. TASKS REVIEWED: 393 total (36 sequence skipped). DRAFTED THIS RUN: 58 (20 new no-draft + 38 NANOG 97 stale-draft overwrites). PRESERVED EXISTING DRAFTS: 71 (from May 27-28 run, not refreshed). THIN-CONTEXT FLAGS: 4. NANOG NOTE: NANOG 97 in Bellevue WA currently in progress (June 1-5). All 38 NANOG task drafts updated from stale "heading to NANOG next week" to "at NANOG in Bellevue this week."
+
+FLAGS FOR ANDY (2026-06-02):
+- Jeremy Fornasiero / Amundi (109276799067): HOT. Decommission proposal for CoreSite + 365 DC multi-site reviewed May 1, vendor decision was expected end of that week. This is ~4 weeks overdue on follow-up. Check your email thread and move fast.
+- Nicolas Mendoza / VTX Communications (110305414674): Met Sunday at Paddy Coynes per HubSpot note. Post-meeting follow-up drafted, asking for a call next week. Send this one today while it is fresh.
+- JP Stern / Euratek (106137992114): HIGH priority. PO confirmation needed -- $9,525.12 payment logged Apr 8. Confirm POs processed and close the loop.
+- Corey Alley / Pillsbury Winthrop (109774139401): Nashville visit confirmed for the 22nd. Draft reminds him and proposes next steps.
+- Dan Windheim / Hunter Communications (109774882314): 25G SFP28 LR Juniper samples delivered to Eugene OR. Draft asks for test results to book engineer call. Good time to push.
+- Melisa Bedell / Datto (109419675830): thin-context. Referred by Victoria. No email history. Draft is minimal -- you may want to add context before sending.
+- Christopher Moering / Siemens Energy (107922853226): thin-context. Server quote was built per task. One call log with no body. Draft asks if quote was reviewed.
+- Dave Trocki / McKay Brothers (108925901723): thin-context. Low-latency microwave telecom for financial markets. No prior email history.
+- Lou Gerritse / SPARC Group (105444120171): thin-context. No longer in charge of hardware (lost to Ensono). Draft asks where he landed / JCPenney angle. May not be worth sending.
+- NANOG drafts preserved: 71 older tasks (May 27-28 drafts) not refreshed this run. These are non-NANOG follow-ups that still have valid drafts.
+
+[2026-05-30 09:02 ET] osi-email-task-drafts-cmig — 0 tasks due, no-op.
+
 [2026-05-29 09:00 ET] osi-email-task-drafts-cmig — 18 tasks drafted (priority pass). TOTAL IN QUEUE: 183. SKIPPED (sequence, empty "Send follow-up email"): 36. DRAFTED THIS RUN: 18 (9 no-prior-draft due today + 9 overdue May-28 overwrites). DRAFTED-FRESH: 9. DRAFTED-OVERWROTE: 9. MANUAL-ACTION FLAGGED: 1. REMAINING (not processed this run): 165 tasks (147 with existing drafts from prior runs, 18 future-dated no-draft tasks).
 
 FLAGS FOR ANDY (2026-05-29):
@@ -2296,3 +2328,6 @@ SKIPPED (sequence tasks — "Send follow-up email"): 36
 **ZI data:** Accuracy 93, lastUpdated 2026-04-24, title Network Administrator, ZI ID -2123685062.
 
 **Action:** Mark pending-relookup. Andy to verify manually (LinkedIn premium search, direct call, or industry conference speaker listing).
+
+---
+osi-email-task-drafts-cmig | 2026-06-02 20:53 UTC | 20 tasks drafted (9 due Jun 2, 11 due Jun 1). All drafts written to HubSpot task bodies. 0 errors. Key flags: Task 108925901723 (Dave Trocki / McKay Brothers) was a live order confirmation - previous draft was wrong cold outreach, now corrected. Task 106137992114 (JP Stern / Euratek) - jp@euratek.net flagged as possible catch-all address by deliverability check. Focused scope: drafted tasks due Jun 1-2 only (skipping older backlog of 200+ tasks due mid-May which had prior drafts already).

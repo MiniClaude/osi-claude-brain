@@ -380,7 +380,7 @@ Discovery and enrichment are two completely separate ZoomInfo operations.
 
 If `enrich_contacts` returns a credit-limit error during the enrichment phase, that does NOT cancel Step 1B for any company in the session. `search_contacts` for discovery must still run on every company regardless of enrichment credit status.
 
-When credits are exhausted for enrichment, the fallback for email resolution is: HubSpot existing email (if present) OR dominant company email pattern derived from verified HubSpot contacts at that company. Log this in the strategy note under EMAIL RESOLUTION: `dominant-pattern (enrich_contacts credits exhausted; pattern derived from [N] verified HubSpot contacts)`.
+When credits are exhausted for enrichment, the fallback order is: (1) ZoomInfo WEB APP in Chrome -- see the HARDWIRED credit-exhaustion rule in the ZOOMINFO ENRICHMENT section. Open the contact's profile at app.zoominfo.com and pull email + phone numbers from the Contact Details panel. Only if the web app has no record of the person at the company: (2) HubSpot existing email (if present) OR dominant company email pattern derived from verified HubSpot contacts at that company, logged in the strategy note under EMAIL RESOLUTION: `dominant-pattern (enrich_contacts credits exhausted; ZI web app no record; pattern derived from [N] verified HubSpot contacts)`.
 
 **Why this rule exists:** 2026-05-14, ZoomInfo enrich_contacts credits were exhausted mid-session. Step 1B was silently skipped for the remaining 5 companies on the grounds that "ZoomInfo is unavailable." search_contacts for discovery was never tried. These are different API calls. One being unavailable does not cancel the other.
 
@@ -596,6 +596,19 @@ EMAIL RESOLUTION: zoominfo-full-match
 **FORBIDDEN: marking `yes-no-email` after fewer than 7 attempts.** Run all 7. No exceptions for token budget, time, or "the others will fail anyway."
 
 **Why this rule exists:** 2026-04-28, Kimberly Rodriguez at Lingo Communications was queued with no email after a single `enrich_contacts` call returned `COMPANY_ONLY_MATCH`. A single-word retry returned `FULL_MATCH`. Run all 7.
+
+### 🚨 HARDWIRED RULE -- ZOOMINFO CREDIT EXHAUSTION = USE THE ZOOMINFO WEB APP IN CHROME (added 2026-06-03)
+
+If any retry-matrix attempt fails with a credit-limit error ("Limit exceeded" or equivalent) instead of a matchStatus response, the MCP retry matrix is DEAD for the session. Do NOT keep burning attempts. Do NOT fall straight to dominant-pattern. Switch to the ZoomInfo web app in Chrome:
+
+1. Navigate to `https://app.zoominfo.com/#/apps/profile/person/<personId>` when discovery (search_contacts) already captured the candidate's ZoomInfo personId. Discovery IDs are free; capture them in Step 1B for exactly this reason.
+2. No personId: navigate to the company employees page (`https://app.zoominfo.com/#/apps/profile/company/<companyId>/employees`) or use the Quick Search box at the top with the candidate's name, then open their contact profile.
+3. Pull from the Contact Details panel: Emails and Phone numbers. The phone entry tagged (M) is the mobile. The entry tagged (HQ) is the company switchboard -- NEVER write it to `phone` or `mobilephone`.
+4. All email-resolution rules still apply. HubSpot-first wins. If the ZI web address deviates from the engagement-verified company pattern (e.g., `friedrich.s@` vs verified `first.last@`), choose the pattern address and write the ZI address to `hs_additional_emails` plus the ALT EMAIL note line. If the ZI web address matches the pattern, use it directly and log `EMAIL RESOLUTION: zoominfo-full-match` noting it came from the web app.
+5. If the ZI web app has no record of the person at the company (common for hires within the last ~6 months -- ZI lags job changes): fall back to HubSpot existing email OR dominant company pattern, and log that.
+6. Log in the strategy note's ZI ATTEMPTS block verbatim, e.g.: `1. enrich_contacts personId=... -> CREDIT_LIMIT; switched to ZoomInfo web app -> email + mobile found`.
+
+**Why this rule exists:** 2026-06-03, Index Exchange Company Mode hit "Limit exceeded" on the first enrichment call. Andy's standing instruction: when MCP credits are gone, open ZoomInfo in Chrome and pull the emails and phone numbers from the web UI instead. The web app delivered verified emails and mobiles for five of seven Yes verdicts that session. Overnight/scheduled fires are retired as of 2026-06-03, so this fallback applies in every session without a prompt-risk carve-out.
 
 ### Results mapping (after FULL_MATCH)
 - Email found -> HubSpot `email`.
