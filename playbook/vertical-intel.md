@@ -1,21 +1,30 @@
-# Vertical Intelligence — what to lead with by industry
+# Vertical Intelligence: what to lead with by industry
 
-Read this when picking the OSI angle for a prospect's strategy note or email.
+Single source for per-vertical lead guidance AND the Park Place / Service Express wedge. Both osi-prospect-qualification (strategy notes, call scripts) and osi-outreach-sequence (email drafting) read this file. Do not copy this content into other playbook files. Point to it instead.
 
-## Telco / Service Provider (T-Mobile, AT&T, Verizon, Comcast, Lumen, Zayo, Cox, Charter, etc.)
+## Role and skills decide the lead, not industry
+
+Pick the OSI angle from the person's role and skills first. Vertical is the tie-breaker, not the rule.
+- Network / transport engineer, architect, or optics-heavy skills: free optic sample, in any industry.
+- Systems / infrastructure / server admin: free DIMM sample.
+- Storage admin / engineer: pre-owned NetApp + TPM.
+- Procurement, IT asset manager, IT director, DC manager, or anyone who looks like they own the maintenance contract: lead with TPM, in ANY vertical, banks included. Use the Park Place wedge below if they have an incumbent TPM provider.
+
+The old "banks never get TPM" rule is gone. At a bank, a network engineer still gets optics, but a procurement lead or the person calling the shots on maintenance gets TPM.
+
+## Telco / Service Provider (T-Mobile, AT&T, Verizon, Comcast, Lumen, Zayo, Cox, Charter)
 **Lead:** optics, ZR/ZR+ coherent, DWDM open line systems.
 **Pain:** OEM lead times stalling 400G/800G core refreshes. Cisco / Lumentum slipping on coherent.
-**Do NOT:** open with free SFPs at scale. Telcos deal in volume — lead with supply chain reliability and technical credibility.
+**Do NOT:** open with free SFPs at scale. Telcos deal in volume, lead with supply chain reliability and technical credibility.
 **TPM note:** rarely the engineer-level opener. Decisions sit at director.
 
 ## Large Banks / Financial Institutions (BofA, Citi, JPMorgan, Goldman, Wells Fargo, BNY, Morgan Stanley)
-**Lead:** optics. Free SFP offer is the right foot in the door.
-**Do NOT:** lead with TPM. Banks often already have TPM (Park Place, Service Express, Curvature, Iron Bow). Engineer rarely controls maintenance contract.
-**TPM as upsell only:** after relationship exists, ask about non-critical gear (branch switches, test labs, dev environments, gear coming off SmartNet).
-**If known TPM provider:** flag in verdict, use Park Place/Service Express merger wedge below.
+**Engineer / optics-fit role:** optics. Free SFP offer is the foot in the door.
+**Procurement or maintenance-contract owner:** lead with TPM. If they have an incumbent (Park Place, Service Express, Curvature, Iron Bow), use the wedge below.
+**"VP" at banks is a job grade, not seniority.** Verify with skills + trajectory before treating as a decision-maker.
 
 ## Professional Services / Consulting (KPMG, Deloitte, EY, PwC, Accenture)
-**Lead:** TPM is viable opener. Cost-sensitive, less regulatory-constrained than banks.
+**Lead:** TPM is a viable opener. Cost-sensitive, less regulatory-constrained than banks.
 **Frame:** lead with pain, not "we save 40-60%." Focus on SmartNet costs on gear running fine for years.
 **Also strong:** free optics for break-glass sparing.
 
@@ -27,21 +36,34 @@ Read this when picking the OSI angle for a prospect's strategy note or email.
 **Lead:** uptime + compliance. TPM with documented SLAs. DIMMs for refresh.
 **Differentiator:** OSI is Gartner-recognized, privately owned, no PE pressure. Engineering continuity matters here.
 
+## Quebec / French-Canadian financial institutions (Desjardins, National Bank of Canada, Hydro-Quebec, Bell Canada, Videotron, Cogeco)
+Search keywords are bilingual. See osi-prospect-qualification for the French keyword list.
+ZoomInfo is unreliable here. Keyword matching returns branch network and distribution roles, not IT. Use LinkedIn directly.
+
 ## Park Place / Service Express merger wedge
 
-Use when prospect already has Park Place, Service Express, Curvature, etc. as their TPM provider:
+Use when the prospect already has Park Place, Service Express, Curvature, or Iron Bow as their TPM provider.
 
+**Conversation opener (verbatim, Andy-defensible):**
 > "With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
 
-OSI competitive positioning vs. Park Place/Service Express:
-- Privately owned. No PE margin pressure on rates or staffing.
-- No M&A disruption.
+**OSI competitive positioning vs Park Place / Service Express:**
+- Independently owned and privately held. No PE margin pressure on rates or staffing.
+- No red tape on SLAs. No corporate approval chain or PE quarterly target sitting between us and the commitment we made. We just honor it.
+- Private equity shifts a support organization's focus from clients to profits. The priority moves from SLAs to margins. We are not going to reorganize around a fund's exit timeline.
+- No M&A disruption. Engineering team is intact.
 - Gartner-recognized.
 - Multi-vendor: Cisco, Dell, HP, NetApp, Juniper, Arista.
 - Will competitive-bid against the existing provider.
 
-## TPM positioning when status unknown
+**Andy-defensible framing:**
+> "The merger between Park Place and Service Express has a lot of PE money behind it. That changes the priorities of a support organization. The focus moves from SLAs to margins. We hit 98 percent of our SLAs in 2025, we spare transparently, and if you decommission hardware mid-contract we give you a credit for the time left. We are not going to reorganize around a fund's exit timeline."
 
-- **Banks:** optics opener, TPM is second conversation.
+**Rules:**
+- The angle is service risk, not price. Do NOT position on price ("we're cheaper than Park Place").
+- 98 percent SLA figure is 2025 data. Verify annually.
+
+## TPM positioning when status unknown
+- **Banks:** optics for engineers, TPM for procurement / contract owners.
 - **Consulting:** TPM can open. Lead with pain, not savings %.
 - **Manufacturing / general enterprise:** TPM is strong. Hook = aging gear and OEM end-of-life.

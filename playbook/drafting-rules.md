@@ -157,7 +157,7 @@ Use these as Email 1 frames (one per email per Surgical Isolation):
 - **Grey market vs engineered product** , our optics come from an engineering organization, not commodity factories.
 - **400G upgrade path** , many accounts still running 100G with no plan, lead with the cost-controlled path forward.
 - **Vendor-agnostic / multi-vendor support** , one TPM contract covering Cisco, Dell, HP, NetApp, Juniper, Arista.
-- **Park Place / Service Express merger wedge** , see Section 6.
+- **Park Place / Service Express merger wedge** , see `playbook/vertical-intel.md`.
 - **VMware / Broadcom licensing squeeze** , 3 to 5x license increases, position OSI savings as found money to offset.
 - **AI infrastructure tailwind** , GPU buildouts under-fund the network. Use only when there's confirmed AI signal on the prospect's profile or company.
 - **Energy cost / power efficiency** , SmartOptics draws less power and less rack space than incumbent DWDM. Use only with DC operators.
@@ -166,64 +166,15 @@ Use these as Email 1 frames (one per email per Surgical Isolation):
 
 ## SECTION 5, VERTICAL INTEL
 
-### Telco / Service Provider
-Companies: T-Mobile, AT&T, Verizon, Comcast, Lumen, Zayo, Cox, Charter.
-Lead: optics, ZR/ZR+ coherent, DWDM open line systems.
-Pain: OEM lead times stalling 400G and 800G core refreshes.
-Do NOT: open with free SFPs at scale. Telcos deal in volume. Lead with supply chain reliability and technical credibility.
-TPM note: rarely the engineer-level opener. Decisions sit at director.
+Vertical lead guidance is single-sourced in `C:\Claude-Brain\playbook\vertical-intel.md`. Read it before picking the lead. Do not restate it here.
 
-### Large Banks / Financial Institutions
-Companies: BofA, Citi, JPMorgan, Goldman, Wells Fargo, BNY, Morgan Stanley.
-Lead: optics. Free SFP offer is the right foot in the door.
-Do NOT: lead with TPM. Banks usually have TPM already (Park Place, Service Express, Curvature, Iron Bow). The engineer rarely controls the maintenance contract.
-TPM as upsell only after relationship exists. Ask about non-critical gear (branch switches, test labs, dev environments, gear coming off SmartNet).
-"VP" at banks is a job grade, not a seniority indicator. Verify with skills + trajectory before treating as decision-maker.
-
-### Professional Services / Consulting
-Companies: KPMG, Deloitte, EY, PwC, Accenture.
-Lead: TPM is viable as opener. Cost-sensitive, less regulatory-constrained than banks.
-Frame: lead with pain, not "we save 40 to 60 percent." Focus on SmartNet costs on gear running fine for years.
-Also strong: free optics for break-glass sparing.
-
-### Manufacturing
-Companies: Forest River, Precision Castparts, Koch, PACCAR.
-Lead: free optics as break-glass insurance. Limited budgets, high uptime requirements, small IT staff.
-Also strong: TPM for aging Cisco gear past OEM support.
-
-### Healthcare
-Companies: hospital systems, health networks, pharma.
-Lead: uptime and compliance. TPM with documented SLAs. DIMMs for refresh.
-Differentiator: privately owned, no PE pressure. Engineering continuity matters here.
-
-### Quebec / French-Canadian financial institutions
-Companies: Desjardins, National Bank of Canada, Caisse Desjardins, Hydro-Quebec, Bell Canada, Videotron, Cogeco.
-Search keywords are bilingual. See `osi-prospect-qualification` for French keyword list.
-ZoomInfo is unreliable for these companies. Their keyword matching returns branch network and distribution roles, not IT. Use LinkedIn directly.
+Key principle: role and skills decide the lead, not industry. Network / optics roles get optics in any vertical. Procurement and maintenance-contract owners get TPM in any vertical, banks included. The old "banks never get TPM" rule is gone.
 
 ---
 
 ## SECTION 6, PARK PLACE / SERVICE EXPRESS MERGER WEDGE
 
-Use when prospect is currently with Park Place, Service Express, Curvature, or Iron Bow.
-
-**Conversation opener (verbatim, Andy-defensible):**
-> "With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
-
-**OSI competitive positioning vs Park Place / Service Express:**
-- Privately owned. No PE margin pressure on rates or staffing.
-- No M&A disruption. Engineering team is intact.
-- Gartner-recognized.
-- Multi-vendor: Cisco, Dell, HP, NetApp, Juniper, Arista.
-- Will competitive-bid against the existing provider.
-
-**Andy-defensible framing:**
-> "The merger between Park Place and Service Express has a lot of PE money behind it. That changes the priorities of a support organization. The focus moves from SLAs to margins. We hit 98 percent of our SLAs in 2025, we spare transparently, and if you decommission hardware mid-contract we give you a credit for the time left. We are not going to reorganize around a fund's exit timeline."
-
-Rules:
-- Do NOT position against other TPM providers on price. Don't say "we're cheaper than Park Place."
-- The angle is service risk, not price.
-- 98 percent SLA figure is 2025 data. Verify annually.
+Single-sourced in `C:\Claude-Brain\playbook\vertical-intel.md` under "Park Place / Service Express merger wedge". Use it when the prospect's current TPM is Park Place, Service Express, Curvature, or Iron Bow. The angle is service risk, not price: independently owned, no red tape on SLAs, and PE pressure pushes incumbents toward margins over clients.
 
 ---
 

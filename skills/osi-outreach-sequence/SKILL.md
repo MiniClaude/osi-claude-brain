@@ -73,7 +73,9 @@ ToolSearch({ query: "select:mcp__Claude_in_Chrome__tabs_context_mcp,mcp__Claude_
 
 Before drafting any email, **Read `C:\Claude-Brain\playbook\drafting-rules.md` in full**. This is non-negotiable. Do NOT rely on training data.
 
-After reading drafting-rules.md, proceed below.
+Also **Read `C:\Claude-Brain\playbook\vertical-intel.md` in full** before drafting. It is the single source for per-vertical lead guidance and the Park Place / Service Express wedge (drafting-rules.md only points to it). Core rule: role and skills decide the lead, not industry. Optics-fit roles get optics in any vertical. Procurement and maintenance-contract owners get TPM in any vertical, banks included.
+
+After reading both, proceed below.
 
 ---
 
@@ -197,7 +199,7 @@ Read `state.stagger[company_name]` from `C:\Claude-Brain\overnight-candidates.js
 | `5` | `last_day1` + 10 business days (cooling gap) |
 | `6+` | `last_day1` + 4 business days |
 
-Day 1 is the date Andy should enroll the contact in the HubSpot sequence. The LINKED_IN_CONNECT task is due on this date — when Andy sees it in his task queue, that is his cue to enroll.
+Day 1 is the date Andy should enroll the contact in the HubSpot sequence. The LINKED_IN_CONNECT task is due on this date. When Andy sees it in his task queue, that is his cue to enroll.
 
 Skip weekends + holidays. Holiday list: `Claude-Brain/holidays.json`. Fallback: US federal holidays + Good Friday + Black Friday + Christmas Eve + New Year's Eve.
 
@@ -366,7 +368,7 @@ Andy
 For every email body, answer these six questions before sanitizing:
 
 1. Does the first line after the greeting reference the prospect, not OSI? (Email 1 only)
-2. Is the Personal Hook from the strategy note in this email? (Email 1 only — if hook is thin, ABORT and flip to `pending-needs-hook`)
+2. Is the Personal Hook from the strategy note in this email? (Email 1 only. If hook is thin, ABORT and flip to `pending-needs-hook`)
 3. Is there exactly ONE product line in this email?
 4. Did I name SmartOptics? (must be no for cold)
 5. Did I claim OSI manufactures? (must be no)
