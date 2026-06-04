@@ -2,6 +2,9 @@
 
 **Read this file inline as Step 0 before drafting ANY outbound copy.** Email body, subject, LinkedIn invite, LinkedIn InMail, voicemail script, call opener, anything that goes to a prospect.
 
+> ## 🚨 NEVER PUT AN EM-DASH IN AN EMAIL. NOT ONCE. NOT EVER. 🚨
+> When you draft any email body or subject line, the em-dash (U+2014) and the en-dash (U+2013) are forbidden. Zero. If you are about to type a dash that joins two thoughts, STOP: use a period and start a new sentence, or use a comma. Every email is sanitized and validated for this before it is queued or written to HubSpot, and an email containing an em-dash never goes out. This is the single most important formatting rule on this page. Andy has said it more than once: no em-dashes in emails, ever.
+
 This file replaces scattered references to:
 - `playbook/voice-rules.md` (consolidated here)
 - `playbook/product-lines.md` (consolidated here)

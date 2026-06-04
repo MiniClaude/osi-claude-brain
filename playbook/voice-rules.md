@@ -14,7 +14,7 @@ Read this when drafting emails, LinkedIn messages, voicemail scripts, or any out
 
 - **Banned vocabulary:** crucial, pivotal, landscape, underscore, delve, showcase, testament, enhance, foster, garner. Cut or replace.
 - **No hyphens** in bodies or subject lines. "end of life" not "end-of-life", "third party" not "third-party", "24/7/365" not "24-hour".
-- **No em-dashes (U+2014)** anywhere. Split into two sentences.
+- **No em-dashes (U+2014). Not once, not ever.** When drafting an email, never put an em-dash in the body or subject line. Split into two sentences instead, or use a comma. An email with an em-dash does not get sent.
 - **No rule of three.** Break three-item lists into prose.
 - **No -ing pile-ups** at sentence ends. Kill "ensuring uptime", "highlighting our advantage", "reflecting market shifts".
 - **No negative parallelisms.** Remove "it's not just X, it's Y" constructions.
