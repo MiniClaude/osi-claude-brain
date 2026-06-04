@@ -140,7 +140,7 @@ def is_teams_meeting(call_props: dict) -> tuple[bool, str]:
 
 ### Step 2, For each call, find associated contacts
 
-Use `search_crm_objects({objectType: "contacts", filterGroups: [{associatedWith: [{objectType: "calls", operator: "EQUAL", objectIdValues: [callId]}]}]})` to get attendees. Filter out OSI domain emails (`@osiglobal.com`), primary contact is the non-OSI one. If multiple non-OSI contacts on a call, use the one whose company matches the meeting title best, then fall back to the first.
+Use `search_crm_objects({objectType: "contacts", filterGroups: [{associatedWith: [{objectType: "calls", operator: "EQUAL", objectIdValues: [callId]}]}]})` to get attendees. Filter out OSI domain emails (`@osihardware.com` or `@osiglobal.com`), primary contact is the non-OSI one. If multiple non-OSI contacts on a call, use the one whose company matches the meeting title best, then fall back to the first.
 
 ### Step 3, Find recap email in Outlook
 

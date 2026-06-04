@@ -515,7 +515,7 @@ def sanitize_body(text: str, email_index: int) -> str:
             r"\n*\s*-{5,}\s*On .* wrote\s*-{5,}",
             r"\nOn .*,? .* (?:McLean )?(?:wrote|wrote:)",
             r"\n>+ ",
-            r"\nFrom: Andrew McLean",
+            r"\nFrom: Brian Charrette",
         ]
         for m in markers:
             match = re.search(m, text)

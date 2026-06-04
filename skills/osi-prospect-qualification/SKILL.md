@@ -1150,7 +1150,7 @@ OPENER: [full opener from playbook/opener-library.md, or custom if HOOK is stron
 15s max. One voicemail, never two. Hook drawn from Personal Hook. Name Email 1 subject. End with "that's bc at osihardware dot com." No phone number. Present/future tense only.
 
 ```
-"Hey [Name], Brian with OSI Global. [One-sentence hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's andy at osiglobal dot com."
+"Hey [Name], Brian with OSI Global. [One-sentence hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's bc at osihardware dot com."
 ```
 
 ### 4. LinkedIn Invite

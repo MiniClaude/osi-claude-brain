@@ -215,7 +215,7 @@ VM: [One line. 15 seconds max. One-sentence hook. "I'm sending you something rig
 
 One voicemail. Never two. 15 seconds max. Reference hook. Name Email 1 subject line. End with Brian's email address spelled audibly ("that's bc at osihardware dot com"). No phone number. Always present or future tense ("I'm sending" or "I'm about to send"). Never past tense.
 
-"Hey [Name], Brian with OSI Global. [One sentence hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's andy at osiglobal dot com."
+"Hey [Name], Brian with OSI Global. [One sentence hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's bc at osihardware dot com."
 
 ---
 

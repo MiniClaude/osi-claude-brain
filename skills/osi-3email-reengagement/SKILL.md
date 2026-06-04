@@ -315,7 +315,7 @@ VM: [One line. 15 seconds max. One-sentence new hook. "I'm sending you something
 
 One voicemail. Never two. 15 seconds max. They know who Brian is. Lead with the new hook. Name Email 1 subject line. End with Brian's email address spelled audibly ("that's bc at osihardware dot com"). No phone number. Always present or future tense. Never past tense.
 
-"Hey [Name], Brian with OSI Global. [One sentence new hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's andy at osiglobal dot com."
+"Hey [Name], Brian with OSI Global. [One sentence new hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's bc at osihardware dot com."
 
 ---
 
@@ -414,7 +414,7 @@ def sanitize_body(text: str, email_index: int) -> str:
             r"\n*\s*-{5,}\s*On .* wrote\s*-{5,}",
             r"\nOn .*,? .* (?:McLean )?(?:wrote|wrote:)",
             r"\n>+ ",
-            r"\nFrom: Andrew McLean",
+            r"\nFrom: Brian Charrette",
         ]
         for m in markers:
             match = re.search(m, text)
