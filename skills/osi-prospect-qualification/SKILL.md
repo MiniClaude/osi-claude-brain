@@ -1,6 +1,6 @@
 ---
 name: osi-prospect-qualification
-description: Qualify LinkedIn prospects for OSI Global. Use whenever Andy pastes a LinkedIn profile URL, asks "good target?", "is this worth an InMail?", or asks to evaluate any LinkedIn profile against OSI's product lines. Also triggers when reviewing prospect lists, when Andy says "find me prospects at [company]", "sequence this company", "find me cold companies", "sweep my accounts", or any variation of company-level prospecting. Should run automatically whenever a LinkedIn profile or company prospecting request appears in conversation, even without explicit ask.
+description: Qualify LinkedIn prospects for OSI Global. Use whenever Andy pastes a LinkedIn profile URL, asks "good target?", "is this worth an InMail?", or asks to evaluate any LinkedIn profile against OSI's product lines. Also triggers when reviewing prospect lists, when Andy says "find me prospects at [company]", "sequence this company", "find me cold companies", "sweep my accounts", or any variation of company-level prospecting. Also triggers on "process my enroll tasks", "check my enroll tasks", "run my enroll tasks" for HubSpot Task Mode batch enrollment from "Enroll in sequence" / "3 email sequence" to-do tasks. Should run automatically whenever a LinkedIn profile or company prospecting request appears in conversation, even without explicit ask.
 ---
 
 > Source: `C:\Claude-Brain\skills\osi-prospect-qualification\` (Git, github.com/Drrewdy/Claude-Brain). Edit source, repackage, install.
@@ -1264,6 +1264,53 @@ wb.save(r'C:\Claude-Brain\prospects-tracker-new.xlsx')
 ```
 
 Default batch: 3 companies per session unless Andy specifies otherwise or says "keep going". Within each company: NO CAP -- find everyone worth contacting.
+
+## MODE 4: HubSpot Task Mode -- batch enrollment from to-do tasks
+Trigger: Andy says "process my enroll tasks", "check my enroll tasks", "run my enroll tasks", or any reference to his HubSpot "Enroll in sequence" / "3 email sequence" to-do tasks.
+
+Andy tags a contact for outreach by creating a TODO task on the contact in HubSpot. The task SUBJECT is the routing instruction. Two subjects:
+
+| Task subject | Treatment | Handoff target |
+|---|---|---|
+| **Enroll in sequence** | Full 6-email sequence, full research per this skill | `osi-outreach-sequence` |
+| **3 email sequence** | Shorter 3-email treatment | `osi-3email-new` |
+
+The contact association carries all the context. Andy does NOT put the name or company in the task title -- pull everything from the associated contact.
+
+🚨 **HARDWIRED RULE -- ANDY'S TASKS ONLY (owner ID 196669355).** Match tasks owned by Andy and nobody else. Never pick up tasks owned by Mark (210187184) or John (210187193).
+
+🚨 **NO "READY" GATE. NO APPROVAL PROMPTS.** Andy decided by tagging the task. Run fully automated, per-contact, immediate handoff. Every HubSpot write uses `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. Never filter by priority -- Andy leaves it blank. Match on subject + owner + not-completed only.
+
+### Step by step
+
+1. **Find the tasks.** `search_crm_objects` on tasks with filters: `hs_task_subject` IN ("Enroll in sequence", "3 email sequence") AND `hs_task_status` != "COMPLETED" AND `hubspot_owner_id` = 196669355. Match the subject case-insensitively. Record each task's `hs_object_id` and its subject (the subject decides routing).
+
+2. **Pull the associated contact** for each task: first name, last name, job title, company, email, phone, mobile, timezone, LinkedIn URL, and existing strategy note. If a task has no contact association, skip it and note "no contact association" in the final summary. Do NOT complete an unassociated task.
+
+3. **Active sequence check.** For each contact, check whether a sequence is already running (active enrollment, or pending entries keyed by email OR prospectName + company per the existing dedupe rules). If already enrolled, mark the task COMPLETED with note "Already enrolled -- skipped" and move on. Do NOT re-enroll.
+
+4. **Full qualification (Andy's normal flow -- no shortcut).** Run the standard Profile Mode qualification on the contact's LinkedIn URL: verify current employer (Path A LinkedIn read, Path B fallback per the NO-EMPLOYER-VERIFICATION rule), three-point check, ZoomInfo enrichment via the full 7-attempt retry matrix, strategy note, LINKED_IN_CONNECT task. This is governed by every rule in this skill -- Task Mode does not bypass employer verification, the ZI matrix, HubSpot-first email resolution, or the read-back transaction (Steps 1-3.5).
+   - If a current, complete strategy note already exists from a recent qualification, you may reuse its Personal Hook + SEQUENCE label rather than re-reading LinkedIn from scratch -- but the employer-verification and active-sequence checks still run.
+   - If qualification returns **No** or **Conditional**: mark the task COMPLETED with note "Not qualified -- [reason]" and move on. No handoff.
+
+5. **Route the handoff by task subject** (one qualified Yes-with-email contact at a time -- IMMEDIATE HANDOFF, NO BATCHING, same rule as Company Mode):
+   - Subject was **"Enroll in sequence"** -> `HANDOFF: invoke osi-outreach-sequence on [First Last] at [Company].`
+   - Subject was **"3 email sequence"** -> `HANDOFF: invoke osi-3email-new on [First Last] at [Company].`
+   The outreach skill owns stagger math, drafting, queue/AI-field writes, and the LINKED_IN_CONNECT due-date update. Do not draft emails here.
+
+6. **No email after the full ZI matrix:** do NOT hand off. The 2 LinkedIn InMail fallback tasks + LINKED_IN_CONNECT task + strategy note ARE the plan (existing rule). Mark the enroll task COMPLETED with note "No email -- LinkedIn fallback created."
+
+7. **Complete the task.** After the outreach skill confirms enrollment (or a fallback disposition above is applied), mark the source task COMPLETED via `manage_crm_objects` updateRequest (`hs_task_status: "COMPLETED"`, `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`). A processed task must never stay open, or it gets re-picked next run.
+
+8. **Final summary** to Andy:
+   - Enrolled (6-email): [N] -- names + companies
+   - Enrolled (3-email): [N] -- names + companies
+   - Already in sequence -- skipped: [N] -- names
+   - Not qualified -- skipped: [N] -- names + reason
+   - No email -- LinkedIn fallback: [N] -- names
+   - No contact association -- left open: [N] -- task IDs
+
+Multiple people from the same company are expected. Stagger math is handled by the outreach skill after each handoff, per the same-company stagger metadata.
 
 ## EXCEL TRACKER -- log every Company Mode session
 
