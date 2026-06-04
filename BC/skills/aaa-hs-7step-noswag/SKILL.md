@@ -27,7 +27,7 @@ All 7 emails are fully personalized and researched. No fixed templates. Saves al
 ## Step 1 — Gather Prospect Info
 
 Ask Brian for or extract from what he pasted:
-- Full name
+- Full name (capture the first name separately, it is required for the email greeting in Step 5)
 - Title
 - Company and domain
 - Email address (required — see Step 1a)
@@ -118,7 +118,9 @@ Capture:
 
 ## Step 5 — Write All 7 Emails (Fully Personalized)
 
-Brian's voice: direct, no-nonsense, outcomes over transactions, zero corporate fluff. Short. Mobile-friendly. Scannable in 10 seconds. No signature block — Brian's Outlook sig or HubSpot template handles that.
+Brian's voice: direct, no-nonsense, outcomes over transactions, zero corporate fluff. Short. Mobile-friendly. Scannable in 10 seconds. No signature block, Brian's Outlook sig or HubSpot template handles that.
+
+🚨 **GREETING: every email opens with the prospect's real first name.** Every one of the 7 emails starts with `Hi [First Name],` on its own line, where [First Name] is the prospect's ACTUAL first name from the HubSpot `firstname` field (or LinkedIn / Brian's input). Substitute the real name into the text BEFORE writing the body. NEVER leave a literal `[First Name]` token in the email, and NEVER write an empty greeting like `Hi ,`. If the first name is blank or unknown, STOP and resolve it (re-read the HubSpot contact, the LinkedIn profile, or ask Brian) before writing any email. After the greeting line, continue with the email's opening sentence described below.
 
 ### Email 1 — Curiosity / Teaser Opener
 
@@ -210,6 +212,7 @@ Run every email through this filter. Anything that fails gets rewritten:
 - **No negative parallelisms.** Remove "it's not just X, it's Y."
 - **Vary sentence length.** Mix short punchy sentences with longer ones.
 - **Use is/are/has** instead of "serves as," "stands as," "functions as."
+- **First-name greeting check.** Confirm every email body begins with `Hi [actual first name],` using the prospect's real first name. Reject any email that opens with `Hi ,`, a blank greeting, or a literal `[First Name]` or `[Name]` token. Fix before continuing.
 - **Final read-aloud check.** If it sounds like a press release, rewrite.
 
 ---
@@ -411,7 +414,7 @@ Use `mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects` with an `upd
 - All 7 subjects: the selected subject from the 5 generated options for each email
 - All 7 bodies: the exact personalized body for each email
 
-**Verify after write:** fetch the contact back and confirm `ai_email_subject_1` is populated and `ai_email_body_1` matches the written content. If blank or wrong, retry once. If still fails, tell Brian which fields didn't write.
+**Verify after write:** fetch the contact back and confirm `ai_email_subject_1` is populated and `ai_email_body_1` matches the written content. Also confirm each `ai_email_body_N` opens with the prospect's real first name (a `Hi [First Name],` greeting) and contains no empty `Hi ,` and no unsubstituted `[First Name]` or `[Name]` token. If blank or wrong, retry once. If still fails, tell Brian which fields didn't write.
 
 ### 11a. Confirm
 
