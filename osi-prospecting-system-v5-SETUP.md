@@ -103,13 +103,12 @@ Open `C:\Claude-Brain\CLAUDE.md` and replace every `<<...>>`. Then run the same 
 - `do-not-auto-prospect.json`: companies to keep out of Auto Mode (still prospectable by name).
 
 ### Step 6: Install the skills in Cowork
-Drag each `.skill` file in `C:\Claude-Brain\skills\` into a Cowork chat to install. Core set:
-1. `osi-prospect-qualification.skill`
-2. `osi-outreach-sequence.skill`
-3. `osi-3email-new.skill`
-4. `osi-3email-reengagement.skill`
-Optional add ons: `osi-cold-reengagement`, `osi-job-change-prospecting`, `osi-old-customer-reengagement`.
-Open a fresh session and confirm they appear in the skills list.
+This package ships the two skills that ARE the system. Drag both `.skill` files in `C:\Claude-Brain\skills\` into a Cowork chat to install:
+1. `osi-prospect-qualification.skill` (find, qualify, write the HubSpot strategy note + LinkedIn task)
+2. `osi-outreach-sequence.skill` (draft the 6 emails, write them to the HubSpot AI fields)
+Open a fresh session and confirm both appear in the skills list. That is everything you need to run the full find-to-emails loop.
+
+Optional extras exist (shorter 3 email cadence, re-engagement, job-change scan) but are deliberately not in this package to keep it simple. Ask Andy for them once you are comfortable with the core two.
 
 ### Step 7: Verify Python + openpyxl
 ```bash
@@ -175,7 +174,7 @@ No em-dashes. Not in any email, subject, note, or script. Ever. The drafting rul
 
 ## 9. Optional, legacy laptop sending (most new users skip this)
 
-The original model wrote emails to `email-queue.json` and sent them from a laptop via Outlook web, driven by three scheduled tasks (`osi-email2-rewriter`, `osi-email-sender`, `osi-monitor`). It still works and is useful only if you are migrating an existing queue. A brand new user does not need it. If you do want it, install those three skills, create the scheduled tasks, and add the Claude in Chrome + Outlook web prerequisites back. Otherwise ignore it. The AI fields path in Sections 2 to 5 is the supported workflow.
+An older model sent emails from a laptop via Outlook web, driven by three scheduled tasks (`osi-email2-rewriter`, `osi-email-sender`, `osi-monitor`). It is not in this package on purpose. A new user does not need it. The AI fields path in Sections 2 to 5 is the supported workflow. If you are ever migrating an existing email queue, ask Andy for the legacy skills.
 
 ---
 
