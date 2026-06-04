@@ -200,4 +200,16 @@ The original model wrote emails to `email-queue.json` and sent them from a lapto
 
 ---
 
+## 12. Send feedback (please do this, it makes the next install easier)
+
+When you finish, send a short feedback report back to Andy. The easiest and most useful way: in the SAME Cowork session you used to set this up, paste this prompt:
+
+> "Read our entire setup conversation from the start. Fill in FEEDBACK.md honestly and specifically: total time, time per step, what errored, what was confusing, what was missing from the package, whether the smoke test passed on the first try, and the single change that would have made this easiest. Be blunt."
+
+Claude has the whole session, so it can give a precise account of where you actually got stuck, better than memory. Save the filled `FEEDBACK.md` and send it back to Andy. He feeds it into the system and the next version fixes whatever tripped you.
+
+If you would rather fill it by hand, open `FEEDBACK.md` and answer the questions as you go.
+
+---
+
 Built by Andy McLean (OSI Global). Questions: andy@osiglobal.com.
