@@ -15,7 +15,7 @@ If any required field is missing or wrong, STOP. Research harder, then retry. Do
 | `phone` | ZoomInfo `phone` (direct dial) or existing HubSpot | `+1 (XXX) XXX-XXXX` for US/CA | Hard format |
 | `mobilephone` | ZoomInfo `mobilePhone` ONLY | `+1 (XXX) XXX-XXXX` for US/CA | Hard format. NEVER company switchboard. |
 | `city`, `state` | LinkedIn location field | As shown | Hard |
-| `hs_timezone` | Andy's 6-bucket from LinkedIn city/state | One of: `us_slash_eastern`, `us_slash_central`, `us_slash_mountain`, `us_slash_pacific`, `us_slash_alaska` (US Alaska), `canada_slash_atlantic` (Canada Atlantic). Outside these six → closest match. Never use city-specific values. | Hard |
+| `hs_timezone` | Brian's 6-bucket from LinkedIn city/state | One of: `us_slash_eastern`, `us_slash_central`, `us_slash_mountain`, `us_slash_pacific`, `us_slash_alaska` (US Alaska), `canada_slash_atlantic` (Canada Atlantic). Outside these six → closest match. Never use city-specific values. | Hard |
 | `hs_linkedin_url` | Sales Nav URL (`linkedin.com/sales/lead/[ID]/`) OR `linkedin.com/in/...` | Full URL | Hard |
 
 ## Phone format

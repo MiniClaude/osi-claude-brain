@@ -1,13 +1,13 @@
 ---
 name: osi-email-task-drafts
-description: Auto-draft reply emails for every HubSpot email task that is due today or overdue for Andy. For each task, identifies the associated contact, reads the FULL HubSpot engagement history (meeting notes, emails, calls), checks for a fresh external hook via one targeted web search, and drafts a thread-matched reply in Andy's voice. Drafts are written into the task's notes field so Andy can review and send. Skips outreach-sequence auto-tasks (generic "Send follow-up email" with empty body), those are handled by osi-outreach-sequence. Trigger on "run email tasks", "draft my email tasks", "write drafts for email tasks", "do my follow-ups", or when Andy asks you to go through email tasks due.
+description: Auto-draft reply emails for every HubSpot email task that is due today or overdue for Brian. For each task, identifies the associated contact, reads the FULL HubSpot engagement history (meeting notes, emails, calls), checks for a fresh external hook via one targeted web search, and drafts a thread-matched reply in Brian's voice. Drafts are written into the task's notes field so Brian can review and send. Skips outreach-sequence auto-tasks (generic "Send follow-up email" with empty body), those are handled by osi-outreach-sequence. Trigger on "run email tasks", "draft my email tasks", "write drafts for email tasks", "do my follow-ups", or when Brian asks you to go through email tasks due.
 ---
 
 > **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-email-task-drafts\` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub. If returning after days away, run `git pull` first to get the latest, then check the local Cowork copy and re-install the `.skill` file if the source has drifted.
 
 # OSI Email Task Drafts
 
-Fully automated draft-generator for Andy's HubSpot email tasks. Run this whenever Andy says "run email tasks" (or equivalent). It sweeps all email tasks due today or overdue, pulls the current state of each contact's relationship from HubSpot engagements, writes thread-matched drafts directly into the HubSpot task notes, and reports back.
+Fully automated draft-generator for Brian's HubSpot email tasks. Run this whenever Brian says "run email tasks" (or equivalent). It sweeps all email tasks due today or overdue, pulls the current state of each contact's relationship from HubSpot engagements, writes thread-matched drafts directly into the HubSpot task notes, and reports back.
 
 ---
 
@@ -50,7 +50,7 @@ If `ValueError` raises: rewrite and re-validate. Do NOT write a failing draft in
 
 ### Rule 2, READ the full engagement history. Strictly.
 
-Andy's words: *"READ THE FUCKING OLDER EMAILS, CALLS AND MEETINGS. STRICT, SEE WHAT IS HAPPENING."*
+Brian's words: *"READ THE FUCKING OLDER EMAILS, CALLS AND MEETINGS. STRICT, SEE WHAT IS HAPPENING."*
 
 Pull 15 each of EMAIL / CALL / NOTE and 10 MEETING_EVENT records for the contact. Then **call `get_crm_objects` on each and read the full body text end-to-end**, not titles, not snippets, not just the 3 most recent. Also pull 5 most recent company-level engagements for colleague context.
 
@@ -80,20 +80,20 @@ If the contact has no engagement history in HubSpot AND no fresh external hook s
 - "go through my email tasks"
 - "email task drafts"
 
-Also after the morning monitor when Andy's ready to work through follow-ups.
+Also after the morning monitor when Brian's ready to work through follow-ups.
 
 ---
 
 ## Scope (default)
 
 **Included:**
-- Andy's email tasks (ownerId `213536174`) that are `NOT_STARTED` with `hs_timestamp <= end of today` (due today OR overdue)
+- Brian's email tasks (ownerId `213536174`) that are `NOT_STARTED` with `hs_timestamp <= end of today` (due today OR overdue)
 - Custom tasks with specific subjects
 
 **Excluded:**
 - Generic `"Send follow-up email"` tasks with empty `hs_task_body`, these are from `osi-outreach-sequence` and already have pre-scheduled Outlook drafts.
 
-**Overwrite rule:** Tasks that already have a draft in `hs_task_body` are NOT excluded. The skill always produces a fresh draft and overwrites whatever is there. Previous drafts (auto or manual) will be replaced. Andy's expectation: the draft in the task is always the current one, built from the latest HubSpot history and today's fresh-hook search. If Andy wants to preserve a specific draft, he sends the email (or marks the task complete) before re-running the skill.
+**Overwrite rule:** Tasks that already have a draft in `hs_task_body` are NOT excluded. The skill always produces a fresh draft and overwrites whatever is there. Previous drafts (auto or manual) will be replaced. Brian's expectation: the draft in the task is always the current one, built from the latest HubSpot history and today's fresh-hook search. If Brian wants to preserve a specific draft, he sends the email (or marks the task complete) before re-running the skill.
 
 ---
 
@@ -101,7 +101,7 @@ Also after the morning monitor when Andy's ready to work through follow-ups.
 
 ### Step 1, Pull tasks
 
-Andy's `ownerId` is `213536174`. Today's date comes from `<env>`.
+Brian's `ownerId` is `213536174`. Today's date comes from `<env>`.
 
 ```
 search_crm_objects(
@@ -164,13 +164,13 @@ Give each agent this prompt (substitute the batch's task list):
 >
 >    ```
 >    THREAD ANCHOR for [Contact Name] at [Company]:
->    LAST OUTBOUND (Andy → Contact): [date] | Subject: "[subject]" | Body (first 300 chars): "[text]"
->    LAST INBOUND (Contact → Andy): [date] | Subject: "[subject]" | Body (first 200 chars): "[text]", OR "no reply on record"
+>    LAST OUTBOUND (Brian → Contact): [date] | Subject: "[subject]" | Body (first 300 chars): "[text]"
+>    LAST INBOUND (Contact → Brian): [date] | Subject: "[subject]" | Body (first 200 chars): "[text]", OR "no reply on record"
 >    LAST NOTE/CALL: [date] | [1-line summary of topic/disposition]
 >    ```
 >
 >    **Rules for this block:**
->    - Pull the most recent EMAIL where `hs_email_direction = OUTGOING` for LAST OUTBOUND. This is the last thing Andy actually sent. The draft must continue this thread.
+>    - Pull the most recent EMAIL where `hs_email_direction = OUTGOING` for LAST OUTBOUND. This is the last thing Brian actually sent. The draft must continue this thread.
 >    - If no outbound email exists in HubSpot: write thin-context fallback + ⚠️ NO OUTBOUND EMAIL FOUND. Do not invent thread context.
 >    - **SELF-CHECK before proceeding:** Does the subject and body of the LAST OUTBOUND match the topic you are about to draft? If not, stop, re-read the history, find the correct email. A draft about optics samples when the last outbound was about an NDA is wrong. A draft about TPM when the last outbound was about DIMMs is wrong. Fix the anchor, then draft.
 >    - The "Last engagement" line in the final draft format MUST be copied verbatim from this anchor block, specifically from LAST OUTBOUND. Not from a call. Not from a note. The outbound email is the thread anchor.
@@ -186,7 +186,7 @@ Give each agent this prompt (substitute the batch's task list):
 >
 >    If your inventory has **2+ specifics** (HubSpot history + fresh hook both count), you can write a full substantive draft weaving them in. If it has fewer, write the shorter thin-context fallback + ⚠️ flag, do NOT invent specifics.
 >
-> 7. **Draft a reply in Andy's voice that continues the LAST OUTBOUND thread.** The draft picks up exactly where the last outbound left off, same topic, same thread, next logical message. Match the formality/length/tone of the conversation so far. NEVER draft from the task title. NEVER pivot to a different product line or topic than what the last outbound established unless the contact explicitly changed the subject in their reply.
+> 7. **Draft a reply in Brian's voice that continues the LAST OUTBOUND thread.** The draft picks up exactly where the last outbound left off, same topic, same thread, next logical message. Match the formality/length/tone of the conversation so far. NEVER draft from the task title. NEVER pivot to a different product line or topic than what the last outbound established unless the contact explicitly changed the subject in their reply.
 >
 > 8. Write to `hs_task_body` via `manage_crm_objects` updateRequest, `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. **OVERWRITE** the body with the fresh draft. Do not append, do not preserve the prior draft. The task body after this write should contain ONLY the fresh draft, nothing else. If the task had a previous draft, note that in the output status (`drafted (overwrote previous)`) but do not keep any of the prior content.
 >
@@ -195,7 +195,7 @@ Give each agent this prompt (substitute the batch's task list):
 > <div dir="auto"><p style="margin:0;"><strong>DRAFT (auto-generated {today}, based on HubSpot engagement history):</strong></p><p style="margin:0;"><em>Last outbound: {LAST OUTBOUND date}, "{LAST OUTBOUND subject}", {first 80 chars of outbound body}</em></p><p style="margin:0;"><br></p><p style="margin:0;">Subject: [subject line]</p><p style="margin:0;"><br></p><p style="margin:0;">Hi [Name],</p><p style="margin:0;"><br></p><p style="margin:0;">[body]</p></div>
 > ```
 >
-> The "Last outbound" line is copied from the THREAD ANCHOR block (step 5). It must show the actual last email Andy sent, not a call or note. This lets Andy verify at a glance that the draft is on the right thread before he opens it.
+> The "Last outbound" line is copied from the THREAD ANCHOR block (step 5). It must show the actual last email Brian sent, not a call or note. This lets Brian verify at a glance that the draft is on the right thread before he opens it.
 >
 > **Edge cases:**
 > - Existing body has a previous draft → overwrite it with the fresh draft. Status = `drafted (overwrote previous)`.
@@ -206,7 +206,7 @@ Give each agent this prompt (substitute the batch's task list):
 
 ### Step 5, Consolidate and report
 
-Compile a single summary for Andy after all subagents return.
+Compile a single summary for Brian after all subagents return.
 
 Format exactly:
 
@@ -224,15 +224,15 @@ DRAFTS READY FOR REVIEW:
 [Table: Contact | Company | Last engagement anchor | HubSpot task URL]
 
 THIN-CONTEXT FLAGS:
-[List any tasks flagged "thin context, no recent HubSpot engagement". Andy reviews these manually before sending.]
+[List any tasks flagged "thin context, no recent HubSpot engagement". Brian reviews these manually before sending.]
 
 NO CONTACT ASSOCIATED:
-[List any tasks with no contact attached. Andy needs to associate the contact in HubSpot before the draft can be written.]
+[List any tasks with no contact attached. Brian needs to associate the contact in HubSpot before the draft can be written.]
 
 STATUS: [ALL CLEAR / ISSUES FOUND -- see flags above]
 ```
 
-Keep the summary under 25 lines. Andy works through drafts in HubSpot directly, the summary is a dispatch list, not a report.
+Keep the summary under 25 lines. Brian works through drafts in HubSpot directly, the summary is a dispatch list, not a report.
 
 If zero tasks were drafted (no tasks due), end with one line: "No drafts needed today. [N] tasks in outreach sequences."
 
@@ -240,9 +240,9 @@ If zero tasks were drafted (no tasks due), end with one line: "No drafts needed 
 
 ## Rules
 
-- Always overwrite existing drafts with a fresh one each run. The task body is never preserved or appended to; it is replaced entirely. If Andy hand-edited a prior draft and wanted to keep it, he would have sent it already.
+- Always overwrite existing drafts with a fresh one each run. The task body is never preserved or appended to; it is replaced entirely. If Brian hand-edited a prior draft and wanted to keep it, he would have sent it already.
 - Never invent specifics. If fewer than 2 are found, write thin-context fallback + flag.
 - HubSpot engagement history is the primary source for specifics. ONE targeted 30-day news web search is allowed per contact for a fresh hook. Never use Outlook search, LinkedIn, or ZoomInfo as drafting sources. Never run more than one web search per contact.
-- Never modify the task status. Andy marks tasks complete himself after sending.
+- Never modify the task status. Brian marks tasks complete himself after sending.
 - Never use em-dashes in the draft body. Split into two sentences instead.
 - If subagent batch returns an error for a task, log it in the summary as "ERROR -- [reason]" and move on.

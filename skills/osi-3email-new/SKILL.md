@@ -2,10 +2,10 @@
 name: osi-3email-new
 description: >
   Generate a hyper-personalized 3-email new outreach sequence for OSI Global prospects.
-  Use this skill when Andy uploads or pastes a LinkedIn profile and wants a shorter outreach
+  Use this skill when Brian uploads or pastes a LinkedIn profile and wants a shorter outreach
   treatment, for directors, targets where a full sequence is overkill, or when a tighter
   cadence fits better. Triggers on: "3-email sequence," "short sequence," "3 emails for [name],"
-  "new outreach 3 emails," or any time Andy drops a profile and asks for outreach without
+  "new outreach 3 emails," or any time Brian drops a profile and asks for outreach without
   specifying a full sequence. Always run this skill before writing any 3-email cold outreach.
 ---
 
@@ -15,7 +15,7 @@ description: >
 
 ## Your job
 
-Andy has given you a LinkedIn profile. This is a first-touch outreach where a shorter sequence is appropriate. Produce the full outreach package: strategy note, call scripts, LinkedIn invite, and individual HubSpot email tasks, each ready to press send.
+Brian has given you a LinkedIn profile. This is a first-touch outreach where a shorter sequence is appropriate. Produce the full outreach package: strategy note, call scripts, LinkedIn invite, and individual HubSpot email tasks, each ready to press send.
 
 Read this entire skill before producing any output.
 
@@ -31,7 +31,7 @@ Step 0 is non-negotiable. Do NOT rely on training data for the drafting rules.
 
 ## 🛑 VALIDATOR BEFORE DELIVERY
 
-Every drafted body and subject runs through `C:\Claude-Brain\scripts\validate_email.py` before being presented to Andy or written to any task.
+Every drafted body and subject runs through `C:\Claude-Brain\scripts\validate_email.py` before being presented to Brian or written to any task.
 
 ```python
 import sys
@@ -52,7 +52,7 @@ If `ValueError` raises: rewrite the offending email and re-validate. Do NOT deli
 
 ---
 
-## Andy Rules, apply to every output
+## Brian Rules, apply to every output
 
 - No em-dashes (U+2014) anywhere. Not once. Split into two sentences if needed.
 - Keep prose tight and direct. No fluff.
@@ -66,7 +66,7 @@ If `ValueError` raises: rewrite the offending email and re-validate. Do NOT deli
 
 Before any other work on this prospect, check the email queue. This prevents stacking duplicate sequences on the same person, which wrecks sender reputation and is bad form.
 
-Open `C:\Claude-Brain\email-queue.json` using plain Python `open(path,'r')`. The queue is Git-versioned along with the rest of Claude-Brain. Andy syncs between his two laptops manually via `git pull` / `git push`. Scan every entry for a match with this prospect:
+Open `C:\Claude-Brain\email-queue.json` using plain Python `open(path,'r')`. The queue is Git-versioned along with the rest of Claude-Brain. Brian syncs between his two laptops manually via `git pull` / `git push`. Scan every entry for a match with this prospect:
 
 - Match by `to` field equal to the prospect's email address (case-insensitive), OR
 - Match by `prospectName` + `company` both matching the prospect's full name and company (case-insensitive)
@@ -79,10 +79,10 @@ Entries with status `paused-*`, `canceled-*`, or older `sent` (>30 days ago) do 
 
 **Skip behavior by mode:**
 
-- **Interactive mode:** Tell Andy:
+- **Interactive mode:** Tell Brian:
   > SKIPPED: [First Last] at [Company], [reason: "already enrolled, N emails pending, next send [date]" OR "recent sequence completed [date]"]. Override?
 
-  Wait for explicit "override" from Andy before proceeding. Without override, stop and move on to the next prospect (batch mode) or end (single-prospect mode).
+  Wait for explicit "override" from Brian before proceeding. Without override, stop and move on to the next prospect (batch mode) or end (single-prospect mode).
 
 - **Overnight / Auto / Company / Batch modes:** Skip silently. Log the skip to `Claude-Brain/prospects-tracker-new.xlsx` Tab 2 (Company Status) with status `SKIPPED - already enrolled` or `SKIPPED - recent sequence` and the reason in the Notes column. Continue to the next prospect.
 
@@ -108,7 +108,7 @@ OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/appr
 - Never "vetted" or "pre-approved", sounds like marketing. "Approved vendor" is the term.
 - Never mention "procurement" in Email 1, telegraphs the sales motion. Just note we're on the list.
 
-To add a company to the approved-vendor list, Andy edits `Claude-Brain/approved-vendors.json` directly and adds the company name to `approved_vendor_companies`.
+To add a company to the approved-vendor list, Brian edits `Claude-Brain/approved-vendors.json` directly and adds the company name to `approved_vendor_companies`.
 
 ---
 
@@ -116,7 +116,7 @@ To add a company to the approved-vendor list, Andy edits `Claude-Brain/approved-
 
 Search HubSpot for the prospect's name and current company. Note the owner. Only create tasks if owned by Brian Charrette (213536174), Mark Metz (210187184), or John Houston (210187193).
 
-If contact is owned by another rep, flag it and wait for Andy's instruction before proceeding.
+If contact is owned by another rep, flag it and wait for Brian's instruction before proceeding.
 
 ---
 
@@ -260,7 +260,7 @@ NEVER include `On <date>, Brian Charrette wrote:`, `>` quoted lines, or any prio
 
 The master osi-email-sender task runs every weekday at 11 AM, 12 PM, 1 PM, 2 PM, 3 PM, and 4 PM Eastern. Each fire window processes queue entries whose `sendTime` matches that window. The 3-email sequence uses the same window architecture as the 6-email sequence.
 
-**MANDATORY before queue write:** run the canonical sanitizer from `osi-outreach-sequence` Step 6.7 on every body and every subject. The sanitizer strips em-dashes / en-dashes (Andy Rule #4) and asserts the result is clean. For Email 3 (NEW MAIL flow), it also strips any quote markers as defense-in-depth. Same function, copy it from there. Do NOT skip this step.
+**MANDATORY before queue write:** run the canonical sanitizer from `osi-outreach-sequence` Step 6.7 on every body and every subject. The sanitizer strips em-dashes / en-dashes (Brian Rule #4) and asserts the result is clean. For Email 3 (NEW MAIL flow), it also strips any quote markers as defense-in-depth. Same function, copy it from there. Do NOT skip this step.
 
 ---
 
@@ -335,9 +335,9 @@ Merger wedge: "With the Park Place and Service Express merger, a lot of teams ha
 
 When a prospect is being processed and they have an existing `LINKED_IN_CONNECT` task in HubSpot (the "Sales Nav -- Send connection request" task that triggered this sequence):
 
-1. **Mark the existing task COMPLETED.** Set `hs_task_status` = `COMPLETED` on that task via `manage_crm_objects` updateRequest. This removes it from Andy's open task queue.
+1. **Mark the existing task COMPLETED.** Set `hs_task_status` = `COMPLETED` on that task via `manage_crm_objects` updateRequest. This removes it from Brian's open task queue.
 
-2. **Create a NEW `LINKED_IN_CONNECT` task** scheduled for Day 1 (the date Email 1 fires). Use the standard subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: 213536174. Notes: the LinkedIn invite text. This surfaces the connection request on Andy's task queue the morning of Day 1 so he can send the LinkedIn invite the same day Email 1 fires.
+2. **Create a NEW `LINKED_IN_CONNECT` task** scheduled for Day 1 (the date Email 1 fires). Use the standard subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: 213536174. Notes: the LinkedIn invite text. This surfaces the connection request on Brian's task queue the morning of Day 1 so he can send the LinkedIn invite the same day Email 1 fires.
 
 Do this for EVERY prospect regardless of whether they had an existing task or not (if no existing task, just create the new one).
 
@@ -360,7 +360,7 @@ Every contact written to HubSpot MUST have these fields populated correctly. If 
 | `phone` | ZoomInfo `phone` field (direct dial) or existing HubSpot value | `+1 (XXX) XXX-XXXX` for US/CA | **Hard format** |
 | `mobilephone` | ZoomInfo `mobilePhone` field only | `+1 (XXX) XXX-XXXX` for US/CA | **Hard format + NEVER company switchboard** |
 | `city`, `state` | LinkedIn location field | As shown | Hard |
-| `hs_timezone` | Andy's 6-bucket from LinkedIn city/state | `us_slash_eastern` / `us_slash_central` / `us_slash_mountain` / `us_slash_pacific` / `us_slash_alaska` (US Alaska) / `canada_slash_atlantic` (Canada Atlantic). Outside these six, use the closest matching bucket. | **Hard** |
+| `hs_timezone` | Brian's 6-bucket from LinkedIn city/state | `us_slash_eastern` / `us_slash_central` / `us_slash_mountain` / `us_slash_pacific` / `us_slash_alaska` (US Alaska) / `canada_slash_atlantic` (Canada Atlantic). Outside these six, use the closest matching bucket. | **Hard** |
 | `hs_linkedin_url` | Sales Nav URL (`linkedin.com/sales/lead/[ID]/`) OR regular `linkedin.com/in/` URL | Full URL | **Hard** |
 
 **Phone format rule:**

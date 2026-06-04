@@ -4,10 +4,10 @@ description: >
   Generate and fully automate a 5-email re-engagement sequence for dormant OSI Global customers
  , people who previously bought from OSI and have gone quiet. Researches the account via ZoomInfo
   scoops and news before writing anything. Emails lead with fresh angles tied to real research,
-  not "just checking in." Andy reviews everything first. On "ready", Email 1 is pre-composed in
-  Outlook for Andy to send, then Emails 2-5 schedule automatically via email-queue.json.
+  not "just checking in." Brian reviews everything first. On "ready", Email 1 is pre-composed in
+  Outlook for Brian to send, then Emails 2-5 schedule automatically via email-queue.json.
   Trigger on: "re-engage old customer", "old customer sequence", "revive this account",
-  "circle back on old account", or any time Andy pastes a contact who previously bought from OSI
+  "circle back on old account", or any time Brian pastes a contact who previously bought from OSI
   and wants outreach built. Do NOT use this for cold prospects, use osi-outreach-sequence instead.
 ---
 
@@ -17,13 +17,13 @@ description: >
 
 ## Your job
 
-Andy has given you a contact who previously bought from OSI and went quiet. This is a warm
+Brian has given you a contact who previously bought from OSI and went quiet. This is a warm
 relationship, they know who OSI is. Your job is to re-open the door with fresh angles tied
 to real research, not repeat the last conversation.
 
 Read this entire skill before producing any output.
 
-5 emails. 28-day cadence. Andy sends Email 1 himself. The rest schedule automatically.
+5 emails. 28-day cadence. Brian sends Email 1 himself. The rest schedule automatically.
 
 ---
 
@@ -37,7 +37,7 @@ This is a re-engagement skill: pass `is_cold=False` and `allow_circle_back=True`
 
 ## 🛑 VALIDATOR BEFORE DELIVERY
 
-Every drafted body and subject runs through `C:\Claude-Brain\scripts\validate_email.py` before being presented to Andy or written to the queue.
+Every drafted body and subject runs through `C:\Claude-Brain\scripts\validate_email.py` before being presented to Brian or written to the queue.
 
 ```python
 import sys
@@ -58,7 +58,7 @@ If `ValueError` raises: rewrite and re-validate. Do NOT write any failing entry 
 
 ---
 
-## Andy Rules, apply to every output
+## Brian Rules, apply to every output
 
 - No em-dashes (U+2014) anywhere. Not once. Split into two sentences instead.
 - Keep prose tight and direct. No fluff.
@@ -68,18 +68,18 @@ If `ValueError` raises: rewrite and re-validate. Do NOT write any failing entry 
 - **Never say "checking in", "circling back", or "just wanted to follow up."** All banned.
 - **Do not apologize for the silence.** Acknowledge it if needed, move forward.
 - **Do not list past purchases.** They know what they bought. Lead with where they are going.
-- Do NOT type "Andy" or any name at the bottom of email bodies. Outlook signature handles the sign-off.
+- Do NOT type "Brian" or any name at the bottom of email bodies. Outlook signature handles the sign-off.
 
 ---
 
 ## Step 1: Gather Contact Info
 
-Ask Andy to provide or paste:
+Ask Brian to provide or paste:
 - Contact full name, title, company, email
 - What OSI sold them historically (product lines are enough, optics, DIMMs, TPM, DWDM, storage, networking, pro services)
 - How long since last contact and any context on why it went quiet
 
-If Andy pastes a HubSpot record, extract fields directly. Do not press for history that isn't offered, research fills the gaps.
+If Brian pastes a HubSpot record, extract fields directly. Do not press for history that isn't offered, research fills the gaps.
 
 ---
 
@@ -87,7 +87,7 @@ If Andy pastes a HubSpot record, extract fields directly. Do not press for histo
 
 Before any other work on this prospect, check the email queue. This prevents stacking duplicate sequences on the same person, which wrecks sender reputation and is bad form.
 
-Open `C:\Claude-Brain\email-queue.json` using plain Python `open(path,'r')`. The queue is Git-versioned along with the rest of Claude-Brain. Andy syncs between his two laptops manually via `git pull` / `git push`. Scan every entry for a match with this prospect:
+Open `C:\Claude-Brain\email-queue.json` using plain Python `open(path,'r')`. The queue is Git-versioned along with the rest of Claude-Brain. Brian syncs between his two laptops manually via `git pull` / `git push`. Scan every entry for a match with this prospect:
 
 - Match by `to` field equal to the prospect's email address (case-insensitive), OR
 - Match by `prospectName` + `company` both matching the prospect's full name and company (case-insensitive)
@@ -100,10 +100,10 @@ Entries with status `paused-*`, `canceled-*`, or older `sent` (>30 days ago) do 
 
 **Skip behavior by mode:**
 
-- **Interactive mode:** Tell Andy:
+- **Interactive mode:** Tell Brian:
   > SKIPPED: [First Last] at [Company], [reason: "already enrolled, N emails pending, next send [date]" OR "recent sequence completed [date]"]. Override?
 
-  Wait for explicit "override" from Andy before proceeding. Without override, stop and move on to the next prospect (batch mode) or end (single-prospect mode).
+  Wait for explicit "override" from Brian before proceeding. Without override, stop and move on to the next prospect (batch mode) or end (single-prospect mode).
 
 - **Overnight / Auto / Company / Batch modes:** Skip silently. Log the skip to `Claude-Brain/prospects-tracker-new.xlsx` Tab 2 (Company Status) with status `SKIPPED - already enrolled` or `SKIPPED - recent sequence` and the reason in the Notes column. Continue to the next prospect.
 
@@ -129,7 +129,7 @@ OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/appr
 - Never "vetted" or "pre-approved", sounds like marketing. "Approved vendor" is the term.
 - Never mention "procurement" in Email 1, telegraphs the sales motion. Just note we're on the list.
 
-To add a company to the approved-vendor list, Andy edits `Claude-Brain/approved-vendors.json` directly and adds the company name to `approved_vendor_companies`.
+To add a company to the approved-vendor list, Brian edits `Claude-Brain/approved-vendors.json` directly and adds the company name to `approved_vendor_companies`.
 
 ---
 
@@ -140,10 +140,10 @@ Search HubSpot by name and current company.
 **Hard stop if owned by another rep:**
 > OWNED BY ANOTHER REP: [First Last] at [Company] is in HubSpot (ID: [id]) owned by [rep name]. Do you want to proceed?
 
-Wait for Andy's explicit instruction before continuing.
+Wait for Brian's explicit instruction before continuing.
 
 JAM owner IDs, only proceed if owned by:
-- Andy McLean: 213536174
+- Brian McLean: 213536174
 - Mark Metz: 210187184
 - John Houston: 210187193
 
@@ -176,12 +176,12 @@ Service Express merger, 400G adoption, OEM end-of-life pressure.
 
 Before writing anything, verify the contact is still at the company and still in a relevant role.
 
-Navigate to their LinkedIn profile. If they have moved on, stop and tell Andy, the sequence
+Navigate to their LinkedIn profile. If they have moved on, stop and tell Brian, the sequence
 should either follow them to their new company or be redirected to a new contact at the
 original account.
 
 Also note city and state from their LinkedIn location field, required for HubSpot.
-Infer timezone using Andy's 6-bucket system:
+Infer timezone using Brian's 6-bucket system:
 - US Eastern → us_slash_eastern
 - US Central → us_slash_central
 - US Mountain → us_slash_mountain
@@ -221,7 +221,7 @@ Product lines available:
 
 ## Step 7: Calculate Send Dates
 
-**Email 1** = next business day after today (or the day Andy says "ready").
+**Email 1** = next business day after today (or the day Brian says "ready").
 
 **Send windows (each email has its own window in the 6-window sender architecture):**
 - Email 1: 4 PM ET (`sendTime: "4pm"`)
@@ -316,7 +316,7 @@ should I take you off the list?"
 
 2-3 sentences plus the question.
 
-NEVER include `On <date>, Andy McLean wrote:`, `>` quoted lines, or any prior email content. The 2026-04-29 incident pattern.
+NEVER include `On <date>, Brian McLean wrote:`, `>` quoted lines, or any prior email content. The 2026-04-29 incident pattern.
 
 ---
 
@@ -367,11 +367,11 @@ For each email EXCEPT Email 3 (which is a reply, inherits Email 1's subject):
 - Write 5 subject line options
 - Mix: 2-3 professional and specific, 1-2 unexpected or curiosity-driven
 - No hyphens in subject lines
-- **Pick one at random and commit to it.** Do not ask Andy which to use. Claude chooses.
+- **Pick one at random and commit to it.** Do not ask Brian which to use. Claude chooses.
   Use actual randomness across runs so the same sequence does not always get the safe choice.
-- Present all 5 to Andy with the selected one clearly marked (bold + "SELECTED")
+- Present all 5 to Brian with the selected one clearly marked (bold + "SELECTED")
 
-If Andy explicitly tells you to swap a subject line after seeing the set, honor that.
+If Brian explicitly tells you to swap a subject line after seeing the set, honor that.
 Otherwise the random pick stands.
 
 ---
@@ -432,7 +432,7 @@ from their profile. Do not mention it has been a while. No pitch. No mutual conn
 
 ## Step 13: Present for Review, Wait for "Ready"
 
-Present everything to Andy:
+Present everything to Brian:
 
 1. **Research summary**, 3-5 bullets on what ZoomInfo scoops, news, and intent surfaced.
    Show the hook. This is what gives the sequence legs.
@@ -451,21 +451,21 @@ End with: "Look it over and say **ready** when you want to send."
 
 ## Step 14: On "Ready", Send Email 1, Then Schedule the Rest
 
-When Andy says "ready" (or any clear go-ahead like "send it", "looks good", "do it"):
+When Brian says "ready" (or any clear go-ahead like "send it", "looks good", "do it"):
 
 ### Send Email 1 via Outlook
 
 1. Navigate to https://outlook.office.com in Chrome
-2. If login screen appears, stop and notify Andy
+2. If login screen appears, stop and notify Brian
 3. Click New mail
 4. Enter prospect's email in To field, press Tab
 5. Enter selected subject line exactly
 6. Click in body above signature, type email body exactly as written
-7. Do NOT click Send, leave pre-composed for Andy
+7. Do NOT click Send, leave pre-composed for Brian
 
-Tell Andy: "Email 1 is ready in Outlook. Click Send when you're good, then say **sent** and I'll schedule the rest."
+Tell Brian: "Email 1 is ready in Outlook. Click Send when you're good, then say **sent** and I'll schedule the rest."
 
-When Andy says "sent":
+When Brian says "sent":
 - Briefly confirm in Sent Items
 - Schedule Emails 2-5 via email-queue.json (below)
 - Create all HubSpot tasks
@@ -496,7 +496,7 @@ Example: `jane-smith-acme-oldcust-2`
 
 #### MANDATORY: Sanitize before queue write
 
-Before appending any entry, run the canonical sanitizer from `osi-outreach-sequence` Step 6.7 on every body and every subject. The sanitizer strips em-dashes (U+2014), en-dashes (U+2013), quote markers in fresh-subject Email 4/5 bodies, and asserts the result is clean. If it raises, STOP the queue write and surface to Andy. Do NOT append a partial sequence.
+Before appending any entry, run the canonical sanitizer from `osi-outreach-sequence` Step 6.7 on every body and every subject. The sanitizer strips em-dashes (U+2014), en-dashes (U+2013), quote markers in fresh-subject Email 4/5 bodies, and asserts the result is clean. If it raises, STOP the queue write and surface to Brian. Do NOT append a partial sequence.
 
 Identical function definition to keep this skill self-contained:
 
@@ -505,7 +505,7 @@ import re
 
 def sanitize_body(text: str, email_index: int) -> str:
     if text is None: return ""
-    EM = chr(0x2014)  # em-dash, banned by Andy Rule #4 so referenced via chr()
+    EM = chr(0x2014)  # em-dash, banned by Brian Rule #4 so referenced via chr()
     EN = chr(0x2013)  # en-dash
     text = (text
         .replace(" " + EM + " ", ". ").replace(EM + " ", ". ").replace(" " + EM, ".").replace(EM, "-")
@@ -579,9 +579,9 @@ Do NOT use the MCP Write tool for the queue file. Do NOT delete the file first.
 
 When a prospect is being processed and they have an existing `LINKED_IN_CONNECT` task in HubSpot (the "Sales Nav -- Send connection request" task that triggered this sequence):
 
-1. **Mark the existing task COMPLETED.** Set `hs_task_status` = `COMPLETED` on that task via `manage_crm_objects` updateRequest. This removes it from Andy's open task queue.
+1. **Mark the existing task COMPLETED.** Set `hs_task_status` = `COMPLETED` on that task via `manage_crm_objects` updateRequest. This removes it from Brian's open task queue.
 
-2. **Create a NEW `LINKED_IN_CONNECT` task** scheduled for Day 1 (the date Email 1 fires). Use the standard subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: 213536174. Notes: the LinkedIn invite text. This surfaces the connection request on Andy's task queue the morning of Day 1 so he can send the LinkedIn invite the same day Email 1 fires.
+2. **Create a NEW `LINKED_IN_CONNECT` task** scheduled for Day 1 (the date Email 1 fires). Use the standard subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: 213536174. Notes: the LinkedIn invite text. This surfaces the connection request on Brian's task queue the morning of Day 1 so he can send the LinkedIn invite the same day Email 1 fires.
 
 Do this for EVERY prospect regardless of whether they had an existing task or not (if no existing task, just create the new one).
 
@@ -604,7 +604,7 @@ Every contact written to HubSpot MUST have these fields populated correctly. If 
 | `phone` | ZoomInfo `phone` field (direct dial) or existing HubSpot value | `+1 (XXX) XXX-XXXX` for US/CA | **Hard format** |
 | `mobilephone` | ZoomInfo `mobilePhone` field only | `+1 (XXX) XXX-XXXX` for US/CA | **Hard format + NEVER company switchboard** |
 | `city`, `state` | LinkedIn location field | As shown | Hard |
-| `hs_timezone` | Andy's 6-bucket from LinkedIn city/state | `us_slash_eastern` / `us_slash_central` / `us_slash_mountain` / `us_slash_pacific` / `us_slash_alaska` (US Alaska) / `canada_slash_atlantic` (Canada Atlantic). Outside these six, use the closest matching bucket. | **Hard** |
+| `hs_timezone` | Brian's 6-bucket from LinkedIn city/state | `us_slash_eastern` / `us_slash_central` / `us_slash_mountain` / `us_slash_pacific` / `us_slash_alaska` (US Alaska) / `canada_slash_atlantic` (Canada Atlantic). Outside these six, use the closest matching bucket. | **Hard** |
 | `hs_linkedin_url` | Sales Nav URL (`linkedin.com/sales/lead/[ID]/`) OR regular `linkedin.com/in/` URL | Full URL | **Hard** |
 
 **Phone format rule:**
@@ -679,7 +679,7 @@ Email 2 - Day 5 - [Date] - Subject: [subject]
 
 Email 3 - Day 10 - [Date] - Subject: RE: [Email 1 subject]
 Any thoughts?
----------- On [Date], Andy McLean wrote ----------
+---------- On [Date], Brian McLean wrote ----------
 [Email 1 quoted]
 
 Email 4 - Day 17 - [Date] - Subject: [subject]
@@ -716,7 +716,7 @@ Append one row after the sequence is created:
 
 Columns: Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Date Added | Notes
 
-- HubSpot Status: "Andy, HubSpot ID [id]" or "Not found"
+- HubSpot Status: "Brian, HubSpot ID [id]" or "Not found"
 - Action: "Pursue, old customer sequence live"
 - Notes: What they bought before + research hook in 1-2 sentences
 

@@ -5,7 +5,7 @@ description: >
   the strategy note + Personal Hook + Fresh Hook from HubSpot, picks sequence type, computes
   Day 1 from same-company stagger metadata, drafts all 6 emails, writes them to the contact's
   HubSpot AI fields (ai_email_subject_1-6 + ai_email_body_1-6), creates a LINKED_IN_CONNECT
-  task on Day 1 as Andy's enrollment cue, and appends Excel Tab 1. Triggers when invoked by
+  task on Day 1 as Brian's enrollment cue, and appends Excel Tab 1. Triggers when invoked by
   osi-prospect-qualification's handoff on a Yes-with-email verdict.
 ---
 
@@ -40,18 +40,18 @@ This skill only runs when invoked via handoff from `osi-prospect-qualification` 
 - Compute Day 1 from same-company stagger metadata
 - Draft 6 emails using the formatting standard below
 - Write all 12 AI field properties to the HubSpot contact in one call (`ai_email_subject_1-6` + `ai_email_body_1-6`)
-- Create a LINKED_IN_CONNECT task on Day 1 (this is Andy's cue to enroll the contact in the HubSpot sequence)
+- Create a LINKED_IN_CONNECT task on Day 1 (this is Brian's cue to enroll the contact in the HubSpot sequence)
 - Append a Tab 1 row to `Claude-Brain/prospects-tracker-new.xlsx`
 - Update stagger metadata (`last_day1`, `person_count`)
 
 **This skill DOES NOT:**
 - Write to `email-queue.json`. The queue is no longer used for new sequences.
 - Compute sendDates or sendTimes. HubSpot sequences handle cadence once enrolled.
-- Invoke osi-email-sender. Sending is handled by HubSpot after Andy enrolls.
+- Invoke osi-email-sender. Sending is handled by HubSpot after Brian enrolls.
 - Qualify. Verdict is `osi-prospect-qualification`'s job.
 - Run on multiple candidates at once. ONE per invocation.
 - Navigate to LinkedIn. All context comes from the handoff payload and HubSpot strategy note.
-- Ask Andy for approval mid-run. AI field writes and task creation are automatic. Andy approved at session start.
+- Ask Brian for approval mid-run. AI field writes and task creation are automatic. Brian approved at session start.
 - Stop for `manage_crm_objects` confirmation prompts. ALL calls use `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`.
 
 ---
@@ -89,7 +89,7 @@ After reading both, proceed below.
 
 ## 🛑 HARDWIRED RULE, NO EM-DASHES OR EN-DASHES, EVER
 
-Andy Rule #4 from `CLAUDE.md`. U+2014 (em-dash) and U+2013 (en-dash) are FORBIDDEN everywhere. Use periods to split sentences. Use commas for parenthetical clauses.
+Brian Rule #4 from `CLAUDE.md`. U+2014 (em-dash) and U+2013 (en-dash) are FORBIDDEN everywhere. Use periods to split sentences. Use commas for parenthetical clauses.
 
 ---
 
@@ -153,7 +153,7 @@ If any of these are missing, refuse and log. Don't proceed on partial data.
 
 After this skill runs on one qualified candidate:
 - 12 AI field properties written to the HubSpot contact (`ai_email_subject_1-6` + `ai_email_body_1-6`)
-- LINKED_IN_CONNECT task created on Day 1 (Andy's cue to enroll in HubSpot sequence)
+- LINKED_IN_CONNECT task created on Day 1 (Brian's cue to enroll in HubSpot sequence)
 - Excel Tab 1 row appended
 - `state.stagger[company_name].last_day1` updated to Day 1
 - `state.stagger[company_name].person_count` incremented
@@ -164,7 +164,7 @@ After this skill runs on one qualified candidate:
 
 Before drafting anything, pull the contact's `ai_email_subject_1` field from HubSpot.
 
-**If populated:** the contact already has a drafted sequence in the AI fields. Tell Andy:
+**If populated:** the contact already has a drafted sequence in the AI fields. Tell Brian:
 > "Contact already has AI Email Subject 1 populated: `[first 60 chars]...`. Overwrite with a fresh sequence?"
 
 Wait for explicit yes before proceeding. Without that, stop.
@@ -207,7 +207,7 @@ Read `state.stagger[company_name]` from `C:\Claude-Brain\overnight-candidates.js
 | `5` | `last_day1` + 10 business days (cooling gap) |
 | `6+` | `last_day1` + 4 business days |
 
-Day 1 is the date Andy should enroll the contact in the HubSpot sequence. The LINKED_IN_CONNECT task is due on this date. When Andy sees it in his task queue, that is his cue to enroll.
+Day 1 is the date Brian should enroll the contact in the HubSpot sequence. The LINKED_IN_CONNECT task is due on this date. When Brian sees it in his task queue, that is his cue to enroll.
 
 Skip weekends + holidays. Holiday list: `Claude-Brain/holidays.json`. Fallback: US federal holidays + Good Friday + Black Friday + Christmas Eve + New Year's Eve.
 
@@ -225,7 +225,7 @@ search_crm_objects({
 ```
 
 - Exactly one result matching handoff ID: proceed.
-- ID mismatch: STOP-GATE. Surface duplicate to Andy.
+- ID mismatch: STOP-GATE. Surface duplicate to Brian.
 - Zero results: STOP-GATE.
 - Multiple results: STOP-GATE. Surface all IDs for manual merge.
 
@@ -392,7 +392,7 @@ Run `sanitize_body(text, email_index)` on every body and `sanitize_subject(subje
 - Normalize spaces
 - Trim trailing whitespace
 
-If sanitize raises (dashes leaked through or body went empty): STOP. Do not write anything. Surface the error to Andy.
+If sanitize raises (dashes leaked through or body went empty): STOP. Do not write anything. Surface the error to Brian.
 
 ### Step 8, Validator (MANDATORY before HubSpot write)
 
@@ -448,9 +448,9 @@ Search HubSpot for an existing "Sales Nav -- Send connection request" task on th
 - Due date: Day 1 at 20:00 UTC (4pm ET)
 - Type: `LINKED_IN_CONNECT`
 - Owner: 213536174
-- Body: the actual LinkedIn invite message Andy will send (under 300 chars, references Personal Hook, no pitch)
+- Body: the actual LinkedIn invite message Brian will send (under 300 chars, references Personal Hook, no pitch)
 
-This task is Andy's cue. When it appears due in his task queue, he enrolls the contact in the HubSpot sequence and sends Email 1. The task date and enrollment date are always the same.
+This task is Brian's cue. When it appears due in his task queue, he enrolls the contact in the HubSpot sequence and sends Email 1. The task date and enrollment date are always the same.
 
 If write fails: log `linkedin-task-sync-failed` to `overnight-run-log.md`. AI fields stay written (they are the authoritative record).
 
@@ -475,7 +475,7 @@ Columns: Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Ac
 Every failure logs to `Claude-Brain/overnight-run-log.md` with timestamp + reason:
 
 - Strategy note missing: log, mark `yes-with-email-strategy-missing`, do NOT write AI fields.
-- Active sequence check: AI fields already populated and Andy did not confirm overwrite: log, stop.
+- Active sequence check: AI fields already populated and Brian did not confirm overwrite: log, stop.
 - AI field write fails: retry once, then log + exit.
 - LINKED_IN_CONNECT task fails: log `linkedin-task-sync-failed`, keep AI fields written.
 - Excel append fails: log warning, do NOT block the field write. Excel is a tracker, not source of truth.

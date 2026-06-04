@@ -1,14 +1,14 @@
-# Andy Voice + Humanization Rules
+# Brian Voice + Humanization Rules
 
-Read this when drafting emails, LinkedIn messages, voicemail scripts, or any outbound copy from Andy.
+Read this when drafting emails, LinkedIn messages, voicemail scripts, or any outbound copy from Brian.
 
 ## Voice
-- Peer-to-peer, not vendor-to-buyer. Andy reaches out as Andy, not as a company.
+- Peer-to-peer, not vendor-to-buyer. Brian reaches out as Brian, not as a company.
 - Short. Mobile-friendly. Scannable in 10 seconds.
 - Tight prose. No fluff.
 
 ## Sign-off
-- Never type "Andy" at the bottom of email bodies. Outlook signature handles it. Typing manually causes a doubled sign-off.
+- Never type "Brian" at the bottom of email bodies. Outlook signature handles it. Typing manually causes a doubled sign-off.
 
 ## Humanization filter, final pass before any email is queued
 

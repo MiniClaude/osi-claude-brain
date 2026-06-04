@@ -2,9 +2,9 @@
 name: osi-cold-reengagement
 description: >
   Find cold 1st-degree LinkedIn connections and create HubSpot InMail tasks to re-engage them.
-  Use this skill when Andy says "find cold connections," "who haven't I messaged," "find me
+  Use this skill when Brian says "find cold connections," "who haven't I messaged," "find me
   people to reach out to," "LinkedIn re-engagement," "cold connections," or any variation of
-  searching existing LinkedIn connections for outreach opportunities. Also triggers when Andy
+  searching existing LinkedIn connections for outreach opportunities. Also triggers when Brian
   says "keep going" or "find another one" during a LinkedIn prospecting session.
 ---
 
@@ -14,7 +14,7 @@ description: >
 
 ## What this skill does
 
-Searches Andy's existing 1st-degree LinkedIn connections for cold prospects who qualify
+Searches Brian's existing 1st-degree LinkedIn connections for cold prospects who qualify
 against OSI's ICP, then creates 2 HubSpot InMail tasks spaced 2 weeks apart with
 personalized draft messages saved in the task notes.
 
@@ -54,7 +54,7 @@ If `ValueError` raises: rewrite and re-validate. Do NOT save any failing draft t
 
 ---
 
-## Andy Rules
+## Brian Rules
 
 - No em-dashes (U+2014) anywhere. Split into two sentences instead.
 - Keep everything tight and direct.
@@ -169,7 +169,7 @@ Based on their profile, pick the right play. Do not limit to one if multiple app
 
 ## Step 7: Create HubSpot tasks
 
-**Duplicate-task check (MANDATORY before creating either task):** Query HubSpot for tasks associated to this contact. If the contact has ANY task where `hs_task_type` = `LINKED_IN_MESSAGE` AND `hs_task_status` is `NOT_STARTED` or `IN_PROGRESS`, skip BOTH tasks entirely. Tell Andy: "existing LinkedIn task on HubSpot. No new tasks created." and move to the next candidate. This applies regardless of the existing task's subject line. One active LinkedIn message task already queued = we do not pile on more.
+**Duplicate-task check (MANDATORY before creating either task):** Query HubSpot for tasks associated to this contact. If the contact has ANY task where `hs_task_type` = `LINKED_IN_MESSAGE` AND `hs_task_status` is `NOT_STARTED` or `IN_PROGRESS`, skip BOTH tasks entirely. Tell Brian: "existing LinkedIn task on HubSpot. No new tasks created." and move to the next candidate. This applies regardless of the existing task's subject line. One active LinkedIn message task already queued = we do not pile on more.
 
 Create 2 tasks on the prospect's contact record (only if the duplicate check passes):
 
@@ -190,13 +190,13 @@ Create 2 tasks on the prospect's contact record (only if the duplicate check pas
 Use manage_crm_objects to create both tasks in a single call.
 Associate both to the contact record.
 
-If the prospect is not in HubSpot, flag this to Andy and ask whether to add them first.
+If the prospect is not in HubSpot, flag this to Brian and ask whether to add them first.
 
 ---
 
 ## After each prospect
 
-Tell Andy the verdict, show both draft messages, and confirm the HubSpot tasks were created
+Tell Brian the verdict, show both draft messages, and confirm the HubSpot tasks were created
 with links. Then ask: "Keep going?"
 
 If yes, return to Step 1 and continue from the next candidate in the search results,

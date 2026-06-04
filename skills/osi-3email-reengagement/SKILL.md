@@ -2,10 +2,10 @@
 name: osi-3email-reengagement
 description: >
   Generate a hyper-personalized 3-email re-engagement sequence for OSI Global prospects
-  who have already been through a previous outreach sequence. Use this skill when Andy
+  who have already been through a previous outreach sequence. Use this skill when Brian
   uploads a LinkedIn profile and indicates this is a second-touch outreach, months after
   the original sequence. Triggers on: "re-engagement," "second touch," "circle back,"
-  "went through the sequence," "re-engage [name]," or any time Andy uploads a profile
+  "went through the sequence," "re-engage [name]," or any time Brian uploads a profile
   and mentions it has been months since last contact. Always research recent company news
   before writing. Always run this skill before writing any re-engagement outreach.
 ---
@@ -16,7 +16,7 @@ description: >
 
 ## Your job
 
-Andy has given you a LinkedIn profile. This person has already been through a previous outreach sequence and did not respond. They know who OSI is. Your job is to re-open the door with fresh angles, not re-introduce the company. Produce the full outreach package: strategy note, call scripts, LinkedIn message, and individual HubSpot email tasks, each ready to press send.
+Brian has given you a LinkedIn profile. This person has already been through a previous outreach sequence and did not respond. They know who OSI is. Your job is to re-open the door with fresh angles, not re-introduce the company. Produce the full outreach package: strategy note, call scripts, LinkedIn message, and individual HubSpot email tasks, each ready to press send.
 
 Read this entire skill before producing any output.
 
@@ -67,7 +67,7 @@ If neither path closes: mark `no` in strategy note as "could not verify current 
 
 ## 🛑 VALIDATOR BEFORE DELIVERY
 
-Every drafted body and subject runs through `C:\Claude-Brain\scripts\validate_email.py` before being presented to Andy or written to any task.
+Every drafted body and subject runs through `C:\Claude-Brain\scripts\validate_email.py` before being presented to Brian or written to any task.
 
 ```python
 import sys
@@ -88,12 +88,12 @@ If `ValueError` raises: rewrite and re-validate. Do NOT deliver any email that f
 
 ---
 
-## Andy Rules, apply to every output
+## Brian Rules, apply to every output
 
 - No em-dashes (U+2014) anywhere. Not once. Split into two sentences if needed.
 - Keep prose tight and direct. No fluff.
 - Emails must feel like a human wrote them to one person, not a mass blast.
-- Tone: peer-to-peer. They have heard Andy's name before. Acknowledge time has passed without being awkward about it.
+- Tone: peer-to-peer. They have heard Brian's name before. Acknowledge time has passed without being awkward about it.
 - Emails are short. Mobile-friendly. Scannable in 10 seconds.
 
 ---
@@ -115,10 +115,10 @@ Entries with status `paused-*`, `canceled-*`, or older `sent` (>30 days ago) do 
 
 **Skip behavior:**
 
-- **Interactive mode:** Tell Andy:
+- **Interactive mode:** Tell Brian:
   > SKIPPED: [First Last] at [Company], [reason: "already enrolled, N emails pending, next send [date]" OR "recent sequence completed [date]"]. Override?
 
-  Wait for explicit "override" from Andy before proceeding. Without override, stop.
+  Wait for explicit "override" from Brian before proceeding. Without override, stop.
 
 - **Overnight / Auto / Batch modes:** Skip silently. Log to `Claude-Brain/overnight-run-log.md` with timestamp, name, company, and reason. Continue to the next prospect.
 
@@ -156,9 +156,9 @@ Note the verification source in the strategy note under `EMPLOYER VERIFICATION:`
 ## Step 2: Research (do this before writing anything)
 
 **HubSpot Check**
-Search HubSpot for the prospect and their current company. Pull any existing notes to understand what was sent previously. Note the HubSpot owner. Only create tasks if owned by Andy McLean (213536174), Mark Metz (210187184), or John Houston (210187193).
+Search HubSpot for the prospect and their current company. Pull any existing notes to understand what was sent previously. Note the HubSpot owner. Only create tasks if owned by Brian McLean (213536174), Mark Metz (210187184), or John Houston (210187193).
 
-If owned by another rep, flag it and wait for Andy's instruction before proceeding.
+If owned by another rep, flag it and wait for Brian's instruction before proceeding.
 
 **ZoomInfo Contact Enrichment**
 Run `enrich_contacts` with the prospect's name and company. Capture:
@@ -199,7 +199,7 @@ Check the existing HubSpot contact's strategy note for an EMAIL RESOLUTION block
 
 - `hubspot-existing` or `verified-pattern`: proceed.
 - `dominant-pattern`: proceed but include `"emailResolution": "dominant-pattern"` in each queue entry.
-- `manual-required`: STOP. Do NOT draft or queue. Return: `"Pattern signal too weak at [Company]. Andy must verify [email] before queueing."` Do not retry.
+- `manual-required`: STOP. Do NOT draft or queue. Return: `"Pattern signal too weak at [Company]. Brian must verify [email] before queueing."` Do not retry.
 
 If no EMAIL RESOLUTION block exists in the strategy note, run the resolver inline:
 1. Search HubSpot for all contacts at the same company.
@@ -313,7 +313,7 @@ VM: [One line. 15 seconds max. One-sentence new hook. "I'm sending you something
 
 **Skip entirely if no phone number available.**
 
-One voicemail. Never two. 15 seconds max. They know who Andy is. Lead with the new hook. Name Email 1 subject line. End with Brian's email address spelled audibly ("that's bc at osihardware dot com"). No phone number. Always present or future tense. Never past tense.
+One voicemail. Never two. 15 seconds max. They know who Brian is. Lead with the new hook. Name Email 1 subject line. End with Brian's email address spelled audibly ("that's bc at osihardware dot com"). No phone number. Always present or future tense. Never past tense.
 
 "Hey [Name], Brian with OSI Global. [One sentence new hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's andy at osiglobal dot com."
 
@@ -355,7 +355,7 @@ That is the entire body. Nothing else. The sender's Reply flow attaches the prio
 - "Should I close the file on this one, or is the timing just off?"
 - "No worries if now isn't the right time. Happy to circle back when things shift."
 
-NEVER include `On <date>, Andy McLean wrote:`, `>` quoted lines, or any prior email content. Doing so causes the 2026-04-29 incident pattern: placeholder text lands in the prospect's inbox verbatim.
+NEVER include `On <date>, Brian McLean wrote:`, `>` quoted lines, or any prior email content. Doing so causes the 2026-04-29 incident pattern: placeholder text lands in the prospect's inbox verbatim.
 
 **Send-window assignments:**
 - Email 1: `sendTime: "4pm"`
@@ -374,16 +374,16 @@ NEVER include `On <date>, Andy McLean wrote:`, `>` quoted lines, or any prior em
 
 For every drafted email body, write out answers to these six questions in working context BEFORE calling sanitize and validator. The validator catches strings; this self-check catches semantics it cannot see.
 
-1. **Does the first sentence reference the prospect or a timely trigger, not OSI?** (Email 1 only. Pass = new hook, company news, role signal. Fail = "I'm Andy", "I work with", any OSI-first opener.)
+1. **Does the first sentence reference the prospect or a timely trigger, not OSI?** (Email 1 only. Pass = new hook, company news, role signal. Fail = "I'm Brian", "I work with", any OSI-first opener.)
 2. **Is the new hook actually in Email 1?** (Email 1 only. The hook must be a real timely trigger, not generic geography or title alone. If thin, ABORT and log to `overnight-run-log.md`.)
 3. **Is there exactly ONE product line in this email?** (All emails. Surgical Isolation rule.)
 4. **Did I name SmartOptics?** (Must be no unless prospect already knows the name from a prior conversation.)
 5. **Did I claim OSI manufactures?** (All emails. Must be no.)
-6. **Did I sign with "Andy" at the bottom?** (All emails. Must be no. Outlook signature handles it.)
+6. **Did I sign with "Brian" at the bottom?** (All emails. Must be no. Outlook signature handles it.)
 
 If any answer is wrong, REWRITE before passing to sanitize. Do not paper over with sanitize.
 
-If question 2 fails (thin or no hook), do NOT write Email 1. Log to `overnight-run-log.md` and exit. Andy will pull a real hook next session.
+If question 2 fails (thin or no hook), do NOT write Email 1. Log to `overnight-run-log.md` and exit. Brian will pull a real hook next session.
 
 ---
 
@@ -455,7 +455,7 @@ for i, email in enumerate(emails, start=1):
         raise ValueError(f"Email {i} body is empty after sanitization. Stopping.")
 ```
 
-If `sanitize_body` raises, STOP the entire queue write. Do NOT append a partial sequence. Surface the error to Andy with the offending email index.
+If `sanitize_body` raises, STOP the entire queue write. Do NOT append a partial sequence. Surface the error to Brian with the offending email index.
 
 ---
 
@@ -502,7 +502,7 @@ After the write succeeds, output exactly one confirmation line and nothing else:
 
 ## Step 10: Save to HubSpot
 
-🚨 **ALL `manage_crm_objects` calls use `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`.** Never show a proposed-changes table. Never ask "Approve?". Andy's session kickoff is blanket approval for all HubSpot writes this skill produces.
+🚨 **ALL `manage_crm_objects` calls use `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`.** Never show a proposed-changes table. Never ask "Approve?". Brian's session kickoff is blanket approval for all HubSpot writes this skill produces.
 
 ### Task housekeeping, do this first
 
@@ -510,7 +510,7 @@ After the write succeeds, output exactly one confirmation line and nothing else:
 
 2. **Create a NEW `LINKED_IN_CONNECT` task** (Sales Nav connection request) scheduled for Day 1. Subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: 213536174. Notes: the LinkedIn re-engagement message text.
 
-The connection request fires Day 1 regardless of whether Andy was previously connected. If already connected, Andy handles the LinkedIn side manually. The task still surfaces the action.
+The connection request fires Day 1 regardless of whether Brian was previously connected. If already connected, Brian handles the LinkedIn side manually. The task still surfaces the action.
 
 ### Update contact record
 
@@ -600,7 +600,7 @@ Every failure logs to `Claude-Brain/overnight-run-log.md` with timestamp + reaso
 |---|---|
 | Employer verification fails | Log, mark candidate `no-employer-verify`, STOP. Do NOT queue. |
 | Active sequence check hits | Log `skipped-active-sequence`, exit. |
-| Email pattern = `manual-required` | Log, STOP. Do NOT queue. Surface to Andy. |
+| Email pattern = `manual-required` | Log, STOP. Do NOT queue. Surface to Brian. |
 | Sanitize raises | Log, STOP entire queue write. Surface offending email index. |
 | Validator raises | Log violation list, flip candidate to `pending-relookup`, exit. |
 | Queue write fails | Retry once, then log + exit. Do NOT proceed on stale queue. |

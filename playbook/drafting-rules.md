@@ -3,7 +3,7 @@
 **Read this file inline as Step 0 before drafting ANY outbound copy.** Email body, subject, LinkedIn invite, LinkedIn InMail, voicemail script, call opener, anything that goes to a prospect.
 
 > ## 🚨 NEVER PUT AN EM-DASH IN AN EMAIL. NOT ONCE. NOT EVER. 🚨
-> When you draft any email body or subject line, the em-dash (U+2014) and the en-dash (U+2013) are forbidden. Zero. If you are about to type a dash that joins two thoughts, STOP: use a period and start a new sentence, or use a comma. Every email is sanitized and validated for this before it is queued or written to HubSpot, and an email containing an em-dash never goes out. This is the single most important formatting rule on this page. Andy has said it more than once: no em-dashes in emails, ever.
+> When you draft any email body or subject line, the em-dash (U+2014) and the en-dash (U+2013) are forbidden. Zero. If you are about to type a dash that joins two thoughts, STOP: use a period and start a new sentence, or use a comma. Every email is sanitized and validated for this before it is queued or written to HubSpot, and an email containing an em-dash never goes out. This is the single most important formatting rule on this page. Brian has said it more than once: no em-dashes in emails, ever.
 
 This file replaces scattered references to:
 - `playbook/voice-rules.md` (consolidated here)
@@ -22,7 +22,7 @@ These are hard stops. The validator scans every body and subject before queue wr
 ### 1.1 NO em-dashes or en-dashes, ever
 The Unicode characters at codepoint U+2014 (em-dash) and U+2013 (en-dash) are banned in every body, subject, note, task description, voicemail, and LinkedIn message. Use periods to split sentences. Use commas for parenthetical clauses. Use hyphens only inside the allowlisted product names (Section 1.7). This file deliberately does not show the banned characters as literals; the validator references them via `chr(0x2014)` and `chr(0x2013)`.
 
-This is Andy Rule #4 from `CLAUDE.md`. It is non-negotiable. The validator will refuse to write the queue entry if either character is present.
+This is Brian Rule #4 from `CLAUDE.md`. It is non-negotiable. The validator will refuse to write the queue entry if either character is present.
 
 ### 1.2 NO "SmartOptics" by name in cold outreach
 Refer to optics as "OSI transceivers" or "our optics." NEVER name SmartOptics in Email 1 through Email 6 of any cold sequence, NEVER in cold LinkedIn invites, NEVER in cold call openers, NEVER in voicemails.
@@ -40,7 +40,7 @@ Acceptable framing: "we source," "we supply," "our optics line," "our transceive
 The first sentence of Email 1 (and any cold LinkedIn message) references the PROSPECT, not OSI. Lead with their pain, their post, their company news, or their role. Never lead with who you are or what OSI does.
 
 The validator bans these opener patterns at the start of Email 1 bodies:
-- `^I'm Andy` / `^I am Andy`
+- `^I'm Brian` / `^I am Brian`
 - `^I'm with OSI` / `^I am with OSI`
 - `^I'm at OSI` / `^I am at OSI`
 - `^I work with` (when followed by a generic role description)
@@ -106,13 +106,13 @@ These read like press releases. Replace with active verbs or sentence breaks.
 ### 1.10 NO negative parallelisms
 Banned: "It's not just X, it's Y." "Not only A but also B." "Less of X, more of Y."
 
-These are LinkedIn-influencer cadence. Andy doesn't talk like that.
+These are LinkedIn-influencer cadence. Brian doesn't talk like that.
 
-### 1.11 NO "Andy" sign-off
-The Outlook signature handles the sign-off. Typing "Andy" or "Best, Andy" or "Thanks, Andy" at the bottom of an email body produces a doubled signature. Bodies end at the last content sentence.
+### 1.11 NO "Brian" sign-off
+The Outlook signature handles the sign-off. Typing "Brian" or "Best, Brian" or "Thanks, Brian" at the bottom of an email body produces a doubled signature. Bodies end at the last content sentence.
 
 ### 1.12 ONE product line per email (Surgical Isolation)
-Andy Rule #2 from `CLAUDE.md`. Each email body covers exactly one OSI product line. Email 1 = one line. Email 3 = a different line. Email 4 = another different line. Within a single email, do not lump optics with TPM, do not lump DIMMs with storage, do not list product lines.
+Brian Rule #2 from `CLAUDE.md`. Each email body covers exactly one OSI product line. Email 1 = one line. Email 3 = a different line. Email 4 = another different line. Within a single email, do not lump optics with TPM, do not lump DIMMs with storage, do not list product lines.
 
 The validator checks for product-line keyword density. If two or more distinct product-line keyword clusters appear in one body, the write aborts.
 
@@ -199,7 +199,7 @@ Email 1 leads with the Personal Hook. The hook lives in the strategy note (built
 - Company size or industry alone. "Big bank" is not a hook.
 
 ### Hook quality gate
-If the strategy note's Personal Hook is one of the "NOT a Personal Hook" cases, the drafter ABORTS Email 1 and flips the candidate to `pending-needs-hook` in `state.candidates`. Andy reviews next session and either pulls a real hook from LinkedIn or marks the candidate as no-hook-available.
+If the strategy note's Personal Hook is one of the "NOT a Personal Hook" cases, the drafter ABORTS Email 1 and flips the candidate to `pending-needs-hook` in `state.candidates`. Brian reviews next session and either pulls a real hook from LinkedIn or marks the candidate as no-hook-available.
 
 The drafter does NOT write Email 1 with a thin hook.
 
@@ -294,7 +294,7 @@ The Christopher Lawrence email below shipped on 2026-04-30 and broke 7 rules in 
 ```
 Christopher,
 
-I'm Andy McLean at OSI Global. I work with IT infrastructure managers at large financial institutions on two areas where OEM pricing tends to be painful: transceivers and third party maintenance.
+I'm Brian McLean at OSI Global. I work with IT infrastructure managers at large financial institutions on two areas where OEM pricing tends to be painful: transceivers and third party maintenance.
 
 We manufacture SmartOptics transceivers at 80 to 90 percent below Cisco OEM list, and we do multi vendor TPM covering Cisco, Dell, NetApp, HP, and Arista at 40 to 60 percent below OEM rates.
 
@@ -304,7 +304,7 @@ Worth 15 minutes?
 ```
 
 What's wrong:
-1. **Opens with "I'm Andy McLean at OSI Global"**. Credentials before pain. Section 1.4 violation.
+1. **Opens with "I'm Brian McLean at OSI Global"**. Credentials before pain. Section 1.4 violation.
 2. **Names "SmartOptics" in cold**. Section 1.2 violation.
 3. **Claims "we manufacture SmartOptics transceivers"**. Factually wrong. Section 1.3 violation.
 4. **Two product lines (optics and TPM) crammed into one email**. Section 1.12 (Surgical Isolation) violation.
@@ -325,7 +325,7 @@ Before passing any email body to the validator, the drafter answers these six qu
 3. Is there exactly ONE product line in this email?
 4. Did I name SmartOptics? (must be no for cold outreach)
 5. Did I claim OSI manufactures? (must be no)
-6. Did I sign with "Andy" at the bottom? (must be no, Outlook signature handles it)
+6. Did I sign with "Brian" at the bottom? (must be no, Outlook signature handles it)
 
 If any answer is wrong, rewrite before validating. The validator catches strings; this self-check catches semantics.
 
@@ -333,7 +333,7 @@ If any answer is wrong, rewrite before validating. The validator catches strings
 
 ## SECTION 13, VOICE AND HUMANIZATION
 
-- **Peer-to-peer**, not vendor-to-buyer. Andy reaches out as Andy, not as a company.
+- **Peer-to-peer**, not vendor-to-buyer. Brian reaches out as Brian, not as a company.
 - **Short**. Mobile-friendly. Scannable in 10 seconds.
 - **Tight prose**. No fluff.
 - **Vary sentence length**. Mix short punchy with longer.

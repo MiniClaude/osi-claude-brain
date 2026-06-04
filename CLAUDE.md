@@ -1,8 +1,8 @@
-# Andy's Second Brain  -  Master Instructions
+# Brian's Second Brain  -  Master Instructions
 
 ## 🚨 BAD NUMBER COMMAND (added 2026-05-28)
 
-**Trigger:** Andy says "bad number on [Name] at [Company]"
+**Trigger:** Brian says "bad number on [Name] at [Company]"
 
 **Action (no confirmation needed, execute immediately):**
 1. Search HubSpot contacts by firstname + lastname + company to find the exact contact.
@@ -16,7 +16,7 @@ Email tasks and all other task types are never touched. Only NOT_STARTED call ta
 
 ## 🚨 READ THE SKILL FIRST. EVERY TIME. NO EXCEPTIONS. (added 2026-05-05)
 
-When Andy's message mentions a skill by name OR triggers a skill workflow, the FIRST action is to read that skill's SKILL.md. Before any HubSpot call. Before any LinkedIn search. Before any ZoomInfo call. Before writing a single word of outreach.
+When Brian's message mentions a skill by name OR triggers a skill workflow, the FIRST action is to read that skill's SKILL.md. Before any HubSpot call. Before any LinkedIn search. Before any ZoomInfo call. Before writing a single word of outreach.
 
 Trigger -> Skill to read FIRST:
 - "find prospects at [company]" / "find me people at" / "qualify" -> `C:\Claude-Brain\skills\osi-prospect-qualification\SKILL.md`
@@ -27,13 +27,13 @@ Trigger -> Skill to read FIRST:
 - "run the monitor" / "sequence status" -> `C:\Claude-Brain\skills\osi-monitor\SKILL.md`
 - "send emails" / "email sender" -> `C:\Claude-Brain\skills\osi-email-sender\SKILL.md`
 
-If Andy says "read the [X] skill" in his message: read it IMMEDIATELY as the first tool call. Not after trying something. Not after asking a clarifying question. First.
+If Brian says "read the [X] skill" in his message: read it IMMEDIATELY as the first tool call. Not after trying something. Not after asking a clarifying question. First.
 
-**Company Mode always requires BOTH skills.** If Andy asks to find AND sequence prospects at a company, that is Company Mode. Company Mode is governed by osi-prospect-qualification (discovery, qualification, LinkedIn browsing) AND osi-outreach-sequence (drafting, queueing). Reading only the outreach skill and skipping the qualification skill is a guaranteed failure mode -- the outreach skill contains zero discovery logic.
+**Company Mode always requires BOTH skills.** If Brian asks to find AND sequence prospects at a company, that is Company Mode. Company Mode is governed by osi-prospect-qualification (discovery, qualification, LinkedIn browsing) AND osi-outreach-sequence (drafting, queueing). Reading only the outreach skill and skipping the qualification skill is a guaranteed failure mode -- the outreach skill contains zero discovery logic.
 
 **Special alert -- hedge funds and quant firms:** D.E. Shaw, Renaissance, Two Sigma, Citadel, Jane Street, Millennium, Point72, and similar firms have employees who deliberately scrub LinkedIn profiles. Keyword searches return near-zero results at these firms. The ONLY viable discovery path is the Round 0 card browse in the qualification skill. If the qualification skill has not been read, you do not know this rule. Read it first.
 
-**Why this rule exists:** 2026-05-05 -- Andy's first message said "find prospects at siemens energy... read the prospecting skill and outreach skill." Claude ignored it and improvised. 2026-05-08 -- Company Mode on D.E. Shaw read the outreach skill but not the qualification skill. The Round 0 browse was skipped. Three VP-level data center targets were missed because keyword searches returned nothing against a firm where employees deliberately strip their profiles.
+**Why this rule exists:** 2026-05-05 -- Brian's first message said "find prospects at siemens energy... read the prospecting skill and outreach skill." Claude ignored it and improvised. 2026-05-08 -- Company Mode on D.E. Shaw read the outreach skill but not the qualification skill. The Round 0 browse was skipped. Three VP-level data center targets were missed because keyword searches returned nothing against a firm where employees deliberately strip their profiles.
 
 ---
 
@@ -51,9 +51,9 @@ What this means in practice:
 
 If a fire triggers a prompt, that is a bug in the skill that called the prompting tool. Stop and fix the skill. Do NOT one-off it.
 
-Interactive sessions (Andy at keyboard) keep the broader research surface. The rule fires only when the session is launched by a scheduled task.
+Interactive sessions (Brian at keyboard) keep the broader research surface. The rule fires only when the session is launched by a scheduled task.
 
-**Why this rule exists:** 2026-04-29, overnight Processing Recurring fire ran a Patti Paulo (ExteNet Systems) qualification subagent that hit a restricted LinkedIn profile and followed the qualification skill's documented Path B fallback by `web_fetch`-ing `extenet.com/about-us/leadership/patti-paulo`. That fetch prompted Andy for browser permission overnight. The orchestrator promised zero prompts during scheduled fires; the qualification skill broke the promise via a documented fallback. The fix is the inverted rule above plus parallel rules in osi-overnight-runner, osi-prospect-qualification, osi-discovery-sweep, osi-outreach-sequence.
+**Why this rule exists:** 2026-04-29, overnight Processing Recurring fire ran a Patti Paulo (ExteNet Systems) qualification subagent that hit a restricted LinkedIn profile and followed the qualification skill's documented Path B fallback by `web_fetch`-ing `extenet.com/about-us/leadership/patti-paulo`. That fetch prompted Brian for browser permission overnight. The orchestrator promised zero prompts during scheduled fires; the qualification skill broke the promise via a documented fallback. The fix is the inverted rule above plus parallel rules in osi-overnight-runner, osi-prospect-qualification, osi-discovery-sweep, osi-outreach-sequence.
 
 ---
 
@@ -63,9 +63,9 @@ Before creating any new HubSpot contact OR queueing any email, search HubSpot by
 
 If no HubSpot match exists, derive the company's **verified** email pattern from engagement signals (replies, opens, bounces) at that company, not from "most common stored format." Stored formats include the bad ZoomInfo guesses we're trying to filter out. Full algorithm at `knowledge/email-pattern-resolver.md`.
 
-When ZoomInfo returns an email different from the chosen address, write the ZoomInfo address to the contact's `hs_additional_emails` and prepend a top-of-notes line: `ALT EMAIL <date>: ZoomInfo lists <email>. Using <chosen>. Pattern: <pattern> verified by <signal>.` Andy reviews every contact before sending, that line surfaces the alternate.
+When ZoomInfo returns an email different from the chosen address, write the ZoomInfo address to the contact's `hs_additional_emails` and prepend a top-of-notes line: `ALT EMAIL <date>: ZoomInfo lists <email>. Using <chosen>. Pattern: <pattern> verified by <signal>.` Brian reviews every contact before sending, that line surfaces the alternate.
 
-**Why this rule exists:** on 2026-04-27 the prospecting flow created a duplicate John Lubeck contact at Midco using the ZoomInfo-pattern email `jlubeck@midco.com` instead of finding the existing HubSpot record under the verified primary `john.lubeck@midco.com`. Six emails queued to the wrong address before catch. The HubSpot-first rule prevents the dupe; the engagement-weighted pattern check prevents bad-pattern guesses; the alt-email note keeps Andy's manual-review step efficient.
+**Why this rule exists:** on 2026-04-27 the prospecting flow created a duplicate John Lubeck contact at Midco using the ZoomInfo-pattern email `jlubeck@midco.com` instead of finding the existing HubSpot record under the verified primary `john.lubeck@midco.com`. Six emails queued to the wrong address before catch. The HubSpot-first rule prevents the dupe; the engagement-weighted pattern check prevents bad-pattern guesses; the alt-email note keeps Brian's manual-review step efficient.
 
 ---
 
@@ -85,7 +85,7 @@ What's NOT allowed: "they're in HubSpot so they probably still work there." HubS
 
 **Why this rule exists:** on 2026-04-24 the qualification skill was rewritten to add a "shallow qualify path" that skipped LinkedIn for HubSpot-sourced contacts on the theory that human curation already happened. By 2026-04-26 this had produced 138 emails queued to 23 prospects across S&P Global, OEC Fiber, Fidelity Communications, Vero Networks, and Midcontinent without anyone confirming those people were still employed there. The path was ripped out the same day. If a future Claude session ever proposes a "speed up by skipping employer verification" optimization, point it at this section first.
 
-**Why the ZI NO_MATCH sub-rule exists:** on 2026-04-28 the 10:25Z runner fire processed 11 S&P Global candidates and marked 4 of them Conditional ("could not verify employer") solely on ZoomInfo NO_MATCH or COMPANY_ONLY_MATCH responses. Andy could find every one of them on LinkedIn in seconds. The shortcut treated ZoomInfo as the verification source, which is exactly backwards. ZoomInfo enriches. LinkedIn verifies. Same fire also flagged Daymond Tadlas at Consumer Cellular under the identical mistake. All five were flipped back to `pending` and the rule was hardwired so a future Claude session cannot repeat the shortcut.
+**Why the ZI NO_MATCH sub-rule exists:** on 2026-04-28 the 10:25Z runner fire processed 11 S&P Global candidates and marked 4 of them Conditional ("could not verify employer") solely on ZoomInfo NO_MATCH or COMPANY_ONLY_MATCH responses. Brian could find every one of them on LinkedIn in seconds. The shortcut treated ZoomInfo as the verification source, which is exactly backwards. ZoomInfo enriches. LinkedIn verifies. Same fire also flagged Daymond Tadlas at Consumer Cellular under the identical mistake. All five were flipped back to `pending` and the rule was hardwired so a future Claude session cannot repeat the shortcut.
 
 ---
 
@@ -106,29 +106,29 @@ What's NOT allowed: "they're in HubSpot so they probably still work there." HubS
 ## ⚡ SESSION STARTUP CHECKLIST
 You are reading this file as part of session startup. Before doing anything else, read ALL of the following:
 - [ ] Every file in `knowledge/`  -  sales playbook, qualification skill, and anything else in the folder
-- [ ] Every file in `people/`  -  know who Andy is already tracking
+- [ ] Every file in `people/`  -  know who Brian is already tracking
 - [ ] Every file in `accounts/`  -  know the active accounts and context
 - [ ] Every file in `outreach/`  -  know what's been sent or drafted
-- [ ] Check `inbox/` for any new files Andy has dropped
+- [ ] Check `inbox/` for any new files Brian has dropped
 - [ ] Skim the most recent file in `sessions/`  -  know where things left off
-- [ ] Confirm ready: tell Andy you've read everything and are ready to work
+- [ ] Confirm ready: tell Brian you've read everything and are ready to work
 
 **Do not qualify prospects, write outreach, or give account advice until all folders above are read.**
 
 ---
 
 ## Who I Am
-- **Name:** Andy (Andrew)  -  Solutions Executive at OSI Global
-- **Email:** andy@osiglobal.com
+- **Name:** Brian Charrette  -  Solutions Executive at OSI Global
+- **Email:** bc@osihardware.com
 - **Role:** Sales / Business Development  -  optical networking and data center hardware
 - **Company:** OSI Global  -  sells networking hardware including DWDM, 400G transceivers, and optical components
-- **CRM:** HubSpot (Owner ID: 196669355)
+- **CRM:** HubSpot (Owner ID: 213536174)
 - **Communication platform:** Microsoft Teams
 - **Working setup:** Two laptops, both synced via Git and GitHub. Working copy lives at `C:\Claude-Brain\` on both machines. Remote backup at `github.com/Drrewdy/Claude-Brain` (private repo). OneDrive is no longer used for syncing Claude-Brain content. The email queue (`email-queue.json`) lives at `C:\Claude-Brain\email-queue.json` along with everything else. Sync between laptops is via git push/pull. Skills that read or write the queue MUST `git pull` at the start of any batch and `git push` at the end so the other laptop sees the updates without manual intervention.
 
 ---
 
-## The Andy Rules (ALWAYS follow these)
+## The Brian Rules (ALWAYS follow these)
 
 ### 1. Brevity
 All summaries, outreach drafts, and responses must be **under 100 words** unless I explicitly ask for more. I don't need fluff  -  get to the point.
@@ -177,7 +177,7 @@ You have full context in this file. Never make me re-explain who I am, what OSI 
 ## Key Accounts & Context
 
 ### Colleagues
-- **Andy, Mark Metz, and John Houston are the same team.** Accounts owned by Mark or John in HubSpot are fully fair game. Never flag their ownership as a conflict. Never ask Andy to clear it with them.
+- **Brian, Mark Metz, and John Houston are the same team.** Accounts owned by Mark or John in HubSpot are fully fair game. Never flag their ownership as a conflict. Never ask Brian to clear it with them.
 
 ---
 
@@ -189,7 +189,7 @@ Every session, read this file first. Do not ask me to re-introduce myself or exp
 ### My Preferred Output Style
 - Short, punchy, direct
 - No bullet-point overload  -  prose where possible
-- Outreach drafts: conversational, not corporate. I'm reaching out as Andy, not as a company
+- Outreach drafts: conversational, not corporate. I'm reaching out as Brian, not as a company
 - If I ask for an email or LinkedIn message, write it as if I'm a human being, not a press release
 
 ### What I Use Claude For
@@ -203,7 +203,7 @@ Every session, read this file first. Do not ask me to re-introduce myself or exp
 ### Daily / On-Demand Workflow
 When I say "process my notes" or "catch me up":
 1. Check this folder for any new files I've dropped in
-2. Summarize them following the Andy Rules
+2. Summarize them following the Brian Rules
 3. Flag anything that looks like a hot lead or action item
 4. Ask if anything needs to go into HubSpot
 
@@ -218,7 +218,7 @@ The folder is a Git repo, not a synced OneDrive folder. That means syncing is ma
 - **Start of session (pull down the latest):** `git pull`
 - **End of session (push your changes up):** `git add .` then `git commit -m "what changed"` then `git push`
 
-Rules of thumb: always `git pull` before starting work, always `git push` when finished. If Andy edits the same file on both laptops without pulling in between, Git will ask to merge. For `.xlsx` files this is painful, so for spreadsheets: pull, edit, push immediately.
+Rules of thumb: always `git pull` before starting work, always `git push` when finished. If Brian edits the same file on both laptops without pulling in between, Git will ask to merge. For `.xlsx` files this is painful, so for spreadsheets: pull, edit, push immediately.
 
 If Claude is running a task that modifies files in this folder, Claude should offer to commit and push at the end of the task so the other laptop can pull the change.
 
@@ -247,7 +247,7 @@ Both the source folder (`skills/[skill-name]/SKILL.md`) AND the packaged `.skill
 As of 2026-04-25 the email queue moved BACK from OneDrive to `C:\Claude-Brain\email-queue.json`. The OneDrive sync was eliminating itself one prompt at a time: every scheduled-task session triggered a Cowork mount approval prompt. Now the queue is git-versioned along with everything else.
 
 🚨 **HARD RULE: NO AUTO GIT IN SCHEDULED TASKS / RUNNERS.**
-Skills must NOT call `git pull` or `git push` automatically. Reasons: (1) `.git/index.lock` keeps getting stuck because the sandbox can't always delete it, blocking subsequent operations; (2) Andy only runs the runner on ONE laptop, so auto-sync isn't needed; (3) auto-git pollutes logs with `GIT WARN` noise every fire. Skills read and write to disk; Andy commits and pushes manually when he wants to sync to the other laptop.
+Skills must NOT call `git pull` or `git push` automatically. Reasons: (1) `.git/index.lock` keeps getting stuck because the sandbox can't always delete it, blocking subsequent operations; (2) Brian only runs the runner on ONE laptop, so auto-sync isn't needed; (3) auto-git pollutes logs with `GIT WARN` noise every fire. Skills read and write to disk; Brian commits and pushes manually when he wants to sync to the other laptop.
 
 If a skill or scheduled task previously did `git pull` / `git push` automatically, remove that logic. Do NOT log `GIT WARN` lines about lock files. Just write to disk cleanly and exit.
 
@@ -297,12 +297,12 @@ The stub frontmatter must match the source frontmatter (preserves Cowork trigger
 
 **Morning skill sync (auto-heal planned):** The `morning-skill-sync` scheduled task runs weekday mornings. Currently it reports drift; the planned upgrade is for it to auto-heal by re-stubbing the runtime if it detects full content where there should be a stub. Until that's built, drift is unlikely (because every fire reads source via the stub) but possible (if someone re-installs via drag-drop). If morning-skill-sync flags drift, force-stub the affected skills.
 
-**Why this rewrite happened (2026-04-29 incident):** the `osi-email-sender` runtime fell 2,675 bytes behind source after multiple Claude sessions edited the source without doing the force-copy step. The email-sender then skipped 8 of 11 due entries because the runtime was missing a recent fix. Andy halted the run. The four-step manual workflow had been failing silently for at least a week. Architectural fix: replace the runtime with a redirect stub so drift becomes impossible by construction. The runtime cannot be stale if it contains no skill content.
+**Why this rewrite happened (2026-04-29 incident):** the `osi-email-sender` runtime fell 2,675 bytes behind source after multiple Claude sessions edited the source without doing the force-copy step. The email-sender then skipped 8 of 11 due entries because the runtime was missing a recent fix. Brian halted the run. The four-step manual workflow had been failing silently for at least a week. Architectural fix: replace the runtime with a redirect stub so drift becomes impossible by construction. The runtime cannot be stale if it contains no skill content.
 
 ### Cold Re-Engagement vs. Full Sequence - Keep These Separate
 - **Cold re-engagement** = 2 InMail tasks only (no strategy doc, no email sequence). Used when working existing 1st-degree LinkedIn connections who've gone cold.
 - **7-email or 3-email sequence** = full outreach package. Used when actively prospecting a specific person.
-These are different workflows. Do not run both on the same person without Andy explicitly asking for both.
+These are different workflows. Do not run both on the same person without Brian explicitly asking for both.
 
 ### 6-Month LinkedIn Message Check Rule
 When running cold re-engagement:
@@ -311,10 +311,10 @@ When running cold re-engagement:
 - No HubSpot record: always check LinkedIn messages before proceeding.
 
 ### Capture Rule
-If I drop a file or paste text without instructions, assume I want it processed, summarized, and filed per the Andy Rules. Tell me where you filed it and flag any action items.
+If I drop a file or paste text without instructions, assume I want it processed, summarized, and filed per the Brian Rules. Tell me where you filed it and flag any action items.
 
 ### Session Summary Rule
-At the end of every session, save a summary to `sessions/` using the filename format `session-YYYY-MM-DD.md`. Include: what we worked on, any outputs created, action items, and anything that should go into HubSpot. Keep it under 150 words per the Andy Rules.
+At the end of every session, save a summary to `sessions/` using the filename format `session-YYYY-MM-DD.md`. Include: what we worked on, any outputs created, action items, and anything that should go into HubSpot. Keep it under 150 words per the Brian Rules.
 
 ---
 
@@ -365,7 +365,7 @@ Title says "Data Center Strategy & Operations" but his entire career is program 
 ---
 
 ## Notes on Data & Privacy
-- This file lives in a private GitHub repo (`github.com/Drrewdy/Claude-Brain`) with the working copy at `C:\Claude-Brain\` on each laptop. The repo is private and only Andy has access.
+- This file lives in a private GitHub repo (`github.com/Drrewdy/Claude-Brain`) with the working copy at `C:\Claude-Brain\` on each laptop. The repo is private and only Brian has access.
 - Do not store specific serial numbers, unreleased pricing, or confidential customer contract details in plain text here
 - For sensitive deal specifics, reference HubSpot instead
 - The old OneDrive Claude-Brain folder was DELETED 2026-04-30 on the work laptop. The personal laptop's `C:\Users\drrew\OneDrive\Claude-Brain` may still exist as a stale copy; do NOT read or write to it. The single source of truth is `C:\Claude-Brain\` on each laptop, synced via Git. Cowork's scheduled-task storage still writes to `C:\Users\Andy\OneDrive - OSI Hardware\Documents\Claude\Scheduled\` because that path is hardcoded in Cowork's `create_scheduled_task` tool. That folder is local-only (OneDrive Backup off); the "OneDrive" in the path name is misleading. Scheduled tasks fire fine from there. The Cowork app config is the only thing that could redirect that path, and it's not exposed via MCP.

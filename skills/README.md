@@ -49,6 +49,6 @@ If editing a skill in a Cowork session:
 3. cd /sessions/.../mnt/.claude/skills/skill-creator
 4. python3 -m scripts.package_skill /sessions/.../skill_sync/build/{skill} /sessions/.../skill_sync/dist
 5. cp dist/*.skill to C:\Claude-Brain\skills\
-6. present_files on the .skill files, Andy clicks Save skill
+6. present_files on the .skill files, Brian clicks Save skill
 7. git add . && git commit -m "skill: update {skill-name}" && git push
 ```

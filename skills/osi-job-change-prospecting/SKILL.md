@@ -46,7 +46,7 @@ save the search, then update the `recentSearchParam id` in this URL with the new
 
 ---
 
-## Andy Rules
+## Brian Rules
 
 - No em-dashes anywhere. Not once.
 - Hard No = silent skip. Do not log in Excel.
@@ -126,7 +126,7 @@ For each person shown:
 3. Check Excel tracker first, skip anyone already logged from a prior job change run.
 4. Everyone else: full ICP check → history pull → HubSpot check → action.
 
-**Message tone for new connections:** These people just connected with Andy. The opener
+**Message tone for new connections:** These people just connected with Brian. The opener
 should acknowledge the new connection naturally, not a cold reach, but also not
 over-familiar. Reference something specific about their role or company. Keep it warm
 and conversational. No pitch in Touch 1.
@@ -152,7 +152,7 @@ making any HubSpot changes. Do this in parallel where possible.
 ### 4a. LinkedIn Message History (Sales Navigator)
 - Navigate to their Sales Nav lead page.
 - Read the Timeline / Relationship section, it shows past InMail threads, notes,
-  and interactions Andy has had with this person.
+  and interactions Brian has had with this person.
 - Note: date of last contact, what was discussed, any responses received.
 
 ### 4b. LinkedIn Message History (Regular LinkedIn)
@@ -185,7 +185,7 @@ Search for deals associated with the contact's current or past company:
 ## Step 5: HubSpot Ownership Check
 
 1. Search HubSpot for the contact by name.
-   - If privacy-blocked on LinkedIn, use past companies to find them (see Andy Rules above).
+   - If privacy-blocked on LinkedIn, use past companies to find them (see Brian Rules above).
 2. Search HubSpot for their NEW company. Note the owner ID.
 3. Resolve owner ID to a name using search_owners.
 4. Decide action:
@@ -200,8 +200,8 @@ Search for deals associated with the contact's current or past company:
 
 ### Company update rule (IMPORTANT)
 Only update a contact's company association if the new company is:
-- Already owned by Andy/Mark/John (JAM team), OR
-- Not in HubSpot at all (create it, assign to Andy 213536174, then associate)
+- Already owned by Brian/Mark/John (JAM team), OR
+- Not in HubSpot at all (create it, assign to Brian 213536174, then associate)
 
 If new company is another rep's: leave contact's company as-is. Still create tasks.
 
@@ -222,30 +222,30 @@ For each qualified target eligible for tasks (and passing the duplicate check ab
 - Body: **ONLY the raw draft message text. Nothing else.**
 
 ### Task body rule (HARD RULE, no exceptions)
-The task body / note field on a Sales Navigator LinkedIn task is the literal message text Andy will paste into LinkedIn. It must contain ONLY the draft to send. Nothing else.
+The task body / note field on a Sales Navigator LinkedIn task is the literal message text Brian will paste into LinkedIn. It must contain ONLY the draft to send. Nothing else.
 
 Do NOT include any of the following in the task body:
 - Label prefixes like "LinkedIn invite (under 300 chars):", "Touch 1:", "Message:", "Draft:", "InMail body:"
 - Character-count annotations like "(under 300 chars)" or "(280/300)"
 - Subject lines, headers, or section dividers
 - Strategy notes, ICP rationale, history summaries, or context
-- Signoff metadata like a dash followed by "Andy" if it's not part of the actual message body
-- Any framing, commentary, or instructions to Andy
+- Signoff metadata like a dash followed by "Brian" if it's not part of the actual message body
+- Any framing, commentary, or instructions to Brian
 
 ❌ WRONG (do not do this):
 ```
-LinkedIn invite (under 300 chars): Hey Charles, OSI worked with Patrick a while back. Sending a fresh batch of SmartOptics samples around to a few network admins this month. Open to swapping notes? Andy at OSI Global.
+LinkedIn invite (under 300 chars): Hey Charles, OSI worked with Patrick a while back. Sending a fresh batch of SmartOptics samples around to a few network admins this month. Open to swapping notes? Brian at OSI Global.
 ```
 
 ✅ RIGHT (the entire body field):
 ```
-Hey Charles, OSI worked with Patrick a while back. Sending a fresh batch of SmartOptics samples around to a few network admins this month. Open to swapping notes? Andy at OSI Global.
+Hey Charles, OSI worked with Patrick a while back. Sending a fresh batch of SmartOptics samples around to a few network admins this month. Open to swapping notes? Brian at OSI Global.
 ```
 
-The task subject already encodes the touch number and the contact. The body is just the message. Andy copies the body field straight into LinkedIn, anything other than the message itself has to be deleted by hand and that's the bug we're fixing.
+The task subject already encodes the touch number and the contact. The body is just the message. Brian copies the body field straight into LinkedIn, anything other than the message itself has to be deleted by hand and that's the bug we're fixing.
 
 ### Message guidelines
-- Warm, peer-to-peer tone. Andy speaks as a person, not a company.
+- Warm, peer-to-peer tone. Brian speaks as a person, not a company.
 - No pitch in Touch 1. Open a conversation.
 - No em-dashes. Under 200 words.
 - Always reference their new role and company specifically.

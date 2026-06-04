@@ -1,11 +1,11 @@
 ---
 name: osi-email2-rewriter
-description: Redraft pain-led Email 2s in the queue before the 11am send window. Pulls that morning's pending pain-led Email 2 entries, reads the matching Email 1 for context, researches the prospect's company for a fresh angle, drafts a 2-3 sentence replacement body with a concrete ask, and after Andy reviews, writes the new body back to the queue atomically. Trigger: scheduled daily 9:30 AM ET weekdays, or manually via "rewrite today's email 2s", "pull the pain-led follow-ups", "redraft email 2".
+description: Redraft pain-led Email 2s in the queue before the 11am send window. Pulls that morning's pending pain-led Email 2 entries, reads the matching Email 1 for context, researches the prospect's company for a fresh angle, drafts a 2-3 sentence replacement body with a concrete ask, and after Brian reviews, writes the new body back to the queue atomically. Trigger: scheduled daily 9:30 AM ET weekdays, or manually via "rewrite today's email 2s", "pull the pain-led follow-ups", "redraft email 2".
 ---
 
 # osi-email2-rewriter
 
-This skill fixes a gap in `osi-outreach-sequence`: for pain-led Email 1s (TPM, DWDM, storage, pre-owned, servers), the sequence writer ships Email 2 as a flat `Any thoughts?`, which is a weak bump for a consultative pitch. This skill rewrites those Email 2s the morning they're due, with Andy's review, before `osi-email-sender` fires at 11 AM.
+This skill fixes a gap in `osi-outreach-sequence`: for pain-led Email 1s (TPM, DWDM, storage, pre-owned, servers), the sequence writer ships Email 2 as a flat `Any thoughts?`, which is a weak bump for a consultative pitch. This skill rewrites those Email 2s the morning they're due, with Brian's review, before `osi-email-sender` fires at 11 AM.
 
 Sample-offer Email 2s (SFP sample, DIMM sample, shipping question) stay as `Any thoughts?`, that bump is correct for a logistics question. This skill ignores them.
 
@@ -104,7 +104,7 @@ Example (Email 1 pitched DWDM to a regional carrier, signal is a federal grant a
 
 ---
 
-## Step 4: Present drafts to Andy for review
+## Step 4: Present drafts to Brian for review
 
 Output a concise block per candidate in chat. Format:
 
@@ -120,18 +120,18 @@ Keep each block under 8 lines. All candidates in one message, not one per.
 
 Then ask: "Approve all / approve [IDs] / edit [ID] with [new text] / skip [ID] (sends as 'Any thoughts?')."
 
-Do not touch the queue until Andy responds.
+Do not touch the queue until Brian responds.
 
 ---
 
 ## Step 5: Write approved bodies back to the queue
 
-For each approved (or Andy-edited) entry, construct the new `body` field as:
+For each approved (or Brian-edited) entry, construct the new `body` field as:
 
 ```
 [approved reply text]
 
----------- On [Email 1 sendDate formatted "Month DD"], Andy McLean wrote ----------
+---------- On [Email 1 sendDate formatted "Month DD"], Brian McLean wrote ----------
 [Full Email 1 body text]
 ```
 
@@ -170,11 +170,11 @@ Append to `C:\Claude-Brain\sessions\session-YYYY-MM-DD.md` under an "Email 2 rew
 
 ## Failure modes to watch
 
-- **Queue changed mid-flight.** Between presenting drafts and writing back, `osi-monitor` or Andy may have cancelled an entry. Re-read the entry's status right before writing; if not `pending`, skip the write and log it.
+- **Queue changed mid-flight.** Between presenting drafts and writing back, `osi-monitor` or Brian may have cancelled an entry. Re-read the entry's status right before writing; if not `pending`, skip the write and log it.
 - **Email 1 not found in queue.** If you cannot find the matching `-1` entry, fall back to using the Email 2's own subject (strip `RE: `) plus any context from `people/` files. If still nothing, skip the rewrite for that entry and leave `Any thoughts?`, do NOT invent a pain or company signal.
 - **Research came up empty.** Use 3B (adjacent product line) rather than skipping. Fabricating a fake "recent news" signal is worse than a generic product pivot.
-- **More than 6 candidates in one window.** That's a lot of drafting. Present all of them in one message anyway, Andy will bulk-approve. Do not silently defer any; if he runs out of time he'll tell you to skip the rest.
-- **Fabricated stats.** If you claim "DDR4 softened 15%", you must have a source. If you cannot cite one mentally, rephrase softer: "DDR4 pricing has kept drifting lower" instead of a false hard number. Andy represents these numbers on calls.
+- **More than 6 candidates in one window.** That's a lot of drafting. Present all of them in one message anyway, Brian will bulk-approve. Do not silently defer any; if he runs out of time he'll tell you to skip the rest.
+- **Fabricated stats.** If you claim "DDR4 softened 15%", you must have a source. If you cannot cite one mentally, rephrase softer: "DDR4 pricing has kept drifting lower" instead of a false hard number. Brian represents these numbers on calls.
 
 ---
 
@@ -184,4 +184,4 @@ Append to `C:\Claude-Brain\sessions\session-YYYY-MM-DD.md` under an "Email 2 rew
 - US federal holidays when the sender is off.
 - If `osi-email-sender` is disabled or the queue file is locked / unreadable.
 
-If run manually by Andy mid-day (after the 11am send has fired), report "11am window already fired today, next candidates will be for tomorrow 11am" and list tomorrow's pain-led candidates so Andy can draft them ahead.
+If run manually by Brian mid-day (after the 11am send has fired), report "11am window already fired today, next candidates will be for tomorrow 11am" and list tomorrow's pain-led candidates so Brian can draft them ahead.

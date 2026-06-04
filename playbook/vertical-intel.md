@@ -53,7 +53,7 @@ Use when the prospect already has Park Place, Service Express, Curvature, or Iro
 **Why it matters (the real story):**
 The TPM market has consolidated through acquisitions, PE buyouts, and mergers. Every time that happens, the engineering talent that made the support good walks out the door. Support shifts to a call-center model, response times slip, and the person who knew your environment is gone. OSI does not have that problem: no PE firm pushing for margin expansion, no acquisition to digest, no incentive to cut the team that knows what it is doing.
 
-**Conversation opener (verbatim, Andy-defensible):**
+**Conversation opener (verbatim, Brian-defensible):**
 > "With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
 
 **OSI competitive positioning vs Park Place / Service Express:**
@@ -70,7 +70,7 @@ The TPM market has consolidated through acquisitions, PE buyouts, and mergers. E
 - Most flexible contracts in the industry. Decommission hardware mid-contract and you get a credit for the remaining term. No penalty, no fight.
 - Direct access. Call, email, or open a ticket through the portal. You reach engineers, not a call center.
 
-**Andy-defensible framing:**
+**Brian-defensible framing:**
 > "The merger between Park Place and Service Express has a lot of PE money behind it. That changes the priorities of a support organization. The focus moves from SLAs to margins. We hit 98 percent of our SLAs in 2025, we spare transparently, and if you decommission hardware mid-contract we give you a credit for the time left. We are not going to reorganize around a fund's exit timeline."
 
 **Pricing and framing discipline:**

@@ -1,7 +1,7 @@
 ---
 name: osi-meeting-followup
 description: >
-  Daily 10 AM ET runner that drafts follow-up emails for every Teams meeting Andy had in the last 24 hours.
+  Daily 10 AM ET runner that drafts follow-up emails for every Teams meeting Brian had in the last 24 hours.
   Pulls HubSpot Conversations Intelligence AI summary (`hs_call_summary`) for each call, parses the structured
   action items from the matching HubSpot recap email in Outlook, drafts a concise voice-clean follow-up email,
   and writes it to a HubSpot EMAIL task on the primary external contact (creates a new task or updates the
@@ -21,13 +21,13 @@ description: >
 
 Every weekday morning at 10 AM ET, this skill:
 
-1. Finds all `calls` engagement records owned by Andy (`hubspot_owner_id: 213536174`) that completed between yesterday morning and now.
+1. Finds all `calls` engagement records owned by Brian (`hubspot_owner_id: 213536174`) that completed between yesterday morning and now.
 2. For each call, **verify it is a Teams meeting** (see Step 1.5 below). If not, skip with reason logged.
 3. For each qualifying Teams meeting:
    - Pulls the AI-generated summary (`hs_call_summary` property, has Summary, Key notes, Topics discussed)
-   - Looks up the matching HubSpot recap email in Andy's Outlook inbox (sender `noreply@notifications.hubspot.com`, subject `Next steps ready: <meeting title>`) and parses the structured **action items** list out of the email body HTML
+   - Looks up the matching HubSpot recap email in Brian's Outlook inbox (sender `noreply@notifications.hubspot.com`, subject `Next steps ready: <meeting title>`) and parses the structured **action items** list out of the email body HTML
    - Identifies the primary external contact (the non-OSI attendee)
-   - Drafts a 2-3 sentence follow-up email per Andy's voice rules
+   - Drafts a 2-3 sentence follow-up email per Brian's voice rules
    - Finds an existing pending EMAIL task on that contact, OR creates a new one (due same day, 12 PM ET)
    - Saves the draft as the task body
    - Saves a markdown copy to `C:\Claude-Brain\meetings\YYYY-MM-DD-<slug>.md`
@@ -43,7 +43,7 @@ Every weekday morning at 10 AM ET, this skill:
 - **Call has no `hs_call_summary` populated:** skip with reason "AI summary not yet ready", likely the recording hasn't finished processing. The next morning's run will pick it up.
 - **No primary external contact identified:** skip with reason "internal-only call" (e.g., OSI team standup).
 - **Recap email missing in Outlook:** still proceed using just the `hs_call_summary`, degrade gracefully. Note in log.
-- **Task body already non-empty AND contains "===":** Andy has already worked on it. Don't overwrite. Append a "===Auto draft alternative===" footer with the new draft so Andy can compare without losing his edits.
+- **Task body already non-empty AND contains "===":** Brian has already worked on it. Don't overwrite. Append a "===Auto draft alternative===" footer with the new draft so Brian can compare without losing his edits.
 
 ---
 
@@ -136,7 +136,7 @@ def is_teams_meeting(call_props: dict) -> tuple[bool, str]:
     return True, "qualifies as Teams meeting"
 ```
 
-**Why this rule exists:** on 2026-04-28 the runner created email follow-up tasks for three voicemails (John Lachance / Lingo, Joe Kennedy / TNS, Kal Karran). Andy never asked for follow-up emails on voicemails, the next channel after a voicemail is another call, not an email. The skill spec did not have an explicit Teams-only filter; it drafted on every call with any AI summary. The three bad tasks were closed manually on 2026-04-29 and this hard gate was added the same day. If a future Claude session ever proposes loosening this, point it at this section first.
+**Why this rule exists:** on 2026-04-28 the runner created email follow-up tasks for three voicemails (John Lachance / Lingo, Joe Kennedy / TNS, Kal Karran). Brian never asked for follow-up emails on voicemails, the next channel after a voicemail is another call, not an email. The skill spec did not have an explicit Teams-only filter; it drafted on every call with any AI summary. The three bad tasks were closed manually on 2026-04-29 and this hard gate was added the same day. If a future Claude session ever proposes loosening this, point it at this section first.
 
 ### Step 2, For each call, find associated contacts
 
@@ -159,7 +159,7 @@ Then `read_resource` with the email URI to get the full body. Parse the action i
 
 ### Step 4, Draft the email
 
-Read **`C:\Claude-Brain\playbook\voice-rules.md`** before drafting any email. Apply hard rules: no em-dashes, no hyphens, no "Andy" sign-off, no banned vocab.
+Read **`C:\Claude-Brain\playbook\voice-rules.md`** before drafting any email. Apply hard rules: no em-dashes, no hyphens, no "Brian" sign-off, no banned vocab.
 
 Format:
 ```
@@ -192,11 +192,11 @@ search_crm_objects({
 **If a task exists** with empty/generic body (no `===` markers, less than 200 chars):
 - Update `hs_task_body` to the draft + footer with source attribution.
 
-**If a task exists with substantial body** (Andy has already worked on it):
+**If a task exists with substantial body** (Brian has already worked on it):
 - Append `<p>---<br>Auto draft alternative (run YYYY-MM-DD):</p><p>[draft]</p>` to the existing body. Don't overwrite.
 
 **If no task exists:**
-- Create a new EMAIL task on the contact, due today at 12 PM ET (16:00 UTC during EDT, 17:00 UTC during EST), priority MEDIUM, owner Andy.
+- Create a new EMAIL task on the contact, due today at 12 PM ET (16:00 UTC during EDT, 17:00 UTC during EST), priority MEDIUM, owner Brian.
 
 Footer template appended to every draft:
 ```
@@ -246,8 +246,8 @@ Recording + transcript: HubSpot call record <id> (Review Next Steps tab).
 
 ## 🛡️ SAFETY RULES
 
-- **Never overwrite a non-empty task body without a fallback.** If Andy has typed his own draft into a task, append the auto draft as an alternative, don't replace.
-- **Never mention "Andy" in the email sign-off.** Outlook signature handles it.
+- **Never overwrite a non-empty task body without a fallback.** If Brian has typed his own draft into a task, append the auto draft as an alternative, don't replace.
+- **Never mention "Brian" in the email sign-off.** Outlook signature handles it.
 - **No em-dashes anywhere.** Mechanical scrub before write.
 - **No word-internal hyphens.** Use the same replacement table as `osi-outreach-sequence` (pre-owned → pre owned, multi-vendor → multi vendor, third-party → third party, Gartner-recognized → Gartner recognized, etc.).
 - **No banned vocab:** crucial, pivotal, landscape, underscore, delve, showcase, testament, enhance, foster, garner.
@@ -257,12 +257,12 @@ Recording + transcript: HubSpot call record <id> (Review Next Steps tab).
 
 ## 🧪 MANUAL INVOCATION
 
-When Andy types "draft my meeting follow-ups" or "run meeting followup":
+When Brian types "draft my meeting follow-ups" or "run meeting followup":
 1. Run the same logic, but expand the lookback window to include any call from the last 7 days (not just yesterday).
-2. Show Andy a one-line summary per call before writing tasks ("Found X calls. Draft and save? (y/n)").
+2. Show Brian a one-line summary per call before writing tasks ("Found X calls. Draft and save? (y/n)").
 3. On confirmation, execute and report.
 
-This lets Andy catch up after travel or weekends.
+This lets Brian catch up after travel or weekends.
 
 ---
 
@@ -283,7 +283,7 @@ State file is informational. Recurring runner does NOT use it for dedup, instead
 
 ## 🔄 PERMISSIONS / TOOL USE
 
-- HubSpot: `search_crm_objects` (calls, contacts, tasks), `manage_crm_objects` (tasks create/update, meetings update). Andy approves on first fire of the recurring task.
+- HubSpot: `search_crm_objects` (calls, contacts, tasks), `manage_crm_objects` (tasks create/update, meetings update). Brian approves on first fire of the recurring task.
 - Outlook: `outlook_email_search`, `read_resource` (mail URIs). Read-only. Approved on first fire.
 - File writes: bash + Python for markdown files and state file. Already approved.
 
@@ -293,7 +293,7 @@ No external network access needed beyond these tools. No web searches in this sk
 
 ## 🔁 INTEROP
 
-- **Coexists with the HubSpot Workflow safety net.** The workflow auto-creates an EMAIL task on every meeting with outcome=Completed (placeholder body "Send follow-up. AI draft is on the meeting record's Review tab."). This skill then enriches that task body with the actual drafted email when it runs at 10 AM. If Cowork is asleep or this runner fails, the workflow's task at least exists so Andy isn't blind.
+- **Coexists with the HubSpot Workflow safety net.** The workflow auto-creates an EMAIL task on every meeting with outcome=Completed (placeholder body "Send follow-up. AI draft is on the meeting record's Review tab."). This skill then enriches that task body with the actual drafted email when it runs at 10 AM. If Cowork is asleep or this runner fails, the workflow's task at least exists so Brian isn't blind.
 - **Does NOT touch outreach sequences.** The 6-email outreach queue (`osi-outreach-sequence`) is for cold prospects. This skill is for post-meeting follow-up only.
 - **Does NOT run during overnight outreach.** Different lane, different cadence.
 
@@ -301,7 +301,7 @@ No external network access needed beyond these tools. No web searches in this sk
 
 ## ⚠️ KNOWN LIMITATIONS
 
-- The AI-drafted follow-up email body that HubSpot itself produces is NOT exposed via the standard CRM API. We use `hs_call_summary` (which IS exposed) plus the recap email in Outlook to compose our own draft. This is by design, Andy's voice rules wouldn't match HubSpot's generic AI draft anyway.
+- The AI-drafted follow-up email body that HubSpot itself produces is NOT exposed via the standard CRM API. We use `hs_call_summary` (which IS exposed) plus the recap email in Outlook to compose our own draft. This is by design, Brian's voice rules wouldn't match HubSpot's generic AI draft anyway.
 - The full transcript text is not exposed via the CRM API (`hs_call_has_transcript` flag is, transcript body is not). If you need the transcript, click the call record's Review tab in HubSpot, the link is in the markdown copy.
 - Action item parsing depends on HubSpot's recap email format. If HubSpot changes the email template, the parser may need an update. Detected by: log entries showing "0 action items captured" on calls that should have them.
 
@@ -309,6 +309,6 @@ No external network access needed beyond these tools. No web searches in this sk
 
 ## 🛠️ MAINTENANCE
 
-If Andy's voice rules change (new banned vocab, new sign-off rule), update both this skill AND `osi-outreach-sequence` AND `voice-rules.md` together. They share the rules.
+If Brian's voice rules change (new banned vocab, new sign-off rule), update both this skill AND `osi-outreach-sequence` AND `voice-rules.md` together. They share the rules.
 
-If Andy's HubSpot owner ID ever changes (re-org, new instance), update the constant in this skill.
+If Brian's HubSpot owner ID ever changes (re-org, new instance), update the constant in this skill.

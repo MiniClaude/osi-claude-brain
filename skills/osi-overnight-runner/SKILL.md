@@ -7,7 +7,7 @@ description: >
   per company in Discovery Mega fires, invokes osi-prospect-qualification per candidate in
   Processing fires, invokes osi-outreach-sequence on Yes-with-email handoffs. Triggers on:
   "run sequences tonight", "run a sequence", "run sequences for the following companies",
-  Andy pasting a LinkedIn profile, OR scheduled-task fire (9 fires/day, skips 8 AM to 2 PM ET).
+  Brian pasting a LinkedIn profile, OR scheduled-task fire (9 fires/day, skips 8 AM to 2 PM ET).
 ---
 
 > Source: `C:\Claude-Brain\skills\osi-overnight-runner\` (Git, github.com/Drrewdy/Claude-Brain). Cowork `.claude/skills/` is a copy. Edit source, repackage, install.
@@ -22,9 +22,9 @@ Before invoking any sub-skill (`osi-prospect-qualification`, `osi-outreach-seque
 
 ### Steps (run inline, no subagents)
 
-1. For each sub-skill the runner invokes (`osi-prospect-qualification`, `osi-outreach-sequence`, `osi-discovery-sweep`), confirm the source file is reachable via Read tool at `C:\Claude-Brain\skills\<skill>\SKILL.md`. If any source 404s, log to `C:\Claude-Brain\overnight-run-log.md` (one line per missing source) and EXIT THE FIRE CLEANLY. Do NOT attempt to recover or fall back. Andy will see the log and fix.
+1. For each sub-skill the runner invokes (`osi-prospect-qualification`, `osi-outreach-sequence`, `osi-discovery-sweep`), confirm the source file is reachable via Read tool at `C:\Claude-Brain\skills\<skill>\SKILL.md`. If any source 404s, log to `C:\Claude-Brain\overnight-run-log.md` (one line per missing source) and EXIT THE FIRE CLEANLY. Do NOT attempt to recover or fall back. Brian will see the log and fix.
 
-2. For each sub-skill that has a runtime backing store entry (qualification and outreach do; discovery-sweep is source-only), Read the runtime SKILL.md at `C:\Users\Andy\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\local-agent-mode-sessions\skills-plugin\<plugin-id>\<session-id>\skills\<skill>\SKILL.md`. Verify the runtime is a valid stub:
+2. For each sub-skill that has a runtime backing store entry (qualification and outreach do; discovery-sweep is source-only), Read the runtime SKILL.md at `C:\Users\Brian\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\local-agent-mode-sessions\skills-plugin\<plugin-id>\<session-id>\skills\<skill>\SKILL.md`. Verify the runtime is a valid stub:
    - Under 5 KB
    - Contains the literal string `RUNTIME REDIRECT STUB`
    - Contains the redirect target `C:\Claude-Brain\skills\<skill>\SKILL.md`
@@ -34,7 +34,7 @@ Before invoking any sub-skill (`osi-prospect-qualification`, `osi-outreach-seque
 
 4. If the runtime mount path is unavailable in this fire (skills-plugin not mounted), log `PREFLIGHT-WARN: skills-plugin mount unavailable, sub-skills will load from source via stub fallback` and continue. Do NOT call `request_cowork_directory` (would prompt).
 
-5. Em-dash audit: scan every regenerated stub for U+2014. If present, sanitization failed; log a bug and skip the write. Stubs must be em-dash free per Andy Rule #4.
+5. Em-dash audit: scan every regenerated stub for U+2014. If present, sanitization failed; log a bug and skip the write. Stubs must be em-dash free per Brian Rule #4.
 
 Pre-flight is a heartbeat, not a barrier. Source unreachable = abort. Runtime stub stale = heal silently and continue. Mount unavailable = continue (the morning-skill-sync next 9 AM run will catch up).
 
@@ -48,11 +48,11 @@ After pre-flight passes, proceed to the branch logic below.
 
 The orchestrator MUST NOT use the `Agent` tool to dispatch subagents during a scheduled-task fire. Run all qualification, discovery, and outreach work INLINE in the orchestrator's own context. "Invoke osi-prospect-qualification" means: read the skill file into your own context and execute Profile Mode here. It does NOT mean dispatch an Agent subagent.
 
-Why: every Agent dispatch spawns a fresh sandbox context. The fresh context does not inherit the parent session's approved folder mounts (Claude-Brain, skills-plugin, etc.). On startup, before any subagent tool call runs, Cowork prompts Andy to approve each mount. The "no approval prompts" rule below cannot catch this because it's enforced inside subagent tool calls, but the mount approval fires at subagent *startup*, before any subagent code executes. There is no way to suppress it from inside the subagent.
+Why: every Agent dispatch spawns a fresh sandbox context. The fresh context does not inherit the parent session's approved folder mounts (Claude-Brain, skills-plugin, etc.). On startup, before any subagent tool call runs, Cowork prompts Brian to approve each mount. The "no approval prompts" rule below cannot catch this because it's enforced inside subagent tool calls, but the mount approval fires at subagent *startup*, before any subagent code executes. There is no way to suppress it from inside the subagent.
 
 This is a single-context runner. Read the per-candidate / per-company skill, run it inline, atomic-write the state, advance to the next item. The full pipeline already fits comfortably inside one orchestrator context, every successful fire for the past week ran this way.
 
-**Why this rule exists:** 2026-04-29, Processing Recurring fire dispatched 8 Agent subagents (one per pending candidate) instead of running Profile Mode inline. Each dispatch triggered a folder approval prompt in Andy's UI. Andy halted the run mid-fire. Zero yes-with-email fired. Previous fires (Cantor Fitzgerald 3-of-3 at 2026-04-29T00:12, Aidan Rigney at 17:15) ran inline and produced no prompts. Diff between working fires and this fire: subagent dispatches. Removed.
+**Why this rule exists:** 2026-04-29, Processing Recurring fire dispatched 8 Agent subagents (one per pending candidate) instead of running Profile Mode inline. Each dispatch triggered a folder approval prompt in Brian's UI. Brian halted the run mid-fire. Zero yes-with-email fired. Previous fires (Cantor Fitzgerald 3-of-3 at 2026-04-29T00:12, Aidan Rigney at 17:15) ran inline and produced no prompts. Diff between working fires and this fire: subagent dispatches. Removed.
 
 If a future Claude session reads "invoke osi-prospect-qualification" and reaches for the Agent tool, stop. Read the skill file with the Read tool, follow the steps in your own context, and write state directly. That is the runner.
 
@@ -67,13 +67,13 @@ This applies to the orchestrator AND to every subagent (Agent tool dispatch) the
 Examples that trigger this rule:
 - `web_fetch` or `WebFetch` to a domain that prompts (anything outside the already-approved MCP connectors).
 - `mcp__Claude_in_Chrome__navigate` to a non-LinkedIn domain that prompts.
-- `request_cowork_directory` on a mount Andy has not pre-approved.
+- `request_cowork_directory` on a mount Brian has not pre-approved.
 - `mcp__scheduled-tasks__create_scheduled_task` if approval is required (only the kickoff tasks in Company / Auto Mode pre-approve this; mid-run scheduling that prompts is forbidden).
 - ANY future tool that prompts. Do not enumerate. The trigger is the prompt itself, not the tool.
 
 The runner is fully autonomous overnight. Any prompt is a bug in the skill that called the prompting tool. The skill must be edited to remove the path that calls it; the fire stops doing that step until the skill is fixed.
 
-**Why this rule exists:** 2026-04-29, Patti Paulo (ExteNet Systems) qualification subagent hit a restricted LinkedIn profile and followed the qualification skill's Path B fallback, which sent a `web_fetch` to `extenet.com/about-us/leadership/patti-paulo`. That fetch prompted Andy for permission overnight. The qualification skill explicitly authorized Path B with corporate-website verification, so the subagent was right per the skill but the skill was wrong per the runner contract. Replace the long allowlist of "pre-approved connectors that subagents may use" with this single inverted rule: any prompt = abort. Every overnight-touched skill carries the same rule.
+**Why this rule exists:** 2026-04-29, Patti Paulo (ExteNet Systems) qualification subagent hit a restricted LinkedIn profile and followed the qualification skill's Path B fallback, which sent a `web_fetch` to `extenet.com/about-us/leadership/patti-paulo`. That fetch prompted Brian for permission overnight. The qualification skill explicitly authorized Path B with corporate-website verification, so the subagent was right per the skill but the skill was wrong per the runner contract. Replace the long allowlist of "pre-approved connectors that subagents may use" with this single inverted rule: any prompt = abort. Every overnight-touched skill carries the same rule.
 
 ---
 
@@ -81,12 +81,12 @@ The runner is fully autonomous overnight. Any prompt is a bug in the skill that 
 
 The only two valid exits from Branch A are: (a) 2 yes-with-email sequences fired this run, or (b) zero pending candidates remain in `state.candidates`. Nothing else.
 
-(Cap was 3 pre-2026-05-01; lowered to 2 by Andy on 2026-05-01 for token-budget control after $25 day-one extra-usage spend on the new $300 monthly cap. The historical 3-cap text below in this skill is preserved for context but the active cap is 2.)
+(Cap was 3 pre-2026-05-01; lowered to 2 by Brian on 2026-05-01 for token-budget control after $25 day-one extra-usage spend on the new $300 monthly cap. The historical 3-cap text below in this skill is preserved for context but the active cap is 2.)
 
 The following are NOT valid reasons to exit Branch A early. Do not invent them, do not act on them:
 - "Token budget feels tight", the documented budget is the budget; if a fire feels expensive, that is the budget being used as designed.
 - "The queue looks stale", the runner verifies each candidate; the stale ones produce No / Conditional verdicts and that's the system working, not a reason to bail.
-- "Andy can manually triage" / "next fire will catch it", no, the rule says fire 3 this run.
+- "Brian can manually triage" / "next fire will catch it", no, the rule says fire 3 this run.
 - "First N candidates were all No / Conditional, the pattern will continue", keep going. The next pending may be the Yes.
 - "The next pending is a `hubspot_contact` source and is heavier", qualify it anyway, or skip ahead per the cadence rule below, but do NOT exit.
 
@@ -117,7 +117,7 @@ If a fire needs to skip ahead in the pending pool (cadence rule says `linkedin_s
 
 ## 🛑 HARDWIRED RULE, ANDY-NAMED DISCOVERY OUTRANKS PROCESSING
 
-When Andy adds companies mid-run with `added_via` matching `andy_named_*` and a recent timestamp, those companies must reach Discovery Mega before the next Processing fire grinds further on the existing pending queue. The previous branch order (Processing → Discovery Mega Re-Fire) made this impossible: as long as `pending > 0`, Branch A won and Branch B never fired, so Andy-named companies sat in `discovery_pending` indefinitely behind a backlog of stale candidates.
+When Brian adds companies mid-run with `added_via` matching `andy_named_*` and a recent timestamp, those companies must reach Discovery Mega before the next Processing fire grinds further on the existing pending queue. The previous branch order (Processing → Discovery Mega Re-Fire) made this impossible: as long as `pending > 0`, Branch A won and Branch B never fired, so Brian-named companies sat in `discovery_pending` indefinitely behind a backlog of stale candidates.
 
 The new top priority is **Branch A-prime, ANDY-NAMED DISCOVERY PRIORITY** (defined below). It fires BEFORE Branch A when:
 - Any company in `state.companies` has `status: "discovery_pending"` AND
@@ -126,9 +126,9 @@ The new top priority is **Branch A-prime, ANDY-NAMED DISCOVERY PRIORITY** (defin
 
 Action: schedule a fresh Discovery Mega one-time task to fire in 2-5 minutes via `mcp__scheduled-tasks__create_scheduled_task`, log the dispatch, exit. The current fire does not run Branch A. The Discovery Mega catches up the new companies, then the next regular Processing fire resumes Branch A.
 
-Branch A still runs on every other fire (no recent Andy-named additions), and Branch B still exists for the case of mid-run additions WITHOUT recent Andy-named flag (e.g. Refill appended via Branch C and the Discovery Mega scheduling failed).
+Branch A still runs on every other fire (no recent Brian-named additions), and Branch B still exists for the case of mid-run additions WITHOUT recent Brian-named flag (e.g. Refill appended via Branch C and the Discovery Mega scheduling failed).
 
-Why this rule exists: 2026-04-28, Andy named 10 companies (Gulf Stream Coach, WSP, KONE Elevators, Princeton, Cantor Fitzgerald, Bank of America, ExteNet Systems, OpenX, DRW, Iconectiv) for a 2 PM Discovery Mega. They were appended to `state.companies` as `discovery_pending`. The runner saw 36+ pending candidates, won Branch A on every fire from kickoff onward, and never reached Branch B. The 10 companies sat untouched for 4+ hours while Andy waited. This branch fixes that.
+Why this rule exists: 2026-04-28, Brian named 10 companies (Gulf Stream Coach, WSP, KONE Elevators, Princeton, Cantor Fitzgerald, Bank of America, ExteNet Systems, OpenX, DRW, Iconectiv) for a 2 PM Discovery Mega. They were appended to `state.companies` as `discovery_pending`. The runner saw 36+ pending candidates, won Branch A on every fire from kickoff onward, and never reached Branch B. The 10 companies sat untouched for 4+ hours while Brian waited. This branch fixes that.
 
 ---
 
@@ -191,7 +191,7 @@ If a Processing fire ends up doing any of the above directly instead of invoking
 
 ## HANDOFF (this skill is the top of the chain)
 
-This skill INVOKES three other skills as part of orchestration. It is not handed off TO from anywhere except Andy's command at kickoff or a scheduled-task fire.
+This skill INVOKES three other skills as part of orchestration. It is not handed off TO from anywhere except Brian's command at kickoff or a scheduled-task fire.
 
 | Branch | Skill invoked | Per |
 |---|---|---|
@@ -224,10 +224,10 @@ Token budget per Discovery Mega fire: ~100-150K for 5 companies (light per-compa
 ### 2. Processing Recurring, recurring task
 
 Two recurring crons in local ET (Cowork adds ~9 min jitter):
-- **Weekday cron**, `0 0,2,4,6,14,16,18,20,22 * * 1-5`. 9 fires/day Mon-Fri at 2pm, 4pm, 6pm, 8pm, 10pm, midnight, 2am, 4am, 6am ET. **Daytime blackout 8 AM to 2 PM ET on weekdays.** Andy is at his desk during the blackout.
-- **Weekend cron**, `0 */2 * * 0,6`. 12 fires/day Sat-Sun at every even hour (12am, 2am, 4am, 6am, 8am, 10am, 12pm, 2pm, 4pm, 6pm, 8pm, 10pm ET). **No blackout on weekends**, Andy isn't at the desk so the runner can grind continuously.
+- **Weekday cron**, `0 0,2,4,6,14,16,18,20,22 * * 1-5`. 9 fires/day Mon-Fri at 2pm, 4pm, 6pm, 8pm, 10pm, midnight, 2am, 4am, 6am ET. **Daytime blackout 8 AM to 2 PM ET on weekdays.** Brian is at his desk during the blackout.
+- **Weekend cron**, `0 */2 * * 0,6`. 12 fires/day Sat-Sun at every even hour (12am, 2am, 4am, 6am, 8am, 10am, 12pm, 2pm, 4pm, 6pm, 8pm, 10pm ET). **No blackout on weekends**, Brian isn't at the desk so the runner can grind continuously.
 
-Combined coverage: continuous fires from Mon 2 PM ET through Fri 8 AM ET (with weekday daytime blackouts mid-week), then continuous Fri 2 PM ET through Mon 8 AM ET with no blackout (weekend cron handles Sat + Sun, weekday cron resumes Mon at 12 AM). Architecture documented 2026-04-28 at Andy's request.
+Combined coverage: continuous fires from Mon 2 PM ET through Fri 8 AM ET (with weekday daytime blackouts mid-week), then continuous Fri 2 PM ET through Mon 8 AM ET with no blackout (weekend cron handles Sat + Sun, weekday cron resumes Mon at 12 AM). Architecture documented 2026-04-28 at Brian's request.
 
 Both recurring tasks use the SAME Processing Recurring prompt below. Same orchestrator, same branch logic, same skill. The cron split is purely a schedule concern.
 
@@ -237,7 +237,7 @@ Five branches, top-to-bottom priority:
 - Schedule a new Discovery Mega one-time task to fire in 2-5 minutes via `mcp__scheduled-tasks__create_scheduled_task`. Use the Discovery Mega prompt template below.
 - Log the dispatch and the list of qualifying companies.
 - Exit. Do NOT run Branch A this fire. The Discovery Mega catches up, the next regular fire resumes Branch A.
-- This branch outranks Branch A so that Andy's mid-run named companies cannot get blocked behind a long pending queue.
+- This branch outranks Branch A so that Brian's mid-run named companies cannot get blocked behind a long pending queue.
 
 **Branch A, PROCESSING** (any pending candidates):
 - Take the first pending candidate.
@@ -250,7 +250,7 @@ Five branches, top-to-bottom priority:
 - Log status line. Exit.
 
 **Branch B, DISCOVERY MEGA RE-FIRE** (no pending candidates AND any company status `discovery_pending`):
-- This branch handles the case where Andy added companies mid-run, OR Branch C (Refill) just appended companies but Discovery Mega hasn't fired on them yet.
+- This branch handles the case where Brian added companies mid-run, OR Branch C (Refill) just appended companies but Discovery Mega hasn't fired on them yet.
 - Schedule a new Discovery Mega one-time task to fire in 2-5 minutes. Use the Discovery Mega prompt template below.
 - Log status line. Exit.
 
@@ -264,13 +264,13 @@ Five branches, top-to-bottom priority:
 **Branch D, WRAP-UP** (no pending, no discovery_pending, AND last Refill selector returned 0):
 - Update Tab 2 of `prospects-tracker-new.xlsx` with per-company summary if not already done this run.
 - Final status line to `overnight-run-log.md`: `WRAP-UP, refill selector exhausted, run complete.`
-- Exit clean. Future fires also fall through to wrap-up until Andy starts a new run.
+- Exit clean. Future fires also fall through to wrap-up until Brian starts a new run.
 
 Token budget per Processing fire: ~150-240K (3 sequences × 50-80K each for full LinkedIn read + ZoomInfo + HubSpot writes + email drafts). Branches B and C are cheap (state-file write + one-time-task schedule). Branch D is cheap (Excel write + log).
 
 ### Why split into two tasks
 
-Discovery is bursty (one fire = many candidates). Processing is steady (3 sequences/fire). Mixing them means Processing competes with Discovery for token budget and the backlog grows faster than it drains. Splitting keeps each task's load predictable. Two scheduled tasks = two approval pools (Andy approves LinkedIn / HubSpot / ZoomInfo / Chrome ONCE per task on first fire, all subsequent fires reuse).
+Discovery is bursty (one fire = many candidates). Processing is steady (3 sequences/fire). Mixing them means Processing competes with Discovery for token budget and the backlog grows faster than it drains. Splitting keeps each task's load predictable. Two scheduled tasks = two approval pools (Brian approves LinkedIn / HubSpot / ZoomInfo / Chrome ONCE per task on first fire, all subsequent fires reuse).
 
 ### NO Discovery Fallback. NO 1-company-per-fire trickle.
 
@@ -278,50 +278,50 @@ The old "Discovery Fallback, pick the FIRST discovery_pending company per fire" 
 
 ### NO Auto-Mode-only Refill.
 
-Refill fires in BOTH Company Mode and Auto Mode runs. If Andy started the run with a named list, the runner finishes that list AND THEN refills with cold Andy-owned companies, because the goal is to keep every fire slot full while the recurring task is enabled. Andy stops refill by disabling the recurring task.
+Refill fires in BOTH Company Mode and Auto Mode runs. If Brian started the run with a named list, the runner finishes that list AND THEN refills with cold Brian-owned companies, because the goal is to keep every fire slot full while the recurring task is enabled. Brian stops refill by disabling the recurring task.
 
-The earlier "Auto-Mode Pivot" was removed because it (a) used a broken shallow-qualify shortcut, (b) drip-fed companies one-per-fire, and (c) was gated on `mode == "auto"` which surprised Andy when his Company Mode runs ended early. The current Refill is the fixed version: full upfront Discovery Mega per refill, fires in any mode.
+The earlier "Auto-Mode Pivot" was removed because it (a) used a broken shallow-qualify shortcut, (b) drip-fed companies one-per-fire, and (c) was gated on `mode == "auto"` which surprised Brian when his Company Mode runs ended early. The current Refill is the fixed version: full upfront Discovery Mega per refill, fires in any mode.
 
 ---
 
 ## RUN MODES
 
-### Interactive Mode (in-session, Andy at keyboard)
+### Interactive Mode (in-session, Brian at keyboard)
 
-Andy pastes one LinkedIn profile, OR says "build a sequence for [Name]".
+Brian pastes one LinkedIn profile, OR says "build a sequence for [Name]".
 1. Invoke `osi-prospect-qualification` Profile Mode on the candidate.
 2. If verdict is ✅ Yes-with-email, qualification hands off to `osi-outreach-sequence`.
 3. `osi-outreach-sequence` drafts all 6 emails in interactive form.
-4. Show review to Andy → wait for `ready` → open Outlook with Email 1 → Andy clicks Send → say `sent` → queue Emails 2-6.
+4. Show review to Brian → wait for `ready` → open Outlook with Email 1 → Brian clicks Send → say `sent` → queue Emails 2-6.
 
 Interactive Mode does NOT touch the state file or the scheduled tasks. It is a one-off.
 
 ### Company Mode (in-session kickoff, then overnight)
 
-Andy says "run sequences for the following companies: X, Y, Z".
+Brian says "run sequences for the following companies: X, Y, Z".
 1. Kickoff (in-session, ~2 minutes):
    - Read existing `overnight-candidates.json`. Preserve pending entries.
-   - Append Andy's named companies to `state.companies` with status `discovery_pending`. JAM-tree (Andy / Mark / John) ownership is fine in Company Mode, Mark- and John-owned companies are allowed when Andy names them explicitly.
+   - Append Brian's named companies to `state.companies` with status `discovery_pending`. JAM-tree (Brian / Mark / John) ownership is fine in Company Mode, Mark- and John-owned companies are allowed when Brian names them explicitly.
    - Schedule **Discovery Mega** one-time task to fire in 2-5 minutes.
    - Schedule **Processing Recurring** with cron `0 0,2,4,6,14,16,18,20,22 * * *` if not already scheduled (9 fires/day, daytime blackout 8 AM to 2 PM ET).
-   - Andy approves both schedule calls.
+   - Brian approves both schedule calls.
 2. Overnight (scheduled tasks):
    - Discovery Mega fire processes all named companies in one upfront sweep, files candidates as `pending`.
    - Processing Recurring works through pending candidates 3/fire.
-   - When Andy's named list is fully processed, Refill fires (yes, even in Company Mode) and picks 5 cold Andy-owned companies, schedules new Discovery Mega. Cycle continues until selector returns 0 OR Andy disables the task.
+   - When Brian's named list is fully processed, Refill fires (yes, even in Company Mode) and picks 5 cold Brian-owned companies, schedules new Discovery Mega. Cycle continues until selector returns 0 OR Brian disables the task.
 
 Kickoff does NOT do LinkedIn search, qualification, or outreach itself.
 
 ### Auto Mode (in-session kickoff, then overnight, no named companies)
 
-Andy says "run sequences tonight" with no companies.
+Brian says "run sequences tonight" with no companies.
 1. Kickoff:
    - Read existing `overnight-candidates.json`. Preserve pending entries.
    - Run cold-company selector (steps below). Pick top 5. Append to `state.companies` with status `discovery_pending`.
    - Schedule Discovery Mega + Processing Recurring (same as Company Mode).
 2. Overnight: same as Company Mode. Refill cycles continue until cold pool exhausted.
 
-Auto Mode is overnight-only. The selector is Andy-owned ONLY (owner ID 213536174, NOT Mark or John).
+Auto Mode is overnight-only. The selector is Brian-owned ONLY (owner ID 213536174, NOT Mark or John).
 
 ---
 
@@ -331,12 +331,12 @@ Same logic in both places. Used by Refill (Branch C) and by Auto Mode kickoff.
 
 ### Selector steps (in order)
 
-1. **HubSpot search**, `objectType: companies`, filters: `hubspot_owner_id = 213536174` (Andy ONLY, Mark 210187184 and John 210187193 are NOT eligible. Auto-picked Mark/John accounts are off-limits. They can be processed only when Andy names them explicitly in Company Mode.) AND (`notes_last_contacted` 6+ months ago OR null). Sort by `notes_last_contacted` ASC. Pull a generous candidate pool (~50).
+1. **HubSpot search**, `objectType: companies`, filters: `hubspot_owner_id = 213536174` (Brian ONLY, Mark 210187184 and John 210187193 are NOT eligible. Auto-picked Mark/John accounts are off-limits. They can be processed only when Brian names them explicitly in Company Mode.) AND (`notes_last_contacted` 6+ months ago OR null). Sort by `notes_last_contacted` ASC. Pull a generous candidate pool (~50).
 2. **Active client filter**, for each candidate, check associated deals. Skip any with closed-won deal in last 12 months OR open deal in active pipeline stage. Do NOT use Lifecycle Stage. Log each skip: `SKIPPED: [Company], active client (deal: [name])`.
 3. **M&A check**, quick web search per candidate for recent acquisitions / mergers / rebrands. If the company is a subsidiary of an active OSI customer (e.g. Cable One brands), skip, that customer relationship is owned by another rep. Log skip: `SKIPPED: [Company], M&A subsidiary of [parent], [parent] is OSI customer of [rep]`.
 4. **OSI fit check**, keep telecom, ISPs, cable MSOs, fiber, carriers, regional MSOs, data centers, IT infrastructure plays, banks/credit unions with internal IT, hospitals/health systems with IT infra, manufacturers with real IT footprint. Skip retail, food service, pure software/SaaS, hyperscalers, professional services without IT infra ownership.
 5. **Queue-prevent filter**, open `C:\Claude-Brain\email-queue.json`. Skip any company where ANY entry has `status: "pending"` OR (`status: "sent"` with `sendDate` within last 30 days).
-5a. **DNP filter**, read `C:\Claude-Brain\do-not-auto-prospect.json`. Skip any company whose name case-insensitively matches (substring or exact) any entry in that file. These companies are excluded from Auto Mode and Refill permanently. They can still be worked in Company Mode when Andy names them explicitly. Log each skip: `SKIPPED: [Company], on do-not-auto-prospect list`.
+5a. **DNP filter**, read `C:\Claude-Brain\do-not-auto-prospect.json`. Skip any company whose name case-insensitively matches (substring or exact) any entry in that file. These companies are excluded from Auto Mode and Refill permanently. They can still be worked in Company Mode when Brian names them explicitly. Log each skip: `SKIPPED: [Company], on do-not-auto-prospect list`.
 6. **State-dedup filter**, skip any company already present in `state.companies` (any status). Prevents the same coldest companies being re-picked every refill.
 7. **Rank**, by OSI fit signal first (telecom + ISPs + DCs first, then enterprise IT, then everything else), then by `notes_last_contacted` ASC. Pick the top **10**.
 8. **Write**, append the 5 picks to `state.companies` with `status: "discovery_pending"`. Atomic state file write.
@@ -352,7 +352,7 @@ Without filter 6, the selector would re-pick the same coldest companies every re
 
 ### Why owner-ID filter is critical
 
-Auto-picked Mark/John accounts are off-limits because that's the boundary between "Andy named this, JAM-tree fine" and "the runner picked this on its own, Andy-only." Mark/John accounts can still be processed in Company Mode when Andy names them explicitly.
+Auto-picked Mark/John accounts are off-limits because that's the boundary between "Brian named this, JAM-tree fine" and "the runner picked this on its own, Brian-only." Mark/John accounts can still be processed in Company Mode when Brian names them explicitly.
 
 ---
 
@@ -396,7 +396,7 @@ Open C:\Claude-Brain\overnight-candidates.json. If missing: log alert to overnig
 
 Branch (top to bottom priority):
 
-A-prime. ANDY-NAMED DISCOVERY PRIORITY, any company `status: "discovery_pending"` with `added_via` starting `andy_named_` AND added in last 24h → schedule a fresh Discovery Mega one-time task to fire in 2-5 minutes via `mcp__scheduled-tasks__create_scheduled_task`. Log dispatch + list of qualifying companies. Exit (do NOT run Branch A this fire). This outranks Branch A so Andy's mid-run named companies are never blocked behind a stale pending queue.
+A-prime. ANDY-NAMED DISCOVERY PRIORITY, any company `status: "discovery_pending"` with `added_via` starting `andy_named_` AND added in last 24h → schedule a fresh Discovery Mega one-time task to fire in 2-5 minutes via `mcp__scheduled-tasks__create_scheduled_task`. Log dispatch + list of qualifying companies. Exit (do NOT run Branch A this fire). This outranks Branch A so Brian's mid-run named companies are never blocked behind a stale pending queue.
 
 A. PROCESSING, any candidate status pending → take first (linkedin_search bucket before hubspot_contact bucket per the cadence rule), invoke osi-prospect-qualification FULL Profile Mode (NOT a Path A web-search preview, full pipeline). On verdict:
    - No / Conditional: STOP-GATE per qualification. Atomic write state. ADVANCE TO NEXT PENDING. Run full pipeline on next candidate. Continue.
@@ -408,9 +408,9 @@ A. PROCESSING, any candidate status pending → take first (linkedin_search buck
 
 B. DISCOVERY MEGA RE-FIRE, no pending AND any company discovery_pending → schedule a new one-time Discovery Mega task to fire in 2-5 minutes (same prompt template as kickoff). Log, exit.
 
-C. REFILL, no pending AND no discovery_pending (fires in BOTH Company Mode and Auto Mode) → run cold-company selector (Andy-owned ONLY for the selector, Mark/John never auto-picked, 6+ months no activity, active-client filter, M&A check, OSI fit check, queue-prevent filter, state-dedup filter), pick top 5, append to state.companies as discovery_pending, schedule new Discovery Mega in 2-5 minutes. If selector returns 0, fall through to D. Log, exit.
+C. REFILL, no pending AND no discovery_pending (fires in BOTH Company Mode and Auto Mode) → run cold-company selector (Brian-owned ONLY for the selector, Mark/John never auto-picked, 6+ months no activity, active-client filter, M&A check, OSI fit check, queue-prevent filter, state-dedup filter), pick top 5, append to state.companies as discovery_pending, schedule new Discovery Mega in 2-5 minutes. If selector returns 0, fall through to D. Log, exit.
 
-D. WRAP-UP, no pending, no discovery_pending, AND last refill selector returned 0 → update Tab 2 of prospects-tracker-new.xlsx, write final status line "WRAP-UP, refill selector exhausted, run complete", exit clean. Future fires also fall through to wrap-up until Andy starts a new run.
+D. WRAP-UP, no pending, no discovery_pending, AND last refill selector returned 0 → update Tab 2 of prospects-tracker-new.xlsx, write final status line "WRAP-UP, refill selector exhausted, run complete", exit clean. Future fires also fall through to wrap-up until Brian starts a new run.
 
 NO 1-company-per-fire trickle anywhere. Discovery only happens via Discovery Mega (always all-companies-upfront).
 
@@ -486,19 +486,19 @@ Always write to `state.tmp` then `os.replace(state.tmp, state)`. Never delete-th
 
 ## KICKOFF (in-session, ~2 minutes)
 
-Triggered by Andy's command: "run sequences for the following companies: X, Y, Z" (Company Mode), "run sequences tonight" (Auto Mode), or paste a single profile (Interactive Mode, no kickoff).
+Triggered by Brian's command: "run sequences for the following companies: X, Y, Z" (Company Mode), "run sequences tonight" (Auto Mode), or paste a single profile (Interactive Mode, no kickoff).
 
 For Company Mode and Auto Mode:
 
 1. Read existing `C:\Claude-Brain\overnight-candidates.json`. Preserve pending entries.
 2. Populate company list:
-   - **Company Mode:** Andy's named list, all marked `discovery_pending`. JAM-tree owners (Mark, John) are fine in Company Mode.
-   - **Auto Mode:** run cold-company selector (Andy-owned ONLY), pick top 5, mark `discovery_pending`.
+   - **Company Mode:** Brian's named list, all marked `discovery_pending`. JAM-tree owners (Mark, John) are fine in Company Mode.
+   - **Auto Mode:** run cold-company selector (Brian-owned ONLY), pick top 5, mark `discovery_pending`.
 3. Schedule **Discovery Mega** as a one-time task firing in 2-5 minutes (or immediately via Run now). Use the Discovery Mega prompt template above.
 4. Schedule **Processing Recurring** as TWO recurring tasks if not already scheduled (one weekday, one weekend). Use the Processing Recurring prompt template above for both.
    - Weekday: cron `0 0,2,4,6,14,16,18,20,22 * * 1-5` (9 fires/day Mon-Fri, daytime blackout 8 AM to 2 PM ET).
    - Weekend: cron `0 */2 * * 0,6` (12 fires/day Sat-Sun, no blackout).
-5. Done. Andy approves both schedule calls.
+5. Done. Brian approves both schedule calls.
 
 Kickoff does NOT invoke discovery-sweep, qualification, or outreach-sequence directly. Those run only in scheduled-task fires.
 
@@ -506,9 +506,9 @@ Kickoff does NOT invoke discovery-sweep, qualification, or outreach-sequence dir
 
 ## MID-RUN ADDITIONS
 
-If Andy adds a company manually to `state.companies` with `status: "discovery_pending"` while a run is in progress, the next Processing Recurring fire detects it via Branch B (Discovery Mega Re-Fire) and schedules a fresh Discovery Mega task. The new Discovery Mega processes the added company in its next fire.
+If Brian adds a company manually to `state.companies` with `status: "discovery_pending"` while a run is in progress, the next Processing Recurring fire detects it via Branch B (Discovery Mega Re-Fire) and schedules a fresh Discovery Mega task. The new Discovery Mega processes the added company in its next fire.
 
-If Andy adds a candidate manually to `state.candidates` with `status: "pending"`, the next Processing Recurring fire picks it up via Branch A (Processing) and runs qualification on it.
+If Brian adds a candidate manually to `state.candidates` with `status: "pending"`, the next Processing Recurring fire picks it up via Branch A (Processing) and runs qualification on it.
 
 State file is the source of truth. Edits to it propagate naturally through the next fire.
 
@@ -521,13 +521,13 @@ Used by `osi-discovery-sweep` (Step 2 HubSpot ownership check) and by Refill sel
 | Situation | Action |
 |---|---|
 | Not in HubSpot | Proceed |
-| Owned by Andy (213536174) | Proceed |
-| Owned by Mark (210187184) | Proceed in Company Mode (Andy named); SKIP in Refill / Auto Mode |
-| Owned by John (210187193) | Proceed in Company Mode (Andy named); SKIP in Refill / Auto Mode |
+| Owned by Brian (213536174) | Proceed |
+| Owned by Mark (210187184) | Proceed in Company Mode (Brian named); SKIP in Refill / Auto Mode |
+| Owned by John (210187193) | Proceed in Company Mode (Brian named); SKIP in Refill / Auto Mode |
 | Other rep, recent activity (within 3 months) | Skip silent. Log to overnight-run-log.md |
 | Other rep, no activity 3+ months, not a client | Log for account-request. Do NOT prospect |
 
-Refill / Auto-Mode boundary is hardwired: only Andy's owner ID is auto-picked by the selector. Mark and John accounts only enter the run when Andy names them explicitly in Company Mode at kickoff.
+Refill / Auto-Mode boundary is hardwired: only Brian's owner ID is auto-picked by the selector. Mark and John accounts only enter the run when Brian names them explicitly in Company Mode at kickoff.
 
 ---
 
@@ -535,8 +535,8 @@ Refill / Auto-Mode boundary is hardwired: only Andy's owner ID is auto-picked by
 
 Every failure logs to `Claude-Brain/overnight-run-log.md` with timestamp + reason:
 - State file missing → log alert, exit. Don't try to recreate.
-- Discovery Mega scheduling fails → retry once, then log + exit. Andy may need to manually reschedule.
-- Processing Recurring scheduled task disabled → next fire never happens, but the state file is preserved. Andy can re-enable.
+- Discovery Mega scheduling fails → retry once, then log + exit. Brian may need to manually reschedule.
+- Processing Recurring scheduled task disabled → next fire never happens, but the state file is preserved. Brian can re-enable.
 - Branch routing logic crashes mid-fire → log the partial state (which candidate / company was being processed), exit. Next fire picks up.
 - A skill invocation fails (discovery-sweep / qualification / outreach-sequence) → log the failure, mark the company or candidate appropriately, continue with the next item. Don't abort the entire fire on one bad item.
 
@@ -546,12 +546,12 @@ Every failure logs to `Claude-Brain/overnight-run-log.md` with timestamp + reaso
 
 - Orchestrator never does the work itself, always invokes the right skill.
 - Refill fires in BOTH Company Mode and Auto Mode. Never gate on mode for Refill.
-- Refill selector is Andy-owned ONLY (Mark/John never auto-picked).
+- Refill selector is Brian-owned ONLY (Mark/John never auto-picked).
 - Discovery only happens via Discovery Mega (one-time task). Never per-fire trickle.
 - Every Refill cycle and every mid-run addition schedules a fresh Discovery Mega.
 - State file is the source of truth. Atomic writes only.
 - Branch A (Processing) is top priority every fire, leftover pending candidates from previous runs get worked first.
 - 2 yes-with-email per fire is the hard ceiling for Branch A (lowered from 3 on 2026-05-01). Yes-no-email and No / Conditional do NOT count toward this ceiling.
-- Wrap-up only triggers when refill selector returns 0 (true exhaustion). Future fires fall through to wrap-up cleanly until Andy starts a new run.
-- Never auto-pivot to Mark/John accounts. Andy approves those explicitly via Company Mode at kickoff.
+- Wrap-up only triggers when refill selector returns 0 (true exhaustion). Future fires fall through to wrap-up cleanly until Brian starts a new run.
+- Never auto-pivot to Mark/John accounts. Brian approves those explicitly via Company Mode at kickoff.
 - Always log every branch decision and every failure.

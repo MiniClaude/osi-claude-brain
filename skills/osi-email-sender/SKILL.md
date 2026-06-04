@@ -9,9 +9,9 @@ description: Send all due emails from C:\Claude-Brain\email-queue.json via Outlo
 
 1. Use the Read tool on `C:\Claude-Brain\skills\osi-email-sender\SKILL.md`. That file is the ONLY authoritative version.
 2. If you are currently reading any other copy (e.g., a `SKILL.md` in `/mnt/uploads/`, an inlined copy pasted into a scheduled task prompt, a `.claude/skills/` runtime snapshot, or anything attached to this session that was written before today), STOP and reload from `C:\Claude-Brain\skills\osi-email-sender\SKILL.md`. Stale copies have caused real prospects to receive malformed emails. 2026-04-23: Joe Zarcone / Rackspace went out with a hand-rolled quote header and no grey divider because the runner was following a stale upload that did not contain Step 3A REPLY flow logic. This must not happen again.
-3. The live file on disk is authoritative. Any version that disagrees with the live file is wrong. If you see two copies and they differ, follow the live file and surface the drift to Andy at the end of the run.
+3. The live file on disk is authoritative. Any version that disagrees with the live file is wrong. If you see two copies and they differ, follow the live file and surface the drift to Brian at the end of the run.
 
-If the live file is unreachable for any reason, ABORT the run. Do not fall back to an older copy. Report the failure and let Andy decide.
+If the live file is unreachable for any reason, ABORT the run. Do not fall back to an older copy. Report the failure and let Brian decide.
 
 ---
 
@@ -27,7 +27,7 @@ This skill sends cold outreach to real, paying-potential customers. One bad form
 
 ```python
 import json
-QUEUE_PATH = 'C:/Claude-Brain/email-queue.json'  # Live queue, Git-versioned. Andy syncs between laptops manually via git push/pull.
+QUEUE_PATH = 'C:/Claude-Brain/email-queue.json'  # Live queue, Git-versioned. Brian syncs between laptops manually via git push/pull.
 HARD_BLOCK_PATH = 'C:/Claude-Brain/hard-block.json'  # Hard-block list stays in Git (manually maintained, low churn)
 
 with open(QUEUE_PATH) as f:
@@ -49,7 +49,7 @@ domain = addr.split('@')[-1] if '@' in addr else ''
 
 if addr in blocked_addrs or domain in blocked_domains:
     # Hard-block hit. This is NOTIFICATION-WORTHY: some upstream sequence enrolled a prospect
-    # against a blocked address/domain. Andy wants to know, NOT silent skipping.
+    # against a blocked address/domain. Brian wants to know, NOT silent skipping.
     # Raise a distinctive AssertionError so the runner logs it loudly in Step 7.
     reason = f"hard-blocked address {addr}" if addr in blocked_addrs else f"hard-blocked domain {domain}"
     raise AssertionError(f"HARD_BLOCK_HIT | id={ENTRY_ID} | to={addr} | {reason} | FLAG TO ANDY IN REPORT")
@@ -66,11 +66,11 @@ If either assert fails, SKIP this entry: do not open a compose, do not draft, do
 ## TL;DR: the five rules that matter
 
 1. **Re-read the queue entry from disk right before composing each email.** Run the Pre-Send Gate above. If `status != "pending"` or `to` is hard-blocked, SKIP. No exceptions, ever.
-2. **Subject starts with `RE: ` → use Outlook's Reply button on the original sent email in Sent Items. NEVER start a New mail for a follow-up.** The queue body's fake `---------- On April 16, Andy McLean wrote ----------` separator is NOT the quote format. Outlook's native Reply gives the real grey divider and From/Sent/To/Subject header.
+2. **Subject starts with `RE: ` → use Outlook's Reply button on the original sent email in Sent Items. NEVER start a New mail for a follow-up.** The queue body's fake `---------- On April 16, Brian McLean wrote ----------` separator is NOT the quote format. Outlook's native Reply gives the real grey divider and From/Sent/To/Subject header.
 3. **Subject does NOT start with `RE: ` → New mail flow.** Type the full body from the queue.
 4. **Exactly ONE blank line between the last line you typed and `Best,`.** Not zero. Not two. One. Run the bi-directional trim in Step 4 on every email, then verify visually before Send. The trim pads up if there are too few newlines and Backspaces down if there are too many. Target is always one visible blank line.
 5. **Preview before Send on every email.** Count the blank lines. Confirm the grey divider and header are present (Reply flow). Confirm no hand-rolled quote header is in the body.
-6. **Always cross-check the Reply To: tag against the queue `to`.** Outlook auto-resolves To: from the original From: line, which is wrong when Email 1 went out from a non-canonical Andy alias (`andy@osihardware.onmicrosoft.com`). **Every Desjardins prospect (any `@desjardins.com`) hits this, assume it on Desjardins always.** If the To: tag is "Andrew McLean" or any self-reference, remove it and type the queue `to` address. Self-heal, do not stop. Detail in Step 3A.6 and Failure Modes.
+6. **Always cross-check the Reply To: tag against the queue `to`.** Outlook auto-resolves To: from the original From: line, which is wrong when Email 1 went out from a non-canonical Brian alias (`andy@osihardware.onmicrosoft.com`). **Every Desjardins prospect (any `@desjardins.com`) hits this, assume it on Desjardins always.** If the To: tag is "Andrew McLean" or any self-reference, remove it and type the queue `to` address. Self-heal, do not stop. Detail in Step 3A.6 and Failure Modes.
 
 If any rule feels unclear, re-read the full file. Skipping these rules is how prospects get burned.
 
@@ -116,13 +116,13 @@ if (txt.includes('\u2014') || txt.includes('\u2013')) {
 }
 ```
 
-If the queue body contains an em-dash, it is a bug in whichever skill wrote the queue entry (osi-outreach-sequence, osi-3email-new, etc.). Surface it to Andy so he can fix the upstream skill. Never send an email that has an em-dash in it, even if you have to skip the entry.
+If the queue body contains an em-dash, it is a bug in whichever skill wrote the queue entry (osi-outreach-sequence, osi-3email-new, etc.). Surface it to Brian so he can fix the upstream skill. Never send an email that has an em-dash in it, even if you have to skip the entry.
 
 ---
 
 ## Step 0: Pre-flight concurrency lock (MANDATORY, runs before every fire)
 
-The 2026-04-29 incident had two runners writing to `email-queue.json` simultaneously: a scheduled fire and a manual chat session Andy started. They didn't corrupt each other by luck. A simple lock file prevents the race.
+The 2026-04-29 incident had two runners writing to `email-queue.json` simultaneously: a scheduled fire and a manual chat session Brian started. They didn't corrupt each other by luck. A simple lock file prevents the race.
 
 ```python
 import os, json, time, uuid
@@ -154,7 +154,7 @@ with open(LOCK_PATH, 'w') as f:
 
 The lock is released in **Step 8: Cleanup** at the end of the run. If the run crashes between acquire and release, the lock will time out after 15 minutes and the next runner can adopt it.
 
-NOTE: A previous version of this Step 0 also included a "self-integrity check" that scanned the skill source for 5 regex patterns and aborted the entire fire if any were missing. Three of those patterns matched documentation prose, not code, so any cosmetic rephrase would false-positive and skip the whole send window. Removed 2026-04-30. The TARGET=2 invariant is now documented loudly in 4 places in this file (Step 4 code, Step 4 explanation, the visual GOOD-vs-BAD reference, and the Failure Modes section). Andy reviews changes via git history. That's the safety net; a brittle self-scan was net-negative.
+NOTE: A previous version of this Step 0 also included a "self-integrity check" that scanned the skill source for 5 regex patterns and aborted the entire fire if any were missing. Three of those patterns matched documentation prose, not code, so any cosmetic rephrase would false-positive and skip the whole send window. Removed 2026-04-30. The TARGET=2 invariant is now documented loudly in 4 places in this file (Step 4 code, Step 4 explanation, the visual GOOD-vs-BAD reference, and the Failure Modes section). Brian reviews changes via git history. That's the safety net; a brittle self-scan was net-negative.
 
 ---
 
@@ -164,7 +164,7 @@ NOTE: A previous version of this Step 0 also included a "self-integrity check" t
 
 Queue file: `C:\Claude-Brain\email-queue.json`
 
-The queue is Git-versioned along with the rest of Claude-Brain. Andy syncs between his two laptops manually via `git pull` / `git push`. Do NOT auto-`git pull` or `git push` from this skill (the lock file gets stuck and pollutes logs). If the queue file is unreachable for any reason, ABORT and report. Do not fall back to a stale copy. (Historical note: a one-day OneDrive sync experiment ran 2026-04-24 and was rolled back same evening; the OneDrive Claude-Brain folder was permanently deleted 2026-04-30. C:\Claude-Brain is the only valid location.)
+The queue is Git-versioned along with the rest of Claude-Brain. Brian syncs between his two laptops manually via `git pull` / `git push`. Do NOT auto-`git pull` or `git push` from this skill (the lock file gets stuck and pollutes logs). If the queue file is unreachable for any reason, ABORT and report. Do not fall back to a stale copy. (Historical note: a one-day OneDrive sync experiment ran 2026-04-24 and was rolled back same evening; the OneDrive Claude-Brain folder was permanently deleted 2026-04-30. C:\Claude-Brain is the only valid location.)
 
 ### ⚠️ MANDATORY DATE VALIDATION: CROSS-CHECK BASH TIME AGAINST ENV DATE
 
@@ -201,18 +201,18 @@ Skip `cancelled` and `sent` entries.
 
 If current hour is outside the six windows, do nothing and log the no-op. Do not dispatch.
 
-### 1B. Pre-flight hard-block scan (MANDATORY, Andy must always know)
+### 1B. Pre-flight hard-block scan (MANDATORY, Brian must always know)
 
 Before composing ANY email this window, scan the pending candidate set against `C:\Claude-Brain\hard-block.json`. For every pending entry whose `to` matches a blocked address or whose domain matches a blocked domain, collect it into a `hard_block_hits` list.
 
-Andy wants to be NOTIFIED any time an upstream sequence enrolled a prospect against a blocked address or domain. Silent skipping is not acceptable, a new sequence quietly failing to send is worse than visible failure, because Andy thinks outreach is going out when it isn't.
+Brian wants to be NOTIFIED any time an upstream sequence enrolled a prospect against a blocked address or domain. Silent skipping is not acceptable, a new sequence quietly failing to send is worse than visible failure, because Brian thinks outreach is going out when it isn't.
 
 For each `hard_block_hits` entry, you MUST:
 1. Do NOT compose or send that email.
 2. Mark the queue entry `status = "cancelled"` with `cancelReason = "hard-blocked by <address|domain>. Was enrolled by <upstream sequence>. Flagged at <time>."` so it doesn't show up on future runs.
 3. Surface the hit loudly in the Step 7 run report under a dedicated "🚨 HARD-BLOCK HITS, NEW ENROLLMENTS AGAINST BLOCKED CONTACTS" section. Include: prospect name (derive from `id`), email, which rule fired (exact address vs domain), which sequence enrolled them (infer from queue history, the first entry in the sequence will have been created by one of the outreach skills), and recommended action.
 
-If there are zero hits, say so explicitly in the report ("Hard-block scan: clean, 0 hits") so Andy has positive confirmation the scan ran.
+If there are zero hits, say so explicitly in the report ("Hard-block scan: clean, 0 hits") so Brian has positive confirmation the scan ran.
 
 ```python
 import json
@@ -244,7 +244,7 @@ for e in candidates:
 
 ### 2A. Re-read the entry from disk immediately before composing
 
-Do not trust the in-memory list of pending entries you built in Step 1. The queue can be updated mid-run by osi-monitor (bounces, replies) or by Andy editing it directly. Before composing each email, re-read the queue file from disk and look up this specific entry by `id`. Confirm `status == "pending"`. If it is anything else (`cancelled`, `sent`, `paused`), SKIP this entry entirely. Do not compose, do not draft, do not send. Log the skip and move on.
+Do not trust the in-memory list of pending entries you built in Step 1. The queue can be updated mid-run by osi-monitor (bounces, replies) or by Brian editing it directly. Before composing each email, re-read the queue file from disk and look up this specific entry by `id`. Confirm `status == "pending"`. If it is anything else (`cancelled`, `sent`, `paused`), SKIP this entry entirely. Do not compose, do not draft, do not send. Log the skip and move on.
 
 Additionally, cross-check the recipient against the hard-block list in the user's auto-memory (`feedback_bad_emails.md`). If the `to` field matches any blocked address, SKIP and log. Do not send under any circumstance.
 
@@ -279,7 +279,7 @@ If any abort-level violation hits:
 3. Log the entry id + violation list to the run report under a "Validator skips" line.
 4. Continue to the next pending entry.
 
-The skip is permanent until Andy fixes the entry. The next runner fire will see `paused-validator` and ignore it. This prevents a bad entry from firing every hour until someone notices.
+The skip is permanent until Brian fixes the entry. The next runner fire will see `paused-validator` and ignore it. This prevents a bad entry from firing every hour until someone notices.
 
 Why this matters: on 2026-04-30 the Christopher Lawrence Email 1 shipped because it was queued before the validator existed. A bad queue entry from a stale skill version, a manual edit gone wrong, or any other path-to-bad-body must be caught at the last gate before it leaves the building.
 
@@ -300,7 +300,7 @@ This decision is not a judgment call. It's a string prefix check. `RE: ` → Rep
 
 An Email 1 is a queue entry that has a fresh subject (no `RE:` prefix) AND whose `id` ends with `-1` (e.g. `david-thomas-sifi-1`). OR, equivalently, the `sendTime` is `4pm` and the subject has no `RE:` prefix, since Email 1 is the only entry that goes out at 4pm. Use either signal to confirm.
 
-**Why this gate exists:** The qualification skill creates a HubSpot `LINKED_IN_CONNECT` task for every new prospect at enrollment. That task tracks whether Andy has sent the Sales Navigator connection request. Email 1 must NOT go out until Andy has sent the connection request. If the LI task is still `NOT_STARTED`, the prospect has not been warmed up on LinkedIn and the email sequence must wait. This was not enforced before 2026-05-27. Five Email 1s went out to prospects whose connection requests had not yet been sent.
+**Why this gate exists:** The qualification skill creates a HubSpot `LINKED_IN_CONNECT` task for every new prospect at enrollment. That task tracks whether Brian has sent the Sales Navigator connection request. Email 1 must NOT go out until Brian has sent the connection request. If the LI task is still `NOT_STARTED`, the prospect has not been warmed up on LinkedIn and the email sequence must wait. This was not enforced before 2026-05-27. Five Email 1s went out to prospects whose connection requests had not yet been sent.
 
 ### Gate logic
 
@@ -431,7 +431,7 @@ else:
 
 **Cadence preservation rule:** When the gate fires, EVERY pending entry for that prospect (identified by `to` address) must be pushed forward by the exact same business-day offset. This keeps the E1-E2-E3-E4-E5-E6 gaps intact. Do not slide E1 alone while leaving E2-E6 behind.
 
-**Log the gate skip in the Step 7 run report** under a dedicated section: "🔗 CONNECTION REQUEST GATES FIRED". Include: entry ID, old date, new date, offset, HubSpot task ID updated. If no gates fired, write "Connection request gate: clean, 0 fires" so Andy has positive confirmation the check ran.
+**Log the gate skip in the Step 7 run report** under a dedicated section: "🔗 CONNECTION REQUEST GATES FIRED". Include: entry ID, old date, new date, offset, HubSpot task ID updated. If no gates fired, write "Connection request gate: clean, 0 fires" so Brian has positive confirmation the check ran.
 
 ---
 
@@ -444,14 +444,14 @@ Any thoughts?                        ← the new reply text you typed
 
                                      ← exactly ONE blank line
 Best,
-Andy
+Brian
                                      ← signature block (auto-inserted)
-Andy McLean
+Brian McLean
 Solutions Executive
 Book a Meeting with Me
 ...
 _________________________________    ← solid light grey horizontal divider
-From: Andrew McLean <andy@osiglobal.com>
+From: Andrew McLean <bc@osihardware.com>
 Sent: Monday, April 20, 2026 4:35 PM
 To: 'Prospect Name' <prospect@example.com>
 Subject: Original subject without RE:
@@ -470,12 +470,12 @@ The grey divider + From/Sent/To/Subject header block + original body are all pro
 4. If no matching sent email exists, STOP. Do not fall back to New mail. Report: `Could not find original sent thread for <id>. Not sent.` Move on.
 5. Click the `Reply` button (top right of the reading pane, or at the bottom of the email).
 6. The reply compose opens inline. VERIFY all three fields:
-   - **To**: must equal the queue `to` exactly. **Fix mismatches automatically, do not STOP.** Outlook's Reply on a sent email resolves To: from the original message's From: line, not the original To: line. When the Email 1 went out from a non-canonical sender alias (e.g. `andy@osihardware.onmicrosoft.com` for **every Desjardins prospect**, Etienne Trudel, Marc Delaune, and any other `@desjardins.com` recipient, and any other case where the alias shows up in the quoted `From:` line at the bottom of the compose body), Reply will pre-fill To: as "Andrew McLean" (Andy himself, the alias resolved to a Display Name). The queue entry's `to` field is authoritative. **Self-heal:** click the X on the wrong To: tag, click into the empty To: field, type the queue `to` address, press Tab to convert it to a tag. Then continue. Do NOT compose with the wrong recipient. Do NOT skip the entry.
+   - **To**: must equal the queue `to` exactly. **Fix mismatches automatically, do not STOP.** Outlook's Reply on a sent email resolves To: from the original message's From: line, not the original To: line. When the Email 1 went out from a non-canonical sender alias (e.g. `andy@osihardware.onmicrosoft.com` for **every Desjardins prospect**, Etienne Trudel, Marc Delaune, and any other `@desjardins.com` recipient, and any other case where the alias shows up in the quoted `From:` line at the bottom of the compose body), Reply will pre-fill To: as "Andrew McLean" (Brian himself, the alias resolved to a Display Name). The queue entry's `to` field is authoritative. **Self-heal:** click the X on the wrong To: tag, click into the empty To: field, type the queue `to` address, press Tab to convert it to a tag. Then continue. Do NOT compose with the wrong recipient. Do NOT skip the entry.
    - **Subject**: matches the queue `subject` exactly (`Re: ...` vs `RE: ...` case difference is fine. Outlook's autofill is canonical). If subject is wrong, STOP.
    - **Body**: cursor at the top, then Outlook's signature, then the grey divider and From/Sent/To/Subject header, then the original email body. If no grey divider appears, STOP. That means Reply did not attach the thread properly.
 7. Parse the queue `body` to extract ONLY the new reply text. The new text is everything BEFORE the first quote marker. Recognize any of these as quote markers:
    - A line matching `----------\s*On .* wrote ----------`
-   - A line matching `On .*, (Andy )?McLean .*wrote:`
+   - A line matching `On .*, (Brian )?McLean .*wrote:`
    - A line starting with `> `
    - A line starting with `From: Andrew McLean`
    Take the text before the first marker, strip trailing whitespace. For Email 2 in the standard sequence, this is almost always just `Any thoughts?`.
@@ -494,7 +494,7 @@ The grey divider + From/Sent/To/Subject header block + original body are all pro
 1. Navigate to `https://outlook.office.com/mail/deeplink/compose?to=<URL-encoded to>&subject=<URL-encoded subject>`.
 2. Wait up to 6 seconds for the compose body to render (`[aria-label="Message body"][role="textbox"]` must exist).
 3. Verify the To and Subject fields are populated correctly from the URL. If either is empty or wrong, STOP.
-4. **MANDATORY pre-insertion strip.** Before typing anything, sanitize the queue `body` by removing any prior-thread placeholder content. Fresh-subject Email 3/4/5/6 entries must NEVER ship with `On <date>, Andy McLean wrote:` separators or `>` quoted lines in the body, those are upstream-skill bugs and they produce malformed emails (2026-04-29 incident: 11 prospects received Email 3s with hand-rolled quote blocks because the chat-session runner skipped this strip). Apply the same regex the Reply flow uses in Step 3A.7. If a quote marker is found, take everything BEFORE it, strip trailing whitespace, and use that as the body to insert. Do NOT abort; do NOT skip the entry; just clean and continue. Log the strip in the Step 7 run report under a "Defensive quote-strip" line so Andy can see which upstream entries had the bug.
+4. **MANDATORY pre-insertion strip.** Before typing anything, sanitize the queue `body` by removing any prior-thread placeholder content. Fresh-subject Email 3/4/5/6 entries must NEVER ship with `On <date>, Brian McLean wrote:` separators or `>` quoted lines in the body, those are upstream-skill bugs and they produce malformed emails (2026-04-29 incident: 11 prospects received Email 3s with hand-rolled quote blocks because the chat-session runner skipped this strip). Apply the same regex the Reply flow uses in Step 3A.7. If a quote marker is found, take everything BEFORE it, strip trailing whitespace, and use that as the body to insert. Do NOT abort; do NOT skip the entry; just clean and continue. Log the strip in the Step 7 run report under a "Defensive quote-strip" line so Brian can see which upstream entries had the bug.
 5. Click at position 0 of the body (top, above the signature).
 6. Insert the SANITIZED body (from step 4), splitting on `\n\n` for paragraph breaks. Use this exact cursor-positioning pattern:
 
@@ -523,7 +523,7 @@ for (let i = 0; i < paras.length; i++) {
 Two `insertLineBreak` calls after every paragraph (including the last) produce `<br><br>` which Outlook renders as exactly one blank line. The last pair gives `nlBB=2` before "Best," matching TARGET=2. Do NOT use `insertParagraph` anywhere in the body insertion -- it creates separate `<p>` elements whose CSS margin causes double-spacing (2026-05-20 bug, 6 real sends) or a leading blank line above the first name (2026-05-20 second bug).
 
 7. Do NOT add any extra calls after the last paragraph. The `insertLineBreak x2` after the last paragraph already provides the gap before "Best,".
-7a. **MANDATORY leading-blank strip.** After insertion, position the cursor immediately before the FIRST character of the first body paragraph (e.g., before "Hi" in "Hi David,"). Count `\n` characters preceding it in innerText. While that count is greater than 0, run `document.execCommand('delete', false)` to Backspace each one out. This is required because Outlook's empty compose has 1-2 empty paragraphs above the signature; positioning the cursor at "Best," and inserting body text leaves those empty paragraphs ABOVE the inserted body, which renders as 2-3 blank lines above "Hi <Name>,". Andy caught this on 2026-04-30 (David Thomas/SiFi was the first email of that 11am run). Without this strip the email looks malformed even when the rest is correct. Same logic must run on Reply flow too. See Step 3A addition.
+7a. **MANDATORY leading-blank strip.** After insertion, position the cursor immediately before the FIRST character of the first body paragraph (e.g., before "Hi" in "Hi David,"). Count `\n` characters preceding it in innerText. While that count is greater than 0, run `document.execCommand('delete', false)` to Backspace each one out. This is required because Outlook's empty compose has 1-2 empty paragraphs above the signature; positioning the cursor at "Best," and inserting body text leaves those empty paragraphs ABOVE the inserted body, which renders as 2-3 blank lines above "Hi <Name>,". Brian caught this on 2026-04-30 (David Thomas/SiFi was the first email of that 11am run). Without this strip the email looks malformed even when the rest is correct. Same logic must run on Reply flow too. See Step 3A addition.
 8. **Trim the signature's leading blank to TARGET=2.** Same rule as Reply flow. See Step 4.
 9. Run the preview check in Step 5.
 10. Click `Send`.
@@ -541,8 +541,8 @@ This is the single rule that matters most. The rendered email must look like thi
 ...the last sentence of your body text.
                                          ← exactly ONE visible blank line
 Best,
-Andy
-Andy McLean
+Brian
+Brian McLean
 Solutions Executive
 ...
 ```
@@ -619,7 +619,7 @@ if (finalCount !== TARGET) {
 }
 ```
 
-After this runs, the rendered body shows exactly ONE visible blank line between the last typed line and `Best,`. Not two. Not zero. One. If the function throws, STOP and surface to Andy. Do not send a broken email.
+After this runs, the rendered body shows exactly ONE visible blank line between the last typed line and `Best,`. Not two. Not zero. One. If the function throws, STOP and surface to Brian. Do not send a broken email.
 
 **Visual reference (THIS is what every email must look like):**
 
@@ -627,8 +627,8 @@ After this runs, the rendered body shows exactly ONE visible blank line between 
 GOOD:                                BAD (do not ship):
 Worth 15 minutes...?                 Worth 15 minutes...?
                                      Best,
-Best,                                Andy
-Andy
+Best,                                Brian
+Brian
 ```
 
 The GOOD column has one visible blank line between the last sentence and "Best,". That requires **2 `\n` in innerText** (TARGET=2, see Step 4) with the `insertLineBreak` x2 paragraph approach. The BAD column has zero blank lines. **TARGET=2.** See Step 4 rationale block for the full empirical history.
@@ -659,7 +659,7 @@ Call `insertLineBreak` twice after every paragraph including the last. This give
 
 ### Never type a sign-off
 
-NEVER type `Best,` or `Andy` or any name at the bottom of the body. Outlook's signature block does that automatically. Typing it produces a doubled sign-off.
+NEVER type `Best,` or `Brian` or any name at the bottom of the body. Outlook's signature block does that automatically. Typing it produces a doubled sign-off.
 
 ---
 
@@ -669,8 +669,8 @@ Before clicking Send, run these five checks. If any fails, do not send.
 
 1. **Take a screenshot of the compose window.** Look at it. Count the blank lines between the last line of your typed text and `Best,`. It must be exactly ONE. Two blanks means the signature trim did not run or targeted the wrong count. Zero means you over-trimmed.
 2. **Reply flow only**: confirm the grey horizontal divider is present below the signature and the `From: / Sent: / To: / Subject:` header shows real data (Andrew McLean as the From, the original recipient as the To, the original subject without `RE:`, a plausible prior date).
-3. **No fake quote header in the body.** Search the body text for `---------- On` or `On .*, Andy McLean .*wrote:` or lines starting with `> `. If any match appears in what you typed at the top, you accidentally typed the full queue body including its fake separator. STOP. Clear the body and redo.
-4. **Read `body.innerText.slice(0, 800)`.** Confirm each paragraph from the queue body appears on its own line, separated by exactly one blank line. Confirm no stray `Andy` typed manually at the end. Confirm no double-space after abbreviations that were not actual sentence endings.
+3. **No fake quote header in the body.** Search the body text for `---------- On` or `On .*, Brian McLean .*wrote:` or lines starting with `> `. If any match appears in what you typed at the top, you accidentally typed the full queue body including its fake separator. STOP. Clear the body and redo.
+4. **Read `body.innerText.slice(0, 800)`.** Confirm each paragraph from the queue body appears on its own line, separated by exactly one blank line. Confirm no stray `Brian` typed manually at the end. Confirm no double-space after abbreviations that were not actual sentence endings.
 5. **EM-DASH / EN-DASH CHECK.** Run: `body.innerText.includes('\u2014') || body.innerText.includes('\u2013')`. If true, ABORT. Em-dashes and en-dashes tell prospects an AI wrote the email. That destroys the outreach. Never send a body that contains either character.
 
 If all five pass, click Send.
@@ -679,7 +679,7 @@ If all five pass, click Send.
 
 ## Step 6: Update the queue (with per-entry audit fields)
 
-After each successful send, flip the entry's `status` to `sent` AND append per-entry audit fields. These fields make a post-hoc audit possible in 30 seconds, no Sent Items archaeology required. The 2026-04-29 incident was found only because Andy noticed Bryan Ackerman's broken Email 3 by eye, hours after it shipped. With audit fields, anomalies surface from the queue file alone.
+After each successful send, flip the entry's `status` to `sent` AND append per-entry audit fields. These fields make a post-hoc audit possible in 30 seconds, no Sent Items archaeology required. The 2026-04-29 incident was found only because Brian noticed Bryan Ackerman's broken Email 3 by eye, hours after it shipped. With audit fields, anomalies surface from the queue file alone.
 
 ### Required audit fields
 
@@ -784,7 +784,7 @@ if failed_preview:
     print(f"FLAG: {len(failed_preview)} sends where preview checks failed but Send was clicked anyway: {failed_preview}")
 ```
 
-If any anomaly fires, flag immediately to Andy in the Step 7 run report.
+If any anomaly fires, flag immediately to Brian in the Step 7 run report.
 
 ### Atomic write rules (unchanged from before)
 
@@ -822,11 +822,11 @@ If anomalies:
   - <id>, <field>=<value>, <one-line interpretation>
 ```
 
-If clean: state "Audit anomaly scan: clean, N sends, all fields nominal" so Andy has positive confirmation the scan ran.
+If clean: state "Audit anomaly scan: clean, N sends, all fields nominal" so Brian has positive confirmation the scan ran.
 
 ### 🔗 Connection Request Gates section (mandatory, even when empty)
 
-Every run report MUST include a "Connection request gate" section. This is how Andy knows which Email 1s were held and rescheduled.
+Every run report MUST include a "Connection request gate" section. This is how Brian knows which Email 1s were held and rescheduled.
 
 Format:
 
@@ -838,11 +838,11 @@ If gates fired:
   - <entry id>: LI task NOT_STARTED (<task id>). E1 rescheduled from <old date> to <new date>. E2-E6 respread +<N> business days. HubSpot task updated.
 ```
 
-If clean: write "Connection request gate: clean, 0 fires" so Andy has positive confirmation the check ran.
+If clean: write "Connection request gate: clean, 0 fires" so Brian has positive confirmation the check ran.
 
 ### 🚨 Hard-block hits section (mandatory, even when empty)
 
-Every run report MUST include a "Hard-block scan" section. This is how Andy knows whether upstream sequences are enrolling prospects against blocked contacts.
+Every run report MUST include a "Hard-block scan" section. This is how Brian knows whether upstream sequences are enrolling prospects against blocked contacts.
 
 Format:
 
@@ -854,19 +854,19 @@ If hits:
   - <Prospect name> (<email>), rule: <address|domain>, enrolled by: <upstream sequence, inferred from queue history>, action: cancelled all remaining entries in that sequence
 ```
 
-This is the piece Andy explicitly asked for on 2026-04-23: notify on every blocked enrollment. Never bury a hard-block hit inside aggregate counts. Always call it out by name with context so Andy can go upstream and stop the enrolling skill from doing it again.
+This is the piece Brian explicitly asked for on 2026-04-23: notify on every blocked enrollment. Never bury a hard-block hit inside aggregate counts. Always call it out by name with context so Brian can go upstream and stop the enrolling skill from doing it again.
 
 ---
 
 ## Failure modes (learned the hard way, don't repeat these)
 
-- **Hand-rolled quote headers (2026-04-22).** Brett Baker / Lippert was left sitting as a draft in Sent Items, and Lance Weaver / Rackspace went out to a real prospect, both with the entire queue body typed into a New mail compose including a fake `---------- On April 16, Andy McLean wrote ----------` separator. No grey divider. No real From/Sent/To/Subject header. The original body was retyped instead of quoted natively. It looks like spam. Root cause: sender ignored Step 2 and went straight to New mail for every entry. For `RE: ` subjects the ONLY correct flow is Step 3A. New mail is for fresh subjects only.
+- **Hand-rolled quote headers (2026-04-22).** Brett Baker / Lippert was left sitting as a draft in Sent Items, and Lance Weaver / Rackspace went out to a real prospect, both with the entire queue body typed into a New mail compose including a fake `---------- On April 16, Brian McLean wrote ----------` separator. No grey divider. No real From/Sent/To/Subject header. The original body was retyped instead of quoted natively. It looks like spam. Root cause: sender ignored Step 2 and went straight to New mail for every entry. For `RE: ` subjects the ONLY correct flow is Step 3A. New mail is for fresh subjects only.
 - **Wrong-sized gap before signature.** The target is ALWAYS exactly one visible blank line between the last typed sentence and `Best,`. Mechanically, **exactly 2 newlines in `innerText` immediately before `Best,`** (TARGET=2 in Step 4, with the insertLineBreak x2 paragraph approach). The Step 4 trim is bi-directional. It pads up or Backspaces down to that target. Historical context: Josh Harless / Hunter went out with too many blanks. Ben Wexler / KeyBank went out with zero. Noriel Ocampo / DOCOMO 2026-04-22 shipped with four. The 2026-04-29 run shipped with ZERO (TARGET was 1, bumped to 2, but 2 still failed with insertParagraph approach so it went to 5). 2026-05-20: switched to insertLineBreak x2 approach, TARGET=2 now correct and empirically confirmed. **TARGET is 2 with the insertLineBreak approach. Do NOT revert to TARGET=5 or insertParagraph x2.**
-- **Paragraphs double-spaced (2026-05-20 bug).** Using `insertParagraph` x2 between paragraphs creates a separate empty `<p>` element. Outlook's CSS gives each `<p>` a margin, so an empty `<p>` between two content `<p>` elements renders as approximately 2 visible blank lines. 6 real sends went out double-spaced on 2026-05-20 before Andy caught it. Fix: use `insertLineBreak` x2 between paragraphs instead. This writes `<br><br>` within the same `<p>`, rendering as exactly 1 visible blank line.
+- **Paragraphs double-spaced (2026-05-20 bug).** Using `insertParagraph` x2 between paragraphs creates a separate empty `<p>` element. Outlook's CSS gives each `<p>` a margin, so an empty `<p>` between two content `<p>` elements renders as approximately 2 visible blank lines. 6 real sends went out double-spaced on 2026-05-20 before Brian caught it. Fix: use `insertLineBreak` x2 between paragraphs instead. This writes `<br><br>` within the same `<p>`, rendering as exactly 1 visible blank line.
 - **Spurious blank line before first name (2026-05-20 second bug).** Using `range.setStart(body, 0)` then `insertParagraph` to open the body pushes an empty `<p>` ABOVE the cursor. That empty paragraph renders as a blank line before "Hi Name," in the received email. 7 sends went out with this leading blank on 2026-05-20 (Kevin Dancs, Noriel Ocampo, Etienne Trudel, Marc Delaune, Jonghwan Kim, David Thomas, Edward Fox). Fix: use `range.setStart(body.firstChild, 0)` to place the cursor INSIDE the existing first `<p>`, then type directly. No `insertParagraph` call at the start, ever.
 - **Paragraphs with zero spacing.** Using a single `insertLineBreak` (or no call) produces 1 `\n` in innerText, which Outlook renders as 0 visible blank lines (line wrap only). Always use `insertLineBreak` x2 between paragraphs.
 - **Sending before verifying.** Clicking Send before running the preview check has burned real prospect outreach multiple times. Do the preview check every single email, even if the previous 9 looked fine.
-- **Signature dup.** Typing `Best,` or `Andy` at the bottom of the body produces a doubled sign-off. The queue body never contains a sign-off. Respect that and insert only what's there.
+- **Signature dup.** Typing `Best,` or `Brian` at the bottom of the body produces a doubled sign-off. The queue body never contains a sign-off. Respect that and insert only what's there.
 - **Draft left in Sent Items on a failed Send.** If the Send click is intercepted by a Discard dialog, the compose closes without actually sending but leaves a `[Draft]` entry in Sent Items. After every Send, confirm the Sent Items item does NOT have the `[Draft]` prefix before marking the queue entry as `sent`.
-- **Reply auto-resolves To: to "Andrew McLean" (self) instead of the prospect.** Happens when the original Email 1 was sent from a non-canonical Andy alias, `andy@osihardware.onmicrosoft.com` is the documented recurring case. **Every Desjardins email Andy sends (any `@desjardins.com` address) goes out from this legacy alias, so every Desjardins follow-up will trigger this.** Outlook's Reply pre-fills To: from the original From: line, which resolves to Andy's own Display Name, not the actual recipient. The 2026-04-28 4pm run hit this on `etienne-trudel-desjardins-2` and `marc-delaune-desjardins-2`. Step 3A.6 above now handles this with self-heal: remove the wrong tag, type the queue `to` address, press Tab. Do NOT stop. Do NOT need a queue-entry-level annotation. The skill knows.
-- **Hand-rolled quote header in fresh-subject Email 3/4/5/6 (2026-04-29).** A manual chat-session runner sent 11 Email 3s on the 3pm slot where the queue body contained an `On <date>, Andy McLean wrote: > [Email 2] > > On <date>, Andy McLean wrote: > > [Email 1]` placeholder block. Email 3+ are NEW MAIL flow (fresh subject = standalone touch), so Outlook does not attach a thread. The runner typed the entire body verbatim, including the placeholder, and 11 prospects (incl. Bryan Ackerman / BNY Mellon) received emails that look like obvious AI slop. Two layers of bug: (1) upstream `osi-outreach-sequence` was writing the placeholder block into Email 3+ queue bodies, fixed 2026-04-29 by removing the "Quote Email N thread" instruction from the sequence skill; (2) downstream `osi-email-sender` Step 3B did not strip placeholder text before insertion, fixed 2026-04-29 by adding a MANDATORY pre-insertion strip in Step 3B.4. If future Claude sessions see queue bodies containing `>` lines or `On <date>, .* wrote:` markers in fresh-subject entries, the sender now strips them automatically and logs the strip. Do not remove that strip; it is defense-in-depth against upstream regressions.
+- **Reply auto-resolves To: to "Andrew McLean" (self) instead of the prospect.** Happens when the original Email 1 was sent from a non-canonical Brian alias, `andy@osihardware.onmicrosoft.com` is the documented recurring case. **Every Desjardins email Brian sends (any `@desjardins.com` address) goes out from this legacy alias, so every Desjardins follow-up will trigger this.** Outlook's Reply pre-fills To: from the original From: line, which resolves to Brian's own Display Name, not the actual recipient. The 2026-04-28 4pm run hit this on `etienne-trudel-desjardins-2` and `marc-delaune-desjardins-2`. Step 3A.6 above now handles this with self-heal: remove the wrong tag, type the queue `to` address, press Tab. Do NOT stop. Do NOT need a queue-entry-level annotation. The skill knows.
+- **Hand-rolled quote header in fresh-subject Email 3/4/5/6 (2026-04-29).** A manual chat-session runner sent 11 Email 3s on the 3pm slot where the queue body contained an `On <date>, Brian McLean wrote: > [Email 2] > > On <date>, Brian McLean wrote: > > [Email 1]` placeholder block. Email 3+ are NEW MAIL flow (fresh subject = standalone touch), so Outlook does not attach a thread. The runner typed the entire body verbatim, including the placeholder, and 11 prospects (incl. Bryan Ackerman / BNY Mellon) received emails that look like obvious AI slop. Two layers of bug: (1) upstream `osi-outreach-sequence` was writing the placeholder block into Email 3+ queue bodies, fixed 2026-04-29 by removing the "Quote Email N thread" instruction from the sequence skill; (2) downstream `osi-email-sender` Step 3B did not strip placeholder text before insertion, fixed 2026-04-29 by adding a MANDATORY pre-insertion strip in Step 3B.4. If future Claude sessions see queue bodies containing `>` lines or `On <date>, .* wrote:` markers in fresh-subject entries, the sender now strips them automatically and logs the strip. Do not remove that strip; it is defense-in-depth against upstream regressions.

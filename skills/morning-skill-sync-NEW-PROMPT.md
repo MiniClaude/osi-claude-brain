@@ -52,7 +52,7 @@ The plugin-id and session-id are the ones currently in use (visible in the env c
 
 ALGORITHM (run inline, in this context)
 ========================================
-1. Read source for each skill. If source is missing or malformed (no frontmatter), log a CRITICAL error and skip that skill. Andy needs to fix the source manually.
+1. Read source for each skill. If source is missing or malformed (no frontmatter), log a CRITICAL error and skip that skill. Brian needs to fix the source manually.
 
 2. Read runtime for each skill. Determine status:
    - VALID STUB: runtime is < 5 KB AND contains the literal string "RUNTIME REDIRECT STUB" AND contains "C:\Claude-Brain\skills\<skill>\SKILL.md" as the redirect target AND has a frontmatter `name:` field matching <skill>.
@@ -89,7 +89,7 @@ If you find yourself proceeding without having read the live file, you are in a 
 
 4. After every healing write, re-read the runtime file and verify it matches the stub you intended to write. If it does not match (filesystem error, race condition), log and skip. Do not loop.
 
-5. Em-dash audit: after generating each stub, scan the entire stub for the character U+2014 (em-dash). If present anywhere in the stub, the sanitization failed; log a bug and skip the write. The stub must be em-dash free per Andy Rule #4.
+5. Em-dash audit: after generating each stub, scan the entire stub for the character U+2014 (em-dash). If present anywhere in the stub, the sanitization failed; log a bug and skip the write. The stub must be em-dash free per Brian Rule #4.
 
 OUTPUT
 ======
@@ -109,7 +109,7 @@ DO NOT
 - Do NOT use the Agent tool. Run inline.
 - Do NOT call request_cowork_directory. If the runtime mount is not already accessible, log and exit.
 - Do NOT do anything to the .skill zip packages in C:\Claude-Brain\skills\<name>.skill. They contain full content for distribution. Leave them alone.
-- Do NOT git pull or git push. Andy commits manually.
+- Do NOT git pull or git push. Brian commits manually.
 
 If the runtime mount path cannot be determined (no skills-plugin folder visible), log `ANDY: skills-plugin mount unavailable, cannot auto-heal this fire` and exit cleanly. Do NOT prompt for it.
 
@@ -117,7 +117,7 @@ EXIT CONDITIONS
 ===============
 - All 12 skills VALID: log one-line summary, exit.
 - Some HEALED / INSTALLED: log full summary, exit. Healing is silent, no notification needed.
-- Some CRITICAL (malformed source): log full summary including ANDY line, exit. Andy will see it in chat next time he opens Cowork.
+- Some CRITICAL (malformed source): log full summary including ANDY line, exit. Brian will see it in chat next time he opens Cowork.
 - Mount unavailable: log one line, exit.
 
 Run end-to-end. Do not pause. Do not ask. This is a daily heartbeat. It either heals quietly or flags loudly.
@@ -132,8 +132,8 @@ After the update succeeds, confirm the new prompt is in place and report back th
 
 The old morning-skill-sync compared full source content to runtime and reported "drift." That was correct under the old architecture (runtime was a copy of source). Under the new architecture (runtime is a stub), source != runtime is EXPECTED and not a problem. The new criterion is: "is the runtime a *valid stub* for this skill?" If yes, leave alone. If no (full content present, wrong path, missing), re-stub.
 
-The five status categories give Andy clean diagnostic info in the daily log without spam: most days will say "all 12 valid, no action needed" in one line. The only time the log is verbose is when something actually got healed.
+The five status categories give Brian clean diagnostic info in the daily log without spam: most days will say "all 12 valid, no action needed" in one line. The only time the log is verbose is when something actually got healed.
 
-CRITICAL status (malformed source) is an explicit human-flag because auto-healing can't fix a broken source file. Those need Andy.
+CRITICAL status (malformed source) is an explicit human-flag because auto-healing can't fix a broken source file. Those need Brian.
 
 Mount-unavailable exit is the seatbelt for the no-prompt rule: if the runtime mount isn't available, the skill cannot heal. Better to log and exit cleanly than try to mount it (which would prompt overnight).
