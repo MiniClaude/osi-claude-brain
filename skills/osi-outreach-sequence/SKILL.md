@@ -274,7 +274,7 @@ Andy
 ```
 
 **Pain-Led (TPM / DWDM / Storage / Pre-owned):**
-3-4 sentences. Lead with their specific pain. Reference Personal Hook. Reference Fresh Hook if strong. One concrete ask.
+3-4 sentences. Lead with their specific pain. Reference Personal Hook. Reference Fresh Hook if strong. One concrete ask. Pull the pain articulation and the one-line ask from `C:\Claude-Brain\playbook\pain-and-objections.md` (pain by product line).
 
 ```
 [First],

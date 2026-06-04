@@ -1049,6 +1049,7 @@ One search. No rabbit holes. Filler in this field gets surfaced into Email 1 as 
 - **`C:\Claude-Brain\playbook\product-lines.md`** -- OSI product lines, sequence-type table, DWDM talking points, who buys what.
 - **`C:\Claude-Brain\playbook\vertical-intel.md`** -- what to lead with by industry. Park Place / Service Express merger wedge. TPM positioning.
 - **`C:\Claude-Brain\playbook\opener-library.md`** -- 12 cold-call openers + cold call rules.
+- **`C:\Claude-Brain\playbook\pain-and-objections.md`** -- pain points + discovery questions by product line, objection-handler bank, secondary-source positioning. Use when writing the Live Call Script (objection handling) and the Personal Hook / The Play.
 - **`C:\Claude-Brain\playbook\hubspot-data-quality.md`** -- required fields, phone format, timezone buckets, pre-write checklist.
 - **`C:\Claude-Brain\playbook\voice-rules.md`** -- Andy's voice + humanization filter. Apply to call script, VM, LinkedIn invite text.
 

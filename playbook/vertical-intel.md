@@ -21,6 +21,7 @@ The old "banks never get TPM" rule is gone. At a bank, a network engineer still 
 ## Large Banks / Financial Institutions (BofA, Citi, JPMorgan, Goldman, Wells Fargo, BNY, Morgan Stanley)
 **Engineer / optics-fit role:** optics. Free SFP offer is the foot in the door.
 **Procurement or maintenance-contract owner:** lead with TPM. If they have an incumbent (Park Place, Service Express, Curvature, Iron Bow), use the wedge below.
+**Who controls TPM:** the maintenance contract sits with procurement, not the engineer. For critical trading and core banking infrastructure, banks stay on OEM support for regulatory reasons. TPM is an upsell only, and only on non-critical gear: branch switches, test labs, dev environments, and hardware coming off SmartNet.
 **"VP" at banks is a job grade, not seniority.** Verify with skills + trajectory before treating as a decision-maker.
 
 ## Professional Services / Consulting (KPMG, Deloitte, EY, PwC, Accenture)
@@ -35,6 +36,11 @@ The old "banks never get TPM" rule is gone. At a bank, a network engineer still 
 ## Healthcare (hospital systems, health networks, pharma)
 **Lead:** uptime + compliance. TPM with documented SLAs. DIMMs for refresh.
 **Differentiator:** OSI is Gartner-recognized, privately owned, no PE pressure. Engineering continuity matters here.
+
+## Software / Cloud / SaaS
+**Lead:** optics and high-density connectivity. Lead time is the pain, not support cost.
+**Do NOT:** lead with TPM. These shops run cloud-native and lease colo. They are not carrying large OEM maintenance contracts on owned gear.
+**Note:** only worth it at real scale (5,000+ employees with their own data center / infra team). Small SaaS runs entirely in someone else's cloud.
 
 ## Quebec / French-Canadian financial institutions (Desjardins, National Bank of Canada, Hydro-Quebec, Bell Canada, Videotron, Cogeco)
 Search keywords are bilingual. See osi-prospect-qualification for the French keyword list.
