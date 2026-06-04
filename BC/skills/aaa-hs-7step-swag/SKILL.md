@@ -28,7 +28,7 @@ Emails 1-3 are fixed swag / address-confirm touches. Emails 4-7 are fully person
 ## Step 1 — Gather Prospect Info
 
 Ask Brian for or extract from what he pasted:
-- Full name
+- Full name (capture the first name separately, it is required for the email greetings in Steps 3 and 6)
 - Title
 - Company and domain
 - Email address (required — see Step 1a)
@@ -95,12 +95,16 @@ Emails 1-3 are always the same. No personalization. No research needed. Write ex
 **Subject (fixed — no options, no variation):**
 `RE: Confirming address`
 
-**Body (fixed — exact text):**
+**Body (fixed swag text, with first-name greeting):**
+> Hi [First Name],
+>
 > I'm just prepping this package for you. I have a box of swag and a pair of sample SFPs to send to you from the team here at OSI Global IT.
 >
 > Do you come into the office? Is that the best address to send it to right now?
 >
 > Best,
+
+The first line `Hi [First Name],` uses the prospect's ACTUAL first name from the HubSpot `firstname` field, substituted before sending. Never leave the literal `[First Name]` token and never send `Hi ,`. The rest of the body is fixed exactly as shown.
 
 The "RE:" makes it look like a follow-up in their inbox. This is not a literal reply — it's a new email with a manufactured subject. If they reply with an address, Brian ships the swag and pauses the remaining touches manually.
 
@@ -109,10 +113,12 @@ The "RE:" makes it look like a follow-up in their inbox. This is not a literal r
 **Subject (fixed — no options, no variation):**
 `RE: Confirming address`
 
-**Body (fixed — exact text):**
+**Body (fixed, exact text, NO greeting by design):**
 > Any thoughts?
 >
 > Best,
+
+Email 2 stays bare with no first-name greeting. It rides the Email 1 thread as a terse one-line nudge. Do NOT add `Hi [First Name],` here.
 
 Short by design. Rides the Email 1 thread visually.
 
@@ -121,10 +127,14 @@ Short by design. Rides the Email 1 thread visually.
 **Subject (fixed — no options, no variation):**
 `RE: Confirming address`
 
-**Body (fixed — exact text):**
+**Body (fixed swag text, with first-name greeting):**
+> Hi [First Name],
+>
 > Not sure if you missed my email below, so I am following up on it. No big deal, but wanted to make sure! I have a box of swag and SFP samples to send to you…
 >
 > Cheers!
+
+The first line `Hi [First Name],` uses the prospect's ACTUAL first name, substituted before sending. Never leave the literal token and never send `Hi ,`. The rest of the body is fixed exactly as shown.
 
 ---
 
@@ -157,7 +167,9 @@ Capture 1-2 specific concrete details to weave into Email 4 — this is the **Pe
 
 ## Step 6 — Write Emails 4-7 (Fully Personalized)
 
-Brian's voice: direct, no-nonsense, outcomes over transactions, zero corporate fluff. Short. Mobile-friendly. Scannable in 10 seconds. No signature block — Brian's Outlook sig or HubSpot template handles that.
+Brian's voice: direct, no-nonsense, outcomes over transactions, zero corporate fluff. Short. Mobile-friendly. Scannable in 10 seconds. No signature block, Brian's Outlook sig or HubSpot template handles that.
+
+🚨 **GREETING: Emails 4, 5, 6, and 7 each open with the prospect's real first name.** Every personalized email starts with `Hi [First Name],` on its own line, where [First Name] is the prospect's ACTUAL first name from the HubSpot `firstname` field (or LinkedIn / Brian's input), substituted into the text BEFORE writing the body. NEVER leave a literal `[First Name]` token and NEVER write an empty `Hi ,`. If the first name is blank or unknown, STOP and resolve it (re-read the HubSpot contact, the LinkedIn profile, or ask Brian) before writing. After the greeting line, continue with the email's opening sentence below. (Email 2 is the only exception in this sequence: it stays bare per Step 3.)
 
 ### Email 4 — Cold Intro / OSI Value Prop (first personalized touch)
 
@@ -215,6 +227,7 @@ Run every personalized email through this filter. Anything that fails gets rewri
 - **No negative parallelisms.** Remove "it's not just X, it's Y."
 - **Vary sentence length.** Mix short punchy sentences with longer ones.
 - **Use is/are/has** instead of "serves as," "stands as," "functions as."
+- **First-name greeting check.** Confirm Emails 4-7 each begin with `Hi [actual first name],` using the prospect's real first name. Reject any that open with `Hi ,`, a blank greeting, or a literal `[First Name]` or `[Name]` token. Confirm Emails 1 and 3 also carry the substituted first-name greeting, and that Email 2 stays bare. Fix before continuing.
 - **Final read-aloud check.** If it sounds like a press release, rewrite.
 
 ---
@@ -419,7 +432,7 @@ Use `mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects` with an `upd
 - Emails 4-7 subjects: the selected subject from the 5 options
 - Emails 4-7 bodies: the exact personalized body
 
-**Verify after write:** fetch the contact back and confirm `ai_email_subject_1` = `RE: Confirming address` and `ai_email_body_1` matches the fixed swag text. If blank or wrong, retry once. If still fails, tell Brian which fields didn't write.
+**Verify after write:** fetch the contact back and confirm `ai_email_subject_1` = `RE: Confirming address` and `ai_email_body_1` matches the fixed swag text. Also confirm the first-name greeting landed: `ai_email_body_1`, `ai_email_body_3`, and `ai_email_body_4` through `ai_email_body_7` each open with the prospect's real first name (a `Hi [First Name],` line) with no empty `Hi ,` and no unsubstituted `[First Name]` token, and `ai_email_body_2` stays bare (`Any thoughts?`, no greeting). If blank or wrong, retry once. If still fails, tell Brian which fields didn't write.
 
 ### 12a. Confirm
 
