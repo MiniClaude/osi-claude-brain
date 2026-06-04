@@ -105,13 +105,13 @@ Adam,
 ```
 
 ### Sign-off
-Every email ends with a blank line, then "Best," on its own line, then "Andy" on its own line, then a blank line.
+Every email ends with a blank line, then "Best," on its own line, then "Brian" on its own line, then a blank line.
 
 ```
 [last line of body]
 
 Best,
-Andy
+Brian
 
 ```
 
@@ -122,14 +122,14 @@ When Email 1 was a Sample-Offer (SFPs or DIMMs), Email 2 body is:
 Any thoughts?
 
 Best,
-Andy
+Brian
 
 ```
 
 No greeting. No name at the top. Just "Any thoughts?" followed by the standard sign-off.
 
 ### Email 2 on Pain-Led sequences
-Has the full standard formatting: first name greeting + substance + Best/Andy sign-off.
+Has the full standard formatting: first name greeting + substance + Best/Brian sign-off.
 
 ---
 
@@ -248,10 +248,10 @@ If no EMAIL RESOLUTION block exists, run the resolver inline per `knowledge/emai
 - Body paragraphs
 - Blank line
 - `Best,`
-- `Andy`
+- `Brian`
 - Blank line
 
-**Exception:** Email 2 on Sample-Offer sequences = `Any thoughts?` with no greeting, followed by the standard Best/Andy sign-off. No first name at the top.
+**Exception:** Email 2 on Sample-Offer sequences = `Any thoughts?` with no greeting, followed by the standard Best/Brian sign-off. No first name at the top.
 
 #### Email 1 (by sequence type)
 
@@ -264,7 +264,7 @@ I'm just prepping this package for you. I have a box of swag and a pair of sampl
 Do you come into the office, or is there a better address to ship it to?
 
 Best,
-Andy
+Brian
 
 ```
 
@@ -277,7 +277,7 @@ I'd like to send you a sample DIMM from our current batch. Same spec as what you
 Do you come into the office, or is there a better address to ship it to?
 
 Best,
-Andy
+Brian
 
 ```
 
@@ -293,7 +293,7 @@ Andy
 [Sentence 4: ONE concrete ask.]
 
 Best,
-Andy
+Brian
 
 ```
 
@@ -308,7 +308,7 @@ Body:
 Any thoughts?
 
 Best,
-Andy
+Brian
 
 ```
 
@@ -323,7 +323,7 @@ Subject: `Re: [Email 1 subject]`
 [Concrete ask ending with a question mark.]
 
 Best,
-Andy
+Brian
 
 ```
 
@@ -337,11 +337,11 @@ Different product line. 3-4 sentences. One ask.
 [Body. New product line only. No quoted thread, no prior email reference.]
 
 Best,
-Andy
+Brian
 
 ```
 
-🚫 No quoted thread. No `On <date>, Andy wrote:`. No `>` lines.
+🚫 No quoted thread. No `On <date>, Brian wrote:`. No `>` lines.
 
 #### Email 4 (new subject, STANDALONE)
 
@@ -365,7 +365,7 @@ One sentence. Clean close. No ask.
 Should I close the file on this one, or is the timing just off?
 
 Best,
-Andy
+Brian
 
 ```
 
@@ -380,7 +380,7 @@ For every email body, answer these six questions before sanitizing:
 3. Is there exactly ONE product line in this email?
 4. Did I name SmartOptics? (must be no for cold)
 5. Did I claim OSI manufactures? (must be no)
-6. Does every email end with the sign-off: blank line, "Best,", "Andy", blank line? (All 6 emails including "Any thoughts?" Email 2. No exceptions.)
+6. Does every email end with the sign-off: blank line, "Best,", "Brian", blank line? (All 6 emails including "Any thoughts?" Email 2. No exceptions.)
 
 If any answer is wrong, rewrite before sanitizing.
 
@@ -398,7 +398,7 @@ If sanitize raises (dashes leaked through or body went empty): STOP. Do not writ
 
 Run `validate_or_raise` on every email per `C:\Claude-Brain\scripts\validate_email.py`.
 
-**NOTE on rule 1.11 (sign-off ban):** The validator was written for the old email-queue workflow where Outlook appended the signature. In the new HubSpot AI fields workflow, "Best, Andy" is explicitly required in the body. The validator's 1.11 sign-off check does NOT apply to this skill. All other rules apply unchanged.
+**NOTE on rule 1.11 (sign-off ban):** The validator was written for the old email-queue workflow where Outlook appended the signature. In the new HubSpot AI fields workflow, "Best, Brian" is explicitly required in the body. The validator's 1.11 sign-off check does NOT apply to this skill. All other rules apply unchanged.
 
 If the validator raises on any other rule: log to `overnight-run-log.md`, do NOT write any AI fields, flip candidate to `pending-relookup`.
 
@@ -490,6 +490,6 @@ Quality gates in order: Step 0 (drafting-rules.md), Step 3 (duplicate check), St
 
 Hard constraints: one candidate per invocation, 6 emails only, single atomic AI field write (Step 9), LINKED_IN_CONNECT task always on Day 1 (Step 10).
 
-Sign-off rule: "Best, Andy" on every single email. No exceptions. Including "Any thoughts?" Email 2.
+Sign-off rule: "Best, Brian" on every single email. No exceptions. Including "Any thoughts?" Email 2.
 
 Greeting rule: first name + comma only. No "Hi". No "Hello".

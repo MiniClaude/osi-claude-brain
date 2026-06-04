@@ -387,39 +387,39 @@ QUICK CONNECT KEYWORDS
 
 LIVE CALL SCRIPT
 OPENER: [Full opener from library below, or custom if a strong company hook was found]
-VM: [One line. 15 seconds max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Andy's email: "that's andy at osiglobal dot com." No phone number. Present or future tense only. Never past tense.]
+VM: [One line. 15 seconds max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Brian's email: "that's bc at osihardware dot com." No phone number. Present or future tense only. Never past tense.]
 
 ### Opener Library
 
 **Telco / Service Provider network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply ZR and ZR+ coherent optics to carrier teams as a secondary source when Cisco or Lumentum timelines slip. Is that something your team is running into right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply ZR and ZR+ coherent optics to carrier teams as a secondary source when Cisco or Lumentum timelines slip. Is that something your team is running into right now?"
 
 **Bank / Financial Institution network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply certified compatible optics to bank IT teams, mostly for the break-glass scenario where something fails and you can't wait two weeks for OEM. I was going to send a few complimentary SFPs your way. Would that be useful?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply certified compatible optics to bank IT teams, mostly for the break-glass scenario where something fails and you can't wait two weeks for OEM. I was going to send a few complimentary SFPs your way. Would that be useful?"
 
 **Enterprise IT / Consulting network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We work with enterprise IT teams on third party maintenance, specifically replacing OEM support on Cisco gear that is running fine but coming off warranty. Is that a conversation your team is having right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We work with enterprise IT teams on third party maintenance, specifically replacing OEM support on Cisco gear that is running fine but coming off warranty. Is that a conversation your team is having right now?"
 
 **Manufacturing network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply certified compatible optics and networking spares to manufacturing IT teams for the break-glass scenario. I was going to send a few complimentary SFPs so you've got a Plan B on the shelf. Worth it?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply certified compatible optics and networking spares to manufacturing IT teams for the break-glass scenario. I was going to send a few complimentary SFPs so you've got a Plan B on the shelf. Worth it?"
 
 **Director or VP any vertical**
-"Hey [Name], how have you been? It's Andy with OSI Global. We work with infrastructure leaders on two things mostly: third party maintenance and optical hardware where OEM timelines or costs have become a problem. Is either of those a live conversation for your team?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We work with infrastructure leaders on two things mostly: third party maintenance and optical hardware where OEM timelines or costs have become a problem. Is either of those a live conversation for your team?"
 
 **Already has TPM, merger wedge**
-"Hey [Name], how have you been? It's Andy with OSI Global. With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
+"Hey [Name], how have you been? It's Brian with OSI Global. With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
 
 **Systems / Infrastructure engineer, DIMMs**
-"Hey [Name], how have you been? It's Andy with OSI Global. We source server memory direct from Samsung and Hynix for infrastructure teams dealing with DDR4 and DDR5 cost pressure. Is that on your radar right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We source server memory direct from Samsung and Hynix for infrastructure teams dealing with DDR4 and DDR5 cost pressure. Is that on your radar right now?"
 
 **Storage engineer / admin**
-"Hey [Name], how have you been? It's Andy with OSI Global. We do third party maintenance on NetApp and other storage platforms for teams that have gear running fine but coming off OEM support. Is that a conversation you're having?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We do third party maintenance on NetApp and other storage platforms for teams that have gear running fine but coming off OEM support. Is that a conversation you're having?"
 
 **IT Director, compute and infrastructure**
-"Hey [Name], how have you been? It's Andy with OSI Global. We work with IT leaders on server memory and third party maintenance, mostly for teams carrying OEM costs on infrastructure that has been running fine for years. Is budget pressure on that something you're dealing with?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We work with IT leaders on server memory and third party maintenance, mostly for teams carrying OEM costs on infrastructure that has been running fine for years. Is budget pressure on that something you're dealing with?"
 
 **Transport engineer / Optical network engineer, DWDM**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply open line DWDM systems, 30 to 50% below Ciena and Nokia, with no licensing headaches. A few teams have been using us to fill capacity gaps without going back to the OEM. Is that a conversation worth having for your network?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply open line DWDM systems, 30 to 50% below Ciena and Nokia, with no licensing headaches. A few teams have been using us to fill capacity gaps without going back to the OEM. Is that a conversation worth having for your network?"
 
 ---
 
@@ -663,7 +663,7 @@ QUICK CONNECT KEYWORDS
 
 LIVE CALL SCRIPT (omit entire section if no phone)
 OPENER: [full opener from library]
-VM: [one line, 15 seconds max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Andy's email: "that's andy at osiglobal dot com." No phone number. Present or future tense only. Never past tense.]
+VM: [one line, 15 seconds max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Brian's email: "that's bc at osihardware dot com." No phone number. Present or future tense only. Never past tense.]
 
 THE PLAY
 [One tight paragraph: why they qualify for re-engagement + the research hook + the attack
@@ -774,4 +774,4 @@ the merger, or are you still on the same rates?"
 2. State a clear reason for calling.
 3. End with a question about their world. Never "Is now a good time?"
 4. Never ask "Is now a good time?"
-5. Voicemails: 15 seconds max. No phone number. End with Andy's email address spelled audibly ("that's andy at osiglobal dot com"). Always present or future tense ("I'm sending" or "I'm about to send"). Never past tense.
+5. Voicemails: 15 seconds max. No phone number. End with Brian's email address spelled audibly ("that's bc at osihardware dot com"). Always present or future tense ("I'm sending" or "I'm about to send"). Never past tense.

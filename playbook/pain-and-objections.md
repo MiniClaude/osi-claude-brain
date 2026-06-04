@@ -63,5 +63,5 @@ Reframes, not rebuttals. Each one stays peer to peer and gives the prospect an e
 
 ## Live call opener variants (beyond the openers in opener-library.md)
 
-- **Honesty led pattern interrupt:** "[Name], this is Andy with OSI Global. I'll be straight, this is a cold call. Give me sixty seconds to tell you why I called, then tell me to get lost or keep going. Fair?"
+- **Honesty led pattern interrupt:** "[Name], this is Brian with OSI Global. I'll be straight, this is a cold call. Give me sixty seconds to tell you why I called, then tell me to get lost or keep going. Fair?"
 - **Low pressure close:** "I'm not trying to run a full pitch on a cold call. Would it make sense to find twenty minutes to compare notes? Worst case you get a second opinion, best case we find something worth looking at."

@@ -167,45 +167,45 @@ Format exactly as below, no paragraphs, no extra text:
 KEYWORDS: [5-8 spoken trigger words including technical terms and any news-driven triggers]
 HOOK: [Company news or personal trigger in one sentence. If nothing: none, using library opener]
 OPENER: [Full opener from OPENER LIBRARY, or custom if HOOK is populated]
-VM: [One line. 15 seconds max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Andy's email: "that's andy at osiglobal dot com." No phone number. Present or future tense only. Never past tense.]
+VM: [One line. 15 seconds max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Brian's email: "that's bc at osihardware dot com." No phone number. Present or future tense only. Never past tense.]
 
 #### OPENER LIBRARY
 
 **Telco / Service Provider network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply ZR and ZR+ coherent optics to carrier teams as a secondary source when Cisco or Lumentum timelines slip. Is that something your team is running into right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply ZR and ZR+ coherent optics to carrier teams as a secondary source when Cisco or Lumentum timelines slip. Is that something your team is running into right now?"
 
 **Bank / Financial Institution network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply certified compatible optics to bank IT teams, mostly for the break-glass scenario where something fails and you can't wait two weeks for OEM. I was going to send a few complimentary SFPs your way. Would that be useful?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply certified compatible optics to bank IT teams, mostly for the break-glass scenario where something fails and you can't wait two weeks for OEM. I was going to send a few complimentary SFPs your way. Would that be useful?"
 
 **Enterprise IT / Consulting network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We work with enterprise IT teams on third party maintenance, specifically replacing OEM support on Cisco gear that is running fine but coming off warranty. Is that a conversation your team is having right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We work with enterprise IT teams on third party maintenance, specifically replacing OEM support on Cisco gear that is running fine but coming off warranty. Is that a conversation your team is having right now?"
 
 **Manufacturing network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply certified compatible optics and networking spares to manufacturing IT teams for the break-glass scenario. I was going to send a few complimentary SFPs so you've got a Plan B on the shelf. Worth it?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply certified compatible optics and networking spares to manufacturing IT teams for the break-glass scenario. I was going to send a few complimentary SFPs so you've got a Plan B on the shelf. Worth it?"
 
 **Director or VP any vertical**
-"Hey [Name], how have you been? It's Andy with OSI Global. We work with infrastructure leaders on two things mostly: third party maintenance and optical hardware where OEM timelines or costs have become a problem. Is either of those a live conversation for your team?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We work with infrastructure leaders on two things mostly: third party maintenance and optical hardware where OEM timelines or costs have become a problem. Is either of those a live conversation for your team?"
 
 **Already has TPM, merger wedge**
-"Hey [Name], how have you been? It's Andy with OSI Global. With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
+"Hey [Name], how have you been? It's Brian with OSI Global. With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
 
 **Systems / Infrastructure engineer, DIMMs**
-"Hey [Name], how have you been? It's Andy with OSI Global. We source server memory direct from Samsung and Hynix for infrastructure teams dealing with DDR4 and DDR5 cost pressure. Is that on your radar right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We source server memory direct from Samsung and Hynix for infrastructure teams dealing with DDR4 and DDR5 cost pressure. Is that on your radar right now?"
 
 **Storage engineer / admin**
-"Hey [Name], how have you been? It's Andy with OSI Global. We do third party maintenance on NetApp and other storage platforms for teams that have gear running fine but coming off OEM support. Is that a conversation you're having?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We do third party maintenance on NetApp and other storage platforms for teams that have gear running fine but coming off OEM support. Is that a conversation you're having?"
 
 **IT Director, compute and infrastructure**
-"Hey [Name], how have you been? It's Andy with OSI Global. We work with IT leaders on server memory and third party maintenance, mostly for teams carrying OEM costs on infrastructure that has been running fine for years. Is budget pressure on that something you're dealing with?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We work with IT leaders on server memory and third party maintenance, mostly for teams carrying OEM costs on infrastructure that has been running fine for years. Is budget pressure on that something you're dealing with?"
 
 **Procurement, TPM competitive bid**
-"Hey [Name], how have you been? It's Andy with OSI Global. We make competitive bids on multi-vendor maintenance contracts. A lot of procurement teams are using us to benchmark their current rates, especially since the Park Place and Service Express merger. Would a competitive bid be worth a look for your next cycle?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We make competitive bids on multi-vendor maintenance contracts. A lot of procurement teams are using us to benchmark their current rates, especially since the Park Place and Service Express merger. Would a competitive bid be worth a look for your next cycle?"
 
 **Transport engineer / Optical network engineer, DWDM**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply open line DWDM systems, 30 to 50% below Ciena and Nokia, with no licensing headaches. A few teams have been using us to fill capacity gaps without going back to the OEM. Is that a conversation worth having for your network?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply open line DWDM systems, 30 to 50% below Ciena and Nokia, with no licensing headaches. A few teams have been using us to fill capacity gaps without going back to the OEM. Is that a conversation worth having for your network?"
 
 **Network architect, metro or long-haul WDM**
-"Hey [Name], how have you been? It's Andy with OSI Global. We do open architecture DWDM, SmartOptics platform, significantly less rack space and power than traditional Ciena or Nokia boxes, and ships faster. Is that something that fits anything on your roadmap right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We do open architecture DWDM, SmartOptics platform, significantly less rack space and power than traditional Ciena or Nokia boxes, and ships faster. Is that something that fits anything on your roadmap right now?"
 
 ---
 
@@ -213,9 +213,9 @@ VM: [One line. 15 seconds max. One-sentence hook. "I'm sending you something rig
 
 **Skip entirely if no phone number available.**
 
-One voicemail. Never two. 15 seconds max. Reference hook. Name Email 1 subject line. End with Andy's email address spelled audibly ("that's andy at osiglobal dot com"). No phone number. Always present or future tense ("I'm sending" or "I'm about to send"). Never past tense.
+One voicemail. Never two. 15 seconds max. Reference hook. Name Email 1 subject line. End with Brian's email address spelled audibly ("that's bc at osihardware dot com"). No phone number. Always present or future tense ("I'm sending" or "I'm about to send"). Never past tense.
 
-"Hey [Name], Andy with OSI Global. [One sentence hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's andy at osiglobal dot com."
+"Hey [Name], Brian with OSI Global. [One sentence hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's andy at osiglobal dot com."
 
 ---
 
@@ -313,7 +313,7 @@ TPM with documented SLAs. DIMMs for server refresh. Gartner-recognized, privatel
 4. Never ask "Is now a good time?"
 5. Skip "Have you heard our name tossed around?"
 6. Tone over words. Warm, confident, peer-to-peer.
-7. Voicemails: 15 seconds max. No phone number. End with Andy's email address spelled audibly ("that's andy at osiglobal dot com"). Always present or future tense ("I'm sending" or "I'm about to send"). Never past tense.
+7. Voicemails: 15 seconds max. No phone number. End with Brian's email address spelled audibly ("that's bc at osihardware dot com"). Always present or future tense ("I'm sending" or "I'm about to send"). Never past tense.
 
 ---
 
@@ -413,7 +413,7 @@ QUICK CONNECT KEYWORDS
 
 LIVE CALL SCRIPT (omit entire section if no phone number)
 OPENER: [full opener from library]
-VM: [one line, 15 seconds max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Andy's email: "that's andy at osiglobal dot com." No phone number. Present or future tense only. Never past tense.]
+VM: [one line, 15 seconds max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Brian's email: "that's bc at osihardware dot com." No phone number. Present or future tense only. Never past tense.]
 
 THE PLAY
 [One tight paragraph: why they qualify + the hook + the attack plan. Only include Previous Employer OSI Client Check if a HubSpot match is found. Skip it entirely if no matches.]
