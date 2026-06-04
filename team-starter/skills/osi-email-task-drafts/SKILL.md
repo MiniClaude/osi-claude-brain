@@ -1,6 +1,6 @@
 ---
 name: osi-email-task-drafts
-description: Auto-draft reply emails for every HubSpot email task that is due today or overdue for the user. For each task, identifies the associated contact, pulls the CURRENT state of the relationship from HubSpot engagements (calls, emails logged to HubSpot, and Teams/Zoom meeting notes), drafts a thread-matched reply in my voice, and writes the draft into the task's notes field so the user can review and send. Skips outreach-sequence auto-tasks (generic "Send follow-up email" with empty body) — those are handled by osi-outreach-sequence. Trigger on "run email tasks", "draft my email tasks", "write drafts for email tasks", "do my follow-ups", or when the user asks you to go through email tasks due.
+description: Auto-draft reply emails for every HubSpot email task that is due today or overdue for the user. For each task, identifies the associated contact, pulls the CURRENT state of the relationship from HubSpot engagements (calls, emails logged to HubSpot, and Teams/Zoom meeting notes), drafts a thread-matched reply in my voice, and writes the draft into the task's notes field so the user can review and send. Skips outreach-sequence auto-tasks (generic "Send follow-up email" with empty body), those are handled by osi-outreach-sequence. Trigger on "run email tasks", "draft my email tasks", "write drafts for email tasks", "do my follow-ups", or when the user asks you to go through email tasks due.
 ---
 
 > **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-email-task-drafts\` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub. If returning after days away, run `git pull` first to get the latest, then check the local Cowork copy and re-install the `.skill` file if the source has drifted.
@@ -13,28 +13,28 @@ Fully automated draft-generator for my HubSpot email tasks. Run this whenever th
 
 ## 🚨 Critical drafting rules
 
-### Rule 1 — Ignore the task title. Read the history.
+### Rule 1, Ignore the task title. Read the history.
 
-**Do NOT use the task subject/title as drafting material.** Task titles are often months stale. The subject tells you WHICH contact to draft for — nothing more.
+**Do NOT use the task subject/title as drafting material.** Task titles are often months stale. The subject tells you WHICH contact to draft for, nothing more.
 
-### Rule 2 — READ the full engagement history. Strictly.
+### Rule 2, READ the full engagement history. Strictly.
 
 the user's own words: *"READ THE FUCKING OLDER EMAILS, CALLS AND MEETINGS. STRICT, SEE WHAT IS HAPPENING."*
 
-Pull 15 each of EMAIL / CALL / NOTE and 10 MEETING_EVENT records for the contact. Then **call `get_crm_objects` on each and read the full body text end-to-end** — not titles, not snippets, not just the 3 most recent. Also pull 5 most recent company-level engagements for colleague context.
+Pull 15 each of EMAIL / CALL / NOTE and 10 MEETING_EVENT records for the contact. Then **call `get_crm_objects` on each and read the full body text end-to-end**, not titles, not snippets, not just the 3 most recent. Also pull 5 most recent company-level engagements for colleague context.
 
-Every draft must reference **at least 2 specifics** (named products, standards, projects, named partner-side engineers, prior commitments) pulled directly from what you read. If you can't find 2 specifics, do NOT invent them — write the thin-context fallback.
+Every draft must reference **at least 2 specifics** (named products, standards, projects, named partner-side engineers, prior commitments) pulled directly from what you read. If you can't find 2 specifics, do NOT invent them, write the thin-context fallback.
 
-### Rule 3 — HubSpot is the only source.
+### Rule 3, HubSpot is the only source.
 
 If the contact has no engagement history in HubSpot, do NOT go searching externally. No Outlook search, no LinkedIn, no ZoomInfo, no web search. Write the thin-context fallback and flag for manual review.
 
 ### Data sources (in order of usefulness for specifics)
 
-- NOTE objects — Teams / Zoom meeting transcripts and summaries. **Often the richest source of technical specifics** (product families, standards, requirements, named engineers at partners).
-- EMAIL objects — threads logged to HubSpot via Outlook integration. Read direction to understand who said what.
-- CALL objects — call history bodies often contain disposition notes and next-step commitments.
-- MEETING_EVENT objects — calendar metadata; less detail than NOTEs but useful for timeline.
+- NOTE objects, Teams / Zoom meeting transcripts and summaries. **Often the richest source of technical specifics** (product families, standards, requirements, named engineers at partners).
+- EMAIL objects, threads logged to HubSpot via Outlook integration. Read direction to understand who said what.
+- CALL objects, call history bodies often contain disposition notes and next-step commitments.
+- MEETING_EVENT objects, calendar metadata; less detail than NOTEs but useful for timeline.
 
 ---
 
@@ -58,14 +58,14 @@ Also after the morning monitor when the user is ready to work through follow-ups
 - Custom tasks with specific subjects
 
 **Excluded:**
-- Generic `"Send follow-up email"` tasks with empty `hs_task_body` — these are from `osi-outreach-sequence` and already have pre-scheduled Outlook drafts.
+- Generic `"Send follow-up email"` tasks with empty `hs_task_body`, these are from `osi-outreach-sequence` and already have pre-scheduled Outlook drafts.
 - Tasks that already have a substantive draft in `hs_task_body` (anything more than `<p></p>` or empty). Preserve existing drafts; don't overwrite.
 
 ---
 
 ## Execution plan
 
-### Step 1 — Pull tasks
+### Step 1, Pull tasks
 
 my `ownerId` is `[MY_HUBSPOT_OWNER_ID]`. Today's date comes from `<env>`.
 
@@ -86,39 +86,39 @@ search_crm_objects(
 )
 ```
 
-### Step 2 — Filter to drafting queue
+### Step 2, Filter to drafting queue
 
 - **Draft queue:** tasks whose subject is NOT exactly "Send follow-up email" AND whose `hs_task_body` is empty or just `<p></p>`.
-- **Skip — sequence:** subject = "Send follow-up email" AND empty body (osi-outreach-sequence tasks).
-- **Skip — preserved:** `hs_task_body` already has substantive content (a previous draft).
+- **Skip, sequence:** subject = "Send follow-up email" AND empty body (osi-outreach-sequence tasks).
+- **Skip, preserved:** `hs_task_body` already has substantive content (a previous draft).
 
 Report counts in the opening message.
 
-### Step 3 — Dispatch parallel subagents
+### Step 3, Dispatch parallel subagents
 
-Divide the draft queue into 4–5 batches of ~8–10 tasks. Dispatch `general-purpose` subagents in parallel (single message, multiple Agent calls) with the prompt in Step 4.
+Divide the draft queue into 4-5 batches of ~8-10 tasks. Dispatch `general-purpose` subagents in parallel (single message, multiple Agent calls) with the prompt in Step 4.
 
-### Step 4 — Subagent task-drafter prompt
+### Step 4, Subagent task-drafter prompt
 
 Give each agent this prompt (substitute the batch's task list):
 
-> You are drafting email reply content for [MY_FULL_NAME] ([MY_EMAIL]) at OSI Global — IT hardware / maintenance / optics. Today is {today's date}.
+> You are drafting email reply content for [MY_FULL_NAME] ([MY_EMAIL]) at OSI Global, IT hardware / maintenance / optics. Today is {today's date}.
 >
 > **🚨 CRITICAL RULE: Do NOT use the task subject/title as drafting material.** Task titles are often outdated. The subject only tells you which task to work on. Draft only from current-state HubSpot engagements.
 >
 > **For each task:**
 >
-> 1. `get_crm_objects` objectType="TASK", taskId — get task details (you need the body to check for existing drafts, not the subject for drafting context).
+> 1. `get_crm_objects` objectType="TASK", taskId, get task details (you need the body to check for existing drafts, not the subject for drafting context).
 >
 > 2. Find associated contact: `search_crm_objects` objectType="CONTACT", filter `associatedWith: [{objectType: "tasks", operator: "EQUAL", objectIdValues: [taskId]}]`. Properties: firstname, lastname, email, jobtitle, company, phone.
 >
-> 3. **🚨 STRICT: READ THE FULL HISTORY — not just metadata, not just the most recent few.** Pull the full set of HubSpot engagements for this contact. Associated-with searches on the contact:
+> 3. **🚨 STRICT: READ THE FULL HISTORY, not just metadata, not just the most recent few.** Pull the full set of HubSpot engagements for this contact. Associated-with searches on the contact:
 >    - `search_crm_objects` objectType="EMAIL", sort by `-hs_createdate`, limit **15**. Then `get_crm_objects` on the full set with properties `["hs_email_subject", "hs_email_text", "hs_email_direction", "hs_email_from_email", "hs_email_to_email", "hs_createdate"]`. **Read every body** end-to-end. Do not skim.
->    - `search_crm_objects` objectType="CALL", sort by `-hs_createdate`, limit **15**. Then `get_crm_objects` with properties `["hs_call_title", "hs_call_body", "hs_call_disposition", "hs_call_direction", "hs_createdate", "hs_call_duration"]`. **Read every call-log body** — disposition + notes together.
->    - `search_crm_objects` objectType="NOTE", sort by `-hs_createdate`, limit **15**. Then `get_crm_objects` with `["hs_note_body", "hs_createdate"]`. **Read every note body** — these often contain Teams / Zoom meeting transcripts and summaries with the most useful technical specifics.
+>    - `search_crm_objects` objectType="CALL", sort by `-hs_createdate`, limit **15**. Then `get_crm_objects` with properties `["hs_call_title", "hs_call_body", "hs_call_disposition", "hs_call_direction", "hs_createdate", "hs_call_duration"]`. **Read every call-log body**, disposition + notes together.
+>    - `search_crm_objects` objectType="NOTE", sort by `-hs_createdate`, limit **15**. Then `get_crm_objects` with `["hs_note_body", "hs_createdate"]`. **Read every note body**, these often contain Teams / Zoom meeting transcripts and summaries with the most useful technical specifics.
 >    - `search_crm_objects` objectType="MEETING_EVENT", sort by `-hs_createdate`, limit **10**. Then `get_crm_objects` with `["hs_meeting_title", "hs_meeting_body", "hs_meeting_start_time", "hs_createdate", "hs_internal_meeting_notes"]`. **Read every meeting body**.
 >
->    If the contact is associated with a company, also pull the 5 most recent engagements on the COMPANY record (via `associatedWith` with `objectType: "companies"`) — these often surface context from colleagues that's relevant to the target contact.
+>    If the contact is associated with a company, also pull the 5 most recent engagements on the COMPANY record (via `associatedWith` with `objectType: "companies"`), these often surface context from colleagues that's relevant to the target contact.
 >
 > 4. **Do NOT** run `outlook_email_search`, LinkedIn, web search, or ZoomInfo. HubSpot engagement history is the only source.
 >
@@ -130,27 +130,27 @@ Give each agent this prompt (substitute the batch's task list):
 >    - Specific prior offers / commitments (e.g., "shadow-quote in 24 hours", "advance overnight replacement")
 >    - Open questions or unanswered asks from the last contact message
 >
->    If your inventory has **2+ specifics**, you can write a full substantive draft weaving them in. If it has fewer, write the shorter thin-context fallback + ⚠️ flag — do NOT invent specifics.
+>    If your inventory has **2+ specifics**, you can write a full substantive draft weaving them in. If it has fewer, write the shorter thin-context fallback + ⚠️ flag, do NOT invent specifics.
 >
-> 6. **Draft a substantive 3–5 paragraph reply in my voice** that hits the four-move blueprint below and weaves in **at least 2 specifics from your inventory**. Match the formality/length/tone of the most recent real reply from the contact. NEVER draft from the task title — it is stale reference only.
+> 6. **Draft a substantive 3-5 paragraph reply in my voice** that hits the four-move blueprint below and weaves in **at least 2 specifics from your inventory**. Match the formality/length/tone of the most recent real reply from the contact. NEVER draft from the task title, it is stale reference only.
 >
 > 7. Write to `hs_task_body` via `manage_crm_objects` updateRequest, `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. **APPEND** after existing notes using `<hr>`. Never overwrite.
 >
 > **Draft format:**
 > ```
-> <div dir="auto"><p style="margin:0;"><strong>DRAFT (auto-generated {today} — based on HubSpot engagement history):</strong></p><p style="margin:0;"><em>Last engagement: {most recent email/call/meeting with 1-line summary and date}</em></p><p style="margin:0;"><br></p><p style="margin:0;">Subject: [subject line]</p><p style="margin:0;"><br></p><p style="margin:0;">Hi [Name],</p><p style="margin:0;"><br></p><p style="margin:0;">[body]</p><p style="margin:0;"><br></p><p style="margin:0;">[MY_FIRST_NAME]</p></div>
+> <div dir="auto"><p style="margin:0;"><strong>DRAFT (auto-generated {today}, based on HubSpot engagement history):</strong></p><p style="margin:0;"><em>Last engagement: {most recent email/call/meeting with 1-line summary and date}</em></p><p style="margin:0;"><br></p><p style="margin:0;">Subject: [subject line]</p><p style="margin:0;"><br></p><p style="margin:0;">Hi [Name],</p><p style="margin:0;"><br></p><p style="margin:0;">[body]</p><p style="margin:0;"><br></p><p style="margin:0;">[MY_FIRST_NAME]</p></div>
 > ```
 >
-> Including the "Last engagement" line lets the user see at a glance what the draft is anchored on — if it's stale or wrong, I can skip.
+> Including the "Last engagement" line lets the user see at a glance what the draft is anchored on, if it's stale or wrong, I can skip.
 >
 > **Edge cases:**
-> - Existing substantive body → SKIP + log "already has draft — preserved".
-> - No contact associated → write "NO CONTACT ASSOCIATED — manual review needed." to the task body.
-> - Contact exists but zero HubSpot engagements in last 12 months → write a short "circling back / worth reconnecting?" draft AND flag "⚠️ thin context — no recent HubSpot engagement" at the top.
+> - Existing substantive body → SKIP + log "already has draft, preserved".
+> - No contact associated → write "NO CONTACT ASSOCIATED, manual review needed." to the task body.
+> - Contact exists but zero HubSpot engagements in last 12 months → write a short "circling back / worth reconnecting?" draft AND flag "⚠️ thin context, no recent HubSpot engagement" at the top.
 >
 > **Output:** Table with columns: `Task ID | Contact | Company | Status (drafted/skipped/no-contact/thin-context) | Last engagement anchor (date + 1-line)`.
 
-### Step 5 — Consolidate and report
+### Step 5, Consolidate and report
 
 Compile a single summary for the user after all subagents return.
 
@@ -169,7 +169,7 @@ DRAFTS READY FOR REVIEW:
 [Table: Contact | Company | Last engagement anchor | HubSpot task URL]
 
 THIN-CONTEXT FLAGS:
-[List any tasks flagged "thin context — no recent HubSpot engagement". the user reviews these manually before sending.]
+[List any tasks flagged "thin context, no recent HubSpot engagement". the user reviews these manually before sending.]
 
 NO CONTACT ASSOCIATED:
 [List any tasks with no contact attached. the user needs to associate the contact in HubSpot before the draft can be written.]
@@ -177,7 +177,7 @@ NO CONTACT ASSOCIATED:
 STATUS: [ALL CLEAR / ISSUES FOUND -- see flags above]
 ```
 
-Keep the summary under 25 lines. the user works through drafts in HubSpot directly — the summary is a dispatch list, not a report.
+Keep the summary under 25 lines. the user works through drafts in HubSpot directly, the summary is a dispatch list, not a report.
 
 If zero tasks were drafted (everything skipped or no tasks due), end with one line: "No drafts needed today. [N] tasks already had drafts, [N] in outreach sequences."
 

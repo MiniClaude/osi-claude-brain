@@ -24,7 +24,7 @@ Read this entire skill before starting.
 
 ## The Rules
 
-- No em-dashes (—) anywhere. Split into two sentences instead.
+- No em-dashes (, ) anywhere. Split into two sentences instead.
 - Keep everything tight and direct.
 - Draft messages: peer-to-peer tone, not vendor-to-buyer.
 - Never create HubSpot tasks for contacts not owned by Andy McLean, Mark Metz, or John Houston.
@@ -34,7 +34,7 @@ Read this entire skill before starting.
 ## Step 1: Search LinkedIn for candidates
 
 Navigate to LinkedIn people search filtered to 1st-degree connections with relevant titles.
-Use regular LinkedIn only — not Sales Navigator.
+Use regular LinkedIn only, not Sales Navigator.
 
 Good search URL:
 `https://www.linkedin.com/search/results/people/?network=%5B%22F%22%5D&keywords=network+engineer+infrastructure+director`
@@ -56,10 +56,10 @@ Search HubSpot for each candidate before doing any LinkedIn research.
 
 **Hard rule:** Only proceed with contacts owned by:
 - [MY_FULL_NAME], owner ID [MY_HUBSPOT_OWNER_ID]
-- Mark Metz — owner ID 210187184
-- John Houston — owner ID 210187193
+- Mark Metz, owner ID 210187184
+- John Houston, owner ID 210187193
 
-Skip anyone owned by another rep. Do not flag it as an issue — just move on silently.
+Skip anyone owned by another rep. Do not flag it as an issue, just move on silently.
 
 Also note `notes_last_contacted` for each qualifying contact. This determines whether to
 check LinkedIn messages in the next step.
@@ -84,15 +84,15 @@ Use this rule to decide whether to check LinkedIn messages:
 Navigate to their LinkedIn profile and skills page. Evaluate against OSI's ICP:
 
 **Target:**
-- Title confirms they buy or specify networking/server/storage hardware — not just adjacent to it
+- Title confirms they buy or specify networking/server/storage hardware, not just adjacent to it
 - Skills with real endorsements: Cisco, optical networking, DWDM, transceivers, data center
   infrastructure, network design, vendor management for hardware, servers, storage
 - Works at a mid-to-large enterprise, carrier, telecom, or regional data center operator
-- Not a hyperscaler (Google, Meta, Amazon, ByteDance) — they build custom, OSI can't compete
+- Not a hyperscaler (Google, Meta, Amazon, ByteDance), they build custom, OSI can't compete
 
 **Disqualify if:**
 - Title is project/program management with no hardware skills
-- All skills are project management, Lean Six Sigma, Scrum, supply chain ops — zero networking
+- All skills are project management, Lean Six Sigma, Scrum, supply chain ops, zero networking
 - Works at a hyperscaler at scale
 
 **Verdict format:**
@@ -107,7 +107,7 @@ If No, move to the next candidate from the search results.
 
 Based on their profile, pick the right play. Do not limit to one if multiple apply:
 
-- **Optics/DWDM:** Network architects, transport engineers, carriers — any Cisco optical,
+- **Optics/DWDM:** Network architects, transport engineers, carriers, any Cisco optical,
   DWDM, or 400G signal. Lead with SmartOptics: 30-50% below Ciena/Nokia, ships fast.
 - **TPM:** Large enterprise with multi-vendor gear and vendor management skills. Lead with
   40-60% below OEM. Mention Park Place/Service Express merger as competitive context.

@@ -1,4 +1,4 @@
-# Session: 2026-04-24 Overnight Batch 1 of 32 (ABORTED — no work done)
+# Session: 2026-04-24 Overnight Batch 1 of 32 (ABORTED, no work done)
 
 ## Trigger
 Scheduled task `osi-overnight-batch-01-fri-1730` fired at 2026-04-24 5:30 PM ET, scoped as batch 1 of 32. Task file: "Read overnight-candidates.json, work one pending candidate at a time, stop after 3 yes-with-email sequences fire."
@@ -17,7 +17,7 @@ Even if I had a qualified yes-with-email prospect, I could not append the 6-emai
 This is the same blocker that aborted today's 11am and later email-sender runs (see `session-2026-04-24.md`).
 
 ## What Andy needs to do
-1. **Mount the OneDrive folder into Cowork.** Until the OSI Hardware OneDrive `Claude-Brain` folder is connected, every scheduled task that reads or writes the live queue will abort. This is the single highest-priority fix — it is blocking send windows and overnight runs.
+1. **Mount the OneDrive folder into Cowork.** Until the OSI Hardware OneDrive `Claude-Brain` folder is connected, every scheduled task that reads or writes the live queue will abort. This is the single highest-priority fix, it is blocking send windows and overnight runs.
 2. **Regenerate `overnight-candidates.json`** by running Phase 1 kickoff attended (Andy at keyboard). The named-company list from tonight's task prompt is: Midcontinent Communications, Lingo Communications, Visionary Broadband, Cincinnati Bell / altafiber, Armstrong Group of Companies, Stellar, Ahead, Patrick Industries, S&P Global. That list populates the queue; Phase 2 overnight batches then consume it.
 3. **Check whether the remaining 31 batches in tonight's chain are still scheduled.** If yes, they will hit the same two blockers and should be cancelled or paused until items 1 and 2 are resolved.
 

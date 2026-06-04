@@ -1,22 +1,22 @@
-# Weekend Sequence Chain — Batch 8 of 38 — 2026-04-18
+# Weekend Sequence Chain, Batch 8 of 38, 2026-04-18
 
 ## Prospects processed (all 3)
 
-**Pete Johnson — Arvig — Network sequence**
+**Pete Johnson, Arvig, Network sequence**
 - HubSpot: 28190886282 (Andy-owned, lifecycle=lead)
 - Day 1: Mon 2026-04-20 @ 4pm ET (Arvig person #1)
 - Hook: Arvig Eagan DC interconnect (March 2026) + Twin Cities expansion
 - ZI: COMPANY_ONLY_MATCH, no personal data. Phone was switchboard, formatted to +1 (888) 992-7844.
 - Associated to Arvig Enterprises Inc (21312564408).
 
-**Mike Fiszlewicz — altafiber — TPM sequence**
+**Mike Fiszlewicz, altafiber, TPM sequence**
 - HubSpot: 174482956358 (Andy-owned, lifecycle=customer)
 - Day 1: Thu 2026-04-30 @ 4pm ET (altafiber person #3, 4-biz-day stagger after Mike Wills 4/24)
 - Hook: Nokia XGS-PON expansion (Jan 2026) + Cincinnati HQ relocation April 2026 (2290 employees)
 - ZI: FULL_MATCH. Mobile +1 (513) 435-3325 added. Title refreshed to "Director II, Information Technology Operations". LinkedIn URL upgraded to https.
 - Associated to Cincinnati Bell Inc (9732259995).
 
-**Ed Martin — altafiber/Cinbell — TPM sequence**
+**Ed Martin, altafiber/Cinbell, TPM sequence**
 - HubSpot: 394649 (Andy-owned, lifecycle=customer, longstanding)
 - Day 1: Wed 2026-05-06 @ 4pm ET (altafiber person #4, stagger after Mike Fiszlewicz 4/30)
 - Hook: altafiber Nokia expansion + April office relocation
@@ -36,4 +36,4 @@ Ed     E1 5/6  4pm | E2 5/8  | E3 5/14 | E4 5/26 | E5 6/1  | E6 6/9
 ```
 All dates verified against 2026 holiday list. No sends on weekends/holidays.
 
-## Batch 8 of 38 — complete.
+## Batch 8 of 38, complete.

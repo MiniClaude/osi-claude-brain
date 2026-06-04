@@ -10,11 +10,11 @@ Read this when drafting emails, LinkedIn messages, voicemail scripts, or any out
 ## Sign-off
 - Never type "Andy" at the bottom of email bodies. Outlook signature handles it. Typing manually causes a doubled sign-off.
 
-## Humanization filter — final pass before any email is queued
+## Humanization filter, final pass before any email is queued
 
 - **Banned vocabulary:** crucial, pivotal, landscape, underscore, delve, showcase, testament, enhance, foster, garner. Cut or replace.
 - **No hyphens** in bodies or subject lines. "end of life" not "end-of-life", "third party" not "third-party", "24/7/365" not "24-hour".
-- **No em-dashes (—)** anywhere. Split into two sentences.
+- **No em-dashes (U+2014)** anywhere. Split into two sentences.
 - **No rule of three.** Break three-item lists into prose.
 - **No -ing pile-ups** at sentence ends. Kill "ensuring uptime", "highlighting our advantage", "reflecting market shifts".
 - **No negative parallelisms.** Remove "it's not just X, it's Y" constructions.

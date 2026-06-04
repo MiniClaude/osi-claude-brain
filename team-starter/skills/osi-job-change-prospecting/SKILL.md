@@ -104,12 +104,12 @@ Skip anyone already in the tracker.
 
 ### Phase A: Job Changes
 Use the Phase A URL. Read all pages (navigate to &page=2, &page=3 as needed).
-Use get_page_text first — it loads all cards at once. If that fails, use read_page
+Use get_page_text first, it loads all cards at once. If that fails, use read_page
 with depth 5 and look for the list of lead cards.
 
 For each person shown:
 1. Note name, title, company, change type (hired vs promoted), timeframe.
-2. Quick ICP screen — Silent Skip (no log) if clearly not a buyer:
+2. Quick ICP screen, Silent Skip (no log) if clearly not a buyer:
    - Project/program managers, sales reps, designers, recruiters, finance/legal/HR roles
    - Hyperscaler employees (Google, Meta, Amazon at scale)
    - Anyone with zero networking/hardware/infrastructure signals
@@ -120,12 +120,12 @@ Use the Phase B URL. Same page navigation and loading approach as Phase A.
 
 For each person shown:
 1. Note name, title, company. Change type = "New Connection."
-2. Same quick ICP screen as Phase A — Silent Skip if clearly not a buyer.
-3. Check Excel tracker first — skip anyone already logged from a prior job change run.
+2. Same quick ICP screen as Phase A, Silent Skip if clearly not a buyer.
+3. Check Excel tracker first, skip anyone already logged from a prior job change run.
 4. Everyone else: full ICP check → history pull → HubSpot check → action.
 
 **Message tone for new connections:** These people just connected with the user. The opener
-should acknowledge the new connection naturally — not a cold reach, but also not
+should acknowledge the new connection naturally, not a cold reach, but also not
 over-familiar. Reference something specific about their role or company. Keep it warm
 and conversational. No pitch in Touch 1.
 
@@ -149,7 +149,7 @@ making any HubSpot changes. Do this in parallel where possible.
 
 ### 4a. LinkedIn Message History (Sales Navigator)
 - Navigate to their Sales Nav lead page.
-- Read the Timeline / Relationship section — it shows past InMail threads, notes,
+- Read the Timeline / Relationship section, it shows past InMail threads, notes,
   and interactions the user has had with this person.
 - Note: date of last contact, what was discussed, any responses received.
 
@@ -160,9 +160,9 @@ making any HubSpot changes. Do this in parallel where possible.
 
 ### 4c. HubSpot Contact History
 Search all of the following associated with the contact ID (sort DESCENDING by timestamp):
-- **Emails**: objectType "emails" — subject line, direction, date
-- **Calls**: objectType "calls" — outcome, notes, date
-- **Notes**: objectType "notes" — content, date
+- **Emails**: objectType "emails", subject line, direction, date
+- **Calls**: objectType "calls", outcome, notes, date
+- **Notes**: objectType "notes", content, date
 - **Tasks (completed)**: objectType "tasks", filter hs_task_status = COMPLETED
 
 Key questions to answer:
@@ -176,7 +176,7 @@ Search for deals associated with the contact's current or past company:
 - search_crm_objects objectType "deals", associatedWith the company ID
 - Note: deal name, stage, amount, close date, owner
 - If the company has been a customer or has an active deal, flag this prominently.
-  It changes the outreach angle entirely — reference the existing relationship.
+  It changes the outreach angle entirely, reference the existing relationship.
 
 ---
 
@@ -212,8 +212,8 @@ For companies NOT in HubSpot: create company record (owner: [MY_HUBSPOT_OWNER_ID
 ## Step 7: Create LinkedIn InMail Tasks
 
 For each qualified target eligible for tasks:
-- Task 1: "LinkedIn InMail - [Name] - [Company] (Touch 1)" — LINKED_IN_MESSAGE — due TODAY
-- Task 2: "LinkedIn InMail - [Name] - [Company] (Touch 2)" — LINKED_IN_MESSAGE — due 2 WEEKS
+- Task 1: "LinkedIn InMail - [Name] - [Company] (Touch 1)", LINKED_IN_MESSAGE, due TODAY
+- Task 2: "LinkedIn InMail - [Name] - [Company] (Touch 2)", LINKED_IN_MESSAGE, due 2 WEEKS
 - Owner: [MY_HUBSPOT_OWNER_ID]
 - Body: Full drafted message
 
@@ -224,7 +224,7 @@ For each qualified target eligible for tasks:
 - Always reference their new role and company specifically.
 - **If any prior history exists (LinkedIn messages, HubSpot emails, calls, samples sent):**
   The message MUST feel like picking up where you left off, not a cold intro. Reference
-  the specific interaction — what was discussed, what was sent, what was agreed. Never
+  the specific interaction, what was discussed, what was sent, what was agreed. Never
   write a cold opener to a warm contact.
 - **If the company has a purchasing history or active deal:** Reference the existing
   relationship directly. Lead with continuity, not prospecting.
@@ -255,7 +255,7 @@ Save updated file back to Claude-Brain.
 
 > **SYNC NOTE:** This skill exists in two locations that must ALWAYS be kept in sync:
 > - `C:\Claude-Brain\skills\osi-job-change-prospecting\SKILL.md` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain)
-> - `.claude/skills/osi-job-change-prospecting/SKILL.md` (Cowork local — what triggers the skill)
+> - `.claude/skills/osi-job-change-prospecting/SKILL.md` (Cowork local, what triggers the skill)
 >
 > Any time changes are made to one, apply them to the other immediately. After editing, repackage
 > `Claude-Brain/skills/osi-job-change-prospecting.skill` and reinstall via Cowork if the local

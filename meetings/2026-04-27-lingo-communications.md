@@ -1,4 +1,4 @@
-# 2026-04-27 — Lingo Communications (John Lachance, Sr. Solutions Engineer)
+# 2026-04-27, Lingo Communications (John Lachance, Sr. Solutions Engineer)
 
 Call ID: 108743414693  
 Duration: ~1:07  

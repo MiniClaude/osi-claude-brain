@@ -1,4 +1,4 @@
-# Session 2026-04-21 — Fatbeam sequences + Cooper Harless
+# Session 2026-04-21, Fatbeam sequences + Cooper Harless
 
 ## What got done
 
@@ -23,16 +23,16 @@ Ran Company Mode on **Fatbeam** (regional fiber carrier, 8 western states). Also
 All 6 emails queued per prospect with proper threading, 2/4/6/5/6 business day cadence, Memorial Day skipped. 5 HubSpot contacts updated/created + associated to Fatbeam. 5 strategy notes posted. 5 LINKED_IN_CONNECT tasks created, due dates matched to respective Day 1s.
 
 **Disqualifications (profile reads, not title-only):**
-- Jeffrey Bulger — Open To Work, leaving Fatbeam.
-- Katherine Stephens — Director of Digital Transformation & Automation but actual background is BI / GIS / workflow automation. Not a network infra buyer.
-- Gregory Green — HubSpot ID 355102, listed as "Manager, Technology" with greg@fatbeam.com. Actually was the former CEO, now at an investment firm in Las Vegas. Contact record is stale. **Flag for Andy to archive or update.**
+- Jeffrey Bulger, Open To Work, leaving Fatbeam.
+- Katherine Stephens, Director of Digital Transformation & Automation but actual background is BI / GIS / workflow automation. Not a network infra buyer.
+- Gregory Green, HubSpot ID 355102, listed as "Manager, Technology" with greg@fatbeam.com. Actually was the former CEO, now at an investment firm in Las Vegas. Contact record is stale. **Flag for Andy to archive or update.**
 
 **Not sequenced this run (individual ICs, better as LinkedIn-only later):** Mike Martin, Mitchell R., Tyler Culbertson (HS 45425), Christian Reid, Zac Barron (Network Engineers), Phoebe Seibel, Phillip Coltrin (NOC Engineers), Amy Mauldin, Bruce Hathaway (OSP ICs).
 
 ### Cooper Harless at Hunter Communications
-- Separate prospect from the existing Josh Harless sequence (different people, different emails, different profiles — confirmed by Andy).
+- Separate prospect from the existing Josh Harless sequence (different people, different emails, different profiles, confirmed by Andy).
 - HubSpot ID 564235, last contacted Dec 2022. Cold reengagement.
-- Fresh hook: Personal — just earned Junos SR-MPLS (JSR) certification 2mo ago. Company — Oak Hill Capital closed acquisition of Hunter on 2026-04-01.
+- Fresh hook: Personal, just earned Junos SR-MPLS (JSR) certification 2mo ago. Company, Oak Hill Capital closed acquisition of Hunter on 2026-04-01.
 - Person 7 at Hunter in the email queue. Day 1 = 2026-05-13 per same-company stagger.
 - HubSpot contact refreshed (title, city, LinkedIn). Strategy note + LINKED_IN_CONNECT task due 2026-05-13. 6 emails queued.
 
@@ -42,7 +42,7 @@ Starting: 402 entries. Added: 36 entries (6 × 6 prospects). Ending: 438 entries
 ## Action items for Andy
 - Send the 5 Fatbeam LinkedIn invite requests on their respective Day 1 mornings (tasks are on the queue).
 - Send the Cooper Harless LinkedIn invite on 2026-05-13.
-- Review Gregory Green record (HS 355102) — former Fatbeam CEO, now elsewhere. Archive or update.
+- Review Gregory Green record (HS 355102), former Fatbeam CEO, now elsewhere. Archive or update.
 - Tyler Culbertson (HS 45425) is still at Fatbeam as Network Engineer. Not sequenced this run but could be added later as a LinkedIn-only touch.
 
 ## Process notes

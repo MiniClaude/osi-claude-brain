@@ -53,7 +53,7 @@ If a fire triggers a prompt, that is a bug in the skill that called the promptin
 
 Interactive sessions (Andy at keyboard) keep the broader research surface. The rule fires only when the session is launched by a scheduled task.
 
-**Why this rule exists:** 2026-04-29 — overnight Processing Recurring fire ran a Patti Paulo (ExteNet Systems) qualification subagent that hit a restricted LinkedIn profile and followed the qualification skill's documented Path B fallback by `web_fetch`-ing `extenet.com/about-us/leadership/patti-paulo`. That fetch prompted Andy for browser permission overnight. The orchestrator promised zero prompts during scheduled fires; the qualification skill broke the promise via a documented fallback. The fix is the inverted rule above plus parallel rules in osi-overnight-runner, osi-prospect-qualification, osi-discovery-sweep, osi-outreach-sequence.
+**Why this rule exists:** 2026-04-29, overnight Processing Recurring fire ran a Patti Paulo (ExteNet Systems) qualification subagent that hit a restricted LinkedIn profile and followed the qualification skill's documented Path B fallback by `web_fetch`-ing `extenet.com/about-us/leadership/patti-paulo`. That fetch prompted Andy for browser permission overnight. The orchestrator promised zero prompts during scheduled fires; the qualification skill broke the promise via a documented fallback. The fix is the inverted rule above plus parallel rules in osi-overnight-runner, osi-prospect-qualification, osi-discovery-sweep, osi-outreach-sequence.
 
 ---
 
@@ -61,9 +61,9 @@ Interactive sessions (Andy at keyboard) keep the broader research surface. The r
 
 Before creating any new HubSpot contact OR queueing any email, search HubSpot by `firstname + lastname + company`. Use the existing contact's primary email. Do NOT trust ZoomInfo as the authority on contact identity. ZoomInfo is enrichment only.
 
-If no HubSpot match exists, derive the company's **verified** email pattern from engagement signals (replies, opens, bounces) at that company — not from "most common stored format." Stored formats include the bad ZoomInfo guesses we're trying to filter out. Full algorithm at `knowledge/email-pattern-resolver.md`.
+If no HubSpot match exists, derive the company's **verified** email pattern from engagement signals (replies, opens, bounces) at that company, not from "most common stored format." Stored formats include the bad ZoomInfo guesses we're trying to filter out. Full algorithm at `knowledge/email-pattern-resolver.md`.
 
-When ZoomInfo returns an email different from the chosen address, write the ZoomInfo address to the contact's `hs_additional_emails` and prepend a top-of-notes line: `ALT EMAIL <date>: ZoomInfo lists <email>. Using <chosen>. Pattern: <pattern> verified by <signal>.` Andy reviews every contact before sending — that line surfaces the alternate.
+When ZoomInfo returns an email different from the chosen address, write the ZoomInfo address to the contact's `hs_additional_emails` and prepend a top-of-notes line: `ALT EMAIL <date>: ZoomInfo lists <email>. Using <chosen>. Pattern: <pattern> verified by <signal>.` Andy reviews every contact before sending, that line surfaces the alternate.
 
 **Why this rule exists:** on 2026-04-27 the prospecting flow created a duplicate John Lubeck contact at Midco using the ZoomInfo-pattern email `jlubeck@midco.com` instead of finding the existing HubSpot record under the verified primary `john.lubeck@midco.com`. Six emails queued to the wrong address before catch. The HubSpot-first rule prevents the dupe; the engagement-weighted pattern check prevents bad-pattern guesses; the alt-email note keeps Andy's manual-review step efficient.
 
@@ -144,7 +144,7 @@ Never mix them in the same output. If both are needed, present them in clearly l
 Everything you produce must be something I can explain and defend **solo**, without needing an engineer in the room. Avoid jargon I can't own. If something is technical, translate it into language I can use confidently on a call.
 
 ### 4. No Em-Dashes. Ever.
-**NEVER use the character — in any output, any file, any email, any message. Not once. Not ever.**
+**NEVER use the em-dash character (Unicode U+2014) in any output, any file, any email, any message. Not once. Not ever.**
 Split thoughts into two sentences instead. This is non-negotiable.
 
 ### 5. No Re-explaining
@@ -262,7 +262,7 @@ Reusable skills live in `Claude-Brain/skills/` (NOT `.claude/skills/` - that is 
 
 ### Skill Editing & Install Workflow (REDIRECT-STUB ARCHITECTURE, 2026-04-29)
 
-🚨 **READ FIRST — the runtime is intentionally a stub.** As of 2026-04-29 the Cowork runtime backing store at `.../skills-plugin/<plugin-id>/<session-id>/skills/[skill-name]/SKILL.md` no longer contains real skill logic. It contains a one-line redirect that tells Claude to Read `C:\Claude-Brain\skills\[skill-name]\SKILL.md` and execute that file instead. Every scheduled-task fire, every skill triggering event, the runtime stub loads first, and the live source loads on top of it. The runtime cannot drift from source because it has no source-equivalent content of its own.
+🚨 **READ FIRST, the runtime is intentionally a stub.** As of 2026-04-29 the Cowork runtime backing store at `.../skills-plugin/<plugin-id>/<session-id>/skills/[skill-name]/SKILL.md` no longer contains real skill logic. It contains a one-line redirect that tells Claude to Read `C:\Claude-Brain\skills\[skill-name]\SKILL.md` and execute that file instead. Every scheduled-task fire, every skill triggering event, the runtime stub loads first, and the live source loads on top of it. The runtime cannot drift from source because it has no source-equivalent content of its own.
 
 **If you find yourself "fixing" the runtime by copying full skill content over a stub, STOP.** That is the bug we just removed. The stub is correct. The runtime should be ~2 KB of redirect text and nothing else. If a skill behaves wrong, fix the source at `C:\Claude-Brain\skills\[skill-name]\SKILL.md`. Do not add content to the runtime.
 

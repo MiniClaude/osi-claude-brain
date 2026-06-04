@@ -28,7 +28,7 @@ Use mcp__scheduled-tasks__list_scheduled_tasks to get all scheduled tasks.
 
 Filter for OSI outreach email tasks. Identify by task ID format: [firstname]-[lastname]-[company-slug]-email-[N].
 
-Group by prospect — strip the -email-N suffix to get the prospect key (e.g. brett-baker-lippert).
+Group by prospect, strip the -email-N suffix to get the prospect key (e.g. brett-baker-lippert).
 
 For each prospect, build a status list:
 - **Fired:** enabled: false AND fireAt date is in the past
@@ -42,7 +42,7 @@ For each prospect, build a status list:
 Any task where enabled: true and fireAt is in the past is a failure. It should have sent but did not.
 
 Flag each one:
-> OVERDUE: [Name] at [Company] — Email [N] was due [date/time]. Still enabled. Check Cowork Scheduled Tasks sidebar.
+> OVERDUE: [Name] at [Company], Email [N] was due [date/time]. Still enabled. Check Cowork Scheduled Tasks sidebar.
 
 Do not attempt to resend automatically. Flag only.
 
@@ -61,14 +61,14 @@ For each bounce found:
 2. Search HubSpot for a contact with that email address
 3. If found:
    a. Identify all remaining enabled scheduled tasks for that prospect (task IDs matching [firstname]-[lastname]-[company-slug]-email-*)
-   b. Cancel all remaining tasks — set enabled: false via mcp__scheduled-tasks__update_scheduled_task
-   c. Update HubSpot strategy note on the contact: prepend "EMAIL BOUNCED [date] — all remaining sequence tasks canceled. Verify email address before re-enrolling."
+   b. Cancel all remaining tasks, set enabled: false via mcp__scheduled-tasks__update_scheduled_task
+   c. Update HubSpot strategy note on the contact: prepend "EMAIL BOUNCED [date], all remaining sequence tasks canceled. Verify email address before re-enrolling."
    d. Add to bounce report
 4. If no HubSpot contact found for the bounced address, flag it for the user to investigate manually
 
 ---
 
-## Step 4: Check HubSpot for Replies — Auto-Pause on non-OOO
+## Step 4: Check HubSpot for Replies, Auto-Pause on non-OOO
 
 For each prospect who had an email task fire in the last 48 hours:
 
@@ -77,20 +77,20 @@ Search HubSpot for recent inbound activity on that contact:
 - Notes added since their last outbound email
 - Meetings booked
 
-### Out-of-office filter — applied first
+### Out-of-office filter, applied first
 If the reply body contains any of these phrases, skip entirely. Do not pause. Do not flag.
 
 Keywords: "out of office", "on vacation", "away from the office", "will return", "maternity leave", "parental leave", "extended leave", "on PTO", "back on [date]"
 
-### Any other reply — auto-pause the remaining sequence
+### Any other reply, auto-pause the remaining sequence
 If the reply is not an OOO, treat it as human engagement and auto-pause the remaining queue entries for that prospect immediately. No waiting for my confirmation. No lost momentum while the user is asleep.
 
 Steps:
 1. Read `C:\Claude-Brain\email-queue.json`.
 2. Find every entry where the prospectName matches AND status is `"pending"`.
 3. Change each of those entries' status from `"pending"` to `"paused-reply-[YYYY-MM-DD]"`. Write the file back.
-4. Update the HubSpot strategy note on the contact — prepend this line:
-   > REPLY RECEIVED [date] — sequence auto-paused. the user to review and decide whether to resume or cancel.
+4. Update the HubSpot strategy note on the contact, prepend this line:
+   > REPLY RECEIVED [date], sequence auto-paused. the user to review and decide whether to resume or cancel.
 5. Add to the monitor output in the PAUSED ON REPLY section.
 
 Special case: if the reply is specifically a shipping address tied to a swag or sample request, still auto-pause. Flag it distinctly in the summary as SHIPMENT REQUESTED so the user knows to ship before doing anything else.
@@ -149,25 +149,25 @@ If everything is clean, end with: "All clear. [N] sequences running."
 
 ---
 
-## Step 7: Update Excel Tracker — Unenrolled Tab
+## Step 7: Update Excel Tracker, Unenrolled Tab
 
 File: Claude-Brain/prospects-tracker-new.xlsx, Tab 3 "Unenrolled"
 
 After every monitor run, append a row for anyone unenrolled during this run. This includes:
 - Hard bounces (auto-canceled by the monitor)
-- Auto-paused on reply (by the monitor — Step 4)
+- Auto-paused on reply (by the monitor, Step 4)
 - Manual cancellations the user requested ("cancel sequence for [name]")
 - Reply-based cancellations the user confirmed
 
 Columns: Name | Company | Date Unenrolled | Reason | Emails Sent | Emails Remaining | Notes
 
 **Reason values:**
-- Hard bounce — bad email address
-- Hard bounce — domain blocked
-- Auto-paused — reply received
-- Auto-paused — shipment requested
-- Replied — the user canceled
-- Connected — the user canceled
+- Hard bounce, bad email address
+- Hard bounce, domain blocked
+- Auto-paused, reply received
+- Auto-paused, shipment requested
+- Replied, the user canceled
+- Connected, the user canceled
 - the user request
 
 **Emails Sent / Remaining:** count from the scheduled tasks that fired vs. were still enabled at cancellation time.

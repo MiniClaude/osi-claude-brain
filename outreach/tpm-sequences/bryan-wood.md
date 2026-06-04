@@ -28,7 +28,7 @@ Cigna likely uses Park Place for TPM/lifecycle services on infrastructure hardwa
 
 OSI positioned as stable, boutique, PE-free alternative. Gartner-recognized TPM (same coverage, better pricing). Multi-vendor support (Cisco, Dell, HP, NetApp, Juniper, Arista). No forced bundling with merged entity overhead.
 
-Ken Cunliffe as proof of relationship. ("I see Ken manages your TPM function...") Establish that OSI already supports Cigna operations. Bryan owns infrastructure strategy—TPM cost and service model impacts his P&L.
+Ken Cunliffe as proof of relationship. ("I see Ken manages your TPM function...") Establish that OSI already supports Cigna operations. Bryan owns infrastructure strategy, TPM cost and service model impacts his P&L.
 
 ### The Personal Hook
 Infrastructure Engineer Director role = cost control focus. Merger creates re-negotiation opportunity. Health insurance vertical = regulatory compliance and uptime requirements. OSI's multi-vendor model aligns with infrastructure flexibility (not locked into one TPM vendor).

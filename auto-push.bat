@@ -8,7 +8,7 @@ cd /d C:\Claude-Brain
 REM Pull first so we don't push over the other laptop's work.
 git pull --quiet
 if errorlevel 1 (
-    echo [%date% %time%] PULL FAILED — skipping push >> C:\Claude-Brain\auto-push.log
+    echo [%date% %time%] PULL FAILED, skipping push >> C:\Claude-Brain\auto-push.log
     exit /b 1
 )
 

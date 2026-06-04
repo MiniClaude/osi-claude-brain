@@ -1,4 +1,4 @@
-# Stratus Networks / Ben Russell — 2026-04-29
+# Stratus Networks / Ben Russell, 2026-04-29
 
 **Call ID:** 108878446996
 **Title:** Stratus / OSI
@@ -44,10 +44,10 @@ Technical discussion among team members regarding the optical design between Gal
 
 ## Follow-up Task
 
-- HubSpot Task: 105278268837 — "Ask Thomas for quote and send to Ben" (HIGH priority)
+- HubSpot Task: 105278268837, "Ask Thomas for quote and send to Ben" (HIGH priority)
 - Draft saved to task body
 - Due bumped to 2026-04-30 12 PM ET
 
 ## Recording + Transcript
 
-HubSpot call record 108878446996 — Review tab in HubSpot for transcript and recording.
+HubSpot call record 108878446996, Review tab in HubSpot for transcript and recording.

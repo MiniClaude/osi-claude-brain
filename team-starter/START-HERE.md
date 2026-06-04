@@ -32,8 +32,8 @@ Before anything else, ask the teammate for these five pieces of information. Ask
 1. **Full name** (e.g., `Mark Metz`)
 2. **First name** (e.g., `Mark`)
 3. **OSI email** (e.g., `mark@osiglobal.com`)
-4. **HubSpot Owner ID** — if they don't know it, tell them: "In HubSpot, click your avatar top right, then Profile & Preferences. The Owner ID is a 9-digit number. If you can't find it, Teams Andy and ask."
-5. **GitHub username** — if they don't have a GitHub account yet, tell them to go to github.com right now and create one with their personal email (not OSI email, so the account survives a job change). Wait for them to confirm it's done.
+4. **HubSpot Owner ID**, if they don't know it, tell them: "In HubSpot, click your avatar top right, then Profile & Preferences. The Owner ID is a 9-digit number. If you can't find it, Teams Andy and ask."
+5. **GitHub username**, if they don't have a GitHub account yet, tell them to go to github.com right now and create one with their personal email (not OSI email, so the account survives a job change). Wait for them to confirm it's done.
 
 Also compute a sixth value: the "spoken email" for voicemails. Take their OSI email and expand it into spoken form. Example: `mark@osiglobal.com` becomes `mark at osiglobal dot com`. Confirm this with them before continuing.
 

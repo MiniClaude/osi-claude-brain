@@ -1,4 +1,4 @@
-# Desjardins / Julien L'Ecuyer — 2026-04-29
+# Desjardins / Julien L'Ecuyer, 2026-04-29
 
 **Call ID:** 108890653242
 **Title:** Call with Julien L'Ecuyer
@@ -38,9 +38,9 @@ Andrew McLean from OSI Global reached out to Julien L'Ecuyer to discuss transcei
 
 ## Follow-up Task
 
-- HubSpot Task: 108897240111 — "follow up on asking procurement about sending up samples and tpm bid"
+- HubSpot Task: 108897240111, "follow up on asking procurement about sending up samples and tpm bid"
 - Draft saved to task body
 
 ## Recording + Transcript
 
-HubSpot call record 108890653242 — Review tab in HubSpot for transcript and recording.
+HubSpot call record 108890653242, Review tab in HubSpot for transcript and recording.

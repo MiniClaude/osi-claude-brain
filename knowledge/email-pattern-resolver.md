@@ -1,6 +1,6 @@
 # Email Pattern Resolver
 
-Single source of truth for resolving the right email address for a prospect. Every skill that creates HubSpot contacts, queues emails, or runs pre-flight checks should follow this exact algorithm. ZoomInfo is enrichment, not authority — the authority is HubSpot's engagement signal at the same company.
+Single source of truth for resolving the right email address for a prospect. Every skill that creates HubSpot contacts, queues emails, or runs pre-flight checks should follow this exact algorithm. ZoomInfo is enrichment, not authority, the authority is HubSpot's engagement signal at the same company.
 
 ## Why this exists
 
@@ -13,12 +13,12 @@ A 2026-04-27 incident: ZoomInfo gave `jlubeck@midco.com` for John Lubeck. HubSpo
 
 ---
 
-## Step 1 — HubSpot-first contact lookup
+## Step 1, HubSpot-first contact lookup
 
 Before any new contact creation or any queue write:
 
 1. Search HubSpot contacts by `firstname + lastname + company`. Match by company name OR company domain.
-2. If exactly one match → use that contact. Use its `email` field as the send target. Done — skip Step 2.
+2. If exactly one match → use that contact. Use its `email` field as the send target. Done, skip Step 2.
 3. If multiple matches → flag for manual review. Do NOT create a new record. Do NOT queue an email.
 4. If zero matches → continue to Step 2.
 
@@ -26,7 +26,7 @@ Do not search HubSpot by the ZoomInfo-supplied email alone. ZoomInfo's email may
 
 ---
 
-## Step 2 — Verified company pattern
+## Step 2, Verified company pattern
 
 When no existing HubSpot contact matches, derive the company's verified email pattern from engagement signals (NOT from the most-common stored format).
 
@@ -71,7 +71,7 @@ Apply a recency decay on opens and replies: any signal older than 12 months coun
 
 ---
 
-## Step 3 — Fallback when engagement signal is missing
+## Step 3, Fallback when engagement signal is missing
 
 When Step 2 says insufficient signal:
 
@@ -81,7 +81,7 @@ When Step 2 says insufficient signal:
 
 ---
 
-## Step 4 — Handling the ZoomInfo alt email
+## Step 4, Handling the ZoomInfo alt email
 
 When ZoomInfo gives an email that differs from the chosen address (whether HubSpot match in Step 1 or constructed from verified pattern in Step 2):
 

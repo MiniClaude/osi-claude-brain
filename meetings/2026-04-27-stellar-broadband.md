@@ -1,4 +1,4 @@
-# 2026-04-27 — Stellar Broadband (Richard Laing, President & COO)
+# 2026-04-27, Stellar Broadband (Richard Laing, President & COO)
 
 Call ID: 108737902659  
 Duration: ~3:31  

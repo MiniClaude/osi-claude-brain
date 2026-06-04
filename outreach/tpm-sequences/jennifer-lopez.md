@@ -45,7 +45,7 @@ Hook: "Saw you joined NYPL as CDO. That's a huge mandate. Question: as you're bu
 
 ## LIVE CALL SCRIPT (30 seconds)
 
-"Hi Jennifer, this is Andy McLean at OSI Global. I saw you came on as CDO at NYPL—that's an incredible mandate. I work with public institutions and libraries on infrastructure modernization, specifically helping them refresh aging servers and storage at 40 to 50 percent below what they'd spend with Dell or NetApp direct. I'm not sure if that's on your radar yet, but if you're building new digital platforms, every dollar you save on maintenance hardware is a dollar that goes back to collections access. Do you have 15 minutes next week to talk through what that looks like?"
+"Hi Jennifer, this is Andy McLean at OSI Global. I saw you came on as CDO at NYPL, that's an incredible mandate. I work with public institutions and libraries on infrastructure modernization, specifically helping them refresh aging servers and storage at 40 to 50 percent below what they'd spend with Dell or NetApp direct. I'm not sure if that's on your radar yet, but if you're building new digital platforms, every dollar you save on maintenance hardware is a dollar that goes back to collections access. Do you have 15 minutes next week to talk through what that looks like?"
 
 ---
 
@@ -57,7 +57,7 @@ Hook: "Saw you joined NYPL as CDO. That's a huge mandate. Question: as you're bu
 
 ## LINKEDIN INVITE (under 300 characters)
 
-"Hi Jennifer, Saw you joined NYPL as CDO—congrats. I work with public institutions on infrastructure refresh. Specifically, we help cut server/storage costs 40-50% vs. OEM. Would love to compare notes on how that might fit into your modernization mandate."
+"Hi Jennifer, Saw you joined NYPL as CDO, congrats. I work with public institutions on infrastructure refresh. Specifically, we help cut server/storage costs 40-50% vs. OEM. Would love to compare notes on how that might fit into your modernization mandate."
 
 (238 characters)
 

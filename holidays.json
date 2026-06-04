@@ -1,7 +1,7 @@
 {
   "_comment": "Holidays to skip when scheduling outreach email sends. US federal holidays + widely-observed B2B holidays. Read by osi-outreach-sequence and related skills at runtime. Update this file, not the skills.",
   "last_updated": "2026-04-24",
-  "managed_by": "Andy — edit to add/remove dates",
+  "managed_by": "Andy, edit to add/remove dates",
   "timezone_note": "All dates are US Eastern calendar dates. Weekends are handled separately (skip Saturday and Sunday regardless).",
   "skip_dates": [
     {"date": "2026-01-01", "name": "New Year's Day"},

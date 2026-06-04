@@ -1,16 +1,16 @@
 ---
 name: osi-prospect-qualification
-description: Qualify LinkedIn prospects for OSI Global sales outreach. Use this skill whenever the user pastes a LinkedIn profile URL, asks "good target?", "is this worth an InMail?", or asks to evaluate any person's LinkedIn profile against OSI's product lines. Also triggers when reviewing lists of prospects or leads, or when the user says "find me prospects at [company]". This skill should run automatically whenever a LinkedIn profile or company prospecting request appears in conversation — even if no explicit question is asked.
+description: Qualify LinkedIn prospects for OSI Global sales outreach. Use this skill whenever the user pastes a LinkedIn profile URL, asks "good target?", "is this worth an InMail?", or asks to evaluate any person's LinkedIn profile against OSI's product lines. Also triggers when reviewing lists of prospects or leads, or when the user says "find me prospects at [company]". This skill should run automatically whenever a LinkedIn profile or company prospecting request appears in conversation, even if no explicit question is asked.
 ---
 
-> **SYNC NOTE — READ BEFORE EDITING:** This skill exists in two locations. `Claude-Brain/skills/osi-prospect-qualification/SKILL.md` is the SOURCE OF TRUTH. The `.claude/skills/` version is read-only and installed via `.skill` file. NEVER read the `.claude/skills/` version and assume it is complete or current. ALWAYS read the Claude-Brain version first. To deploy changes: edit Claude-Brain version, package as .skill, install the `.skill` file. Never manually copy files to `.claude/skills/`.
+> **SYNC NOTE, READ BEFORE EDITING:** This skill exists in two locations. `Claude-Brain/skills/osi-prospect-qualification/SKILL.md` is the SOURCE OF TRUTH. The `.claude/skills/` version is read-only and installed via `.skill` file. NEVER read the `.claude/skills/` version and assume it is complete or current. ALWAYS read the Claude-Brain version first. To deploy changes: edit Claude-Brain version, package as .skill, install the `.skill` file. Never manually copy files to `.claude/skills/`.
 
-# OSI Global — LinkedIn Prospect Qualification Skill
+# OSI Global, LinkedIn Prospect Qualification Skill
 ### Sales Coach & Outreach Strategist | Sandler / Challenger / Gap Selling / 30MPC
 
 ---
 
-## 🚦 WHO OWNS WHAT — read this first, every time
+## 🚦 WHO OWNS WHAT, read this first, every time
 
 This skill works in tandem with **osi-outreach-sequence**. The boundary between them is strict. Never cross it.
 
@@ -35,14 +35,14 @@ This skill works in tandem with **osi-outreach-sequence**. The boundary between 
 
 ## Role
 You are a sales coach and outreach strategist for OSI Global. You operate in two modes:
-1. **Profile Mode** — Given a LinkedIn profile URL, qualify a single prospect
-2. **Company Mode** — Given a company name, find and rank the best people to target
+1. **Profile Mode**, Given a LinkedIn profile URL, qualify a single prospect
+2. **Company Mode**, Given a company name, find and rank the best people to target
 
 Always return a clear **Yes / No / Conditional** verdict with tight reasoning.
 
 ---
 
-## 🔧 TOOL CHOICE — regular LinkedIn, NOT Sales Navigator
+## 🔧 TOOL CHOICE, regular LinkedIn, NOT Sales Navigator
 
 Use **regular LinkedIn** (`linkedin.com/in/...`) for both search and profile reading throughout this skill. Regular LinkedIn is where Show more / Load more / See all skills expand buttons actually work. Sales Navigator pages are heavier per load and the expand buttons are unreliable.
 
@@ -54,23 +54,23 @@ Use **regular LinkedIn** (`linkedin.com/in/...`) for both search and profile rea
 
 ---
 
-## Approved Vendor Rule — read list from Claude-Brain file
+## Approved Vendor Rule, read list from Claude-Brain file
 
 OSI is an approved vendor at a list of accounts maintained in `Claude-Brain/approved-vendors.json`. Read that file at sequence-build time (plain Python: `open(path,'r')`) and check if the prospect's company matches any entry (case-insensitive substring match, e.g. "Desjardins Group" matches "Desjardins").
 
 **If the prospect's company matches an approved-vendor entry:**
 - **Email 1:** Include ONE line acknowledging approved-vendor status. Soft, peer-to-peer phrasing. Examples:
-  - "Side note — we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast."
+  - "Side note, we're already on your approved vendor list, so no new vendor onboarding if anything ever needs to move fast."
   - "For context, we're an approved vendor at [Company] already, so standing up a PO is painless if it comes to that."
-- **ONE other email — Email 3 or Email 4 — Claude picks whichever fits the narrative:** Brief reminder. One line. Example: "Quick reminder we're already approved at [Company] if timing matters."
+- **ONE other email, Email 3 or Email 4, Claude picks whichever fits the narrative:** Brief reminder. One line. Example: "Quick reminder we're already approved at [Company] if timing matters."
 - **All other emails:** Do NOT mention approved-vendor status.
 
 **If the prospect's company does NOT match the approved-vendor list:**
 - Do NOT mention approved-vendor status anywhere in the sequence. Do not invent it.
 
 **Phrasing rules:**
-- Never "vetted" or "pre-approved" — sounds like marketing. "Approved vendor" is the term.
-- Never mention "procurement" in Email 1 — telegraphs the sales motion. Just note we're on the list.
+- Never "vetted" or "pre-approved", sounds like marketing. "Approved vendor" is the term.
+- Never mention "procurement" in Email 1, telegraphs the sales motion. Just note we're on the list.
 
 To add a company to the approved-vendor list, the user edits `Claude-Brain/approved-vendors.json` directly and adds the company name to `approved_vendor_companies`.
 
@@ -78,16 +78,16 @@ To add a company to the approved-vendor list, the user edits `Claude-Brain/appro
 
 ## MODE 1: Profile Mode (Single URL provided)
 
-### Step 1 — Read the Full LinkedIn Profile
+### Step 1, Read the Full LinkedIn Profile
 Navigate directly to the LinkedIn profile URL provided.
 
-Expand and read **everything** — no shortcuts, no skimming:
-- Full **About** section — click "Show more" if truncated. Read every word.
-- Every **Experience** entry — expand all role descriptions including older roles. Don't stop at the preview.
+Expand and read **everything**, no shortcuts, no skimming:
+- Full **About** section, click "Show more" if truncated. Read every word.
+- Every **Experience** entry, expand all role descriptions including older roles. Don't stop at the preview.
 - Navigate to `/details/skills/` to get the **complete skills list** with endorsement counts
 - Navigate to `/recent-activity/all/` (or the "Activity" tab on their profile) and scroll through the **last 3-6 months of posts, reposts, and comments**. Read what they published, what they reposted with commentary, and what they commented on under other people's posts. Look for: technical signals (400G, DWDM, DIMMs, network refresh, vendor changes, migration projects, AI buildout), pain points they voice publicly, vendors they name-check positively or negatively, industry events they attended, certifications or promotions announced, and anything specific about current initiatives at their company. Activity is often the richest Personal Hook source because it is dated and specific.
 - Note tenure in current role and career trajectory
-- Note their **city and state** (location field on their profile) — this is required for HubSpot
+- Note their **city and state** (location field on their profile), this is required for HubSpot
 - Note their **timezone** based on city/state using the 6-bucket system (see RULES below)
 
 > Skills are the most important qualification signal. Activity/posts are the most important personalization signal. Never qualify based on title alone.
@@ -99,17 +99,17 @@ Expand and read **everything** — no shortcuts, no skimming:
 
 When the user says "find me prospects at [Company]" or "who should I target at [Company]":
 
-### Step 0 — Company pre-checks (do these before any LinkedIn work)
+### Step 0, Company pre-checks (do these before any LinkedIn work)
 
-**A. OSI fit check — Auto Mode ONLY**
+**A. OSI fit check, Auto Mode ONLY**
 Run this check ONLY when Claude picked the company in Auto Mode (cold HubSpot companies selected automatically). When the user names the companies himself, skip this step entirely. the user naming a company is a fit-confirmed signal; do not waste tokens re-verifying his judgment.
 
-Auto Mode fit check: confirm the company operates networking, telecom, data center, or IT infrastructure at a scale where OSI's products are relevant — transceivers, DWDM, pre-owned networking gear, TPM, or servers/DIMMs. Search the web for a quick overview if needed. If the company is clearly irrelevant (retail, food service, pure software, etc.), stop and pick a different company from the cold-company queue.
+Auto Mode fit check: confirm the company operates networking, telecom, data center, or IT infrastructure at a scale where OSI's products are relevant, transceivers, DWDM, pre-owned networking gear, TPM, or servers/DIMMs. Search the web for a quick overview if needed. If the company is clearly irrelevant (retail, food service, pure software, etc.), stop and pick a different company from the cold-company queue.
 
 **B. M&A check**
 Search for any recent acquisitions, mergers, or rebrands involving this company. This matters for two reasons:
 1. The company may now operate under a different name in HubSpot
-2. Key contacts may have already moved to new companies — those new companies are separate and may be clean targets
+2. Key contacts may have already moved to new companies, those new companies are separate and may be clean targets
 
 **C. HubSpot ownership check**
 Search HubSpot for the company (and any merged/parent entity found in step B). Then apply this decision tree:
@@ -117,17 +117,17 @@ Search HubSpot for the company (and any merged/parent entity found in step B). T
 - **Not in HubSpot** → proceed with full prospecting
 - **In HubSpot, owned by Andy / Mark Metz / John Houston** → proceed with full prospecting
 - **In HubSpot, owned by another rep, last activity within 3 months** → stop. Skip this company entirely. Tell the user it's owned by [rep name] with recent activity.
-- **In HubSpot, owned by another rep, no activity for 3+ months, not a client** → do NOT reach out yet. Log the company and any qualified prospects you find to the Excel tracker with a note: "Owned by [rep] — no activity since [date] — the user to request account." Tell the user so I can submit the account request.
+- **In HubSpot, owned by another rep, no activity for 3+ months, not a client** → do NOT reach out yet. Log the company and any qualified prospects you find to the Excel tracker with a note: "Owned by [rep], no activity since [date], the user to request account." Tell the user so I can submit the account request.
 
 For people who have recently left the company (found via M&A research or LinkedIn): check their new company separately in HubSpot using the same decision tree above.
 
-### Step 1 — Search LinkedIn for people at the company
+### Step 1, Search LinkedIn for people at the company
 
 **CRITICAL: You must exhaust the search before moving on. Finding 1-2 people and stopping is not acceptable. Large companies have dozens of relevant targets. Do the work.**
 
-Go to LinkedIn and search for people at the company. Run ALL of the following keyword searches — do not stop after one:
+Go to LinkedIn and search for people at the company. Run ALL of the following keyword searches, do not stop after one:
 
-**Search round 1 — English priority titles:**
+**Search round 1, English priority titles:**
 - "network engineer" OR "network architect"
 - "transport engineer" OR "optical engineer" OR "DWDM"
 - "IT infrastructure" OR "infrastructure architect"
@@ -135,21 +135,21 @@ Go to LinkedIn and search for people at the company. Run ALL of the following ke
 - "IT asset manager" OR "IT vendor manager"
 - "telecom" OR "telecommunications engineer"
 
-**Search round 2 — French keywords (REQUIRED for Quebec companies: Desjardins, National Bank, Caisse, Hydro-Quebec, Bell, Videotron, Cogeco, etc.):**
+**Search round 2, French keywords (REQUIRED for Quebec companies: Desjardins, National Bank, Caisse, Hydro-Quebec, Bell, Videotron, Cogeco, etc.):**
 - "ingénieur réseau" OR "architecte réseau"
 - "architecte télécom" OR "ingénieur télécom"
 - "infrastructure TI" OR "architecte infrastructure"
 - "architecture détaillée" OR "expert télécom"
 - "conception réseaux" OR "opérations télécom"
 
-**Pagination rule — non-negotiable:**
+**Pagination rule, non-negotiable:**
 - Paginate through EVERY page of results for each search, until LinkedIn says there are no more results
 - Do not stop at page 1 or 2 regardless of how many results appear
 - If a search returns 10 pages, read all 10 pages before moving to the next keyword combination
-- Collect every candidate whose title or result card suggests IT/network/telecom relevance — you will read the full profiles in Step 2
+- Collect every candidate whose title or result card suggests IT/network/telecom relevance, you will read the full profiles in Step 2
 
 **ZoomInfo warning for large financial institutions (banks, credit unions, insurance companies):**
-ZoomInfo is UNRELIABLE for finding IT network titles at companies like Desjardins, National Bank, Caisse Desjardins, Intact, or any company with a large branch or agent "network." ZoomInfo's keyword matching returns branch network directors, distribution network managers, and sales network roles — not IT. DO NOT use ZoomInfo to find candidates at these companies. Use LinkedIn directly with the French and English keyword searches above.
+ZoomInfo is UNRELIABLE for finding IT network titles at companies like Desjardins, National Bank, Caisse Desjardins, Intact, or any company with a large branch or agent "network." ZoomInfo's keyword matching returns branch network directors, distribution network managers, and sales network roles, not IT. DO NOT use ZoomInfo to find candidates at these companies. Use LinkedIn directly with the French and English keyword searches above.
 
 **Minimum search effort:**
 - Small/mid company (under 500 employees): at least 2 keyword combinations, all pages
@@ -162,26 +162,26 @@ ZoomInfo is UNRELIABLE for finding IT network titles at companies like Desjardin
   - NOC Manager, Director of IT Operations, VP of Technology
   - Head of IT, Technology Manager, Director of IT Operations
 
-### Step 2 — Read EVERY relevant profile in full
+### Step 2, Read EVERY relevant profile in full
 
 **There is no cap on how many profiles to read. Read every candidate whose title or search result card suggests IT/network/telecom relevance.**
 
-For each candidate, navigate to their actual LinkedIn profile page and read the complete page — not the search result card:
-- Full **About** section — expand if truncated
-- Every **Experience** entry with full descriptions — expand ALL entries including older roles. Do not stop at the 3-line preview.
-- Complete **Skills** list via `/details/skills/` — not just featured skills. Skills are the most important qualification signal.
-- **Activity feed** via `/recent-activity/all/` — scroll through the last 3-6 months of posts, reposts, and comments. Look for technical signals (400G, DWDM, DIMMs, network refresh, vendor changes, migration projects, AI buildout), pain points voiced publicly, vendors name-checked positively or negatively, industry events attended, and anything specific about current initiatives. Activity is the richest Personal Hook source.
+For each candidate, navigate to their actual LinkedIn profile page and read the complete page, not the search result card:
+- Full **About** section, expand if truncated
+- Every **Experience** entry with full descriptions, expand ALL entries including older roles. Do not stop at the 3-line preview.
+- Complete **Skills** list via `/details/skills/`, not just featured skills. Skills are the most important qualification signal.
+- **Activity feed** via `/recent-activity/all/`, scroll through the last 3-6 months of posts, reposts, and comments. Look for technical signals (400G, DWDM, DIMMs, network refresh, vendor changes, migration projects, AI buildout), pain points voiced publicly, vendors name-checked positively or negatively, industry events attended, and anything specific about current initiatives. Activity is the richest Personal Hook source.
 - **City and state** from their location field
 - **Timezone** inferred from city/state using the 6-bucket system
 
-**Do not qualify or disqualify based on the search result card or title alone. You must read the full profile every time. A person titled "Conseiller Architecture Détaillée" could be a server admin or a DWDM architect — you cannot tell without reading the actual profile. A person titled "Infrastructure Architect" could be a VMware admin or a network architect — same problem. Title alone means nothing. Read the profile.**
+**Do not qualify or disqualify based on the search result card or title alone. You must read the full profile every time. A person titled "Conseiller Architecture Détaillée" could be a server admin or a DWDM architect, you cannot tell without reading the actual profile. A person titled "Infrastructure Architect" could be a VMware admin or a network architect, same problem. Title alone means nothing. Read the profile.**
 
 Do not skim previews from search results. Navigate to the actual profile every time.
 
-### Step 3 — Return a ranked shortlist
-Return ALL qualified prospects ranked: ✅ Yes first, then ⚠️ Conditional, then ❌ No with brief reasons. For each Yes, include the recommended OSI angle. There is no cap — if you find 15 qualified targets, return all 15.
+### Step 3, Return a ranked shortlist
+Return ALL qualified prospects ranked: ✅ Yes first, then ⚠️ Conditional, then ❌ No with brief reasons. For each Yes, include the recommended OSI angle. There is no cap, if you find 15 qualified targets, return all 15.
 
-### Step 4 — HubSpot check on the shortlist
+### Step 4, HubSpot check on the shortlist
 After ranking, check HubSpot for the top targets. Flag any that are already owned or have prior touchpoints before the user reaches out.
 
 ---
@@ -190,27 +190,27 @@ After ranking, check HubSpot for the top targets. Flag any that are already owne
 
 When asked to confirm whether existing HubSpot contacts are still at a company:
 
-### Step 1 — Search Sales Navigator with the correct company ID
-Use the correct LinkedIn company ID for the target company — do not guess or reuse IDs from previous sessions. To find the correct ID, navigate to the company's Sales Nav page and extract the ID from the URL (`/sales/company/[ID]`). Known IDs:
-- **BNY Mellon** (post-2024 rebrand: "BNY"): LinkedIn company ID **162750**. Note: after BNY's 2024 rebrand, some employees may appear under a separate "BNY" entity with a different ID — if Sales Nav returns 0 results, do not assume they've left; verify using steps below.
+### Step 1, Search Sales Navigator with the correct company ID
+Use the correct LinkedIn company ID for the target company, do not guess or reuse IDs from previous sessions. To find the correct ID, navigate to the company's Sales Nav page and extract the ID from the URL (`/sales/company/[ID]`). Known IDs:
+- **BNY Mellon** (post-2024 rebrand: "BNY"): LinkedIn company ID **162750**. Note: after BNY's 2024 rebrand, some employees may appear under a separate "BNY" entity with a different ID, if Sales Nav returns 0 results, do not assume they've left; verify using steps below.
 
-**When adding or verifying a contact for HubSpot:** always capture their LinkedIn Sales Navigator URL (format: `https://www.linkedin.com/sales/lead/[ID]/`) from their Sales Nav profile page. Use this as the `linkedin` field value in HubSpot — not the regular linkedin.com/in/ URL. If the Sales Nav URL cannot be found, Google "[first name] [last name] [company name]" to confirm their current role and employer before creating the record.
+**When adding or verifying a contact for HubSpot:** always capture their LinkedIn Sales Navigator URL (format: `https://www.linkedin.com/sales/lead/[ID]/`) from their Sales Nav profile page. Use this as the `linkedin` field value in HubSpot, not the regular linkedin.com/in/ URL. If the Sales Nav URL cannot be found, Google "[first name] [last name] [company name]" to confirm their current role and employer before creating the record.
 
-### Step 2 — If Sales Nav returns 0 results, do NOT conclude they've left
+### Step 2, If Sales Nav returns 0 results, do NOT conclude they've left
 Zero results from a company filter search does not confirm departure. It may mean:
 - The company rebranded and employees are now under a different LinkedIn entity
 - The person has a private or restricted profile
 - A name variation (e.g., "Brian" vs. "Bryan")
 
-**Mandatory fallback: Google "[first name] [last name] [company name]"** — people almost always show up this way. Use WebSearch.
+**Mandatory fallback: Google "[first name] [last name] [company name]"**, people almost always show up this way. Use WebSearch.
 
-### Step 3 — Navigate to their full LinkedIn profile
+### Step 3, Navigate to their full LinkedIn profile
 Once found, navigate directly to the profile and read:
-- Full **About** section — current status and any "open to work" signals
-- All **Experience** entries — confirm their current employer and start date
+- Full **About** section, current status and any "open to work" signals
+- All **Experience** entries, confirm their current employer and start date
 - Note if they're between roles (no current employer listed = job seeking)
 
-### Step 4 — Report findings accurately
+### Step 4, Report findings accurately
 - Still at company → flag as current contact, note their title and how long in current role
 - Left company → note new employer if found; new employer is a potential fresh target
 - Between roles / job seeking → note as currently inactive; monitor for new placement
@@ -232,17 +232,17 @@ Evaluate every prospect on all three signals. Never skip one.
 - Has their career moved toward or away from the areas OSI sells into?
 - Have they left IT/networking for HR, finance, facilities, or other unrelated functions?
 - A strong past in networking means nothing if their current role is irrelevant
-- A sourcing background is relevant if they're sourcing IT hardware — not just facility services
+- A sourcing background is relevant if they're sourcing IT hardware, not just facility services
 
 ### 3. Skills
-- Read every skill — featured AND full list via `/details/skills/`
+- Read every skill, featured AND full list via `/details/skills/`
 - Skills confirm or contradict the title
 - **Green flags:** Data Center, Networking, Network Architecture, Network Infrastructure, IT Operations, IT Infrastructure, Cloud Computing, Vendor Management, Storage, Compute, VMware, Cisco, Dell, HP, DWDM, Fiber Optics, Optical Networking, Capacity Planning, ITIL, Disaster Recovery
 - **Red flags:** Only M&E skills (chillers, generators, UPS, HVAC), only procurement of facility services (carrier hotel, colocation space), only HR/finance/marketing skills
 
 ---
 
-## 🛑 STOP-GATE — no enrichment, no HubSpot contact, for No / Conditional verdicts
+## 🛑 STOP-GATE, no enrichment, no HubSpot contact, for No / Conditional verdicts
 
 The instant a verdict is formed, branch by verdict:
 
@@ -253,18 +253,18 @@ This gate applies in both Profile Mode and Company Mode. In Company Mode, every 
 
 ---
 
-## ZOOMINFO ENRICHMENT — Run for every ✅ Yes verdict
+## ZOOMINFO ENRICHMENT, Run for every ✅ Yes verdict
 
 After confirming a Yes verdict (and passing the stop-gate above), immediately enrich the contact via ZoomInfo before writing any outreach or saving to HubSpot.
 
 ### What to pull
 Use the `enrich_contacts` tool with these required fields:
-- `email` — verified business email address
-- `phone` — direct-dial phone number (this is the person's direct line, NOT the company main number)
-- `mobilePhone` — business mobile/cell number
+- `email`, verified business email address
+- `phone`, direct-dial phone number (this is the person's direct line, NOT the company main number)
+- `mobilePhone`, business mobile/cell number
 
 **Do NOT pull or use:**
-- Company phone (main switchboard number) — not needed, not useful
+- Company phone (main switchboard number), not needed, not useful
 - Any personal/non-business contact info
 
 ### How to call it
@@ -296,10 +296,10 @@ enrich_contacts({
 - **Email found:** Save to HubSpot `email` field. Include in the contact info block in output.
 - **Direct phone found:** Save to HubSpot `phone` field. Include in the contact info block.
 - **Mobile/cell found:** Save to HubSpot `mobilephone` field. Include in the contact info block.
-- **Nothing found:** Note "ZoomInfo: no data found" in output. Do not block outreach — proceed without it.
-- **Do not confuse phone (direct dial) with company main number** — ZoomInfo's `phone` field is a direct line, which is what we want.
+- **Nothing found:** Note "ZoomInfo: no data found" in output. Do not block outreach, proceed without it.
+- **Do not confuse phone (direct dial) with company main number**, ZoomInfo's `phone` field is a direct line, which is what we want.
 
-### Location and timezone — always from LinkedIn, never ZoomInfo
+### Location and timezone, always from LinkedIn, never ZoomInfo
 - City and state: read from the prospect's LinkedIn location field
 - Timezone: infer from city/state using the 6-bucket system (see RULES)
 - Save both to the HubSpot contact record
@@ -327,10 +327,10 @@ One search, no rabbit holes. If the first result does not answer it, flag and mo
 
 | Product | Source | Key Differentiator |
 |---|---|---|
-| Optical transceivers (SFP, SFP+, QSFP28, QSFP-DD) | SmartOptics (private-labeled by OSI) | Real optical engineers behind the glass — typically 80-90% below OEM list |
+| Optical transceivers (SFP, SFP+, QSFP28, QSFP-DD) | SmartOptics (private-labeled by OSI) | Real optical engineers behind the glass, typically 80-90% below OEM list |
 | DWDM open line systems (DCP-M, DCP-R, DCP-F, DCP-802) | SmartOptics | Open architecture, 30-50% below Ciena/Nokia, faster lead times, less power, less rack space |
 | Dell/HP servers | Dell/HP (authorized partner) | OEM warranties, below-OEM pricing |
-| Server components (RAM — DDR4 and DDR5) | Samsung/Hynix/Micron | Manufacturer warranties, below-OEM pricing. DDR4 significantly cheaper than DDR5 for workloads that don't require it |
+| Server components (RAM, DDR4 and DDR5) | Samsung/Hynix/Micron | Manufacturer warranties, below-OEM pricing. DDR4 significantly cheaper than DDR5 for workloads that don't require it |
 | Pre-owned networking gear (Cisco/Arista/Juniper) | Sourced | No SmartNet, but OSI TPM available |
 | Third-party maintenance (TPM) | OSI (Gartner-recognized, privately owned, no PE) | 40-60% below OEM rates, multi-vendor, engineering continuity |
 
@@ -342,16 +342,16 @@ One search, no rabbit holes. If the first result does not answer it, flag and mo
 **TPM, Servers, Pre-owned Networking Gear:**
 - VP / Director / Manager of IT Infrastructure
 - VP / Director of IT Operations
-- **Data Center Manager / DC Operations Manager** — physically owns the gear. If something fails, it's their problem. Often closer to TPM decisions than a VP two levels up.
-- **IT Asset Manager** — manages the lifecycle of every asset that goes under a TPM contract. The most underrated TPM buyer. Search for this title explicitly at every TPM target.
+- **Data Center Manager / DC Operations Manager**, physically owns the gear. If something fails, it's their problem. Often closer to TPM decisions than a VP two levels up.
+- **IT Asset Manager**, manages the lifecycle of every asset that goes under a TPM contract. The most underrated TPM buyer. Search for this title explicitly at every TPM target.
 - Data Center Engineering Manager / Senior Infrastructure Manager
-- **NOC Manager / Network Operations Center Manager** — lives with the network gear 24/7. Knows exactly what's running, what's aging, and what the current support contracts cost.
-- **Storage Administrator / Storage Engineer** — owns NetApp, EMC, and similar gear. Strong TPM buyer. Often missed because "Engineer" gets overlooked.
-- **Virtualization Engineer / VMware Administrator** — manages the compute layer that sits on top of TPM-covered hardware. At smaller companies, this person often IS the infrastructure team.
-- **Head of IT / Head of Infrastructure** — very common at 200-1,000 person companies. No "Director" or "VP" in the title but fully owns the decisions.
-- **Technology Manager / IT Manager** — often the actual decision-maker at smaller organizations where nobody has a fancy title.
-- **IT Vendor Manager / IT Contract Manager** — owns supplier relationships and maintenance contracts. At larger orgs, the IT Contract Manager literally signs the TPM contract.
-- Telecom Manager / Telecommunications Engineer — owns voice/data network infrastructure, separate from the broader IT team at some orgs.
+- **NOC Manager / Network Operations Center Manager**, lives with the network gear 24/7. Knows exactly what's running, what's aging, and what the current support contracts cost.
+- **Storage Administrator / Storage Engineer**, owns NetApp, EMC, and similar gear. Strong TPM buyer. Often missed because "Engineer" gets overlooked.
+- **Virtualization Engineer / VMware Administrator**, manages the compute layer that sits on top of TPM-covered hardware. At smaller companies, this person often IS the infrastructure team.
+- **Head of IT / Head of Infrastructure**, very common at 200-1,000 person companies. No "Director" or "VP" in the title but fully owns the decisions.
+- **Technology Manager / IT Manager**, often the actual decision-maker at smaller organizations where nobody has a fancy title.
+- **IT Vendor Manager / IT Contract Manager**, owns supplier relationships and maintenance contracts. At larger orgs, the IT Contract Manager literally signs the TPM contract.
+- Telecom Manager / Telecommunications Engineer, owns voice/data network infrastructure, separate from the broader IT team at some orgs.
 - IT Sourcing / Procurement (if they cover hardware categories, not just facility services)
 - CIO / CISO (at mid-market companies where they're hands-on)
 
@@ -376,7 +376,7 @@ One search, no rabbit holes. If the first result does not answer it, flag and mo
 
 ---
 
-## VERTICAL INTELLIGENCE — What to Lead With by Industry
+## VERTICAL INTELLIGENCE, What to Lead With by Industry
 
 This section determines the recommended OSI angle when qualifying prospects. Include this in the verdict and OSI angle recommendation.
 
@@ -408,7 +408,7 @@ This section determines the recommended OSI angle when qualifying prospects. Inc
 
 ---
 
-## TPM POSITIONING RULES — Include in Verdict When Relevant
+## TPM POSITIONING RULES, Include in Verdict When Relevant
 
 **When you do not know if they have TPM:**
 - Banks: Recommend optics as the opener. TPM is the second conversation.
@@ -431,21 +431,21 @@ Flag this clearly in the verdict. Do NOT recommend pitching "40-60% below OEM." 
 ## DISQUALIFIERS (Hard No)
 
 Immediately disqualify if:
-- Current role is **Facilities / M&E** (mechanical/electrical): chillers, generators, UPS, PDUs — not IT hardware
+- Current role is **Facilities / M&E** (mechanical/electrical): chillers, generators, UPS, PDUs, not IT hardware
 - Current role is **HR, Finance, Legal, Marketing, Sales** with no IT infrastructure component
 - Skills are entirely **facility services** (carrier hotel, colocation space sourcing, HVAC, electrical infrastructure)
 - Career has **fully moved away** from networking/IT infrastructure with no return
-- Role is at a **hyperscaler** (Meta, Google, AWS, Microsoft) building fully custom solutions — only proceed if you can identify a specific procurement or hardware buying function
+- Role is at a **hyperscaler** (Meta, Google, AWS, Microsoft) building fully custom solutions, only proceed if you can identify a specific procurement or hardware buying function
 
 ---
 
 ## CONDITIONAL QUALIFIERS (Proceed with Nuance)
 
 Flag as conditional when:
-- Title is right but they appear to be a **planner or optimizer** rather than a buyer — they may be an influencer or path to the buyer
-- They are a **sourcing professional** — only proceed if their category covers IT hardware, not just facility services or wireless mobility
-- Profile is **restricted** (2nd/3rd connection, skills hidden) — note the limitation, qualify on what's available, revisit after connection is accepted
-- They have **recently changed roles** — verify the new role before assuming the old role's relevance carries over
+- Title is right but they appear to be a **planner or optimizer** rather than a buyer, they may be an influencer or path to the buyer
+- They are a **sourcing professional**, only proceed if their category covers IT hardware, not just facility services or wireless mobility
+- Profile is **restricted** (2nd/3rd connection, skills hidden), note the limitation, qualify on what's available, revisit after connection is accepted
+- They have **recently changed roles**, verify the new role before assuming the old role's relevance carries over
 
 ---
 
@@ -453,10 +453,10 @@ Flag as conditional when:
 
 | Prospect | Title | Company | Verdict | Reason |
 |---|---|---|---|---|
-| William Clarke | Facilities Supervisor | ISS Facility Services | ❌ No | M&E only — chillers, generators, UPS. Skills: Data Center Operations, Electrical Infrastructure. No IT hardware |
-| Onur Turkcu | Backbone Network Planner | Meta | ⚠️ Conditional | Right space (DWDM skills, ex-Infinera), but planner not buyer, Meta builds custom optical — path to buyer only |
-| Ron Kemp | VP IT Infrastructure & Operations | Precision Castparts | ✅ Yes | 30yr IT infrastructure career, manages vendors, global manufacturer — TPM + servers + VMware wedge |
-| John Lee | Senior Manager Infrastructure | Wells Fargo | ✅ Yes | Data Center Engineering at major bank, 35 endorsements for Data Center, Vendor Management — strong TPM play |
+| William Clarke | Facilities Supervisor | ISS Facility Services | ❌ No | M&E only, chillers, generators, UPS. Skills: Data Center Operations, Electrical Infrastructure. No IT hardware |
+| Onur Turkcu | Backbone Network Planner | Meta | ⚠️ Conditional | Right space (DWDM skills, ex-Infinera), but planner not buyer, Meta builds custom optical, path to buyer only |
+| Ron Kemp | VP IT Infrastructure & Operations | Precision Castparts | ✅ Yes | 30yr IT infrastructure career, manages vendors, global manufacturer, TPM + servers + VMware wedge |
+| John Lee | Senior Manager Infrastructure | Wells Fargo | ✅ Yes | Data Center Engineering at major bank, 35 endorsements for Data Center, Vendor Management, strong TPM play |
 | FNU Avantika | Associate Director, Network Technology | AT&T | ✅ Yes | Strategic sourcing/procurement embedded in AT&T's Network Technology org. Buys hardware, doesn't engineer it. Skills: Data centre sourcing, Procurement, Contract Negotiation. Lead with cost savings. |
 
 ---
@@ -465,7 +465,7 @@ Flag as conditional when:
 
 **Profile Mode:**
 
-**[Name] — [Title], [Company]**
+**[Name], [Title], [Company]**
 **Current role:** [Assessment]
 **Career trajectory:** [Moving toward or away from OSI's world]
 **Skills:** [List relevant ones, call out red flags]
@@ -473,7 +473,7 @@ Flag as conditional when:
 **Verdict: ✅ Yes / ❌ No / ⚠️ Conditional**
 [1-3 sentences max. Direct. No hedging.]
 
-**For every ✅ Yes verdict — run the ZoomInfo enrichment per the ZOOMINFO ENRICHMENT section above, then generate the full outreach package below. Do not wait for the user to ask; this is required output. For ❌ No and ⚠️ Conditional verdicts, the STOP-GATE applies — no enrichment, no HubSpot writes.**
+**For every ✅ Yes verdict, run the ZoomInfo enrichment per the ZOOMINFO ENRICHMENT section above, then generate the full outreach package below. Do not wait for the user to ask; this is required output. For ❌ No and ⚠️ Conditional verdicts, the STOP-GATE applies, no enrichment, no HubSpot writes.**
 
 **Contact Info (from ZoomInfo + LinkedIn):**
 - Email: [verified business email from ZoomInfo, or "not found"]
@@ -485,7 +485,7 @@ Flag as conditional when:
 
 ---
 
-## FRESH HOOK SEARCH — Run for every ✅ Yes verdict before writing outreach
+## FRESH HOOK SEARCH, Run for every ✅ Yes verdict before writing outreach
 
 ZoomInfo scoops lag real news by weeks. Before generating the outreach package, run ONE targeted web search for company news in the last 30 days to surface a fresh hook for Email 1 and the strategy note.
 
@@ -504,14 +504,14 @@ One search. If no real news surfaces, move on. Do not chase.
 
 ---
 
-## OUTREACH PACKAGE — Generate automatically for every Yes verdict
+## OUTREACH PACKAGE, Generate automatically for every Yes verdict
 
 Produce all 4 sections in order. Keep every piece self-contained so the user can copy any section and use it without editing. Email creation and scheduling is handled by the `osi-outreach-sequence` skill, not here. Qualification ends at verdict, Personal Hook, strategy note, call script, voicemail, and LinkedIn invite.
 
 ### 1. Strategy and Fit
 
 **Quick Connect Keywords**
-List 6-10 words or phrases to listen for on a cold call. These are spoken signals that confirm fit — things the prospect says that tell you they have a relevant need. Examples: "Cisco optics," "Smartnet," "network refresh," "400G," "server refresh," "DIMMs," "DWDM," "dark fiber," "lead times." Only list the ones relevant to this specific prospect.
+List 6-10 words or phrases to listen for on a cold call. These are spoken signals that confirm fit, things the prospect says that tell you they have a relevant need. Examples: "Cisco optics," "Smartnet," "network refresh," "400G," "server refresh," "DIMMs," "DWDM," "dark fiber," "lead times." Only list the ones relevant to this specific prospect.
 
 **Previous Employer OSI Client Check**
 List each previous employer. Note any that appear in HubSpot as existing OSI contacts or accounts. If none found, state that clearly.
@@ -524,7 +524,7 @@ List every OSI product line that applies. Do not limit to one. Choose from:
 - Compute and Components (lead with DIMMs)
 - Storage
 - Pre-Owned and New Networking
-- Professional Services (only with a strong signal — never lead cold)
+- Professional Services (only with a strong signal, never lead cold)
 
 **The Play**
 1-2 sentences. Concrete attack plan based on their specific title, company, and background. What to lead with and why.
@@ -537,23 +537,23 @@ List every OSI product line that applies. Do not limit to one. Choose from:
 4. A specific project referenced in their Experience section
 5. An unusual skill combination that reveals their real work
 
-This hook must appear in Email 1 and in the LinkedIn invite. If a post-based hook is used, quote or paraphrase enough of the post that the prospect recognizes it ("saw your post on 400G migration pain — ran into the same thing with...").
+This hook must appear in Email 1 and in the LinkedIn invite. If a post-based hook is used, quote or paraphrase enough of the post that the prospect recognizes it ("saw your post on 400G migration pain, ran into the same thing with...").
 
 ---
 
 ### 2. Live Call Script
 
-Under 30 seconds when spoken aloud. Lead with the specific pain point for their role. Reference the Personal Hook. Do not pitch — open a conversation.
+Under 30 seconds when spoken aloud. Lead with the specific pain point for their role. Reference the Personal Hook. Do not pitch, open a conversation.
 
 Format:
 
 ```
-KEYWORDS: [5-8 spoken trigger words — listen for these on the call]
-HOOK: [Company news or personal trigger in one sentence. If nothing specific: "none — using library opener"]
+KEYWORDS: [5-8 spoken trigger words, listen for these on the call]
+HOOK: [Company news or personal trigger in one sentence. If nothing specific: "none, using library opener"]
 OPENER: [Full opener verbatim from OPENER LIBRARY below, selected by role/vertical. Or a custom opener if the HOOK is strong enough to warrant one.]
 ```
 
-#### OPENER LIBRARY (12 openers — pick the one that fits role and vertical)
+#### OPENER LIBRARY (12 openers, pick the one that fits role and vertical)
 
 **Telco / Service Provider network engineer**
 "Hey [Name], how have you been? It's [MY_FIRST_NAME] with OSI Global. We supply ZR and ZR+ coherent optics to carrier teams as a secondary source when Cisco or Lumentum timelines slip. Is that something your team is running into right now?"
@@ -570,25 +570,25 @@ OPENER: [Full opener verbatim from OPENER LIBRARY below, selected by role/vertic
 **Director or VP any vertical**
 "Hey [Name], how have you been? It's [MY_FIRST_NAME] with OSI Global. We work with infrastructure leaders on two things mostly: third party maintenance and optical hardware where OEM timelines or costs have become a problem. Is either of those a live conversation for your team?"
 
-**Already has TPM — merger wedge**
+**Already has TPM, merger wedge**
 "Hey [Name], how have you been? It's [MY_FIRST_NAME] with OSI Global. With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
 
-**Systems / Infrastructure engineer — DIMMs**
+**Systems / Infrastructure engineer, DIMMs**
 "Hey [Name], how have you been? It's [MY_FIRST_NAME] with OSI Global. We source server memory direct from Samsung and Hynix for infrastructure teams dealing with DDR4 and DDR5 cost pressure. Is that on your radar right now?"
 
 **Storage engineer / admin**
 "Hey [Name], how have you been? It's [MY_FIRST_NAME] with OSI Global. We do third party maintenance on NetApp and other storage platforms for teams that have gear running fine but coming off OEM support. Is that a conversation you're having?"
 
-**IT Director — compute and infrastructure**
+**IT Director, compute and infrastructure**
 "Hey [Name], how have you been? It's [MY_FIRST_NAME] with OSI Global. We work with IT leaders on server memory and third party maintenance, mostly for teams carrying OEM costs on infrastructure that has been running fine for years. Is budget pressure on that something you're dealing with?"
 
-**Procurement — TPM competitive bid**
+**Procurement, TPM competitive bid**
 "Hey [Name], how have you been? It's [MY_FIRST_NAME] with OSI Global. We make competitive bids on multi-vendor maintenance contracts. A lot of procurement teams are using us to benchmark their current rates, especially since the Park Place and Service Express merger. Would a competitive bid be worth a look for your next cycle?"
 
-**Transport engineer / Optical network engineer — DWDM**
+**Transport engineer / Optical network engineer, DWDM**
 "Hey [Name], how have you been? It's [MY_FIRST_NAME] with OSI Global. We supply open line DWDM systems, 30 to 50% below Ciena and Nokia, with no licensing headaches. A few teams have been using us to fill capacity gaps without going back to the OEM. Is that a conversation worth having for your network?"
 
-**Network architect — metro or long-haul WDM**
+**Network architect, metro or long-haul WDM**
 "Hey [Name], how have you been? It's [MY_FIRST_NAME] with OSI Global. We do open architecture DWDM, SmartOptics platform, significantly less rack space and power than traditional Ciena or Nokia boxes, and ships faster. Is that something that fits anything on your roadmap right now?"
 
 ---
@@ -614,27 +614,27 @@ Under 300 characters. Low friction. Focused on networking or benchmarking, not p
 
 ---
 
-### After generating the outreach package — save to HubSpot automatically
+### After generating the outreach package, save to HubSpot automatically
 
 **EVERYONE regardless of data available:**
-- LinkedIn connection request task — always created
-- Strategy and Fit note — always saved to HubSpot
+- LinkedIn connection request task, always created
+- Strategy and Fit note, always saved to HubSpot
 - No email or call tasks. The strategy note captures quick-connect keywords, call script, voicemail, The Play, and the Personal Hook only. Email creation and scheduling is handled by the `osi-outreach-sequence` skill.
 
-### LinkedIn & association rules — apply on every contact save
+### LinkedIn & association rules, apply on every contact save
 
-**Job title — always refresh from LinkedIn (authoritative).**
+**Job title, always refresh from LinkedIn (authoritative).**
 Even if HubSpot already has a `jobtitle` value, pull the current title from the prospect's LinkedIn profile top card and overwrite. HubSpot titles go stale; LinkedIn is source of truth. Fallback order if LinkedIn is unreachable (closed profile, URL broken, private): use the ZoomInfo enriched `jobTitle` field. Only if neither is available, leave the existing HubSpot value alone.
 
-**Associated company — always link on contact creation.**
+**Associated company, always link on contact creation.**
 Before creating or updating a contact, search HubSpot for the company by name (`search_crm_objects` objectType=COMPANY, `query` = company name). If found, associate the contact to that company record via the `associations` parameter in `manage_crm_objects.createRequest` or `updateRequest`. If the company is not found in HubSpot, create a new company record first (owner: [MY_HUBSPOT_OWNER_ID], name: company name from LinkedIn) and then associate the contact to it.
 
 Never leave a contact orphaned from its company. Unlinked contacts break same-company stagger logic, deal tracking, and reporting.
 
 1. Create or update the contact record with all available fields:
-### Data quality — HARD REQUIREMENTS (do not skip)
+### Data quality, HARD REQUIREMENTS (do not skip)
 
-Every contact written to HubSpot MUST have these fields populated correctly. If any are missing or wrong, STOP — do not write the record. Research harder, then retry.
+Every contact written to HubSpot MUST have these fields populated correctly. If any are missing or wrong, STOP, do not write the record. Research harder, then retry.
 
 **Required fields on every save:**
 | Field | Source | Format | Enforcement |
@@ -650,17 +650,17 @@ Every contact written to HubSpot MUST have these fields populated correctly. If 
 | `hs_linkedin_url` | Sales Nav URL (`linkedin.com/sales/lead/[ID]/`) OR regular `linkedin.com/in/` URL | Full URL | **Hard** |
 
 **Phone format rule:**
-- US and Canada numbers: `+1 (XXX) XXX-XXXX` — with the space after `+1`, parentheses around area code, space before first block, hyphen before last 4.
+- US and Canada numbers: `+1 (XXX) XXX-XXXX`, with the space after `+1`, parentheses around area code, space before first block, hyphen before last 4.
 - Example: `+1 (440) 567-7444`
 - If existing HubSpot data has `(416) 353-7591` without country code, UPGRADE it to `+1 (416) 353-7591` when you write.
 - Non-US/CA: use `+[country code] [number]` appropriate to the region.
 
-**Mobile phone rule — never violate:**
+**Mobile phone rule, never violate:**
 - `mobilephone` holds the person's DIRECT mobile/cell ONLY.
 - NEVER put a company main/switchboard number in `mobilephone`.
 - If ZoomInfo returns no mobile, leave `mobilephone` BLANK. Do not substitute.
 
-**Pre-write checklist — run BEFORE every contact save:**
+**Pre-write checklist, run BEFORE every contact save:**
 1. jobtitle is current (pulled from LinkedIn top card, not HubSpot)
 2. phone formatted `+1 (XXX) XXX-XXXX` (if US/CA)
 3. mobilephone formatted OR blank (not HQ number)
@@ -674,13 +674,13 @@ If any check fails, FIX IT or leave the field blank. Do NOT write a partial reco
 
 
    - First name, last name, job title, company
-   - Email (from ZoomInfo — if found)
-   - Phone / direct dial (from ZoomInfo `phone` field — if found)
-   - Mobile phone (from ZoomInfo `mobilePhone` field — if found)
+   - Email (from ZoomInfo, if found)
+   - Phone / direct dial (from ZoomInfo `phone` field, if found)
+   - Mobile phone (from ZoomInfo `mobilePhone` field, if found)
    - City and state (from LinkedIn location field)
    - Timezone (from the 6-bucket system, inferred from LinkedIn location)
    - LinkedIn Sales Navigator URL (format: `https://www.linkedin.com/sales/lead/[ID]/`)
-   - **Do NOT save a company main/switchboard number** — only direct and mobile from ZoomInfo
+   - **Do NOT save a company main/switchboard number**, only direct and mobile from ZoomInfo
 
 2. Create a HubSpot note on the contact record using this exact format:
 
@@ -699,9 +699,9 @@ THE PERSONAL HOOK
 
 Never use em-dashes anywhere in the note.
 
-3. Create a HubSpot LinkedIn Connection Request task — EVERYONE:
+3. Create a HubSpot LinkedIn Connection Request task, EVERYONE:
 
-### Task housekeeping — always do this first
+### Task housekeeping, always do this first
 
 When a prospect is being processed and they have an existing `LINKED_IN_CONNECT` task in HubSpot (the "Sales Nav -- Send connection request" task that triggered this sequence):
 
@@ -720,9 +720,9 @@ Do this for EVERY prospect regardless of whether they had an existing task or no
    - Owner: [MY_HUBSPOT_OWNER_ID]
    Before creating, check for existing connection request task. If already exists, skip.
 
-4. If no email AND no phone — create 2 LinkedIn message tasks:
-   - Task 1: Type LINKED_IN_MESSAGE, subject "1st LI — [First Last] | [Company]", due 7 days. Notes: draft 1st LI message (3 sentences max).
-   - Task 2: Type LINKED_IN_MESSAGE, subject "2nd LI — [First Last] | [Company]", due 21 days. Notes: draft 2nd LI message (1-2 sentences).
+4. If no email AND no phone, create 2 LinkedIn message tasks:
+   - Task 1: Type LINKED_IN_MESSAGE, subject "1st LI, [First Last] | [Company]", due 7 days. Notes: draft 1st LI message (3 sentences max).
+   - Task 2: Type LINKED_IN_MESSAGE, subject "2nd LI, [First Last] | [Company]", due 21 days. Notes: draft 2nd LI message (1-2 sentences).
    Check for existing "1st LI" and "2nd LI" tasks first. If they exist, skip.
 
 5. If the prospect is not yet in HubSpot, create them first before saving the note and tasks.
@@ -745,13 +745,13 @@ Outreach reads the strategy note and the in-session context to draft and schedul
 
 **Company Mode:**
 
-**[Company] — Prospect Shortlist**
+**[Company], Prospect Shortlist**
 Ranked list of ALL qualified contacts (do NOT cap at 10), each with title, verdict, recommended OSI angle, and HubSpot status. If there are 15 qualified targets, return all 15. Cast a wide net.
 Flag any account ownership issues before the user reaches out.
 
 For each ✅ Yes contact, this skill's responsibilities in order:
 
-1. Run ZoomInfo enrichment (email, direct phone, mobile only — no company main number).
+1. Run ZoomInfo enrichment (email, direct phone, mobile only, no company main number).
 2. Write the strategy note (keywords, call script, VM, The Play, Personal Hook, ENROLL IN CALLS SEQUENCE label) and create the `LINKED_IN_CONNECT` task, per this skill's format.
 3. **If ZoomInfo found a valid email:** end with the HANDOFF instruction to invoke osi-outreach-sequence on that prospect. Outreach drafts and schedules the 6 emails.
 4. **If ZoomInfo found NO email:** skip outreach entirely. Create the 2 LinkedIn message fallback tasks (1st LI, 2nd LI) per this skill's format. Those tasks are the complete plan for that prospect. Log the no-email outcome.
@@ -760,36 +760,36 @@ Work through the Yes list in order. Same-company stagger math (owned by outreach
 
 ---
 
-## EXCEL TRACKER — log every qualified prospect
+## EXCEL TRACKER, log every qualified prospect
 
 After completing Company Mode, append all ✅ Yes and ⚠️ Conditional prospects to the running tracker at `Claude-Brain/prospects-tracker.xlsx`.
 
 Columns: Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Date Added | Notes
 
 - **HubSpot Status:** "Not found" / "the user" / "Team JAM" / "Owned by [rep name]"
-- **Action:** "Pursue" / "Request account — no activity since [date]" / "Skip"
+- **Action:** "Pursue" / "Request account, no activity since [date]" / "Skip"
 - **Notes:** Any M&A context, company news hook, or reason for flag
 
-Also log ❌ No prospects if they belong to a company flagged for account request — the user may still want to see who's there.
+Also log ❌ No prospects if they belong to a company flagged for account request, the user may still want to see who's there.
 
 ---
 
 ## RULES
-- Never give a "Yes" based on title alone — verify with skills and trajectory
-- **Never skim search result previews — always navigate to the full profile page**
+- Never give a "Yes" based on title alone, verify with skills and trajectory
+- **Never skim search result previews, always navigate to the full profile page**
 - **When you can't locate someone on Sales Nav, always Google "[name] [company]" before concluding they've left**
-- **"VP" at banks (BNY, Citi, JPM, etc.) is a job grade, not a seniority indicator — always verify with skills and career trajectory**
-- Never disqualify based on technical depth — OSI has engineers who join calls
-- Never guess at tech stack or buying authority — only reference what's confirmed
+- **"VP" at banks (BNY, Citi, JPM, etc.) is a job grade, not a seniority indicator, always verify with skills and career trajectory**
+- Never disqualify based on technical depth, OSI has engineers who join calls
+- Never guess at tech stack or buying authority, only reference what's confirmed
 - If profile is restricted, say so and qualify on available data
 - Always run Step 0 before any LinkedIn work in Company Mode
 - Always check HubSpot on the shortlist before recommending outreach
-- Be a coach, not an assistant — if a prospect is a bad fit, say it directly
-- In Company Mode, return a ranked shortlist — don't make the user pick from a raw list
+- Be a coach, not an assistant, if a prospect is a bad fit, say it directly
+- In Company Mode, return a ranked shortlist, don't make the user pick from a raw list
 - Always log to the Excel tracker at the end of every Company Mode session
-- When creating HubSpot tasks for Sales Nav connection requests, ALWAYS use hs_task_type: LINKED_IN_CONNECT — never LINKED_IN_MESSAGE (that is for InMail) and never TODO
-- **Always run ZoomInfo enrichment for every ✅ Yes verdict — email, direct phone, mobile only. Never company main number.**
-- **City, state, and timezone always come from LinkedIn — never from ZoomInfo**
+- When creating HubSpot tasks for Sales Nav connection requests, ALWAYS use hs_task_type: LINKED_IN_CONNECT, never LINKED_IN_MESSAGE (that is for InMail) and never TODO
+- **Always run ZoomInfo enrichment for every ✅ Yes verdict, email, direct phone, mobile only. Never company main number.**
+- **City, state, and timezone always come from LinkedIn, never from ZoomInfo**
 - When setting hs_timezone on HubSpot contacts, use the 6-bucket system ONLY:
   - US Eastern → us_slash_eastern
   - US Central → us_slash_central

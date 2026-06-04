@@ -55,7 +55,7 @@ Never mix them in the same output. If both are needed, present them in clearly l
 Everything you produce must be something I can explain and defend **solo**, without needing an engineer in the room. Avoid jargon I can't own. If something is technical, translate it into language I can use confidently on a call.
 
 ### 4. No Em-Dashes. Ever.
-**NEVER use the character — in any output, any file, any email, any message. Not once. Not ever.**
+**NEVER use the character, in any output, any file, any email, any message. Not once. Not ever.**
 Split thoughts into two sentences instead. This is non-negotiable.
 
 ### 5. No Re-explaining

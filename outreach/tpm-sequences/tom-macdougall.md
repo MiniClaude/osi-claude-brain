@@ -53,7 +53,7 @@ Hi Tom, Andy McLean from OSI Global. We work with large health plans on a TPM mo
 
 ## LINKEDIN INVITE (Under 300 characters)
 
-Hey Tom. Saw your background in healthcare IT and infrastructure leadership at LA Care. Thought it'd make sense to connect—particularly around healthcare-focused TPM and vendor-agnostic hardware partnerships. Let's stay in touch.
+Hey Tom. Saw your background in healthcare IT and infrastructure leadership at LA Care. Thought it'd make sense to connect, particularly around healthcare-focused TPM and vendor-agnostic hardware partnerships. Let's stay in touch.
 
 ---
 

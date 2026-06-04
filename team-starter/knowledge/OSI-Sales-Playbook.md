@@ -60,7 +60,7 @@ Plus: **Professional Services**  -  deployment support, network design, migratio
 
 OSI's transceivers are manufactured by SmartOptics  -  an optical networking company that designs and builds DWDM open line systems. SmartOptics has real optical engineering behind the product, not an anonymous factory. When something goes wrong, there's an engineering organization backing it, not just a warehouse.
 
-**Pricing reality:** OEM-branded transceivers (Cisco, Juniper, Arista) carry extreme markups. A Cisco-branded 100G QSFP28 can list at $3,000–8,000+. SmartOptics equivalents typically land 80–90% below OEM list. This is not a small discount  -  it's a budget-line item conversation.
+**Pricing reality:** OEM-branded transceivers (Cisco, Juniper, Arista) carry extreme markups. A Cisco-branded 100G QSFP28 can list at $3,000-8,000+. SmartOptics equivalents typically land 80-90% below OEM list. This is not a small discount  -  it's a budget-line item conversation.
 
 **Andy-defensible framing:** "OEM transceiver pricing is essentially a tax on the logo. The glass inside a Cisco-branded optic and a SmartOptics optic is doing the same job. The difference is SmartOptics has real engineers behind it  -  unlike the grey market  -  and you're not paying for a Cisco brand premium."
 

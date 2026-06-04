@@ -3,7 +3,7 @@
 - **Date:** 2026-04-28 (Tuesday) 17:00 UTC, ~20 min
 - **Call ID:** 108833325853
 - **Attendees:** KC Killoran (OSI), Andrew McLean (OSI), Ambrose "Yepu" Wang (FITI / Foxsemicon)
-- **Primary external contact:** Ambrose Wang (216063292854) — ambrose.yp.wang@foxsemicon.com
+- **Primary external contact:** Ambrose Wang (216063292854), ambrose.yp.wang@foxsemicon.com
 - **Outcome:** Connected
 - **Recording + transcript:** HubSpot call record 108833325853 (Review Next Steps tab)
 

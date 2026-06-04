@@ -4,13 +4,13 @@ Read this when picking a sequence type, drafting emails, or writing strategy not
 
 ## Product lines
 
-1. **Optics** — SmartOptics transceivers (private-labeled). Sample is the wedge.
-2. **DWDM / Open Line Systems** — SmartOptics DCP, 30-50% below Ciena/Nokia. Ships fast.
-3. **Compute / DIMMs** — Samsung/Hynix/Micron. DDR4 cheaper than DDR5 for workloads not needing DDR5. Lead with DIMMs.
-4. **Storage** — NetApp TPM, pre-owned storage gear.
-5. **TPM** — 40-60% below OEM. Multi-vendor (Cisco, Dell, HP, NetApp, Juniper, Arista). Gartner-recognized, privately owned, no PE.
-6. **Pre-owned + New Networking** — Cisco/Juniper/Arista pre-owned (OSI TPM available, no SmartNet). Nokia authorized new.
-7. **Professional Services** — Strong signal only. Never lead cold.
+1. **Optics**, SmartOptics transceivers (private-labeled). Sample is the wedge.
+2. **DWDM / Open Line Systems**, SmartOptics DCP, 30-50% below Ciena/Nokia. Ships fast.
+3. **Compute / DIMMs**, Samsung/Hynix/Micron. DDR4 cheaper than DDR5 for workloads not needing DDR5. Lead with DIMMs.
+4. **Storage**, NetApp TPM, pre-owned storage gear.
+5. **TPM**, 40-60% below OEM. Multi-vendor (Cisco, Dell, HP, NetApp, Juniper, Arista). Gartner-recognized, privately owned, no PE.
+6. **Pre-owned + New Networking**, Cisco/Juniper/Arista pre-owned (OSI TPM available, no SmartNet). Nokia authorized new.
+7. **Professional Services**, Strong signal only. Never lead cold.
 
 ## Authorized partner status
 - OSI IS a Dell, HP, and Nokia authorized partner.

@@ -1,24 +1,24 @@
-# Scheduler Cleanup List — 2026-04-30
+# Scheduler Cleanup List, 2026-04-30
 
-These tasks can all be safely deleted from the Cowork UI. None are firing — every entry is `enabled=false`. The 7 active `-cmig` tasks below the cleanup list are what's actually running.
+These tasks can all be safely deleted from the Cowork UI. None are firing, every entry is `enabled=false`. The 7 active `-cmig` tasks below the cleanup list are what's actually running.
 
 How to delete: open Cowork's scheduled tasks panel, find each `taskId` exactly as written, delete.
 
 ---
 
-## ✅ KEEP — these 7 are the live, working scheduler (do NOT delete)
+## ✅ KEEP, these 7 are the live, working scheduler (do NOT delete)
 
-1. `morning-skill-sync-cmig` — daily 9am
-2. `osi-meeting-followup-cmig` — weekday 10am
-3. `osi-overnight-runner-recurring-cmig` — every 2 hrs weekdays except 8am-2pm blackout
-4. `osi-overnight-runner-recurring-weekend-cmig` — every 2 hrs Sat/Sun
-5. `osi-sequence-monitor-v2-cmig` — weekday 2:15pm
-6. `osi-email-sender-v2-cmig` — weekday 11am, 12pm, 1pm, 2pm, 3pm, 4pm
-7. `job-change-prospecting-weekly-v2-cmig` — Mondays 2:30pm
+1. `morning-skill-sync-cmig`, daily 9am
+2. `osi-meeting-followup-cmig`, weekday 10am
+3. `osi-overnight-runner-recurring-cmig`, every 2 hrs weekdays except 8am-2pm blackout
+4. `osi-overnight-runner-recurring-weekend-cmig`, every 2 hrs Sat/Sun
+5. `osi-sequence-monitor-v2-cmig`, weekday 2:15pm
+6. `osi-email-sender-v2-cmig`, weekday 11am, 12pm, 1pm, 2pm, 3pm, 4pm
+7. `job-change-prospecting-weekly-v2-cmig`, Mondays 2:30pm
 
 ---
 
-## 🗑️ DELETE — old v1 versions (replaced by -cmig)
+## 🗑️ DELETE, old v1 versions (replaced by -cmig)
 
 1. `weekend-linkedin-reengagement`
 2. `job-change-prospecting-weekly`
@@ -27,7 +27,7 @@ How to delete: open Cowork's scheduled tasks panel, find each `taskId` exactly a
 
 ---
 
-## 🗑️ DELETE — v2 versions (replaced by -cmig today)
+## 🗑️ DELETE, v2 versions (replaced by -cmig today)
 
 1. `osi-email-sender-v2`
 2. `osi-sequence-monitor-v2`
@@ -40,14 +40,14 @@ How to delete: open Cowork's scheduled tasks panel, find each `taskId` exactly a
 
 ---
 
-## 🗑️ DELETE — one-time tasks already past their fireAt
+## 🗑️ DELETE, one-time tasks already past their fireAt
 
 ### Brett Baker / Lippert emails 1-3 (already past, replaced by email-queue.json system)
 1. `brett-baker-lippert-email-1` (was 4/16/2026)
 2. `brett-baker-lippert-email-2` (was 4/22/2026)
 3. `brett-baker-lippert-email-3` (was 4/28/2026)
 
-### Brett Baker / Lippert emails 4-6 (FUTURE-dated but obsolete — email-queue.json replaces this flow)
+### Brett Baker / Lippert emails 4-6 (FUTURE-dated but obsolete, email-queue.json replaces this flow)
 4. `brett-baker-lippert-email-4` (5/6/2026)
 5. `brett-baker-lippert-email-5` (5/13/2026)
 6. `brett-baker-lippert-email-6` (5/21/2026)
@@ -119,4 +119,4 @@ How to delete: open Cowork's scheduled tasks panel, find each `taskId` exactly a
 - KEEP: 7
 - DELETE: 70
 
-After cleanup, `list_scheduled_tasks` will return 7 entries — your live fleet plus nothing else.
+After cleanup, `list_scheduled_tasks` will return 7 entries, your live fleet plus nothing else.

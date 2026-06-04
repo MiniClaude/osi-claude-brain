@@ -1,4 +1,4 @@
-# Session Summary — Kevin Buchan TPM Re-Engagement
+# Session Summary, Kevin Buchan TPM Re-Engagement
 
 ## What We Worked On
 Built comprehensive TPM re-engagement strategy for Kevin Buchan (Troutman Pepper Locke LLP). HubSpot context: 26 calls, 9 emails, last contact March 17. Email flagged as catch-all (ZeroBounce). Existing TPM customer, security team rejected DIMMs.

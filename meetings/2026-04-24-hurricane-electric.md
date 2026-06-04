@@ -1,4 +1,4 @@
-# 2026-04-24 — Hurricane Electric / OSI Global
+# 2026-04-24, Hurricane Electric / OSI Global
 
 **Time:** Friday April 24, 2026, 3:30 - 4:00 PM ET
 **Platform:** Microsoft Teams
@@ -6,10 +6,10 @@
 **HubSpot call record (recording + transcript):** 108640001290
 
 ## Attendees
-- **Alex Broque** — Senior Network Engineer, Hurricane Electric | broquea@he.net | HubSpot 2021151
-- **Andy McLean** — OSI Global (organizer)
-- **Thomas Radigan** — OSI Global
-- **Mike Rosato** — OSI Global (tentative)
+- **Alex Broque**, Senior Network Engineer, Hurricane Electric | broquea@he.net | HubSpot 2021151
+- **Andy McLean**, OSI Global (organizer)
+- **Thomas Radigan**, OSI Global
+- **Mike Rosato**, OSI Global (tentative)
 
 ## Summary (HubSpot AI)
 The call focused on hardware platform upgrades, specifically moving from older systems to modern Cisco based systems, and the compatibility of SmartOptics products with existing infrastructure. Key points: need for high power optics, concerns about vendor reliability, and the potential for collaboration on testing and product trials.

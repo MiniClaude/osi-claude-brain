@@ -22,18 +22,18 @@ Read this entire skill before producing any output.
 
 ---
 
-## 🚨 SALES NAV RULE — NON-NEGOTIABLE, APPLIES EVERYWHERE IN THIS SKILL
+## 🚨 SALES NAV RULE, NON-NEGOTIABLE, APPLIES EVERYWHERE IN THIS SKILL
 
-**Any time Email 1's send date changes for any reason — stranded fix, overdue fix, ordering fix, Andy request, any reason at all — the HubSpot "Sales Nav -- Send connection request" task for that prospect MUST be rescheduled to match the new Email 1 date. This is not optional. This is not a secondary step. Do it in the same write pass.**
+**Any time Email 1's send date changes for any reason, stranded fix, overdue fix, ordering fix, Andy request, any reason at all, the HubSpot "Sales Nav -- Send connection request" task for that prospect MUST be rescheduled to match the new Email 1 date. This is not optional. This is not a secondary step. Do it in the same write pass.**
 
 Procedure (applies every single time E1 date changes):
 1. Find the contact in HubSpot by email address.
 2. Search tasks on that contact where `hs_task_subject` contains "Sales Nav -- Send connection request" AND `hs_task_status = NOT_STARTED`.
 3. Exactly one match: update `hs_timestamp` to the new E1 date at 20:00 UTC (4pm ET).
-4. Already COMPLETED: leave it. Flag in summary: "Sales Nav connect already sent on [old date] — LinkedIn arm fired ahead of rescheduled E1."
+4. Already COMPLETED: leave it. Flag in summary: "Sales Nav connect already sent on [old date], LinkedIn arm fired ahead of rescheduled E1."
 5. Zero or multiple NOT_STARTED matches: do NOT auto-update. Flag for Andy to handle manually. Still fix the email queue.
 
-Never reschedule E1 without also addressing this task. If the HubSpot lookup fails, note it and move on — but do not skip the email queue fix.
+Never reschedule E1 without also addressing this task. If the HubSpot lookup fails, note it and move on, but do not skip the email queue fix.
 
 ---
 
@@ -52,11 +52,11 @@ For each prospect, build a status list:
 
 ---
 
-## Step 2: Full Queue Sweep — Auto-Fix All Overdue Entries
+## Step 2: Full Queue Sweep, Auto-Fix All Overdue Entries
 
 Read `C:\Claude-Brain\email-queue.json`. Scan every entry where `status: "pending"` AND `sentAt: null` AND `sendDate` is in the past. There is no lookback ceiling. If an entry is 10 days overdue, it still gets fixed.
 
-**E1 overdue:** handled by Step 5 (stranded sequence auto-fix). Skip here — do not double-process.
+**E1 overdue:** handled by Step 5 (stranded sequence auto-fix). Skip here, do not double-process.
 
 **E2-6 overdue:** auto-fix immediately.
 
@@ -123,7 +123,7 @@ Steps:
    > REPLY RECEIVED [date], sequence auto-paused. Andy to review and decide whether to resume or cancel.
 5. Add to the monitor output in the PAUSED ON REPLY section.
 
-Special case: if the reply contains a shipping address (street number, city, state, zip — or explicit "ship to" / "send to" / "address is" language), treat it as a SHIPMENT REQUESTED reply. Still auto-pause the sequence. Then do all of the following automatically:
+Special case: if the reply contains a shipping address (street number, city, state, zip, or explicit "ship to" / "send to" / "address is" language), treat it as a SHIPMENT REQUESTED reply. Still auto-pause the sequence. Then do all of the following automatically:
 
 **1. Determine product to send.**
 Check the queue entry for this prospect's Email 1 `id` suffix to find the sequence type from the strategy note or queue metadata:
@@ -139,14 +139,14 @@ Fill in everything known now. Leave Date Shipped, Tracking #, and Follow-up Stat
 
 **3. Create two HubSpot tasks on the contact.**
 
-Task 1 — Ship task:
+Task 1, Ship task:
 - Subject: `Ship swag to [First Name] at [Company]`
 - Due: today
 - Type: `TODO`
 - Owner: Andy (196669355)
 - Body: `[First Name] replied with a shipping address. Send [SFPs/DIMMs]. Address: [extracted address].`
 
-Task 2 — Follow-up task:
+Task 2, Follow-up task:
 - Subject: `Follow up with [First Name] re: swag shipment`
 - Due: 4 business days from today (so it fires after delivery)
 - Type: `TODO`
@@ -201,9 +201,9 @@ Never reschedule the queue without also addressing the Sales Nav task. Skipping 
 
 ---
 
-## Step 5.1: Ordering Sweep — Fix E2+ Scheduled Before E1
+## Step 5.1: Ordering Sweep, Fix E2+ Scheduled Before E1
 
-After Steps 2 and 5, do a pass over all pending entries. For each prospect, check whether any E2-6 entry has the same `sendDate` as E1 AND a `sendTime` that is earlier in the day than E1's `sendTime` (e.g. E2 at 11am, E1 at 4pm — same day, wrong order).
+After Steps 2 and 5, do a pass over all pending entries. For each prospect, check whether any E2-6 entry has the same `sendDate` as E1 AND a `sendTime` that is earlier in the day than E1's `sendTime` (e.g. E2 at 11am, E1 at 4pm, same day, wrong order).
 
 **Auto-fix:** keep E1 where it is. Push E2 to the next business day at 11am. Respread E3-6 from there using the original cadence gaps.
 
@@ -215,7 +215,7 @@ Report under AUTO-FIXED ORDERING: Name | Company | E2 moved from [date 11am] to 
 
 ---
 
-## Step 5.2: Company Gap Sweep — No Two Prospects at Same Company Same Day
+## Step 5.2: Company Gap Sweep, No Two Prospects at Same Company Same Day
 
 After all queue fixes in Steps 2, 5, and 5.1, scan all pending entries and group by company. If two or more prospects at the same company have a pending entry on the same `sendDate`, there is a conflict.
 
@@ -237,7 +237,7 @@ Atomic write. Report any corrections under AUTO-FIXED CADENCE: Name | Company | 
 
 ---
 
-## Step 5.4: Sales Nav Task Audit — Every E1 Going Out Today
+## Step 5.4: Sales Nav Task Audit, Every E1 Going Out Today
 
 For every prospect with a pending Email 1 (`-1` id suffix) scheduled for today's 4pm window:
 
@@ -245,15 +245,15 @@ For every prospect with a pending Email 1 (`-1` id suffix) scheduled for today's
 2. Search for ALL tasks on that contact where `hs_task_subject` contains "Sales Nav -- Send connection request".
 3. Three cases:
 
-   **Case A — Task found AND status is COMPLETED:** All good. Connection request already sent. No action needed.
+   **Case A, Task found AND status is COMPLETED:** All good. Connection request already sent. No action needed.
 
-   **Case B — Task found AND status is NOT_STARTED:** The email-sender gate will hold this E1 at 4pm and push it to tomorrow. Flag immediately as a pre-flight risk:
+   **Case B, Task found AND status is NOT_STARTED:** The email-sender gate will hold this E1 at 4pm and push it to tomorrow. Flag immediately as a pre-flight risk:
    - Risk type: `li-task-pending`
    - Message: `LI connection request not sent. Email-sender gate WILL hold E1 at 4pm and reschedule to tomorrow unless you send the connection request first.`
    - Recommended action: `Send Sales Nav connection request now, or let the gate push it.`
    - List under PRE-FLIGHT RISKS, not SALES NAV TASKS CREATED.
 
-   **Case C — No task found:** Create the task now. Fields:
+   **Case C, No task found:** Create the task now. Fields:
    - Subject: `Sales Nav -- Send connection request to [First Name] [Last Name]`
    - Due date: today
    - Type: `TODO`
@@ -261,7 +261,7 @@ For every prospect with a pending Email 1 (`-1` id suffix) scheduled for today's
    - Body: `Day 1 connection request. Email 1 goes out at 4pm today.`
    - Report under SALES NAV TASKS CREATED: Name | Company | task created for today.
 
-4. If the HubSpot contact lookup fails, flag it: Name | Company | contact not found, Sales Nav task could not be verified — check manually.
+4. If the HubSpot contact lookup fails, flag it: Name | Company | contact not found, Sales Nav task could not be verified, check manually.
 
 This runs every day before the pre-flight risk check. No E1 should go out without Andy knowing whether the connection request has been sent.
 
@@ -437,7 +437,7 @@ After producing the summary output, write `C:\Claude-Brain\monitor-last-run.json
 {"lastRun": "2026-05-20T18:15:00Z", "status": "success"}
 ```
 
-Atomic write (`.tmp` + `os.replace`). This file is what Steps 3 and 4 use on the next run to know how far back to look. If the monitor errors out before this step, the file is not written, which means next run will use the 7-day fallback — safe behavior.
+Atomic write (`.tmp` + `os.replace`). This file is what Steps 3 and 4 use on the next run to know how far back to look. If the monitor errors out before this step, the file is not written, which means next run will use the 7-day fallback, safe behavior.
 
 ---
 
@@ -473,7 +473,7 @@ If no one was unenrolled this run, skip this step entirely.
 - Never modify tasks except to cancel on a confirmed hard bounce, auto-pause on a non-OOO reply, or Andy's explicit instruction.
 - Never flag out-of-office auto-replies as actionable. Never pause on OOO.
 - Auto-pause (not cancel) on non-OOO replies. Andy decides whether to resume or cancel after reviewing.
-- **🚨 SALES NAV RULE — see the prominent callout at the top of this skill. Any time E1's date changes for any reason, the HubSpot Sales Nav connection request task moves with it. No exceptions. No "I'll flag it for Andy." Fix it in the same pass.**
+- **🚨 SALES NAV RULE, see the prominent callout at the top of this skill. Any time E1's date changes for any reason, the HubSpot Sales Nav connection request task moves with it. No exceptions. No "I'll flag it for Andy." Fix it in the same pass.**
 - Auto-fix everything: overdue entries, stranded sequences, ordering violations, company gap conflicts, cadence compression. Report what was fixed. Do not ask for permission first.
 - Never reschedule the queue without also addressing the Sales Nav task. Skipping it silently breaks the LinkedIn arm of the cadence.
 - If Outlook login screen appears, note it and skip all Outlook-dependent checks.

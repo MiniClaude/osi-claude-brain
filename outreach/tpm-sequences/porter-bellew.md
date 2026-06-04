@@ -17,7 +17,7 @@ Last Contact: March 2023 (3+ years cold)
 Federal Realty Investment Trust: Real estate REIT with 100+ retail properties. Operates significant data center and IT infrastructure to support property management, tenant systems, financial operations. CIO role is infrastructure buyer and decision-maker.
 
 ### Target Sequences
-Re-engagement after 3-year gap. Leading with Park Place/Service Express merger as fresh wedge. Position OSI as boutique, no-PE alternative to escape consolidation chaos. This is a REIT with operational leverage to IT—they'll want continuity and SLA reliability.
+Re-engagement after 3-year gap. Leading with Park Place/Service Express merger as fresh wedge. Position OSI as boutique, no-PE alternative to escape consolidation chaos. This is a REIT with operational leverage to IT, they'll want continuity and SLA reliability.
 
 ### The Play
 1. Acknowledge the time gap honestly (no awkward apologies, just move forward)
@@ -58,7 +58,7 @@ Porter, it's been a few years. Park Place and Service Express merged, and our Fe
 
 Porter,
 
-It's been a few years since we talked. I know we sent you some competitive bids back in 2022 and 2023 for TPM—not sure if any of those turned into anything or if the project shifted. Either way, I'm reaching back out for a specific reason.
+It's been a few years since we talked. I know we sent you some competitive bids back in 2022 and 2023 for TPM, not sure if any of those turned into anything or if the project shifted. Either way, I'm reaching back out for a specific reason.
 
 Park Place and Service Express just merged. Our customers in the REIT and data center space are already reporting rep transitions and SLA slippage. If you're a Park Place customer, this is worth a 20-minute conversation.
 
