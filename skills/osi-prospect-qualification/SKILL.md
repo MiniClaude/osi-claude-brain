@@ -11,7 +11,7 @@ description: Qualify LinkedIn prospects for OSI Global. Use whenever Andy pastes
 
 ## 🚨 STEP -1: TOOL PREFETCH (MANDATORY, RUNS ONCE BEFORE ANY COMPANY WORK)
 
-**The very first action in any session that triggers this skill — before reading files, before HubSpot, before LinkedIn, before anything — is a single ToolSearch call that loads every tool schema needed for the full run. Do this ONCE. After this step, no further ToolSearch calls are needed.**
+**The very first action in any session that triggers this skill, before reading files, before HubSpot, before LinkedIn, before anything, is a single ToolSearch call that loads every tool schema needed for the full run. Do this ONCE. After this step, no further ToolSearch calls are needed.**
 
 Run ONE ToolSearch call with this exact query (all tools comma-separated, max_results=15):
 
@@ -33,7 +33,7 @@ ToolSearch({
 
 Both calls can fire in the SAME message (parallel). After both return, all tool schemas are live. Do not call ToolSearch again during the run.
 
-**Why this rule exists:** Without prefetch, ToolSearch calls interrupt the run every time a new tool category is needed — HubSpot, ZoomInfo, LinkedIn, bash, web search each trigger a separate load. Andy wants to say "go" and have zero interruptions. Prefetching all schemas at session start eliminates every mid-run ToolSearch call.
+**Why this rule exists:** Without prefetch, ToolSearch calls interrupt the run every time a new tool category is needed. HubSpot, ZoomInfo, LinkedIn, bash, web search each trigger a separate load. Andy wants to say "go" and have zero interruptions. Prefetching all schemas at session start eliminates every mid-run ToolSearch call.
 
 **If a tool schema was already loaded earlier in the conversation:** skip that tool from the prefetch. Already-loaded schemas stay live for the session. The prefetch only needs to fire for tools not yet loaded.
 
@@ -907,10 +907,10 @@ EMAIL RESOLUTION: [hubspot-existing | zoominfo-full-match | dominant-pattern]
 ```
 
 **SEQUENCE values:**
-- `Network` — Sample-Offer Network. Target: network engineers, architects, transport engineers.
-- `DWDM` — Pain-Led DWDM. Target: transport/optical engineers, network planners at carriers, CLECs, MSOs.
-- `Server/Storage` — Sample-Offer Server or Pain-Led Storage. Target: systems engineers, infrastructure engineers, storage admins.
-- `TPM` — Pain-Led TPM. Target: IT directors, DC managers, asset managers, procurement, mid-market CIOs.
+- `Network`: Sample-Offer Network. Target: network engineers, architects, transport engineers.
+- `DWDM`: Pain-Led DWDM. Target: transport/optical engineers, network planners at carriers, CLECs, MSOs.
+- `Server/Storage`: Sample-Offer Server or Pain-Led Storage. Target: systems engineers, infrastructure engineers, storage admins.
+- `TPM`: Pain-Led TPM. Target: IT directors, DC managers, asset managers, procurement, mid-market CIOs.
 
 This is the first thing Andy reads when a LINKED_IN_CONNECT task comes due. It tells him which HubSpot sequence to enroll the contact in.
 
