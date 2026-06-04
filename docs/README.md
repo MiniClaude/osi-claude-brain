@@ -100,7 +100,7 @@ Skills are the reusable workflows. Each is a folder under `skills/[name]/SKILL.m
 
 ### Sending and monitoring
 - **osi-email-sender** Sends all due emails from `email-queue.json` via Outlook. Intended cadence: weekday late mornings through afternoon (legacy path).
-- **osi-monitor** Daily sequence monitor. Checks tasks, bounces, and replies. Auto cancels on hard bounce, auto pauses on reply.
+- **osi-monitor** Daily sequence monitor for the legacy Outlook queue. Checks tasks, bounces, and replies. Auto cancels on hard bounce, auto pauses on reply. Transitional: stays active until the legacy queue is drained, then retires (see Section 5). Does not cover HubSpot sent mail.
 - **osi-email-task-drafts** Auto drafts reply emails for HubSpot email tasks due today or overdue.
 - **osi-meeting-followup** Meeting follow up automation.
 
@@ -120,6 +120,17 @@ There are two delivery paths, and the system is mid migration between them.
 - **Current direction: HubSpot AI fields.** As of 2026-05-29, qualified emails are written directly into HubSpot contact AI fields (`ai_email_body_1` through `6`, `ai_email_subject_1` through `6`). Andy enrolls the contact in a HubSpot sequence, and HubSpot sends from the cloud with no laptop dependency. The LinkedIn connect task date is the cue telling Andy when to enroll.
 
 When working outreach, confirm which path a given contact uses before assuming. New work favors AI fields.
+
+### Both paths are live at once (transition state, as of 2026-06-04)
+
+The migration is not finished. The legacy queue still holds about 712 pending sends scheduled out to 2026-10-26. So both paths run in parallel, and each has its own bounce and reply handling:
+
+| Path | Sends via | Bounces handled by | Replies handled by |
+|---|---|---|---|
+| Legacy queue (`email-queue.json`) | Outlook + `osi-email-sender` | `osi-monitor` (must stay active) | `osi-monitor` auto pause |
+| New (HubSpot AI fields) | HubSpot sequences (cloud) | pre-send Blocked Address Check in `osi-prospect-qualification` + HubSpot's native bounce reporting | HubSpot's native auto unenroll on reply |
+
+**`osi-monitor` is transitional, not retired.** It is the only bounce and reply guard for the in-flight legacy queue, so it stays on until `email-queue.json` has zero pending or paused entries (projected late October 2026, sooner if the tail is cancelled). It does not touch HubSpot sent mail. Do not mark it unused while the queue still has pending sends.
 
 ---
 
