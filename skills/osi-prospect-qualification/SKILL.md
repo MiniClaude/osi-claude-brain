@@ -9,33 +9,26 @@ description: Qualify LinkedIn prospects for OSI Global. Use whenever Andy pastes
 
 ---
 
-## 🚨 STEP -1: TOOL PREFETCH (MANDATORY, RUNS ONCE BEFORE ANY COMPANY WORK)
+## ⚙️ STEP -1: LOAD TOOLS ON DEMAND (NO BULK PREFETCH)
 
-**The very first action in any session that triggers this skill, before reading files, before HubSpot, before LinkedIn, before anything, is a single ToolSearch call that loads every tool schema needed for the full run. Do this ONCE. After this step, no further ToolSearch calls are needed.**
+This skill needs bash, HubSpot, ZoomInfo, Chrome (LinkedIn), and web-search tools. Load each tool's schema with ToolSearch the first time a phase needs it, then reuse it for the rest of the session. **Do NOT bulk-load every tool at once.**
 
-Run ONE ToolSearch call with this exact query (all tools comma-separated, max_results=15):
+🚨 **Why no bulk prefetch (do not re-add it):** loading many MCP schemas in one shot can trip an API error, `tools.X.custom.input_schema: int too big to convert`, caused by an oversized integer in one MCP tool's JSON schema (a ZoomInfo or Chrome tool). An earlier version of this skill bulk-prefetched ~17 tools at launch and failed immediately on every run with exactly that 400 error. Loading on demand keeps each request's tool set small and never pulls in a tool a given run does not use.
 
+**At the start of a run, load only the core tools every mode uses:**
 ```
-ToolSearch({
-  query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_owners,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__search_contacts,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_news,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_scoops",
-  max_results: 9
-})
+ToolSearch({ query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects", max_results: 4 })
 ```
 
-Then immediately run a SECOND ToolSearch call:
+**Then load each remaining group with its own small ToolSearch call, only just before its first use:**
+- HubSpot owner lookup -> `mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_owners`
+- LinkedIn browsing -> `mcp__Claude_in_Chrome__navigate`, `mcp__Claude_in_Chrome__get_page_text`, `mcp__Claude_in_Chrome__find` (add `tabs_context_mcp` / `browser_batch` only if a run actually needs them)
+- ZoomInfo enrichment -> `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__search_contacts`, `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts`
+- Company news hook -> `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_news`, `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_scoops` (load ONLY when you actually run a news/scoops lookup)
+- Web search -> `WebSearch`
+- Overnight/state tracking -> `TaskCreate`, `TaskUpdate`, `TaskList` (load ONLY if used)
 
-```
-ToolSearch({
-  query: "select:mcp__Claude_in_Chrome__tabs_context_mcp,mcp__Claude_in_Chrome__navigate,mcp__Claude_in_Chrome__get_page_text,mcp__Claude_in_Chrome__find,mcp__Claude_in_Chrome__browser_batch,WebSearch,TaskCreate,TaskUpdate,TaskList",
-  max_results: 9
-})
-```
-
-Both calls can fire in the SAME message (parallel). After both return, all tool schemas are live. Do not call ToolSearch again during the run.
-
-**Why this rule exists:** Without prefetch, ToolSearch calls interrupt the run every time a new tool category is needed. HubSpot, ZoomInfo, LinkedIn, bash, web search each trigger a separate load. Andy wants to say "go" and have zero interruptions. Prefetching all schemas at session start eliminates every mid-run ToolSearch call.
-
-**If a tool schema was already loaded earlier in the conversation:** skip that tool from the prefetch. Already-loaded schemas stay live for the session. The prefetch only needs to fire for tools not yet loaded.
+**If a tool schema was already loaded earlier in the conversation:** skip it, already-loaded schemas stay live for the session. Keep each ToolSearch call to a small group (3-5 tools). If a single ToolSearch group ever triggers the `int too big to convert` 400, split it and load the tools one at a time to isolate and skip the offending tool.
 
 ---
 

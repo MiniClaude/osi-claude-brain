@@ -22,14 +22,22 @@ Read this entire skill before producing any output.
 
 ---
 
-## 🛑 STEP -1: TOOL PREFETCH (MANDATORY, do this first)
+## ⚙️ STEP -1: LOAD TOOLS ON DEMAND (NO BULK PREFETCH)
 
-Fire these TWO ToolSearch calls in the same message before doing anything else. Do not proceed until both return.
+**Do NOT bulk-load every tool at once.** Loading many MCP schemas in one shot can trip an API error, `tools.X.custom.input_schema: int too big to convert`, from an oversized integer in one MCP tool's JSON schema (a ZoomInfo or Chrome tool). Load each tool with its own small ToolSearch call the first time a phase needs it.
 
+Load only the core tools up front:
 ```
-ToolSearch({ query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_news", max_results: 6 })
-ToolSearch({ query: "select:mcp__Claude_in_Chrome__tabs_context_mcp,mcp__Claude_in_Chrome__navigate,mcp__Claude_in_Chrome__get_page_text,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_scoops,WebSearch,TaskCreate,TaskUpdate", max_results: 6 })
+ToolSearch({ query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects", max_results: 4 })
 ```
+
+Then load each remaining group with its own small ToolSearch call just before first use:
+- ZoomInfo -> `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts` (add `enrich_news` / `enrich_scoops` only when you actually run a news/scoops lookup)
+- LinkedIn -> `mcp__Claude_in_Chrome__navigate`, `mcp__Claude_in_Chrome__get_page_text` (add `tabs_context_mcp` only if needed)
+- Web search -> `WebSearch`
+- State tracking -> `TaskCreate`, `TaskUpdate` (only if used)
+
+Keep each ToolSearch group small (3-5 tools). If a group ever triggers the `int too big to convert` 400, split it and load tools one at a time to isolate and skip the offender.
 
 After both return, all schemas are live. Do not call ToolSearch again during the run.
 
