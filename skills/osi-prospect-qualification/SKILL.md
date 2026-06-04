@@ -486,6 +486,17 @@ Obvious No's by title were already eliminated in Step 1 pre-filter. Do NOT re-re
 
 Yes first, then Conditional, then No with brief reasons. No cap on Yes count. Each Yes includes recommended OSI angle.
 
+### 🚨 CHAT OUTPUT IS MINIMAL, CONSERVE CREDITS (Company Mode and Auto Mode)
+
+Cowork bills by tokens. The HubSpot record, the strategy note, and the AI fields are the deliverable. The chat is not. Keep what you print tight.
+
+- **NEVER print email bodies or subjects in chat.** The drafter writes them to the HubSpot AI fields and reports ONE line: `AI fields written: [Name] | [Sequence] | Enroll by [date]`.
+- **NEVER paste full strategy notes, LinkedIn About or Experience text, or long skill lists into chat.** They live on the HubSpot contact, not in the conversation.
+- **One line per candidate** for verdicts (format below). No per-candidate paragraphs.
+- **Do not narrate every tool call or echo HubSpot / ZoomInfo payloads.** Act, then report the result in a short phrase.
+- The discovery log table prints once (it is required). The end-of-company summary is one line: `[Company]: X Yes, Y No, Z Conditional`.
+- If I explicitly ask to see a specific email, note, or profile, show that one. Otherwise stay terse.
+
 **Company Mode sweep verdict format (one line per candidate):**
 ```
 [Name] | [Title] | Yes / No / Conditional | [one phrase reason]
