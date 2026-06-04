@@ -1,0 +1,26 @@
+{
+  "skill_name": "abc-7step-master",
+  "evals": [
+    {
+      "id": 1,
+      "name": "linkedin-paste-network-engineer-telco",
+      "prompt": "run the master on this guy: https://www.linkedin.com/in/example-network-engineer/ — Tyler Reed, Senior Network Engineer at Frontier Communications. Email: treed@ftr.com. He posted last week about pulling Ciena ZR+ optics for a metro expansion in Tampa. Build the full sequence.",
+      "expected_output": "Full 7-email sequence queued with telco/optics lead, ZR+ Personal Hook woven into Email 1, call script using the Telco/Service Provider opener from the library, voicemail under 15 sec, LinkedIn task synced to Day 1, HubSpot contact created/refreshed, schedule shows 7 dates with PT send windows and zero weekend/holiday hits, queue write atomic and dedup-safe.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "hubspot-record-paste-it-director-manufacturing",
+      "prompt": "abc-7step-master on this HubSpot record: Sandra Liu, Director of IT, Stellaris Precision Manufacturing (already an approved vendor for us per our list). Email sandra.liu@stellarisprecision.com, direct 312.555.0144. They just announced a $40M plant expansion in Plano. Aging Cisco core, off OEM support next quarter.",
+      "expected_output": "7-email TPM-led sequence (manufacturing + IT Director + EOL hook), approved-vendor soft line in Email 1 plus brief reminder in Email 3 or 4, IT Director opener from library, full call script package on HubSpot note, LinkedIn task synced to Day 1, Excel tracker Tab 1 updated, schedule applies same-company stagger if anyone else at Stellaris is already in the queue.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "dedup-active-sequence-skip",
+      "prompt": "run the master on Tyler Reed at Frontier again, treed@ftr.com. (Note: this is the SAME prospect from eval 1 — should be caught by the active sequence check.)",
+      "expected_output": "Skill performs the Step 1b active sequence check, finds Tyler's pending entries in the queue from eval 1, and stops with SKIPPED message asking Brian for override. Does NOT proceed to write a second sequence without explicit override.",
+      "files": []
+    }
+  ]
+}
