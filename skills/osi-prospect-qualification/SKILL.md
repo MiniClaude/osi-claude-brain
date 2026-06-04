@@ -619,6 +619,19 @@ If any retry-matrix attempt fails with a credit-limit error ("Limit exceeded" or
 
 City / state / timezone -> ALWAYS LinkedIn, NEVER ZoomInfo.
 
+### Personal / consumer email hard block -- check first, no exceptions
+
+Never pass a personal/consumer email address to outreach. If the chosen email (HubSpot or ZoomInfo) sits at any of these domains, treat it as NO email found and fall back to the 2 LinkedIn InMail tasks:
+- gmail.com, googlemail.com
+- yahoo.com, yahoo.ca, yahoo.co.uk, ymail.com
+- hotmail.com, hotmail.ca, outlook.com, live.com, msn.com
+- icloud.com, me.com, mac.com
+- aol.com, aim.com
+- protonmail.com, proton.me
+- any other clearly personal/consumer ISP domain
+
+Log: `Personal email ([address]) -- not used. LinkedIn InMail fallback created.` This is a deterministic string check, no tool call. Run it FIRST, before the corporate-domain search and the blocked address check below.
+
 ### Email domain validation -- before handoff to outreach
 
 ONE web search to confirm the email domain is the company's corporate domain, not consumer ISP / subsidiary brand / stale pre-acquisition.
