@@ -89,6 +89,8 @@ OSI's transceivers are manufactured by SmartOptics  -  an optical networking com
 **Do NOT** claim to own SmartOptics firmware or technology. **Do NOT** get into coherent modulation, DSP tuning, or optical budget calculations without an engineer present.
 
 ### 3. The TPM Wedge
+> Operational version the skills draft from: `playbook/vertical-intel.md` ("Park Place / Service Express merger wedge"). This section is the narrative reference. Keep the two in sync.
+
 OSI is a Gartner-recognized TPM provider. Privately owned. No private equity. That matters more than it sounds.
 
 **The real story:** The TPM market has consolidated heavily. Large providers have gone through acquisitions, PE buyouts, and mergers. Every time that happens, the engineering talent that made the support good walks out the door. Support shifts to a call-center model. Response times slip. The person who knew your environment is gone.

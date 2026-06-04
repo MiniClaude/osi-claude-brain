@@ -42,7 +42,10 @@ ZoomInfo is unreliable here. Keyword matching returns branch network and distrib
 
 ## Park Place / Service Express merger wedge
 
-Use when the prospect already has Park Place, Service Express, Curvature, or Iron Bow as their TPM provider.
+Use when the prospect already has Park Place, Service Express, Curvature, or Iron Bow as their TPM provider. This is the operational version the skills draft from. The narrative version lives in `knowledge/OSI-Sales-Playbook.md` Section 3.
+
+**Why it matters (the real story):**
+The TPM market has consolidated through acquisitions, PE buyouts, and mergers. Every time that happens, the engineering talent that made the support good walks out the door. Support shifts to a call-center model, response times slip, and the person who knew your environment is gone. OSI does not have that problem: no PE firm pushing for margin expansion, no acquisition to digest, no incentive to cut the team that knows what it is doing.
 
 **Conversation opener (verbatim, Andy-defensible):**
 > "With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
@@ -50,18 +53,26 @@ Use when the prospect already has Park Place, Service Express, Curvature, or Iro
 **OSI competitive positioning vs Park Place / Service Express:**
 - Independently owned and privately held. No PE margin pressure on rates or staffing.
 - No red tape on SLAs. No corporate approval chain or PE quarterly target sitting between us and the commitment we made. We just honor it.
-- Private equity shifts a support organization's focus from clients to profits. The priority moves from SLAs to margins. We are not going to reorganize around a fund's exit timeline.
-- No M&A disruption. Engineering team is intact.
-- Gartner-recognized.
-- Multi-vendor: Cisco, Dell, HP, NetApp, Juniper, Arista.
+- Engineering continuity. The same engineers support your environment next year and the year after. No acquisition, no headcount cut to hit a fund's return target.
+- Private equity shifts a support organization's focus from clients to profits. The priority moves from SLAs to margins.
+- Gartner-recognized. Multi-vendor: Cisco, Dell, HP, NetApp, Juniper, Arista.
 - Will competitive-bid against the existing provider.
+
+**Proof points (use in the conversation):**
+- Transparent sparing. We tell customers what parts we stock and where they are located. No mystery when a P1 hits.
+- Onsite sparing for critical hardware. If your environment cannot wait for a courier, we position the part before you need it.
+- Most flexible contracts in the industry. Decommission hardware mid-contract and you get a credit for the remaining term. No penalty, no fight.
+- Direct access. Call, email, or open a ticket through the portal. You reach engineers, not a call center.
 
 **Andy-defensible framing:**
 > "The merger between Park Place and Service Express has a lot of PE money behind it. That changes the priorities of a support organization. The focus moves from SLAs to margins. We hit 98 percent of our SLAs in 2025, we spare transparently, and if you decommission hardware mid-contract we give you a credit for the time left. We are not going to reorganize around a fund's exit timeline."
 
-**Rules:**
-- The angle is service risk, not price. Do NOT position on price ("we're cheaper than Park Place").
+**Pricing and framing discipline:**
+- 40-60% below OEM support rates. Lead with value, not price. Let the prospect ask about cost, then deliver the number. It lands harder that way.
+- TPM is a direct capex-to-opex conversion: extend the life of existing gear instead of replacing it. Finance teams respond to this.
+- The angle is service risk, not price. Do NOT position on price ("we're cheaper than Park Place") or name competitors in price comparisons.
 - 98 percent SLA figure is 2025 data. Verify annually.
+- Only use customer stories about support failures if you have a verified, specific one. Do not generalize.
 
 ## TPM positioning when status unknown
 - **Banks:** optics for engineers, TPM for procurement / contract owners.
