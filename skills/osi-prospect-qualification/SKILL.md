@@ -632,6 +632,25 @@ Examples to catch: Altafiber employees with @zoomtown.com; post-acquisition empl
 
 One search, no rabbit holes.
 
+### Blocked address check -- before handoff to outreach (MANDATORY on every Yes with an email)
+
+🚨 Outreach now sends from HubSpot sequences, not the local Outlook queue. The osi-monitor bounce scan (Outlook via Chrome) that used to catch dead addresses downstream is NOT running for HubSpot-sent mail. This pre-handoff check is the only bounce guard. Run it on every Yes verdict that has an email, in every mode, immediately before the HANDOFF.
+
+Check the chosen email address against three sources, cheapest first:
+1. **hard-block.json.** Read `C:\Claude-Brain\hard-block.json`. If the address (or the contact) is listed, it is blocked. No tool call needed.
+2. **HubSpot engagement history.** On the contact record, look for any email engagement logged against this address with status BOUNCED, HARD_BOUNCED, or REJECTED.
+3. **Outlook inbox.** ONE targeted search for a delivery-failure message referencing this exact address: FROM "Mail Delivery", "postmaster", or "mailer-daemon"; subject contains "Undeliverable", "Delivery Status Notification", "Failed", or "Blocked". Use the Outlook email search tool (read-only, no Chrome, no prompt). One search, no rabbit holes.
+
+**If any source flags the address:**
+- Do NOT hand off. Treat the contact exactly like a no-email contact.
+- Create the 2 LinkedIn InMail fallback tasks (the existing no-email plan).
+- Tell Andy: `BLOCKED ADDRESS: [exact email] -- prior delivery failure / hard block. No sequence created. LinkedIn InMail fallback set up instead.`
+- In Mode 4, also mark the source enroll task COMPLETED with note "Blocked address -- LinkedIn fallback created."
+
+**If all three are clean:** proceed to the HANDOFF.
+
+Lightweight by design: steps 1-2 are a file read and a field check, step 3 is a single Outlook search. Do not expand it into a multi-search investigation.
+
 ---
 
 ## DISQUALIFIERS (Hard No)
@@ -1296,9 +1315,9 @@ The contact association carries all the context. Andy does NOT put the name or c
 5. **Route the handoff by task subject** (one qualified Yes-with-email contact at a time -- IMMEDIATE HANDOFF, NO BATCHING, same rule as Company Mode):
    - Subject was **"Enroll in sequence"** -> `HANDOFF: invoke osi-outreach-sequence on [First Last] at [Company].`
    - Subject was **"3 email sequence"** -> `HANDOFF: invoke osi-3email-new on [First Last] at [Company].`
-   The outreach skill owns stagger math, drafting, queue/AI-field writes, and the LINKED_IN_CONNECT due-date update. Do not draft emails here.
+   The outreach skill owns stagger math, drafting, queue/AI-field writes, and the LINKED_IN_CONNECT due-date update. Do not draft emails here. Before any handoff, the Blocked address check (see "Blocked address check" section above) must pass. A blocked address takes the no-email disposition in step 6.
 
-6. **No email after the full ZI matrix:** do NOT hand off. The 2 LinkedIn InMail fallback tasks + LINKED_IN_CONNECT task + strategy note ARE the plan (existing rule). Mark the enroll task COMPLETED with note "No email -- LinkedIn fallback created."
+6. **No email after the full ZI matrix, OR a blocked address:** do NOT hand off. The 2 LinkedIn InMail fallback tasks + LINKED_IN_CONNECT task + strategy note ARE the plan (existing rule). Mark the enroll task COMPLETED with note "No email -- LinkedIn fallback created" (or "Blocked address -- LinkedIn fallback created")."
 
 7. **Complete the task.** After the outreach skill confirms enrollment (or a fallback disposition above is applied), mark the source task COMPLETED via `manage_crm_objects` updateRequest (`hs_task_status: "COMPLETED"`, `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`). A processed task must never stay open, or it gets re-picked next run.
 
@@ -1308,6 +1327,7 @@ The contact association carries all the context. Andy does NOT put the name or c
    - Already in sequence -- skipped: [N] -- names
    - Not qualified -- skipped: [N] -- names + reason
    - No email -- LinkedIn fallback: [N] -- names
+   - Blocked address -- LinkedIn fallback: [N] -- names
    - No contact association -- left open: [N] -- task IDs
 
 Multiple people from the same company are expected. Stagger math is handled by the outreach skill after each handoff, per the same-company stagger metadata.
