@@ -506,6 +506,20 @@ Example: `Kevin Walsh | Facilities Manager | No | M&E only, no IT hardware`
 
 Do not write paragraphs per candidate during a sweep. Reserve the full OUTPUT FORMAT for Profile Mode (single prospect).
 
+**End-of-run SEQUENCED RECAP (print after each company, and once more at the end of a batch):**
+
+After a company's Yes candidates are all sequenced, print a recap with one line per person who was ACTUALLY sequenced (Yes with email, AI fields written). Include the sequence type and both URLs:
+```
+[Name] | [Sequence type] | Enroll by [date] | LinkedIn: [hs_linkedin_url] | HubSpot: https://app.hubspot.com/contacts/21878985/record/0-1/[contactId]
+```
+Then one count line: `[Company]: X Yes, Y No, Z Conditional`.
+
+Rules for the recap:
+- Only people actually sequenced appear. No-email fallbacks and No / Conditional verdicts are not in the recap (they are in the verdict lines above).
+- LinkedIn URL is the contact's `hs_linkedin_url`. If blank, write `LinkedIn: none on record`.
+- HubSpot URL is built from the portal id `21878985` and the contact id. It is a clickable link to the record.
+- This recap IS the deliverable summary. Keep it to these one-line entries. No paragraphs, no email bodies (the minimal-output rule still applies).
+
 ### Step 4: HubSpot check on shortlist
 
 Flag any already owned or with prior touchpoints before Andy reaches out.

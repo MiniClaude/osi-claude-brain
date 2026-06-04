@@ -90,10 +90,11 @@ This is what makes cloud sending work. Do it once in HubSpot.
 
 Now when Claude writes the AI fields and you enroll the contact, HubSpot renders the stored emails and sends them.
 
-### Step 4: Fill in CLAUDE.md placeholders
-Open `C:\Claude-Brain\CLAUDE.md` and replace every `<<...>>`:
-- `<<YOUR_NAME>>`, `<<your_email@company.com>>`, `<<your_role>>`, `<<your_company>>`, `<<your_company_products>>`
-- `<<YOUR_HUBSPOT_OWNER_ID>>` (HubSpot: avatar top right, Profile and Preferences, Owner ID)
+### Step 4: Fill in the identity placeholders
+Open `C:\Claude-Brain\CLAUDE.md` and replace every `<<...>>`. Then run the same find and replace across the `skills/` and `playbook/` folders, because these appear in the skill files too:
+- `<<YOUR_NAME>>` (also your email sign-off), `<<YOUR_EMAIL>>`, `<<your_role>>`
+- `<<YOUR_HUBSPOT_OWNER_ID>>` (HubSpot: avatar top right, Profile and Preferences, Owner ID). Critical: until this is set, prospecting would assign contacts to the wrong owner.
+- `<<YOUR_HUBSPOT_PORTAL_ID>>` (your HubSpot account / portal id, the number in any HubSpot URL like `app.hubspot.com/contacts/<this number>/...`). Used to build the clickable contact links in the run output.
 - `<<YOUR_GITHUB_USERNAME>>`
 
 ### Step 5: Fill in the three config lists
