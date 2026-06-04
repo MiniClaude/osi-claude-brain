@@ -417,7 +417,11 @@ Build all 12 field values in memory (6 subjects + 6 bodies). Write in a SINGLE `
 
 After write succeeds, output exactly one confirmation line:
 
-`AI fields written: [First Last] | [Sequence type] | Enroll by [Day 1 date]`
+`AI fields written: [First Last] | [Sequence type] | Enroll by [Day 1 date] | LinkedIn: [hs_linkedin_url] | HubSpot: https://app.hubspot.com/contacts/21878985/record/0-1/[hubspotContactId]`
+
+- **LinkedIn URL:** use the contact's `hs_linkedin_url` (the profile read during qualification). If it is blank, write `LinkedIn: none on record`.
+- **HubSpot URL:** build it from the portal id `21878985` and the `hubspotContactId` you just wrote to. This is a clickable link straight to the contact record.
+- If a Company Mode run prints an end-of-run recap of everyone sequenced, each name in that recap carries these same two URLs.
 
 Do NOT display email bodies in chat. Do NOT ask "ready?". Move immediately to Step 10.
 
