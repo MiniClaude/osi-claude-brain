@@ -33,7 +33,7 @@ If any required field is missing or wrong, STOP. Research harder, then retry. Do
 HubSpot titles go stale. LinkedIn top card is source of truth. Overwrite even if HubSpot has a value. Fallback if LinkedIn unreachable: ZoomInfo `jobTitle`. Only if neither, leave existing HubSpot value.
 
 ## Associated company, always link
-Before creating/updating a contact, search HubSpot for the company by name. If found, associate via `associations` parameter. If not in HubSpot, create the company first (owner: 196669355, name from LinkedIn), then associate. Never leave a contact orphaned, unlinked contacts break stagger logic, deal tracking, reporting.
+Before creating/updating a contact, search HubSpot for the company by name. If found, associate via `associations` parameter. If not in HubSpot, create the company first (owner: 213536174, name from LinkedIn), then associate. Never leave a contact orphaned, unlinked contacts break stagger logic, deal tracking, reporting.
 
 ## Pre-write checklist (run before every save)
 

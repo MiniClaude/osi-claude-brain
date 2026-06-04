@@ -156,7 +156,7 @@ Note the verification source in the strategy note under `EMPLOYER VERIFICATION:`
 ## Step 2: Research (do this before writing anything)
 
 **HubSpot Check**
-Search HubSpot for the prospect and their current company. Pull any existing notes to understand what was sent previously. Note the HubSpot owner. Only create tasks if owned by Andy McLean (196669355), Mark Metz (210187184), or John Houston (210187193).
+Search HubSpot for the prospect and their current company. Pull any existing notes to understand what was sent previously. Note the HubSpot owner. Only create tasks if owned by Andy McLean (213536174), Mark Metz (210187184), or John Houston (210187193).
 
 If owned by another rep, flag it and wait for Andy's instruction before proceeding.
 
@@ -508,7 +508,7 @@ After the write succeeds, output exactly one confirmation line and nothing else:
 
 1. **Mark any existing `LINKED_IN_CONNECT` task COMPLETED.** Set `hs_task_status` = `COMPLETED` on that task via `manage_crm_objects` updateRequest.
 
-2. **Create a NEW `LINKED_IN_CONNECT` task** (Sales Nav connection request) scheduled for Day 1. Subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: 196669355. Notes: the LinkedIn re-engagement message text.
+2. **Create a NEW `LINKED_IN_CONNECT` task** (Sales Nav connection request) scheduled for Day 1. Subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: 213536174. Notes: the LinkedIn re-engagement message text.
 
 The connection request fires Day 1 regardless of whether Andy was previously connected. If already connected, Andy handles the LinkedIn side manually. The task still surfaces the action.
 
@@ -533,7 +533,7 @@ Required fields to verify/refresh on every re-engagement save:
 
 ### Strategy and Fit note
 
-objectType: "notes", owner 196669355, associated to contact.
+objectType: "notes", owner 213536174, associated to contact.
 
 Note format:
 

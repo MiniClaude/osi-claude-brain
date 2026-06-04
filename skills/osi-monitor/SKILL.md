@@ -143,14 +143,14 @@ Task 1, Ship task:
 - Subject: `Ship swag to [First Name] at [Company]`
 - Due: today
 - Type: `TODO`
-- Owner: Andy (196669355)
+- Owner: Andy (213536174)
 - Body: `[First Name] replied with a shipping address. Send [SFPs/DIMMs]. Address: [extracted address].`
 
 Task 2, Follow-up task:
 - Subject: `Follow up with [First Name] re: swag shipment`
 - Due: 4 business days from today (so it fires after delivery)
 - Type: `TODO`
-- Owner: Andy (196669355)
+- Owner: Andy (213536174)
 - Body: `Check in after swag shipment. Ask if the [SFPs/DIMMs] arrived and if they had a chance to test them.`
 
 **4. Log in the summary under SHIPMENT REQUESTED:** Name | Company | product | address | "Ship task + follow-up task created in HubSpot. Row added to Swag tab."
@@ -257,7 +257,7 @@ For every prospect with a pending Email 1 (`-1` id suffix) scheduled for today's
    - Subject: `Sales Nav -- Send connection request to [First Name] [Last Name]`
    - Due date: today
    - Type: `TODO`
-   - Owner: Andy (HubSpot owner ID 196669355)
+   - Owner: Andy (HubSpot owner ID 213536174)
    - Body: `Day 1 connection request. Email 1 goes out at 4pm today.`
    - Report under SALES NAV TASKS CREATED: Name | Company | task created for today.
 

@@ -16,7 +16,7 @@ and removals. Renders an interactive HTML dashboard with a running chart.
 
 ## Key Constants
 
-- **Andy's HubSpot Owner ID**: `196669355`
+- **Andy's HubSpot Owner ID**: `213536174`
 - **Skill base directory**: wherever this SKILL.md lives (e.g. `.claude/skills/andy-monthly-account-count/`)
 - **Snapshots directory**: `snapshots/` (sibling to SKILL.md)
 - **Output file**: `Andy_Account_Count_YYYY-MM-DD.html` saved to Andy's workspace folder
@@ -73,7 +73,7 @@ search_crm_objects({
   objectType: "companies",
   filterGroups: [{
     filters: [
-      { propertyName: "hubspot_owner_id", operator: "EQ", value: "196669355" }
+      { propertyName: "hubspot_owner_id", operator: "EQ", value: "213536174" }
     ]
   }],
   properties: ["name", "createdate", "hubspot_owner_id", "city", "state", "industry"],

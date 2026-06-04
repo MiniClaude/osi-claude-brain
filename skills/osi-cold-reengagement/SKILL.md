@@ -59,7 +59,7 @@ If `ValueError` raises: rewrite and re-validate. Do NOT save any failing draft t
 - No em-dashes (U+2014) anywhere. Split into two sentences instead.
 - Keep everything tight and direct.
 - Draft messages: peer-to-peer tone, not vendor-to-buyer.
-- Never create HubSpot tasks for contacts not owned by Andy McLean, Mark Metz, or John Houston.
+- Never create HubSpot tasks for contacts not owned by Brian Charrette, Mark Metz, or John Houston.
 
 ---
 
@@ -87,7 +87,7 @@ Pull 5-8 names from the results. Focus on titles like:
 Search HubSpot for each candidate before doing any LinkedIn research.
 
 **Hard rule:** Only proceed with contacts owned by:
-- Andy McLean, owner ID 196669355
+- Brian Charrette, owner ID 213536174
 - Mark Metz, owner ID 210187184
 - John Houston, owner ID 210187193
 
@@ -178,14 +178,14 @@ Create 2 tasks on the prospect's contact record (only if the duplicate check pas
 - Type: LINKED_IN_MESSAGE
 - Due: today
 - Notes: Message 1 draft
-- Owner: 196669355
+- Owner: 213536174
 
 **Task 2:**
 - Subject: "2nd LinkedIn Message"
 - Type: LINKED_IN_MESSAGE
 - Due: 14 days from today
 - Notes: Message 2 draft
-- Owner: 196669355
+- Owner: 213536174
 
 Use manage_crm_objects to create both tasks in a single call.
 Associate both to the contact record.

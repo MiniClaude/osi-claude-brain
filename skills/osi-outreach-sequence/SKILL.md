@@ -447,7 +447,7 @@ Search HubSpot for an existing "Sales Nav -- Send connection request" task on th
 - Subject: `Sales Nav -- Send connection request -- [First Last] | [Company]`
 - Due date: Day 1 at 20:00 UTC (4pm ET)
 - Type: `LINKED_IN_CONNECT`
-- Owner: 196669355
+- Owner: 213536174
 - Body: the actual LinkedIn invite message Andy will send (under 300 chars, references Personal Hook, no pitch)
 
 This task is Andy's cue. When it appears due in his task queue, he enrolls the contact in the HubSpot sequence and sends Email 1. The task date and enrollment date are always the same.

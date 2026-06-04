@@ -321,7 +321,7 @@ Andy says "run sequences tonight" with no companies.
    - Schedule Discovery Mega + Processing Recurring (same as Company Mode).
 2. Overnight: same as Company Mode. Refill cycles continue until cold pool exhausted.
 
-Auto Mode is overnight-only. The selector is Andy-owned ONLY (owner ID 196669355, NOT Mark or John).
+Auto Mode is overnight-only. The selector is Andy-owned ONLY (owner ID 213536174, NOT Mark or John).
 
 ---
 
@@ -331,7 +331,7 @@ Same logic in both places. Used by Refill (Branch C) and by Auto Mode kickoff.
 
 ### Selector steps (in order)
 
-1. **HubSpot search**, `objectType: companies`, filters: `hubspot_owner_id = 196669355` (Andy ONLY, Mark 210187184 and John 210187193 are NOT eligible. Auto-picked Mark/John accounts are off-limits. They can be processed only when Andy names them explicitly in Company Mode.) AND (`notes_last_contacted` 6+ months ago OR null). Sort by `notes_last_contacted` ASC. Pull a generous candidate pool (~50).
+1. **HubSpot search**, `objectType: companies`, filters: `hubspot_owner_id = 213536174` (Andy ONLY, Mark 210187184 and John 210187193 are NOT eligible. Auto-picked Mark/John accounts are off-limits. They can be processed only when Andy names them explicitly in Company Mode.) AND (`notes_last_contacted` 6+ months ago OR null). Sort by `notes_last_contacted` ASC. Pull a generous candidate pool (~50).
 2. **Active client filter**, for each candidate, check associated deals. Skip any with closed-won deal in last 12 months OR open deal in active pipeline stage. Do NOT use Lifecycle Stage. Log each skip: `SKIPPED: [Company], active client (deal: [name])`.
 3. **M&A check**, quick web search per candidate for recent acquisitions / mergers / rebrands. If the company is a subsidiary of an active OSI customer (e.g. Cable One brands), skip, that customer relationship is owned by another rep. Log skip: `SKIPPED: [Company], M&A subsidiary of [parent], [parent] is OSI customer of [rep]`.
 4. **OSI fit check**, keep telecom, ISPs, cable MSOs, fiber, carriers, regional MSOs, data centers, IT infrastructure plays, banks/credit unions with internal IT, hospitals/health systems with IT infra, manufacturers with real IT footprint. Skip retail, food service, pure software/SaaS, hyperscalers, professional services without IT infra ownership.
@@ -521,7 +521,7 @@ Used by `osi-discovery-sweep` (Step 2 HubSpot ownership check) and by Refill sel
 | Situation | Action |
 |---|---|
 | Not in HubSpot | Proceed |
-| Owned by Andy (196669355) | Proceed |
+| Owned by Andy (213536174) | Proceed |
 | Owned by Mark (210187184) | Proceed in Company Mode (Andy named); SKIP in Refill / Auto Mode |
 | Owned by John (210187193) | Proceed in Company Mode (Andy named); SKIP in Refill / Auto Mode |
 | Other rep, recent activity (within 3 months) | Skip silent. Log to overnight-run-log.md |

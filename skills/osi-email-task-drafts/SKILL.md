@@ -87,7 +87,7 @@ Also after the morning monitor when Andy's ready to work through follow-ups.
 ## Scope (default)
 
 **Included:**
-- Andy's email tasks (ownerId `196669355`) that are `NOT_STARTED` with `hs_timestamp <= end of today` (due today OR overdue)
+- Andy's email tasks (ownerId `213536174`) that are `NOT_STARTED` with `hs_timestamp <= end of today` (due today OR overdue)
 - Custom tasks with specific subjects
 
 **Excluded:**
@@ -101,14 +101,14 @@ Also after the morning monitor when Andy's ready to work through follow-ups.
 
 ### Step 1, Pull tasks
 
-Andy's `ownerId` is `196669355`. Today's date comes from `<env>`.
+Andy's `ownerId` is `213536174`. Today's date comes from `<env>`.
 
 ```
 search_crm_objects(
   objectType: "TASK",
   filterGroups: [{
     filters: [
-      { propertyName: "hubspot_owner_id", operator: "EQ", value: "196669355" },
+      { propertyName: "hubspot_owner_id", operator: "EQ", value: "213536174" },
       { propertyName: "hs_task_status", operator: "EQ", value: "NOT_STARTED" },
       { propertyName: "hs_task_type", operator: "EQ", value: "EMAIL" },
       { propertyName: "hs_timestamp", operator: "LTE", value: "<today end-of-day UTC>" }
@@ -135,7 +135,7 @@ Divide the draft queue into 4-5 batches of ~8-10 tasks. Dispatch `general-purpos
 
 Give each agent this prompt (substitute the batch's task list):
 
-> You are drafting email reply content for Andy McLean (andy@osiglobal.com) at OSI Global, IT hardware / maintenance / optics. Today is {today's date}.
+> You are drafting email reply content for Brian Charrette (bc@osihardware.com) at OSI Global, IT hardware / maintenance / optics. Today is {today's date}.
 >
 > **🚨 CRITICAL RULE: Do NOT use the task subject/title as drafting material.** Task titles are often outdated. The subject only tells you which task to work on. Draft only from current-state HubSpot engagements.
 >

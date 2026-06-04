@@ -21,7 +21,7 @@ description: >
 
 Every weekday morning at 10 AM ET, this skill:
 
-1. Finds all `calls` engagement records owned by Andy (`hubspot_owner_id: 196669355`) that completed between yesterday morning and now.
+1. Finds all `calls` engagement records owned by Andy (`hubspot_owner_id: 213536174`) that completed between yesterday morning and now.
 2. For each call, **verify it is a Teams meeting** (see Step 1.5 below). If not, skip with reason logged.
 3. For each qualifying Teams meeting:
    - Pulls the AI-generated summary (`hs_call_summary` property, has Summary, Key notes, Topics discussed)
@@ -90,7 +90,7 @@ HubSpot search:
 search_crm_objects({
   objectType: "calls",
   filterGroups: [{filters: [
-    {propertyName: "hubspot_owner_id", operator: "EQ", value: "196669355"},
+    {propertyName: "hubspot_owner_id", operator: "EQ", value: "213536174"},
     {propertyName: "hs_timestamp", operator: "GTE", value: window_start.isoformat()},
     {propertyName: "hs_timestamp", operator: "LT", value: now.isoformat()}
   ]}],

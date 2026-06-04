@@ -143,7 +143,7 @@ Search HubSpot by name and current company.
 Wait for Andy's explicit instruction before continuing.
 
 JAM owner IDs, only proceed if owned by:
-- Andy McLean: 196669355
+- Andy McLean: 213536174
 - Mark Metz: 210187184
 - John Houston: 210187193
 
@@ -581,7 +581,7 @@ When a prospect is being processed and they have an existing `LINKED_IN_CONNECT`
 
 1. **Mark the existing task COMPLETED.** Set `hs_task_status` = `COMPLETED` on that task via `manage_crm_objects` updateRequest. This removes it from Andy's open task queue.
 
-2. **Create a NEW `LINKED_IN_CONNECT` task** scheduled for Day 1 (the date Email 1 fires). Use the standard subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: 196669355. Notes: the LinkedIn invite text. This surfaces the connection request on Andy's task queue the morning of Day 1 so he can send the LinkedIn invite the same day Email 1 fires.
+2. **Create a NEW `LINKED_IN_CONNECT` task** scheduled for Day 1 (the date Email 1 fires). Use the standard subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: 213536174. Notes: the LinkedIn invite text. This surfaces the connection request on Andy's task queue the morning of Day 1 so he can send the LinkedIn invite the same day Email 1 fires.
 
 Do this for EVERY prospect regardless of whether they had an existing task or not (if no existing task, just create the new one).
 
@@ -637,7 +637,7 @@ If any check fails, FIX IT or leave the field blank. Do NOT write a partial reco
 Even if HubSpot already has a `jobtitle` value, pull the current title from the prospect's LinkedIn profile top card and overwrite. HubSpot titles go stale; LinkedIn is source of truth. Fallback order if LinkedIn is unreachable (closed profile, URL broken, private): use the ZoomInfo enriched `jobTitle` field. Only if neither is available, leave the existing HubSpot value alone.
 
 **Associated company, always link on contact creation.**
-Before creating or updating a contact, search HubSpot for the company by name (`search_crm_objects` objectType=COMPANY, `query` = company name). If found, associate the contact to that company record via the `associations` parameter in `manage_crm_objects.createRequest` or `updateRequest`. If the company is not found in HubSpot, create a new company record first (owner: 196669355, name: company name from LinkedIn) and then associate the contact to it.
+Before creating or updating a contact, search HubSpot for the company by name (`search_crm_objects` objectType=COMPANY, `query` = company name). If found, associate the contact to that company record via the `associations` parameter in `manage_crm_objects.createRequest` or `updateRequest`. If the company is not found in HubSpot, create a new company record first (owner: 213536174, name: company name from LinkedIn) and then associate the contact to it.
 
 Never leave a contact orphaned from its company. Unlinked contacts break same-company stagger logic, deal tracking, and reporting.
 
@@ -652,7 +652,7 @@ City, state, and timezone always come from LinkedIn, never ZoomInfo.
 
 ### Create strategy note, EVERYONE
 
-objectType: "notes", owner 196669355, associated to contact.
+objectType: "notes", owner 213536174, associated to contact.
 
 Format exactly:
 
@@ -696,7 +696,7 @@ Never use em-dashes anywhere in the note.
 - Type: LINKED_IN_CONNECT
 - Due: Day 1 (same date as Email 1)
 - Notes: LinkedIn re-engagement message text
-- Owner: 196669355
+- Owner: 213536174
 
 Check for existing connection request task first. Skip if already exists.
 

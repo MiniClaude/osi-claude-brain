@@ -156,7 +156,7 @@ A candidate whose title AND company are genuinely ambiguous, whose profile is co
 **Use shallow only when ALL true:**
 1. `source: "hubspot_contact"` with `hubspotContactId`, AND
 2. HubSpot record has `email`, `jobtitle`, `company` populated, AND
-3. Owned by JAM (Andy 196669355 / Mark 210187184 / John 210187193), AND
+3. Owned by JAM (Andy 213536174 / Mark 210187184 / John 210187193), AND
 4. Email domain matches the company's known/derived primary domain, AND
 5. **Recent positive engagement: at least ONE of:**
    - Inbound reply received from this contact within the last **12 months**, OR
@@ -286,7 +286,7 @@ From the unioned HubSpot results, determine ownership:
 | Scenario | Action |
 |---|---|
 | Not found in HubSpot under any name or domain variant | Proceed. New account. |
-| Found, JAM-owned (Andy 196669355 / Mark 210187184 / John 210187193) | Proceed. |
+| Found, JAM-owned (Andy 213536174 / Mark 210187184 / John 210187193) | Proceed. |
 | Found, other rep, last activity within 3 months | STOP. Flag to Andy: "**[Company] is owned by [Rep Name] in HubSpot (last activity [date]). Do not prospect -- active account under another rep.**" Do NOT prospect silently. |
 | Found, other rep, no activity in 3+ months, not a client | STOP. Flag to Andy: "**[Company] is in HubSpot under [Rep Name] but no activity since [date]. Flagging for account-request -- do not prospect yet.**" Log to `overnight-run-log.md`. |
 | Found under a variant name / domain the input didn't match | STOP. Flag to Andy: "**Heads up: '[Input Name]' appears to already be in HubSpot as '[HubSpot Name]' (domain: [domain], owner: [rep]). Treating as same company.**" Then apply ownership rules above. |
@@ -897,7 +897,7 @@ Filter all results to records where `company` matches the prospect's company (ex
 
 Do NOT create a note and then update it. Do NOT write a placeholder. Finish ALL research (LinkedIn full read, ZoomInfo retry matrix, fresh hook search) BEFORE touching HubSpot. The note is written exactly once, in final format, as a single atomic action.
 
-objectType: `notes`, owner: 196669355, associated to contact.
+objectType: `notes`, owner: 213536174, associated to contact.
 
 Write in this exact order with these exact labels:
 
@@ -993,7 +993,7 @@ Create:
 - Type: `LINKED_IN_CONNECT` (never `LINKED_IN_MESSAGE`, never `TODO`)
 - `hs_timestamp`: provisional -- next business day at 4 PM ET. `osi-outreach-sequence` will update this to the real Day 1 after computing the stagger.
 - Notes: LinkedIn invite text (under 300 chars, references Personal Hook, no pitch). Body is ONLY the raw message text, no labels, no character counts.
-- Owner: 196669355.
+- Owner: 213536174.
 
 **PRE-WRITE CHECKLIST -- complete before calling manage_crm_objects:**
 - [ ] Subject contains "Sales Nav -- Send connection request --" followed by full name and company
@@ -1184,7 +1184,7 @@ Trigger: Andy says "find me cold companies", "auto mode", "sweep my accounts", o
 
 🚨 **HARDWIRED RULE -- ANDY'S COMPANIES ONLY. NEVER JAM. (added 2026-05-19)**
 
-Auto Mode ONLY pulls companies owned by Andy (owner ID **196669355**). Never expand this to Mark (210187184) or John (210187193). The CLAUDE.md rule that "JAM accounts are fair game" means Andy can prospect into those accounts if he chooses -- it does NOT mean Auto Mode should pull them automatically. Andy has corrected this mistake multiple times. The owner ID in every filter is 196669355 and nothing else.
+Auto Mode ONLY pulls companies owned by Andy (owner ID **213536174**). Never expand this to Mark (210187184) or John (210187193). The CLAUDE.md rule that "JAM accounts are fair game" means Andy can prospect into those accounts if he chooses -- it does NOT mean Auto Mode should pull them automatically. Andy has corrected this mistake multiple times. The owner ID in every filter is 213536174 and nothing else.
 
 🚨 **HARDWIRED RULE -- USE THE MASTER PIPELINE LIST FIRST. HUBSPOT PULL IS FALLBACK ONLY. (added 2026-05-19)**
 
@@ -1200,7 +1200,7 @@ The "Company Pipeline" tab of `C:\Claude-Brain\prospects-tracker-new.xlsx` is th
 7. After completing a company (regardless of result), mark its row Status = "Done" and write today's date to Date Processed. Use openpyxl via bash.
 8. If the Pipeline tab has no remaining Pending rows: fall back to the live HubSpot pull below.
 
-**Rebuilding the Pipeline tab:** Run a fresh build when Andy says "rebuild pipeline" or "refresh company list". Pull all Andy-owned (196669355) companies with `numberofemployees >= 200` from HubSpot, cross-ref queue and DNP, score by industry, write to the tab. This replaces all existing rows.
+**Rebuilding the Pipeline tab:** Run a fresh build when Andy says "rebuild pipeline" or "refresh company list". Pull all Andy-owned (213536174) companies with `numberofemployees >= 200` from HubSpot, cross-ref queue and DNP, score by industry, write to the tab. This replaces all existing rows.
 
 ### Step 0: Build the exclusion list (MANDATORY, runs even when using Pipeline tab)
 
@@ -1220,7 +1220,7 @@ After building the exclusion list:
 
 **PRIMARY -- Pipeline tab:** Read the "Company Pipeline" tab. Take the next N rows with Status = "Pending" that are not in the exclusion list. N = however many it takes to get 3 viable candidates through Step 2.5 pre-checks. No cap on how many rows to read -- keep going until 3 clean companies are found or the tab is exhausted.
 
-**FALLBACK -- Live HubSpot pull (only when Pipeline tab is exhausted):** Search HubSpot for companies owned by Andy (**owner ID 196669355 ONLY**) with no activity in 6+ months. Filter: `notes_last_contacted` < 180 days ago or null, `hubspot_owner_id` = 196669355, `numberofemployees` >= 200. Pull 50 at a time, keep pulling batches until 3 viable candidates survive Step 2.5. Never stop after one batch.
+**FALLBACK -- Live HubSpot pull (only when Pipeline tab is exhausted):** Search HubSpot for companies owned by Andy (**owner ID 213536174 ONLY**) with no activity in 6+ months. Filter: `notes_last_contacted` < 180 days ago or null, `hubspot_owner_id` = 213536174, `numberofemployees` >= 200. Pull 50 at a time, keep pulling batches until 3 viable candidates survive Step 2.5. Never stop after one batch.
 
 ### Step 2: ICP pre-filter + queue exclusion
 
@@ -1272,7 +1272,7 @@ If the list comes out short (companies dropped from 0A/0B/0C results), find repl
 
 🚨 **THE STEP 1 PULL IS NOT A SUBSTITUTE FOR STEP 0A. EVER.**
 
-The cold-company HubSpot pull (Step 1) is filtered by owner ID 196669355. It is structurally blind to duplicate company records owned by other reps. A company appearing in the Step 1 results does NOT mean it has no other HubSpot record under a different owner. Step 0A (name variants + domain search, NO owner filter) MUST run on every candidate regardless of how it was sourced. The most dangerous failure mode is: company appears in Andy-owned pull -> Claude skips 0A reasoning "ownership is already confirmed" -> duplicate under another rep missed -> company presented as clean when it is not.
+The cold-company HubSpot pull (Step 1) is filtered by owner ID 213536174. It is structurally blind to duplicate company records owned by other reps. A company appearing in the Step 1 results does NOT mean it has no other HubSpot record under a different owner. Step 0A (name variants + domain search, NO owner filter) MUST run on every candidate regardless of how it was sourced. The most dangerous failure mode is: company appears in Andy-owned pull -> Claude skips 0A reasoning "ownership is already confirmed" -> duplicate under another rep missed -> company presented as clean when it is not.
 
 Named incidents (do not repeat):
 - **Sonic.net Inc -- 2026-05-07:** appeared in Andy-owned pull, 0A skipped, duplicate owned by Nick Sibersky missed, presented as clean.
@@ -1328,13 +1328,13 @@ Andy tags a contact for outreach by creating a TODO task on the contact in HubSp
 
 The contact association carries all the context. Andy does NOT put the name or company in the task title -- pull everything from the associated contact.
 
-🚨 **HARDWIRED RULE -- ANDY'S TASKS ONLY (owner ID 196669355).** Match tasks owned by Andy and nobody else. Never pick up tasks owned by Mark (210187184) or John (210187193).
+🚨 **HARDWIRED RULE -- ANDY'S TASKS ONLY (owner ID 213536174).** Match tasks owned by Andy and nobody else. Never pick up tasks owned by Mark (210187184) or John (210187193).
 
 🚨 **NO "READY" GATE. NO APPROVAL PROMPTS.** Andy decided by tagging the task. Run fully automated, per-contact, immediate handoff. Every HubSpot write uses `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. Never filter by priority -- Andy leaves it blank. Match on subject + owner + not-completed only.
 
 ### Step by step
 
-1. **Find the tasks.** `search_crm_objects` on tasks with filters: `hs_task_subject` IN ("Enroll in sequence", "3 email sequence") AND `hs_task_status` != "COMPLETED" AND `hubspot_owner_id` = 196669355. Match the subject case-insensitively. Record each task's `hs_object_id` and its subject (the subject decides routing).
+1. **Find the tasks.** `search_crm_objects` on tasks with filters: `hs_task_subject` IN ("Enroll in sequence", "3 email sequence") AND `hs_task_status` != "COMPLETED" AND `hubspot_owner_id` = 213536174. Match the subject case-insensitively. Record each task's `hs_object_id` and its subject (the subject decides routing).
 
 2. **Pull the associated contact** for each task: first name, last name, job title, company, email, phone, mobile, timezone, LinkedIn URL, and existing strategy note. If a task has no contact association, skip it and note "no contact association" in the final summary. Do NOT complete an unassociated task.
 
