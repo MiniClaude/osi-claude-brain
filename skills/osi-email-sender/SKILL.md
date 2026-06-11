@@ -858,6 +858,16 @@ This is the piece Andy explicitly asked for on 2026-04-23: notify on every block
 
 ---
 
+## Final step: refresh active-sequences memory (mandatory, every run)
+
+After the run report, rewrite `C:\Users\Mini\Documents\osi-claude-brain\memory\active-sequences.md` from the queue file on disk. This keeps the morning-brain-sync accurate without manual updates.
+
+Format: a "Last updated" date line, total counts by status (sent / pending / skipped-dedup / cancelled / needs_review), a table of pending sends grouped by contact (contact, company, emails left, next send date), and a list of any needs_review entries flagged for Brian. Keep it under 60 lines. Do not list sent or deduped history beyond the counts.
+
+This step writes one file to disk and nothing else. It never blocks the run; if the write fails, log it and exit normally.
+
+---
+
 ## Failure modes (learned the hard way, don't repeat these)
 
 - **Hand-rolled quote headers (2026-04-22).** Brett Baker / Lippert was left sitting as a draft in Sent Items, and Lance Weaver / Rackspace went out to a real prospect, both with the entire queue body typed into a New mail compose including a fake `---------- On April 16, Andy McLean wrote ----------` separator. No grey divider. No real From/Sent/To/Subject header. The original body was retyped instead of quoted natively. It looks like spam. Root cause: sender ignored Step 2 and went straight to New mail for every entry. For `RE: ` subjects the ONLY correct flow is Step 3A. New mail is for fresh subjects only.
