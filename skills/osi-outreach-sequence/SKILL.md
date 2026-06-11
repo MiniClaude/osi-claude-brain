@@ -56,16 +56,24 @@ This skill only runs when invoked via handoff from `osi-prospect-qualification` 
 
 ---
 
-## 🛑 STEP -1: TOOL PREFETCH (MANDATORY if not already done this session)
+## ⚙️ STEP -1: LOAD TOOLS ON DEMAND (NO BULK PREFETCH)
 
-If osi-prospect-qualification already ran its prefetch earlier in this conversation, skip this step.
+If osi-prospect-qualification already loaded its tools earlier in this conversation, skip this step, already-loaded schemas stay live.
 
-If running standalone, fire these TWO ToolSearch calls in the same message:
+🚨 **Do NOT bulk-load every tool at once.** Loading many MCP schemas in one shot can trip an API error, `tools.X.custom.input_schema: int too big to convert`, from an oversized integer in one MCP tool's JSON schema (a ZoomInfo or Chrome tool). An earlier version bulk-prefetched and failed immediately with that 400. Load on demand instead.
 
+If running standalone, load only the core tools up front:
 ```
-ToolSearch({ query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_news", max_results: 6 })
-ToolSearch({ query: "select:mcp__Claude_in_Chrome__tabs_context_mcp,mcp__Claude_in_Chrome__navigate,mcp__Claude_in_Chrome__get_page_text,WebSearch,TaskCreate,TaskUpdate", max_results: 6 })
+ToolSearch({ query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects", max_results: 4 })
 ```
+
+Then load each remaining group with its own small ToolSearch call just before first use:
+- ZoomInfo enrichment -> `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts` (add `enrich_news` only when you run a news lookup)
+- LinkedIn -> `mcp__Claude_in_Chrome__navigate`, `mcp__Claude_in_Chrome__get_page_text` (add `tabs_context_mcp` only if needed)
+- Web search -> `WebSearch`
+- State tracking -> `TaskCreate`, `TaskUpdate` (only if used)
+
+Keep each ToolSearch group small (3-5 tools). If a group ever triggers the `int too big to convert` 400, split it and load tools one at a time to isolate and skip the offender.
 
 ---
 
@@ -73,7 +81,9 @@ ToolSearch({ query: "select:mcp__Claude_in_Chrome__tabs_context_mcp,mcp__Claude_
 
 Before drafting any email, **Read `C:\Claude-Brain\playbook\drafting-rules.md` in full**. This is non-negotiable. Do NOT rely on training data.
 
-After reading drafting-rules.md, proceed below.
+Also **Read `C:\Claude-Brain\playbook\vertical-intel.md` in full** before drafting. It is the single source for per-vertical lead guidance and the Park Place / Service Express wedge (drafting-rules.md only points to it). Core rule: role and skills decide the lead, not industry. Optics-fit roles get optics in any vertical. Procurement and maintenance-contract owners get TPM in any vertical, banks included.
+
+After reading both, proceed below.
 
 ---
 
@@ -197,7 +207,7 @@ Read `state.stagger[company_name]` from `C:\Claude-Brain\overnight-candidates.js
 | `5` | `last_day1` + 10 business days (cooling gap) |
 | `6+` | `last_day1` + 4 business days |
 
-Day 1 is the date Andy should enroll the contact in the HubSpot sequence. The LINKED_IN_CONNECT task is due on this date — when Andy sees it in his task queue, that is his cue to enroll.
+Day 1 is the date Andy should enroll the contact in the HubSpot sequence. The LINKED_IN_CONNECT task is due on this date. When Andy sees it in his task queue, that is his cue to enroll.
 
 Skip weekends + holidays. Holiday list: `Claude-Brain/holidays.json`. Fallback: US federal holidays + Good Friday + Black Friday + Christmas Eve + New Year's Eve.
 
@@ -272,7 +282,7 @@ Andy
 ```
 
 **Pain-Led (TPM / DWDM / Storage / Pre-owned):**
-3-4 sentences. Lead with their specific pain. Reference Personal Hook. Reference Fresh Hook if strong. One concrete ask.
+3-4 sentences. Lead with their specific pain. Reference Personal Hook. Reference Fresh Hook if strong. One concrete ask. Pull the pain articulation and the one-line ask from `C:\Claude-Brain\playbook\pain-and-objections.md` (pain by product line).
 
 ```
 [First],
@@ -366,7 +376,7 @@ Andy
 For every email body, answer these six questions before sanitizing:
 
 1. Does the first line after the greeting reference the prospect, not OSI? (Email 1 only)
-2. Is the Personal Hook from the strategy note in this email? (Email 1 only — if hook is thin, ABORT and flip to `pending-needs-hook`)
+2. Is the Personal Hook from the strategy note in this email? (Email 1 only. If hook is thin, ABORT and flip to `pending-needs-hook`)
 3. Is there exactly ONE product line in this email?
 4. Did I name SmartOptics? (must be no for cold)
 5. Did I claim OSI manufactures? (must be no)
@@ -415,7 +425,11 @@ Build all 12 field values in memory (6 subjects + 6 bodies). Write in a SINGLE `
 
 After write succeeds, output exactly one confirmation line:
 
-`AI fields written: [First Last] | [Sequence type] | Enroll by [Day 1 date]`
+`AI fields written: [First Last] | [Sequence type] | Enroll by [Day 1 date] | LinkedIn: [hs_linkedin_url] | HubSpot: https://app.hubspot.com/contacts/21878985/record/0-1/[hubspotContactId]`
+
+- **LinkedIn URL:** use the contact's `hs_linkedin_url` (the profile read during qualification). If it is blank, write `LinkedIn: none on record`.
+- **HubSpot URL:** build it from the portal id `21878985` and the `hubspotContactId` you just wrote to. This is a clickable link straight to the contact record.
+- If a Company Mode run prints an end-of-run recap of everyone sequenced, each name in that recap carries these same two URLs.
 
 Do NOT display email bodies in chat. Do NOT ask "ready?". Move immediately to Step 10.
 

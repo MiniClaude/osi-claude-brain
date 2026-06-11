@@ -1,0 +1,5 @@
+{
+  "addresses": [
+    { "email": "person@example.com", "reason": "asked to be removed 2026-01-01", "blockedAt": "2026-01-01" }
+  ]
+}

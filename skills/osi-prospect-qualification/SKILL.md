@@ -1,6 +1,6 @@
 ---
 name: osi-prospect-qualification
-description: Qualify LinkedIn prospects for OSI Global. Use whenever Andy pastes a LinkedIn profile URL, asks "good target?", "is this worth an InMail?", or asks to evaluate any LinkedIn profile against OSI's product lines. Also triggers when reviewing prospect lists, when Andy says "find me prospects at [company]", "sequence this company", "find me cold companies", "sweep my accounts", or any variation of company-level prospecting. Should run automatically whenever a LinkedIn profile or company prospecting request appears in conversation, even without explicit ask.
+description: "Qualify LinkedIn prospects for OSI Global. Use whenever Brian pastes a LinkedIn profile URL, asks \"good target?\", \"is this worth an InMail?\", or asks to evaluate any LinkedIn profile against OSI's product lines. Also triggers when reviewing prospect lists, when Andy says \"find me prospects at [company]\", \"sequence this company\", \"find me cold companies\", \"sweep my accounts\", or any variation of company-level prospecting. Also triggers on \"process my enroll tasks\", \"check my enroll tasks\", \"run my enroll tasks\" for HubSpot Task Mode batch enrollment from \"Enroll in sequence\" / \"3 email sequence\" to-do tasks. Should run automatically whenever a LinkedIn profile or company prospecting request appears in conversation, even without explicit ask."
 ---
 
 > Source: `C:\Claude-Brain\skills\osi-prospect-qualification\` (Git, github.com/Drrewdy/Claude-Brain). Edit source, repackage, install.
@@ -9,33 +9,26 @@ description: Qualify LinkedIn prospects for OSI Global. Use whenever Andy pastes
 
 ---
 
-## 🚨 STEP -1: TOOL PREFETCH (MANDATORY, RUNS ONCE BEFORE ANY COMPANY WORK)
+## ⚙️ STEP -1: LOAD TOOLS ON DEMAND (NO BULK PREFETCH)
 
-**The very first action in any session that triggers this skill — before reading files, before HubSpot, before LinkedIn, before anything — is a single ToolSearch call that loads every tool schema needed for the full run. Do this ONCE. After this step, no further ToolSearch calls are needed.**
+This skill needs bash, HubSpot, ZoomInfo, Chrome (LinkedIn), and web-search tools. Load each tool's schema with ToolSearch the first time a phase needs it, then reuse it for the rest of the session. **Do NOT bulk-load every tool at once.**
 
-Run ONE ToolSearch call with this exact query (all tools comma-separated, max_results=15):
+🚨 **Why no bulk prefetch (do not re-add it):** loading many MCP schemas in one shot can trip an API error, `tools.X.custom.input_schema: int too big to convert`, caused by an oversized integer in one MCP tool's JSON schema (a ZoomInfo or Chrome tool). An earlier version of this skill bulk-prefetched ~17 tools at launch and failed immediately on every run with exactly that 400 error. Loading on demand keeps each request's tool set small and never pulls in a tool a given run does not use.
 
+**At the start of a run, load only the core tools every mode uses:**
 ```
-ToolSearch({
-  query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_owners,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__search_contacts,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_news,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_scoops",
-  max_results: 9
-})
+ToolSearch({ query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects", max_results: 4 })
 ```
 
-Then immediately run a SECOND ToolSearch call:
+**Then load each remaining group with its own small ToolSearch call, only just before its first use:**
+- HubSpot owner lookup -> `mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_owners`
+- LinkedIn browsing -> `mcp__Claude_in_Chrome__navigate`, `mcp__Claude_in_Chrome__get_page_text`, `mcp__Claude_in_Chrome__find` (add `tabs_context_mcp` / `browser_batch` only if a run actually needs them)
+- ZoomInfo enrichment -> `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__search_contacts`, `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts`
+- Company news hook -> `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_news`, `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_scoops` (load ONLY when you actually run a news/scoops lookup)
+- Web search -> `WebSearch`
+- Overnight/state tracking -> `TaskCreate`, `TaskUpdate`, `TaskList` (load ONLY if used)
 
-```
-ToolSearch({
-  query: "select:mcp__Claude_in_Chrome__tabs_context_mcp,mcp__Claude_in_Chrome__navigate,mcp__Claude_in_Chrome__get_page_text,mcp__Claude_in_Chrome__find,mcp__Claude_in_Chrome__browser_batch,WebSearch,TaskCreate,TaskUpdate,TaskList",
-  max_results: 9
-})
-```
-
-Both calls can fire in the SAME message (parallel). After both return, all tool schemas are live. Do not call ToolSearch again during the run.
-
-**Why this rule exists:** Without prefetch, ToolSearch calls interrupt the run every time a new tool category is needed — HubSpot, ZoomInfo, LinkedIn, bash, web search each trigger a separate load. Andy wants to say "go" and have zero interruptions. Prefetching all schemas at session start eliminates every mid-run ToolSearch call.
-
-**If a tool schema was already loaded earlier in the conversation:** skip that tool from the prefetch. Already-loaded schemas stay live for the session. The prefetch only needs to fire for tools not yet loaded.
+**If a tool schema was already loaded earlier in the conversation:** skip it, already-loaded schemas stay live for the session. Keep each ToolSearch call to a small group (3-5 tools). If a single ToolSearch group ever triggers the `int too big to convert` 400, split it and load the tools one at a time to isolate and skip the offending tool.
 
 ---
 
@@ -486,6 +479,17 @@ Obvious No's by title were already eliminated in Step 1 pre-filter. Do NOT re-re
 
 Yes first, then Conditional, then No with brief reasons. No cap on Yes count. Each Yes includes recommended OSI angle.
 
+### 🚨 CHAT OUTPUT IS MINIMAL, CONSERVE CREDITS (Company Mode and Auto Mode)
+
+Cowork bills by tokens. The HubSpot record, the strategy note, and the AI fields are the deliverable. The chat is not. Keep what you print tight.
+
+- **NEVER print email bodies or subjects in chat.** The drafter writes them to the HubSpot AI fields and reports ONE line: `AI fields written: [Name] | [Sequence] | Enroll by [date]`.
+- **NEVER paste full strategy notes, LinkedIn About or Experience text, or long skill lists into chat.** They live on the HubSpot contact, not in the conversation.
+- **One line per candidate** for verdicts (format below). No per-candidate paragraphs.
+- **Do not narrate every tool call or echo HubSpot / ZoomInfo payloads.** Act, then report the result in a short phrase.
+- The discovery log table prints once (it is required). The end-of-company summary is one line: `[Company]: X Yes, Y No, Z Conditional`.
+- If I explicitly ask to see a specific email, note, or profile, show that one. Otherwise stay terse.
+
 **Company Mode sweep verdict format (one line per candidate):**
 ```
 [Name] | [Title] | Yes / No / Conditional | [one phrase reason]
@@ -494,6 +498,20 @@ Example: `Jamie Ross | Sr. Network Engineer | Yes | DWDM + compute skills, activ
 Example: `Kevin Walsh | Facilities Manager | No | M&E only, no IT hardware`
 
 Do not write paragraphs per candidate during a sweep. Reserve the full OUTPUT FORMAT for Profile Mode (single prospect).
+
+**End-of-run SEQUENCED RECAP (print after each company, and once more at the end of a batch):**
+
+After a company's Yes candidates are all sequenced, print a recap with one line per person who was ACTUALLY sequenced (Yes with email, AI fields written). Include the sequence type and both URLs:
+```
+[Name] | [Sequence type] | Enroll by [date] | LinkedIn: [hs_linkedin_url] | HubSpot: https://app.hubspot.com/contacts/21878985/record/0-1/[contactId]
+```
+Then one count line: `[Company]: X Yes, Y No, Z Conditional`.
+
+Rules for the recap:
+- Only people actually sequenced appear. No-email fallbacks and No / Conditional verdicts are not in the recap (they are in the verdict lines above).
+- LinkedIn URL is the contact's `hs_linkedin_url`. If blank, write `LinkedIn: none on record`.
+- HubSpot URL is built from the portal id `21878985` and the contact id. It is a clickable link to the record.
+- This recap IS the deliverable summary. Keep it to these one-line entries. No paragraphs, no email bodies (the minimal-output rule still applies).
 
 ### Step 4: HubSpot check on shortlist
 
@@ -619,6 +637,19 @@ If any retry-matrix attempt fails with a credit-limit error ("Limit exceeded" or
 
 City / state / timezone -> ALWAYS LinkedIn, NEVER ZoomInfo.
 
+### Personal / consumer email hard block -- check first, no exceptions
+
+Never pass a personal/consumer email address to outreach. If the chosen email (HubSpot or ZoomInfo) sits at any of these domains, treat it as NO email found and fall back to the 2 LinkedIn InMail tasks:
+- gmail.com, googlemail.com
+- yahoo.com, yahoo.ca, yahoo.co.uk, ymail.com
+- hotmail.com, hotmail.ca, outlook.com, live.com, msn.com
+- icloud.com, me.com, mac.com
+- aol.com, aim.com
+- protonmail.com, proton.me
+- any other clearly personal/consumer ISP domain
+
+Log: `Personal email ([address]) -- not used. LinkedIn InMail fallback created.` This is a deterministic string check, no tool call. Run it FIRST, before the corporate-domain search and the blocked address check below.
+
 ### Email domain validation -- before handoff to outreach
 
 ONE web search to confirm the email domain is the company's corporate domain, not consumer ISP / subsidiary brand / stale pre-acquisition.
@@ -631,6 +662,25 @@ Search: `"[Company name] corporate email domain"`
 Examples to catch: Altafiber employees with @zoomtown.com; post-acquisition employees on dead domain.
 
 One search, no rabbit holes.
+
+### Blocked address check -- before handoff to outreach (MANDATORY on every Yes with an email)
+
+🚨 Outreach now sends from HubSpot sequences, not the local Outlook queue. The osi-monitor bounce scan (Outlook via Chrome) that used to catch dead addresses downstream is NOT running for HubSpot-sent mail. This pre-handoff check is the only bounce guard. Run it on every Yes verdict that has an email, in every mode, immediately before the HANDOFF.
+
+Check the chosen email address against three sources, cheapest first:
+1. **hard-block.json.** Read `C:\Claude-Brain\hard-block.json`. If the address (or the contact) is listed, it is blocked. No tool call needed.
+2. **HubSpot engagement history.** On the contact record, look for any email engagement logged against this address with status BOUNCED, HARD_BOUNCED, or REJECTED.
+3. **Outlook inbox.** ONE targeted search for a delivery-failure message referencing this exact address: FROM "Mail Delivery", "postmaster", or "mailer-daemon"; subject contains "Undeliverable", "Delivery Status Notification", "Failed", or "Blocked". Use the Outlook email search tool (read-only, no Chrome, no prompt). One search, no rabbit holes.
+
+**If any source flags the address:**
+- Do NOT hand off. Treat the contact exactly like a no-email contact.
+- Create the 2 LinkedIn InMail fallback tasks (the existing no-email plan).
+- Tell Andy: `BLOCKED ADDRESS: [exact email] -- prior delivery failure / hard block. No sequence created. LinkedIn InMail fallback set up instead.`
+- In Mode 4, also mark the source enroll task COMPLETED with note "Blocked address -- LinkedIn fallback created."
+
+**If all three are clean:** proceed to the HANDOFF.
+
+Lightweight by design: steps 1-2 are a file read and a field check, step 3 is a single Outlook search. Do not expand it into a multi-search investigation.
 
 ---
 
@@ -875,10 +925,10 @@ EMAIL RESOLUTION: [hubspot-existing | zoominfo-full-match | dominant-pattern]
 ```
 
 **SEQUENCE values:**
-- `Network` — Sample-Offer Network. Target: network engineers, architects, transport engineers.
-- `DWDM` — Pain-Led DWDM. Target: transport/optical engineers, network planners at carriers, CLECs, MSOs.
-- `Server/Storage` — Sample-Offer Server or Pain-Led Storage. Target: systems engineers, infrastructure engineers, storage admins.
-- `TPM` — Pain-Led TPM. Target: IT directors, DC managers, asset managers, procurement, mid-market CIOs.
+- `Network`: Sample-Offer Network. Target: network engineers, architects, transport engineers.
+- `DWDM`: Pain-Led DWDM. Target: transport/optical engineers, network planners at carriers, CLECs, MSOs.
+- `Server/Storage`: Sample-Offer Server or Pain-Led Storage. Target: systems engineers, infrastructure engineers, storage admins.
+- `TPM`: Pain-Led TPM. Target: IT directors, DC managers, asset managers, procurement, mid-market CIOs.
 
 This is the first thing Andy reads when a LINKED_IN_CONNECT task comes due. It tells him which HubSpot sequence to enroll the contact in.
 
@@ -1017,6 +1067,7 @@ One search. No rabbit holes. Filler in this field gets surfaced into Email 1 as 
 - **`C:\Claude-Brain\playbook\product-lines.md`** -- OSI product lines, sequence-type table, DWDM talking points, who buys what.
 - **`C:\Claude-Brain\playbook\vertical-intel.md`** -- what to lead with by industry. Park Place / Service Express merger wedge. TPM positioning.
 - **`C:\Claude-Brain\playbook\opener-library.md`** -- 12 cold-call openers + cold call rules.
+- **`C:\Claude-Brain\playbook\pain-and-objections.md`** -- pain points + discovery questions by product line, objection-handler bank, secondary-source positioning. Use when writing the Live Call Script (objection handling) and the Personal Hook / The Play.
 - **`C:\Claude-Brain\playbook\hubspot-data-quality.md`** -- required fields, phone format, timezone buckets, pre-write checklist.
 - **`C:\Claude-Brain\playbook\voice-rules.md`** -- Andy's voice + humanization filter. Apply to call script, VM, LinkedIn invite text.
 
@@ -1264,6 +1315,54 @@ wb.save(r'C:\Claude-Brain\prospects-tracker-new.xlsx')
 ```
 
 Default batch: 3 companies per session unless Andy specifies otherwise or says "keep going". Within each company: NO CAP -- find everyone worth contacting.
+
+## MODE 4: HubSpot Task Mode -- batch enrollment from to-do tasks
+Trigger: Andy says "process my enroll tasks", "check my enroll tasks", "run my enroll tasks", or any reference to his HubSpot "Enroll in sequence" / "3 email sequence" to-do tasks.
+
+Andy tags a contact for outreach by creating a TODO task on the contact in HubSpot. The task SUBJECT is the routing instruction. Two subjects:
+
+| Task subject | Treatment | Handoff target |
+|---|---|---|
+| **Enroll in sequence** | Full 6-email sequence, full research per this skill | `osi-outreach-sequence` |
+| **3 email sequence** | Shorter 3-email treatment | `osi-3email-new` |
+
+The contact association carries all the context. Andy does NOT put the name or company in the task title -- pull everything from the associated contact.
+
+🚨 **HARDWIRED RULE -- ANDY'S TASKS ONLY (owner ID 196669355).** Match tasks owned by Andy and nobody else. Never pick up tasks owned by Mark (210187184) or John (210187193).
+
+🚨 **NO "READY" GATE. NO APPROVAL PROMPTS.** Andy decided by tagging the task. Run fully automated, per-contact, immediate handoff. Every HubSpot write uses `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. Never filter by priority -- Andy leaves it blank. Match on subject + owner + not-completed only.
+
+### Step by step
+
+1. **Find the tasks.** `search_crm_objects` on tasks with filters: `hs_task_subject` IN ("Enroll in sequence", "3 email sequence") AND `hs_task_status` != "COMPLETED" AND `hubspot_owner_id` = 196669355. Match the subject case-insensitively. Record each task's `hs_object_id` and its subject (the subject decides routing).
+
+2. **Pull the associated contact** for each task: first name, last name, job title, company, email, phone, mobile, timezone, LinkedIn URL, and existing strategy note. If a task has no contact association, skip it and note "no contact association" in the final summary. Do NOT complete an unassociated task.
+
+3. **Active sequence check.** For each contact, check whether a sequence is already running (active enrollment, or pending entries keyed by email OR prospectName + company per the existing dedupe rules). If already enrolled, mark the task COMPLETED with note "Already enrolled -- skipped" and move on. Do NOT re-enroll.
+
+4. **Full qualification (Andy's normal flow -- no shortcut).** Run the standard Profile Mode qualification on the contact's LinkedIn URL: verify current employer (Path A LinkedIn read, Path B fallback per the NO-EMPLOYER-VERIFICATION rule), three-point check, ZoomInfo enrichment via the full 7-attempt retry matrix, strategy note, LINKED_IN_CONNECT task. This is governed by every rule in this skill -- Task Mode does not bypass employer verification, the ZI matrix, HubSpot-first email resolution, or the read-back transaction (Steps 1-3.5).
+   - If a current, complete strategy note already exists from a recent qualification, you may reuse its Personal Hook + SEQUENCE label rather than re-reading LinkedIn from scratch -- but the employer-verification and active-sequence checks still run.
+   - If qualification returns **No** or **Conditional**: mark the task COMPLETED with note "Not qualified -- [reason]" and move on. No handoff.
+
+5. **Route the handoff by task subject** (one qualified Yes-with-email contact at a time -- IMMEDIATE HANDOFF, NO BATCHING, same rule as Company Mode):
+   - Subject was **"Enroll in sequence"** -> `HANDOFF: invoke osi-outreach-sequence on [First Last] at [Company].`
+   - Subject was **"3 email sequence"** -> `HANDOFF: invoke osi-3email-new on [First Last] at [Company].`
+   The outreach skill owns stagger math, drafting, queue/AI-field writes, and the LINKED_IN_CONNECT due-date update. Do not draft emails here. Before any handoff, the Blocked address check (see "Blocked address check" section above) must pass. A blocked address takes the no-email disposition in step 6.
+
+6. **No email after the full ZI matrix, OR a blocked address:** do NOT hand off. The 2 LinkedIn InMail fallback tasks + LINKED_IN_CONNECT task + strategy note ARE the plan (existing rule). Mark the enroll task COMPLETED with note "No email -- LinkedIn fallback created" (or "Blocked address -- LinkedIn fallback created")."
+
+7. **Complete the task.** After the outreach skill confirms enrollment (or a fallback disposition above is applied), mark the source task COMPLETED via `manage_crm_objects` updateRequest (`hs_task_status: "COMPLETED"`, `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`). A processed task must never stay open, or it gets re-picked next run.
+
+8. **Final summary** to Andy:
+   - Enrolled (6-email): [N] -- names + companies
+   - Enrolled (3-email): [N] -- names + companies
+   - Already in sequence -- skipped: [N] -- names
+   - Not qualified -- skipped: [N] -- names + reason
+   - No email -- LinkedIn fallback: [N] -- names
+   - Blocked address -- LinkedIn fallback: [N] -- names
+   - No contact association -- left open: [N] -- task IDs
+
+Multiple people from the same company are expected. Stagger math is handled by the outreach skill after each handoff, per the same-company stagger metadata.
 
 ## EXCEL TRACKER -- log every Company Mode session
 

@@ -1,47 +1,97 @@
-# Vertical Intelligence — what to lead with by industry
+# Vertical Intel
 
-Read this when picking the OSI angle for a prospect's strategy note or email.
+**Last updated:** 2026-06-05
 
-## Telco / Service Provider (T-Mobile, AT&T, Verizon, Comcast, Lumen, Zayo, Cox, Charter, etc.)
-**Lead:** optics, ZR/ZR+ coherent, DWDM open line systems.
-**Pain:** OEM lead times stalling 400G/800G core refreshes. Cisco / Lumentum slipping on coherent.
-**Do NOT:** open with free SFPs at scale. Telcos deal in volume — lead with supply chain reliability and technical credibility.
-**TPM note:** rarely the engineer-level opener. Decisions sit at director.
+Role and current pain decide the lead — not just the industry. Use this as a guide, not a script.
 
-## Large Banks / Financial Institutions (BofA, Citi, JPMorgan, Goldman, Wells Fargo, BNY, Morgan Stanley)
-**Lead:** optics. Free SFP offer is the right foot in the door.
-**Do NOT:** lead with TPM. Banks often already have TPM (Park Place, Service Express, Curvature, Iron Bow). Engineer rarely controls maintenance contract.
-**TPM as upsell only:** after relationship exists, ask about non-critical gear (branch switches, test labs, dev environments, gear coming off SmartNet).
-**If known TPM provider:** flag in verdict, use Park Place/Service Express merger wedge below.
+---
 
-## Professional Services / Consulting (KPMG, Deloitte, EY, PwC, Accenture)
-**Lead:** TPM is viable opener. Cost-sensitive, less regulatory-constrained than banks.
-**Frame:** lead with pain, not "we save 40-60%." Focus on SmartNet costs on gear running fine for years.
-**Also strong:** free optics for break-glass sparing.
+## Regional Fiber / ISP / Broadband Operators
 
-## Manufacturing (Forest River, Precision Castparts, Koch, PACCAR)
-**Lead:** free optics as break-glass insurance. Limited budgets, high uptime, small IT staff.
-**Also strong:** TPM for aging Cisco gear past OEM support.
+**Companies like:** Surf Internet, Astound, Breezeline, Zirrus, Synergy Fiber, TruVista, NGN Coop, Mid-South Synergy, BTES, HEMC, Tombigbee Electric
 
-## Healthcare (hospital systems, health networks, pharma)
-**Lead:** uptime + compliance. TPM with documented SLAs. DIMMs for refresh.
-**Differentiator:** OSI is Gartner-recognized, privately owned, no PE pressure. Engineering continuity matters here.
+**Lead with:** DWDM / SmartOptics. Wave extension costs and lead times are universal pain here. Hyperscalers consuming transport supply is the hook.
 
-## Park Place / Service Express merger wedge
+**Secondary:** Optics (SFP/QSFP sample offer). TPM on aging Cisco/Juniper edge gear.
 
-Use when prospect already has Park Place, Service Express, Curvature, etc. as their TPM provider:
+**Title targets:** VP Engineering, VP Network, Director of Network Engineering, Network Architect, CTO.
 
-> "With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
+**Proof point to use:** "Your peers are winning more deals and turning up customers faster with Smartoptics. One of our largest customers calls it their hammer — everything is a nail."
 
-OSI competitive positioning vs. Park Place/Service Express:
-- Privately owned. No PE margin pressure on rates or staffing.
-- No M&A disruption.
-- Gartner-recognized.
-- Multi-vendor: Cisco, Dell, HP, NetApp, Juniper, Arista.
-- Will competitive-bid against the existing provider.
+---
 
-## TPM positioning when status unknown
+## Healthcare / Hospital Systems
 
-- **Banks:** optics opener, TPM is second conversation.
-- **Consulting:** TPM can open. Lead with pain, not savings %.
-- **Manufacturing / general enterprise:** TPM is strong. Hook = aging gear and OEM end-of-life.
+**Companies like:** Ogden Clinic, Good Shepherd Rehab, Pinnacle Services, IHN
+
+**Lead with:** TPM (Cisco SmartNet renewal pain is near-universal). DIMMs for server infrastructure.
+
+**Secondary:** Pre-owned networking gear for refresh on tight budgets.
+
+**Title targets:** IT Director, VP IT, Infrastructure Manager, Network Manager.
+
+**Note:** Procurement cycles are long. Lead time sensitivity matters — they can't wait 6 months for gear during an EHR go-live.
+
+---
+
+## Financial Services / Fintech
+
+**Companies like:** Apex Fintech, Jack Henry, Morgan White
+
+**Lead with:** DIMMs and compute (high-density workloads). TPM on legacy infrastructure.
+
+**Secondary:** Pre-owned Cisco/Juniper for edge and branch.
+
+**Title targets:** Director of Infrastructure, VP Technology, CTO, Network Architect.
+
+**Note:** Compliance-sensitive — never promise anything about data handling or certifications you can't verify.
+
+---
+
+## Manufacturing / Industrial
+
+**Companies like:** Emerson, Chart Industries, Dematic, Jeld-Wen, Hexion, Ryder
+
+**Lead with:** TPM (aging Cisco infrastructure is common). DIMMs and servers for plant-floor compute refresh.
+
+**Secondary:** Pre-owned networking gear.
+
+**Title targets:** IT Director, Infrastructure Lead, Network Engineer, VP IT.
+
+**Pain:** Cisco EoL gear with no budget to refresh. OEM support renewals eating the IT budget.
+
+---
+
+## Energy / Utilities
+
+**Companies like:** Constellation, SCE, Exelon, TotalEnergies
+
+**Lead with:** TPM and optics. Large physical infrastructure means lots of aging network gear.
+
+**Secondary:** DIMMs for control systems and data infrastructure.
+
+**Title targets:** Director of IT, Network Architect, Infrastructure Manager.
+
+**Note:** Long procurement cycles and strict vendor vetting. Get a champion early.
+
+---
+
+## Logistics / Distribution
+
+**Companies like:** Ryder, DHL, Acosta, CrossCountry
+
+**Lead with:** DIMMs and servers (high-volume compute for warehouse/logistics systems). TPM on distributed Cisco infrastructure across hundreds of sites.
+
+**Title targets:** VP IT, Director of Infrastructure, Network Manager.
+
+**Pain:** Branch/site sprawl makes OEM support expensive. DIMM refresh cycles for WMS and ERP systems.
+
+---
+
+## Data Center / Cloud / MSP
+
+**Lead with:** Optics first (SFP sample). DWDM if they operate fiber. DIMMs and compute for build-outs.
+
+**Title targets:** Network Engineer, Solutions Architect, Infrastructure Engineer, CTO.
+
+**Pain:** Transceiver OEM markup (Cisco-branded SFPs at 10x cost). Lead time on 400G gear.

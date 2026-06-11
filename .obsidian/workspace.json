@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "0e553ad758d6eccf",
+    "type": "split",
+    "children": [
+      {
+        "id": "61a628e41e065325",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "23abc2a63855eeac",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c3f9610e1cfca804",
+    "type": "split",
+    "children": [
+      {
+        "id": "10057006c490c4b4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "41dfe9b6a1d060dd",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "e83cc00102107483",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "eeb0fa3e95a5f3cf",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "0f4807cc995c28e7",
+    "type": "split",
+    "children": [
+      {
+        "id": "7f846e8f31c7043b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6219ac6efefb4776",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "bdfccdd4c986cc1b",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "a95185127c845f2f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "8860bd1359fd52f1",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "f87fbca1843fd4b5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "23abc2a63855eeac",
+  "lastOpenFiles": [
+    "skills/setup-cowork/SKILL.md",
+    "skills/setup-cowork",
+    "skills/session-compress/SKILL.md",
+    "skills/session-compress",
+    "skills/schedule/SKILL.md",
+    "skills/schedule",
+    "skills/research-assistant/SKILL.md",
+    "skills/research-assistant",
+    "skills/pdf/scripts/fill_pdf_form_with_annotations.py",
+    "skills/pdf/scripts/fill_fillable_fields.py",
+    "skills/pdf/scripts/extract_form_structure.py",
+    "skills/pdf/scripts/extract_form_field_info.py",
+    "skills/pdf/scripts/create_validation_image.py",
+    "skills/pdf/scripts/convert_pdf_to_images.py",
+    "skills/pdf/SKILL.md",
+    "skills/pdf/REFERENCE.md",
+    "skills/pdf/FORMS.md",
+    "skills/notebooklm/SKILL.md",
+    "skills/morning-briefing/SKILL.md",
+    "skills/meeting-notes/SKILL.md",
+    "skills/humanizer/SKILL.md",
+    "scheduled-tasks/travis-genesse-palomar-health-email-7-corrected/SKILL.md",
+    "scheduled-tasks/travis-genesse-palomar-health-email-7/SKILL.md",
+    "scheduled-tasks/travis-genesse-palomar-health-email-6-corrected/SKILL.md",
+    "scheduled-tasks/travis-genesse-palomar-health-email-6/SKILL.md",
+    "scheduled-tasks/travis-genesse-palomar-health-email-5-corrected/SKILL.md",
+    "scheduled-tasks/travis-genesse-palomar-health-email-5/SKILL.md",
+    "scheduled-tasks/travis-genesse-palomar-health-email-4-corrected/SKILL.md",
+    "scheduled-tasks/travis-genesse-palomar-health-email-4/SKILL.md",
+    "scheduled-tasks/travis-genesse-palomar-health-email-3-corrected/SKILL.md",
+    "scheduled-tasks/travis-genesse-palomar-health-email-3/SKILL.md",
+    "scheduled-tasks/travis-genesse-palomar-health-email-2-corrected/SKILL.md",
+    "scheduled-tasks/travis-genesse-palomar-health-email-2/SKILL.md",
+    "scheduled-tasks/steve-mccabe-amplex-email-7/SKILL.md",
+    "scheduled-tasks/steve-mccabe-amplex-email-6/SKILL.md",
+    "scheduled-tasks/steve-mccabe-amplex-email-5/SKILL.md"
+  ]
+}

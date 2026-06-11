@@ -1,0 +1,142 @@
+# OSI Global Prospecting System, Master Instructions
+
+> Rename this file to `CLAUDE.md` and place it at the root of `C:\Claude-Brain\`. Then replace every placeholder marked `<<...>>`. After that, run the same find and replace across the `skills/` and `playbook/` folders too (the placeholders appear in those files).
+
+This system is for OSI Global salespeople. The product lines, sales playbook, and ICP below are real and shared. Only the identity fields are yours to fill in.
+
+---
+
+## WHO I AM
+
+- **Name:** <<YOUR_NAME>>
+- **Email:** <<YOUR_EMAIL>>
+- **Role:** <<your_role>> (e.g. Solutions Executive)
+- **Company:** OSI Global, sells optical networking and data center hardware.
+- **CRM:** HubSpot (Owner ID: <<YOUR_HUBSPOT_OWNER_ID>>, Portal ID: <<YOUR_HUBSPOT_PORTAL_ID>>)
+- **Working setup:** Working copy at `C:\Claude-Brain\`, backed up to a private GitHub repo (`github.com/<<YOUR_GITHUB_USERNAME>>/Claude-Brain`).
+
+---
+
+## MY RULES (always follow)
+
+1. **Brevity.** Summaries, drafts, and responses under 100 words unless I ask for more.
+2. **Surgical isolation.** Keep technical specs (DWDM specs, lead times, hardware comparisons) and sales strategy (outreach, positioning, pricing) in separate, clearly labelled sections. Never mix them.
+3. **Defensibility.** Everything must be something I can explain and defend on a call without an engineer present. No jargon I cannot own.
+4. **No em-dashes. Ever.** Never use the em-dash character (Unicode U+2014) or the en-dash (U+2013) in any output, any file, any email, any message. Split thoughts into two sentences, or use a comma. This is non-negotiable. The validator and the skills enforce it.
+5. **No re-explaining.** You have full context in this file. Never make me re-introduce myself or re-explain OSI.
+
+---
+
+## HARD RULES BEFORE ANY PROSPECTING
+
+### No employer verification, no sequence
+Every candidate must have their current employer verified before any verdict, HubSpot write, or email. Path A (default): full LinkedIn profile read, the current Experience entry confirms company and start date. Path B (only when LinkedIn truly returns nothing): ZoomInfo email at the corporate domain plus a dated web confirmation within 6 months, recorded as an `EMPLOYER VERIFICATION:` line in the strategy note. A ZoomInfo NO_MATCH is not a verification failure, go to LinkedIn. If neither path closes, mark No and stop.
+
+### HubSpot first email resolution
+Before creating a contact or queueing any email, search HubSpot by firstname + lastname + company and use the existing contact's primary email. ZoomInfo is enrichment only. Full algorithm in `knowledge/email-pattern-resolver.md`.
+
+### No mid-run approval prompts
+`manage_crm_objects` has a built-in confirmation step. Always set `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. My session kickoff ("go", "proceed", "run it") is blanket approval for all HubSpot writes that session.
+
+### Ownership is respected
+Only prospect into accounts you own (owner id <<YOUR_HUBSPOT_OWNER_ID>>) or that your team agrees are shared. If another rep has logged activity on a company in the last 3 months, stop and flag it. Do not silently reassign.
+
+### Chat output is minimal, conserve credits
+In Company Mode and Auto Mode the chat is not the deliverable, the HubSpot record is. Never print email bodies or subjects in chat (the drafter writes them to the AI fields and reports one line). Never paste full strategy notes or LinkedIn profile text into chat. One line per candidate. End each company with a recap, one line per person sequenced, including sequence type, enroll date, LinkedIn URL, and a clickable HubSpot contact link (built from portal id <<YOUR_HUBSPOT_PORTAL_ID>> and the contact id).
+
+---
+
+## OSI PRODUCT LINES, EVALUATE ALL OF THESE EVERY TIME YOU QUALIFY
+
+1. **Optics.** OSI transceivers (SmartOptics manufactured, private labeled). A free sample is the opening wedge for any network engineer or architect.
+2. **DWDM and Open Line Systems.** SmartOptics DCP platform, 30 to 50% below Ciena and Nokia, ships in weeks.
+3. **Compute and Components.** Dell and HP servers (authorized partner). DIMMs are a major play: Samsung, Hynix, Micron, manufacturer warranties, below OEM. Lead with DIMMs first, server refresh second.
+4. **Storage.** Pre-owned NetApp and enterprise storage, OSI TPM available.
+5. **TPM (Third Party Maintenance).** Gartner-recognized, privately owned, no PE, 40 to 60% below OEM. Multi-vendor (Cisco, Dell, HP, NetApp, Juniper, Arista).
+6. **Pre-owned and New Networking Gear.** Pre-owned Cisco, Juniper, Arista (tested, OSI TPM available). New Nokia (authorized partner).
+7. **Professional Services.** Deployment, design, migration. Second conversation only, never lead cold.
+
+Anyone with Servers, Hardware, Storage, or Data Center skills is a Compute or Components target. Do not skip this.
+
+OSI is a Dell, HP, and Nokia authorized partner. OSI is NOT a Cisco partner and cannot provide SmartNet or DNA licensing. Never claim otherwise.
+
+---
+
+## HOW OUTREACH IS DELIVERED (HubSpot AI fields)
+
+Outreach sends from HubSpot sequences in the cloud, not from a laptop.
+
+1. `osi-prospect-qualification` qualifies and writes the strategy note + a LinkedIn task.
+2. `osi-outreach-sequence` drafts 6 emails and writes them to the contact's HubSpot AI fields (`ai_email_subject_1` to `_6`, `ai_email_body_1` to `_6`). The emails are written to HubSpot only, never printed in the chat. The confirmation line includes the LinkedIn URL and a clickable HubSpot contact link.
+3. The LinkedIn task on Day 1 is the cue. When it comes due, enroll the contact in your HubSpot sequence (which references those AI fields as tokens). HubSpot sends.
+
+One time HubSpot setup is required: create the 12 AI custom properties and a 6 step token based sequence. See SETUP Step 3.
+
+---
+
+## SESSION STARTUP CHECKLIST
+
+Every session, before doing anything else, read:
+- [ ] Every file in `playbook/` (drafting rules, product lines, verticals, pain and objections, openers, voice, data quality)
+- [ ] `knowledge/email-pattern-resolver.md`
+- [ ] The most recent file in `sessions/`
+- [ ] Then tell me you are ready.
+
+Do not qualify, draft, or advise until the playbook is read.
+
+---
+
+## THE SKILLS
+
+- `osi-prospect-qualification`: core qualifier. Profile Mode (paste a URL), Company Mode ("find me prospects at X"), Auto Mode ("sweep my accounts"), Task Mode ("process my enroll tasks", picks up "Enroll in sequence" and "3 email sequence" to do tasks).
+- `osi-outreach-sequence`: drafts the 6 email cadence and writes the AI fields. Called on a Yes.
+- `osi-3email-new`: shorter 3 email cadence.
+- `osi-3email-reengagement`: 3 email second touch for prior sequence recipients.
+- `osi-old-customer-reengagement`: 5 email revival for dormant customers.
+- `osi-cold-reengagement`: cold first degree LinkedIn connections, InMail tasks.
+- `osi-job-change-prospecting`: weekly Sales Nav job change and new connection scan.
+- `osi-email-task-drafts`: drafts replies for HubSpot email tasks due today.
+
+Legacy (`skills/legacy/`, only for draining an old queue): `osi-email-sender`, `osi-monitor`, `osi-email2-rewriter`.
+
+---
+
+## THE PLAYBOOK (read before any drafting)
+
+- `playbook/drafting-rules.md`: voice, email structure, banned phrases, the absolute em-dash ban. Mandatory.
+- `playbook/product-lines.md`: product lines and the role to sequence map.
+- `playbook/vertical-intel.md`: what to lead with by industry, plus the Park Place / Service Express wedge. Role and skills decide the lead, not industry.
+- `playbook/pain-and-objections.md`: pain points and a discovery question per product line, the objection handler bank, secondary source positioning. Lead with pain.
+- `playbook/opener-library.md`: cold call openers.
+- `playbook/voice-rules.md`: tone and the banned AI vocabulary filter.
+- `knowledge/OSI-Sales-Playbook.md`: the full narrative sales playbook (wedges, market context, talking points).
+
+---
+
+## OUTPUT STYLE
+
+Short, punchy, direct. Prose over bullet dumps. Outreach reads like a human wrote it, not a press release. Lead with the prospect's pain, never with what OSI does.
+
+---
+
+## VERDICT FORMAT
+
+Every qualification ends with Yes (worth it, here is the angle), No (not a fit, here is exactly why), or Conditional (what would need to be true). No grey area. Default to No if genuinely unsure.
+
+---
+
+## A HANDY COMMAND
+
+"Bad number on [Name] at [Company]": find the contact, mark every NOT_STARTED call task complete in one batch, leave email steps untouched, confirm in chat. No confirmation needed.
+
+---
+
+## DATA AND PRIVACY
+
+Keep your `C:\Claude-Brain\` repo private. Do not store serial numbers, unreleased pricing, or confidential contract details in plain text. For sensitive deal specifics, reference HubSpot.
+
+---
+
+## END OF SESSION
+
+Save a summary to `sessions/` as `session-YYYY-MM-DD.md`: what we worked on, outputs, action items, anything for HubSpot. Under 150 words.

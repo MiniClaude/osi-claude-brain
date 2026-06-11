@@ -1,8 +1,26 @@
-~$*
+# Windows system files
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS (if you ever open this on a Mac)
+.DS_Store
+
+# Temporary files
 *.tmp
-test_write*.txt
-test-write*.txt
+*.temp
 ~$*
-*.tmp
-test_write*.txt
-test-write*.txt
+
+# Sensitive files - NEVER commit these
+*password*
+*secret*
+*credentials*
+*.env
+
+# osi-claude-brain junk
+*.lnk
+
+# Node / Python artifacts (just in case)
+node_modules/
+__pycache__/
+*.pyc
