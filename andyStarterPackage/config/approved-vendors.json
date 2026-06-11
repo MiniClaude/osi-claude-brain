@@ -1,5 +1,0 @@
-{
-  "approved_vendor_companies": ["Example Company A", "Example Company B"],
-  "how_to_match": "Case-insensitive substring match against the prospect company name.",
-  "usage_rule": "If the prospect company matches, one soft acknowledgment in Email 1 and one reminder in Email 3 or 4."
-}
