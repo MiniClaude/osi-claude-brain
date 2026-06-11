@@ -76,7 +76,7 @@ When a Sales Nav result shows only a first name + last initial (e.g. "Tim W." or
 
 ## JAM Team Owner IDs
 
-- Andy McLean: <<YOUR_HUBSPOT_OWNER_ID>>
+- Brian Charrette: 213536174
 - Mark Metz: 210187184
 - John Houston: 210187193
 
@@ -201,13 +201,13 @@ Search for deals associated with the contact's current or past company:
 ### Company update rule (IMPORTANT)
 Only update a contact's company association if the new company is:
 - Already owned by Andy/Mark/John (JAM team), OR
-- Not in HubSpot at all (create it, assign to Andy <<YOUR_HUBSPOT_OWNER_ID>>, then associate)
+- Not in HubSpot at all (create it, assign to Andy 213536174, then associate)
 
 If new company is another rep's: leave contact's company as-is. Still create tasks.
 
 For contacts NOT in HubSpot: create contact + associate with company.
 For contacts already in HubSpot: update job title. Update company per rule above.
-For companies NOT in HubSpot: create company record (owner: <<YOUR_HUBSPOT_OWNER_ID>>).
+For companies NOT in HubSpot: create company record (owner: 213536174).
 
 ---
 
@@ -218,7 +218,7 @@ For companies NOT in HubSpot: create company record (owner: <<YOUR_HUBSPOT_OWNER
 For each qualified target eligible for tasks (and passing the duplicate check above):
 - Task 1: "LinkedIn InMail - [Name] - [Company] (Touch 1)", LINKED_IN_MESSAGE, due TODAY
 - Task 2: "LinkedIn InMail - [Name] - [Company] (Touch 2)", LINKED_IN_MESSAGE, due 2 WEEKS
-- Owner: <<YOUR_HUBSPOT_OWNER_ID>>
+- Owner: 213536174
 - Body: **ONLY the raw draft message text. Nothing else.**
 
 ### Task body rule (HARD RULE, no exceptions)
@@ -229,7 +229,7 @@ Do NOT include any of the following in the task body:
 - Character-count annotations like "(under 300 chars)" or "(280/300)"
 - Subject lines, headers, or section dividers
 - Strategy notes, ICP rationale, history summaries, or context
-- Signoff metadata like a dash followed by "Andy" if it's not part of the actual message body
+- Signoff metadata like a dash followed by a sender name if it's not part of the actual message body
 - Any framing, commentary, or instructions to Andy
 
 ❌ WRONG (do not do this):
@@ -281,7 +281,7 @@ Save updated file back to Claude-Brain.
 ---
 
 > **SYNC NOTE:** This skill exists in two locations that must ALWAYS be kept in sync:
-> - `C:\Claude-Brain\skills\osi-job-change-prospecting\SKILL.md` (Git-versioned, source of truth, backed up at github.com/<<YOUR_GITHUB_USERNAME>>/Claude-Brain)
+> - `C:\Claude-Brain\skills\osi-job-change-prospecting\SKILL.md` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain)
 > - `.claude/skills/osi-job-change-prospecting/SKILL.md` (Cowork local, what triggers the skill)
 >
 > Any time changes are made to one, apply them to the other immediately. After editing, repackage

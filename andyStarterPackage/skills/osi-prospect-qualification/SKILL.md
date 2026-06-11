@@ -3,7 +3,7 @@ name: osi-prospect-qualification
 description: Qualify LinkedIn prospects for OSI Global. Use whenever Andy pastes a LinkedIn profile URL, asks "good target?", "is this worth an InMail?", or asks to evaluate any LinkedIn profile against OSI's product lines. Also triggers when reviewing prospect lists, when Andy says "find me prospects at [company]", "sequence this company", "find me cold companies", "sweep my accounts", or any variation of company-level prospecting. Also triggers on "process my enroll tasks", "check my enroll tasks", "run my enroll tasks" for HubSpot Task Mode batch enrollment from "Enroll in sequence" / "3 email sequence" to-do tasks. Should run automatically whenever a LinkedIn profile or company prospecting request appears in conversation, even without explicit ask.
 ---
 
-> Source: `C:\Claude-Brain\skills\osi-prospect-qualification\` (Git, github.com/<<YOUR_GITHUB_USERNAME>>/Claude-Brain). Edit source, repackage, install.
+> Source: `C:\Claude-Brain\skills\osi-prospect-qualification\` (Git, github.com/Drrewdy/Claude-Brain). Edit source, repackage, install.
 
 # OSI Global, LinkedIn Prospect Qualification
 
@@ -163,7 +163,7 @@ A candidate whose title AND company are genuinely ambiguous, whose profile is co
 **Use shallow only when ALL true:**
 1. `source: "hubspot_contact"` with `hubspotContactId`, AND
 2. HubSpot record has `email`, `jobtitle`, `company` populated, AND
-3. Owned by JAM (Andy <<YOUR_HUBSPOT_OWNER_ID>> / Mark 210187184 / John 210187193), AND
+3. Owned by JAM (Andy 213536174 / Mark 210187184 / John 210187193), AND
 4. Email domain matches the company's known/derived primary domain, AND
 5. **Recent positive engagement: at least ONE of:**
    - Inbound reply received from this contact within the last **12 months**, OR
@@ -293,7 +293,7 @@ From the unioned HubSpot results, determine ownership:
 | Scenario | Action |
 |---|---|
 | Not found in HubSpot under any name or domain variant | Proceed. New account. |
-| Found, JAM-owned (Andy <<YOUR_HUBSPOT_OWNER_ID>> / Mark 210187184 / John 210187193) | Proceed. |
+| Found, JAM-owned (Andy 213536174 / Mark 210187184 / John 210187193) | Proceed. |
 | Found, other rep, last activity within 3 months | STOP. Flag to Andy: "**[Company] is owned by [Rep Name] in HubSpot (last activity [date]). Do not prospect -- active account under another rep.**" Do NOT prospect silently. |
 | Found, other rep, no activity in 3+ months, not a client | STOP. Flag to Andy: "**[Company] is in HubSpot under [Rep Name] but no activity since [date]. Flagging for account-request -- do not prospect yet.**" Log to `overnight-run-log.md`. |
 | Found under a variant name / domain the input didn't match | STOP. Flag to Andy: "**Heads up: '[Input Name]' appears to already be in HubSpot as '[HubSpot Name]' (domain: [domain], owner: [rep]). Treating as same company.**" Then apply ownership rules above. |
@@ -510,14 +510,14 @@ Do not write paragraphs per candidate during a sweep. Reserve the full OUTPUT FO
 
 After a company's Yes candidates are all sequenced, print a recap with one line per person who was ACTUALLY sequenced (Yes with email, AI fields written). Include the sequence type and both URLs:
 ```
-[Name] | [Sequence type] | Enroll by [date] | LinkedIn: [hs_linkedin_url] | HubSpot: https://app.hubspot.com/contacts/<<YOUR_HUBSPOT_PORTAL_ID>>/record/0-1/[contactId]
+[Name] | [Sequence type] | Enroll by [date] | LinkedIn: [hs_linkedin_url] | HubSpot: https://app.hubspot.com/contacts/21878985/record/0-1/[contactId]
 ```
 Then one count line: `[Company]: X Yes, Y No, Z Conditional`.
 
 Rules for the recap:
 - Only people actually sequenced appear. No-email fallbacks and No / Conditional verdicts are not in the recap (they are in the verdict lines above).
 - LinkedIn URL is the contact's `hs_linkedin_url`. If blank, write `LinkedIn: none on record`.
-- HubSpot URL is built from the portal id `<<YOUR_HUBSPOT_PORTAL_ID>>` and the contact id. It is a clickable link to the record.
+- HubSpot URL is built from the portal id `21878985` and the contact id. It is a clickable link to the record.
 - This recap IS the deliverable summary. Keep it to these one-line entries. No paragraphs, no email bodies (the minimal-output rule still applies).
 
 ### Step 4: HubSpot check on shortlist
@@ -904,7 +904,7 @@ Filter all results to records where `company` matches the prospect's company (ex
 
 Do NOT create a note and then update it. Do NOT write a placeholder. Finish ALL research (LinkedIn full read, ZoomInfo retry matrix, fresh hook search) BEFORE touching HubSpot. The note is written exactly once, in final format, as a single atomic action.
 
-objectType: `notes`, owner: <<YOUR_HUBSPOT_OWNER_ID>>, associated to contact.
+objectType: `notes`, owner: 213536174, associated to contact.
 
 Write in this exact order with these exact labels:
 
@@ -918,7 +918,7 @@ QUICK CONNECT KEYWORDS
 
 LIVE CALL SCRIPT (omit entire section if no phone)
 OPENER: [full opener from playbook/opener-library.md]
-VM: [one line, 15s max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with "that's <<YOUR_EMAIL>>." Present/future tense only.]
+VM: [one line, 15s max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with "that's bc@osihardware.com." Present/future tense only.]
 
 THE PLAY
 [One paragraph: why they qualify + the hook + the attack plan.]
@@ -1000,7 +1000,7 @@ Create:
 - Type: `LINKED_IN_CONNECT` (never `LINKED_IN_MESSAGE`, never `TODO`)
 - `hs_timestamp`: provisional -- next business day at 4 PM ET. `osi-outreach-sequence` will update this to the real Day 1 after computing the stagger.
 - Notes: LinkedIn invite text (under 300 chars, references Personal Hook, no pitch). Body is ONLY the raw message text, no labels, no character counts.
-- Owner: <<YOUR_HUBSPOT_OWNER_ID>>.
+- Owner: 213536174.
 
 **PRE-WRITE CHECKLIST -- complete before calling manage_crm_objects:**
 - [ ] Subject contains "Sales Nav -- Send connection request --" followed by full name and company
@@ -1008,7 +1008,7 @@ Create:
 - [ ] Body references the Personal Hook from THE PERSONAL HOOK section
 - [ ] Body has no pitch, no OSI mention, no product names
 - [ ] Body is under 300 characters (count it)
-- [ ] Body ends naturally -- no sign-off, no "Andy"
+- [ ] Body ends naturally -- no sign-off, no typed name
 
 **CORRECT example (Tim Davidson, VP IT Infrastructure, NFL):**
 ```
@@ -1154,10 +1154,10 @@ OPENER: [full opener from playbook/opener-library.md, or custom if HOOK is stron
 
 ### 3. Voicemail
 
-15s max. One voicemail, never two. Hook drawn from Personal Hook. Name Email 1 subject. End with "that's <<YOUR_EMAIL>>." No phone number. Present/future tense only.
+15s max. One voicemail, never two. Hook drawn from Personal Hook. Name Email 1 subject. End with "that's bc@osihardware.com." No phone number. Present/future tense only.
 
 ```
-"Hey [Name], Andy with OSI Global. [One-sentence hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's <<YOUR_EMAIL>>."
+"Hey [Name], Brian with OSI Global. [One-sentence hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's bc@osihardware.com."
 ```
 
 ### 4. LinkedIn Invite
@@ -1191,7 +1191,7 @@ Trigger: Andy says "find me cold companies", "auto mode", "sweep my accounts", o
 
 🚨 **HARDWIRED RULE -- ANDY'S COMPANIES ONLY. NEVER JAM. (added 2026-05-19)**
 
-Auto Mode ONLY pulls companies owned by Andy (owner ID **<<YOUR_HUBSPOT_OWNER_ID>>**). Never expand this to Mark (210187184) or John (210187193). The CLAUDE.md rule that "JAM accounts are fair game" means Andy can prospect into those accounts if he chooses -- it does NOT mean Auto Mode should pull them automatically. Andy has corrected this mistake multiple times. The owner ID in every filter is <<YOUR_HUBSPOT_OWNER_ID>> and nothing else.
+Auto Mode ONLY pulls companies owned by Andy (owner ID **213536174**). Never expand this to Mark (210187184) or John (210187193). The CLAUDE.md rule that "JAM accounts are fair game" means Andy can prospect into those accounts if he chooses -- it does NOT mean Auto Mode should pull them automatically. Andy has corrected this mistake multiple times. The owner ID in every filter is 213536174 and nothing else.
 
 🚨 **HARDWIRED RULE -- USE THE MASTER PIPELINE LIST FIRST. HUBSPOT PULL IS FALLBACK ONLY. (added 2026-05-19)**
 
@@ -1207,7 +1207,7 @@ The "Company Pipeline" tab of `C:\Claude-Brain\prospects-tracker-new.xlsx` is th
 7. After completing a company (regardless of result), mark its row Status = "Done" and write today's date to Date Processed. Use openpyxl via bash.
 8. If the Pipeline tab has no remaining Pending rows: fall back to the live HubSpot pull below.
 
-**Rebuilding the Pipeline tab:** Run a fresh build when Andy says "rebuild pipeline" or "refresh company list". Pull all Andy-owned (<<YOUR_HUBSPOT_OWNER_ID>>) companies with `numberofemployees >= 200` from HubSpot, cross-ref queue and DNP, score by industry, write to the tab. This replaces all existing rows.
+**Rebuilding the Pipeline tab:** Run a fresh build when Andy says "rebuild pipeline" or "refresh company list". Pull all Andy-owned (213536174) companies with `numberofemployees >= 200` from HubSpot, cross-ref queue and DNP, score by industry, write to the tab. This replaces all existing rows.
 
 ### Step 0: Build the exclusion list (MANDATORY, runs even when using Pipeline tab)
 
@@ -1227,7 +1227,7 @@ After building the exclusion list:
 
 **PRIMARY -- Pipeline tab:** Read the "Company Pipeline" tab. Take the next N rows with Status = "Pending" that are not in the exclusion list. N = however many it takes to get 3 viable candidates through Step 2.5 pre-checks. No cap on how many rows to read -- keep going until 3 clean companies are found or the tab is exhausted.
 
-**FALLBACK -- Live HubSpot pull (only when Pipeline tab is exhausted):** Search HubSpot for companies owned by Andy (**owner ID <<YOUR_HUBSPOT_OWNER_ID>> ONLY**) with no activity in 6+ months. Filter: `notes_last_contacted` < 180 days ago or null, `hubspot_owner_id` = <<YOUR_HUBSPOT_OWNER_ID>>, `numberofemployees` >= 200. Pull 50 at a time, keep pulling batches until 3 viable candidates survive Step 2.5. Never stop after one batch.
+**FALLBACK -- Live HubSpot pull (only when Pipeline tab is exhausted):** Search HubSpot for companies owned by Andy (**owner ID 213536174 ONLY**) with no activity in 6+ months. Filter: `notes_last_contacted` < 180 days ago or null, `hubspot_owner_id` = 213536174, `numberofemployees` >= 200. Pull 50 at a time, keep pulling batches until 3 viable candidates survive Step 2.5. Never stop after one batch.
 
 ### Step 2: ICP pre-filter + queue exclusion
 
@@ -1279,7 +1279,7 @@ If the list comes out short (companies dropped from 0A/0B/0C results), find repl
 
 🚨 **THE STEP 1 PULL IS NOT A SUBSTITUTE FOR STEP 0A. EVER.**
 
-The cold-company HubSpot pull (Step 1) is filtered by owner ID <<YOUR_HUBSPOT_OWNER_ID>>. It is structurally blind to duplicate company records owned by other reps. A company appearing in the Step 1 results does NOT mean it has no other HubSpot record under a different owner. Step 0A (name variants + domain search, NO owner filter) MUST run on every candidate regardless of how it was sourced. The most dangerous failure mode is: company appears in Andy-owned pull -> Claude skips 0A reasoning "ownership is already confirmed" -> duplicate under another rep missed -> company presented as clean when it is not.
+The cold-company HubSpot pull (Step 1) is filtered by owner ID 213536174. It is structurally blind to duplicate company records owned by other reps. A company appearing in the Step 1 results does NOT mean it has no other HubSpot record under a different owner. Step 0A (name variants + domain search, NO owner filter) MUST run on every candidate regardless of how it was sourced. The most dangerous failure mode is: company appears in Andy-owned pull -> Claude skips 0A reasoning "ownership is already confirmed" -> duplicate under another rep missed -> company presented as clean when it is not.
 
 Named incidents (do not repeat):
 - **Sonic.net Inc -- 2026-05-07:** appeared in Andy-owned pull, 0A skipped, duplicate owned by Nick Sibersky missed, presented as clean.
@@ -1335,13 +1335,13 @@ Andy tags a contact for outreach by creating a TODO task on the contact in HubSp
 
 The contact association carries all the context. Andy does NOT put the name or company in the task title -- pull everything from the associated contact.
 
-🚨 **HARDWIRED RULE -- ANDY'S TASKS ONLY (owner ID <<YOUR_HUBSPOT_OWNER_ID>>).** Match tasks owned by Andy and nobody else. Never pick up tasks owned by Mark (210187184) or John (210187193).
+🚨 **HARDWIRED RULE -- ANDY'S TASKS ONLY (owner ID 213536174).** Match tasks owned by Andy and nobody else. Never pick up tasks owned by Mark (210187184) or John (210187193).
 
 🚨 **NO "READY" GATE. NO APPROVAL PROMPTS.** Andy decided by tagging the task. Run fully automated, per-contact, immediate handoff. Every HubSpot write uses `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. Never filter by priority -- Andy leaves it blank. Match on subject + owner + not-completed only.
 
 ### Step by step
 
-1. **Find the tasks.** `search_crm_objects` on tasks with filters: `hs_task_subject` IN ("Enroll in sequence", "3 email sequence") AND `hs_task_status` != "COMPLETED" AND `hubspot_owner_id` = <<YOUR_HUBSPOT_OWNER_ID>>. Match the subject case-insensitively. Record each task's `hs_object_id` and its subject (the subject decides routing).
+1. **Find the tasks.** `search_crm_objects` on tasks with filters: `hs_task_subject` IN ("Enroll in sequence", "3 email sequence") AND `hs_task_status` != "COMPLETED" AND `hubspot_owner_id` = 213536174. Match the subject case-insensitively. Record each task's `hs_object_id` and its subject (the subject decides routing).
 
 2. **Pull the associated contact** for each task: first name, last name, job title, company, email, phone, mobile, timezone, LinkedIn URL, and existing strategy note. If a task has no contact association, skip it and note "no contact association" in the final summary. Do NOT complete an unassociated task.
 

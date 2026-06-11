@@ -11,7 +11,7 @@ description: >
   and wants outreach built. Do NOT use this for cold prospects, use osi-outreach-sequence instead.
 ---
 
-> **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-old-customer-reengagement\` (Git-versioned, source of truth, backed up at github.com/<<YOUR_GITHUB_USERNAME>>/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub. If returning after days away, run `git pull` first to get the latest, then check the local Cowork copy and re-install the `.skill` file if the source has drifted.
+> **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-old-customer-reengagement\` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub. If returning after days away, run `git pull` first to get the latest, then check the local Cowork copy and re-install the `.skill` file if the source has drifted.
 
 # OSI Global, Old Customer Re-Engagement Sequence
 
@@ -68,7 +68,7 @@ If `ValueError` raises: rewrite and re-validate. Do NOT write any failing entry 
 - **Never say "checking in", "circling back", or "just wanted to follow up."** All banned.
 - **Do not apologize for the silence.** Acknowledge it if needed, move forward.
 - **Do not list past purchases.** They know what they bought. Lead with where they are going.
-- Do NOT type "Andy" or any name at the bottom of email bodies. Outlook signature handles the sign-off.
+- Do NOT type "Brian" or any name at the bottom of email bodies. Outlook signature handles the sign-off. Outlook signature handles the sign-off.
 
 ---
 
@@ -143,7 +143,7 @@ Search HubSpot by name and current company.
 Wait for Andy's explicit instruction before continuing.
 
 JAM owner IDs, only proceed if owned by:
-- Andy McLean: <<YOUR_HUBSPOT_OWNER_ID>>
+- Brian Charrette: 213536174
 - Mark Metz: 210187184
 - John Houston: 210187193
 
@@ -316,7 +316,7 @@ should I take you off the list?"
 
 2-3 sentences plus the question.
 
-NEVER include `On <date>, Andy McLean wrote:`, `>` quoted lines, or any prior email content. The 2026-04-29 incident pattern.
+NEVER include `On <date>, Brian Charrette wrote:`, `>` quoted lines, or any prior email content. The 2026-04-29 incident pattern.
 
 ---
 
@@ -387,39 +387,39 @@ QUICK CONNECT KEYWORDS
 
 LIVE CALL SCRIPT
 OPENER: [Full opener from library below, or custom if a strong company hook was found]
-VM: [One line. 15 seconds max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Andy's email: "that's <<YOUR_EMAIL>>." No phone number. Present or future tense only. Never past tense.]
+VM: [One line. 15 seconds max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Brian's email: "that's bc@osihardware.com." No phone number. Present or future tense only. Never past tense.]
 
 ### Opener Library
 
 **Telco / Service Provider network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply ZR and ZR+ coherent optics to carrier teams as a secondary source when Cisco or Lumentum timelines slip. Is that something your team is running into right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply ZR and ZR+ coherent optics to carrier teams as a secondary source when Cisco or Lumentum timelines slip. Is that something your team is running into right now?"
 
 **Bank / Financial Institution network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply certified compatible optics to bank IT teams, mostly for the break-glass scenario where something fails and you can't wait two weeks for OEM. I was going to send a few complimentary SFPs your way. Would that be useful?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply certified compatible optics to bank IT teams, mostly for the break-glass scenario where something fails and you can't wait two weeks for OEM. I was going to send a few complimentary SFPs your way. Would that be useful?"
 
 **Enterprise IT / Consulting network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We work with enterprise IT teams on third party maintenance, specifically replacing OEM support on Cisco gear that is running fine but coming off warranty. Is that a conversation your team is having right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We work with enterprise IT teams on third party maintenance, specifically replacing OEM support on Cisco gear that is running fine but coming off warranty. Is that a conversation your team is having right now?"
 
 **Manufacturing network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply certified compatible optics and networking spares to manufacturing IT teams for the break-glass scenario. I was going to send a few complimentary SFPs so you've got a Plan B on the shelf. Worth it?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply certified compatible optics and networking spares to manufacturing IT teams for the break-glass scenario. I was going to send a few complimentary SFPs so you've got a Plan B on the shelf. Worth it?"
 
 **Director or VP any vertical**
-"Hey [Name], how have you been? It's Andy with OSI Global. We work with infrastructure leaders on two things mostly: third party maintenance and optical hardware where OEM timelines or costs have become a problem. Is either of those a live conversation for your team?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We work with infrastructure leaders on two things mostly: third party maintenance and optical hardware where OEM timelines or costs have become a problem. Is either of those a live conversation for your team?"
 
 **Already has TPM, merger wedge**
-"Hey [Name], how have you been? It's Andy with OSI Global. With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
+"Hey [Name], how have you been? It's Brian with OSI Global. With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
 
 **Systems / Infrastructure engineer, DIMMs**
-"Hey [Name], how have you been? It's Andy with OSI Global. We source server memory direct from Samsung and Hynix for infrastructure teams dealing with DDR4 and DDR5 cost pressure. Is that on your radar right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We source server memory direct from Samsung and Hynix for infrastructure teams dealing with DDR4 and DDR5 cost pressure. Is that on your radar right now?"
 
 **Storage engineer / admin**
-"Hey [Name], how have you been? It's Andy with OSI Global. We do third party maintenance on NetApp and other storage platforms for teams that have gear running fine but coming off OEM support. Is that a conversation you're having?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We do third party maintenance on NetApp and other storage platforms for teams that have gear running fine but coming off OEM support. Is that a conversation you're having?"
 
 **IT Director, compute and infrastructure**
-"Hey [Name], how have you been? It's Andy with OSI Global. We work with IT leaders on server memory and third party maintenance, mostly for teams carrying OEM costs on infrastructure that has been running fine for years. Is budget pressure on that something you're dealing with?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We work with IT leaders on server memory and third party maintenance, mostly for teams carrying OEM costs on infrastructure that has been running fine for years. Is budget pressure on that something you're dealing with?"
 
 **Transport engineer / Optical network engineer, DWDM**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply open line DWDM systems, 30 to 50% below Ciena and Nokia, with no licensing headaches. A few teams have been using us to fill capacity gaps without going back to the OEM. Is that a conversation worth having for your network?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply open line DWDM systems, 30 to 50% below Ciena and Nokia, with no licensing headaches. A few teams have been using us to fill capacity gaps without going back to the OEM. Is that a conversation worth having for your network?"
 
 ---
 
@@ -581,7 +581,7 @@ When a prospect is being processed and they have an existing `LINKED_IN_CONNECT`
 
 1. **Mark the existing task COMPLETED.** Set `hs_task_status` = `COMPLETED` on that task via `manage_crm_objects` updateRequest. This removes it from Andy's open task queue.
 
-2. **Create a NEW `LINKED_IN_CONNECT` task** scheduled for Day 1 (the date Email 1 fires). Use the standard subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: <<YOUR_HUBSPOT_OWNER_ID>>. Notes: the LinkedIn invite text. This surfaces the connection request on Andy's task queue the morning of Day 1 so he can send the LinkedIn invite the same day Email 1 fires.
+2. **Create a NEW `LINKED_IN_CONNECT` task** scheduled for Day 1 (the date Email 1 fires). Use the standard subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: 213536174. Notes: the LinkedIn invite text. This surfaces the connection request on Andy's task queue the morning of Day 1 so he can send the LinkedIn invite the same day Email 1 fires.
 
 Do this for EVERY prospect regardless of whether they had an existing task or not (if no existing task, just create the new one).
 
@@ -637,7 +637,7 @@ If any check fails, FIX IT or leave the field blank. Do NOT write a partial reco
 Even if HubSpot already has a `jobtitle` value, pull the current title from the prospect's LinkedIn profile top card and overwrite. HubSpot titles go stale; LinkedIn is source of truth. Fallback order if LinkedIn is unreachable (closed profile, URL broken, private): use the ZoomInfo enriched `jobTitle` field. Only if neither is available, leave the existing HubSpot value alone.
 
 **Associated company, always link on contact creation.**
-Before creating or updating a contact, search HubSpot for the company by name (`search_crm_objects` objectType=COMPANY, `query` = company name). If found, associate the contact to that company record via the `associations` parameter in `manage_crm_objects.createRequest` or `updateRequest`. If the company is not found in HubSpot, create a new company record first (owner: <<YOUR_HUBSPOT_OWNER_ID>>, name: company name from LinkedIn) and then associate the contact to it.
+Before creating or updating a contact, search HubSpot for the company by name (`search_crm_objects` objectType=COMPANY, `query` = company name). If found, associate the contact to that company record via the `associations` parameter in `manage_crm_objects.createRequest` or `updateRequest`. If the company is not found in HubSpot, create a new company record first (owner: 213536174, name: company name from LinkedIn) and then associate the contact to it.
 
 Never leave a contact orphaned from its company. Unlinked contacts break same-company stagger logic, deal tracking, and reporting.
 
@@ -652,7 +652,7 @@ City, state, and timezone always come from LinkedIn, never ZoomInfo.
 
 ### Create strategy note, EVERYONE
 
-objectType: "notes", owner <<YOUR_HUBSPOT_OWNER_ID>>, associated to contact.
+objectType: "notes", owner 213536174, associated to contact.
 
 Format exactly:
 
@@ -663,7 +663,7 @@ QUICK CONNECT KEYWORDS
 
 LIVE CALL SCRIPT (omit entire section if no phone)
 OPENER: [full opener from library]
-VM: [one line, 15 seconds max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Andy's email: "that's <<YOUR_EMAIL>>." No phone number. Present or future tense only. Never past tense.]
+VM: [one line, 15 seconds max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Brian's email: "that's bc@osihardware.com." No phone number. Present or future tense only. Never past tense.]
 
 THE PLAY
 [One tight paragraph: why they qualify for re-engagement + the research hook + the attack
@@ -679,7 +679,7 @@ Email 2 - Day 5 - [Date] - Subject: [subject]
 
 Email 3 - Day 10 - [Date] - Subject: RE: [Email 1 subject]
 Any thoughts?
----------- On [Date], Andy McLean wrote ----------
+---------- On [Date], Brian Charrette wrote ----------
 [Email 1 quoted]
 
 Email 4 - Day 17 - [Date] - Subject: [subject]
@@ -696,7 +696,7 @@ Never use em-dashes anywhere in the note.
 - Type: LINKED_IN_CONNECT
 - Due: Day 1 (same date as Email 1)
 - Notes: LinkedIn re-engagement message text
-- Owner: <<YOUR_HUBSPOT_OWNER_ID>>
+- Owner: 213536174
 
 Check for existing connection request task first. Skip if already exists.
 
@@ -774,4 +774,4 @@ the merger, or are you still on the same rates?"
 2. State a clear reason for calling.
 3. End with a question about their world. Never "Is now a good time?"
 4. Never ask "Is now a good time?"
-5. Voicemails: 15 seconds max. No phone number. End with Andy's email address spelled audibly ("that's <<YOUR_EMAIL>>"). Always present or future tense ("I'm sending" or "I'm about to send"). Never past tense.
+5. Voicemails: 15 seconds max. No phone number. End with Brian's email address spelled audibly ("that's bc@osihardware.com"). Always present or future tense ("I'm sending" or "I'm about to send"). Never past tense.

@@ -68,8 +68,6 @@ Sales coach and outreach strategist for Brian Charrette at OSI Global. Four mode
 
 Always return a clear Yes / No / Conditional verdict with tight reasoning.
 
-**Team ownership:** Brian (hubspot_owner_id **213536174**), Mark Metz (**210187184**), and John Houston (**210187193**) are one team (BMJ). Accounts owned by any of the three are fair game. Never flag their ownership as a conflict.
-
 ---
 
 ## 🔧 TOOL CHOICE, regular LinkedIn, NOT Sales Navigator
@@ -166,7 +164,7 @@ It is NEVER valid to declare `pending-needs-hook` and ask Brian to go look in Sa
 **Use shallow only when ALL true:**
 1. `source: "hubspot_contact"` with `hubspotContactId`, AND
 2. HubSpot record has `email`, `jobtitle`, `company` populated, AND
-3. Owned by BMJ (Brian 213536174 / Mark 210187184 / John 210187193), AND
+3. Owned by Brian (213536174), AND
 4. Email domain matches the company's known or derived primary domain, AND
 5. **Recent positive engagement: at least ONE of:**
    - Inbound reply from this contact within the last **12 months**, OR
@@ -262,14 +260,14 @@ search_crm_objects({
 #### 0B. M&A check
 One web search: `"[Company] acquired" OR "[Company] merger" OR "[Company] rebranded" site:reuters.com OR site:businesswire.com OR site:prnewswire.com`
 
-If a material acquisition or merger is found: identify the acquirer, re-run the HubSpot company search for the acquirer. If the acquirer is owned by another rep: STOP and flag (0C). If BMJ-owned or not in HubSpot: proceed but note M&A context in the strategy note. People who recently left for a new company: check the new company separately with the same decision tree.
+If a material acquisition or merger is found: identify the acquirer, re-run the HubSpot company search for the acquirer. If the acquirer is owned by another rep: STOP and flag (0C). If Brian-owned or not in HubSpot: proceed but note M&A context in the strategy note. People who recently left for a new company: check the new company separately with the same decision tree.
 
 #### 0C. Ownership decision
 
 | Scenario | Action |
 |---|---|
 | Not found under any variant or domain | Proceed. New account. |
-| Found, BMJ-owned (213536174 / 210187184 / 210187193) | Proceed. |
+| Found, Brian-owned (213536174) | Proceed. |
 | Found, other rep, last activity within 3 months | STOP. Flag: "**[Company] is owned by [Rep] in HubSpot (last activity [date]). Do not prospect, active account under another rep.**" |
 | Found, other rep, no activity 3+ months, not a client | STOP. Flag: "**[Company] is in HubSpot under [Rep] but no activity since [date]. Flagging for account request, do not prospect yet.**" Log to `overnight-run-log.md`. |
 | Found under a variant the input did not match | STOP. Flag: "**Heads up: '[Input]' is already in HubSpot as '[HubSpot Name]' (domain: [domain], owner: [rep]). Treating as same company.**" Then apply ownership rules. |
@@ -418,7 +416,7 @@ Trigger: "find me cold companies", "auto mode", "sweep my accounts", or similar.
 
 🚨 **SAME RULE AS COMPANY MODE: NEVER CAP CANDIDATES PER COMPANY.**
 
-🚨 **HARDWIRED RULE, BRIAN'S COMPANIES ONLY. NEVER PULL ANOTHER OWNER AUTOMATICALLY.** Auto Mode pulls only companies owned by Brian (**213536174**). The "BMJ accounts are fair game" rule means Brian can prospect into Mark's or John's accounts if he chooses, it does NOT mean Auto Mode pulls them automatically. The owner ID in every Auto Mode filter is 213536174 and nothing else.
+🚨 **HARDWIRED RULE, BRIAN'S COMPANIES ONLY. NEVER PULL ANOTHER OWNER AUTOMATICALLY.** Auto Mode pulls only companies owned by Brian (**213536174**). The owner ID in every Auto Mode filter is 213536174 and nothing else.
 
 🚨 **HARDWIRED RULE, USE THE MASTER PIPELINE LIST FIRST. HUBSPOT PULL IS FALLBACK ONLY.** The "Company Pipeline" tab of `C:\Users\Mini\Documents\osi-claude-brain\prospects-tracker-new.xlsx` is the primary source: Brian-owned companies with 200+ employees, pre-scored by ICP fit (HIGH/MEDIUM/UNKNOWN/LOW), HIGH first then coldest last-activity first.
 
@@ -1158,7 +1156,7 @@ If any check fails, fix it or leave the field blank. Do NOT write a partial reco
 
 Append all Yes and Conditional to `C:\Users\Mini\Documents\osi-claude-brain\prospects-tracker-new.xlsx` (Prospects tab).
 Columns: Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Action | Date Added | Notes
-- **HubSpot Status:** "Not found" / "Brian" / "Team BMJ" / "Owned by [rep]"
+- **HubSpot Status:** "Not found" / "Brian" / "Owned by [rep]"
 - **Action:** "Pursue" / "Request account, no activity since [date]" / "Skip"
 - **Notes:** M&A context, news hook, or reason for flag.
 
