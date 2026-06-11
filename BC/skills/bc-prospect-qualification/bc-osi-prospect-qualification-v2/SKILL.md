@@ -110,7 +110,7 @@ Search for any recent acquisitions, mergers, or rebrands involving this company.
 Search HubSpot for the company (and any merged/parent entity found in step B). Then apply this decision tree:
 
 - **Not in HubSpot** → proceed with full prospecting
-- **In HubSpot, owned by Brian / Mark Metz / John Houston** → proceed with full prospecting
+- **In HubSpot, owned by Brian** → proceed with full prospecting
 - **In HubSpot, owned by another rep, last activity within 3 months** → stop. Skip this company entirely. Tell Brian it's owned by [rep name] with recent activity.
 - **In HubSpot, owned by another rep, no activity for 3+ months, not a client** → do NOT reach out yet. Log the company and any qualified prospects you find to the Excel tracker with a note: "Owned by [rep] — no activity since [date] — Brian to request account." Tell Brian so he can submit the account request.
 

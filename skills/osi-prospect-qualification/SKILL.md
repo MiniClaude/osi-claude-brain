@@ -1,6 +1,6 @@
 ---
 name: osi-prospect-qualification
-description: "Qualify LinkedIn prospects for OSI Global. Use whenever Brian pastes a LinkedIn profile URL, asks \"good target?\", \"is this worth an InMail?\", or asks to evaluate any LinkedIn profile against OSI's product lines. Also triggers when reviewing prospect lists, when Andy says \"find me prospects at [company]\", \"sequence this company\", \"find me cold companies\", \"sweep my accounts\", or any variation of company-level prospecting. Also triggers on \"process my enroll tasks\", \"check my enroll tasks\", \"run my enroll tasks\" for HubSpot Task Mode batch enrollment from \"Enroll in sequence\" / \"3 email sequence\" to-do tasks. Should run automatically whenever a LinkedIn profile or company prospecting request appears in conversation, even without explicit ask."
+description: Qualify LinkedIn prospects for OSI Global. Use whenever Brian pastes a LinkedIn profile URL, asks "good target?", "is this worth an InMail?", or asks to evaluate any LinkedIn profile against OSI's product lines. Also triggers when reviewing prospect lists, when Brian says "find me prospects at [company]", "sequence this company", "find me cold companies", "sweep my accounts", or any variation of company-level prospecting. Should run automatically whenever a LinkedIn profile or company prospecting request appears in conversation, even without explicit ask.
 ---
 
 > Source: `C:\Claude-Brain\skills\osi-prospect-qualification\` (Git, github.com/Drrewdy/Claude-Brain). Edit source, repackage, install.
@@ -9,26 +9,33 @@ description: "Qualify LinkedIn prospects for OSI Global. Use whenever Brian past
 
 ---
 
-## ⚙️ STEP -1: LOAD TOOLS ON DEMAND (NO BULK PREFETCH)
+## 🚨 STEP -1: TOOL PREFETCH (MANDATORY, RUNS ONCE BEFORE ANY COMPANY WORK)
 
-This skill needs bash, HubSpot, ZoomInfo, Chrome (LinkedIn), and web-search tools. Load each tool's schema with ToolSearch the first time a phase needs it, then reuse it for the rest of the session. **Do NOT bulk-load every tool at once.**
+**The very first action in any session that triggers this skill — before reading files, before HubSpot, before LinkedIn, before anything — is a single ToolSearch call that loads every tool schema needed for the full run. Do this ONCE. After this step, no further ToolSearch calls are needed.**
 
-🚨 **Why no bulk prefetch (do not re-add it):** loading many MCP schemas in one shot can trip an API error, `tools.X.custom.input_schema: int too big to convert`, caused by an oversized integer in one MCP tool's JSON schema (a ZoomInfo or Chrome tool). An earlier version of this skill bulk-prefetched ~17 tools at launch and failed immediately on every run with exactly that 400 error. Loading on demand keeps each request's tool set small and never pulls in a tool a given run does not use.
+Run ONE ToolSearch call with this exact query (all tools comma-separated, max_results=15):
 
-**At the start of a run, load only the core tools every mode uses:**
 ```
-ToolSearch({ query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects", max_results: 4 })
+ToolSearch({
+  query: "select:mcp__workspace__bash,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__manage_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__get_crm_objects,mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_owners,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__search_contacts,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_news,mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_scoops",
+  max_results: 9
+})
 ```
 
-**Then load each remaining group with its own small ToolSearch call, only just before its first use:**
-- HubSpot owner lookup -> `mcp__df6165ad-588c-41c3-b9f1-2113e2a3b91a__search_owners`
-- LinkedIn browsing -> `mcp__Claude_in_Chrome__navigate`, `mcp__Claude_in_Chrome__get_page_text`, `mcp__Claude_in_Chrome__find` (add `tabs_context_mcp` / `browser_batch` only if a run actually needs them)
-- ZoomInfo enrichment -> `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__search_contacts`, `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_contacts`
-- Company news hook -> `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_news`, `mcp__4ba1185f-93a5-43f3-9910-49e11601259c__enrich_scoops` (load ONLY when you actually run a news/scoops lookup)
-- Web search -> `WebSearch`
-- Overnight/state tracking -> `TaskCreate`, `TaskUpdate`, `TaskList` (load ONLY if used)
+Then immediately run a SECOND ToolSearch call:
 
-**If a tool schema was already loaded earlier in the conversation:** skip it, already-loaded schemas stay live for the session. Keep each ToolSearch call to a small group (3-5 tools). If a single ToolSearch group ever triggers the `int too big to convert` 400, split it and load the tools one at a time to isolate and skip the offending tool.
+```
+ToolSearch({
+  query: "select:mcp__Claude_in_Chrome__tabs_context_mcp,mcp__Claude_in_Chrome__navigate,mcp__Claude_in_Chrome__get_page_text,mcp__Claude_in_Chrome__find,mcp__Claude_in_Chrome__browser_batch,WebSearch,TaskCreate,TaskUpdate,TaskList",
+  max_results: 9
+})
+```
+
+Both calls can fire in the SAME message (parallel). After both return, all tool schemas are live. Do not call ToolSearch again during the run.
+
+**Why this rule exists:** Without prefetch, ToolSearch calls interrupt the run every time a new tool category is needed — HubSpot, ZoomInfo, LinkedIn, bash, web search each trigger a separate load. Brian wants to say "go" and have zero interruptions. Prefetching all schemas at session start eliminates every mid-run ToolSearch call.
+
+**If a tool schema was already loaded earlier in the conversation:** skip that tool from the prefetch. Already-loaded schemas stay live for the session. The prefetch only needs to fire for tools not yet loaded.
 
 ---
 
@@ -109,7 +116,7 @@ Navigate to the URL. Expand and read EVERYTHING:
 - Complete **Skills** list via `/details/skills/`, endorsement counts.
 - **Activity feed** via `/recent-activity/all/`, last 3-6 months of posts, reposts, comments. Look for technical signals (400G, DWDM, DIMMs, network refresh, vendor changes, AI buildout), pain points, vendors name-checked, certifications, current initiatives. Activity is the richest Personal Hook source.
 - **City + state** from location field, required for HubSpot.
-- **Timezone** from city/state per Andy's 6-bucket system (see hubspot-data-quality.md).
+- **Timezone** from city/state per Brian's 6-bucket system (see hubspot-data-quality.md).
 
 > Skills = most important qualification signal. Activity = most important personalization signal. Never qualify on title alone. Never skim search result previews, always navigate to the actual profile page.
 
@@ -135,15 +142,15 @@ If the regular LinkedIn profile is restricted or returns minimal info (no About,
 2. Sales Nav also gated OR fails to render in the automation browser → Apply sparse profile rule (see PERSONAL HOOK QUALITY GATE section)
 3. Sparse profile rule: if title + company clearly confirm ICP target → use company-level hook (news, ZoomInfo scoops, infrastructure signal) and QUEUE IT
 
-It is NEVER valid to declare `pending-needs-hook` and present candidates to Andy asking him to go look in Sales Nav. That is Claude's job, not Andy's.
+It is NEVER valid to declare `pending-needs-hook` and present candidates to Brian asking him to go look in Sales Nav. That is Claude's job, not Brian's.
 
 **When Sales Nav automation fails to render (browser cards stuck in skeleton/placeholder state):**
-Do not treat this as "Sales Nav returned nothing." Browser rendering failures are not data. When Sales Nav cards won't load in the automation browser, move IMMEDIATELY to the sparse profile rule -- do not stop, do not declare pending-needs-hook, do not ask Andy to check. If the title and company clearly confirm an ICP target: use company-level hooks (news, ZoomInfo scoops, acquisition signal, revenue growth news), write the strategy note with that hook, and queue the sequence.
+Do not treat this as "Sales Nav returned nothing." Browser rendering failures are not data. When Sales Nav cards won't load in the automation browser, move IMMEDIATELY to the sparse profile rule -- do not stop, do not declare pending-needs-hook, do not ask Brian to check. If the title and company clearly confirm an ICP target: use company-level hooks (news, ZoomInfo scoops, acquisition signal, revenue growth news), write the strategy note with that hook, and queue the sequence.
 
 **The only legitimate use of pending-needs-hook:**
 A candidate whose title AND company are genuinely ambiguous, whose profile is completely empty, AND where both Sales Nav and web search returned nothing that resolves the ambiguity. If the title and company clearly confirm an ICP target, sparse profile is NOT a blocker. Queue it with the best available hook.
 
-**Why this rule exists:** 2026-05-12, 10 candidates (6 Black Box Network Services, 4 NEC Corporation of America) were declared pending-needs-hook after their regular LinkedIn profiles were gated (3rd+ degree). Sales Nav was never attempted. The session told Andy to go look in Sales Nav himself. Andy: "YOU DO FUCKING EVERYTHING. THAT IS THE POINT OF THIS." The sparse profile rule was already in the skill. The ladder was not followed. The fix is this hard rule: declare pending-needs-hook only after the full ladder including sparse profile fallback has been applied and truly failed. Never hand research back to Andy.
+**Why this rule exists:** 2026-05-12, 10 candidates (6 Black Box Network Services, 4 NEC Corporation of America) were declared pending-needs-hook after their regular LinkedIn profiles were gated (3rd+ degree). Sales Nav was never attempted. The session told Brian to go look in Sales Nav himself. Brian: "YOU DO FUCKING EVERYTHING. THAT IS THE POINT OF THIS." The sparse profile rule was already in the skill. The ladder was not followed. The fix is this hard rule: declare pending-needs-hook only after the full ladder including sparse profile fallback has been applied and truly failed. Never hand research back to Brian.
 
 ---
 
@@ -151,12 +158,12 @@ A candidate whose title AND company are genuinely ambiguous, whose profile is co
 
 **HARD GATE:** This path is ONLY available when there is a recent two-way engagement signal proving the contact is currently reachable at the listed company. Mere HubSpot record presence is NOT sufficient. Title alone is NEVER sufficient. Without a recent reply or meeting, fall back to deep LinkedIn read.
 
-**Why this gate exists:** 2026-04-26, an earlier version of this path triggered on "HubSpot record + JAM-owned" alone and produced 138 emails queued to 23 prospects without confirming anyone was still employed there. This path requires a real engagement signal.
+**Why this gate exists:** 2026-04-26, an earlier version of this path triggered on "HubSpot record + Brian-owned" alone and produced 138 emails queued to 23 prospects without confirming anyone was still employed there. This path requires a real engagement signal.
 
 **Use shallow only when ALL true:**
 1. `source: "hubspot_contact"` with `hubspotContactId`, AND
 2. HubSpot record has `email`, `jobtitle`, `company` populated, AND
-3. Owned by JAM (Andy 196669355 / Mark 210187184 / John 210187193), AND
+3. Owned by Brian (213536174), AND
 4. Email domain matches the company's known/derived primary domain, AND
 5. **Recent positive engagement: at least ONE of:**
    - Inbound reply received from this contact within the last **12 months**, OR
@@ -201,7 +208,7 @@ Cast the widest net possible. If 12 people at a company are worth qualifying, qu
 
 🚨 **HARDWIRED RULE -- BATCH SIZE DOES NOT CHANGE THE PROCESS. EVER. (added 2026-05-14)**
 
-When Andy provides a list of companies to run in one session (2 companies, 7 companies, 20 companies -- any number), output this statement BEFORE starting the first company and DO NOT deviate from it:
+When Brian provides a list of companies to run in one session (2 companies, 7 companies, 20 companies -- any number), output this statement BEFORE starting the first company and DO NOT deviate from it:
 
 ```
 Running full 4-source discovery on [N] companies. Process is identical regardless of batch size:
@@ -210,25 +217,25 @@ Discovery log will be shown before qualification begins at each company.
 No shortcuts. No stopping after HubSpot.
 ```
 
-The number of companies in the batch is NEVER a reason to compress, skip, or abbreviate any discovery step. A 7-company batch gets the same per-company rigor as a 1-company session. If the batch is too large to run properly in one session, the right answer is to tell Andy "I can complete [N] companies fully in this session -- want me to start and continue in the next session?" NOT to silently thin the discovery to get through more companies faster.
+The number of companies in the batch is NEVER a reason to compress, skip, or abbreviate any discovery step. A 7-company batch gets the same per-company rigor as a 1-company session. If the batch is too large to run properly in one session, the right answer is to tell Brian "I can complete [N] companies fully in this session -- want me to start and continue in the next session?" NOT to silently thin the discovery to get through more companies faster.
 
 **Why this rule exists:** 2026-05-14, a 7-company batch was run where most companies received only HubSpot-sourced contacts (1-2 per company) because the pace was too fast. ZoomInfo search_contacts, LinkedIn browse, and keyword rounds were all skipped to get through the list faster. The session produced 9 contacts across 7 companies when it should have found 30-50+. Batch size is not an excuse. The process is the process.
 
 🚨 **HARDWIRED RULE -- NEVER ASK "SHOULD I PROCEED TO THE NEXT COMPANY?" IN A PRE-APPROVED BATCH. (added 2026-05-15)**
 
-When Andy provides a list of companies at session start, that list is blanket approval for ALL companies in it. When one company is fully processed (all YES candidates sequenced, stagger updated, tracker updated), immediately start the next company without pausing. Do not ask "Should I proceed to Company 4?" or "Ready for the next one?" or "Want me to continue?" or any similar checkpoint prompt.
+When Brian provides a list of companies at session start, that list is blanket approval for ALL companies in it. When one company is fully processed (all YES candidates sequenced, stagger updated, tracker updated), immediately start the next company without pausing. Do not ask "Should I proceed to Company 4?" or "Ready for the next one?" or "Want me to continue?" or any similar checkpoint prompt.
 
-The only legitimate reason to pause between companies is a hard blocker that Andy must resolve (e.g., LinkedIn browser inaccessible, HubSpot auth failure). A successful company completion is not a pause point. Proceed automatically.
+The only legitimate reason to pause between companies is a hard blocker that Brian must resolve (e.g., LinkedIn browser inaccessible, HubSpot auth failure). A successful company completion is not a pause point. Proceed automatically.
 
 **Why this rule exists:** 2026-05-15 -- after completing IT-CNP (Company 3 of a pre-approved 10-company batch), Claude stopped and asked "Should I proceed to Company 4?" The batch was approved at session kickoff. The prompt wasted time and contradicted the no-approval-prompt rule.
 
-When Andy says "find me prospects at [Company]" without running a full discovery sweep.
+When Brian says "find me prospects at [Company]" without running a full discovery sweep.
 
 ### Step 0: Company pre-checks
 
 **THIS STEP IS MANDATORY BEFORE TOUCHING LINKEDIN OR ZOOMINFO. DO NOT SKIP.**
 
-🚨 **THIS STEP ALSO RUNS IN AUTO MODE BEFORE THE SHORTLIST IS PRESENTED TO ANDY.** If you are in Auto Mode Step 2.5 and have not yet run this step on a candidate company, run it now. The list Andy sees must already be clean. Presenting first and checking later is the bug this rule exists to prevent.
+🚨 **THIS STEP ALSO RUNS IN AUTO MODE BEFORE THE SHORTLIST IS PRESENTED TO BRIAN.** If you are in Auto Mode Step 2.5 and have not yet run this step on a candidate company, run it now. The list Brian sees must already be clean. Presenting first and checking later is the bug this rule exists to prevent.
 
 #### 0A. Build the company name variant list
 
@@ -276,8 +283,8 @@ After the HubSpot search, run one web search: `"[Company] acquired" OR "[Company
 If a material acquisition or merger is found:
 - Identify the acquiring company.
 - Run the HubSpot company search again for the acquiring company name.
-- If the acquiring company is in HubSpot and owned by another rep: STOP. Flag to Andy (see 0C).
-- If JAM-owned or not in HubSpot: proceed but note the M&A context in the strategy note.
+- If the acquiring company is in HubSpot and owned by another rep: STOP. Flag to Brian (see 0C).
+- If Brian-owned or not in HubSpot: proceed but note the M&A context in the strategy note.
 
 #### 0C. Ownership decision
 
@@ -286,13 +293,13 @@ From the unioned HubSpot results, determine ownership:
 | Scenario | Action |
 |---|---|
 | Not found in HubSpot under any name or domain variant | Proceed. New account. |
-| Found, JAM-owned (Andy 196669355 / Mark 210187184 / John 210187193) | Proceed. |
-| Found, other rep, last activity within 3 months | STOP. Flag to Andy: "**[Company] is owned by [Rep Name] in HubSpot (last activity [date]). Do not prospect -- active account under another rep.**" Do NOT prospect silently. |
-| Found, other rep, no activity in 3+ months, not a client | STOP. Flag to Andy: "**[Company] is in HubSpot under [Rep Name] but no activity since [date]. Flagging for account-request -- do not prospect yet.**" Log to `overnight-run-log.md`. |
-| Found under a variant name / domain the input didn't match | STOP. Flag to Andy: "**Heads up: '[Input Name]' appears to already be in HubSpot as '[HubSpot Name]' (domain: [domain], owner: [rep]). Treating as same company.**" Then apply ownership rules above. |
-| M&A: target acquired by a company owned by another rep | STOP. Flag to Andy: "**[Input Company] was acquired by [Acquirer]. [Acquirer] is owned by [Rep] in HubSpot. Do not prospect [Input Company] contacts -- they roll up to an account owned by another rep.**" |
+| Found, Brian-owned (213536174) | Proceed. |
+| Found, other rep, last activity within 3 months | STOP. Flag to Brian: "**[Company] is owned by [Rep Name] in HubSpot (last activity [date]). Do not prospect -- active account under another rep.**" Do NOT prospect silently. |
+| Found, other rep, no activity in 3+ months, not a client | STOP. Flag to Brian: "**[Company] is in HubSpot under [Rep Name] but no activity since [date]. Flagging for account-request -- do not prospect yet.**" Log to `overnight-run-log.md`. |
+| Found under a variant name / domain the input didn't match | STOP. Flag to Brian: "**Heads up: '[Input Name]' appears to already be in HubSpot as '[HubSpot Name]' (domain: [domain], owner: [rep]). Treating as same company.**" Then apply ownership rules above. |
+| M&A: target acquired by a company owned by another rep | STOP. Flag to Brian: "**[Input Company] was acquired by [Acquirer]. [Acquirer] is owned by [Rep] in HubSpot. Do not prospect [Input Company] contacts -- they roll up to an account owned by another rep.**" |
 
-**The flag message must always say: company name as stored in HubSpot, domain, owner name, last activity date, and what Andy should do next. Never skip silently.**
+**The flag message must always say: company name as stored in HubSpot, domain, owner name, last activity date, and what Brian should do next. Never skip silently.**
 
 ### Step 1: Candidate discovery -- LOCKED ORDER, FOUR SOURCES
 
@@ -322,9 +329,9 @@ DISCOVERY LOG -- [Company]
 Rules:
 - Any row showing 0 MUST include a one-line reason in parentheses: `0 (enrich_contacts credits exhausted, search_contacts returned 0)` or `0 (company too small for keyword results, browse covered it)`. A blank 0 with no reason is a red flag that the source was skipped, not exhausted.
 - If the master list total is fewer than 3 candidates AND the company has 200+ employees, that is a discovery failure signal -- not a signal that the company is thin. Do NOT proceed to qualification. Re-run Step 1C with additional browse pages and Step 1D with additional keyword rounds until either more candidates are found or every round returns empty.
-- This table is output to the conversation (visible to Andy). It is not optional, not skippable, and not replaceable with a prose summary. Andy can see exactly what was found at each source and call out a skip instantly.
+- This table is output to the conversation (visible to Brian). It is not optional, not skippable, and not replaceable with a prose summary. Brian can see exactly what was found at each source and call out a skip instantly.
 
-**Why this rule exists:** 2026-05-14, a 7-company batch was run in Company Mode where most companies got 1 person sequenced. The root cause was stopping after HubSpot found 1-2 contacts without running ZoomInfo, LinkedIn browse, or keyword searches. The discovery log makes that shortcut immediately visible -- if 1C and 1D both show 0 with no reason, Andy knows the browse was skipped. You cannot hide a skipped source in a discovery log.
+**Why this rule exists:** 2026-05-14, a 7-company batch was run in Company Mode where most companies got 1 person sequenced. The root cause was stopping after HubSpot found 1-2 contacts without running ZoomInfo, LinkedIn browse, or keyword searches. The discovery log makes that shortcut immediately visible -- if 1C and 1D both show 0 with no reason, Brian knows the browse was skipped. You cannot hide a skipped source in a discovery log.
 
 ---
 
@@ -479,17 +486,6 @@ Obvious No's by title were already eliminated in Step 1 pre-filter. Do NOT re-re
 
 Yes first, then Conditional, then No with brief reasons. No cap on Yes count. Each Yes includes recommended OSI angle.
 
-### 🚨 CHAT OUTPUT IS MINIMAL, CONSERVE CREDITS (Company Mode and Auto Mode)
-
-Cowork bills by tokens. The HubSpot record, the strategy note, and the AI fields are the deliverable. The chat is not. Keep what you print tight.
-
-- **NEVER print email bodies or subjects in chat.** The drafter writes them to the HubSpot AI fields and reports ONE line: `AI fields written: [Name] | [Sequence] | Enroll by [date]`.
-- **NEVER paste full strategy notes, LinkedIn About or Experience text, or long skill lists into chat.** They live on the HubSpot contact, not in the conversation.
-- **One line per candidate** for verdicts (format below). No per-candidate paragraphs.
-- **Do not narrate every tool call or echo HubSpot / ZoomInfo payloads.** Act, then report the result in a short phrase.
-- The discovery log table prints once (it is required). The end-of-company summary is one line: `[Company]: X Yes, Y No, Z Conditional`.
-- If I explicitly ask to see a specific email, note, or profile, show that one. Otherwise stay terse.
-
 **Company Mode sweep verdict format (one line per candidate):**
 ```
 [Name] | [Title] | Yes / No / Conditional | [one phrase reason]
@@ -499,23 +495,9 @@ Example: `Kevin Walsh | Facilities Manager | No | M&E only, no IT hardware`
 
 Do not write paragraphs per candidate during a sweep. Reserve the full OUTPUT FORMAT for Profile Mode (single prospect).
 
-**End-of-run SEQUENCED RECAP (print after each company, and once more at the end of a batch):**
-
-After a company's Yes candidates are all sequenced, print a recap with one line per person who was ACTUALLY sequenced (Yes with email, AI fields written). Include the sequence type and both URLs:
-```
-[Name] | [Sequence type] | Enroll by [date] | LinkedIn: [hs_linkedin_url] | HubSpot: https://app.hubspot.com/contacts/21878985/record/0-1/[contactId]
-```
-Then one count line: `[Company]: X Yes, Y No, Z Conditional`.
-
-Rules for the recap:
-- Only people actually sequenced appear. No-email fallbacks and No / Conditional verdicts are not in the recap (they are in the verdict lines above).
-- LinkedIn URL is the contact's `hs_linkedin_url`. If blank, write `LinkedIn: none on record`.
-- HubSpot URL is built from the portal id `21878985` and the contact id. It is a clickable link to the record.
-- This recap IS the deliverable summary. Keep it to these one-line entries. No paragraphs, no email bodies (the minimal-output rule still applies).
-
 ### Step 4: HubSpot check on shortlist
 
-Flag any already owned or with prior touchpoints before Andy reaches out.
+Flag any already owned or with prior touchpoints before Brian reaches out.
 
 ---
 
@@ -626,7 +608,7 @@ If any retry-matrix attempt fails with a credit-limit error ("Limit exceeded" or
 5. If the ZI web app has no record of the person at the company (common for hires within the last ~6 months -- ZI lags job changes): fall back to HubSpot existing email OR dominant company pattern, and log that.
 6. Log in the strategy note's ZI ATTEMPTS block verbatim, e.g.: `1. enrich_contacts personId=... -> CREDIT_LIMIT; switched to ZoomInfo web app -> email + mobile found`.
 
-**Why this rule exists:** 2026-06-03, Index Exchange Company Mode hit "Limit exceeded" on the first enrichment call. Andy's standing instruction: when MCP credits are gone, open ZoomInfo in Chrome and pull the emails and phone numbers from the web UI instead. The web app delivered verified emails and mobiles for five of seven Yes verdicts that session. Overnight/scheduled fires are retired as of 2026-06-03, so this fallback applies in every session without a prompt-risk carve-out.
+**Why this rule exists:** 2026-06-03, Index Exchange Company Mode hit "Limit exceeded" on the first enrichment call. Brian's standing instruction: when MCP credits are gone, open ZoomInfo in Chrome and pull the emails and phone numbers from the web UI instead. The web app delivered verified emails and mobiles for five of seven Yes verdicts that session. Overnight/scheduled fires are retired as of 2026-06-03, so this fallback applies in every session without a prompt-risk carve-out.
 
 ### Results mapping (after FULL_MATCH)
 - Email found -> HubSpot `email`.
@@ -637,19 +619,6 @@ If any retry-matrix attempt fails with a credit-limit error ("Limit exceeded" or
 
 City / state / timezone -> ALWAYS LinkedIn, NEVER ZoomInfo.
 
-### Personal / consumer email hard block -- check first, no exceptions
-
-Never pass a personal/consumer email address to outreach. If the chosen email (HubSpot or ZoomInfo) sits at any of these domains, treat it as NO email found and fall back to the 2 LinkedIn InMail tasks:
-- gmail.com, googlemail.com
-- yahoo.com, yahoo.ca, yahoo.co.uk, ymail.com
-- hotmail.com, hotmail.ca, outlook.com, live.com, msn.com
-- icloud.com, me.com, mac.com
-- aol.com, aim.com
-- protonmail.com, proton.me
-- any other clearly personal/consumer ISP domain
-
-Log: `Personal email ([address]) -- not used. LinkedIn InMail fallback created.` This is a deterministic string check, no tool call. Run it FIRST, before the corporate-domain search and the blocked address check below.
-
 ### Email domain validation -- before handoff to outreach
 
 ONE web search to confirm the email domain is the company's corporate domain, not consumer ISP / subsidiary brand / stale pre-acquisition.
@@ -657,30 +626,11 @@ ONE web search to confirm the email domain is the company's corporate domain, no
 Search: `"[Company name] corporate email domain"`
 
 - Match -> proceed.
-- Consumer ISP / residential brand / dead domain -> invalid. Flag, do NOT queue, pattern-match real corporate domain or hand back to Andy.
+- Consumer ISP / residential brand / dead domain -> invalid. Flag, do NOT queue, pattern-match real corporate domain or hand back to Brian.
 
 Examples to catch: Altafiber employees with @zoomtown.com; post-acquisition employees on dead domain.
 
 One search, no rabbit holes.
-
-### Blocked address check -- before handoff to outreach (MANDATORY on every Yes with an email)
-
-🚨 Outreach now sends from HubSpot sequences, not the local Outlook queue. The osi-monitor bounce scan (Outlook via Chrome) that used to catch dead addresses downstream is NOT running for HubSpot-sent mail. This pre-handoff check is the only bounce guard. Run it on every Yes verdict that has an email, in every mode, immediately before the HANDOFF.
-
-Check the chosen email address against three sources, cheapest first:
-1. **hard-block.json.** Read `C:\Claude-Brain\hard-block.json`. If the address (or the contact) is listed, it is blocked. No tool call needed.
-2. **HubSpot engagement history.** On the contact record, look for any email engagement logged against this address with status BOUNCED, HARD_BOUNCED, or REJECTED.
-3. **Outlook inbox.** ONE targeted search for a delivery-failure message referencing this exact address: FROM "Mail Delivery", "postmaster", or "mailer-daemon"; subject contains "Undeliverable", "Delivery Status Notification", "Failed", or "Blocked". Use the Outlook email search tool (read-only, no Chrome, no prompt). One search, no rabbit holes.
-
-**If any source flags the address:**
-- Do NOT hand off. Treat the contact exactly like a no-email contact.
-- Create the 2 LinkedIn InMail fallback tasks (the existing no-email plan).
-- Tell Andy: `BLOCKED ADDRESS: [exact email] -- prior delivery failure / hard block. No sequence created. LinkedIn InMail fallback set up instead.`
-- In Mode 4, also mark the source enroll task COMPLETED with note "Blocked address -- LinkedIn fallback created."
-
-**If all three are clean:** proceed to the HANDOFF.
-
-Lightweight by design: steps 1-2 are a file read and a field check, step 3 is a single Outlook search. Do not expand it into a multi-search investigation.
 
 ---
 
@@ -723,7 +673,7 @@ Lightweight by design: steps 1-2 are a file read and a field check, step 3 is a 
 
 `manage_crm_objects` has a built-in confirmation step. **This skill always bypasses it by setting `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"` on every single call.**
 
-Andy's session kick-off ("go", "proceed", "run it", or any equivalent) is blanket approval for all HubSpot contact creates, updates, note creates, and task creates that this skill produces during that session. Do not interpret the tool's confirmation requirement as a reason to stop. Do not show a "proposed changes" table. Do not ask "Approve?" Do not ask "proceed?". Do not pause for any reason mid-run.
+Brian's session kick-off ("go", "proceed", "run it", or any equivalent) is blanket approval for all HubSpot contact creates, updates, note creates, and task creates that this skill produces during that session. Do not interpret the tool's confirmation requirement as a reason to stop. Do not show a "proposed changes" table. Do not ask "Approve?" Do not ask "proceed?". Do not pause for any reason mid-run.
 
 This applies to:
 - Contact creates and updates (Step 1)
@@ -732,12 +682,12 @@ This applies to:
 - Any other `manage_crm_objects` call this skill makes
 
 **Forbidden patterns:**
-- Showing a proposed-changes table and asking Andy to approve -> NEVER
+- Showing a proposed-changes table and asking Brian to approve -> NEVER
 - "Approve this update?" -> NEVER
 - "Want to skip confirmations for this chat?" -> NEVER (already waived at session start)
 - Pausing between candidates for any HubSpot write reason -> NEVER
 
-**Why this rule exists:** 2026-05-06, Company Mode qualification of Instinet stopped mid-run to ask Andy to approve a contact update for Andrew Banhidi (stale @baml.com -> @instinet.com). Andy had already said "go" at session start. The tool's confirmation step is a safety measure for ad-hoc use; it is not intended to interrupt a pre-approved qualification batch. The fix is to always use `CONFIRMATION_WAIVED_FOR_SESSION` so the tool never prompts.
+**Why this rule exists:** 2026-05-06, Company Mode qualification of Instinet stopped mid-run to ask Brian to approve a contact update for Andrew Banhidi (stale @baml.com -> @instinet.com). Brian had already said "go" at session start. The tool's confirmation step is a safety measure for ad-hoc use; it is not intended to interrupt a pre-approved qualification batch. The fix is to always use `CONFIRMATION_WAIVED_FOR_SESSION` so the tool never prompts.
 
 Always create regardless of data:
 - LinkedIn connection request task with a provisional `hs_timestamp` = next business day at 4 PM ET.
@@ -885,7 +835,7 @@ Filter all results to records where `company` matches the prospect's company (ex
 - Use that contact's `hs_object_id` as `hubspotContactId`. Do NOT create a new record.
 - Use that contact's primary `email` for all queue entries. Do NOT substitute a ZoomInfo-derived address unless HubSpot has no email at all.
 - If ZoomInfo returned a different email, write the ZoomInfo address to `hs_additional_emails` and append this line to the strategy note (below THE PERSONAL HOOK, above the ZI ATTEMPTS block): `ALT EMAIL <date>: ZoomInfo lists <zi_email>. Using <hubspot_email>. Pattern: <pattern> verified by HubSpot existing record.`
-- If multiple matches found (true ambiguity -- two people with same last name at same company): surface both to Andy and stop. Do not guess.
+- If multiple matches found (true ambiguity -- two people with same last name at same company): surface both to Brian and stop. Do not guess.
 
 **If no match found:** create the contact (linked to company) before note + tasks. All required fields per data-quality playbook.
 
@@ -897,7 +847,7 @@ Filter all results to records where `company` matches the prospect's company (ex
 
 Do NOT create a note and then update it. Do NOT write a placeholder. Finish ALL research (LinkedIn full read, ZoomInfo retry matrix, fresh hook search) BEFORE touching HubSpot. The note is written exactly once, in final format, as a single atomic action.
 
-objectType: `notes`, owner: 196669355, associated to contact.
+objectType: `notes`, owner: 213536174, associated to contact.
 
 Write in this exact order with these exact labels:
 
@@ -911,7 +861,7 @@ QUICK CONNECT KEYWORDS
 
 LIVE CALL SCRIPT (omit entire section if no phone)
 OPENER: [full opener from playbook/opener-library.md]
-VM: [one line, 15s max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with "that's andy at osiglobal dot com." Present/future tense only.]
+VM: [one line, 15s max. One-sentence hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with "that's bc at osihardware dot com." Present/future tense only.]
 
 THE PLAY
 [One paragraph: why they qualify + the hook + the attack plan.]
@@ -925,12 +875,12 @@ EMAIL RESOLUTION: [hubspot-existing | zoominfo-full-match | dominant-pattern]
 ```
 
 **SEQUENCE values:**
-- `Network`: Sample-Offer Network. Target: network engineers, architects, transport engineers.
-- `DWDM`: Pain-Led DWDM. Target: transport/optical engineers, network planners at carriers, CLECs, MSOs.
-- `Server/Storage`: Sample-Offer Server or Pain-Led Storage. Target: systems engineers, infrastructure engineers, storage admins.
-- `TPM`: Pain-Led TPM. Target: IT directors, DC managers, asset managers, procurement, mid-market CIOs.
+- `Network` — Sample-Offer Network. Target: network engineers, architects, transport engineers.
+- `DWDM` — Pain-Led DWDM. Target: transport/optical engineers, network planners at carriers, CLECs, MSOs.
+- `Server/Storage` — Sample-Offer Server or Pain-Led Storage. Target: systems engineers, infrastructure engineers, storage admins.
+- `TPM` — Pain-Led TPM. Target: IT directors, DC managers, asset managers, procurement, mid-market CIOs.
 
-This is the first thing Andy reads when a LINKED_IN_CONNECT task comes due. It tells him which HubSpot sequence to enroll the contact in.
+This is the first thing Brian reads when a LINKED_IN_CONNECT task comes due. It tells him which HubSpot sequence to enroll the contact in.
 
 **EMAIL RESOLUTION rules:**
 - `hubspot-existing`: email was already on the HubSpot contact record. No ZI attempts needed. One line only: `EMAIL RESOLUTION: hubspot-existing | chosen@domain.com`
@@ -993,15 +943,15 @@ Create:
 - Type: `LINKED_IN_CONNECT` (never `LINKED_IN_MESSAGE`, never `TODO`)
 - `hs_timestamp`: provisional -- next business day at 4 PM ET. `osi-outreach-sequence` will update this to the real Day 1 after computing the stagger.
 - Notes: LinkedIn invite text (under 300 chars, references Personal Hook, no pitch). Body is ONLY the raw message text, no labels, no character counts.
-- Owner: 196669355.
+- Owner: 213536174.
 
 **PRE-WRITE CHECKLIST -- complete before calling manage_crm_objects:**
 - [ ] Subject contains "Sales Nav -- Send connection request --" followed by full name and company
-- [ ] Body is the actual invite message Andy will copy-paste into LinkedIn. NOT an instruction. NOT "Lead with X angle." NOT a description of what to do.
+- [ ] Body is the actual invite message Brian will copy-paste into LinkedIn. NOT an instruction. NOT "Lead with X angle." NOT a description of what to do.
 - [ ] Body references the Personal Hook from THE PERSONAL HOOK section
 - [ ] Body has no pitch, no OSI mention, no product names
 - [ ] Body is under 300 characters (count it)
-- [ ] Body ends naturally -- no sign-off, no "Andy"
+- [ ] Body ends naturally -- no sign-off, no "Brian"
 
 **CORRECT example (Tim Davidson, VP IT Infrastructure, NFL):**
 ```
@@ -1013,10 +963,10 @@ Body:   Tim, 25 years running NFL IT infrastructure is a long time to see every 
 **WRONG examples (these have been written before -- never again):**
 ```
 WRONG body: "Send LinkedIn connection request to Tim Davidson. Lead with the 25-year infrastructure tenure angle."
--- This is an instruction to Claude, not a message Andy can send. The task note is what Andy copies into LinkedIn.
+-- This is an instruction to Claude, not a message Brian can send. The task note is what Brian copies into LinkedIn.
 
 WRONG body: "Reaching out because I noticed you work in IT infrastructure at the NFL and I'd like to connect about OSI's products."
--- Contains a pitch. Credentials-first. Andy would never send this.
+-- Contains a pitch. Credentials-first. Brian would never send this.
 ```
 
 ### Step 3.5: Read-back verification (MANDATORY before handoff)
@@ -1067,9 +1017,8 @@ One search. No rabbit holes. Filler in this field gets surfaced into Email 1 as 
 - **`C:\Claude-Brain\playbook\product-lines.md`** -- OSI product lines, sequence-type table, DWDM talking points, who buys what.
 - **`C:\Claude-Brain\playbook\vertical-intel.md`** -- what to lead with by industry. Park Place / Service Express merger wedge. TPM positioning.
 - **`C:\Claude-Brain\playbook\opener-library.md`** -- 12 cold-call openers + cold call rules.
-- **`C:\Claude-Brain\playbook\pain-and-objections.md`** -- pain points + discovery questions by product line, objection-handler bank, secondary-source positioning. Use when writing the Live Call Script (objection handling) and the Personal Hook / The Play.
 - **`C:\Claude-Brain\playbook\hubspot-data-quality.md`** -- required fields, phone format, timezone buckets, pre-write checklist.
-- **`C:\Claude-Brain\playbook\voice-rules.md`** -- Andy's voice + humanization filter. Apply to call script, VM, LinkedIn invite text.
+- **`C:\Claude-Brain\playbook\voice-rules.md`** -- Brian's voice + humanization filter. Apply to call script, VM, LinkedIn invite text.
 
 ---
 
@@ -1131,9 +1080,9 @@ The hook MUST be one of the 5 priority types above. The following are NOT Person
 
 This rule is the FINAL STEP of the restricted-profile fallback ladder (see Step 1 above). It applies after Sales Nav was tried (or failed to render in the automation browser). It is not a last resort -- it is a valid path. Company-level hooks produce real Email 1s. A Sample-Offer sequence does not require a deep personal hook. Queue it.
 
-Only downgrade to Conditional on "no Personal Hook" if the profile is sparse AND qualification itself is genuinely ambiguous (title is unclear, role scope is unknown). If they are clearly the right person at the right company, sparse profile is not a blocker. Never declare pending-needs-hook and hand research back to Andy when the sparse profile rule could close it.
+Only downgrade to Conditional on "no Personal Hook" if the profile is sparse AND qualification itself is genuinely ambiguous (title is unclear, role scope is unknown). If they are clearly the right person at the right company, sparse profile is not a blocker. Never declare pending-needs-hook and hand research back to Brian when the sparse profile rule could close it.
 
-**Why this rule exists:** 2026-04-30, Christopher Lawrence email shipped with "BNY's Pittsburgh infrastructure footprint is significant" as the Personal Hook. That is not a hook. The fix lives at strategy-note-write time. The sparse-profile addendum was added 2026-05-06 after Andy found multiple valid NFL targets that were being skipped because their LinkedIn profiles had no About or job descriptions.
+**Why this rule exists:** 2026-04-30, Christopher Lawrence email shipped with "BNY's Pittsburgh infrastructure footprint is significant" as the Personal Hook. That is not a hook. The fix lives at strategy-note-write time. The sparse-profile addendum was added 2026-05-06 after Brian found multiple valid NFL targets that were being skipped because their LinkedIn profiles had no About or job descriptions.
 
 ### 2. Live Call Script
 
@@ -1147,10 +1096,10 @@ OPENER: [full opener from playbook/opener-library.md, or custom if HOOK is stron
 
 ### 3. Voicemail
 
-15s max. One voicemail, never two. Hook drawn from Personal Hook. Name Email 1 subject. End with "that's andy at osiglobal dot com." No phone number. Present/future tense only.
+15s max. One voicemail, never two. Hook drawn from Personal Hook. Name Email 1 subject. End with "that's bc at osihardware dot com." No phone number. Present/future tense only.
 
 ```
-"Hey [Name], Andy with OSI Global. [One-sentence hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's andy at osiglobal dot com."
+"Hey [Name], Brian with OSI Global. [One-sentence hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's bc at osihardware dot com."
 ```
 
 ### 4. LinkedIn Invite
@@ -1173,22 +1122,22 @@ If ZI retry matrix returned no email after all 7 attempts: do NOT hand off. The 
 
 **IMMEDIATE HANDOFF -- NO BATCHING.** When a candidate in a Company Mode sweep is verdicted Yes, hand off to osi-outreach-sequence immediately before qualifying the next candidate. Do NOT accumulate Yes verdicts and hand off in a batch at the end. Batching causes context overflow, loses candidates, and breaks the per-candidate stagger logic. The flow is: qualify candidate -> verdict Yes -> handoff -> queue confirmed -> next candidate. Repeat. Never "I'll sequence all of them at the end."
 
-🚨 **NO MID-BATCH APPROVAL PROMPTS. EVER.** Once Andy has kicked off a Company Mode or Profile Mode batch, this skill and osi-outreach-sequence execute through every candidate without stopping to ask "proceed?", "should I continue?", "ready to queue?", or any equivalent. Andy trusted you to find and sequence the right people. He does not want to approve each one. The only time you stop and ask is: (1) hard conflict requiring Andy's judgment (account owned by another rep with recent activity), (2) validator raises a fatal error, or (3) the active sequence check asks about an override in an interactive session. Everything else runs automatically. Do not ask. Do not confirm. Execute.
+🚨 **NO MID-BATCH APPROVAL PROMPTS. EVER.** Once Brian has kicked off a Company Mode or Profile Mode batch, this skill and osi-outreach-sequence execute through every candidate without stopping to ask "proceed?", "should I continue?", "ready to queue?", or any equivalent. Brian trusted you to find and sequence the right people. He does not want to approve each one. The only time you stop and ask is: (1) hard conflict requiring Brian's judgment (account owned by another rep with recent activity), (2) validator raises a fatal error, or (3) the active sequence check asks about an override in an interactive session. Everything else runs automatically. Do not ask. Do not confirm. Execute.
 
 ---
 
 ## MODE 3: Auto Mode
-Trigger: Andy says "find me cold companies", "auto mode", "sweep my accounts", or similar.
+Trigger: Brian says "find me cold companies", "auto mode", "sweep my accounts", or similar.
 
 🚨 **SAME RULE AS COMPANY MODE: NEVER CAP CANDIDATES PER COMPANY. FIND EVERYONE WORTH REACHING OUT TO.**
 
-🚨 **HARDWIRED RULE -- ANDY'S COMPANIES ONLY. NEVER JAM. (added 2026-05-19)**
+🚨 **HARDWIRED RULE -- BRIAN'S COMPANIES ONLY. (added 2026-05-19)**
 
-Auto Mode ONLY pulls companies owned by Andy (owner ID **196669355**). Never expand this to Mark (210187184) or John (210187193). The CLAUDE.md rule that "JAM accounts are fair game" means Andy can prospect into those accounts if he chooses -- it does NOT mean Auto Mode should pull them automatically. Andy has corrected this mistake multiple times. The owner ID in every filter is 196669355 and nothing else.
+Auto Mode ONLY pulls companies owned by Brian (owner ID **213536174**). Brian has corrected this mistake multiple times. The owner ID in every filter is 213536174 and nothing else.
 
 🚨 **HARDWIRED RULE -- USE THE MASTER PIPELINE LIST FIRST. HUBSPOT PULL IS FALLBACK ONLY. (added 2026-05-19)**
 
-The "Company Pipeline" tab of `C:\Claude-Brain\prospects-tracker-new.xlsx` is the primary source for Auto Mode targets. It was built on 2026-05-19 from all Andy-owned HubSpot companies with 200+ employees, pre-scored by ICP fit (HIGH / MEDIUM / UNKNOWN / LOW), and sorted with HIGH-fit companies first then coldest last activity first within each tier. Do NOT pull from HubSpot live if the Pipeline tab has Pending companies. Use the tab.
+The "Company Pipeline" tab of `C:\Claude-Brain\prospects-tracker-new.xlsx` is the primary source for Auto Mode targets. It was built on 2026-05-19 from all Brian-owned HubSpot companies with 200+ employees, pre-scored by ICP fit (HIGH / MEDIUM / UNKNOWN / LOW), and sorted with HIGH-fit companies first then coldest last activity first within each tier. Do NOT pull from HubSpot live if the Pipeline tab has Pending companies. Use the tab.
 
 **Master Pipeline tab logic:**
 1. Read "Company Pipeline" tab from `C:\Claude-Brain\prospects-tracker-new.xlsx`.
@@ -1200,7 +1149,7 @@ The "Company Pipeline" tab of `C:\Claude-Brain\prospects-tracker-new.xlsx` is th
 7. After completing a company (regardless of result), mark its row Status = "Done" and write today's date to Date Processed. Use openpyxl via bash.
 8. If the Pipeline tab has no remaining Pending rows: fall back to the live HubSpot pull below.
 
-**Rebuilding the Pipeline tab:** Run a fresh build when Andy says "rebuild pipeline" or "refresh company list". Pull all Andy-owned (196669355) companies with `numberofemployees >= 200` from HubSpot, cross-ref queue and DNP, score by industry, write to the tab. This replaces all existing rows.
+**Rebuilding the Pipeline tab:** Run a fresh build when Brian says "rebuild pipeline" or "refresh company list". Pull all Brian-owned (213536174) companies with `numberofemployees >= 200` from HubSpot, cross-ref queue and DNP, score by industry, write to the tab. This replaces all existing rows.
 
 ### Step 0: Build the exclusion list (MANDATORY, runs even when using Pipeline tab)
 
@@ -1210,7 +1159,7 @@ Read `C:\Claude-Brain\email-queue.json`. Extract every unique `company` value (c
 
 Also read the "Companies Prospected" tab of `C:\Claude-Brain\prospects-tracker-new.xlsx` for any additional historically prospected companies.
 
-**DNP filter:** Read `C:\Claude-Brain\do-not-auto-prospect.json`. Any company whose name case-insensitively matches (substring or exact) a name in that file is permanently excluded from Auto Mode. This list covers companies Andy does not want surfaced by automation -- they can still be manually prospected if Andy names them explicitly, but they will never appear in an auto-generated shortlist. Add these to the exclusion set alongside the queue companies.
+**DNP filter:** Read `C:\Claude-Brain\do-not-auto-prospect.json`. Any company whose name case-insensitively matches (substring or exact) a name in that file is permanently excluded from Auto Mode. This list covers companies Brian does not want surfaced by automation -- they can still be manually prospected if Brian names them explicitly, but they will never appear in an auto-generated shortlist. Add these to the exclusion set alongside the queue companies.
 
 After building the exclusion list:
 - Update the "Companies Prospected" tab in `C:\Claude-Brain\prospects-tracker-new.xlsx` with any companies from the queue that are not already listed there (company name + last sequence date, sorted by date descending).
@@ -1220,7 +1169,7 @@ After building the exclusion list:
 
 **PRIMARY -- Pipeline tab:** Read the "Company Pipeline" tab. Take the next N rows with Status = "Pending" that are not in the exclusion list. N = however many it takes to get 3 viable candidates through Step 2.5 pre-checks. No cap on how many rows to read -- keep going until 3 clean companies are found or the tab is exhausted.
 
-**FALLBACK -- Live HubSpot pull (only when Pipeline tab is exhausted):** Search HubSpot for companies owned by Andy (**owner ID 196669355 ONLY**) with no activity in 6+ months. Filter: `notes_last_contacted` < 180 days ago or null, `hubspot_owner_id` = 196669355, `numberofemployees` >= 200. Pull 50 at a time, keep pulling batches until 3 viable candidates survive Step 2.5. Never stop after one batch.
+**FALLBACK -- Live HubSpot pull (only when Pipeline tab is exhausted):** Search HubSpot for companies owned by Brian (**owner ID 213536174 ONLY**) with no activity in 6+ months. Filter: `notes_last_contacted` < 180 days ago or null, `hubspot_owner_id` = 213536174, `numberofemployees` >= 200. Pull 50 at a time, keep pulling batches until 3 viable candidates survive Step 2.5. Never stop after one batch.
 
 ### Step 2: ICP pre-filter + queue exclusion
 
@@ -1235,7 +1184,7 @@ The Pipeline's ICP scoring is broad and was built algorithmically. HIGH does not
 - Media / entertainment companies under 10,000 employees (Raycom, CBS Interactive, broadcast media). Their IT is not large enough to be a meaningful OSI account.
 - Staffing, recruiting, HR tech, legal tech, marketing SaaS -- no infrastructure footprint.
 - Hyperscalers at any size (Google, Meta, AWS, Microsoft, ByteDance). Already handled in DISQUALIFIERS but explicit here.
-- Non-US companies (check the domain: .kz, .ca that are Canadian with no US presence, .eu, .co.il, etc.) unless Andy explicitly named them. OSI ships primarily in North America.
+- Non-US companies (check the domain: .kz, .ca that are Canadian with no US presence, .eu, .co.il, etc.) unless Brian explicitly named them. OSI ships primarily in North America.
 
 **STRONG KEEP -- these are the target profile:**
 - Carriers, CLECs, ISPs, regional telecoms, cable companies, wireless carriers (any size with 200+ emp)
@@ -1246,13 +1195,13 @@ The Pipeline's ICP scoring is broad and was built algorithmically. HIGH does not
 
 Cross-check against the exclusion list from Step 0. Skip queue matches. Skip DNP matches. Skip LOW-scored rows unless nothing better exists. Apply the hard-skip / strong-keep criteria above to EVERY row, including HIGH-scored pipeline rows.
 
-**Why this rule exists:** 2026-05-19, Auto Mode presented Barrister Global Services Network (IT field services) and Epson America (printer manufacturer) as HIGH ICP targets. Both were immediately flagged by Andy as obviously wrong. The Pipeline ICP score was assigned algorithmically and does not reflect OSI's actual buyer profile. This filter is the human judgment layer that the pipeline build is missing.
+**Why this rule exists:** 2026-05-19, Auto Mode presented Barrister Global Services Network (IT field services) and Epson America (printer manufacturer) as HIGH ICP targets. Both were immediately flagged by Brian as obviously wrong. The Pipeline ICP score was assigned algorithmically and does not reflect OSI's actual buyer profile. This filter is the human judgment layer that the pipeline build is missing.
 
 ### Step 2.5: Pre-check every surviving company BEFORE presenting (MANDATORY)
 
-🚨 **THIS STEP RUNS IN AUTO MODE BEFORE ANDY SEES ANY COMPANY NAME. NO EXCEPTIONS.**
+🚨 **THIS STEP RUNS IN AUTO MODE BEFORE BRIAN SEES ANY COMPANY NAME. NO EXCEPTIONS.**
 
-For every company that survived Steps 1 and 2, run Company Mode Step 0 in full: the HubSpot multi-variant name + domain search (0A), the M&A web search (0B), and the ownership decision (0C). Do this NOW, before Step 3. Not after Andy picks. Not during Company Mode. Before the list is shown.
+For every company that survived Steps 1 and 2, run Company Mode Step 0 in full: the HubSpot multi-variant name + domain search (0A), the M&A web search (0B), and the ownership decision (0C). Do this NOW, before Step 3. Not after Brian picks. Not during Company Mode. Before the list is shown.
 
 🚨 **BATCH GATE -- ALL CHECKS COMPLETE BEFORE ANY OUTPUT. NO EXCEPTIONS.**
 
@@ -1268,33 +1217,33 @@ If the list comes out short (companies dropped from 0A/0B/0C results), find repl
 
 **The failure mode this prevents:** presenting 7 checked companies while 3 replacements are added without checks. That is exactly how Evoque (Centersquare), Nordcloud (IBM acquired), and Panasonic (NA entity owned by another rep) ended up on a list presented as clean -- they were added mid-run as replacements and never got the same checks as the original batch.
 
-**Why this rule exists:** 2026-05-12 Auto Mode session. The initial 10 had incomplete checks on replacement companies. Evoque, Nordcloud, and Panasonic all required retraction after Andy challenged the list. Every check must complete on every company -- including replacements -- before the list is shown. No exceptions.
+**Why this rule exists:** 2026-05-12 Auto Mode session. The initial 10 had incomplete checks on replacement companies. Evoque, Nordcloud, and Panasonic all required retraction after Brian challenged the list. Every check must complete on every company -- including replacements -- before the list is shown. No exceptions.
 
 🚨 **THE STEP 1 PULL IS NOT A SUBSTITUTE FOR STEP 0A. EVER.**
 
-The cold-company HubSpot pull (Step 1) is filtered by owner ID 196669355. It is structurally blind to duplicate company records owned by other reps. A company appearing in the Step 1 results does NOT mean it has no other HubSpot record under a different owner. Step 0A (name variants + domain search, NO owner filter) MUST run on every candidate regardless of how it was sourced. The most dangerous failure mode is: company appears in Andy-owned pull -> Claude skips 0A reasoning "ownership is already confirmed" -> duplicate under another rep missed -> company presented as clean when it is not.
+The cold-company HubSpot pull (Step 1) is filtered by owner ID 213536174. It is structurally blind to duplicate company records owned by other reps. A company appearing in the Step 1 results does NOT mean it has no other HubSpot record under a different owner. Step 0A (name variants + domain search, NO owner filter) MUST run on every candidate regardless of how it was sourced. The most dangerous failure mode is: company appears in Brian-owned pull -> Claude skips 0A reasoning "ownership is already confirmed" -> duplicate under another rep missed -> company presented as clean when it is not.
 
 Named incidents (do not repeat):
-- **Sonic.net Inc -- 2026-05-07:** appeared in Andy-owned pull, 0A skipped, duplicate owned by Nick Sibersky missed, presented as clean.
+- **Sonic.net Inc -- 2026-05-07:** appeared in Brian-owned pull, 0A skipped, duplicate owned by Nick Sibersky missed, presented as clean.
 - **Whidbey Telecom -- 2026-05-07:** same skip, duplicate owned by May Jareda (actively reaching out) missed, presented as clean.
 
-**Why this rule exists:** 2026-05-06, Claude presented Cequel Communications (Suddenlink) as a clean pick. It is now Optimum/Altice USA, actively worked by Stephen Craig with activity logged TODAY. The M&A check and ownership check were only run after Andy pushed back. The presented list must be clean before Andy sees it.
+**Why this rule exists:** 2026-05-06, Claude presented Cequel Communications (Suddenlink) as a clean pick. It is now Optimum/Altice USA, actively worked by Stephen Craig with activity logged TODAY. The M&A check and ownership check were only run after Brian pushed back. The presented list must be clean before Brian sees it.
 
 Apply the Company Mode Step 0C ownership table to every company:
 - Fails ownership (other rep, active in 3 months): remove from list silently.
-- Needs Andy's judgment (duplicate ownership, M&A ambiguity, other rep inactive 3+ months): keep on list but flag it explicitly next to the company name.
+- Needs Brian's judgment (duplicate ownership, M&A ambiguity, other rep inactive 3+ months): keep on list but flag it explicitly next to the company name.
 - Passes: present as clean.
 
 No company appears on the presented list as a clean pick without a completed Step 0 pre-check.
 
-### Step 3: Present the list to Andy
+### Step 3: Present the list to Brian
 Show the filtered, pre-checked list with company name, industry, employee count, last activity date, and any flags from Step 2.5. Ask: "Which of these do you want to run first, or should I start from the top?"
 
 ### Step 4: Run Company Mode on each selected company
-For each company Andy approves (or starting from the top if he says go): run the full MODE 2 Company Mode workflow. Find every relevant title. Qualify each one. Never stop early.
+For each company Brian approves (or starting from the top if he says go): run the full MODE 2 Company Mode workflow. Find every relevant title. Qualify each one. Never stop early.
 
 ### Step 5: After each company
-Report results (X yes, Y no, Z conditional), then move to the next company. Andy can stop after any company by saying "that's enough."
+Report results (X yes, Y no, Z conditional), then move to the next company. Brian can stop after any company by saying "that's enough."
 
 After completing a company (win or no):
 1. Add it to the "Companies Prospected" tab if not already there.
@@ -1314,55 +1263,7 @@ for row in ws.iter_rows(min_row=2):
 wb.save(r'C:\Claude-Brain\prospects-tracker-new.xlsx')
 ```
 
-Default batch: 3 companies per session unless Andy specifies otherwise or says "keep going". Within each company: NO CAP -- find everyone worth contacting.
-
-## MODE 4: HubSpot Task Mode -- batch enrollment from to-do tasks
-Trigger: Andy says "process my enroll tasks", "check my enroll tasks", "run my enroll tasks", or any reference to his HubSpot "Enroll in sequence" / "3 email sequence" to-do tasks.
-
-Andy tags a contact for outreach by creating a TODO task on the contact in HubSpot. The task SUBJECT is the routing instruction. Two subjects:
-
-| Task subject | Treatment | Handoff target |
-|---|---|---|
-| **Enroll in sequence** | Full 6-email sequence, full research per this skill | `osi-outreach-sequence` |
-| **3 email sequence** | Shorter 3-email treatment | `osi-3email-new` |
-
-The contact association carries all the context. Andy does NOT put the name or company in the task title -- pull everything from the associated contact.
-
-🚨 **HARDWIRED RULE -- ANDY'S TASKS ONLY (owner ID 196669355).** Match tasks owned by Andy and nobody else. Never pick up tasks owned by Mark (210187184) or John (210187193).
-
-🚨 **NO "READY" GATE. NO APPROVAL PROMPTS.** Andy decided by tagging the task. Run fully automated, per-contact, immediate handoff. Every HubSpot write uses `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`. Never filter by priority -- Andy leaves it blank. Match on subject + owner + not-completed only.
-
-### Step by step
-
-1. **Find the tasks.** `search_crm_objects` on tasks with filters: `hs_task_subject` IN ("Enroll in sequence", "3 email sequence") AND `hs_task_status` != "COMPLETED" AND `hubspot_owner_id` = 196669355. Match the subject case-insensitively. Record each task's `hs_object_id` and its subject (the subject decides routing).
-
-2. **Pull the associated contact** for each task: first name, last name, job title, company, email, phone, mobile, timezone, LinkedIn URL, and existing strategy note. If a task has no contact association, skip it and note "no contact association" in the final summary. Do NOT complete an unassociated task.
-
-3. **Active sequence check.** For each contact, check whether a sequence is already running (active enrollment, or pending entries keyed by email OR prospectName + company per the existing dedupe rules). If already enrolled, mark the task COMPLETED with note "Already enrolled -- skipped" and move on. Do NOT re-enroll.
-
-4. **Full qualification (Andy's normal flow -- no shortcut).** Run the standard Profile Mode qualification on the contact's LinkedIn URL: verify current employer (Path A LinkedIn read, Path B fallback per the NO-EMPLOYER-VERIFICATION rule), three-point check, ZoomInfo enrichment via the full 7-attempt retry matrix, strategy note, LINKED_IN_CONNECT task. This is governed by every rule in this skill -- Task Mode does not bypass employer verification, the ZI matrix, HubSpot-first email resolution, or the read-back transaction (Steps 1-3.5).
-   - If a current, complete strategy note already exists from a recent qualification, you may reuse its Personal Hook + SEQUENCE label rather than re-reading LinkedIn from scratch -- but the employer-verification and active-sequence checks still run.
-   - If qualification returns **No** or **Conditional**: mark the task COMPLETED with note "Not qualified -- [reason]" and move on. No handoff.
-
-5. **Route the handoff by task subject** (one qualified Yes-with-email contact at a time -- IMMEDIATE HANDOFF, NO BATCHING, same rule as Company Mode):
-   - Subject was **"Enroll in sequence"** -> `HANDOFF: invoke osi-outreach-sequence on [First Last] at [Company].`
-   - Subject was **"3 email sequence"** -> `HANDOFF: invoke osi-3email-new on [First Last] at [Company].`
-   The outreach skill owns stagger math, drafting, queue/AI-field writes, and the LINKED_IN_CONNECT due-date update. Do not draft emails here. Before any handoff, the Blocked address check (see "Blocked address check" section above) must pass. A blocked address takes the no-email disposition in step 6.
-
-6. **No email after the full ZI matrix, OR a blocked address:** do NOT hand off. The 2 LinkedIn InMail fallback tasks + LINKED_IN_CONNECT task + strategy note ARE the plan (existing rule). Mark the enroll task COMPLETED with note "No email -- LinkedIn fallback created" (or "Blocked address -- LinkedIn fallback created")."
-
-7. **Complete the task.** After the outreach skill confirms enrollment (or a fallback disposition above is applied), mark the source task COMPLETED via `manage_crm_objects` updateRequest (`hs_task_status: "COMPLETED"`, `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`). A processed task must never stay open, or it gets re-picked next run.
-
-8. **Final summary** to Andy:
-   - Enrolled (6-email): [N] -- names + companies
-   - Enrolled (3-email): [N] -- names + companies
-   - Already in sequence -- skipped: [N] -- names
-   - Not qualified -- skipped: [N] -- names + reason
-   - No email -- LinkedIn fallback: [N] -- names
-   - Blocked address -- LinkedIn fallback: [N] -- names
-   - No contact association -- left open: [N] -- task IDs
-
-Multiple people from the same company are expected. Stagger math is handled by the outreach skill after each handoff, per the same-company stagger metadata.
+Default batch: 3 companies per session unless Brian specifies otherwise or says "keep going". Within each company: NO CAP -- find everyone worth contacting.
 
 ## EXCEL TRACKER -- log every Company Mode session
 
