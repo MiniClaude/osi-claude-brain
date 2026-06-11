@@ -24,3 +24,7 @@ $RECYCLE.BIN/
 node_modules/
 __pycache__/
 *.pyc
+
+# SharePoint junction - company files, never commit
+sharepoint/
+sharepoint
