@@ -22,8 +22,13 @@ search, read, and browse notes — and keeps Cowork memory in sync with new Clip
 
 - **Base URL**: `http://127.0.0.1:27123`
 - **API Key**: `f6e58142e450d6e7447193fe5b13efb0a138c2a8b7790c6c6c52b2370dad684c`
-- **Method**: All API calls go through `mcp__Claude_in_Chrome__javascript_tool` (browser fetch)
-- **Important**: The bash sandbox cannot reach Brian's localhost — only Chrome browser tools can.
+- **Vault**: `C:\Users\Mini\Documents\OSI-Notes` (clean notes-only vault since 2026-06-11; the API serves whichever vault is open in Obsidian)
+- **Method**: Call the API directly from PowerShell (`Invoke-RestMethod`) or bash (`curl`). Verified working 2026-06-11. Only fall back to `mcp__Claude_in_Chrome__javascript_tool` if running in a sandboxed environment where localhost is unreachable.
+
+Example:
+```powershell
+Invoke-RestMethod -Uri 'http://127.0.0.1:27123/vault/' -Headers @{Authorization='Bearer f6e58142e450d6e7447193fe5b13efb0a138c2a8b7790c6c6c52b2370dad684c'}
+```
 
 ---
 
