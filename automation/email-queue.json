@@ -3704,12 +3704,14 @@
     "sendTime": "11am",
     "sendTimeZone": "PT",
     "replyMode": false,
-    "status": "pending",
+    "status": "sent",
     "addedDate": "2026-06-01",
     "sequenceId": "daniel-bloor-thalesgroup",
     "emailNumber": 4,
     "cadenceGap": 10,
-    "priorEmailId": "daniel-bloor-thalesgroup-3"
+    "priorEmailId": "daniel-bloor-thalesgroup-3",
+    "sentAt": "2026-06-10T11:14:46-07:00",
+    "sentInWindow": "11am"
   },
   {
     "id": "chad-maalis-swag-email-1",
@@ -3777,11 +3779,13 @@
     "body": "Ethan,\n\nCircling back on the optics sample. Still happy to drop a few complimentary SFPs in the mail so you have break glass spares on the shelf at MWRD.\n\nJust need an address to send them to. Where is best?\n\nBrian",
     "sendDate": "2026-06-08",
     "sendTime": "12pm",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "ethan-warren-mwrd-swag-email-2",
     "originalFireAtUtc": "2026-06-08T16:00:00.000Z",
     "originalEt": "12:00",
-    "isReply": false
+    "isReply": false,
+    "sentAt": "2026-06-08T12:10:58.188801-07:00",
+    "sentInWindow": "12pm"
   },
   {
     "id": "ethan-warren-mwrd-swag-email-3",
@@ -3791,11 +3795,13 @@
     "body": "Ethan,\n\nLast one on the swag. If you send me an address I will get the SFPs out this week. If it is easier to grab 10 minutes and talk through Nokia supply and optical sourcing for the MWRD network instead, happy to do that too.\n\nEither way, just say the word.\n\nBrian",
     "sendDate": "2026-06-10",
     "sendTime": "12pm",
-    "status": "pending",
+    "status": "sent",
     "sourceTask": "ethan-warren-mwrd-swag-email-3",
     "originalFireAtUtc": "2026-06-10T16:00:00.000Z",
     "originalEt": "12:00",
-    "isReply": false
+    "isReply": false,
+    "sentAt": "2026-06-10T12:10:47 PT",
+    "sentInWindow": "12pm"
   },
   {
     "id": "john-pobalis-sciremc-email-2",
@@ -3805,13 +3811,15 @@
     "body": "John,\n\nWanted to take a different angle from my last note.\n\nA lot of cooperative networks at your stage are hitting the same wall: backbone capacity. When you need to add DWDM or extend your fiber spans, Nokia and Ciena want you to buy the whole platform and the licensing.\n\nWe carry the SmartOptics open-line system. Same performance, a fraction of the rack space, and typically 30 to 50% below what you'd pay going direct to Nokia. No per-port licensing. Spares ship fast.\n\nIf SCI Fiber's backbone is all lit fiber right now, maybe this doesn't matter yet. But if wavelength capacity is on the roadmap, it might be worth a conversation.\n\nBrian\n\nBrian Charrette\nDirector of Key Accounts\nDesk: 805.845.5167 | Cell: 805.682.9358\nSystems: HPE / Dell / Cisco UCS / Supermicro / APC\nNetwork: Cisco / Aruba / Juniper / Fortinet / APC / Opengear\nOptical: Transceivers / DAC / AOC / Cables / DWDM Line Systems\nService: Systain Third Party Maintenance / Professional Services",
     "sendDate": "2026-06-09",
     "sendTime": "11am",
-    "status": "pending",
+    "status": "sent",
     "isReply": false,
     "prospectName": "John Pobalis",
     "company": "South Central Indiana REMC",
     "addedDate": "2026-06-03",
     "emailNumber": 2,
-    "sequenceId": "john-pobalis-sciremc-7step"
+    "sequenceId": "john-pobalis-sciremc-7step",
+    "sentAt": "2026-06-09T11:11:16.815470-07:00",
+    "sentInWindow": "11am"
   },
   {
     "id": "john-pobalis-sciremc-email-3",

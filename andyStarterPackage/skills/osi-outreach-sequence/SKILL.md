@@ -5,11 +5,11 @@ description: >
   the strategy note + Personal Hook + Fresh Hook from HubSpot, picks sequence type, computes
   Day 1 from same-company stagger metadata, drafts all 6 emails, writes them to the contact's
   HubSpot AI fields (ai_email_subject_1-6 + ai_email_body_1-6), creates a LINKED_IN_CONNECT
-  task on Day 1 as Andy's enrollment cue, and appends Excel Tab 1. Triggers when invoked by
+  task on Day 1 as Brian's enrollment cue, and appends Excel Tab 1. Triggers when invoked by
   osi-prospect-qualification's handoff on a Yes-with-email verdict.
 ---
 
-> Source: `C:\Claude-Brain\skills\osi-outreach-sequence\` (Git, github.com/<<YOUR_GITHUB_USERNAME>>/Claude-Brain). Edit source, repackage, install.
+> Source: `C:\Claude-Brain\skills\osi-outreach-sequence\` (Git, github.com/Drrewdy/Claude-Brain). Edit source, repackage, install.
 
 # OSI Outreach Sequence
 
@@ -40,18 +40,18 @@ This skill only runs when invoked via handoff from `osi-prospect-qualification` 
 - Compute Day 1 from same-company stagger metadata
 - Draft 6 emails using the formatting standard below
 - Write all 12 AI field properties to the HubSpot contact in one call (`ai_email_subject_1-6` + `ai_email_body_1-6`)
-- Create a LINKED_IN_CONNECT task on Day 1 (this is Andy's cue to enroll the contact in the HubSpot sequence)
+- Create a LINKED_IN_CONNECT task on Day 1 (this is Brian's cue to enroll the contact in the HubSpot sequence)
 - Append a Tab 1 row to `Claude-Brain/prospects-tracker-new.xlsx`
 - Update stagger metadata (`last_day1`, `person_count`)
 
 **This skill DOES NOT:**
 - Write to `email-queue.json`. The queue is no longer used for new sequences.
 - Compute sendDates or sendTimes. HubSpot sequences handle cadence once enrolled.
-- Invoke osi-email-sender. Sending is handled by HubSpot after Andy enrolls.
+- Invoke osi-email-sender. Sending is handled by HubSpot after Brian enrolls.
 - Qualify. Verdict is `osi-prospect-qualification`'s job.
 - Run on multiple candidates at once. ONE per invocation.
 - Navigate to LinkedIn. All context comes from the handoff payload and HubSpot strategy note.
-- Ask Andy for approval mid-run. AI field writes and task creation are automatic. Andy approved at session start.
+- Ask Brian for approval mid-run. AI field writes and task creation are automatic. Brian approved at session start.
 - Stop for `manage_crm_objects` confirmation prompts. ALL calls use `confirmationStatus: "CONFIRMATION_WAIVED_FOR_SESSION"`.
 
 ---
@@ -81,7 +81,7 @@ After reading both, proceed below.
 
 ## 🛑 HARDWIRED RULE, NO EM-DASHES OR EN-DASHES, EVER
 
-Andy Rule #4 from `CLAUDE.md`. U+2014 (em-dash) and U+2013 (en-dash) are FORBIDDEN everywhere. Use periods to split sentences. Use commas for parenthetical clauses.
+Brian Rule #4 from `CLAUDE.md`. U+2014 (em-dash) and U+2013 (en-dash) are FORBIDDEN everywhere. Use periods to split sentences. Use commas for parenthetical clauses.
 
 ---
 
@@ -97,13 +97,13 @@ Adam,
 ```
 
 ### Sign-off
-Every email ends with a blank line, then "Best," on its own line, then "Andy" on its own line, then a blank line.
+Every email ends with a blank line, then "Best," on its own line, then "Brian" on its own line, then a blank line.
 
 ```
 [last line of body]
 
 Best,
-<<YOUR_NAME>>
+Brian
 
 ```
 
@@ -114,14 +114,14 @@ When Email 1 was a Sample-Offer (SFPs or DIMMs), Email 2 body is:
 Any thoughts?
 
 Best,
-<<YOUR_NAME>>
+Brian
 
 ```
 
 No greeting. No name at the top. Just "Any thoughts?" followed by the standard sign-off.
 
 ### Email 2 on Pain-Led sequences
-Has the full standard formatting: first name greeting + substance + Best/Andy sign-off.
+Has the full standard formatting: first name greeting + substance + Best/Brian sign-off.
 
 ---
 
@@ -145,7 +145,7 @@ If any of these are missing, refuse and log. Don't proceed on partial data.
 
 After this skill runs on one qualified candidate:
 - 12 AI field properties written to the HubSpot contact (`ai_email_subject_1-6` + `ai_email_body_1-6`)
-- LINKED_IN_CONNECT task created on Day 1 (Andy's cue to enroll in HubSpot sequence)
+- LINKED_IN_CONNECT task created on Day 1 (Brian's cue to enroll in HubSpot sequence)
 - Excel Tab 1 row appended
 - `state.stagger[company_name].last_day1` updated to Day 1
 - `state.stagger[company_name].person_count` incremented
@@ -156,7 +156,7 @@ After this skill runs on one qualified candidate:
 
 Before drafting anything, pull the contact's `ai_email_subject_1` field from HubSpot.
 
-**If populated:** the contact already has a drafted sequence in the AI fields. Tell Andy:
+**If populated:** the contact already has a drafted sequence in the AI fields. Tell Brian:
 > "Contact already has AI Email Subject 1 populated: `[first 60 chars]...`. Overwrite with a fresh sequence?"
 
 Wait for explicit yes before proceeding. Without that, stop.
@@ -199,7 +199,7 @@ Read `state.stagger[company_name]` from `C:\Claude-Brain\overnight-candidates.js
 | `5` | `last_day1` + 10 business days (cooling gap) |
 | `6+` | `last_day1` + 4 business days |
 
-Day 1 is the date Andy should enroll the contact in the HubSpot sequence. The LINKED_IN_CONNECT task is due on this date. When Andy sees it in his task queue, that is his cue to enroll.
+Day 1 is the date Brian should enroll the contact in the HubSpot sequence. The LINKED_IN_CONNECT task is due on this date. When Brian sees it in his task queue, that is Brian's cue to enroll.
 
 Skip weekends + holidays. Holiday list: `Claude-Brain/holidays.json`. Fallback: US federal holidays + Good Friday + Black Friday + Christmas Eve + New Year's Eve.
 
@@ -217,7 +217,7 @@ search_crm_objects({
 ```
 
 - Exactly one result matching handoff ID: proceed.
-- ID mismatch: STOP-GATE. Surface duplicate to Andy.
+- ID mismatch: STOP-GATE. Surface duplicate to Brian.
 - Zero results: STOP-GATE.
 - Multiple results: STOP-GATE. Surface all IDs for manual merge.
 
@@ -240,10 +240,10 @@ If no EMAIL RESOLUTION block exists, run the resolver inline per `knowledge/emai
 - Body paragraphs
 - Blank line
 - `Best,`
-- `Andy`
+- `Brian`
 - Blank line
 
-**Exception:** Email 2 on Sample-Offer sequences = `Any thoughts?` with no greeting, followed by the standard Best/Andy sign-off. No first name at the top.
+**Exception:** Email 2 on Sample-Offer sequences = `Any thoughts?` with no greeting, followed by the standard Best/Brian sign-off. No first name at the top.
 
 #### Email 1 (by sequence type)
 
@@ -256,7 +256,7 @@ I'm just prepping this package for you. I have a box of swag and a pair of sampl
 Do you come into the office, or is there a better address to ship it to?
 
 Best,
-<<YOUR_NAME>>
+Brian
 
 ```
 
@@ -269,7 +269,7 @@ I'd like to send you a sample DIMM from our current batch. Same spec as what you
 Do you come into the office, or is there a better address to ship it to?
 
 Best,
-<<YOUR_NAME>>
+Brian
 
 ```
 
@@ -285,7 +285,7 @@ Best,
 [Sentence 4: ONE concrete ask.]
 
 Best,
-<<YOUR_NAME>>
+Brian
 
 ```
 
@@ -300,7 +300,7 @@ Body:
 Any thoughts?
 
 Best,
-<<YOUR_NAME>>
+Brian
 
 ```
 
@@ -315,7 +315,7 @@ Subject: `Re: [Email 1 subject]`
 [Concrete ask ending with a question mark.]
 
 Best,
-<<YOUR_NAME>>
+Brian
 
 ```
 
@@ -329,11 +329,11 @@ Different product line. 3-4 sentences. One ask.
 [Body. New product line only. No quoted thread, no prior email reference.]
 
 Best,
-<<YOUR_NAME>>
+Brian
 
 ```
 
-🚫 No quoted thread. No `On <date>, Andy wrote:`. No `>` lines.
+🚫 No quoted thread. No `On <date>, Brian wrote:`. No `>` lines.
 
 #### Email 4 (new subject, STANDALONE)
 
@@ -357,7 +357,7 @@ One sentence. Clean close. No ask.
 Should I close the file on this one, or is the timing just off?
 
 Best,
-<<YOUR_NAME>>
+Brian
 
 ```
 
@@ -372,7 +372,7 @@ For every email body, answer these six questions before sanitizing:
 3. Is there exactly ONE product line in this email?
 4. Did I name SmartOptics? (must be no for cold)
 5. Did I claim OSI manufactures? (must be no)
-6. Does every email end with the sign-off: blank line, "Best,", "Andy", blank line? (All 6 emails including "Any thoughts?" Email 2. No exceptions.)
+6. Does every email end with the sign-off: blank line, "Best,", "Brian", blank line? (All 6 emails including "Any thoughts?" Email 2. No exceptions.)
 
 If any answer is wrong, rewrite before sanitizing.
 
@@ -384,13 +384,13 @@ Run `sanitize_body(text, email_index)` on every body and `sanitize_subject(subje
 - Normalize spaces
 - Trim trailing whitespace
 
-If sanitize raises (dashes leaked through or body went empty): STOP. Do not write anything. Surface the error to Andy.
+If sanitize raises (dashes leaked through or body went empty): STOP. Do not write anything. Surface the error to Brian.
 
 ### Step 8, Validator (MANDATORY before HubSpot write)
 
 Run `validate_or_raise` on every email per `C:\Claude-Brain\scripts\validate_email.py`.
 
-**NOTE on rule 1.11 (sign-off ban):** The validator was written for the old email-queue workflow where Outlook appended the signature. In the new HubSpot AI fields workflow, "Best, <<YOUR_NAME>>" is explicitly required in the body. The validator's 1.11 sign-off check does NOT apply to this skill. All other rules apply unchanged.
+**NOTE on rule 1.11 (sign-off ban):** The validator was written for the old email-queue workflow where Outlook appended the signature. In the new HubSpot AI fields workflow, "Best, Brian" is explicitly required in the body. The validator's 1.11 sign-off check does NOT apply to this skill. All other rules apply unchanged.
 
 If the validator raises on any other rule: log to `overnight-run-log.md`, do NOT write any AI fields, flip candidate to `pending-relookup`.
 
@@ -417,10 +417,10 @@ Build all 12 field values in memory (6 subjects + 6 bodies). Write in a SINGLE `
 
 After write succeeds, output exactly one confirmation line:
 
-`AI fields written: [First Last] | [Sequence type] | Enroll by [Day 1 date] | LinkedIn: [hs_linkedin_url] | HubSpot: https://app.hubspot.com/contacts/<<YOUR_HUBSPOT_PORTAL_ID>>/record/0-1/[hubspotContactId]`
+`AI fields written: [First Last] | [Sequence type] | Enroll by [Day 1 date] | LinkedIn: [hs_linkedin_url] | HubSpot: https://app.hubspot.com/contacts/21878985/record/0-1/[hubspotContactId]`
 
 - **LinkedIn URL:** use the contact's `hs_linkedin_url` (the profile read during qualification). If it is blank, write `LinkedIn: none on record`.
-- **HubSpot URL:** build it from the portal id `<<YOUR_HUBSPOT_PORTAL_ID>>` and the `hubspotContactId` you just wrote to. This is a clickable link straight to the contact record.
+- **HubSpot URL:** build it from the portal id `21878985` and the `hubspotContactId` you just wrote to. This is a clickable link straight to the contact record.
 - If a Company Mode run prints an end-of-run recap of everyone sequenced, each name in that recap carries these same two URLs.
 
 Do NOT display email bodies in chat. Do NOT ask "ready?". Move immediately to Step 10.
@@ -439,10 +439,10 @@ Search HubSpot for an existing "Sales Nav -- Send connection request" task on th
 - Subject: `Sales Nav -- Send connection request -- [First Last] | [Company]`
 - Due date: Day 1 at 20:00 UTC (4pm ET)
 - Type: `LINKED_IN_CONNECT`
-- Owner: <<YOUR_HUBSPOT_OWNER_ID>>
-- Body: the actual LinkedIn invite message Andy will send (under 300 chars, references Personal Hook, no pitch)
+- Owner: 213536174
+- Body: the actual LinkedIn invite message Brian will send (under 300 chars, references Personal Hook, no pitch)
 
-This task is Andy's cue. When it appears due in his task queue, he enrolls the contact in the HubSpot sequence and sends Email 1. The task date and enrollment date are always the same.
+This task is Brian's cue. When it appears due in his task queue, Brian enrolls the contact in the HubSpot sequence and sends Email 1. The task date and enrollment date are always the same.
 
 If write fails: log `linkedin-task-sync-failed` to `overnight-run-log.md`. AI fields stay written (they are the authoritative record).
 
@@ -467,7 +467,7 @@ Columns: Name | Title | Company | LinkedIn URL | OSI Angle | HubSpot Status | Ac
 Every failure logs to `Claude-Brain/overnight-run-log.md` with timestamp + reason:
 
 - Strategy note missing: log, mark `yes-with-email-strategy-missing`, do NOT write AI fields.
-- Active sequence check: AI fields already populated and Andy did not confirm overwrite: log, stop.
+- Active sequence check: AI fields already populated and Brian did not confirm overwrite: log, stop.
 - AI field write fails: retry once, then log + exit.
 - LINKED_IN_CONNECT task fails: log `linkedin-task-sync-failed`, keep AI fields written.
 - Excel append fails: log warning, do NOT block the field write. Excel is a tracker, not source of truth.
@@ -482,6 +482,6 @@ Quality gates in order: Step 0 (drafting-rules.md), Step 3 (duplicate check), St
 
 Hard constraints: one candidate per invocation, 6 emails only, single atomic AI field write (Step 9), LINKED_IN_CONNECT task always on Day 1 (Step 10).
 
-Sign-off rule: "Best, <<YOUR_NAME>>" on every single email. No exceptions. Including "Any thoughts?" Email 2.
+Sign-off rule: "Best, Brian" on every single email. No exceptions. Including "Any thoughts?" Email 2.
 
 Greeting rule: first name + comma only. No "Hi". No "Hello".

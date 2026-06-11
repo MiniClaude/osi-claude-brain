@@ -10,7 +10,7 @@ description: >
   before writing. Always run this skill before writing any re-engagement outreach.
 ---
 
-> **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-3email-reengagement\` (Git-versioned, source of truth, backed up at github.com/<<YOUR_GITHUB_USERNAME>>/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub.
+> **SYNC NOTE:** This skill exists in two locations: `C:\Claude-Brain\skills\osi-3email-reengagement\` (Git-versioned, source of truth, backed up at github.com/Drrewdy/Claude-Brain) and the local Cowork `.claude/skills/` mount. Any edits must go into `C:\Claude-Brain\skills\` and be pushed to GitHub.
 
 # OSI Global 3-Email Re-Engagement Sequence
 
@@ -148,7 +148,7 @@ Note the verification source in the strategy note under `EMPLOYER VERIFICATION:`
 ## Step 2: Research (do this before writing anything)
 
 **HubSpot Check**
-Search HubSpot for the prospect and their current company. Pull any existing notes to understand what was sent previously. Note the HubSpot owner. Only create tasks if owned by Andy McLean (<<YOUR_HUBSPOT_OWNER_ID>>), Mark Metz (210187184), or John Houston (210187193).
+Search HubSpot for the prospect and their current company. Pull any existing notes to understand what was sent previously. Note the HubSpot owner. Only create tasks if owned by Brian Charrette (213536174), Mark Metz (210187184), or John Houston (210187193).
 
 If owned by another rep, flag it and wait for Andy's instruction before proceeding.
 
@@ -259,45 +259,45 @@ Format exactly as below, no paragraphs, no extra text:
 KEYWORDS: [5-8 spoken trigger words including technical terms and any news-driven triggers]
 HOOK: [Company news or personal trigger in one sentence. If nothing: none, using library opener]
 OPENER: [Full opener from OPENER LIBRARY, or custom if HOOK is populated]
-VM: [One line. 15 seconds max. One-sentence new hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Andy's email: "that's <<YOUR_EMAIL>>." No phone number. Present or future tense only. Never past tense.]
+VM: [One line. 15 seconds max. One-sentence new hook. "I'm sending you something right now, subject line is [Email 1 subject]." Ends with Brian's email: "that's bc@osihardware.com." No phone number. Present or future tense only. Never past tense.]
 
 #### OPENER LIBRARY
 
 **Telco / Service Provider network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply ZR and ZR+ coherent optics to carrier teams as a secondary source when Cisco or Lumentum timelines slip. Is that something your team is running into right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply ZR and ZR+ coherent optics to carrier teams as a secondary source when Cisco or Lumentum timelines slip. Is that something your team is running into right now?"
 
 **Bank / Financial Institution network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply certified compatible optics to bank IT teams, mostly for the break-glass scenario where something fails and you can't wait two weeks for OEM. I was going to send a few complimentary SFPs your way. Would that be useful?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply certified compatible optics to bank IT teams, mostly for the break-glass scenario where something fails and you can't wait two weeks for OEM. I was going to send a few complimentary SFPs your way. Would that be useful?"
 
 **Enterprise IT / Consulting network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We work with enterprise IT teams on third party maintenance, specifically replacing OEM support on Cisco gear that is running fine but coming off warranty. Is that a conversation your team is having right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We work with enterprise IT teams on third party maintenance, specifically replacing OEM support on Cisco gear that is running fine but coming off warranty. Is that a conversation your team is having right now?"
 
 **Manufacturing network engineer**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply certified compatible optics and networking spares to manufacturing IT teams for the break-glass scenario. I was going to send a few complimentary SFPs so you've got a Plan B on the shelf. Worth it?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply certified compatible optics and networking spares to manufacturing IT teams for the break-glass scenario. I was going to send a few complimentary SFPs so you've got a Plan B on the shelf. Worth it?"
 
 **Director or VP any vertical**
-"Hey [Name], how have you been? It's Andy with OSI Global. We work with infrastructure leaders on two things mostly: third party maintenance and optical hardware where OEM timelines or costs have become a problem. Is either of those a live conversation for your team?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We work with infrastructure leaders on two things mostly: third party maintenance and optical hardware where OEM timelines or costs have become a problem. Is either of those a live conversation for your team?"
 
 **Already has TPM, merger wedge**
-"Hey [Name], how have you been? It's Andy with OSI Global. With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
+"Hey [Name], how have you been? It's Brian with OSI Global. With the Park Place and Service Express merger, a lot of teams have been taking a fresh look at their TPM relationships. Have you had a chance to renegotiate since the merger, or are you still on the same rates?"
 
 **Systems / Infrastructure engineer, DIMMs**
-"Hey [Name], how have you been? It's Andy with OSI Global. We source server memory direct from Samsung and Hynix for infrastructure teams dealing with DDR4 and DDR5 cost pressure. Is that on your radar right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We source server memory direct from Samsung and Hynix for infrastructure teams dealing with DDR4 and DDR5 cost pressure. Is that on your radar right now?"
 
 **Storage engineer / admin**
-"Hey [Name], how have you been? It's Andy with OSI Global. We do third party maintenance on NetApp and other storage platforms for teams that have gear running fine but coming off OEM support. Is that a conversation you're having?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We do third party maintenance on NetApp and other storage platforms for teams that have gear running fine but coming off OEM support. Is that a conversation you're having?"
 
 **IT Director, compute and infrastructure**
-"Hey [Name], how have you been? It's Andy with OSI Global. We work with IT leaders on server memory and third party maintenance, mostly for teams carrying OEM costs on infrastructure that has been running fine for years. Is budget pressure on that something you're dealing with?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We work with IT leaders on server memory and third party maintenance, mostly for teams carrying OEM costs on infrastructure that has been running fine for years. Is budget pressure on that something you're dealing with?"
 
 **Procurement, TPM competitive bid**
-"Hey [Name], how have you been? It's Andy with OSI Global. We make competitive bids on multi-vendor maintenance contracts. A lot of procurement teams are using us to benchmark their current rates, especially since the Park Place and Service Express merger. Would a competitive bid be worth a look for your next cycle?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We make competitive bids on multi-vendor maintenance contracts. A lot of procurement teams are using us to benchmark their current rates, especially since the Park Place and Service Express merger. Would a competitive bid be worth a look for your next cycle?"
 
 **Transport engineer / Optical network engineer, DWDM**
-"Hey [Name], how have you been? It's Andy with OSI Global. We supply open line DWDM systems, 30 to 50% below Ciena and Nokia, with no licensing headaches. A few teams have been using us to fill capacity gaps without going back to the OEM. Is that a conversation worth having for your network?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We supply open line DWDM systems, 30 to 50% below Ciena and Nokia, with no licensing headaches. A few teams have been using us to fill capacity gaps without going back to the OEM. Is that a conversation worth having for your network?"
 
 **Network architect, metro or long-haul WDM**
-"Hey [Name], how have you been? It's Andy with OSI Global. We do open architecture DWDM, SmartOptics platform, significantly less rack space and power than traditional Ciena or Nokia boxes, and ships faster. Is that something that fits anything on your roadmap right now?"
+"Hey [Name], how have you been? It's Brian with OSI Global. We do open architecture DWDM, SmartOptics platform, significantly less rack space and power than traditional Ciena or Nokia boxes, and ships faster. Is that something that fits anything on your roadmap right now?"
 
 ---
 
@@ -305,9 +305,9 @@ VM: [One line. 15 seconds max. One-sentence new hook. "I'm sending you something
 
 **Skip entirely if no phone number available.**
 
-One voicemail. Never two. 15 seconds max. They know who Andy is. Lead with the new hook. Name Email 1 subject line. End with Andy's email address spelled audibly ("that's <<YOUR_EMAIL>>"). No phone number. Always present or future tense. Never past tense.
+One voicemail. Never two. 15 seconds max. They know who Andy is. Lead with the new hook. Name Email 1 subject line. End with Brian's email address spelled audibly ("that's bc@osihardware.com"). No phone number. Always present or future tense. Never past tense.
 
-"Hey [Name], Andy with OSI Global. [One sentence new hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's <<YOUR_EMAIL>>."
+"Hey [Name], Brian with OSI Global. [One sentence new hook]. I'm sending you something right now, subject line is [Email 1 subject]. That's bc@osihardware.com."
 
 ---
 
@@ -347,7 +347,7 @@ That is the entire body. Nothing else. The sender's Reply flow attaches the prio
 - "Should I close the file on this one, or is the timing just off?"
 - "No worries if now isn't the right time. Happy to circle back when things shift."
 
-NEVER include `On <date>, Andy McLean wrote:`, `>` quoted lines, or any prior email content. Doing so causes the 2026-04-29 incident pattern: placeholder text lands in the prospect's inbox verbatim.
+NEVER include `On <date>, Brian Charrette wrote:`, `>` quoted lines, or any prior email content. Doing so causes the 2026-04-29 incident pattern: placeholder text lands in the prospect's inbox verbatim.
 
 **Send-window assignments:**
 - Email 1: `sendTime: "4pm"`
@@ -371,7 +371,7 @@ For every drafted email body, write out answers to these six questions in workin
 3. **Is there exactly ONE product line in this email?** (All emails. Surgical Isolation rule.)
 4. **Did I name SmartOptics?** (Must be no unless prospect already knows the name from a prior conversation.)
 5. **Did I claim OSI manufactures?** (All emails. Must be no.)
-6. **Did I sign with "Andy" at the bottom?** (All emails. Must be no. Outlook signature handles it.)
+6. **Did I accidentally type any name at the bottom?** (All emails. Must be no. Outlook signature handles it.)
 
 If any answer is wrong, REWRITE before passing to sanitize. Do not paper over with sanitize.
 
@@ -500,7 +500,7 @@ After the write succeeds, output exactly one confirmation line and nothing else:
 
 1. **Mark any existing `LINKED_IN_CONNECT` task COMPLETED.** Set `hs_task_status` = `COMPLETED` on that task via `manage_crm_objects` updateRequest.
 
-2. **Create a NEW `LINKED_IN_CONNECT` task** (Sales Nav connection request) scheduled for Day 1. Subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: <<YOUR_HUBSPOT_OWNER_ID>>. Notes: the LinkedIn re-engagement message text.
+2. **Create a NEW `LINKED_IN_CONNECT` task** (Sales Nav connection request) scheduled for Day 1. Subject format: `Sales Nav -- Send connection request -- [First Last] | [Company]`. Owner: 213536174. Notes: the LinkedIn re-engagement message text.
 
 The connection request fires Day 1 regardless of whether Andy was previously connected. If already connected, Andy handles the LinkedIn side manually. The task still surfaces the action.
 
@@ -525,7 +525,7 @@ Required fields to verify/refresh on every re-engagement save:
 
 ### Strategy and Fit note
 
-objectType: "notes", owner <<YOUR_HUBSPOT_OWNER_ID>>, associated to contact.
+objectType: "notes", owner 213536174, associated to contact.
 
 Note format:
 
