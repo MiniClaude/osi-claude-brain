@@ -27,7 +27,7 @@ Verify that Memory/vault_sync.md in the OSI-Brain vault is up to date (written t
 5. If the snapshot was generated today — do nothing. Log: "Vault snapshot is current."
 6. If the snapshot is older than 24 hours — notify Brian in the next Cowork session:
    "Your vault snapshot is out of date. Open PowerShell and run:
-   cd 'C:\Users\Mini\Documents\Documents\Claude\Projects\Mini Chamber\OSI-Brain'
+   cd 'C:\Users\Mini\Documents\osi-claude-brain'
    python sync_vault.py"
 
 ## Vault API

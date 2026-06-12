@@ -15,7 +15,7 @@ description: >
 ---
 
 > **SYNC NOTE — READ BEFORE EDITING:** The source of truth for this skill lives at
-> `OSI-Brain\Skills\bc-salesnav-greenfield\SKILL.md` inside Brian's Mini Chamber vault.
+> `C:\Users\Mini\Documents\osi-claude-brain\skills\bc-salesnav-greenfield\SKILL.md`.
 > The version installed under `.claude/skills/` is read-only. To change this skill: edit
 > the source file, package as a `.skill` file, install it. Never manually edit the
 > `.claude/skills/` copy.
